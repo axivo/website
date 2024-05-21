@@ -1,0 +1,34 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "assignees": [
+    "fmunteanu"
+  ],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "datasourceTemplate": "github-releases",
+      "depNameTemplate": "gohugoio/hugo",
+      "extractVersionTemplate": "^v(?<version>.+)$",
+      "fileMatch": [
+        ".github/workflows/hugo.yml"
+      ],
+      "matchStrings": [
+        "HUGO_VERSION:\\s+(?<currentValue>.+)"
+      ]
+    }
+  ],
+  "enabledManagers": [
+    "custom.regex"
+  ],
+  "extends": [
+    "config:recommended"
+  ],
+  "goGetDirs": [
+    "./docs/"
+  ],
+  "labels": [
+    "dependency"
+  ],
+  "prConcurrentLimit": 0,
+  "prHourlyLimit": 0
+}
