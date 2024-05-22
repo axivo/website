@@ -21,6 +21,7 @@ hugo server --buildDrafts --disableFastRender
 Run the following commands:
 
 ```shell
+cd docs
 hugo mod get -u github.com/imfing/hextra
 hugo mod tidy
 ```
