@@ -44,7 +44,7 @@ jobs:
         run: |
           hugo --gc --minify -s ./docs
           snap info hugo
-          hugo --gc --minify -s ./k3s-cluster -d $(pwd)/docs/public/k3s-cluster
+          hugo --gc --minify -s ./k3s-cluster -d "$(pwd)/docs/public/k3s-cluster"
       - name: Upload Pages Artifact
         uses: actions/upload-pages-artifact@v3
         with:
