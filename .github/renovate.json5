@@ -7,13 +7,13 @@
     {
       "customType": "regex",
       "datasourceTemplate": "github-releases",
-      "depNameTemplate": "gohugoio/hugo",
-      "extractVersionTemplate": "^v(?<version>.+)$",
+      "depNameTemplate": "golang/go",
+      "extractVersionTemplate": "^go(?<version>.+)$",
       "fileMatch": [
         ".github/workflows/hugo.yml"
       ],
       "matchStrings": [
-        "HUGO_VERSION:\\s+(?<currentValue>.+)"
+        "go-version:\\s+(?<currentValue>.+)"
       ]
     }
   ],
