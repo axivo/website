@@ -17,7 +17,7 @@ layout: hextra-home
 <div class="hx-mt-6 hx-mb-6">
 {{< hextra/hero-headline >}}
   <span>
-    High Availability K3s Cluster<br class="sm:hx-block hx-hidden" />
+    High Availability Cluster<br class="sm:hx-block hx-hidden" />
     Deployed with Ansible
   </span>
 {{< /hextra/hero-headline >}}
