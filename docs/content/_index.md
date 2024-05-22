@@ -34,7 +34,7 @@ layout: hextra-home
 
 {{< hextra/feature-grid >}}
   {{< hextra/feature-card
-    title="K3s Cluster"
+    title="Kubernetes Cluster"
     subtitle="High Availability cluster deployed with Ansible."
     class="hx-aspect-auto md:hx-aspect-[1.1/1] max-md:hx-min-h-[340px]"
     image="images/card-k3s.webp"
