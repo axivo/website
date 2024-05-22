@@ -43,10 +43,8 @@ jobs:
           TZ: America/New_York
         run: |
           hugo --gc --minify -s ./docs
-          pwd
-          echo "${{ github }}"
-          echo "${{ steps }}"
-          hugo --gc --minify -s ./k3s-cluster -d ./docs/public/k3s-cluster
+          snap info hugo
+          hugo --gc --minify -s ./k3s-cluster -d $(pwd)/docs/public/k3s-cluster
       - name: Upload Pages Artifact
         uses: actions/upload-pages-artifact@v3
         with:
