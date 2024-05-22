@@ -26,12 +26,7 @@ jobs:
           cache: false
           go-version: 1.22.2
       - name: Setup Hugo
-        env:
-          HUGO_VERSION: 0.125.4
-        run: |
-          snap info hugo
-          sudo snap refresh --channel=extended/${HUGO_VERSION} hugo
-          sudo snap install --channel=extended/${HUGO_VERSION} hugo
+        run: sudo snap install --channel=extended/stable hugo
       - name: Configure Pages
         id: pages
         uses: actions/configure-pages@v5
