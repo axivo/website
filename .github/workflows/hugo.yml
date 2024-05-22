@@ -36,12 +36,12 @@ jobs:
           HUGO_ENVIRONMENT: production
           TZ: America/New_York
         run: |
-          hugo --gc --minify -s ./docs
-          hugo --gc --minify -s ./k3s-cluster -d "$(pwd)/docs/public/k3s-cluster"
+          hugo --gc --minify -s ./docs --config ../config/hugo.yaml,hugo.yaml
+          hugo --gc --minify -s ./k3s-cluster --config ../config/hugo.yaml,hugo.yaml
       - name: Upload Pages Artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./docs/public
+          path: ./public
   deploy:
     name: Deploy to GitHub Pages
     environment:
