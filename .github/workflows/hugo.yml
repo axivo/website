@@ -44,7 +44,7 @@ jobs:
         run: |
           hugo --gc --minify -s ./docs -b "${{ steps.pages.outputs.base_url }}/"
           install -d ./docs/public/k3s-cluster
-          hugo --gc --minify -s ./k3s-cluster -d ./docs/public/k3s-cluster/ -b "${{ steps.pages.outputs.base_url }}/"
+          hugo --gc --minify -s ./k3s-cluster -d ./docs/public/k3s-cluster/ -b "${{ steps.pages.outputs.base_url }}/k3s-cluster/"
           ls -lah ./docs/public/k3s-cluster
       - name: Upload Pages Artifact
         uses: actions/upload-pages-artifact@v3
