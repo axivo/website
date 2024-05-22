@@ -21,7 +21,9 @@ The following hardware was used to deploy the cluster:
 
 ## Network
 
-Prior starting the cluster configuration, the end-user must determine if the intended [network](/k3s-cluster/tutorials/handbook/network) configuration can support **inbound load balancing**, with [external IP addresses](https://kubernetes.io/docs/tutorials/stateless-application/expose-external-ip-address) assigned from a load balancer [IP pool](https://docs.cilium.io/en/stable/network/lb-ipam). Some retail routers do not offer this capability.
+{{< callout type="error" >}}
+  Prior starting the cluster configuration, the end-user must determine if the intended [network](/k3s-cluster/tutorials/handbook/network) configuration can support **inbound load balancing**, with [external IP addresses](https://kubernetes.io/docs/tutorials/stateless-application/expose-external-ip-address) assigned from a load balancer [IP pool](https://docs.cilium.io/en/stable/network/lb-ipam). Some retail routers do not offer this capability.
+{{< /callout }}
 
 ## Help
 
