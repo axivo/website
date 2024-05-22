@@ -1,4 +1,4 @@
-baseURL: https://axivo.com/
+baseURL: https://axivo.com/k3s-cluster/
 build:
   buildStats:
     disableIDs: true
@@ -11,7 +11,7 @@ hasCJKLanguage: true
 languages:
   en:
     languageName: English
-    title: AXIVO
+    title: 'AXIVO: K3s Cluster'
     weight: 1
 markup:
   goldmark:
@@ -21,15 +21,37 @@ markup:
     noClasses: false
 menu:
   main:
+    - name: Documentation
+      identifier: wiki
+      pageRef: /wiki
+      weight: 1
+    - name: Tutorials
+      identifier: tutorials
+      pageRef: /tutorials
+      weight: 2
     - name: Search
       params:
         type: search
-      weight: 1
+      weight: 3
     - name: GitHub
       params:
         icon: github
-      url: https://github.com/axivo/website
+      url: https://github.com/axivo/k3s-cluster
+      weight: 4
+  sidebar:
+    - identifier: more
+      name: More
+      params:
+        type: separator
+      weight: 1
+    - identifier: discussions
+      name: "🌐 Discussions ↗"
+      url: "https://github.com/axivo/k3s-cluster/discussions"
       weight: 2
+    - identifier: issues
+      name: "🌐 Issues ↗"
+      url: "https://github.com/axivo/k3s-cluster/issues"
+      weight: 3
 module:
   hugoVersion:
     extended: true
@@ -59,10 +81,10 @@ params:
       strict: 0
     type: giscus
   dateFormat: 'January 2, 2006'
-  description: Imagine. Create.
+  description: K3s cluster deployed with Ansible
   displayUpdatedDate: true
   editURL:
-    base: https://github.com/axivo/website/edit/main/docs
+    base: https://github.com/axivo/website/edit/main/k3s-cluster/content
     enable: true
   footer:
     displayCopyright: true
@@ -85,4 +107,7 @@ params:
     default: system
     displayToggle: true
   variables:
-    repository: github.com/axivo/website
+    os:
+      previous_version: 22.04
+      version: 24.04
+    repository: github.com/axivo/k3s-cluster
