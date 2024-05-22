@@ -27,7 +27,7 @@ jobs:
           go-version: 1.22.2
       - name: Setup Hugo
         env:
-          HUGO_VERSION: 0.125.4
+          HUGO_VERSION: 0.126.1
         run: sudo snap install --channel=extended/${HUGO_VERSION} hugo
       - name: Configure Pages
         id: pages
