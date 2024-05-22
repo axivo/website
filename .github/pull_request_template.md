@@ -6,7 +6,7 @@
 
 - [ ] Bug fix (non-breaking change which fixes an issue)
 - [ ] New feature (non-breaking change which adds functionality)
-- [ ] Documentation (required changes to the documentation)
+- [ ] This change requires a documentation update
 
 ## HOW
 
