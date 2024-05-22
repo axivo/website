@@ -42,8 +42,9 @@ jobs:
           HUGO_ENVIRONMENT: production
           TZ: America/New_York
         run: |
-          install -d ./docs/public/k3s-cluster
-          hugo --gc --minify -s ./docs -d ./docs/public -b "${{ steps.pages.outputs.base_url }}/"
+          hugo --gc --minify -s ./docs -b "${{ steps.pages.outputs.base_url }}/"
+          pwd
+          find . -type d -name 'public'
           hugo --gc --minify -s ./k3s-cluster -d ./docs/public/k3s-cluster -b "${{ steps.pages.outputs.base_url }}/"
       - name: Upload Pages Artifact
         uses: actions/upload-pages-artifact@v3
