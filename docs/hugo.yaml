@@ -24,12 +24,12 @@ menu:
     - name: Search
       params:
         type: search
-      weight: 3
+      weight: 1
     - name: GitHub
       params:
         icon: github
       url: https://github.com/axivo/website
-      weight: 4
+      weight: 2
 module:
   hugoVersion:
     extended: true
@@ -46,23 +46,23 @@ params:
       displayTags: true
   comments:
     enable: false
-    # giscus:
-    #   category: General
-    #   categoryId: DIC_kwDOLteJAc4Ceu8_
-    #   emitMetadata: 0
-    #   inputPosition: top
-    #   lang: en
-    #   mapping: pathname
-    #   reactionsEnabled: 1
-    #   repo: axivo/k3s-cluster
-    #   repoId: R_kgDOLteJAQ
-    #   strict: 0
+    giscus:
+      category: Discussions
+      categoryId: DIC_kwDOI0Z9Z84Cfhkt
+      emitMetadata: 0
+      inputPosition: bottom
+      lang: en
+      mapping: pathname
+      reactionsEnabled: 1
+      repo: axivo/website
+      repoId: R_kgDOI0Z9Zw
+      strict: 0
     type: giscus
   dateFormat: 'January 2, 2006'
   description: Imagine. Create.
   displayUpdatedDate: true
   editURL:
-    base: https://github.com/axivo/website/edit/main
+    base: https://github.com/axivo/website/edit/main/docs
     enable: true
   footer:
     displayCopyright: true
