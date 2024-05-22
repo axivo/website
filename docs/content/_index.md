@@ -17,7 +17,8 @@ layout: hextra-home
 <div class="hx-mb-12">
 {{< hextra/hero-subtitle >}}
   <span>
-    👋 Welcome to our public space.<br class="sm:hx-block hx-hidden" />
+    👋 Welcome to our public space.
+    <br class="sm:hx-block hx-hidden" />
     <br class="sm:hx-block hx-hidden" />
     Our goal is to create beautiful projects, empowering engineers to
     deliver beautiful software experiences to open-source community.
