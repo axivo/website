@@ -29,6 +29,7 @@ jobs:
         env:
           HUGO_VERSION: 0.125.4
         run: |
+          snap info hugo
           sudo snap refresh --channel=extended/${HUGO_VERSION} hugo
           sudo snap install --channel=extended/${HUGO_VERSION} hugo
       - name: Configure Pages
