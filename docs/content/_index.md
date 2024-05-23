@@ -5,8 +5,9 @@ layout: hextra-home
 
 {{< hextra/hero-container
   image="images/logo.webp"
-  imageCard="true"
-  imageTitle="Kubernetes Services"
+  imageClass="hx-block hx-relative hx-overflow-hidden hx-rounded-3xl"
+  imageWidth="300" imageHeight="300"
+  imageTitle="AXIVO"
 >}}
 <div class="hx-mt-6 hx-mb-6">
 {{< hextra/hero-headline >}}
@@ -39,7 +40,7 @@ layout: hextra-home
     title="K3s Cluster"
     subtitle="High Availability cluster deployed with Ansible."
     class="hx-aspect-auto md:hx-aspect-[1.1/1] max-md:hx-min-h-[340px]"
-    image="images/card-k3s.webp"
+    image="images/card-k3s-cluster.webp"
     imageClass="hx-top-[20%] hx-left-[24px] hx-w-[180%] sm:hx-w-[110%] dark:hx-opacity-80"
     link="k3s-cluster"
     style="background: radial-gradient(ellipse at 50% 80%,rgba(194,97,254,0.15),hsla(0,0%,100%,0));"
