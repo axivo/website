@@ -8,40 +8,29 @@ layout: hextra-home
   imageLink="https://github.com/axivo/k3s-cluster"
   imageTitle="Kubernetes Services"
 >}}
-{{< hextra/hero-badge link="https://github.com/axivo/k3s-cluster" >}}
-  <div class="hx-w-2 hx-h-2 hx-rounded-full hx-bg-primary-400"></div>
-  <span>Contribute</span>
-  {{< icon name="arrow-circle-right" attributes="height=14" >}}
-{{< /hextra/hero-badge >}}
-
 <div class="hx-mt-6 hx-mb-6">
 {{< hextra/hero-headline >}}
-  <span>
-    <span class="hx-block">High Availability Cluster</span>
-    <span>Deployed with Ansible</span>
-  </span>
+  High Availability Cluster Deployed with Ansible
 {{< /hextra/hero-headline >}}
 </div>
 
-<div class="hx-mb-12">
+<div class="hx-mt-6 hx-mb-6">
 {{< hextra/hero-subtitle >}}
-  <span>
-    Documentation and tutorials to deploy, manage and monitor
-    your Kubernetes cluster and related components, in style.
-  </span>
+  Documentation and tutorials to deploy, manage and monitor
+  your Kubernetes cluster and related components, in style.
 {{< /hextra/hero-subtitle >}}
 </div>
 
-<div class="hx-mb-6">
+<div class="hx-mt-6 hx-mb-6">
 {{< hextra/hero-button text="Get Started" link="wiki" >}}
 </div>
-{{< /hextra/hero-container >}}
 
-<div class="hx-mt-6 hx-mb-6">
+<div class="hx-mt-12 hx-mb-6">
 {{< hextra/hero-section >}}
   Used Technologies
 {{< /hextra/hero-section >}}
 </div>
+{{< /hextra/hero-container >}}
 
 {{< hextra/feature-grid >}}
   {{< hextra/feature-card
