@@ -13,6 +13,13 @@ menu:
         icon: github
       url: https://github.com/axivo/website
       weight: 2
+module:
+  hugoVersion:
+    extended: true
+    min: 0.125.0
+  imports:
+    - path: github.com/axivo/website
+    - path: github.com/imfing/hextra
 params:
   description: Imagine. Create.
   editURL:
