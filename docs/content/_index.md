@@ -10,28 +10,29 @@ layout: hextra-home
 >}}
 <div class="hx-mt-6 hx-mb-6">
 {{< hextra/hero-headline >}}
-  <span>Imagine. Create.</span>
+  Imagine. Create.
 {{< /hextra/hero-headline >}}
 </div>
 
-<div class="hx-mb-12">
+<div class="hx-mt-6 hx-mb-6">
 {{< hextra/hero-subtitle >}}
-  <span>
-    <span class="hx-block hx-mb-6">👋 Welcome to our public space.</span>
-    <span>
-      Our goal is to create beautiful projects, empowering engineers to
-      deliver beautiful software experiences to open-source community.
-    </span>
-  </span>
+  👋 Welcome to our public space.
 {{< /hextra/hero-subtitle >}}
 </div>
-{{< /hextra/hero-container >}}
 
 <div class="hx-mt-6 hx-mb-6">
+{{< hextra/hero-subtitle >}}
+  Our goal is to create beautiful projects, empowering engineers to
+  deliver beautiful software experiences to open-source community.
+{{< /hextra/hero-subtitle >}}
+</div>
+
+<div class="hx-mt-16 hx-mb-6">
 {{< hextra/hero-section >}}
   Latest Projects
 {{< /hextra/hero-section >}}
 </div>
+{{< /hextra/hero-container >}}
 
 {{< hextra/feature-grid >}}
   {{< hextra/feature-card
