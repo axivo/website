@@ -4,19 +4,15 @@ languages:
     title: AXIVO
 menu:
   main:
-    - name: Tutorials
-      identifier: tutorials
-      pageRef: /tutorials
-      weight: 1
     - name: Search
       params:
         type: search
-      weight: 2
+      weight: 1
     - name: GitHub
       params:
         icon: github
       url: https://github.com/axivo/website
-      weight: 3
+      weight: 2
 module:
   hugoVersion:
     extended: true
