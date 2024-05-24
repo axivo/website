@@ -1,89 +1,34 @@
 baseURL: https://axivo.com/
-build:
-  buildStats:
-    disableIDs: true
-    enable: true
-defaultContentLanguage: en
-enableInlineShortcodes: true
-enableGitInfo: true
-enableRobotsTXT: true
-hasCJKLanguage: true
 languages:
   en:
-    languageName: English
     title: AXIVO
-    weight: 1
-markup:
-  goldmark:
-    renderer:
-      unsafe: true
-  highlight:
-    noClasses: false
 menu:
   main:
+    - name: Tutorials
+      identifier: tutorials
+      pageRef: /tutorials
+      weight: 1
     - name: Search
       params:
         type: search
-      weight: 1
+      weight: 2
     - name: GitHub
       params:
         icon: github
       url: https://github.com/axivo/website
-      weight: 2
+      weight: 3
 module:
   hugoVersion:
     extended: true
     min: 0.125.0
   imports:
+    - path: github.com/axivo/website
     - path: github.com/imfing/hextra
-outputs:
-  home: [HTML]
-  page: [HTML]
-  section: [HTML, RSS]
 params:
-  blog:
-    list:
-      displayTags: true
-  comments:
-    enable: false
-    giscus:
-      category: Discussions
-      categoryId: DIC_kwDOI0Z9Z84Cfhkt
-      emitMetadata: 0
-      inputPosition: bottom
-      lang: en
-      mapping: pathname
-      reactionsEnabled: 1
-      repo: axivo/website
-      repoId: R_kgDOI0Z9Zw
-      strict: 0
-    type: giscus
-  dateFormat: 'January 2, 2006'
   description: Imagine. Create.
-  displayUpdatedDate: true
   editURL:
     base: https://github.com/axivo/website/edit/main/docs/content
     enable: true
-  footer:
-    displayCopyright: true
-    displayPoweredBy: false
-    enable: true
-    width: normal
-  navbar:
-    displayTitle: true
-    displayLogo: true
-    # logo:
-    #   path: /logo.svg
-    #   dark: /logo.svg
-    #   link: /
-    #   width: 20
-    #   height: 10
-    # width: wide
-  page:
-    width: normal
-  theme:
-    default: system
-    displayToggle: true
   variables:
     repository: github.com/axivo/website
 publishDir: ../public
