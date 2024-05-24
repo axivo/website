@@ -3,9 +3,6 @@ on:
   push:
     branches:
       - main
-    paths:
-      - docs/**
-      - k3s-cluster/**
   workflow_dispatch:
 concurrency:
   cancel-in-progress: false
@@ -21,7 +18,7 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v4
       - name: Setup Go
-        uses: actions/setup-go@v5
+        uses: actions/setup-go@v4
         with:
           cache: false
           go-version: 1.22.2
@@ -36,8 +33,8 @@ jobs:
           HUGO_ENVIRONMENT: production
           TZ: America/New_York
         run: |
-          hugo --gc --minify -s ./docs
-          hugo --gc --minify -s ./k3s-cluster
+          hugo --gc --minify -s ./docs --config ../hugo.yaml,./hugo.yaml
+          hugo --gc --minify -s ./k3s-cluster --config ../hugo.yaml,./hugo.yaml
       - name: Upload Pages Artifact
         uses: actions/upload-pages-artifact@v3
         with:

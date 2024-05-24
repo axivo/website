@@ -1,24 +1,7 @@
 baseURL: https://axivo.com/k3s-cluster/
-build:
-  buildStats:
-    disableIDs: true
-    enable: true
-defaultContentLanguage: en
-enableInlineShortcodes: true
-enableGitInfo: true
-enableRobotsTXT: true
-hasCJKLanguage: true
 languages:
   en:
-    languageName: English
     title: 'AXIVO: K3s Cluster'
-    weight: 1
-markup:
-  goldmark:
-    renderer:
-      unsafe: true
-  highlight:
-    noClasses: false
 menu:
   main:
     - name: Documentation
@@ -62,55 +45,13 @@ module:
     extended: true
     min: 0.125.0
   imports:
+    - path: github.com/axivo/website
     - path: github.com/imfing/hextra
-outputs:
-  home: [HTML]
-  page: [HTML]
-  section: [HTML, RSS]
 params:
-  blog:
-    list:
-      displayTags: true
-  comments:
-    enable: false
-    giscus:
-      category: Discussions
-      categoryId: DIC_kwDOI0Z9Z84Cfhkt
-      emitMetadata: 0
-      inputPosition: bottom
-      lang: en
-      mapping: pathname
-      reactionsEnabled: 1
-      repo: axivo/website
-      repoId: R_kgDOI0Z9Zw
-      strict: 0
-    type: giscus
-  dateFormat: 'January 2, 2006'
-  description: K3s cluster deployed with Ansible
-  displayUpdatedDate: true
+  description: High Availability K3s cluster deployed with Ansible
   editURL:
     base: https://github.com/axivo/website/edit/main/k3s-cluster/content
     enable: true
-  footer:
-    displayCopyright: true
-    displayPoweredBy: false
-    enable: true
-    width: normal
-  navbar:
-    displayTitle: true
-    displayLogo: true
-    # logo:
-    #   path: /logo.svg
-    #   dark: /logo.svg
-    #   link: /
-    #   width: 20
-    #   height: 10
-    # width: wide
-  page:
-    width: normal
-  theme:
-    default: system
-    displayToggle: true
   variables:
     os:
       previous_version: 22.04
