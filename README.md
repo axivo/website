@@ -22,6 +22,7 @@ Run the following commands:
 
 ```shell
 cd docs
+hugo mod get -u github.com/axivo/website/global
 hugo mod get -u github.com/imfing/hextra
 hugo mod tidy
 ```

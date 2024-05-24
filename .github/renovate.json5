@@ -13,6 +13,14 @@
   "labels": [
     "dependency"
   ],
+  "packageRules": [
+    {
+      "matchManagers": [
+        "gomod"
+      ],
+      "rangeStrategy": "bump"
+    }
+  ],
   "prConcurrentLimit": 0,
   "prHourlyLimit": 0
 }
