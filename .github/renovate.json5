@@ -30,6 +30,13 @@
   ],
   "packageRules": [
     {
+      "groupName": "golang/go",
+      "matchManagers": [
+        "custom.regex"
+      ]
+    },
+    {
+      "groupName": "golang/go",
       "matchManagers": [
         "gomod"
       ],
