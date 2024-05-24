@@ -31,11 +31,11 @@
   "packageRules": [
     {
       "groupName": "dependency golang/go",
-      "matchDatasources": [
-        "go"
-      ],
       "matchManagers": [
         "custom.regex"
+      ],
+      "matchPackagePrefixes": [
+        "golang/"
       ]
     },
     {
