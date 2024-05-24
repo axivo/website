@@ -3,10 +3,6 @@
   "assignees": [
     "fmunteanu"
   ],
-  "enabledManagers": [
-    "ci",
-    "golang"
-  ],
   "extends": [
     "config:recommended"
   ],
