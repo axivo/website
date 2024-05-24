@@ -30,6 +30,7 @@
   ],
   "packageRules": [
     {
+      "groupName": "golang",
       "matchManagers": [
         "gomod"
       ],
