@@ -3,23 +3,8 @@
   "assignees": [
     "fmunteanu"
   ],
-  "customManagers": [
-    {
-      "customType": "regex",
-      "datasourceTemplate": "github-releases",
-      "depNameTemplate": "golang/go",
-      "extractVersionTemplate": "^go(?<version>.+)$",
-      "fileMatch": [
-        ".github/workflows/hugo.yml"
-      ],
-      "matchStrings": [
-        "go-version:\\s+(?<currentValue>.+)"
-      ]
-    }
-  ],
   "enabledManagers": [
     "ci",
-    "custom.regex",
     "golang"
   ],
   "extends": [
