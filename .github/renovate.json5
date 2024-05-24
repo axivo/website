@@ -6,11 +6,6 @@
   "extends": [
     "config:recommended"
   ],
-  "goGetDirs": [
-    "/",
-    "/docs",
-    "/k3s-cluster"
-  ],
   "labels": [
     "dependency"
   ],
