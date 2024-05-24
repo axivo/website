@@ -18,13 +18,17 @@
     }
   ],
   "enabledManagers": [
-    "custom.regex"
+    "ci",
+    "custom.regex",
+    "golang"
   ],
   "extends": [
     "config:recommended"
   ],
   "goGetDirs": [
-    "./docs/"
+    "/",
+    "/docs",
+    "/k3s-cluster"
   ],
   "labels": [
     "dependency"
