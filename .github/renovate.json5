@@ -3,6 +3,10 @@
   "assignees": [
     "fmunteanu"
   ],
+  "enabledManagers": [
+    "github-actions",
+    "gomod"
+  ],
   "extends": [
     "config:recommended"
   ],
