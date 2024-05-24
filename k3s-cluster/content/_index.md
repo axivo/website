@@ -16,21 +16,21 @@ layout: hextra-home
 
 <div class="hx-mt-6 hx-mb-6">
 {{< hextra/hero-subtitle >}}
-  Documentation and tutorials to deploy, manage and monitor
-  your Kubernetes cluster and related components, in style.
+  Documentation and tutorials to deploy, manage and monitor your
+  Kubernetes cluster and related components, in style.
 {{< /hextra/hero-subtitle >}}
 </div>
 
 <div class="hx-mt-6 hx-mb-6">
 {{< hextra/hero-button text="Get Started" link="wiki" >}}
 </div>
+{{< /hextra/hero-container >}}
 
-<div class="hx-mt-12 hx-mb-6">
+<div class="hx-mt-6 hx-mb-6">
 {{< hextra/hero-section >}}
   Used Technologies
 {{< /hextra/hero-section >}}
 </div>
-{{< /hextra/hero-container >}}
 
 {{< hextra/feature-grid >}}
   {{< hextra/feature-card
