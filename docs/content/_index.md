@@ -5,11 +5,11 @@ layout: hextra-home
 
 {{< hextra/hero-container
   image="images/logo.webp"
-  imageClass="hx-block hx-relative hx-overflow-hidden hx-rounded-3xl"
+  imageClass="hx-block hx-overflow-hidden hx-rounded-3xl"
   imageWidth="300" imageHeight="300"
   imageTitle="AXIVO"
 >}}
-<div class="hx-mt-6 hx-mb-6">
+<div class="hx-mt-12 hx-mb-6">
 {{< hextra/hero-headline >}}
   Imagine. Create.
 {{< /hextra/hero-headline >}}
@@ -27,13 +27,13 @@ layout: hextra-home
   deliver beautiful software experiences to open-source community.
 {{< /hextra/hero-subtitle >}}
 </div>
+{{< /hextra/hero-container >}}
 
-<div class="hx-mt-16 hx-mb-6">
+<div class="hx-mt-6 hx-mb-6">
 {{< hextra/hero-section >}}
   Latest Projects
 {{< /hextra/hero-section >}}
 </div>
-{{< /hextra/hero-container >}}
 
 {{< hextra/feature-grid >}}
   {{< hextra/feature-card
