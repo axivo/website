@@ -30,13 +30,13 @@
   ],
   "packageRules": [
     {
-      "groupName": "golang/go",
+      "groupName": "dependency golang/go",
       "matchManagers": [
         "custom.regex"
       ]
     },
     {
-      "groupName": "golang/go",
+      "groupName": "dependency golang/go",
       "matchManagers": [
         "gomod"
       ],
