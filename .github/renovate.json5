@@ -30,10 +30,10 @@
   ],
   "packageRules": [
     {
+      "groupName": "dependency golang/go",
       "matchDatasources": [
         "github-tags"
       ],
-      "groupName": "dependency golang/go",
       "matchManagers": [
         "custom.regex"
       ],
@@ -52,6 +52,7 @@
       "rangeStrategy": "bump"
     },
     {
+      "enabled": true,
       "matchDepTypes": [
         "indirect"
       ],
