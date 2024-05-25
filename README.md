@@ -13,7 +13,7 @@ brew install hugo golang
 Launch the server:
 
 ```shell
-hugo server --buildDrafts --disableFastRender
+hugo server --disableFastRender -Ds ./docs
 ```
 
 ## Theme Update
@@ -21,16 +21,14 @@ hugo server --buildDrafts --disableFastRender
 Run the following commands:
 
 ```shell
-cd docs
-hugo mod get -u github.com/axivo/website/global
-hugo mod get -u github.com/imfing/hextra
-hugo mod tidy
+hugo mod get -u ./...
+hugo mod tidy ./...
 ```
 
-For `main` branch update, run:
+For Hextra `main` branch update, run:
 
 ```shell
 hugo mod get -u github.com/imfing/hextra@main
 ```
 
-See [Update modules](https://gohugo.io/hugo-modules/use-modules/#update-modules) for more details.
+See the [modules update](https://gohugo.io/hugo-modules/use-modules/#update-modules) documentation, for more details.
