@@ -50,21 +50,6 @@
         "gomod"
       ],
       "rangeStrategy": "bump"
-    },
-    {
-      "groupName": "hugo modules",
-      "enabled": true,
-      "matchDatasources": [
-        "go"
-      ],
-      "matchManagers": [
-        "gomod"
-      ],
-      "matchPackagePrefixes": [
-        "github.com/axivo/website",
-        "github.com/imfing/hextra"
-      ],
-      "rangeStrategy": "bump"
     }
   ],
   "prConcurrentLimit": 0,
