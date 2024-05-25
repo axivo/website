@@ -53,6 +53,7 @@
     },
     {
       "groupName": "hugo modules",
+      "enabled": true,
       "matchDatasources": [
         "go"
       ],
