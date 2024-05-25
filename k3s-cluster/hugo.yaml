@@ -1,7 +1,7 @@
 baseURL: https://axivo.com/k3s-cluster/
 languages:
   en:
-    title: 'AXIVO: K3s Cluster'
+    title: AXIVO | K3s Cluster
 markup:
   _merge: shallow
 menu:
