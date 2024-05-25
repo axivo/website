@@ -33,8 +33,8 @@ jobs:
           HUGO_ENVIRONMENT: production
           TZ: America/New_York
         run: |
-          hugo --gc --minify -s ./docs --config ../global/hugo.yaml,./hugo.yaml
-          hugo --gc --minify -s ./k3s-cluster --config ../global/hugo.yaml,./hugo.yaml
+          hugo --gc --minify -s ./docs
+          hugo --gc --minify -s ./k3s-cluster
       - name: Upload Pages Artifact
         uses: actions/upload-pages-artifact@v3
         with:
