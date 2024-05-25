@@ -52,7 +52,6 @@
       "rangeStrategy": "bump"
     },
     {
-      "enabled": true,
       "matchDepTypes": [
         "indirect"
       ],
