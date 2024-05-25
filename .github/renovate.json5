@@ -50,6 +50,15 @@
         "gomod"
       ],
       "rangeStrategy": "bump"
+    },
+    {
+      "matchDepTypes": [
+        "indirect"
+      ],
+      "matchManagers": [
+        "gomod"
+      ],
+      "rangeStrategy": "bump"
     }
   ],
   "prConcurrentLimit": 0,
