@@ -30,6 +30,9 @@
   ],
   "packageRules": [
     {
+      "matchDatasources": [
+        "github-tags"
+      ],
       "groupName": "dependency golang/go",
       "matchManagers": [
         "custom.regex"
@@ -40,8 +43,25 @@
     },
     {
       "groupName": "dependency golang/go",
+      "matchDatasources": [
+        "golang-version"
+      ],
       "matchManagers": [
         "gomod"
+      ],
+      "rangeStrategy": "bump"
+    },
+    {
+      "groupName": "hugo modules",
+      "matchDatasources": [
+        "go"
+      ],
+      "matchManagers": [
+        "gomod"
+      ],
+      "matchPackagePrefixes": [
+        "github.com/axivo/website",
+        "github.com/imfing/hextra"
       ],
       "rangeStrategy": "bump"
     }
