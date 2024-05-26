@@ -6,6 +6,18 @@
   "customManagers": [
     {
       "customType": "regex",
+      "datasourceTemplate": "github-tags",
+      "depNameTemplate": "golang/go",
+      "extractVersionTemplate": "^go(?<version>.+)$",
+      "fileMatch": [
+        "netlify.toml"
+      ],
+      "matchStrings": [
+        "GO_VERSION[\\s\\S]+\"(?<currentValue>.+)\""
+      ]
+    },
+    {
+      "customType": "regex",
       "datasourceTemplate": "github-releases",
       "depNameTemplate": "gohugoio/hugo",
       "extractVersionTemplate": "^v(?<version>.+)$",
@@ -51,6 +63,18 @@
       ],
       "matchPackagePrefixes": [
         "golang/"
+      ]
+    },
+    {
+      "groupName": "dependency golang/go",
+      "matchDatasources": [
+        "golang-version"
+      ],
+      "matchFileNames": [
+        "global/go.mod"
+      ],
+      "matchManagers": [
+        "gomod"
       ],
       "matchUpdateTypes": [
         "major",
@@ -64,10 +88,6 @@
       ],
       "matchManagers": [
         "gomod"
-      ],
-      "matchUpdateTypes": [
-        "major",
-        "minor"
       ],
       "rangeStrategy": "bump"
     },
