@@ -76,6 +76,7 @@
       "rangeStrategy": "bump"
     },
     {
+      "enabled": false,
       "groupName": "dependency golang/go",
       "matchDatasources": [
         "golang-version"
@@ -87,8 +88,7 @@
         "gomod"
       ],
       "matchUpdateTypes": [
-        "major",
-        "minor"
+        "patch"
       ]
     },
     {
