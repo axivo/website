@@ -68,8 +68,7 @@
       "matchUpdateTypes": [
         "major",
         "minor"
-      ],
-      "rangeStrategy": "bump"
+      ]
     },
     {
       "matchDepTypes": [
