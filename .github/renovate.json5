@@ -54,7 +54,6 @@
   ],
   "packageRules": [
     {
-      "enabled": false,
       "groupName": "dependency golang/go",
       "matchDatasources": [
         "golang-version"
@@ -66,7 +65,8 @@
         "gomod"
       ],
       "matchUpdateTypes": [
-        "patch"
+        "major",
+        "minor"
       ]
     },
     {
