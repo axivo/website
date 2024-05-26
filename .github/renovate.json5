@@ -54,18 +54,7 @@
   ],
   "packageRules": [
     {
-      "groupName": "dependency golang/go",
-      "matchDatasources": [
-        "github-tags"
-      ],
-      "matchManagers": [
-        "custom.regex"
-      ],
-      "matchPackagePrefixes": [
-        "golang/"
-      ]
-    },
-    {
+      "enabled": false,
       "groupName": "dependency golang/go",
       "matchDatasources": [
         "golang-version"
@@ -77,8 +66,19 @@
         "gomod"
       ],
       "matchUpdateTypes": [
-        "major",
-        "minor"
+        "patch"
+      ]
+    },
+    {
+      "groupName": "dependency golang/go",
+      "matchDatasources": [
+        "github-tags"
+      ],
+      "matchManagers": [
+        "custom.regex"
+      ],
+      "matchPackagePrefixes": [
+        "golang/"
       ]
     },
     {
