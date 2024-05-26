@@ -56,22 +56,6 @@
     {
       "groupName": "dependency golang/go",
       "matchDatasources": [
-        "golang-version"
-      ],
-      "matchFileNames": [
-        "global/go.mod"
-      ],
-      "matchManagers": [
-        "gomod"
-      ],
-      "matchUpdateTypes": [
-        "major",
-        "minor"
-      ]
-    },
-    {
-      "groupName": "dependency golang/go",
-      "matchDatasources": [
         "github-tags"
       ],
       "matchManagers": [
@@ -90,6 +74,22 @@
         "gomod"
       ],
       "rangeStrategy": "bump"
+    },
+    {
+      "groupName": "dependency golang/go",
+      "matchDatasources": [
+        "golang-version"
+      ],
+      "matchFileNames": [
+        "global/go.mod"
+      ],
+      "matchManagers": [
+        "gomod"
+      ],
+      "matchUpdateTypes": [
+        "major",
+        "minor"
+      ]
     },
     {
       "matchDepTypes": [
