@@ -13,7 +13,7 @@
         "netlify.toml"
       ],
       "matchStrings": [
-        "go-version:\\s+(?<currentValue>.+)"
+        "HUGO_VERSION[\\s\\S]+\"(?<currentValue>.+)\""
       ]
     },
     {
