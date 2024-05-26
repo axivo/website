@@ -1,7 +1,0 @@
-[build]
-command = "hugo --gc --minify -s ./docs -b ${DEPLOY_PRIME_URL}"
-ignore = "false"
-publish = "./public"
-
-[build.environment]
-HUGO_VERSION = "0.126.0"
