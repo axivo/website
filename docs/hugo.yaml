@@ -22,11 +22,23 @@ module:
   imports:
     - path: github.com/axivo/website/global
     - path: github.com/imfing/hextra
+  mounts:
+    - source: content
+      target: content
+    - source: ../k3s-cluster/content
+      target: content/k3s-cluster
+    - source: static
+      target: static
+    - source: ../k3s-cluster/static
+      target: static/k3s-cluster
 params:
   description: Imagine. Create.
   editURL:
     base: https://github.com/axivo/website/edit/main/docs/content
     enable: true
   variables:
-    repository: github.com/axivo/website
+    os:
+      previous_version: 22.04
+      version: 24.04
+    repository: github.com/axivo/k3s-cluster
 publishDir: ../public
