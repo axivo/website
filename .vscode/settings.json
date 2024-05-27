@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "go.mod": "go",
+        "go.sum": "go"
+    }
+}
