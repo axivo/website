@@ -21,6 +21,7 @@ hugo server --disableFastRender -Ds ./docs
 Run the following commands:
 
 ```shell
+hugo mod clean --all
 hugo mod get -u ./...
 hugo mod tidy ./...
 ```

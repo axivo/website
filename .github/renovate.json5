@@ -10,10 +10,24 @@
       "depNameTemplate": "golang/go",
       "extractVersionTemplate": "^go(?<version>.+)$",
       "fileMatch": [
-        ".github/workflows/hugo.yml"
+        ".github/workflows/hugo.yml",
+        "netlify.toml"
       ],
       "matchStrings": [
-        "go-version:\\s+(?<currentValue>.+)"
+        "go-version:\\s+(?<currentValue>.+)",
+        "^GO_VERSION[\\s\\S]+?\"(?<currentValue>.+)\""
+      ]
+    },
+    {
+      "customType": "regex",
+      "datasourceTemplate": "github-releases",
+      "depNameTemplate": "gohugoio/hugo",
+      "extractVersionTemplate": "^v(?<version>.+)$",
+      "fileMatch": [
+        "netlify.toml"
+      ],
+      "matchStrings": [
+        "^HUGO_VERSION[\\s\\S]+?\"(?<currentValue>.+)\""
       ]
     }
   ],
@@ -48,8 +62,7 @@
       ],
       "matchManagers": [
         "gomod"
-      ],
-      "rangeStrategy": "bump"
+      ]
     },
     {
       "matchDepTypes": [
@@ -57,8 +70,7 @@
       ],
       "matchManagers": [
         "gomod"
-      ],
-      "rangeStrategy": "bump"
+      ]
     }
   ],
   "prConcurrentLimit": 0,
