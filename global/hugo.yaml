@@ -11,6 +11,8 @@ languages:
   en:
     languageName: English
     weight: 1
+markup:
+  _merge: shallow
   goldmark:
     renderer:
       unsafe: true
