@@ -42,13 +42,6 @@ menu:
       name: "🌐 Issues ↗"
       url: "https://github.com/axivo/k3s-cluster/issues"
       weight: 3
-module:
-  hugoVersion:
-    extended: true
-    min: 0.125.0
-  imports:
-    - path: github.com/axivo/website/global
-    - path: github.com/imfing/hextra
 params:
   description: High Availability K3s cluster deployed with Ansible
   editURL:
