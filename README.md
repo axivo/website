@@ -13,7 +13,7 @@ brew install hugo golang
 Launch the server:
 
 ```shell
-hugo server --disableFastRender -Ds ./docs
+hugo server --disableFastRender --logLevel debug -Ds ./docs
 ```
 
 ## Theme Update
