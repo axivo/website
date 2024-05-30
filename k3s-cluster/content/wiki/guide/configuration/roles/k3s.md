@@ -161,10 +161,6 @@ Copies the remote `/.kube/config` to local computer.
 
 {{% /steps %}}
 
-{{% /steps %}}
-
-{{% steps nested="true" %}}
-
 #### `server.loadbalancer`
 
 - Default value: `null`
@@ -187,9 +183,21 @@ Port for `apiserver` client load-balancer.
 
 {{% /steps %}}
 
-{{% /steps %}}
+### `k3s_vars.service`
+
+- Default value: `null`
+
+See the related child settings, listed below.
 
 {{% steps nested="true" %}}
+
+#### `service.debug`
+
+- Default value: `boolean`, `false`
+
+Deploys the K3s service with `debug` mode enabled.
+
+{{% /steps %}}
 
 ### `k3s_vars.tolerations`
 
