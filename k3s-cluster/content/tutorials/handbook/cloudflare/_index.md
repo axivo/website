@@ -28,6 +28,7 @@ The following front-ends are available, once the cluster is provisioned successf
 
 - AlertManager, `https://alertmanager.domain.com`
 - ArgoCD, `https://argocd.domain.com`
+- Cilium Hubble, `https://hubble.domain.com`
 - Longhorn, `https://longhorn.domain.com`
 - Grafana, `https://grafana.domain.com`
 - Prometheus, `https://prometheus.domain.com`
