@@ -212,7 +212,7 @@ Read the [Gateway API](/k3s-cluster/tutorials/handbook/cilium/#gateway-api) tuto
 
 ##### `tls.key_prefix`
 
-- Default value: `string`, `cloudflare-tls`
+- Default value: `string`, `cloudflare`
 
 {{% /steps %}}
 

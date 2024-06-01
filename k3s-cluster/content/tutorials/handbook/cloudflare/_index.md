@@ -13,11 +13,23 @@ This repository uses [Cloudflare](https://www.cloudflare.com) combined with `ext
 Generate the domain [API token](https://developers.cloudflare.com/fundamentals/api/get-started/create-token/), with following permissions:
 
 {{< filetree/container >}}
-  {{< filetree/folder name="AXIVO" >}}
-    {{< filetree/folder name="noty.cc - Zone:Read, DNS:Edit" state="closed" >}}
+  {{< filetree/folder name="ACCOUNT" >}}
+    {{< filetree/folder name="domain.com - Zone:Read, DNS:Edit" state="closed" >}}
     {{< /filetree/folder >}}
   {{< /filetree/folder >}}
 {{< /filetree/container >}}
 
 Encrypt the `token.value` with [`ansible-vault`](/k3s-cluster/tutorials/handbook/ansible/#vault) and insert it into 
 [`main.yaml`](https://{{< param variables.repository >}}/blob/main/roles/cloudflare/defaults/main.yaml) defaults file.
+
+## Front-Ends
+
+The following front-ends are available, once the cluster is provisioned successfully:
+
+- AlertManager, `https://alertmanager.domain.com`
+- ArgoCD, `https://argocd.domain.com`
+- Longhorn, `https://longhorn.domain.com`
+- Grafana, `https://grafana.domain.com`
+- Prometheus, `https://prometheus.domain.com`
+
+Update the `gateway.domain` setting into [`main.yaml`](https://{{< param variables.repository >}}/blob/main/roles/cloudflare/defaults/main.yaml) defaults file.
