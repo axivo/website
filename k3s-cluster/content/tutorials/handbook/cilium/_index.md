@@ -33,7 +33,7 @@ Cilium details the following instructions into their installation steps:
 
 > Please make sure that your issuer is able to create certificates under the `cilium.io` domain name.
 
-CertManager cannot control an external domain, therefore the above listed `Certificate` and `ClusterIssuer` resources are created.
+CertManager cannot control a domain not owned by end-user, therefore the above listed `Certificate` and `ClusterIssuer` resources are created.
 {{< /callout >}}
 
 Refer to Cilium [documentation](https://docs.cilium.io/en/stable/gettingstarted/hubble-configuration/), for further details.
