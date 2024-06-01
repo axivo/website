@@ -4,7 +4,7 @@ prev: /tutorials/handbook
 next: /tutorials/handbook/kured
 ---
 
-This repository uses [Cloudflare](https://www.cloudflare.com) combined with `external-dns`, to maintain the public DNS records and generate valid Let's Encrypt certificates.
+This repository uses [Cloudflare](https://www.cloudflare.com) and [ExternalDNS](https://github.com/kubernetes-sigs/external-dns), to maintain the public DNS records and generate valid Let's Encrypt certificates.
 
 <!--more-->
 
