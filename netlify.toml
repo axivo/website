@@ -1,5 +1,4 @@
 [build]
-command = "hugo --gc --minify -s ./docs -b ${DEPLOY_PRIME_URL}"
 ignore = "false"
 
 [build.environment]
