@@ -34,14 +34,18 @@ menu:
       params:
         type: separator
       weight: 1
-    - identifier: discussions
-      name: "🌐 Discussions ↗"
-      url: "https://github.com/axivo/k3s-cluster/discussions"
+    - identifier: slack
+      name: "🌐 Slack ↗"
+      url: "https://slack.axivo.com"
       weight: 2
-    - identifier: issues
-      name: "🌐 Issues ↗"
-      url: "https://github.com/axivo/k3s-cluster/issues"
+    - identifier: discussions
+      name: "🌐 GitHub Discussions ↗"
+      url: "https://github.com/axivo/k3s-cluster/discussions"
       weight: 3
+    - identifier: issues
+      name: "🌐 GitHub Issues ↗"
+      url: "https://github.com/axivo/k3s-cluster/issues"
+      weight: 4
 module:
   hugoVersion:
     extended: true
