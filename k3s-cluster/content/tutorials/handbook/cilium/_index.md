@@ -31,9 +31,9 @@ During chart post-install provisioning, Cilium Hubble is configured to take adva
 {{< callout type="warning" >}}
 Cilium details the following instructions into their installation steps:
 
-> Please make sure that your issuer is be able to create certificates under the `cilium.io` domain name.
+> Please make sure that your issuer is able to create certificates under the `cilium.io` domain name.
 
-CertManager cannot control an external domain, therefore the Hubble `Certificate` and `ClusterIssuer` resources are created.
+CertManager cannot control an external domain, therefore the above listed `Certificate` and `ClusterIssuer` resources are created.
 {{< /callout >}}
 
 Refer to Cilium [documentation](https://docs.cilium.io/en/stable/gettingstarted/hubble-configuration/), for further details.
