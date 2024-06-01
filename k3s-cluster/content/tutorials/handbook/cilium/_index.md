@@ -40,7 +40,7 @@ Refer to Cilium [documentation](https://docs.cilium.io/en/stable/gettingstarted/
 
 ### Gateway API
 
-[Gateway API](https://gateway-api.sigs.k8s.io) is an official Kubernetes project, focused on L4 and L7 routing in Kubernetes. Refer to Cilium [documentation](https://docs.cilium.io/en/stable/network/servicemesh/gateway-api/gateway-api/), for further details.
+[Gateway API](https://gateway-api.sigs.k8s.io) is an official Kubernetes project, focused on L4 and L7 routing in Kubernetes.
 
 #### Usage Example
 
@@ -49,3 +49,5 @@ This is an example of `Gateway` and `HTTPRoute` resources usage for Longhorn fro
 - `Gateway` resource template, see [`gateway.j2`](https://{{< param variables.repository >}}/blob/main/roles/longhorn/templates/gateway.j2)
 - `HTTPRoute` insecure resource template, see [`http_route.j2`](https://{{< param variables.repository >}}/blob/main/roles/longhorn/templates/http_route.j2)
 - `HTTPRoute` secure resource template, see [`https_route.j2`](https://{{< param variables.repository >}}/blob/main/roles/longhorn/templates/https_route.j2)
+
+Refer to Cilium [documentation](https://docs.cilium.io/en/stable/network/servicemesh/gateway-api/gateway-api/), for further details.
