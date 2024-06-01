@@ -706,7 +706,7 @@ Helm chart values template, see [`values.j2`](https://{{< param variables.reposi
 
 ### Gateway
 
-Kubernetes `Gateway` template, see [`config.j2`](https://{{< param variables.repository >}}/blob/main/roles/argocd/templates/gateway.j2) for details.
+Kubernetes `Gateway` resource template, see [`config.j2`](https://{{< param variables.repository >}}/blob/main/roles/argocd/templates/gateway.j2) for details.
 
 ### HTTP Route
 
@@ -714,17 +714,17 @@ Kubernetes `Gateway` template, see [`config.j2`](https://{{< param variables.rep
 
 #### Insecure Route
 
-Kubernetes `HTTPRoute` template, see [`http_route.j2`](https://{{< param variables.repository >}}/blob/main/roles/argocd/templates/http_route.j2) for details.
+Kubernetes `HTTPRoute` resource template, see [`http_route.j2`](https://{{< param variables.repository >}}/blob/main/roles/argocd/templates/http_route.j2) for details.
 
 #### Secure Route
 
-Kubernetes `HTTPRoute` template, see [`https_route.j2`](https://{{< param variables.repository >}}/blob/main/roles/argocd/templates/https_route.j2) for details.
+Kubernetes `HTTPRoute` resource template, see [`https_route.j2`](https://{{< param variables.repository >}}/blob/main/roles/argocd/templates/https_route.j2) for details.
 
 {{% /steps %}}
 
 ### Load Balancer
 
-Kubernetes `Service` template, see [`loadbalancer.j2`](https://{{< param variables.repository >}}/blob/main/roles/argocd/templates/loadbalancer.j2) for details.
+Kubernetes `Service` resource template, see [`loadbalancer.j2`](https://{{< param variables.repository >}}/blob/main/roles/argocd/templates/loadbalancer.j2) for details.
 
 ### User
 
@@ -732,11 +732,11 @@ Kubernetes `Service` template, see [`loadbalancer.j2`](https://{{< param variabl
 
 #### Name
 
-Kubernetes `ConfigMap` template, see [`username.j2`](https://{{< param variables.repository >}}/blob/main/roles/argocd/templates/username.j2) for details.
+Kubernetes `ConfigMap` resource template, see [`username.j2`](https://{{< param variables.repository >}}/blob/main/roles/argocd/templates/username.j2) for details.
 
 #### Password
 
-Kubernetes `Secret` template, see [`password.j2`](https://{{< param variables.repository >}}/blob/main/roles/argocd/templates/password.j2) for details.
+Kubernetes `Secret` resource template, see [`password.j2`](https://{{< param variables.repository >}}/blob/main/roles/argocd/templates/password.j2) for details.
 
 {{% /steps %}}
 
