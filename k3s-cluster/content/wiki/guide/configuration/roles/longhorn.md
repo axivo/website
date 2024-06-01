@@ -190,7 +190,7 @@ Helm chart values template, see [`values.j2`](https://{{< param variables.reposi
 
 ### Gateway
 
-Kubernetes `Gateway` template, see [`gateway.j2`](https://{{< param variables.repository >}}/blob/main/roles/longhorn/templates/gateway.j2) for details.
+Kubernetes `Gateway` resource template, see [`gateway.j2`](https://{{< param variables.repository >}}/blob/main/roles/longhorn/templates/gateway.j2) for details.
 
 ### HTTP Route
 
@@ -198,16 +198,16 @@ Kubernetes `Gateway` template, see [`gateway.j2`](https://{{< param variables.re
 
 #### Insecure Route
 
-Kubernetes `HTTPRoute` template, see [`http_route.j2`](https://{{< param variables.repository >}}/blob/main/roles/longhorn/templates/http_route.j2) for details.
+Kubernetes `HTTPRoute` resource template, see [`http_route.j2`](https://{{< param variables.repository >}}/blob/main/roles/longhorn/templates/http_route.j2) for details.
 
 #### Secure Route
 
-Kubernetes `HTTPRoute` template, see [`https_route.j2`](https://{{< param variables.repository >}}/blob/main/roles/longhorn/templates/https_route.j2) for details.
+Kubernetes `HTTPRoute` resource template, see [`https_route.j2`](https://{{< param variables.repository >}}/blob/main/roles/longhorn/templates/https_route.j2) for details.
 
 {{% /steps %}}
 
 ### Load Balancer
 
-Kubernetes `Service` template, see [`loadbalancer.j2`](https://{{< param variables.repository >}}/blob/main/roles/longhorn/templates/loadbalancer.j2) for details.
+Kubernetes `Service` resource template, see [`loadbalancer.j2`](https://{{< param variables.repository >}}/blob/main/roles/longhorn/templates/loadbalancer.j2) for details.
 
 {{% /steps %}}

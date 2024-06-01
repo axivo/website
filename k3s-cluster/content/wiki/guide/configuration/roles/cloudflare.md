@@ -256,10 +256,10 @@ Helm chart values template, see [`values.j2`](https://{{< param variables.reposi
 
 ### API Token
 
-Kubernetes `Secret` template, see [`api_token.j2`](https://{{< param variables.repository >}}/blob/main/roles/cloudflare/templates/api_token.j2) for details.
+Kubernetes `Secret` resource template, see [`api_token.j2`](https://{{< param variables.repository >}}/blob/main/roles/cloudflare/templates/api_token.j2) for details.
 
 ### Cluster Issuer
 
-Kubernetes `ClusterIssuer` template, see [`cluster_issuer.j2`](https://{{< param variables.repository >}}/blob/main/roles/cloudflare/templates/cluster_issuer.j2) for details.
+Kubernetes `ClusterIssuer` resource template, see [`cluster_issuer.j2`](https://{{< param variables.repository >}}/blob/main/roles/cloudflare/templates/cluster_issuer.j2) for details.
 
 {{% /steps %}}

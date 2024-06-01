@@ -258,7 +258,7 @@ Sets the `infrastructure` [annotations](https://kubernetes.io/docs/concepts/over
 
 ###### `auto.method`
 
-- Default value: `string`, `certmanager`
+- Default value: `string`, `certmanager`, optional `cronJob` or `helm`
 
 {{% /steps %}}
 
@@ -276,7 +276,7 @@ Sets the `infrastructure` [annotations](https://kubernetes.io/docs/concepts/over
 
 ###### `common.name`
 
-- Default value: `string`, `hubble-tls-certificate`
+- Default value: `string`, `hubble-common-certs`
 
 {{% /steps %}}
 
@@ -288,7 +288,7 @@ Sets the `infrastructure` [annotations](https://kubernetes.io/docs/concepts/over
 
 ###### `root.name`
 
-- Default value: `string`, `hubble-tls-root-certificate`
+- Default value: `string`, `hubble-root-certs`
 
 {{% /steps %}}
 
@@ -604,15 +604,15 @@ Helm chart values template, see [`values.j2`](https://{{< param variables.reposi
 
 ### Certificate
 
-Kubernetes `Certificate` template, see [`certificate.j2`](https://{{< param variables.repository >}}/blob/main/roles/cilium/templates/certificate.j2) for details.
+Kubernetes `Certificate` resource template, see [`certificate.j2`](https://{{< param variables.repository >}}/blob/main/roles/cilium/templates/certificate.j2) for details.
 
 ### Cluster Issuer
 
-Kubernetes `ClusterIssuer` template, see [`cluster_issuer.j2`](https://{{< param variables.repository >}}/blob/main/roles/cilium/templates/cluster_issuer.j2) for details.
+Kubernetes `ClusterIssuer` resource template, see [`cluster_issuer.j2`](https://{{< param variables.repository >}}/blob/main/roles/cilium/templates/cluster_issuer.j2) for details.
 
 ### Gateway
 
-Kubernetes `Gateway` template, see [`gateway.j2`](https://{{< param variables.repository >}}/blob/main/roles/cilium/templates/gateway.j2) for details.
+Kubernetes `Gateway` resource template, see [`gateway.j2`](https://{{< param variables.repository >}}/blob/main/roles/cilium/templates/gateway.j2) for details.
 
 ### HTTP Route
 
@@ -620,24 +620,24 @@ Kubernetes `Gateway` template, see [`gateway.j2`](https://{{< param variables.re
 
 #### Insecure Route
 
-Kubernetes `HTTPRoute` template, see [`http_route.j2`](https://{{< param variables.repository >}}/blob/main/roles/cilium/templates/http_route.j2) for details.
+Kubernetes `HTTPRoute` resource template, see [`http_route.j2`](https://{{< param variables.repository >}}/blob/main/roles/cilium/templates/http_route.j2) for details.
 
 #### Secure Route
 
-Kubernetes `HTTPRoute` template, see [`https_route.j2`](https://{{< param variables.repository >}}/blob/main/roles/cilium/templates/https_route.j2) for details.
+Kubernetes `HTTPRoute` resource template, see [`https_route.j2`](https://{{< param variables.repository >}}/blob/main/roles/cilium/templates/https_route.j2) for details.
 
 {{% /steps %}}
 
 ### L2 Announcement Policy
 
-Kubernetes `CiliumL2AnnouncementPolicy` template, see [`l2_announcement_policy.j2`](https://{{< param variables.repository >}}/blob/main/roles/cilium/templates/l2_announcement_policy.j2) for details.
+Kubernetes `CiliumL2AnnouncementPolicy` resource template, see [`l2_announcement_policy.j2`](https://{{< param variables.repository >}}/blob/main/roles/cilium/templates/l2_announcement_policy.j2) for details.
 
 ### Load Balancer
 
-Kubernetes `Service` template, see [`loadbalancer.j2`](https://{{< param variables.repository >}}/blob/main/roles/cilium/templates/loadbalancer.j2) for details.
+Kubernetes `Service` resource template, see [`loadbalancer.j2`](https://{{< param variables.repository >}}/blob/main/roles/cilium/templates/loadbalancer.j2) for details.
 
 ### Load Balancer IP Pool
 
-Kubernetes `CiliumLoadBalancerIPPool` template, see [`loadbalancer_ip_pool.j2`](https://{{< param variables.repository >}}/blob/main/roles/cilium/templates/loadbalancer_ip_pool.j2) for details.
+Kubernetes `CiliumLoadBalancerIPPool` resource template, see [`loadbalancer_ip_pool.j2`](https://{{< param variables.repository >}}/blob/main/roles/cilium/templates/loadbalancer_ip_pool.j2) for details.
 
 {{% /steps %}}

@@ -280,6 +280,6 @@ Helm chart values template, see [`values.j2`](https://{{< param variables.reposi
 
 ### Cluster Issuer
 
-Kubernetes `ClusterIssuer` template, see [`cluster_issuer.j2`](https://{{< param variables.repository >}}/blob/main/roles/certmanager/templates/cluster_issuer.j2) for details.
+Kubernetes `ClusterIssuer` resource template, see [`cluster_issuer.j2`](https://{{< param variables.repository >}}/blob/main/roles/certmanager/templates/cluster_issuer.j2) for details.
 
 {{% /steps %}}
