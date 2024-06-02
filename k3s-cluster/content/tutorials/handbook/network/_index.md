@@ -17,7 +17,7 @@ It is strongly recommended to set a dedicated VLAN and static IP addresses for e
 
 ### VLAN
 
-In your router, create a new VLAN with IPv6 disabled and domain name set to `local`:
+Create a new VLAN with IPv6 disabled and domain name set to `local`:
 
 [![OS Installation: Network VLAN](network-vlan.webp)](network-vlan.webp)
 
