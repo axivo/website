@@ -65,6 +65,7 @@
       ]
     },
     {
+      "enabled": true,
       "matchDepTypes": [
         "indirect"
       ],
@@ -72,6 +73,9 @@
         "gomod"
       ]
     }
+  ],
+  "postUpdateOptions": [
+    "gomodTidy"
   ],
   "prConcurrentLimit": 0,
   "prHourlyLimit": 0
