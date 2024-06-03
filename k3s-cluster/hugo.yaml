@@ -8,15 +8,15 @@ menu:
   main:
     - name: Home
       identifier: home
-      pageRef: /
+      pageRef: /k3s-cluster/
       weight: 1
     - name: Documentation
       identifier: wiki
-      pageRef: /wiki
+      pageRef: /k3s-cluster/wiki/
       weight: 2
     - name: Tutorials
       identifier: tutorials
-      pageRef: /tutorials
+      pageRef: /k3s-cluster/tutorials/
       weight: 3
     - name: Search
       params:
