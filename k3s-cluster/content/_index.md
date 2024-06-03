@@ -1,5 +1,5 @@
 ---
-title: Home
+title: K3s Cluster
 layout: hextra-home
 ---
 
