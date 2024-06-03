@@ -1,33 +1,37 @@
-baseURL: https://axivo.com/k3s-cluster/
+baseURL: https://axivo.com
 languages:
   en:
-    title: AXIVO | K3s Cluster
+    title: AXIVO
 markup:
   _merge: shallow
 menu:
   main:
+    - name: Home
+      identifier: home
+      pageRef: /
+      weight: 1
     - name: Documentation
       identifier: wiki
       pageRef: /wiki
-      weight: 1
+      weight: 2
     - name: Tutorials
       identifier: tutorials
       pageRef: /tutorials
-      weight: 2
+      weight: 3
     - name: Search
       params:
         type: search
-      weight: 3
+      weight: 4
     - name: GitHub
       params:
         icon: github
       url: https://github.com/axivo/k3s-cluster
-      weight: 4
+      weight: 5
     - name: Parent
       params:
         icon: folder
       url: ../
-      weight: 5
+      weight: 6
   sidebar:
     - identifier: more
       name: More
