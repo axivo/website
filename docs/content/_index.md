@@ -40,9 +40,18 @@ layout: hextra-home
     title="K3s Cluster"
     subtitle="High Availability cluster deployed with Ansible."
     class="hx-aspect-auto md:hx-aspect-[1.1/1] max-md:hx-min-h-[340px]"
-    image="images/card-k3s-cluster.webp"
+    image="/images/card-k3s-cluster.webp"
     imageClass="hx-top-[20%] hx-left-[24px] hx-w-[180%] sm:hx-w-[110%] dark:hx-opacity-80"
-    link="k3s-cluster"
+    link="/k3s-cluster/"
+    style="background: radial-gradient(ellipse at 50% 80%,rgba(194,97,254,0.15),hsla(0,0%,100%,0));"
+  >}}
+  {{< hextra/feature-card
+    title="K3s Applications"
+    subtitle="Project for applications deployed with ArgoCD."
+    class="hx-aspect-auto md:hx-aspect-[1.1/1] max-md:hx-min-h-[340px]"
+    image="/images/card-k3s-apps.webp"
+    imageClass="hx-top-[20%] hx-left-[24px] hx-w-[180%] sm:hx-w-[110%] dark:hx-opacity-80"
+    link="/k3s-cluster/tutorials/handbook/argocd/"
     style="background: radial-gradient(ellipse at 50% 80%,rgba(194,97,254,0.15),hsla(0,0%,100%,0));"
   >}}
 {{< /hextra/feature-grid >}}
