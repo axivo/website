@@ -19,7 +19,7 @@ The configuration guides present in this section allow you to configure the K3s 
 Each cluster node must have Ubuntu Server LTS `{{< param variables.os.version >}}+` (64-bits) OS installed, which is a requirement for [Cilium](https://cilium.io). The required `apt` package dependencies changed also, compared to previous Ubuntu Server LTS release.
 
 {{< callout type="info" >}}
-  Read the [OS installation](/k3s-cluster/tutorials/handbook/server) tutorial, on a Raspberry Pi.
+  Read the [OS Installation](/k3s-cluster/tutorials/handbook/server) tutorial, on bare-metal infrastructure.
 {{< /callout >}}
 
 ## Ansible Vault

@@ -19,69 +19,25 @@ See the related role settings listed below, defined into [`main.yaml`](https://{
 
 - Default value: `null`
 
-If a SSD device is attached to hardware through USB cable, there is a validation step making sure the same device id and name related to cable adapter chipset is present into all cluster nodes. Validate the USB storage device values attached to nodes, by running the `lsusb` command:
-
-```shell
-lsusb
-```
-
-Command output:
-
-```shell
-Bus 003 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
-Bus 002 Device 002: ID 174c:55aa ASMedia Technology Inc. ASM1051E SATA 6Gb/s bridge, ASM1053E SATA 6Gb/s bridge, ASM1153 SATA 3Gb/s bridge, ASM1153E SATA 6Gb/s bridge
-Bus 002 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
-Bus 001 Device 002: ID 2109:3431 VIA Labs, Inc. Hub
-Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
-```
-
-For example, connecting the SSD device with different USB cable models might result in a different `device.name`. Similarly, connecting the SSD device to a different USB port will result in a different `device.id`.
-
 {{< callout type="info" >}}
-  Run the [Validation](/k3s-cluster/wiki/guide/playbooks/validation) playbook, to validate the USB storage device values.
+  Read the [Storage Devices](/k3s-cluster/tutorials/handbook/server) tutorial, on bare-metal infrastructure.
 {{< /callout >}}
 
 See the related child settings, listed below.
 
 {{% steps nested="true" %}}
 
+#### `device.enabled`
+
+- Default value: `boolean`, `true`
+
 #### `device.id`
 
 - Default value: `string`, `2:2`
 
-The SSD device attached with a cable adapter to hardware is identified as `Bus 002 Device 002`, which sets the `device.id` to `2:2`. To test if the value is correct, run:
-
-```shell
-lsusb -s '2:2'
-```
-
-Command output:
-
-```shell
-Bus 002 Device 002: ID 174c:55aa ASMedia Technology Inc. ASM1051E SATA 6Gb/s bridge, ASM1053E SATA 6Gb/s bridge, ASM1153 SATA 3Gb/s bridge, ASM1153E SATA 6Gb/s bridge
-```
-
 #### `device.name`
 
 - Default value: `string`, `ASMedia Technology`
-
-The SSD device cable adapter chipset is identified as `ASMedia Technology Inc. bridge`, which sets the `device.name` to `ASMedia Technology`. To test if the value is correct, run:
-
-```shell
-lsusb -s '2:2' | grep 'ASMedia Technology'
-```
-
-Command output:
-
-```shell
-Bus 002 Device 002: ID 174c:55aa ASMedia Technology Inc. ASM1051E SATA 6Gb/s bridge, ASM1053E SATA 6Gb/s bridge, ASM1153 SATA 3Gb/s bridge, ASM1153E SATA 6Gb/s bridge
-```
-
-#### `device.transport`
-
-- Default value: `string`, `usb`
-
-Setting the value to `sata` will disable any validation and configuration settings related to SSD devices with `usb` transport type. The [Provisioning](/k3s-cluster/wiki/guide/playbooks/provisioning) playbook will assume the OS was deployed prior, to a properly formatted internal disk.
 
 {{% /steps %}}
 
