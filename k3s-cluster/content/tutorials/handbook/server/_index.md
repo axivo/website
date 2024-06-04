@@ -5,13 +5,17 @@ next: /tutorials/handbook/network
 weight: 2
 ---
 
-This repository uses Raspberry Pi's as bare-metal hardware, therefore is recommended to install the latest Ubuntu Server LTS `{{< param variables.os.version >}}+` (64-bits) OS with Raspberry Pi Imager.
+The K3s cluster can be provisioned into any type of bare-metal hardware. This repository uses Raspberry Pi's as bare-metal hardware example, therefore is recommended to install the latest Ubuntu Server LTS `{{< param variables.os.version >}}+` (64-bits) OS with Raspberry Pi Imager.
 
 <!--more-->
 
 ## OS Installation
 
 Each cluster node uses Ubuntu Server LTS `{{< param variables.os.version >}}+` (64-bits) OS installed, which is a requirement for [Cilium](https://cilium.io). The `apt` package dependencies changed, compared to previous `{{< param variables.os.previous_version >}}` release, therefore, `{{< param variables.os.version >}}+` release is enforced as minimal requirement.
+
+{{< callout type="info" >}}
+  For generic hardware, install the OS using your favorite provisioning method.
+{{< /callout >}}
 
 {{% steps %}}
 
@@ -38,6 +42,68 @@ On each cluster node, under `OS Customisation: General` section, set **only** th
 On each cluster node, under `OS Customisation: Services` section, enable SSH with password authentication:
 
 ![OS General Settings: Imager Services](server-imager-services.webp)
+
+{{% /steps %}}
+
+## Storage Devices
+
+See the `cluster_vars.device` settings listed below, defined into [`main.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/cluster/defaults/main.yaml) defaults file.
+
+{{% steps %}}
+
+### `device.enabled`
+
+Setting the value to `false` will assume the storage devices are internal and disable any configuration settings related to storage devices attached to hardware through USB cable adapter.
+
+Validate the USB storage device values attached to cluster nodes, by running the `lsusb` command:
+
+```shell
+lsusb
+```
+
+Command output:
+
+```shell
+Bus 003 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+Bus 002 Device 002: ID 174c:55aa ASMedia Technology Inc. ASM1051E SATA 6Gb/s bridge, ASM1053E SATA 6Gb/s bridge, ASM1153 SATA 3Gb/s bridge, ASM1153E SATA 6Gb/s bridge
+Bus 002 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
+Bus 001 Device 002: ID 2109:3431 VIA Labs, Inc. Hub
+Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+```
+
+For example, connecting the storage device with different USB cable models might result in a different `device.name`. Similarly, connecting the storage device to a different USB port will result in a different `device.id`.
+
+{{< callout type="info" >}}
+  Run the [Validation](/k3s-cluster/wiki/guide/playbooks/validation) playbook, to validate the USB storage device values.
+{{< /callout >}}
+
+### `device.id`
+
+The storage device attached with a cable adapter to hardware is identified as `Bus 002 Device 002`, which sets the `device.id` to `2:2`. To test if the value is correct, run:
+
+```shell
+lsusb -s '2:2'
+```
+
+Command output:
+
+```shell
+Bus 002 Device 002: ID 174c:55aa ASMedia Technology Inc. ASM1051E SATA 6Gb/s bridge, ASM1053E SATA 6Gb/s bridge, ASM1153 SATA 3Gb/s bridge, ASM1153E SATA 6Gb/s bridge
+```
+
+### `device.name`
+
+The storage device cable adapter chipset is identified as `ASMedia Technology Inc. bridge`, which sets the `device.name` to `ASMedia Technology`. To test if the value is correct, run:
+
+```shell
+lsusb -s '2:2' | grep 'ASMedia Technology'
+```
+
+Command output:
+
+```shell
+Bus 002 Device 002: ID 174c:55aa ASMedia Technology Inc. ASM1051E SATA 6Gb/s bridge, ASM1053E SATA 6Gb/s bridge, ASM1153 SATA 3Gb/s bridge, ASM1153E SATA 6Gb/s bridge
+```
 
 {{% /steps %}}
 
