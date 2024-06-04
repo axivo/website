@@ -19,7 +19,6 @@ Navigate to `ArgoCD Settings` > `Repositories` and connect to official project r
 | Project | `default` <tr></tr>                                           |
 | URL     | `https://{{< param variables.repository.applications >}}.git` |
 
-
 ## Applications Provisioning
 
 Application charts are released with version control, based on repository tags. See below an example of application provisioning in ArgoCD.
