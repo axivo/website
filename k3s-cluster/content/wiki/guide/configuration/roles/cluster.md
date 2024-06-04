@@ -11,7 +11,7 @@ The role performs various tasks related to OS configuration, reset and validatio
 
 ## Role Settings
 
-See the related role settings listed below, defined into [`main.yaml`](https://{{< param variables.repository >}}/blob/main/roles/cluster/defaults/main.yaml) defaults file.
+See the related role settings listed below, defined into [`main.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/cluster/defaults/main.yaml) defaults file.
 
 {{% steps %}}
 
@@ -307,34 +307,34 @@ See the related role tasks, listed below.
 
 ### Configuration
 
-OS configuration related tasks, see [`configuration.yaml`](https://{{< param variables.repository >}}/blob/main/roles/cluster/tasks/configuration.yaml) for details.
+OS configuration related tasks, see [`configuration.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/cluster/tasks/configuration.yaml) for details.
 
 ### Facts
 
-Ansible facts, see [`facts.yaml`](https://{{< param variables.repository >}}/blob/main/roles/cluster/tasks/facts.yaml) for details.
+Ansible facts, see [`facts.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/cluster/tasks/facts.yaml) for details.
 
 ### Firewall
 
-Firewall related tasks, can be used to also configure specific firewall rules. See [`firewall.yaml`](https://{{< param variables.repository >}}/blob/main/roles/cluster/tasks/firewall.yaml) for details.
+Firewall related tasks, can be used to also configure specific firewall rules. See [`firewall.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/cluster/tasks/firewall.yaml) for details.
 
 ### Main
 
-Main role related tasks, see [`main.yaml`](https://{{< param variables.repository >}}/blob/main/roles/cluster/tasks/main.yaml) for details.
+Main role related tasks, see [`main.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/cluster/tasks/main.yaml) for details.
 
 ### Reset
 
-Reset related tasks, see [`reset.yaml`](https://{{< param variables.repository >}}/blob/main/roles/cluster/tasks/reset.yaml) for details.
+Reset related tasks, see [`reset.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/cluster/tasks/reset.yaml) for details.
 
 ### Upgrade
 
-OS upgrade related tasks, see [`upgrade.yaml`](https://{{< param variables.repository >}}/blob/main/roles/cluster/tasks/upgrade.yaml) for details.
+OS upgrade related tasks, see [`upgrade.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/cluster/tasks/upgrade.yaml) for details.
 
 ### User
 
-User related tasks, see [`user.yaml`](https://{{< param variables.repository >}}/blob/main/roles/cluster/tasks/user.yaml) for details.
+User related tasks, see [`user.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/cluster/tasks/user.yaml) for details.
 
 ### Validation
 
-Validation related tasks, see [`validation.yaml`](https://{{< param variables.repository >}}/blob/main/roles/cluster/tasks/validation.yaml) for details.
+Validation related tasks, see [`validation.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/cluster/tasks/validation.yaml) for details.
 
 {{% /steps %}}

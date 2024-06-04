@@ -10,7 +10,7 @@ The role performs various tasks related to Helm chart deployment, reset and vali
 
 ## Role Settings
 
-See the related role settings listed below, defined into [`main.yaml`](https://{{< param variables.repository >}}/blob/main/roles/longhorn/defaults/main.yaml) defaults file.
+See the related role settings listed below, defined into [`main.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/longhorn/defaults/main.yaml) defaults file.
 
 {{% steps %}}
 
@@ -162,19 +162,19 @@ See the related role tasks, listed below.
 
 ### Facts
 
-Ansible facts, see [`facts.yaml`](https://{{< param variables.repository >}}/blob/main/roles/longhorn/tasks/facts.yaml) for details.
+Ansible facts, see [`facts.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/longhorn/tasks/facts.yaml) for details.
 
 ### Main
 
-Main role related tasks, see [`main.yaml`](https://{{< param variables.repository >}}/blob/main/roles/longhorn/tasks/main.yaml) for details.
+Main role related tasks, see [`main.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/longhorn/tasks/main.yaml) for details.
 
 ### Reset
 
-Reset related tasks, see [`reset.yaml`](https://{{< param variables.repository >}}/blob/main/roles/longhorn/tasks/reset.yaml) for details.
+Reset related tasks, see [`reset.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/longhorn/tasks/reset.yaml) for details.
 
 ### Validation
 
-Validation related tasks, see [`validation.yaml`](https://{{< param variables.repository >}}/blob/main/roles/longhorn/tasks/validation.yaml) for details.
+Validation related tasks, see [`validation.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/longhorn/tasks/validation.yaml) for details.
 
 {{% /steps %}}
 
@@ -186,11 +186,11 @@ See the related role templates, listed below.
 
 ### Helm Chart
 
-Helm chart values template, see [`values.j2`](https://{{< param variables.repository >}}/blob/main/roles/longhorn/templates/values.j2) for details.
+Helm chart values template, see [`values.j2`](https://{{< param variables.repository.cluster >}}/blob/main/roles/longhorn/templates/values.j2) for details.
 
 ### Gateway
 
-Kubernetes `Gateway` resource template, see [`gateway.j2`](https://{{< param variables.repository >}}/blob/main/roles/longhorn/templates/gateway.j2) for details.
+Kubernetes `Gateway` resource template, see [`gateway.j2`](https://{{< param variables.repository.cluster >}}/blob/main/roles/longhorn/templates/gateway.j2) for details.
 
 ### HTTP Route
 
@@ -198,16 +198,16 @@ Kubernetes `Gateway` resource template, see [`gateway.j2`](https://{{< param var
 
 #### Insecure Route
 
-Kubernetes `HTTPRoute` resource template, see [`http_route.j2`](https://{{< param variables.repository >}}/blob/main/roles/longhorn/templates/http_route.j2) for details.
+Kubernetes `HTTPRoute` resource template, see [`http_route.j2`](https://{{< param variables.repository.cluster >}}/blob/main/roles/longhorn/templates/http_route.j2) for details.
 
 #### Secure Route
 
-Kubernetes `HTTPRoute` resource template, see [`https_route.j2`](https://{{< param variables.repository >}}/blob/main/roles/longhorn/templates/https_route.j2) for details.
+Kubernetes `HTTPRoute` resource template, see [`https_route.j2`](https://{{< param variables.repository.cluster >}}/blob/main/roles/longhorn/templates/https_route.j2) for details.
 
 {{% /steps %}}
 
 ### Load Balancer
 
-Kubernetes `Service` resource template, see [`loadbalancer.j2`](https://{{< param variables.repository >}}/blob/main/roles/longhorn/templates/loadbalancer.j2) for details.
+Kubernetes `Service` resource template, see [`loadbalancer.j2`](https://{{< param variables.repository.cluster >}}/blob/main/roles/longhorn/templates/loadbalancer.j2) for details.
 
 {{% /steps %}}

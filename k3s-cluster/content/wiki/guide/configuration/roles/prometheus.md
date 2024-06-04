@@ -10,7 +10,7 @@ The role performs various tasks related to OS configuration, chart deployment, r
 
 ## Role Settings
 
-See the related role settings listed below, defined into [`main.yaml`](https://{{< param variables.repository >}}/blob/main/roles/prometheus/defaults/main.yaml) defaults file.
+See the related role settings listed below, defined into [`main.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/prometheus/defaults/main.yaml) defaults file.
 
 {{% steps %}}
 
@@ -336,19 +336,19 @@ See the related role tasks, listed below.
 
 ### Facts
 
-Ansible facts, see [`facts.yaml`](https://{{< param variables.repository >}}/blob/main/roles/prometheus/tasks/facts.yaml) for details.
+Ansible facts, see [`facts.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/prometheus/tasks/facts.yaml) for details.
 
 ### Main
 
-Main role related tasks, see [`main.yaml`](https://{{< param variables.repository >}}/blob/main/roles/prometheus/tasks/main.yaml) for details.
+Main role related tasks, see [`main.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/prometheus/tasks/main.yaml) for details.
 
 ### Reset
 
-Reset related tasks, see [`reset.yaml`](https://{{< param variables.repository >}}/blob/main/roles/prometheus/tasks/reset.yaml) for details.
+Reset related tasks, see [`reset.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/prometheus/tasks/reset.yaml) for details.
 
 ### Validation
 
-Validation related tasks, see [`validation.yaml`](https://{{< param variables.repository >}}/blob/main/roles/prometheus/tasks/validation.yaml) for details.
+Validation related tasks, see [`validation.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/prometheus/tasks/validation.yaml) for details.
 
 {{% /steps %}}
 
@@ -360,7 +360,7 @@ See the related role templates, listed below.
 
 ### Helm Chart
 
-Helm chart values template, see [`values.j2`](https://{{< param variables.repository >}}/blob/main/roles/prometheus/templates/values.j2) for details.
+Helm chart values template, see [`values.j2`](https://{{< param variables.repository.cluster >}}/blob/main/roles/prometheus/templates/values.j2) for details.
 
 ### Alert Manager
 
@@ -368,7 +368,7 @@ Helm chart values template, see [`values.j2`](https://{{< param variables.reposi
 
 #### Gateway
 
-Kubernetes `Gateway` resource template, see [`alertmanager_gateway.j2`](https://{{< param variables.repository >}}/blob/main/roles/prometheus/templates/alertmanager_gateway.j2) for details.
+Kubernetes `Gateway` resource template, see [`alertmanager_gateway.j2`](https://{{< param variables.repository.cluster >}}/blob/main/roles/prometheus/templates/alertmanager_gateway.j2) for details.
 
 #### HTTP Route
 
@@ -376,11 +376,11 @@ Kubernetes `Gateway` resource template, see [`alertmanager_gateway.j2`](https://
 
 ##### Insecure Route
 
-Kubernetes `HTTPRoute` resource template, see [`alertmanager_http_route.j2`](https://{{< param variables.repository >}}/blob/main/roles/prometheus/templates/alertmanager_http_route.j2) for details.
+Kubernetes `HTTPRoute` resource template, see [`alertmanager_http_route.j2`](https://{{< param variables.repository.cluster >}}/blob/main/roles/prometheus/templates/alertmanager_http_route.j2) for details.
 
 ##### Secure Route
 
-Kubernetes `HTTPRoute` resource template, see [`alertmanager_https_route.j2`](https://{{< param variables.repository >}}/blob/main/roles/prometheus/templates/alertmanager_https_route.j2) for details.
+Kubernetes `HTTPRoute` resource template, see [`alertmanager_https_route.j2`](https://{{< param variables.repository.cluster >}}/blob/main/roles/prometheus/templates/alertmanager_https_route.j2) for details.
 
 {{% /steps %}}
 
@@ -392,11 +392,11 @@ Kubernetes `HTTPRoute` resource template, see [`alertmanager_https_route.j2`](ht
 
 #### Credentials
 
-Kubernetes `Secret` resource template, see [`grafana_credentials.j2`](https://{{< param variables.repository >}}/blob/main/roles/prometheus/templates/grafana_credentials.j2) for details.
+Kubernetes `Secret` resource template, see [`grafana_credentials.j2`](https://{{< param variables.repository.cluster >}}/blob/main/roles/prometheus/templates/grafana_credentials.j2) for details.
 
 #### Gateway
 
-Kubernetes `Gateway` resource template, see [`grafana_gateway.j2`](https://{{< param variables.repository >}}/blob/main/roles/prometheus/templates/grafana_gateway.j2) for details.
+Kubernetes `Gateway` resource template, see [`grafana_gateway.j2`](https://{{< param variables.repository.cluster >}}/blob/main/roles/prometheus/templates/grafana_gateway.j2) for details.
 
 #### HTTP Route
 
@@ -404,11 +404,11 @@ Kubernetes `Gateway` resource template, see [`grafana_gateway.j2`](https://{{< p
 
 ##### Insecure Route
 
-Kubernetes `HTTPRoute` resource template, see [`grafana_http_route.j2`](https://{{< param variables.repository >}}/blob/main/roles/prometheus/templates/grafana_http_route.j2) for details.
+Kubernetes `HTTPRoute` resource template, see [`grafana_http_route.j2`](https://{{< param variables.repository.cluster >}}/blob/main/roles/prometheus/templates/grafana_http_route.j2) for details.
 
 ##### Secure Route
 
-Kubernetes `HTTPRoute` resource template, see [`grafana_https_route.j2`](https://{{< param variables.repository >}}/blob/main/roles/prometheus/templates/grafana_https_route.j2) for details.
+Kubernetes `HTTPRoute` resource template, see [`grafana_https_route.j2`](https://{{< param variables.repository.cluster >}}/blob/main/roles/prometheus/templates/grafana_https_route.j2) for details.
 
 {{% /steps %}}
 
@@ -420,7 +420,7 @@ Kubernetes `HTTPRoute` resource template, see [`grafana_https_route.j2`](https:/
 
 #### Gateway
 
-Kubernetes `Gateway` resource template, see [`prometheus_gateway.j2`](https://{{< param variables.repository >}}/blob/main/roles/prometheus/templates/prometheus_gateway.j2) for details.
+Kubernetes `Gateway` resource template, see [`prometheus_gateway.j2`](https://{{< param variables.repository.cluster >}}/blob/main/roles/prometheus/templates/prometheus_gateway.j2) for details.
 
 #### HTTP Route
 
@@ -428,11 +428,11 @@ Kubernetes `Gateway` resource template, see [`prometheus_gateway.j2`](https://{{
 
 ##### Insecure Route
 
-Kubernetes `HTTPRoute` resource template, see [`prometheus_http_route.j2`](https://{{< param variables.repository >}}/blob/main/roles/prometheus/templates/prometheus_http_route.j2) for details.
+Kubernetes `HTTPRoute` resource template, see [`prometheus_http_route.j2`](https://{{< param variables.repository.cluster >}}/blob/main/roles/prometheus/templates/prometheus_http_route.j2) for details.
 
 ##### Secure Route
 
-Kubernetes `HTTPRoute` resource template, see [`prometheus_https_route.j2`](https://{{< param variables.repository >}}/blob/main/roles/prometheus/templates/prometheus_https_route.j2) for details.
+Kubernetes `HTTPRoute` resource template, see [`prometheus_https_route.j2`](https://{{< param variables.repository.cluster >}}/blob/main/roles/prometheus/templates/prometheus_https_route.j2) for details.
 
 {{% /steps %}}
 

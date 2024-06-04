@@ -31,7 +31,7 @@ https://hooks.slack.com/services/<token>/<token>/<token>
 ### Notify URL
 
 Encrypt the `slack.notify_url` value with [`ansible-vault`](/k3s-cluster/tutorials/handbook/ansible/#vault) and insert it into 
-[`main.yaml`](https://{{< param variables.repository >}}/blob/main/roles/kured/defaults/main.yaml) defaults file. Notify URL pre-encrypted format:
+[`main.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/kured/defaults/main.yaml) defaults file. Notify URL pre-encrypted format:
 
 ```yaml
 notify_url: slack://<token>/<token>/<token>

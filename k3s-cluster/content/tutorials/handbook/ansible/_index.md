@@ -46,7 +46,7 @@ ansible_password: !vault |
   Use the above defined `my-Gl0bal-Passw0rd` global password example, for all encrypted settings, into your configuration files.
 {{< /callout >}}
 
-Insert the `ansible_password` encrypted output into [`all.yaml`](https://{{< param variables.repository >}}/blob/main/inventory/cluster/group_vars/all.yaml) configuration file, while respecting the output indentation.
+Insert the `ansible_password` encrypted output into [`all.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/inventory/cluster/group_vars/all.yaml) configuration file, while respecting the output indentation.
 
 ### Decryption
 

@@ -10,7 +10,7 @@ The role performs various tasks related to [Cloudflare](https://www.cloudflare.c
 
 ## Role Settings
 
-See the related role settings listed below, defined into [`main.yaml`](https://{{< param variables.repository >}}/blob/main/roles/cloudflare/defaults/main.yaml) defaults file.
+See the related role settings listed below, defined into [`main.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/cloudflare/defaults/main.yaml) defaults file.
 
 {{% steps %}}
 
@@ -228,19 +228,19 @@ See the related role tasks, listed below.
 
 ### Facts
 
-Ansible facts, see [`facts.yaml`](https://{{< param variables.repository >}}/blob/main/roles/cloudflare/tasks/facts.yaml) for details.
+Ansible facts, see [`facts.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/cloudflare/tasks/facts.yaml) for details.
 
 ### Main
 
-Main role related tasks, see [`main.yaml`](https://{{< param variables.repository >}}/blob/main/roles/cloudflare/tasks/main.yaml) for details.
+Main role related tasks, see [`main.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/cloudflare/tasks/main.yaml) for details.
 
 ### Reset
 
-Reset related tasks, see [`reset.yaml`](https://{{< param variables.repository >}}/blob/main/roles/cloudflare/tasks/reset.yaml) for details.
+Reset related tasks, see [`reset.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/cloudflare/tasks/reset.yaml) for details.
 
 ### Validation
 
-Validation related tasks, see [`validation.yaml`](https://{{< param variables.repository >}}/blob/main/roles/cloudflare/tasks/validation.yaml) for details.
+Validation related tasks, see [`validation.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/cloudflare/tasks/validation.yaml) for details.
 
 {{% /steps %}}
 
@@ -252,14 +252,14 @@ See the related role templates, listed below.
 
 ### Helm Chart
 
-Helm chart values template, see [`values.j2`](https://{{< param variables.repository >}}/blob/main/roles/cloudflare/templates/values.j2) for details.
+Helm chart values template, see [`values.j2`](https://{{< param variables.repository.cluster >}}/blob/main/roles/cloudflare/templates/values.j2) for details.
 
 ### API Token
 
-Kubernetes `Secret` resource template, see [`api_token.j2`](https://{{< param variables.repository >}}/blob/main/roles/cloudflare/templates/api_token.j2) for details.
+Kubernetes `Secret` resource template, see [`api_token.j2`](https://{{< param variables.repository.cluster >}}/blob/main/roles/cloudflare/templates/api_token.j2) for details.
 
 ### Cluster Issuer
 
-Kubernetes `ClusterIssuer` resource template, see [`cluster_issuer.j2`](https://{{< param variables.repository >}}/blob/main/roles/cloudflare/templates/cluster_issuer.j2) for details.
+Kubernetes `ClusterIssuer` resource template, see [`cluster_issuer.j2`](https://{{< param variables.repository.cluster >}}/blob/main/roles/cloudflare/templates/cluster_issuer.j2) for details.
 
 {{% /steps %}}

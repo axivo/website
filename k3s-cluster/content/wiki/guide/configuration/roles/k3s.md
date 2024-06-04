@@ -11,7 +11,7 @@ The role performs various tasks related to OS configuration, K3s cluster deploym
 
 ## Role Settings
 
-See the related role settings listed below, defined into [`main.yaml`](https://{{< param variables.repository >}}/blob/main/roles/k3s/defaults/main.yaml) defaults file.
+See the related role settings listed below, defined into [`main.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/k3s/defaults/main.yaml) defaults file.
 
 {{% steps %}}
 
@@ -213,23 +213,23 @@ See the related role tasks, listed below.
 
 ### Facts
 
-Ansible facts, see [`facts.yaml`](https://{{< param variables.repository >}}/blob/main/roles/k3s/tasks/facts.yaml) for details.
+Ansible facts, see [`facts.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/k3s/tasks/facts.yaml) for details.
 
 ### Load Balancer
 
-Load balancer related tasks, see [`loadbalancer.yaml`](https://{{< param variables.repository >}}/blob/main/roles/k3s/tasks/loadbalancer.yaml) for details.
+Load balancer related tasks, see [`loadbalancer.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/k3s/tasks/loadbalancer.yaml) for details.
 
 ### Main
 
-Main role related tasks, see [`main.yaml`](https://{{< param variables.repository >}}/blob/main/roles/k3s/tasks/main.yaml) for details.
+Main role related tasks, see [`main.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/k3s/tasks/main.yaml) for details.
 
 ### Reset
 
-Reset related tasks, see [`reset.yaml`](https://{{< param variables.repository >}}/blob/main/roles/k3s/tasks/reset.yaml) for details.
+Reset related tasks, see [`reset.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/k3s/tasks/reset.yaml) for details.
 
 ### Validation
 
-Validation related tasks, see [`validation.yaml`](https://{{< param variables.repository >}}/blob/main/roles/k3s/tasks/validation.yaml) for details.
+Validation related tasks, see [`validation.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/k3s/tasks/validation.yaml) for details.
 
 {{% /steps %}}
 
@@ -241,22 +241,22 @@ See the related role templates, listed below.
 
 ### Configuration
 
-Cluster configuration template, see [`config.j2`](https://{{< param variables.repository >}}/blob/main/roles/k3s/templates/config.j2) for details.
+Cluster configuration template, see [`config.j2`](https://{{< param variables.repository.cluster >}}/blob/main/roles/k3s/templates/config.j2) for details.
 
 ### HAProxy
 
-HAProxy configuration template, see [`haproxy.j2`](https://{{< param variables.repository >}}/blob/main/roles/k3s/templates/haproxy.j2) for details.
+HAProxy configuration template, see [`haproxy.j2`](https://{{< param variables.repository.cluster >}}/blob/main/roles/k3s/templates/haproxy.j2) for details.
 
 ### KeepAlived
 
-KeepAlived configuration template, see [`keepalived.j2`](https://{{< param variables.repository >}}/blob/main/roles/k3s/templates/keepalived.j2) for details.
+KeepAlived configuration template, see [`keepalived.j2`](https://{{< param variables.repository.cluster >}}/blob/main/roles/k3s/templates/keepalived.j2) for details.
 
 ### Registries
 
-[Registries](https://docs.k3s.io/installation/registry-mirror) configuration template, see [`registries.j2`](https://{{< param variables.repository >}}/blob/main/roles/k3s/templates/registries.j2) for details.
+[Registries](https://docs.k3s.io/installation/registry-mirror) configuration template, see [`registries.j2`](https://{{< param variables.repository.cluster >}}/blob/main/roles/k3s/templates/registries.j2) for details.
 
 ### Service
 
-Service configuration template, see [`service.j2`](https://{{< param variables.repository >}}/blob/main/roles/k3s/templates/service.j2) for details.
+Service configuration template, see [`service.j2`](https://{{< param variables.repository.cluster >}}/blob/main/roles/k3s/templates/service.j2) for details.
 
 {{% /steps %}}
