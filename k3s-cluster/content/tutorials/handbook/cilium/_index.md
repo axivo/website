@@ -24,9 +24,9 @@ See below the required Cilium dependencies, used into chart configuration.
 
 During chart post-install provisioning, Cilium Hubble is configured to take advantage of CertManager auto-renewed certificates, instead of default Helm expiring certificates. This requires the creation of three resources:
 
-- CertManager `ClusterIssuer` resource template, see [`cluster_issuer.j2`](https://{{< param variables.repository >}}/blob/main/roles/certmanager/templates/cluster_issuer.j2)
-- Hubble `Certificate` resource template, see [`certificate.j2`](https://{{< param variables.repository >}}/blob/main/roles/cilium/templates/certificate.j2)
-- Hubble `ClusterIssuer` resource template, see [`cluster_issuer.j2`](https://{{< param variables.repository >}}/blob/main/roles/cilium/templates/cluster_issuer.j2)
+- CertManager `ClusterIssuer` resource template, see [`cluster_issuer.j2`](https://{{< param variables.repository.cluster >}}/blob/main/roles/certmanager/templates/cluster_issuer.j2)
+- Hubble `Certificate` resource template, see [`certificate.j2`](https://{{< param variables.repository.cluster >}}/blob/main/roles/cilium/templates/certificate.j2)
+- Hubble `ClusterIssuer` resource template, see [`cluster_issuer.j2`](https://{{< param variables.repository.cluster >}}/blob/main/roles/cilium/templates/cluster_issuer.j2)
 
 {{< callout type="warning" >}}
 Cilium details the following instructions into their installation steps:
@@ -46,8 +46,8 @@ Refer to Cilium [documentation](https://docs.cilium.io/en/stable/gettingstarted/
 
 This is an example of `Gateway` and `HTTPRoute` resources usage for Longhorn frontend, as replacement for deprecated `Ingress` resource:
 
-- `Gateway` resource template, see [`gateway.j2`](https://{{< param variables.repository >}}/blob/main/roles/longhorn/templates/gateway.j2)
-- `HTTPRoute` insecure resource template, see [`http_route.j2`](https://{{< param variables.repository >}}/blob/main/roles/longhorn/templates/http_route.j2)
-- `HTTPRoute` secure resource template, see [`https_route.j2`](https://{{< param variables.repository >}}/blob/main/roles/longhorn/templates/https_route.j2)
+- `Gateway` resource template, see [`gateway.j2`](https://{{< param variables.repository.cluster >}}/blob/main/roles/longhorn/templates/gateway.j2)
+- `HTTPRoute` insecure resource template, see [`http_route.j2`](https://{{< param variables.repository.cluster >}}/blob/main/roles/longhorn/templates/http_route.j2)
+- `HTTPRoute` secure resource template, see [`https_route.j2`](https://{{< param variables.repository.cluster >}}/blob/main/roles/longhorn/templates/https_route.j2)
 
 Refer to Cilium [documentation](https://docs.cilium.io/en/stable/network/servicemesh/gateway-api/gateway-api/), for further details.

@@ -10,7 +10,7 @@ The role performs various tasks related to Helm chart deployment, reset and vali
 
 ## Role Settings
 
-See the related role settings listed below, defined into [`main.yaml`](https://{{< param variables.repository >}}/blob/main/roles/cilium/defaults/main.yaml) defaults file.
+See the related role settings listed below, defined into [`main.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/cilium/defaults/main.yaml) defaults file.
 
 {{% steps %}}
 
@@ -572,23 +572,23 @@ See the related role tasks, listed below.
 
 ### Facts
 
-Ansible facts, see [`facts.yaml`](https://{{< param variables.repository >}}/blob/main/roles/cilium/tasks/facts.yaml) for details.
+Ansible facts, see [`facts.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/cilium/tasks/facts.yaml) for details.
 
 ### Main
 
-Main role related tasks, see [`main.yaml`](https://{{< param variables.repository >}}/blob/main/roles/cilium/tasks/main.yaml) for details.
+Main role related tasks, see [`main.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/cilium/tasks/main.yaml) for details.
 
 ### Reset
 
-Reset related tasks, see [`reset.yaml`](https://{{< param variables.repository >}}/blob/main/roles/cilium/tasks/reset.yaml) for details.
+Reset related tasks, see [`reset.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/cilium/tasks/reset.yaml) for details.
 
 ### Update
 
-Update related tasks, see [`validation.yaml`](https://{{< param variables.repository >}}/blob/main/roles/cilium/tasks/update.yaml) for details.
+Update related tasks, see [`validation.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/cilium/tasks/update.yaml) for details.
 
 ### Validation
 
-Validation related tasks, see [`validation.yaml`](https://{{< param variables.repository >}}/blob/main/roles/cilium/tasks/validation.yaml) for details.
+Validation related tasks, see [`validation.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/cilium/tasks/validation.yaml) for details.
 
 {{% /steps %}}
 
@@ -600,19 +600,19 @@ See the related role templates, listed below.
 
 ### Helm Chart
 
-Helm chart values template, see [`values.j2`](https://{{< param variables.repository >}}/blob/main/roles/cilium/templates/values.j2) for details.
+Helm chart values template, see [`values.j2`](https://{{< param variables.repository.cluster >}}/blob/main/roles/cilium/templates/values.j2) for details.
 
 ### Certificate
 
-Kubernetes `Certificate` resource template, see [`certificate.j2`](https://{{< param variables.repository >}}/blob/main/roles/cilium/templates/certificate.j2) for details.
+Kubernetes `Certificate` resource template, see [`certificate.j2`](https://{{< param variables.repository.cluster >}}/blob/main/roles/cilium/templates/certificate.j2) for details.
 
 ### Cluster Issuer
 
-Kubernetes `ClusterIssuer` resource template, see [`cluster_issuer.j2`](https://{{< param variables.repository >}}/blob/main/roles/cilium/templates/cluster_issuer.j2) for details.
+Kubernetes `ClusterIssuer` resource template, see [`cluster_issuer.j2`](https://{{< param variables.repository.cluster >}}/blob/main/roles/cilium/templates/cluster_issuer.j2) for details.
 
 ### Gateway
 
-Kubernetes `Gateway` resource template, see [`gateway.j2`](https://{{< param variables.repository >}}/blob/main/roles/cilium/templates/gateway.j2) for details.
+Kubernetes `Gateway` resource template, see [`gateway.j2`](https://{{< param variables.repository.cluster >}}/blob/main/roles/cilium/templates/gateway.j2) for details.
 
 ### HTTP Route
 
@@ -620,24 +620,24 @@ Kubernetes `Gateway` resource template, see [`gateway.j2`](https://{{< param var
 
 #### Insecure Route
 
-Kubernetes `HTTPRoute` resource template, see [`http_route.j2`](https://{{< param variables.repository >}}/blob/main/roles/cilium/templates/http_route.j2) for details.
+Kubernetes `HTTPRoute` resource template, see [`http_route.j2`](https://{{< param variables.repository.cluster >}}/blob/main/roles/cilium/templates/http_route.j2) for details.
 
 #### Secure Route
 
-Kubernetes `HTTPRoute` resource template, see [`https_route.j2`](https://{{< param variables.repository >}}/blob/main/roles/cilium/templates/https_route.j2) for details.
+Kubernetes `HTTPRoute` resource template, see [`https_route.j2`](https://{{< param variables.repository.cluster >}}/blob/main/roles/cilium/templates/https_route.j2) for details.
 
 {{% /steps %}}
 
 ### L2 Announcement Policy
 
-Kubernetes `CiliumL2AnnouncementPolicy` resource template, see [`l2_announcement_policy.j2`](https://{{< param variables.repository >}}/blob/main/roles/cilium/templates/l2_announcement_policy.j2) for details.
+Kubernetes `CiliumL2AnnouncementPolicy` resource template, see [`l2_announcement_policy.j2`](https://{{< param variables.repository.cluster >}}/blob/main/roles/cilium/templates/l2_announcement_policy.j2) for details.
 
 ### Load Balancer
 
-Kubernetes `Service` resource template, see [`loadbalancer.j2`](https://{{< param variables.repository >}}/blob/main/roles/cilium/templates/loadbalancer.j2) for details.
+Kubernetes `Service` resource template, see [`loadbalancer.j2`](https://{{< param variables.repository.cluster >}}/blob/main/roles/cilium/templates/loadbalancer.j2) for details.
 
 ### Load Balancer IP Pool
 
-Kubernetes `CiliumLoadBalancerIPPool` resource template, see [`loadbalancer_ip_pool.j2`](https://{{< param variables.repository >}}/blob/main/roles/cilium/templates/loadbalancer_ip_pool.j2) for details.
+Kubernetes `CiliumLoadBalancerIPPool` resource template, see [`loadbalancer_ip_pool.j2`](https://{{< param variables.repository.cluster >}}/blob/main/roles/cilium/templates/loadbalancer_ip_pool.j2) for details.
 
 {{% /steps %}}

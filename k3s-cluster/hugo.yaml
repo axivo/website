@@ -58,5 +58,7 @@ params:
     os:
       previous_version: 22.04
       version: 24.04
-    repository: github.com/axivo/k3s-cluster
+    repository:
+      applications: github.com/axivo/k3s-applications
+      cluster: github.com/axivo/k3s-cluster
 publishDir: ../public/k3s-cluster

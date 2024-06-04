@@ -20,7 +20,7 @@ Generate the domain [API token](https://developers.cloudflare.com/fundamentals/a
 {{< /filetree/container >}}
 
 Encrypt the `token.value` with [`ansible-vault`](/k3s-cluster/tutorials/handbook/ansible/#vault) and insert it into 
-[`main.yaml`](https://{{< param variables.repository >}}/blob/main/roles/cloudflare/defaults/main.yaml) defaults file.
+[`main.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/cloudflare/defaults/main.yaml) defaults file.
 
 ## Front-Ends
 
@@ -33,4 +33,4 @@ The following front-ends are available, once the cluster is provisioned successf
 - Grafana, `https://grafana.domain.com`
 - Prometheus, `https://prometheus.domain.com`
 
-Update the `gateway.domain` setting into [`main.yaml`](https://{{< param variables.repository >}}/blob/main/roles/cloudflare/defaults/main.yaml) defaults file.
+Update the `gateway.domain` setting into [`main.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/cloudflare/defaults/main.yaml) defaults file.
