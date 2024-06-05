@@ -49,13 +49,17 @@ On each cluster node, under `OS Customisation: Services` section, enable SSH wit
 
 See the `cluster_vars.device` settings listed below, defined into [`main.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/cluster/defaults/main.yaml) defaults file.
 
+{{< callout type="info" >}}
+  To prevent premature wear and improve system performance, the [Provisioning](/k3s-cluster/wiki/guide/playbooks/provisioning) playbook sets the storage device mounts to `noatime`.
+{{< /callout >}}
+
 {{% steps %}}
 
 ### `device.enabled`
 
 Setting the value to `false` will assume the storage devices are internal and disable any configuration settings related to storage devices attached to hardware through USB cable adapter.
 
-Validate the USB storage device values attached to cluster nodes, by running the `lsusb` command:
+Validate the storage devices attached with a USB cable adapter to hardware, by running the `lsusb` command:
 
 ```shell
 lsusb
@@ -79,7 +83,7 @@ For example, connecting the storage device with different USB cable models might
 
 ### `device.id`
 
-The storage device attached with a cable adapter to hardware is identified as `Bus 002 Device 002`, which sets the `device.id` to `2:2`. To test if the value is correct, run:
+The storage device attached with a USB cable adapter to hardware is identified as `Bus 002 Device 002`, which sets the `device.id` to `2:2`. To test if the value is correct, run:
 
 ```shell
 lsusb -s '2:2'
@@ -93,7 +97,7 @@ Bus 002 Device 002: ID 174c:55aa ASMedia Technology Inc. ASM1051E SATA 6Gb/s bri
 
 ### `device.name`
 
-The storage device cable adapter chipset is identified as `ASMedia Technology Inc. bridge`, which sets the `device.name` to `ASMedia Technology`. To test if the value is correct, run:
+The storage device USB cable adapter chipset is identified as `ASMedia Technology Inc. bridge`, which sets the `device.name` to `ASMedia Technology`. To test if the value is correct, run:
 
 ```shell
 lsusb -s '2:2' | grep 'ASMedia Technology'
@@ -109,7 +113,7 @@ Bus 002 Device 002: ID 174c:55aa ASMedia Technology Inc. ASM1051E SATA 6Gb/s bri
 
 ## Hostname Validation
 
-Depending on what router you use, the `hostname` might not resolve correctly in Ubuntu. Prior cluster deployment, verify the `hostname` FQDN is correctly set.
+Depending on what network router you use, the `hostname` might not resolve correctly in Ubuntu. Prior cluster deployment, verify the `hostname` FQDN is correctly set.
 
 {{% steps %}}
 
