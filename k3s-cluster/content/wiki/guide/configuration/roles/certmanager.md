@@ -76,6 +76,10 @@ See the related child settings, listed below.
 
 {{% steps %}}
 
+##### `controller.replicas`
+
+- Default value: `integer`, `2`
+
 ##### `controller.resources`
 
 - Default value: `null`
