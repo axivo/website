@@ -50,7 +50,7 @@ On each cluster node, under `OS Customisation: Services` section, enable SSH wit
 See the `cluster_vars.device` settings listed below, defined into [`main.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/cluster/defaults/main.yaml) defaults file.
 
 {{< callout type="info" >}}
-  To prevent premature wear and improve system performance, the [Provisioning](/k3s-cluster/wiki/guide/playbooks/provisioning) playbook sets the storage device mounts to `noatime`.
+  To prevent premature wear and improve system performance, the [Provisioning](/k3s-cluster/wiki/guide/playbooks/provisioning) playbook disables the `atime` timestamp on storage device mounts.
 {{< /callout >}}
 
 {{% steps %}}
