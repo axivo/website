@@ -246,6 +246,46 @@ Visit [`cert-manager/cert-manager`](https://github.com/cert-manager/cert-manager
 
 {{% /steps %}}
 
+### `certmanager_vars.release`
+
+- Default value: `null`
+
+Release details for `cmctl` binary. See the related child settings, listed below.
+
+{{% steps %}}
+
+#### `release.checksums`
+
+- Default value: `string`, `checksums.txt`
+
+#### `release.file`
+
+- Default value: `string`, `cmctl_linux_arm64`
+
+#### `release.repository`
+
+- Default value: `null`
+
+{{% steps %}}
+
+##### `repository.name`
+
+- Default value: `string`, `cmctl`
+
+##### `repository.org`
+
+- Default value: `string`, `cert-manager`
+
+{{% /steps %}}
+
+#### `release.version`
+
+- Default value: `string`
+
+Visit [`cert-manager/cmctl`](https://github.com/cert-manager/cmctl/releases), for latest release version.
+
+{{% /steps %}}
+
 {{% /steps %}}
 
 ## Role Tasks
