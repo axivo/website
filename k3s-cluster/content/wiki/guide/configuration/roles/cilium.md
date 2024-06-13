@@ -242,6 +242,50 @@ Sets the `infrastructure` [annotations](https://kubernetes.io/docs/concepts/over
 
 {{% /steps %}}
 
+###### `ui.replicas`
+
+- Default value: `integer`, `2`
+
+###### `ui.resources`
+
+- Default value: `null`
+
+{{% steps %}}
+
+###### `resources.limits`
+
+- Default value: `null`
+
+{{% steps %}}
+
+###### `limits.cpu`
+
+- Default value: `string`, `400m`
+
+###### `limits.memory`
+
+- Default value: `string`, `256Mi`
+
+{{% /steps %}}
+
+###### `resources.requests`
+
+- Default value: `null`
+
+{{% steps %}}
+
+###### `requests.cpu`
+
+- Default value: `string`, `100m`
+
+###### `requests.memory`
+
+- Default value: `string`, `64Mi`
+
+{{% /steps %}}
+
+{{% /steps %}}
+
 {{% /steps %}}
 
 ##### `hubble.tls`
