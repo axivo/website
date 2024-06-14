@@ -210,7 +210,7 @@ Sets the `infrastructure` [annotations](https://kubernetes.io/docs/concepts/over
 
 ###### `secret.name`
 
-- Default value: `string`, `grafana-credentials`
+- Default value: `string`, `grafana-secret`
 
 {{% /steps %}}
 

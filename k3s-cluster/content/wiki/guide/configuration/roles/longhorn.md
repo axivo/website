@@ -28,15 +28,61 @@ See the related child settings, listed below.
 
 {{% steps %}}
 
+##### `default_settings.backup`
+
+- Default value: `null`
+
+{{% steps %}}
+
+###### `backup.enabled`
+
+- Default value: `boolean`, `false`
+
+###### `backup.secret`
+
+- Default value: `string`, `longhorn-secret`
+
+###### `backup.target`
+
+- Default value: `string`, `nfs://server:/mount`
+
+###### `backup.user`
+
+- Default value: `null`
+
+{{% steps %}}
+
+###### `user.name`
+
+- Default value: `string`, `user`
+
+###### `user.password`
+
+- Default value: `string`, `password`
+
+Encrypt the variable with [`ansible-vault`](/k3s-cluster/tutorials/handbook/ansible/#vault).
+
+{{% /steps %}}
+
+{{% /steps %}}
+
 ##### `default_settings.data_locality`
 
 - Default value: `string`, `strict-local`
+
+##### `default_settings.orphan_auto_deletion`
+
+- Default value: `boolean`, `true`
 
 ##### `default_settings.pod_deletion_policy`
 
 - Default value: `string`, `delete-both-statefulset-and-deployment-pod`
 
-##### `default_settings.replica_count`
+##### `default_settings.replica_auto_balance`
+
+- Default value: `string`, `best-effort`
+
+##### `default_settings.replicas`
 
 - Default value: `integer`, `3`
 
@@ -142,7 +188,7 @@ Sets the `infrastructure` [annotations](https://kubernetes.io/docs/concepts/over
 
 - Default value: `boolean`, `true`
 
-##### `persistence.replica_count`
+##### `persistence.replicas`
 
 - Default value: `integer`, `3`
 
