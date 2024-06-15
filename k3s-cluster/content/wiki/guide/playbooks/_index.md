@@ -17,4 +17,5 @@ Dive right into the following sections:
   {{< card icon="document" link="reset" title="Reset" subtitle="Configure the *Reset* playbook." >}}
   {{< card icon="document" link="upgrade" title="Upgrade" subtitle="Configure the *Upgrade* playbook." >}}
   {{< card icon="document" link="validation" title="Validation" subtitle="Configure the *Validation* playbook." >}}
+  {{< card icon="document" link="vault" title="Vault" subtitle="Configure the *Vault* playbook." >}}
 {{< /cards >}}
