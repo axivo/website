@@ -23,16 +23,16 @@ This repository uses a global password for all encrypted settings, allowing the 
 
 See below the current list of encrypted variables:
 
-- ansible_password
-- argocd_vars.kubernetes.server.admin.password
-- argocd_vars.kubernetes.server.user.password
-- cloudflare_vars.kubernetes.api.token.value
-- cluster_vars.service.postfix.user.alias
-- cluster_vars.service.postfix.user.name
-- cluster_vars.service.postfix.user.password
-- kured_vars.kubernetes.configuration.slack.notify_url
-- longhorn_vars.kubernetes.default_settings.backup.user.password
-- prometheus_vars.kubernetes.grafana.user.password
+- `ansible_password`
+- `argocd_vars.kubernetes.server.admin.password`
+- `argocd_vars.kubernetes.server.user.password`
+- `cloudflare_vars.kubernetes.api.token.value`
+- `cluster_vars.service.postfix.user.alias`
+- `cluster_vars.service.postfix.user.name`
+- `cluster_vars.service.postfix.user.password`
+- `kured_vars.kubernetes.configuration.slack.notify_url`
+- `longhorn_vars.kubernetes.default_settings.backup.user.password`
+- `prometheus_vars.kubernetes.grafana.user.password`
 
 Example of `ansible_password` variable encryption:
 
