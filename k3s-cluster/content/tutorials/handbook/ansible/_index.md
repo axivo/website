@@ -43,7 +43,7 @@ ansible_password: !vault |
 ```
 
 {{< callout type="warning" >}}
-  Use the above defined `my-Gl0bal-Passw0rd` global password example, for all encrypted settings, into your configuration files.
+  Use the above defined `my-Gl0bal-Passw0rd` global password example for all encrypted settings, into all configuration files.
 {{< /callout >}}
 
 Insert the `ansible_password` encrypted output into [`all.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/inventory/cluster/group_vars/all.yaml) configuration file, while respecting the output indentation.
@@ -58,8 +58,8 @@ Select an action to perform:
  2) Encrypt role variable
  3) Update global password
 : 2
-Set variable with a 'key:value' format:
-ansible_password:this-Is-An0th3r-paSsw0rd
+Set variable with a 'key|value' format:
+ansible_password|this-Is-An0th3r-paSsw0rd
 ```
 
 Ansible Vault encrypted variable output:
