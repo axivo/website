@@ -21,6 +21,19 @@ This repository uses a global password for all encrypted settings, allowing the 
 
 ### Encryption
 
+See below the current list of encrypted variables:
+
+- ansible_password
+- argocd_vars.kubernetes.server.admin.password
+- argocd_vars.kubernetes.server.user.password
+- cloudflare_vars.kubernetes.api.token.value
+- cluster_vars.service.postfix.user.alias
+- cluster_vars.service.postfix.user.name
+- cluster_vars.service.postfix.user.password
+- kured_vars.kubernetes.configuration.slack.notify_url
+- longhorn_vars.kubernetes.default_settings.backup.user.password
+- prometheus_vars.kubernetes.grafana.user.password
+
 Example of `ansible_password` variable encryption:
 
 ```shell
@@ -47,21 +60,6 @@ ansible_password: !vault |
 {{< /callout >}}
 
 Insert the `ansible_password` encrypted output into [`all.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/inventory/cluster/group_vars/all.yaml) configuration file, while respecting the output indentation.
-
-#### Variables
-
-See below the current list of encrypted variables:
-
-- ansible_password
-- argocd_vars.kubernetes.server.admin.password
-- argocd_vars.kubernetes.server.user.password
-- cloudflare_vars.kubernetes.api.token.value
-- cluster_vars.service.postfix.user.alias
-- cluster_vars.service.postfix.user.name
-- cluster_vars.service.postfix.user.password
-- kured_vars.kubernetes.configuration.slack.notify_url
-- longhorn_vars.kubernetes.default_settings.backup.user.password
-- prometheus_vars.kubernetes.grafana.user.password
 
 Once all variables have been initially encrypted with the same global password, they can be updated with the [Vault](/k3s-cluster/wiki/guide/playbooks/vault) playbook:
 
