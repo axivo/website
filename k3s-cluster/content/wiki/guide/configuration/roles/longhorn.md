@@ -40,7 +40,15 @@ See the related child settings, listed below.
 
 ###### `backup.secret`
 
+- Default value: `null`
+
+{{% steps %}}
+
+###### `secret.name`
+
 - Default value: `string`, `longhorn-secret`
+
+{{% /steps %}}
 
 ###### `backup.target`
 
