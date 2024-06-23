@@ -15,20 +15,6 @@ See the related role settings listed below, defined into [`main.yaml`](https://{
 
 {{% steps %}}
 
-### `k3s_vars.agent`
-
-- Default value: `null`
-
-See the related child settings, listed below.
-
-{{% steps nested="true" %}}
-
-#### `agent.kubelet`
-
-- Default value: `list`
-
-{{% /steps %}}
-
 ### `k3s_vars.directory`
 
 - Default value: `null`
@@ -54,6 +40,10 @@ See the related child settings, listed below.
 - Default value: `string`, `/var/lib/rancher/k3s`
 
 {{% /steps %}}
+
+### `k3s_vars.kubelet`
+
+- Default value: `list`
 
 ### `k3s_vars.network`
 
@@ -174,10 +164,6 @@ See the related child settings, listed below.
 Copies the remote `/.kube/config` to local computer.
 
 {{% /steps %}}
-
-#### `server.kubelet`
-
-- Default value: `list`
 
 #### `server.loadbalancer`
 
