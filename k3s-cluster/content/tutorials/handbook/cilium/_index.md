@@ -51,3 +51,19 @@ This is an example of `Gateway` and `HTTPRoute` resources usage for Longhorn fro
 - `HTTPRoute` secure resource template, see [`https_route.j2`](https://{{< param variables.repository.cluster >}}/blob/main/roles/longhorn/templates/https_route.j2)
 
 Refer to Cilium [documentation](https://docs.cilium.io/en/stable/network/servicemesh/gateway-api/gateway-api/), for further details.
+
+## Connectivity Test
+
+To perform a connectivity test, login into one of the server nodes and run the following commands:
+
+```shell
+cilium hubble port-forward &
+cilium connectivity test
+```
+
+To remove the `cilium-test` namespace and Hubble `port-forward`, run:
+
+```shell
+kubectl delete namespace cilium-test -n kube-system
+ps aux | grep kubectl | grep -v grep | awk {'print $2'} | xargs kill
+```
