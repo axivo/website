@@ -418,11 +418,15 @@ Sets the `infrastructure` [annotations](https://kubernetes.io/docs/concepts/over
 
 ##### `loadbalancer.algorithm`
 
-- Default value: `string`, `disabled`
+- Default value: `string`, `maglev`, optional `random`
+
+Refer to the Cilium [documentation](https://docs.cilium.io/en/stable/network/kubernetes/kubeproxy-free/#maglev-consistent-hashing), for more details.
 
 ##### `loadbalancer.ip_pool`
 
 - Default value: `string`, `192.168.4.16/28`
+
+Refer to the Cilium [documentation](https://docs.cilium.io/en/stable/network/lb-ipam/), for more details.
 
 ##### `loadbalancer.table_size`
 
@@ -484,7 +488,7 @@ Sets the `infrastructure` [annotations](https://kubernetes.io/docs/concepts/over
 
 #### `kubernetes.routing_mode`
 
-- Default value: `string`, `native`
+- Default value: `string`, `native`, optional `tunnel`
 
 {{% /steps %}}
 
