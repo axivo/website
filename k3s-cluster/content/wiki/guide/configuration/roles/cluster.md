@@ -207,7 +207,7 @@ Setup Unattended Upgrades service.
 
 ##### `unattended_upgrades.mail_report`
 
-- Default value: `string`, `on-change`
+- Default value: `string`, `only-on-error`, optional `always` or `on-change`
 
 ##### `unattended_upgrades.remove_deps`
 
