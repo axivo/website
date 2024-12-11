@@ -45,6 +45,42 @@ On each cluster node, under `OS Customisation: Services` section, enable SSH wit
 
 {{% /steps %}}
 
+## Hardware
+
+See the `cluster_vars.hardware` settings listed below, defined into [`main.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/cluster/defaults/main.yaml) defaults file.
+
+{{% steps %}}
+
+### `hardware.architecture`
+
+Hardware architecture used to identify the cluster node hardware architecture. To determine the hardware architecture, run:
+
+```shell
+arch
+```
+
+Command output:
+
+```shell
+aarch64
+```
+
+### `hardware.product`
+
+Hardware product, used to identify the cluster node hardware model. To determine the hardware product, run:
+
+```shell
+lshw -class system -quiet | grep product
+```
+
+Command output:
+
+```shell
+product: Raspberry Pi 4 Model B Rev 1.5
+```
+
+{{% /steps %}}
+
 ## Storage Devices
 
 See the `cluster_vars.device` settings listed below, defined into [`main.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/cluster/defaults/main.yaml) defaults file.
