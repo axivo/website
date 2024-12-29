@@ -19,7 +19,7 @@ Dive right into the following sections:
   {{< card icon="adjustments" link="argocd" title="ArgoCD" subtitle="Configure the Ansible *ArgoCD* role." >}}
   {{< card icon="adjustments" link="certmanager" title="CertManager" subtitle="Configure the Ansible *CertManager* role." >}}
   {{< card icon="adjustments" link="cilium" title="Cilium" subtitle="Configure the Ansible *Cilium* role." >}}
-  {{< card icon="adjustments" link="cloudflare" title="Cloudflare" subtitle="Configure the Ansible *Cloudflare* role." >}}
+  {{< card icon="adjustments" link="externaldns" title="ExternalDNS" subtitle="Configure the Ansible *ExternalDNS* role." >}}
   {{< card icon="adjustments" link="helm" title="Helm" subtitle="Configure the Ansible *Helm* role." >}}
   {{< card icon="adjustments" link="k3s" title="K3s" subtitle="Configure the Ansible *K3s* role." >}}
   {{< card icon="adjustments" link="kured" title="Kured" subtitle="Configure the Ansible *Kured* role." >}}

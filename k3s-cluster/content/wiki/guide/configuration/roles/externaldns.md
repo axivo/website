@@ -1,5 +1,5 @@
 ---
-title: Cloudflare
+title: ExternalDNS
 prev: /wiki/guide/configuration/roles
 next: /wiki/guide/configuration/roles/kured
 ---
