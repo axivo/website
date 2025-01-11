@@ -16,7 +16,8 @@
       "matchStrings": [
         "go-version:\\s+(?<currentValue>.+)",
         "^GO_VERSION[\\s\\S]+?\"(?<currentValue>.+)\""
-      ]
+      ],
+      "rangeStrategy": "increase"
     },
     {
       "customType": "regex",
@@ -53,7 +54,8 @@
       ],
       "matchPackagePrefixes": [
         "golang/"
-      ]
+      ],
+      "rangeStrategy": "increase"
     },
     {
       "groupName": "dependency golang/go",
@@ -62,7 +64,8 @@
       ],
       "matchManagers": [
         "gomod"
-      ]
+      ],
+      "rangeStrategy": "increase"
     },
     {
       "enabled": true,
