@@ -1,4 +1,4 @@
 github.com/axivo/website/global v1.0.0 h1:LAKLy5ZXCQw2nfTV/Y2vQ3YJsWapHbNVdepySlxh4yA=
 github.com/axivo/website/global v1.0.0/go.mod h1:QQk2/AIFUOQIGv0YQivBp1qa9aQeAjHHljwIJCGc1fk=
-github.com/imfing/hextra v0.8.2 h1:/IykSIAywgKfhKUBgAW+dCCjrJWJNny4jr9qvdXfch0=
-github.com/imfing/hextra v0.8.2/go.mod h1:cEfel3lU/bSx7lTE/+uuR4GJaphyOyiwNR3PTqFTXpI=
+github.com/imfing/hextra v0.9.3 h1:p4vDm2TSgt3RpJdJm2mqkpoJCH2S08wzySyyYodtgCc=
+github.com/imfing/hextra v0.9.3/go.mod h1:cEfel3lU/bSx7lTE/+uuR4GJaphyOyiwNR3PTqFTXpI=
