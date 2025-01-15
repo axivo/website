@@ -67,7 +67,7 @@ The following front-ends are available, when `victoriametrics_vars.kubernetes.vm
 
 #### VMSingle
 
-The following front-end is available, when `victoriametrics_vars.kubernetes.vmcluster.enabled` is set to `false`:
+The following front-ends are available, when `victoriametrics_vars.kubernetes.vmcluster.enabled` is set to `false`:
 
 - VMSingle UI, `https://metrics.domain.com`
 - VMSingle Prometheus Endpoint, `https://metrics.domain.com/prometheus`
