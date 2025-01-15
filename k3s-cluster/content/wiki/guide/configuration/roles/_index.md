@@ -33,6 +33,6 @@ Dive right into the following sections:
   {{< card icon="adjustments" link="kured" title="Kured" subtitle="Configure the Ansible *kured* role." >}}
   {{< card icon="adjustments" link="longhorn" title="Longhorn" subtitle="Configure the Ansible *longhorn* role." >}}
   {{< card icon="adjustments" link="metricsserver" title="Metrics Server" subtitle="Configure the Ansible *metrics-server* role." >}}
-  {{< card icon="adjustments" link="victorialogs" title="Victoria Logs" subtitle="Configure the Ansible *victoria-logs* role." >}}
-  {{< card icon="adjustments" link="victoriametrics" title="Victoria Metrics" subtitle="Configure the Ansible *victoria-metrics* role." >}}
+  {{< card icon="adjustments" link="victorialogs" title="VictoriaLogs" subtitle="Configure the Ansible *victoria-logs* role." >}}
+  {{< card icon="adjustments" link="victoriametrics" title="VictoriaMetrics" subtitle="Configure the Ansible *victoria-metrics* role." >}}
 {{< /cards >}}

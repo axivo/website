@@ -16,6 +16,6 @@ The cluster inventory, user, role configuration settings and provisioning playbo
 Dive right into the following sections:
 
 {{< cards >}}
-  {{< card icon="adjustments" link="configuration" title="Configuration" subtitle="Configure the cluster for deployment." >}}
-  {{< card icon="folder" link="playbooks" title="Playbooks" subtitle="Configure the Ansible playbooks." >}}
+  {{< card icon="adjustments" link="configuration" title="Configuration" subtitle="Prepare the cluster for deployment." >}}
+  {{< card icon="folder" link="playbooks" title="Playbooks" subtitle="Review the Ansible playbooks usage." >}}
 {{< /cards >}}
