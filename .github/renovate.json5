@@ -19,7 +19,8 @@
   ],
   "enabledManagers": [
     "custom.regex",
-    "github-actions"
+    "github-actions",
+    "gomod"
   ],
   "extends": [
     "config:recommended"
@@ -29,6 +30,20 @@
   ],
   "labels": [
     "dependency"
+  ],
+  "packageRules": [
+    {
+      "enabled": true,
+      "matchDepTypes": [
+        "indirect"
+      ],
+      "matchManagers": [
+        "gomod"
+      ]
+    }
+  ],
+  "postUpdateOptions": [
+    "gomodTidy"
   ],
   "prConcurrentLimit": 0,
   "prHourlyLimit": 0
