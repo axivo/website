@@ -4,289 +4,14 @@ prev: /wiki/guide/configuration/roles
 next: /wiki/guide/configuration/roles/cilium
 ---
 
-The role performs various tasks related to Helm chart deployment, reset and validation.
+[CertManager](https://cert-manager.io/docs) is an extensible X.509 certificate controller for Kubernetes workloads. It creates TLS certificates for workloads and renews them before they expire.
+
+The `cert-manager` role performs various tasks related to Helm chart deployment, reset and validation.
+
+> [!TIP]
+> Role deployments are performed at `global` level, using the [Provisioning](/k3s-cluster/wiki/guide/playbooks/provisioning) playbook. Upgrades can be performed at `role` level, see the instructions detailed below.
 
 <!--more-->
-
-## Role Settings
-
-See the related role settings listed below, defined into [`main.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/certmanager/defaults/main.yaml) defaults file.
-
-{{% steps %}}
-
-### `certmanager_vars.kubernetes`
-
-- Default value: `null`
-
-See the related child settings, listed below.
-
-{{% steps nested="true" %}}
-
-#### `kubernetes.cainjector`
-
-- Default value: `null`
-
-{{% steps %}}
-
-##### `cainjector.resources`
-
-- Default value: `null`
-
-{{% steps %}}
-
-###### `resources.limits`
-
-- Default value: `null`
-
-{{% steps %}}
-
-###### `limits.cpu`
-
-- Default value: `string`, `400m`
-
-###### `limits.memory`
-
-- Default value: `string`, `256Mi`
-
-{{% /steps %}}
-
-###### `resources.requests`
-
-- Default value: `null`
-
-{{% steps %}}
-
-###### `requests.cpu`
-
-- Default value: `string`, `100m`
-
-###### `requests.memory`
-
-- Default value: `string`, `64Mi`
-
-{{% /steps %}}
-
-{{% /steps %}}
-
-{{% /steps %}}
-
-#### `kubernetes.controller`
-
-- Default value: `null`
-
-{{% steps %}}
-
-##### `controller.replicas`
-
-- Default value: `integer`, `2`
-
-##### `controller.resources`
-
-- Default value: `null`
-
-{{% steps %}}
-
-###### `resources.limits`
-
-- Default value: `null`
-
-{{% steps %}}
-
-###### `limits.cpu`
-
-- Default value: `string`, `400m`
-
-###### `limits.memory`
-
-- Default value: `string`, `256Mi`
-
-{{% /steps %}}
-
-###### `resources.requests`
-
-- Default value: `null`
-
-{{% steps %}}
-
-###### `requests.cpu`
-
-- Default value: `string`, `100m`
-
-###### `requests.memory`
-
-- Default value: `string`, `64Mi`
-
-{{% /steps %}}
-
-{{% /steps %}}
-
-{{% /steps %}}
-
-#### `kubernetes.helm`
-
-- Default value: `null`
-
-{{% steps %}}
-
-##### `helm.chart`
-
-- Default value: `null`
-
-{{% steps %}}
-
-###### `chart.name`
-
-- Default value: `string`, `cert-manager`
-
-###### `chart.org`
-
-- Default value: `string`, `cert-manager`
-
-###### `chart.version`
-
-- Default value: `string`
-
-Visit [`cert-manager/cert-manager`](https://github.com/cert-manager/cert-manager/releases), for latest release version.
-
-{{% /steps %}}
-
-##### `helm.repository`
-
-- Default value: `null`
-
-{{% steps %}}
-
-###### `repository.name`
-
-- Default value: `string`, `cert-manager`
-
-###### `repository.org`
-
-- Default value: `string`, `jetstack`
-
-###### `repository.url`
-
-- Default value: `string`, `https://charts.jetstack.io`
-
-{{% /steps %}}
-
-{{% /steps %}}
-
-#### `kubernetes.namespace`
-
-- Default value: `string`, `kube-system`
-
-#### `kubernetes.tls`
-
-- Default value: `null`
-
-{{% steps %}}
-
-##### `tls.cluster_issuer`
-
-- Default value: `null`
-
-{{% steps %}}
-
-##### `cluster_issuer.name`
-
-- Default value: `string`, `certmanager-cluster-issuer`
-
-{{% /steps %}}
-
-{{% /steps %}}
-
-#### `kubernetes.webhook`
-
-- Default value: `null`
-
-{{% steps %}}
-
-##### `webhook.resources`
-
-- Default value: `null`
-
-{{% steps %}}
-
-###### `resources.limits`
-
-- Default value: `null`
-
-{{% steps %}}
-
-###### `limits.cpu`
-
-- Default value: `string`, `400m`
-
-###### `limits.memory`
-
-- Default value: `string`, `256Mi`
-
-{{% /steps %}}
-
-###### `resources.requests`
-
-- Default value: `null`
-
-{{% steps %}}
-
-###### `requests.cpu`
-
-- Default value: `string`, `100m`
-
-###### `requests.memory`
-
-- Default value: `string`, `64Mi`
-
-{{% /steps %}}
-
-{{% /steps %}}
-
-{{% /steps %}}
-
-{{% /steps %}}
-
-### `certmanager_vars.release`
-
-- Default value: `null`
-
-Release details for `cmctl` binary. See the related child settings, listed below.
-
-{{% steps %}}
-
-#### `release.checksums`
-
-- Default value: `string`, `checksums.txt`
-
-#### `release.file`
-
-- Default value: `string`, `cmctl_linux_arm64`
-
-#### `release.repository`
-
-- Default value: `null`
-
-{{% steps %}}
-
-##### `repository.name`
-
-- Default value: `string`, `cmctl`
-
-##### `repository.org`
-
-- Default value: `string`, `cert-manager`
-
-{{% /steps %}}
-
-#### `release.version`
-
-- Default value: `string`
-
-Visit [`cert-manager/cmctl`](https://github.com/cert-manager/cmctl/releases), for latest release version.
-
-{{% /steps %}}
-
-{{% /steps %}}
 
 ## Role Tasks
 
@@ -296,19 +21,38 @@ See the related role tasks, listed below.
 
 ### Facts
 
-Ansible facts, see [`facts.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/certmanager/tasks/facts.yaml) for details.
+Ansible facts, see [`facts.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/cert-manager/tasks/facts.yaml) for details.
 
 ### Main
 
-Main role related tasks, see [`main.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/certmanager/tasks/main.yaml) for details.
+Main role related tasks, see [`main.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/cert-manager/tasks/main.yaml) for details.
+
+### Post-Install
+
+Post-install related tasks, see [`postinstall.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/cert-manager/tasks/postinstall.yaml) for details.
 
 ### Reset
 
-Reset related tasks, see [`reset.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/certmanager/tasks/reset.yaml) for details.
+Reset related tasks, see [`reset.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/cert-manager/tasks/reset.yaml) for details.
+
+> [!TIP]
+> A reset is performed at global level only, review the [Reset](/k3s-cluster/wiki/guide/playbooks/reset) playbook instructions.
+
+### Upgrade
+
+Upgrade related tasks, see [`upgrade.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/cert-manager/tasks/upgrade.yaml) for details. Run the following command, to perform a role upgrade:
+
+```shell
+ansible-playbook --ask-vault-pass --tags=cert-manager upgrade.yaml
+```
 
 ### Validation
 
-Validation related tasks, see [`validation.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/certmanager/tasks/validation.yaml) for details.
+Validation related tasks, see [`validation.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/cert-manager/tasks/validation.yaml) for details. Run the following command, to perform all role related validation tasks:
+
+```shell
+ansible-playbook --ask-vault-pass --tags=cert-manager,validation validation.yaml
+```
 
 {{% /steps %}}
 
@@ -316,14 +60,31 @@ Validation related tasks, see [`validation.yaml`](https://{{< param variables.re
 
 See the related role templates, listed below.
 
+> [!TIP]
+> Perform a role validation, to visualize all rendered templates and variables.
+
 {{% steps %}}
 
 ### Helm Chart
 
-Helm chart values template, see [`values.j2`](https://{{< param variables.repository.cluster >}}/blob/main/roles/certmanager/templates/values.j2) for details.
+Helm chart values template, see [`values.j2`](https://{{< param variables.repository.cluster >}}/blob/main/roles/cert-manager/templates/values.j2) for details.
 
 ### Cluster Issuer
 
-Kubernetes `ClusterIssuer` resource template, see [`cluster_issuer.j2`](https://{{< param variables.repository.cluster >}}/blob/main/roles/certmanager/templates/cluster_issuer.j2) for details.
+Kubernetes `ClusterIssuer` resource template, see [`cluster_issuer.j2`](https://{{< param variables.repository.cluster >}}/blob/main/roles/cert-manager/templates/cluster_issuer.j2) for details.
 
 {{% /steps %}}
+
+## Role Variables
+
+> [!IMPORTANT]
+> A [role upgrade](/k3s-cluster/wiki/guide/configuration/roles/certmanager/#upgrade) is required, in order to apply any changes related to role variables.
+
+See the related role variables, defined into [`main.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/cert-manager/defaults/main.yaml) defaults file. Review the [`README.md`](https://{{< param variables.repository.cluster >}}/tree/main/roles/cert-manager) file, for additional details.
+
+> [!TIP]
+> Use [Renovate](/k3s-cluster/tutorials/handbook/tools/#renovate) to automate release pull requests and keep dependencies up-to-date.
+
+## Support
+
+If you encounter any role related problems or want to request a new feature, feel free to [open an issue](https://{{< param variables.repository.cluster >}}/issues). For general questions or feedback, please use the [discussions](https://{{< param variables.repository.cluster >}}/discussions).

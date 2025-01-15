@@ -5,255 +5,14 @@ next: /wiki/guide/configuration/roles/helm
 weight: 1
 ---
 
-The role performs various tasks related to OS configuration, reset and validation.
+[Ubuntu Server](https://ubuntu.com/server/docs) is a version of the Ubuntu operating system designed and engineered as a backbone for the internet, delivering the best value scale-out performance available.
+
+The `cluster` role performs various tasks related to OS configuration, reset and validation.
+
+> [!TIP]
+> Role deployments are performed at `global` level, using the [Provisioning](/k3s-cluster/wiki/guide/playbooks/provisioning) playbook. Upgrades can be performed at `role` level, see the instructions detailed below.
 
 <!--more-->
-
-## Role Settings
-
-See the related role settings listed below, defined into [`main.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/cluster/defaults/main.yaml) defaults file.
-
-{{% steps %}}
-
-### `cluster_vars.device`
-
-- Default value: `null`
-
-{{< callout type="info" >}}
-  Read the [Storage Devices](/k3s-cluster/tutorials/handbook/server) tutorial, on bare-metal infrastructure.
-{{< /callout >}}
-
-See the related child settings, listed below.
-
-{{% steps nested="true" %}}
-
-#### `device.enabled`
-
-- Default value: `boolean`, `true`
-
-#### `device.id`
-
-- Default value: `string`, `2:2`
-
-#### `device.name`
-
-- Default value: `string`, `ASMedia Technology`
-
-{{% /steps %}}
-
-### `cluster_vars.hardware`
-
-- Default value: `null`
-
-See the related child settings, listed below.
-
-{{% steps nested="true" %}}
-
-#### `hardware.architecture`
-
-- Default value: `string`, `aarch64`
-
-Hardware architecture used to identify the cluster node hardware architecture. To determine the hardware architecture, run:
-
-```shell
-arch
-```
-
-Command output:
-
-```shell
-aarch64
-```
-
-#### `hardware.product`
-
-- Default value: `string`, `Raspberry Pi`
-
-Hardware product, used to identify the cluster node hardware model. To determine the hardware product, run:
-
-```shell
-lshw -class system -quiet | grep product
-```
-
-Command output:
-
-```shell
-product: Raspberry Pi 4 Model B Rev 1.5
-```
-
-{{% /steps %}}
-
-### `cluster_vars.service`
-
-- Default value: `null`
-
-See the related child settings, listed below.
-
-{{% steps nested="true" %}}
-
-#### `service.bluetooth`
-
-- Default value: `null`
-
-Setup Bluetooth service, on Raspberry Pi hardware. By default, Ubuntu Server LTS `{{< param variables.os.version >}}` does not installs the related `apt` packages.
-
-{{% steps %}}
-
-##### `bluetooth.enabled`
-
-- Default value: `boolean`, `false`
-
-{{% /steps %}}
-
-#### `service.cloud_init`
-
-- Default value: `null`
-
-Setup Cloud Init service.
-
-{{% steps %}}
-
-##### `cloud_init.enabled`
-
-- Default value: `boolean`, `false`
-
-{{% /steps %}}
-
-#### `service.postfix`
-
-- Default value: `null`
-
-Setup Postfix service, with iCloud mail servers.
-
-{{% steps %}}
-
-##### `postfix.enabled`
-
-- Default value: `boolean`, `true`
-
-##### `postfix.protocols`
-
-- Default value: `string`, `ipv4`
-
-##### `postfix.relay`
-
-- Default value: `null`
-
-{{% steps %}}
-
-###### `relay.host`
-
-- Default value: `string`, `smtp.mail.me.com`
-
-###### `relay.port`
-
-- Default value: `integer`, `587`
-
-{{% /steps %}}
-
-##### `postfix.user`
-
-- Default value: `null`
-
-{{% steps %}}
-
-###### `user.alias`
-
-- Default value: `string`, [`alias@domain.com`](https://support.apple.com/guide/icloud/add-and-manage-email-aliases-mm6b1a490a/icloud)
-
-Mail sent by `root` user will use this email address.
-
-###### `user.name`
-
-- Default value: `string`, [`username@domain.com`](https://appleid.apple.com)
-
-Used for login into iCloud servers.
-
-###### `user.password`
-
-- Default value: `string`, [`password`](https://support.apple.com/102654)
-
-Encrypt the variable with [`ansible-vault`](/k3s-cluster/tutorials/handbook/ansible/#vault).
-
-{{% /steps %}}
-
-{{% /steps %}}
-
-#### `service.snapd`
-
-- Default value: `null`
-
-Setup Snapd service.
-
-{{% steps %}}
-
-##### `snapd.enabled`
-
-- Default value: `boolean`, `false`
-
-{{% /steps %}}
-
-#### `service.unattended_upgrades`
-
-- Default value: `null`
-
-Setup Unattended Upgrades service.
-
-{{% steps %}}
-
-##### `unattended_upgrades.enabled`
-
-- Default value: `boolean`, `true`
-
-##### `unattended_upgrades.mail_report`
-
-- Default value: `string`, `only-on-error`, optional `always` or `on-change`
-
-##### `unattended_upgrades.remove_deps`
-
-- Default value: `string`, `true`
-
-{{% /steps %}}
-
-#### `service.wifi`
-
-- Default value: `null`
-
-Setup WiFi service, on Raspberry Pi hardware. By default, Ubuntu Server LTS `{{< param variables.os.version >}}` does not installs the related `apt` packages.
-
-{{% steps %}}
-
-##### `wifi.enabled`
-
-- Default value: `boolean`, `false`
-
-{{% /steps %}}
-
-{{% /steps %}}
-
-### `cluster_vars.ssh`
-
-- Default value: `null`
-
-See the related child settings, listed below.
-
-{{% steps nested="true" %}}
-
-#### `ssh.authorized_key`
-
-- Default value: `string`, `/Users/username/.ssh/id_ed25519.pub`
-
-Example of setting a different storage location:
-
-```yaml
-cluster_vars:
-  ssh:
-    authorized_key: /Users/username/keys/id_ed25519.pub
-```
-
-{{% /steps %}}
-
-{{% /steps %}}
 
 ## Role Tasks
 
@@ -281,9 +40,16 @@ Main role related tasks, see [`main.yaml`](https://{{< param variables.repositor
 
 Reset related tasks, see [`reset.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/cluster/tasks/reset.yaml) for details.
 
+> [!TIP]
+> A reset is performed at global level only, review the [Reset](/k3s-cluster/wiki/guide/playbooks/reset) playbook instructions.
+
 ### Upgrade
 
-OS upgrade related tasks, see [`upgrade.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/cluster/tasks/upgrade.yaml) for details.
+OS upgrade related tasks, see [`upgrade.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/cluster/tasks/upgrade.yaml) for details. Run the following command, to perform a role upgrade:
+
+```shell
+ansible-playbook --ask-vault-pass --tags=cluster upgrade.yaml
+```
 
 ### User
 
@@ -291,6 +57,24 @@ User related tasks, see [`user.yaml`](https://{{< param variables.repository.clu
 
 ### Validation
 
-Validation related tasks, see [`validation.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/cluster/tasks/validation.yaml) for details.
+Validation related tasks, see [`validation.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/cluster/tasks/validation.yaml) for details. Run the following command, to perform all role related validation tasks:
+
+```shell
+ansible-playbook --ask-vault-pass --tags=cluster,validation validation.yaml
+```
 
 {{% /steps %}}
+
+## Role Variables
+
+> [!IMPORTANT]
+> A [role upgrade](/k3s-cluster/wiki/guide/configuration/roles/cluster/#upgrade) is required, in order to apply any changes related to role variables.
+
+See the related role variables, defined into [`main.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/cluster/defaults/main.yaml) defaults file. Review the [`README.md`](https://{{< param variables.repository.cluster >}}/tree/main/roles/cluster) file and perform any optional adjustments.
+
+> [!TIP]
+> Use [Renovate](/k3s-cluster/tutorials/handbook/tools/#renovate) to automate release pull requests and keep dependencies up-to-date.
+
+## Support
+
+If you encounter any role related problems or want to request a new feature, feel free to [open an issue](https://{{< param variables.repository.cluster >}}/issues). For general questions or feedback, please use the [discussions](https://{{< param variables.repository.cluster >}}/discussions).

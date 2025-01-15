@@ -7,9 +7,8 @@ The playbook allows the end-user to perform an initial cluster components valida
 
 <!--more-->
 
-{{< callout type="info" >}}
-  Refer to the Ansible [tutorial](/k3s-cluster/tutorials/handbook/ansible), for usage of encrypted variables and files.
-{{< /callout >}}
+> [!IMPORTANT]
+> Refer to the Ansible [tutorial](/k3s-cluster/tutorials/handbook/ansible), for usage of encrypted variables and files.
 
 ## Execution
 
