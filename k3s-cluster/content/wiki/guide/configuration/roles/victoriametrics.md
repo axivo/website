@@ -4,6 +4,8 @@ prev: /wiki/guide/configuration/roles
 next: /wiki/guide/playbooks
 ---
 
+[VictoriaMetrics](https://docs.victoriametrics.com) is a fast, cost-effective and scalable monitoring solution and time series database, used as drop-in replacement for Prometheus.
+
 The `victoria-metrics` role performs various tasks related to Helm chart deployment, reset and validation.
 
 > [!TIP]
