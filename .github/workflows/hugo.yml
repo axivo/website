@@ -1,4 +1,5 @@
 name: Deploy Documentation
+
 on:
   push:
     branches:
@@ -8,12 +9,20 @@ on:
       - global/**
       - k3s-cluster/**
   workflow_dispatch:
+
 concurrency:
   cancel-in-progress: false
   group: pages
+
 defaults:
   run:
     shell: bash
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
   build:
     name: Build Documentation
@@ -21,16 +30,20 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v4
+
       - name: Setup Go
         uses: actions/setup-go@v5
         with:
           cache: false
-          go-version: 1.22
+          go-version: 1.23
+
       - name: Setup Hugo
         run: sudo snap install --channel=extended/stable hugo
+
       - name: Configure Pages
         id: pages
         uses: actions/configure-pages@v5
+
       - name: Build Content
         env:
           HUGO_ENV: production
@@ -39,10 +52,12 @@ jobs:
         run: |
           hugo --gc --minify -s ./docs
           hugo --gc --minify -s ./k3s-cluster
+
       - name: Upload Pages Artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./public
+
   deploy:
     name: Deploy to GitHub Pages
     environment:
@@ -54,7 +69,3 @@ jobs:
       - name: Deploy Pages
         id: deployment
         uses: actions/deploy-pages@v4
-permissions:
-  contents: read
-  pages: write
-  id-token: write
