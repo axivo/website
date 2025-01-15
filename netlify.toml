@@ -2,5 +2,5 @@
 ignore = "false"
 
 [build.environment]
-GO_VERSION = "1.23"
+GO_VERSION = "1.22"
 HUGO_VERSION = "0.126.1"
