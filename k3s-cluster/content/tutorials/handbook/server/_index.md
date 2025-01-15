@@ -13,9 +13,8 @@ The K3s cluster can be provisioned into any type of bare-metal hardware. This re
 
 Each cluster node uses Ubuntu Server LTS `{{< param variables.os.version >}}+` (64-bits) OS installed, which is a requirement for [Cilium](https://cilium.io). The `apt` package dependencies changed, compared to previous `{{< param variables.os.previous_version >}}` release, therefore, `{{< param variables.os.version >}}+` release is enforced as minimal requirement.
 
-{{< callout type="info" >}}
-  For generic hardware, install the OS using your favorite provisioning method.
-{{< /callout >}}
+> [!NOTE]
+> For generic hardware, install the OS using your favorite provisioning method.
 
 {{% steps %}}
 
@@ -33,9 +32,8 @@ On each cluster node, under `OS Customisation: General` section, set **only** th
 
 ![OS General Settings: Imager General](server-imager-general.webp)
 
-{{< callout type="info" >}}
-  Use the `username` defined above to set the [`ansible_username`](/k3s-cluster/wiki/guide/configuration/user) variable.
-{{< /callout >}}
+> [!IMPORTANT]
+> Use the `username` defined above to set the [`ansible_username`](/k3s-cluster/wiki/guide/configuration/user) variable.
 
 ### OS Services
 
@@ -85,9 +83,8 @@ product: Raspberry Pi 4 Model B Rev 1.5
 
 See the `cluster_vars.device` settings listed below, defined into [`main.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/cluster/defaults/main.yaml) defaults file.
 
-{{< callout type="info" >}}
-  To prevent premature wear and improve system performance, the [Provisioning](/k3s-cluster/wiki/guide/playbooks/provisioning) playbook disables the `atime` timestamp on storage device mounts.
-{{< /callout >}}
+> [!NOTE]
+> To prevent premature wear and improve system performance, the [Provisioning](/k3s-cluster/wiki/guide/playbooks/provisioning) playbook disables the `atime` timestamp on storage device mounts.
 
 {{% steps %}}
 
@@ -113,9 +110,8 @@ Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
 
 For example, connecting the storage device with different USB cable models might result in a different `device.name`. Similarly, connecting the storage device to a different USB port will result in a different `device.id`.
 
-{{< callout type="info" >}}
-  Run the [Validation](/k3s-cluster/wiki/guide/playbooks/validation) playbook, to validate the USB storage device values.
-{{< /callout >}}
+> [!TIP]
+> Run the [Validation](/k3s-cluster/wiki/guide/playbooks/validation) playbook, to validate the USB storage device values.
 
 ### `device.id`
 
@@ -175,9 +171,8 @@ If the output is as listed below, no action is required:
 127.0.1.1 apollo.local apollo
 ```
 
-{{< callout type="info" >}}
-  The [Provisioning](/k3s-cluster/wiki/guide/playbooks/provisioning) playbook will validate on each cluster node if the above format is respected, and correct it if needed.
-{{< /callout >}}
+> [!NOTE]
+> The [Provisioning](/k3s-cluster/wiki/guide/playbooks/provisioning) playbook will validate on each cluster node if the above format is respected, and correct it if needed.
 
 You can check the detected server node FQDNs, by running:
 

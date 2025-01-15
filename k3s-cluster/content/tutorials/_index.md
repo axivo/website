@@ -9,11 +9,9 @@ The tutorials are presented as a learning tool, allowing the end-user to further
 
 <!--more-->
 
-## Help
+## Support
 
-{{< callout emoji="❓" >}}
-  Deployment problems? Feel free to [open an issue](https://github.com/axivo/k3s-cluster/issues). For general questions or feedback, please use the [discussions](https://github.com/axivo/k3s-cluster/discussions).
-{{< /callout >}}
+If you encounter any role related problems or want to suggest a new feature, feel free to [open an issue](https://{{< param variables.repository.cluster >}}/issues). For general questions or feedback, please use the [discussions](https://{{< param variables.repository.cluster >}}/discussions).
 
 ## Next
 

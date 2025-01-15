@@ -7,9 +7,8 @@ The playbook allows the end-user to perform an initial cluster deployment, or a 
 
 <!--more-->
 
-{{< callout type="info" >}}
-  Refer to the Ansible [tutorial](/k3s-cluster/tutorials/handbook/ansible), for usage of encrypted variables and files.
-{{< /callout >}}
+> [!IMPORTANT]
+> Refer to the Ansible [tutorial](/k3s-cluster/tutorials/handbook/ansible), for usage of encrypted variables and files.
 
 ## Execution
 
@@ -34,3 +33,5 @@ Example of re-deploying the `kubernetes` playbook segment:
 ```shell
 ansible-playbook --ask-vault-pass --tags=kubernets,charts provisioning.yaml
 ```
+
+Since the `cluster` role OS updates are fully automated, using the above tags allows end-user to save time re-deploying the cluster, after a reset.

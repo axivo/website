@@ -14,15 +14,25 @@ Ansible [roles](https://docs.ansible.com/ansible/latest/playbook_guide/playbooks
 
 Dive right into the following sections:
 
+### Cluster
+
 {{< cards >}}
-  {{< card icon="adjustments" link="cluster" title="Cluster" subtitle="Configure the Ansible *Cluster* role." >}}
-  {{< card icon="adjustments" link="argocd" title="ArgoCD" subtitle="Configure the Ansible *ArgoCD* role." >}}
-  {{< card icon="adjustments" link="certmanager" title="CertManager" subtitle="Configure the Ansible *CertManager* role." >}}
-  {{< card icon="adjustments" link="cilium" title="Cilium" subtitle="Configure the Ansible *Cilium* role." >}}
-  {{< card icon="adjustments" link="externaldns" title="ExternalDNS" subtitle="Configure the Ansible *ExternalDNS* role." >}}
-  {{< card icon="adjustments" link="helm" title="Helm" subtitle="Configure the Ansible *Helm* role." >}}
-  {{< card icon="adjustments" link="k3s" title="K3s" subtitle="Configure the Ansible *K3s* role." >}}
-  {{< card icon="adjustments" link="kured" title="Kured" subtitle="Configure the Ansible *Kured* role." >}}
-  {{< card icon="adjustments" link="longhorn" title="Longhorn" subtitle="Configure the Ansible *Longhorn* role." >}}
-  {{< card icon="adjustments" link="prometheus" title="Prometheus" subtitle="Configure the Ansible *Prometheus* role." >}}
+  {{< card icon="adjustments" link="cluster" title="Cluster" subtitle="Configure the Ansible *cluster* role." >}}
+  {{< card icon="adjustments" link="helm" title="Helm" subtitle="Configure the Ansible *helm* role." >}}
+  {{< card icon="adjustments" link="k3s" title="K3s" subtitle="Configure the Ansible *k3s* role." >}}
+{{< /cards >}}
+
+### Charts
+
+{{< cards >}}
+  {{< card icon="adjustments" link="argocd" title="ArgoCD" subtitle="Configure the Ansible *argo-cd* role." >}}
+  {{< card icon="adjustments" link="certmanager" title="CertManager" subtitle="Configure the Ansible *cert-manager* role." >}}
+  {{< card icon="adjustments" link="cilium" title="Cilium" subtitle="Configure the Ansible *cilium* role." >}}
+  {{< card icon="adjustments" link="coredns" title="CoreDNS" subtitle="Configure the Ansible *coredns* role." >}}
+  {{< card icon="adjustments" link="externaldns" title="ExternalDNS" subtitle="Configure the Ansible *external-dns* role." >}}
+  {{< card icon="adjustments" link="kured" title="Kured" subtitle="Configure the Ansible *kured* role." >}}
+  {{< card icon="adjustments" link="longhorn" title="Longhorn" subtitle="Configure the Ansible *longhorn* role." >}}
+  {{< card icon="adjustments" link="metricsserver" title="Metrics Server" subtitle="Configure the Ansible *metrics-server* role." >}}
+  {{< card icon="adjustments" link="victorialogs" title="Victoria Logs" subtitle="Configure the Ansible *victoria-logs* role." >}}
+  {{< card icon="adjustments" link="victoriametrics" title="Victoria Metrics" subtitle="Configure the Ansible *victoria-metrics* role." >}}
 {{< /cards >}}

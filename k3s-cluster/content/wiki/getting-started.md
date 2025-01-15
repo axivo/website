@@ -10,9 +10,8 @@ All required local environment settings, installation commands and deployment in
 
 Prior starting the cluster configuration, set the local environment for deployments.
 
-{{< callout type="info" >}}
-  [Homebrew](https://brew.sh) is used to install all deployment dependencies.
-{{< /callout >}}
+> [!NOTE]
+> [Homebrew](https://brew.sh) is used to install all deployment dependencies.
 
 {{% steps %}}
 
@@ -29,7 +28,6 @@ brew install ansible ansible-lint
 Install the `sshpass` binary:
 
 ```shell
-brew tap esolitos/ipa
 brew install sshpass
 ```
 

@@ -4,239 +4,14 @@ prev: /wiki/guide/configuration/roles
 next: /wiki/guide/configuration/roles/longhorn
 ---
 
-The role performs various tasks related to Helm chart deployment, reset and validation.
+[Kured](https://kured.dev) (KUbernetes REboot Daemon) is a Kubernetes daemonset that performs safe automatic node reboots when the need to do so is indicated by the package management system of the underlying OS.
+
+The `kured` role performs various tasks related to Helm chart deployment, reset and validation.
+
+> [!TIP]
+> Role deployments are performed at `global` level, using the [Provisioning](/k3s-cluster/wiki/guide/playbooks/provisioning) playbook. Upgrades can be performed at `role` level, see the instructions detailed below.
 
 <!--more-->
-
-## Role Settings
-
-See the related role settings listed below, defined into [`main.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/kured/defaults/main.yaml) defaults file.
-
-{{% steps %}}
-
-### `kured_vars.kubernetes`
-
-- Default value: `null`
-
-See the related child settings, listed below.
-
-{{% steps nested="true" %}}
-
-#### `kubernetes.configuration`
-
-- Default value: `null`
-
-{{% steps %}}
-
-##### `configuration.concurrency`
-
-- Default value: `integer`, `1`
-
-##### `configuration.log_format`
-
-- Default value: `string`, `text`
-
-##### `configuration.period`
-
-- Default value: `string`, `15m`
-
-##### `configuration.reboot_delay`
-
-- Default value: `string`, `60s`
-
-##### `configuration.slack`
-
-- Default value: `null`
-
-{{% steps %}}
-
-###### `slack.enabled`
-
-- Default value: `boolean`, `true`
-
-###### `slack.messages`
-
-- Default value: `null`
-
-{{% steps %}}
-
-###### `messages.enabled`
-
-- Default value: `boolean`, `false`
-
-###### `messages.drain`
-
-- Default value: `string`
-
-###### `messages.reboot`
-
-- Default value: `string`
-
-###### `messages.uncordon`
-
-- Default value: `string`
-
-{{% /steps %}}
-
-###### `slack.notify_url`
-
-- Default value: `string`, `slack://token`
-
-Encrypt the variable with [`ansible-vault`](/k3s-cluster/tutorials/handbook/ansible/#vault).
-
-{{% /steps %}}
-
-##### `configuration.time`
-
-- Default value: `null`
-
-{{% steps %}}
-
-###### `time.start`
-
-- Default value: `string`, `04:00`
-
-###### `time.end`
-
-- Default value: `string`, `08:00`
-
-###### `time.zone`
-
-- Default value: `string`, `UTC`
-
-{{% /steps %}}
-
-#### `kubernetes.helm`
-
-- Default value: `null`
-
-{{% steps %}}
-
-##### `helm.chart`
-
-- Default value: `null`
-
-{{% steps %}}
-
-###### `chart.name`
-
-- Default value: `string`, `kured`
-
-###### `chart.org`
-
-- Default value: `string`, `kubereboot`
-
-###### `chart.version`
-
-- Default value: `string`
-
-Visit [`kubereboot/charts`](https://github.com/kubereboot/charts/releases), for latest release version.
-
-{{% /steps %}}
-
-##### `helm.repository`
-
-- Default value: `null`
-
-{{% steps %}}
-
-###### `repository.name`
-
-- Default value: `string`, `charts`
-
-###### `repository.org`
-
-- Default value: `string`, `kubereboot`
-
-###### `repository.url`
-
-- Default value: `string`, `https://kubereboot.github.io`
-
-{{% /steps %}}
-
-{{% /steps %}}
-
-#### `kubernetes.metrics`
-
-- Default value: `null`
-
-{{% steps %}}
-
-##### `metrics.create`
-
-- Default value: `string`, `true`
-
-{{% /steps %}}
-
-#### `kubernetes.namespace`
-
-- Default value: `string`, `kube-system`
-
-#### `kubernetes.resources`
-
-- Default value: `null`
-
-{{% steps %}}
-
-##### `resources.limits`
-
-- Default value: `null`
-
-{{% steps %}}
-
-##### `limits.cpu`
-
-- Default value: `string`, `400m`
-
-##### `limits.memory`
-
-- Default value: `string`, `256Mi`
-
-{{% /steps %}}
-
-##### `resources.requests`
-
-- Default value: `null`
-
-{{% steps %}}
-
-##### `requests.cpu`
-
-- Default value: `string`, `100m`
-
-##### `requests.memory`
-
-- Default value: `string`, `64Mi`
-
-{{% /steps %}}
-
-{{% /steps %}}
-
-#### `kubernetes.service`
-
-- Default value: `null`
-
-{{% steps %}}
-
-##### `service.annotations`
-
-- Default value: `dictionary`
-
-##### `service.create`
-
-- Default value: `string`, `true`
-
-##### `service.name`
-
-- Default value: `string`, `kured`
-
-{{% /steps %}}
-
-{{% /steps %}}
-
-{{% /steps %}}
-
-{{% /steps %}}
 
 ## Role Tasks
 
@@ -252,19 +27,41 @@ Ansible facts, see [`facts.yaml`](https://{{< param variables.repository.cluster
 
 Main role related tasks, see [`main.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/kured/tasks/main.yaml) for details.
 
+### Post-Install
+
+Post-install related tasks, see [`postinstall.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/kured/tasks/postinstall.yaml) for details.
+
 ### Reset
 
 Reset related tasks, see [`reset.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/kured/tasks/reset.yaml) for details.
 
+> [!TIP]
+> A reset is performed at global level only, review the [Reset](/k3s-cluster/wiki/guide/playbooks/reset) playbook instructions.
+
+### Upgrade
+
+Upgrade related tasks, see [`upgrade.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/kured/tasks/upgrade.yaml) for details. Run the following command, to perform a role upgrade:
+
+```shell
+ansible-playbook --ask-vault-pass --tags=kured upgrade.yaml
+```
+
 ### Validation
 
-Validation related tasks, see [`validation.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/kured/tasks/validation.yaml) for details.
+Validation related tasks, see [`validation.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/kured/tasks/validation.yaml) for details. Run the following command, to perform all role related validation tasks:
+
+```shell
+ansible-playbook --ask-vault-pass --tags=kured,validation validation.yaml
+```
 
 {{% /steps %}}
 
 ## Role Templates
 
 See the related role templates, listed below.
+
+> [!TIP]
+> Perform a role validation, to visualize all rendered templates and variables.
 
 {{% steps %}}
 
@@ -273,3 +70,17 @@ See the related role templates, listed below.
 Helm chart values template, see [`values.j2`](https://{{< param variables.repository.cluster >}}/blob/main/roles/kured/templates/values.j2) for details.
 
 {{% /steps %}}
+
+## Role Variables
+
+> [!IMPORTANT]
+> A [role upgrade](/k3s-cluster/wiki/guide/configuration/roles/kured/#upgrade) is required, in order to apply any changes related to role variables.
+
+See the related role variables, defined into [`main.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/kured/defaults/main.yaml) defaults file. Review the [`README.md`](https://{{< param variables.repository.cluster >}}/tree/main/roles/kured) file, for additional details.
+
+> [!TIP]
+> Use [Renovate](/k3s-cluster/tutorials/handbook/tools/#renovate) to automate release pull requests and keep dependencies up-to-date.
+
+## Support
+
+If you encounter any role related problems or want to request a new feature, feel free to [open an issue](https://{{< param variables.repository.cluster >}}/issues). For general questions or feedback, please use the [discussions](https://{{< param variables.repository.cluster >}}/discussions).

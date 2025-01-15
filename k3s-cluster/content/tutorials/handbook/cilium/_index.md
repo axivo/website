@@ -1,14 +1,14 @@
 ---
 title: Cilium
 prev: /tutorials/handbook
-next: /tutorials/handbook/cloudflare
+next: /tutorials/handbook/externaldns
 ---
 
 This repository uses Cilium, as replacement for various Kubernetes key elements, like `kube-proxy`, `network-policy`, `servicelb` and `traefik`.
 
 <!--more-->
 
-## Chart Provisioning
+## Provisioning
 
 Due to the intricate nature of its requirements, Cilium is deployed in three steps:
 
@@ -16,7 +16,7 @@ Due to the intricate nature of its requirements, Cilium is deployed in three ste
 - Provisioning, using resources created during initial provisioning
 - Post-install provisioning, using resources created by other provisioning roles
 
-## Chart Dependencies
+## Dependencies
 
 See below the required Cilium dependencies, used into chart configuration. 
 
@@ -24,19 +24,17 @@ See below the required Cilium dependencies, used into chart configuration.
 
 During chart post-install provisioning, Cilium Hubble is configured to take advantage of CertManager auto-renewed certificates, instead of default Helm expiring certificates. This requires the creation of three resources:
 
-- CertManager `ClusterIssuer` resource template, see [`cluster_issuer.j2`](https://{{< param variables.repository.cluster >}}/blob/main/roles/certmanager/templates/cluster_issuer.j2)
+- CertManager `ClusterIssuer` resource template, see [`cluster_issuer.j2`](https://{{< param variables.repository.cluster >}}/blob/main/roles/cert-manager/templates/cluster_issuer.j2)
 - Hubble `Certificate` resource template, see [`certificate.j2`](https://{{< param variables.repository.cluster >}}/blob/main/roles/cilium/templates/certificate.j2)
 - Hubble `ClusterIssuer` resource template, see [`cluster_issuer.j2`](https://{{< param variables.repository.cluster >}}/blob/main/roles/cilium/templates/cluster_issuer.j2)
 
-{{< callout type="warning" >}}
-Cilium details the following instructions into their installation steps:
+> [!IMPORTANT]
+> Cilium details the following instructions, into their `cert-manager` [installation](https://docs.cilium.io/en/latest/observability/hubble/configuration/tls) steps:
+> > Please make sure that your issuer is able to create certificates under the `cilium.io` domain name.
+>
+> CertManager cannot control a domain not owned by end-user, therefore the above listed `Certificate` and `ClusterIssuer` resources are created.
 
-> Please make sure that your issuer is able to create certificates under the `cilium.io` domain name.
-
-CertManager cannot control a domain not owned by end-user, therefore the above listed `Certificate` and `ClusterIssuer` resources are created.
-{{< /callout >}}
-
-Refer to Cilium [documentation](https://docs.cilium.io/en/stable/gettingstarted/hubble-configuration/), for further details.
+Refer to Cilium Hubble [documentation](https://docs.cilium.io/en/stable/gettingstarted/hubble-configuration/), for further details.
 
 ### Gateway API
 
@@ -44,15 +42,15 @@ Refer to Cilium [documentation](https://docs.cilium.io/en/stable/gettingstarted/
 
 #### Usage Example
 
-This is an example of `Gateway` and `HTTPRoute` resources usage for Longhorn frontend, as replacement for deprecated `Ingress` resource:
+This is an example of `Gateway` and `HTTPRoute` resources usage for [Cilium Hubble UI](/k3s-cluster/tutorials/handbook/externaldns/#cilium), as replacement for `Ingress` resource:
 
-- `Gateway` resource template, see [`gateway.j2`](https://{{< param variables.repository.cluster >}}/blob/main/roles/longhorn/templates/gateway.j2)
-- `HTTPRoute` insecure resource template, see [`http_route.j2`](https://{{< param variables.repository.cluster >}}/blob/main/roles/longhorn/templates/http_route.j2)
-- `HTTPRoute` secure resource template, see [`https_route.j2`](https://{{< param variables.repository.cluster >}}/blob/main/roles/longhorn/templates/https_route.j2)
+- `Gateway` resource template, see [`gateway.j2`](https://{{< param variables.repository.cluster >}}/blob/main/roles/cilium/templates/gateway.j2)
+- `HTTPRoute` insecure resource template, see [`http_route_insecure.j2`](https://{{< param variables.repository.cluster >}}/blob/main/roles/cilium/templates/http_route_insecure.j2)
+- `HTTPRoute` secure resource template, see [`https_route_secure.j2`](https://{{< param variables.repository.cluster >}}/blob/main/roles/cilium/templates/https_route_secure.j2)
 
 Refer to Cilium [documentation](https://docs.cilium.io/en/stable/network/servicemesh/gateway-api/gateway-api/), for further details.
 
-## Connectivity Test
+## Connectivity
 
 To perform a connectivity test, login into one of the server nodes and run the following commands:
 

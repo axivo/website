@@ -8,9 +8,47 @@ This repository uses [ArgoCD](https://argoproj.github.io/cd) to deploy applicati
 
 <!--more-->
 
+## Configuration
+
+See the related role variables, defined into [`main.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/argo-cd/defaults/main.yaml) defaults file. Review the [`README.md`](https://{{< param variables.repository.cluster >}}/tree/main/roles/argo-cd) file, for additional details and the advanced configuration settings, listed below.
+
+> [!IMPORTANT]
+> A [role upgrade](/k3s-cluster/wiki/guide/configuration/roles/argocd/#upgrade) is required, in order to apply any changes related to configuration.
+
+### Credentials
+
+While still implemented, the `admin` credentials are disabled by default and `user` administrator enabled credentials are configured instead. Additional users can be specified into [`facts.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/argo-cd/tasks/facts.yaml) tasks file, under `argocd_resources.server.users` collection:
+
+```yaml
+argocd_resources:
+  server:
+    users:
+      - name: '{{ argocd_map.credentials.server.user.name }}'
+        password: '{{ argocd_map.credentials.server.user.password }}'
+        permissions: 'apiKey, login'
+        role: admin
+        enabled: true
+```
+
+The `name` and `password` keys listed above are defined into [`all.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/inventory/cluster/group_vars/all.yaml) group variables file, under `argocd_map.credentials.server` collection.
+
+> [!TIP]
+> To enable the `admin` credentials, set the `argocd_vars.kubernetes.configs.cm.admin.enabled` value to `true`, into [`main.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/argo-cd/defaults/main.yaml) defaults file.
+
+### Parameters
+
+Additional configuration parameters can be defined into [`config_params.j2`](https://{{< param variables.repository.cluster >}}/blob/main/roles/argo-cd/templates/config_params.j2) template.
+
+> [!TIP]
+> Perform a [role validation](/k3s-cluster/wiki/guide/configuration/roles/argocd/#validation), to visualize all rendered templates and variables.
+
+### RBAC
+
+Additional RBAC policies can be defined into [`config_rbac.j2`](https://{{< param variables.repository.cluster >}}/blob/main/roles/argo-cd/templates/config_rbac.j2) template. The role automatically injects the users specified into [`facts.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/argo-cd/tasks/facts.yaml) tasks file, under `argocd_resources.server.users` collection.
+
 ## Repository Setup
 
-Navigate to `ArgoCD Settings` > `Repositories` and connect to official project repository:
+Login into [ArgoCD UI](/k3s-cluster/tutorials/handbook/externaldns/#argocd), navigate to `ArgoCD Settings` > `Repositories` and connect to official project repository:
 
 | Key     | Value                                                         |
 | :------ | :------------------------------------------------------------ |

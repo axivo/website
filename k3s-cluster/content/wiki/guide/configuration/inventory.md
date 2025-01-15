@@ -40,9 +40,8 @@ The `serial` structure has the following pattern:
 
 {{% /details %}}
 
-{{< callout type="info" >}}
-  Update the `serial` structure into [`provisioning.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/provisioning.yaml) playbook file.
-{{< /callout >}}
+> [!TIP]
+> Update the `serial` structure into [`provisioning.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/provisioning.yaml) playbook file.
 
 Example of `serial` structure with 3 `server` type nodes and 5 `agent` type nodes, used into [Reset](/k3s-cluster/wiki/guide/playbooks/reset) playbook:
 
@@ -61,17 +60,15 @@ The `serial` structure has the following pattern:
 
 {{% /details %}}
 
-{{< callout type="info" >}}
-  Update the `serial` structure into [`reset.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/reset.yaml) playbook file.
-{{< /callout >}}
+> [!TIP]
+> Update the `serial` structure into [`reset.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/reset.yaml) playbook file.
 
-### `k3s_vars.server.controlplane.tainted`
+### `k3s_vars.cluster.controlplane.tainted`
 
 The setting allows the end-user to control where the Kubernetes pods will be deployed. In a scenario where there is only a single or no `agent` type nodes deployed, setting the value to `false` will allow pods to be deployed into any cluster node type.
 
-{{< callout type="info" >}}
-  Update the setting into K3s role [`main.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/k3s/defaults/main.yaml) variables file.
-{{< /callout >}}
+> [!TIP]
+> Update the setting into `k3s` role [`main.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/k3s/defaults/main.yaml) variables file.
 
 {{% /steps %}}
 
@@ -79,9 +76,8 @@ The setting allows the end-user to control where the Kubernetes pods will be dep
 
 The [`hosts.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/inventory/cluster/hosts.yaml) inventory file contains the list of `server` and `agent` cluster node types.
 
-{{< callout type="info" >}}
-  Please review the [K3s Architecture](https://docs.k3s.io/architecture), for further details.
-{{< /callout >}}
+> [!IMPORTANT]
+> Please review the [K3s Architecture](https://docs.k3s.io/architecture), for further details.
 
 {{% steps %}}
 
@@ -133,19 +129,17 @@ serial:
 
 #### Single Point of Failure
 
-{{< callout type="warning" >}}
-  The above detailed configuration will introduce a SPOF, since Kubernetes pods are deployed to a single or no `agent` type nodes.
-{{< /callout >}}
+> [!CAUTION]
+> The above detailed configuration will introduce a SPOF, since Kubernetes pods are deployed to a single or no `agent` type nodes.
 
-To address this issue, set the `k3s_vars.server.controlplane.tainted` option to `false` into K3s role [`main.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/k3s/defaults/main.yaml) variables file.
+To address this issue, set the `k3s_vars.server.controlplane.tainted` option to `false` into `k3s` role [`main.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/k3s/defaults/main.yaml) variables file.
 
 ### Non High Availability
 
 The minimum number of server type nodes for a Non HA cluster is 1. By [K3s Architecture](https://docs.k3s.io/architecture) design, a cluster can have either 1, or 3+ `server` type nodes.
 
-{{< callout type="warning" >}}
-  If the targeted cluster has less than 3 `server` type nodes, the [Provisioning](/k3s-cluster/wiki/guide/playbooks/provisioning) playbook will automatically disable all related HA features. 
-{{< /callout >}}
+> [!IMPORTANT]
+> If the targeted cluster has less than 3 `server` type nodes, the [Provisioning](/k3s-cluster/wiki/guide/playbooks/provisioning) playbook will automatically disable all related HA features. 
 
 Example of a Non HA cluster inventory with 2 nodes:
 
@@ -185,3 +179,7 @@ serial:
 {{% /details %}}
 
 {{% /steps %}}
+
+## Support
+
+If you encounter any configuration problems or want to request a new feature, feel free to [open an issue](https://{{< param variables.repository.cluster >}}/issues). For general questions or feedback, please use the [discussions](https://{{< param variables.repository.cluster >}}/discussions).

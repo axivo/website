@@ -1,7 +1,7 @@
 ---
 title: Kured
 prev: /tutorials/handbook
-next: /tutorials/handbook/renovate
+next: /tutorials/handbook/tools
 ---
 
 This repository uses [Kured](https://kured.dev), to ensure the cluster nodes are properly rebooted, during a scheduled OS upgrade reboot event.
@@ -30,11 +30,16 @@ https://hooks.slack.com/services/<token>/<token>/<token>
 
 ### Notify URL
 
-Encrypt the `slack.notify_url` value with [`ansible-vault`](/k3s-cluster/tutorials/handbook/ansible/#vault) and insert it into 
-[`main.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/kured/defaults/main.yaml) defaults file. Notify URL pre-encrypted format:
+Encrypt the `global_map.credentials.kured.slack.notify.url` value with [`ansible-vault`](/k3s-cluster/tutorials/handbook/ansible/#vault) and insert it into 
+[`all.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/inventory/cluster/group_vars/all.yaml) group variables file. Notify URL decrypted format:
 
 ```yaml
-notify_url: slack://<token>/<token>/<token>
+global_map:
+  credentials:
+    kured:
+      slack:
+        notify:
+          url: slack://<token>/<token>/<token>
 ```
 
 {{% /steps %}}

@@ -7,9 +7,8 @@ The playbook allows the end-user to perform a cluster reset, bringing the nodes 
 
 <!--more-->
 
-{{< callout type="info" >}}
-  Refer to the Ansible [tutorial](/k3s-cluster/tutorials/handbook/ansible), for usage of encrypted variables and files.
-{{< /callout >}}
+> [!IMPORTANT]
+> Refer to the Ansible [tutorial](/k3s-cluster/tutorials/handbook/ansible), for usage of encrypted variables and files.
 
 ## Execution
 
@@ -30,3 +29,6 @@ To faster re-deploy a cluster after reset, skip the removal of installed `apt` p
 ```shell
 Remove installed apt packages? [Y/n] [n]:
 ```
+
+> [!TIP]
+> Pressing Enter is equivalent to selecting the default `[n]` option.
