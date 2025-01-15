@@ -41,11 +41,11 @@ See below the list of available front-ends, once the cluster is provisioned succ
 
 - UI, `https://longhorn.domain.com`
 
-### Victoria Logs
+### VictoriaLogs
 
 - UI, `https://logs.domain.com`
 
-### Victoria Metrics
+### VictoriaMetrics
 
 See below the global, VMCluster and VMSingle endpoints.
 

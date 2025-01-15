@@ -13,9 +13,9 @@ Ansible [playbooks](https://docs.ansible.com/ansible/latest/playbook_guide/index
 Dive right into the following sections:
 
 {{< cards >}}
-  {{< card icon="document" link="provisioning" title="Provisioning" subtitle="Configure the *Provisioning* playbook." >}}
-  {{< card icon="document" link="reset" title="Reset" subtitle="Configure the *Reset* playbook." >}}
-  {{< card icon="document" link="upgrade" title="Upgrade" subtitle="Configure the *Upgrade* playbook." >}}
-  {{< card icon="document" link="validation" title="Validation" subtitle="Configure the *Validation* playbook." >}}
-  {{< card icon="document" link="vault" title="Vault" subtitle="Configure the *Vault* playbook." >}}
+  {{< card icon="document" link="provisioning" title="Provisioning" subtitle="Review the *Provisioning* playbook usage." >}}
+  {{< card icon="document" link="reset" title="Reset" subtitle="Review the *Reset* playbook usage." >}}
+  {{< card icon="document" link="upgrade" title="Upgrade" subtitle="Review the *Upgrade* playbook usage." >}}
+  {{< card icon="document" link="validation" title="Validation" subtitle="Review the *Validation* playbook usage." >}}
+  {{< card icon="document" link="vault" title="Vault" subtitle="Review the *Vault* playbook usage." >}}
 {{< /cards >}}
