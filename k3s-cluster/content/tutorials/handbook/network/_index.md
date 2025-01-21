@@ -1,7 +1,7 @@
 ---
 title: Network
 prev: /tutorials/handbook
-next: /tutorials/handbook/cilium
+next: /tutorials/handbook/k3s
 weight: 3
 ---
 

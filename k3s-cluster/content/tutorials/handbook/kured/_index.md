@@ -1,7 +1,7 @@
 ---
 title: Kured
 prev: /tutorials/handbook
-next: /tutorials/handbook/tools
+next: /tutorials/handbook/longhorn
 ---
 
 This repository uses [Kured](https://kured.dev), to ensure the cluster nodes are properly rebooted, during a scheduled OS upgrade reboot event.
