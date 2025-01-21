@@ -19,6 +19,8 @@ Dive right into the following sections:
   {{< card icon="book-open" link="argocd" title="ArgoCD" subtitle="ArgoCD related tutorials." >}}
   {{< card icon="book-open" link="cilium" title="Cilium" subtitle="Cilium related tutorials." >}}
   {{< card icon="book-open" link="externaldns" title="ExternalDNS" subtitle="ExternalDNS related tutorials." >}}
+  {{< card icon="book-open" link="k3s" title="K3s" subtitle="K3s related tutorials." >}}
   {{< card icon="book-open" link="kured" title="Kured" subtitle="Kured related tutorials." >}}
+  {{< card icon="book-open" link="longhorn" title="Longhorn" subtitle="Longhorn related tutorials." >}}
   {{< card icon="book-open" link="tools" title="Tools" subtitle="Tools related tutorials." >}}
 {{< /cards >}}

@@ -73,9 +73,13 @@ Helm chart values template, see [`values.j2`](https://{{< param variables.reposi
 
 {{% steps nested="true" %}}
 
+#### Map
+
+Helm chart values template used for configuration map, see [`config_cm.j2`](https://{{< param variables.repository.cluster >}}/blob/main/roles/argo-cd/templates/config_cm.j2) for details.
+
 #### Parameters
 
-Helm chart values template used for additional configuration parameters, see [`config_params.j2`](https://{{< param variables.repository.cluster >}}/blob/main/roles/argo-cd/templates/config_params.j2) for details.
+Helm chart values template used for configuration parameters, see [`config_params.j2`](https://{{< param variables.repository.cluster >}}/blob/main/roles/argo-cd/templates/config_params.j2) for details.
 
 #### RBAC
 
