@@ -29,11 +29,11 @@ The end-user can use `kubectl` to operate the cluster via local terminal, or [Le
 
 ## Upgrade
 
-Upon a new K3s version release, end-user can run a [cluster upgrade](/k3s-cluster/wiki/guide/configuration/roles/k3s/#upgrade), which will schedule a [Kured](/k3s-cluster/wiki/guide/configuration/roles/kured) reboot.
+Upon a new K3s version release, end-user can perform a [role upgrade](/k3s-cluster/wiki/guide/configuration/roles/k3s/#upgrade), which will schedule a [Kured](/k3s-cluster/wiki/guide/configuration/roles/kured) reboot.
 
 ### Manual Upgrade
 
-Once the [cluster upgrade](/k3s-cluster/wiki/guide/configuration/roles/k3s/#upgrade) completed, end-user can choose to manually upgrade each cluster node. A [node drain](/k3s-cluster/tutorials/handbook/longhorn/#node-drain) must be executed one node at the time, followed by a node reboot. Once the node is up and running, it can be uncordoned with Lens or `kubectl`, via local terminal:
+Once the [role upgrade](/k3s-cluster/wiki/guide/configuration/roles/k3s/#upgrade) performed, end-user can choose to manually upgrade each cluster node. A [node drain](/k3s-cluster/tutorials/handbook/longhorn/#node-drain) must be executed one node at the time, followed by a node reboot. Once the node is up and running, it can be uncordoned with Lens or `kubectl`, via local terminal:
 
 ```shell
 kubectl uncordon <node>
