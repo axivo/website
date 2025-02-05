@@ -73,6 +73,16 @@ Helm chart values template, see [`values.j2`](https://{{< param variables.reposi
 
 Kubernetes `ClusterIssuer` resource template, see [`cluster_issuer.j2`](https://{{< param variables.repository.cluster >}}/blob/main/roles/cert-manager/templates/cluster_issuer.j2) for details.
 
+### Configuration
+
+{{% steps nested="true" %}}
+
+#### Controller
+
+Helm chart values template used for controller configuration, see [`config_controller.j2`](https://{{< param variables.repository.cluster >}}/blob/main/roles/cert-manager/templates/config_controller.j2) for details.
+
+{{% /steps %}}
+
 {{% /steps %}}
 
 ## Role Variables

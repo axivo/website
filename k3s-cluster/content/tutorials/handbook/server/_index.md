@@ -63,6 +63,22 @@ Command output:
 aarch64
 ```
 
+> [!IMPORTANT]
+> Certain roles install required binaries, dependent on the hardware architecture.
+
+Example for `k3s` binary defined into [`main.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/k3s/defaults/main.yaml) defaults file:
+
+```yaml
+k3s_vars:
+  release:
+    k3s:
+      checksum: sha256sum-arm64.txt
+      file: k3s-arm64
+      name: k3s
+```
+
+The correct hardware architecture value for `arm64` should be `aarch64`, with a file named `k3s-aarch64`, which unfortunately is not the naming convention used into GitHub repositories. Linux kernel community [have chosen](https://lkml.org/lkml/2012/7/6/624) to call their kernel port `arm64` (rather than `aarch64`), hence the use of hardcoded values.
+
 ### `hardware.product`
 
 Hardware product, used to identify the cluster node hardware model. To determine the hardware product, run:
