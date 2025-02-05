@@ -68,7 +68,7 @@ aarch64
 
 Example for `k3s` binary defined into [`main.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/k3s/defaults/main.yaml) defaults file:
 
-```
+```yaml
 k3s_vars:
   release:
     k3s:
