@@ -62,6 +62,6 @@ cilium connectivity test
 To remove the `cilium-test` namespace and Hubble `port-forward`, run:
 
 ```shell
-kubectl delete namespace cilium-test -n kube-system
+kubectl delete namespace cilium-test
 ps aux | grep kubectl | grep -v grep | awk {'print $2'} | xargs kill
 ```
