@@ -36,10 +36,6 @@ Load balancer related tasks, see [`loadbalancer.yaml`](https://{{< param variabl
 
 Main role related tasks, see [`main.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/k3s/tasks/main.yaml) for details.
 
-### Post-Install
-
-Post-install related tasks, see [`postinstall.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/k3s/tasks/postinstall.yaml) for details.
-
 ### Reset
 
 Reset related tasks, see [`reset.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/k3s/tasks/reset.yaml) for details.
