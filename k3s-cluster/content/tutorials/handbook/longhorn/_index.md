@@ -10,7 +10,7 @@ This repository uses [Longhorn](https://longhorn.io), delivering simplified, clo
 
 ## Backup
 
-Longhorn uses various backup target endpoints, used to access a `backupstore`. A backup target endpoint with `cifs` protocol is configured by default, used with an existing TrueNAS Scale `nfs` share and related ['credentials.j2'](https://{{< param variables.repository.cluster >}}/blob/main/roles/longhorn/templates/credentials.j2) secret:
+Longhorn uses various backup target endpoints, used to access a `backupstore`. A backup target endpoint with `cifs` protocol is configured by default, used with an existing TrueNAS Scale `nfs` share and related [`credentials.j2`](https://{{< param variables.repository.cluster >}}/blob/main/roles/longhorn/templates/credentials.j2) secret:
 
 ```yaml
 longhorn_vars:
@@ -20,7 +20,7 @@ longhorn_vars:
       target: cifs://nas.noty.cc/backup
 ```
 
-Refer to the official [documentation](https://longhorn.io/docs/latest/snapshots-and-backups/backup-and-restore/set-backup-target), to configure the backup target endpoint with a different protocol. Depending on chosen protocol, the ['credentials.j2'](https://{{< param variables.repository.cluster >}}/blob/main/roles/longhorn/templates/credentials.j2) secret will require an update.
+Refer to the official [documentation](https://longhorn.io/docs/latest/snapshots-and-backups/backup-and-restore/set-backup-target), to configure the backup target endpoint with a different protocol. Depending on chosen protocol, the [`credentials.j2`](https://{{< param variables.repository.cluster >}}/blob/main/roles/longhorn/templates/credentials.j2) secret will require an update.
 
 ## Node Drain
 
