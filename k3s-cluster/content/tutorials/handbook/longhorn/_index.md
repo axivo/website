@@ -20,7 +20,7 @@ longhorn_vars:
       target: cifs://nas.noty.cc/backup
 ```
 
-Refer to the official [documentation](https://longhorn.io/docs/latest/snapshots-and-backups/backup-and-restore/set-backup-target), to configure the backup target endpoint with a different protocol. Depending on chosen protocol, the [`credentials.j2`](https://{{< param variables.repository.cluster >}}/blob/main/roles/longhorn/templates/credentials.j2) secret will require an update.
+Review the official [documentation](https://longhorn.io/docs/latest/snapshots-and-backups/backup-and-restore/set-backup-target), to configure the backup target endpoint with a different protocol. Depending on chosen protocol, the [`credentials.j2`](https://{{< param variables.repository.cluster >}}/blob/main/roles/longhorn/templates/credentials.j2) secret will require an update.
 
 ## Node Drain
 
