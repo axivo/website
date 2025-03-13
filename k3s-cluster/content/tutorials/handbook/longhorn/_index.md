@@ -8,6 +8,20 @@ This repository uses [Longhorn](https://longhorn.io), delivering simplified, clo
 
 <!--more-->
 
+## Backup
+
+Longhorn uses various backup target endpoints, used to access a `backupstore`. A backup target endpoint with `cifs` protocol is configured by default, used with an existing TrueNAS Scale `nfs` share and related ['credentials.j2'](https://{{< param variables.repository.cluster >}}/blob/main/roles/longhorn/templates/credentials.j2) secret:
+
+```yaml
+longhorn_vars:
+  kubernetes:
+    backup:
+      enabled: true
+      target: cifs://nas.noty.cc/backup
+```
+
+Refer to the official [documentation](https://longhorn.io/docs/latest/snapshots-and-backups/backup-and-restore/set-backup-target), to configure the backup target endpoint with a different protocol. Depending on chosen protocol, the ['credentials.j2'](https://{{< param variables.repository.cluster >}}/blob/main/roles/longhorn/templates/credentials.j2) secret will require an update.
+
 ## Node Drain
 
 The node drain behavior is controlled with `longhorn_vars.kubernetes.default_settings.node_drain_policy` and `longhorn_vars.kubernetes.default_settings.pod_deletion_policy` variables, defined into [`main.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/longhorn/defaults/main.yaml) defaults file.
