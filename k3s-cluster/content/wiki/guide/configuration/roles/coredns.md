@@ -69,9 +69,9 @@ See the related role templates, listed below.
 
 Helm chart values template, see [`values.j2`](https://{{< param variables.repository.cluster >}}/blob/main/roles/coredns/templates/values.j2) for details.
 
-### Zones Configuration
+### Servers Configuration
 
-Zones configuration template, see [`config_zones.j2`](https://{{< param variables.repository.cluster >}}/blob/main/roles/coredns/templates/config_zones.j2) for details.
+Zones configuration template, see [`config_servers.j2`](https://{{< param variables.repository.cluster >}}/blob/main/roles/coredns/templates/config_servers.j2) for details.
 
 {{% /steps %}}
 
