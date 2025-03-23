@@ -73,22 +73,22 @@ metadata:
   namespace: kube-system
 spec:
   destination:
-    name: ''
     namespace: default
-    server: 'https://kubernetes.default.svc'
+    server: https://kubernetes.default.svc
+  project: default
   source:
-    path: argo/ubuntu
-    repoURL: 'https://{{< param variables.repository.applications >}}.git'
-    targetRevision: ubuntu/v1.0.0
     helm:
       valueFiles:
         - values.yaml
-  sources: []
-  project: default
+    path: apps/ubuntu
+    repoURL: https://{{< param variables.repository.applications >}}.git
+    targetRevision: HEAD
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
 ```
 
 #### Metadata
