@@ -1,7 +1,7 @@
 ---
 title: K3s
 prev: /tutorials/handbook
-next: /tutorials/handbook/argocd
+next: /tutorials/handbook/k3s-monitor
 weight: 4
 ---
 
