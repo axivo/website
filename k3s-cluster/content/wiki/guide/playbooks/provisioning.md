@@ -31,7 +31,7 @@ The end-user can use Ansible tags, in order to re-deploy specific segments of pl
 Example of re-deploying the `kubernetes` playbook segment:
 
 ```shell
-ansible-playbook --ask-vault-pass --tags=kubernets,charts provisioning.yaml
+ansible-playbook --ask-vault-pass --tags=kubernetes,charts provisioning.yaml
 ```
 
 Since the `cluster` role OS updates are fully automated, using the above tags allows end-user to save time re-deploying the cluster, after a reset.
