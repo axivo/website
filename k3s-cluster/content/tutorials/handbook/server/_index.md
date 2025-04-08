@@ -5,13 +5,13 @@ next: /tutorials/handbook/network
 weight: 2
 ---
 
-The K3s cluster can be provisioned into any type of bare-metal hardware. This repository uses Raspberry Pi's as bare-metal hardware example, therefore is recommended to install the latest Ubuntu Server LTS `{{< param variables.os.version >}}+` (64-bits) OS with Raspberry Pi Imager.
+The K3s cluster can be provisioned into any type of bare-metal hardware. This repository uses Raspberry Pi's as bare-metal hardware example, therefore is recommended to install the latest Ubuntu Server `{{< param variables.os.version >}}+` LTS (64-bits) OS with Raspberry Pi Imager.
 
 <!--more-->
 
 ## OS Installation
 
-Each cluster node uses Ubuntu Server LTS `{{< param variables.os.version >}}+` (64-bits) OS installed, which is a requirement for [Cilium](https://cilium.io). The `apt` package dependencies changed, compared to previous `{{< param variables.os.previous_version >}}` release, therefore, `{{< param variables.os.version >}}+` release is enforced as minimal requirement.
+Each cluster node uses Ubuntu Server `{{< param variables.os.version >}}+` LTS (64-bits) OS installed, which is a requirement for [Cilium](https://cilium.io). The `apt` package dependencies changed, compared to previous `{{< param variables.os.previous_version >}}` release, therefore, `{{< param variables.os.version >}}+` release is enforced as minimal requirement.
 
 > [!NOTE]
 > For generic hardware, install the OS using your favorite provisioning method.
