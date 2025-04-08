@@ -1,50 +1,63 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "assignees": [
-    "fmunteanu"
-  ],
+  "assignees": ["fmunteanu"],
   "customManagers": [
+    {
+      "customType": "regex",
+      "datasourceTemplate": "github-tags",
+      "depNameTemplate": "golang/go",
+      "extractVersionTemplate": "^go(?<version>.+)$",
+      "fileMatch": ["netlify.toml"],
+      "matchStrings": ["^GO_VERSION[\\s\\S]+?\"(?<currentValue>.+)\""],
+      "rangeStrategy": "increase"
+    },
     {
       "customType": "regex",
       "datasourceTemplate": "github-releases",
       "depNameTemplate": "gohugoio/hugo",
       "extractVersionTemplate": "^v(?<version>.+)$",
       "fileMatch": [
+        ".github/workflows/deploy.yml",
+        "docs/hugo.yaml",
         "netlify.toml"
       ],
       "matchStrings": [
-        "^HUGO_VERSION[\\s\\S]+?\"(?<currentValue>.+)\""
+        "hugo-version:\\s+(?<currentValue>.+)",
+        "hugoVersion:[\\s\\S]+?min:\\s+(?<currentValue>.+)",
+        "HUGO_VERSION[\\s\\S]+?\"(?<currentValue>.+)\""
       ]
     }
-  ],
-  "enabledManagers": [
-    "custom.regex",
-    "github-actions",
-    "gomod"
   ],
   "extends": [
+    ":semanticCommitTypeAll(chore)",
     "config:recommended"
   ],
-  "gitIgnoredAuthors": [
-    "41898282+github-actions[bot]@users.noreply.github.com"
-  ],
-  "labels": [
-    "dependency"
-  ],
+  "gitIgnoredAuthors": ["41898282+github-actions[bot]@users.noreply.github.com"],
+  "labels": ["dependency"],
   "packageRules": [
     {
+      "groupName": "dependency golang/go",
+      "matchDatasources": ["github-tags"],
+      "matchManagers": ["custom.regex"],
+      "matchPackagePrefixes": ["golang/"],
+      "rangeStrategy": "increase"
+    },
+    {
+      "groupName": "dependency golang/go",
+      "matchDatasources": ["golang-version"],
+      "matchManagers": ["gomod"],
+      "rangeStrategy": "increase"
+    },
+    {
       "enabled": true,
-      "matchDepTypes": [
-        "indirect"
-      ],
-      "matchManagers": [
-        "gomod"
-      ]
+      "matchDepTypes": ["indirect"],
+      "matchManagers": ["gomod"]
     }
   ],
-  "postUpdateOptions": [
-    "gomodTidy"
-  ],
+  "postUpdateOptions": ["gomodTidy"],
   "prConcurrentLimit": 0,
-  "prHourlyLimit": 0
+  "prHourlyLimit": 0,
+  "semanticCommits": "enabled",
+  "separateMajorMinor": false,
+  "separateMinorPatch": false
 }

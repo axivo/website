@@ -20,8 +20,8 @@ defaults:
 
 permissions:
   contents: read
-  pages: write
   id-token: write
+  pages: write
 
 jobs:
   build:
@@ -32,20 +32,22 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup Hugo
-        run: sudo snap install --channel=extended/stable hugo
-
-      - name: Configure Pages
-        id: pages
-        uses: actions/configure-pages@v5
+        uses: peaceiris/actions-hugo@v2
+        with:
+          extended: true
+          hugo-version: 0.123.0
 
       - name: Build Content
         env:
           HUGO_ENV: production
-          HUGO_ENVIRONMENT: production
           TZ: America/New_York
         run: |
           hugo --gc --minify -s ./docs
           hugo --gc --minify -s ./k3s-cluster
+
+      - name: Configure Pages
+        id: pages
+        uses: actions/configure-pages@v5
 
       - name: Upload Pages Artifact
         uses: actions/upload-pages-artifact@v3
@@ -53,13 +55,13 @@ jobs:
           path: ./public
 
   deploy:
-    name: Deploy to GitHub Pages
+    name: Deploy Documentation to GitHub Pages
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: Deploy Pages
+      - name: Deploy Documentation
         id: deployment
         uses: actions/deploy-pages@v4
