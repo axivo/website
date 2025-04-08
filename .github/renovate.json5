@@ -4,17 +4,17 @@
   "customManagers": [
     {
       "customType": "regex",
-      "datasource": "github-tags",
-      "depName": "golang/go",
-      "extractVersion": "^go(?<version>.+)$",
+      "datasourceTemplate": "github-tags",
+      "depNameTemplate": "golang/go",
+      "extractVersionTemplate": "^go(?<version>.+)$",
       "fileMatch": ["netlify.toml"],
       "matchStrings": ["GO_VERSION\\s*=\\s*\"(?<currentValue>.+)\""]
     },
     {
       "customType": "regex",
-      "datasource": "github-releases",
-      "depName": "gohugoio/hugo",
-      "extractVersion": "^v(?<version>.+)$",
+      "datasourceTemplate": "github-releases",
+      "depNameTemplate": "gohugoio/hugo",
+      "extractVersionTemplate": "^v(?<version>.+)$",
       "fileMatch": [".github/workflows/deploy.yml", "docs/hugo.yaml", "netlify.toml"],
       "matchStrings": [
         "hugo-version:\\s+(?<currentValue>.+)",
