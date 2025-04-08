@@ -63,7 +63,7 @@ Application charts are released with version control, based on repository tags. 
 
 ### Application Resource
 
-In this example, we will create an [Ubuntu Server pod](https://{{< param variables.repository.applications >}}/tree/main/argo/ubuntu), deployed into `default` namespace. Navigate to `Applications` and create an application, then edit the resource manifest as `YAML` and paste the following content:
+In this example, we will create an Ubuntu Server `{{< param variables.os.version >}}` LTS [container](https://{{< param variables.repository.applications >}}/tree/main/apps/ubuntu), deployed into `default` namespace. Navigate to `Applications` and create an application, then edit the resource manifest as `YAML` and paste the following content:
 
 ```yaml
 apiVersion: argoproj.io/v1alpha1
@@ -99,7 +99,7 @@ The `spec.destination.name` is inherited from `metadata.name` value.
 
 ### Shell Login
 
-Example of pod shell login:
+Example of container shell login:
 
 ```shell
 $ kubectl get pods -n default -o go-template \
@@ -109,3 +109,5 @@ ubuntu-6589cf5fb4-p9z2b
 $ kubectl exec -itn default ubuntu-6589cf5fb4-p9z2b -- bash
 root@ubuntu-6589cf5fb4-p9z2b:/#
 ```
+
+End-user will have `root` access to a minimal Ubuntu `{{< param variables.os.version >}}` LTS container, connected to the Kubernetes cluster network. Common tools may require manual installation via `apt-get`.
