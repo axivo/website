@@ -8,7 +8,7 @@
       "depNameTemplate": "golang/go",
       "extractVersionTemplate": "^go(?<version>.+)$",
       "fileMatch": ["netlify.toml"],
-      "matchStrings": ["GO_VERSION\\s*=\\s*\"(?<currentValue>.+)\""]
+      "matchStrings": ["^GO_VERSION[\\s\\S]+\"(?<currentValue>.+)\""]
     },
     {
       "customType": "regex",
@@ -28,15 +28,9 @@
   "labels": ["dependency"],
   "packageRules": [
     {
-      "groupName": "dependency golang/go",
-      "matchPackageNames": ["golang/go"],
-      "rangeStrategy": "bump"
-    },
-    {
       "enabled": true,
-      "matchDepTypes": ["require", "indirect"],
-      "matchManagers": ["gomod"],
-      "rangeStrategy": "increase"
+      "matchDepTypes": ["indirect"],
+      "matchManagers": ["gomod"]
     }
   ],
   "postUpdateOptions": ["gomodTidy"],
