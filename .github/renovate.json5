@@ -5,18 +5,14 @@
     {
       "customType": "regex",
       "datasourceTemplate": "github-releases",
-      "depNameTemplate": "golang/go",
-      "extractVersionTemplate": "^go(?<version>.+)$",
-      "fileMatch": ["go.mod"],
-      "matchStrings": ["module[\\s\\S]+?go\\s+(?<currentValue>.+)"],
-      "versioningTemplate": "regex:^(?<major>\\d+)\\.(?<minor>\\d+)$"
-    },
-    {
-      "customType": "regex",
-      "datasourceTemplate": "github-releases",
       "depNameTemplate": "gohugoio/hugo",
       "extractVersionTemplate": "^v(?<version>.+)$",
-      "fileMatch": [".github/workflows/deploy.yml", "docs/hugo.yaml"],
+      "fileMatch": [
+        ".github/workflows/checksums.yml",
+        ".github/workflows/documentation.yml",
+        "docs/hugo.yaml",
+        "k3s-cluster/hugo.yaml"
+      ],
       "matchStrings": [
         "hugo-version:\\s+(?<currentValue>.+)",
         "hugoVersion:[\\s\\S]+?min:\\s+(?<currentValue>.+)"
