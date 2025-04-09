@@ -26,8 +26,7 @@
     {
       "enabled": true,
       "matchDepTypes": ["direct", "indirect"],
-      "matchManagers": ["gomod"],
-      "postUpdateOptions": ["gomodTidy"]
+      "matchManagers": ["gomod"]
     }
   ],
   "prConcurrentLimit": 0,
