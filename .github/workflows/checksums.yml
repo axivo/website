@@ -50,16 +50,12 @@ jobs:
               await Promise.all(['docs', 'k3s-cluster'].map(item => 
                 exec.exec('hugo', ['mod', 'tidy', '-s', item])
               ));
-              const status = await runGit(['status', '--porcelain']);
-              const modifiedFiles = status
-                .split('\n')
-                .filter(line => line.trim())
-                .map(line => line.trim().substring(3));
-              if (modifiedFiles.length === 0) {
+              const files = (await runGit(['diff', '--name-only'])).split('\n').filter(Boolean);
+              if (files.length === 0) {
                 core.info('No changes detected');
                 return;
               }
-              const additions = await Promise.all(modifiedFiles.map(async file => {
+              const additions = await Promise.all(files.map(async file => {
                 const contents = await fs.readFile(file, 'utf-8');
                 return {
                   path: file,
