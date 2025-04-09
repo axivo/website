@@ -4,22 +4,22 @@
   "customManagers": [
     {
       "customType": "regex",
-      "datasourceTemplate": "github-tags",
+      "datasourceTemplate": "github-releases",
       "depNameTemplate": "golang/go",
       "extractVersionTemplate": "^go(?<version>.+)$",
-      "fileMatch": ["netlify.toml"],
-      "matchStrings": ["^GO_VERSION[\\s\\S]+\"(?<currentValue>.+)\""]
+      "fileMatch": ["go.mod"],
+      "matchStrings": ["module[\\s\\S]+?go\\s+(?<currentValue>.+)"],
+      "versioningTemplate": "regex:^(?<major>\\d+)\\.(?<minor>\\d+)$"
     },
     {
       "customType": "regex",
       "datasourceTemplate": "github-releases",
       "depNameTemplate": "gohugoio/hugo",
       "extractVersionTemplate": "^v(?<version>.+)$",
-      "fileMatch": [".github/workflows/deploy.yml", "docs/hugo.yaml", "netlify.toml"],
+      "fileMatch": [".github/workflows/deploy.yml", "docs/hugo.yaml"],
       "matchStrings": [
         "hugo-version:\\s+(?<currentValue>.+)",
-        "hugoVersion:[\\s\\S]+?min:\\s+(?<currentValue>.+)",
-        "HUGO_VERSION[\\s\\S]+?\"(?<currentValue>.+)\""
+        "hugoVersion:[\\s\\S]+?min:\\s+(?<currentValue>.+)"
       ]
     }
   ],
@@ -29,14 +29,13 @@
   "packageRules": [
     {
       "enabled": true,
-      "matchDepTypes": ["indirect"],
-      "matchManagers": ["gomod"]
+      "matchDepTypes": ["direct", "indirect"],
+      "matchManagers": ["gomod"],
+      "postUpdateOptions": ["gomodTidy"]
     }
   ],
-  "postUpdateOptions": ["gomodTidy"],
   "prConcurrentLimit": 0,
   "prHourlyLimit": 0,
-  "semanticCommits": "enabled",
   "separateMajorMinor": false,
   "separateMinorPatch": false
 }
