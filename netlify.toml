@@ -1,9 +1,0 @@
-[build]
-  command = "hugo --gc --minify -s ./docs && hugo --gc --minify -s ./k3s-cluster"
-  publish = "public"
-  ignore = "false"
-
-[build.environment]
-  GO_VERSION = "1.22"
-  HUGO_VERSION = "0.145.0"
-  TZ = "America/New_York"
