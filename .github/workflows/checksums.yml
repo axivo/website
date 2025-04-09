@@ -72,7 +72,7 @@ jobs:
                   additions: additions,
                   deletions: []
                 },
-                message: { headline: 'chore(github-action): update checksums' }
+                message: { headline: 'chore(github-action): update module checksums' }
               };
               const mutation = `
                 mutation CreateCommitOnBranch($input: CreateCommitOnBranchInput!) {
