@@ -47,7 +47,8 @@ jobs:
               await runGit(['switch', process.env.GITHUB_HEAD_REF]);
               await exec.exec('hugo', ['mod', 'clean', '--all']);
               await exec.exec('hugo', ['mod', 'get', '-u', './...']);
-              await Promise.all(['docs', 'k3s-cluster'].map(item => 
+              const modules = ['docs', 'k3s-cluster'];
+              await Promise.all(modules.map(item =>
                 exec.exec('hugo', ['mod', 'tidy', '-s', item])
               ));
               const files = (await runGit(['diff', '--name-only'])).split('\n').filter(Boolean);
