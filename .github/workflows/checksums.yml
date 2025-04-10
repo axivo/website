@@ -1,4 +1,4 @@
-name: Update Go Checksums
+name: Update Module Checksums
 
 on:
   pull_request:
@@ -19,10 +19,10 @@ permissions:
 
 jobs:
   update:
-    name: Update Checksums
+    name: Update Module Checksums
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Setup Hugo
@@ -31,7 +31,7 @@ jobs:
           extended: true
           hugo-version: 0.145.0
 
-      - name: Update checksums
+      - name: Update module checksums
         uses: actions/github-script@v7
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
@@ -55,13 +55,21 @@ jobs:
                 core.info('No changes detected');
                 return;
               }
-              const additions = await Promise.all(files.map(async file => {
-                const contents = await fs.readFile(file, 'utf-8');
-                return {
-                  path: file,
-                  contents: Buffer.from(contents).toString('base64')
-                };
-              }));
+              const additions = await Promise.all((await runGit(['diff', '--name-only', '--diff-filter=AM']))
+                .split('\n')
+                .filter(Boolean)
+                .map(async file => {
+                  const contents = await fs.readFile(file, 'utf-8');
+                  return {
+                    path: file,
+                    contents: Buffer.from(contents).toString('base64')
+                  };
+                })
+              );
+              const deletions = (await runGit(['diff', '--name-only', '--diff-filter=D']))
+                .split('\n')
+                .filter(Boolean)
+                .map(file => ({ path: file }));
               const input = {
                 branch: {
                   repositoryNameWithOwner: context.payload.repository.full_name,
@@ -70,7 +78,7 @@ jobs:
                 expectedHeadOid: context.payload.pull_request.head.sha,
                 fileChanges: {
                   additions: additions,
-                  deletions: []
+                  deletions: deletions
                 },
                 message: { headline: 'chore(github-action): update module checksums' }
               };

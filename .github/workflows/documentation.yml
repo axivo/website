@@ -28,7 +28,7 @@ jobs:
     name: Build Documentation
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repo
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Setup Hugo
@@ -37,7 +37,7 @@ jobs:
           extended: true
           hugo-version: 0.145.0
 
-      - name: Build Content
+      - name: Build content
         env:
           HUGO_ENV: production
           TZ: America/New_York
@@ -45,23 +45,23 @@ jobs:
           hugo --gc --minify -s ./docs
           hugo --gc --minify -s ./k3s-cluster
 
-      - name: Configure Pages
+      - name: Configure pages
         id: pages
         uses: actions/configure-pages@v5
 
-      - name: Upload Pages Artifact
+      - name: Upload pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./public
 
   deploy:
-    name: Deploy Documentation to GitHub Pages
+    name: Deploy Documentation
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: Deploy Documentation
+      - name: Deploy documentation
         id: deployment
         uses: actions/deploy-pages@v4
