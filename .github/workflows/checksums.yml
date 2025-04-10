@@ -52,7 +52,7 @@ jobs:
               ));
               const files = (await runGit(['diff', '--name-only'])).split('\n').filter(Boolean);
               if (files.length === 0) {
-                core.info('No changes detected');
+                core.info('No file changes detected');
                 return;
               }
               const additions = await Promise.all((await runGit(['diff', '--name-only', '--diff-filter=AM']))
