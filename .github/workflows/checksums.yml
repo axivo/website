@@ -55,7 +55,7 @@ jobs:
                 core.info('No file changes detected');
                 return;
               }
-              const additions = await Promise.all((await runGit(['diff', '--name-only', '--diff-filter=AM']))
+              const additions = await Promise.all((await runGit(['diff', '--name-only', '--diff-filter=ACMR']))
                 .split('\n')
                 .filter(Boolean)
                 .map(async file => {
@@ -88,7 +88,7 @@ jobs:
                 }
               `;
               const { createCommitOnBranch } = await github.graphql(mutation, { input });
-              console.log('Signed commit created with OID:', createCommitOnBranch.commit.oid);
+              core.info('Signed commit created with OID: ' + createCommitOnBranch.commit.oid);
             } catch (error) {
               core.setFailed(error.message);
             }
