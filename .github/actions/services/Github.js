@@ -17,38 +17,6 @@ const Action = require('../core/Action');
  */
 class GitHubService extends Action {
   /**
-   * Creates an annotation for the current workflow run
-   * 
-   * @param {string} message - Annotation message
-   * @param {string} [level='warning'] - Annotation level (warning, error, notice)
-   * @returns {Promise<Object>} Created check run data
-   */
-  async createAnnotation(message, level = 'warning') {
-    return this.execute('create annotation', async () => {
-      const checkRun = await this.github.rest.checks.create({
-        owner: this.context.repo.owner,
-        repo: this.context.repo.repo,
-        name: level,
-        head_sha: this.context.sha,
-        status: 'completed',
-        conclusion: 'neutral',
-        output: {
-          title: level,
-          summary: message,
-          annotations: [{
-            path: level,
-            start_line: 1,
-            end_line: 1,
-            annotation_level: level,
-            message: message
-          }]
-        }
-      });
-      return checkRun.data;
-    });
-  }
-
-  /**
    * Creates a signed commit using GitHub GraphQL API
    * 
    * @param {string} branch - Branch name
@@ -174,10 +142,11 @@ class GitHubService extends Action {
         repo: this.context.repo.repo,
         run_id: runId
       });
-      const checkRuns = await this.github.rest.checks.listForRef({
+      if (!workflowRun.data.check_suite_id) return [];
+      const checkRuns = await this.github.rest.checks.listForSuite({
         owner: this.context.repo.owner,
         repo: this.context.repo.repo,
-        ref: workflowRun.data.head_sha
+        check_suite_id: workflowRun.data.check_suite_id
       });
       const annotations = [];
       for (const checkRun of checkRuns.data.check_runs) {
