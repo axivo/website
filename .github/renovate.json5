@@ -1,13 +1,15 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "assignees": ["fmunteanu"],
+  "assignees": [
+    "fmunteanu"
+  ],
   "customManagers": [
     {
       "customType": "regex",
       "datasourceTemplate": "github-releases",
       "depNameTemplate": "gohugoio/hugo",
       "extractVersionTemplate": "^v(?<version>.+)$",
-      "fileMatch": [
+      "managerFilePatterns": [
         ".github/workflows/checksums.yml",
         ".github/workflows/documentation.yml",
         "docs/hugo.yaml",
@@ -19,18 +21,31 @@
       ]
     }
   ],
-  "extends": [":semanticCommitTypeAll(chore)", "config:recommended"],
-  "gitIgnoredAuthors": ["41898282+github-actions[bot]@users.noreply.github.com"],
-  "labels": ["dependency"],
+  "extends": [
+    ":semanticCommitTypeAll(chore)",
+    "config:recommended"
+  ],
+  "gitIgnoredAuthors": [
+    "41898282+github-actions[bot]@users.noreply.github.com"
+  ],
+  "labels": [
+    "dependency"
+  ],
   "packageRules": [
     {
       "enabled": true,
-      "matchDepTypes": ["direct", "indirect"],
-      "matchManagers": ["gomod"]
+      "matchDepTypes": [
+        "direct",
+        "indirect"
+      ],
+      "matchManagers": [
+        "gomod"
+      ]
     }
   ],
   "prConcurrentLimit": 0,
   "prHourlyLimit": 0,
+  "semanticCommits": "enabled",
   "separateMajorMinor": false,
   "separateMinorPatch": false
 }
