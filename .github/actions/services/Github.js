@@ -168,42 +168,16 @@ class GitHubService extends Action {
    */
   async getAnnotations() {
     return this.execute('get annotations', async () => {
-      // DEBUG start
-      console.log('=== DETAILED ANNOTATION DEBUG ===');
-      // DEBUG end
       const checkRuns = await this.github.rest.checks.listForRef({
         owner: this.context.repo.owner,
         repo: this.context.repo.repo,
         ref: this.context.sha
       });
-      // DEBUG start
-      console.log('Number of check runs:', checkRuns.data.check_runs.length);
-      checkRuns.data.check_runs.forEach((checkRun, i) => {
-        console.log(`Check run ${i + 1}:`, {
-          name: checkRun.name,
-          status: checkRun.status,
-          conclusion: checkRun.conclusion,
-          has_output: !!checkRun.output,
-          annotations_url: checkRun.output?.annotations_url,
-          annotations_count: checkRun.output?.annotations_count
-        });
-      });
-      // DEBUG end
       const annotations = [];
       for (const checkRun of checkRuns.data.check_runs) {
         if (checkRun.output?.annotations_url) {
           try {
-            // DEBUG start
-            console.log('Fetching annotations from:', checkRun.output.annotations_url);
-            // DEBUG end
             const response = await this.github.request(checkRun.output.annotations_url);
-            // DEBUG start
-            console.log('Annotation response:', {
-              status: response.status,
-              data_length: response.data?.length || 0,
-              data: response.data
-            });
-            // DEBUG end
             if (response.data && response.data.length > 0) {
               annotations.push(...response.data.map(annotation => ({
                 level: annotation.annotation_level,
@@ -213,16 +187,10 @@ class GitHubService extends Action {
               })));
             }
           } catch (error) {
-            // DEBUG start
-            console.log('Annotation fetch error:', error.message);
-            // DEBUG end
             continue;
           }
         }
       }
-      // DEBUG start
-      console.log('=== END DETAILED DEBUG ===');
-      // DEBUG end
       return annotations;
     }, false);
   }

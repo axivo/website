@@ -27,28 +27,6 @@ class IssueService extends Action {
   }
 
   /**
-   * Validates if workflow has issues that warrant creating an issue
-   * 
-   * @private
-   * @param {number} id - Workflow run ID
-   * @returns {Promise<boolean>} True if issues detected
-   */
-  async #validate(id) {
-    return this.execute('validate workflow status', async () => {
-      const annotations = await this.gitHubService.getAnnotations();
-      // DEBUG start
-      console.log('=== ANNOTATIONS DEBUG ===');
-      console.log('Total annotations:', annotations.length);
-      annotations.forEach((annotation, i) => {
-        console.log(`Annotation ${i + 1}:`, annotation);
-      });
-      // DEBUG end
-      // Create issue if any annotations exist (warnings, errors, etc.)
-      return annotations.length > 0;
-    }, false);
-  }
-
-  /**
    * Prepares and creates a workflow issue
    * 
    * @param {Object} context - GitHub Actions context
@@ -61,8 +39,8 @@ class IssueService extends Action {
   async report(context, label, template = {}) {
     return this.execute('report workflow issue', async () => {
       const { content, service } = template;
-      const hasIssues = await this.#validate(context.runId);
-      if (!hasIssues) return null;
+      const annotations = await this.gitHubService.getAnnotations();
+      if (!annotations.length) return null;
       const repoUrl = context.payload.repository.html_url;
       const isPullRequest = Boolean(context.payload.pull_request);
       const branchName = isPullRequest
