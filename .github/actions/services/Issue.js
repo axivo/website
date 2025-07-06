@@ -53,8 +53,20 @@ class IssueService extends Action {
       const hasWarnings = await this.execute('validate workflow warnings', async () => {
         const logsData = await this.gitHubService.getWorkflowRunLogs(id);
         if (!logsData) return false;
-        const regex = /(^|:|\[)warning(:|])/i;
-        return regex.test(logsData);
+        // DEBUG start
+        console.log('=== LOG CONTENT DEBUG ===');
+        console.log('Log length:', logsData.length);
+        console.log('First 1000 chars:', logsData.substring(0, 1000));
+        const warningLines = logsData.split('\n').filter(line => line.toLowerCase().includes('warning'));
+        console.log('Lines containing "warning":', warningLines.length);
+        warningLines.forEach((line, index) => {
+          console.log(`Warning line ${index + 1}:`, line);
+        });
+        // DEBUG end
+        const regex = /(^|:|[)warning(:|])/i;
+        const hasMatch = regex.test(logsData);
+        console.log('Regex match result:', hasMatch);
+        return hasMatch;
       }, false);
       return hasFailures || hasWarnings;
     }, false);
