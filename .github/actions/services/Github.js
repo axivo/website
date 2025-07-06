@@ -250,30 +250,6 @@ class GitHubService extends Action {
   }
 
   /**
-   * Gets workflow run data
-   * 
-   * @param {number} id - Workflow run ID
-   * @returns {Promise<Object>} Workflow run data
-   */
-  async getWorkflowRun(id) {
-    return this.execute(`get workflow run '${id}' ID`, async () => {
-      const response = await this.github.rest.actions.getWorkflowRun({
-        owner: this.context.repo.owner,
-        repo: this.context.repo.repo,
-        run_id: id
-      });
-      return {
-        id: response.data.id,
-        status: response.data.status,
-        conclusion: response.data.conclusion,
-        url: response.data.html_url,
-        createdAt: response.data.created_at,
-        updatedAt: response.data.updated_at
-      };
-    }, false);
-  }
-
-  /**
    * Lists jobs for a workflow run
    * 
    * @returns {Promise<Array<Object>>} Array of job objects with steps

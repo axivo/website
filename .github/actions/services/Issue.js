@@ -30,13 +30,12 @@ class IssueService extends Action {
    * Prepares and creates a workflow issue
    * 
    * @param {Object} context - GitHub Actions context
-   * @param {Object} label - Label service instance
    * @param {Object} [template={}] - Template configuration
    * @param {string} template.content - Issue template content
    * @param {Object} template.service - Template service instance
    * @returns {Promise<Object|null>} Created issue data or null on failure
    */
-  async report(context, label, template = {}) {
+  async report(context, template = {}) {
     return this.execute('report workflow issue', async () => {
       const { content, service } = template;
       const annotations = await this.gitHubService.getAnnotations();

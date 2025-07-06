@@ -52,7 +52,7 @@ class WorkflowHandler extends Action {
         this.logger.info('Updating repository labels...');
         await this.labelService.update();
       }
-      this.logger.info('Building Hugo documentation sites...');
+      this.logger.info('Building documentation sites...');
       await this.hugoService.buildSites();
       this.logger.info('Documentation build complete');
     });
@@ -86,7 +86,6 @@ class WorkflowHandler extends Action {
       const templateContent = await this.fileService.read(templatePath);
       const issue = await this.issueService.report(
         this.context,
-        this.labelService,
         {
           content: templateContent,
           service: this.templateService
@@ -105,9 +104,9 @@ class WorkflowHandler extends Action {
    */
   async updateModuleChecksums() {
     return this.execute('update module checksums', async () => {
-      this.logger.info('Updating Hugo module checksums...');
+      this.logger.info('Updating module checksums...');
       await this.hugoService.updateModuleChecksums();
-      this.logger.info('Module checksum update complete');
+      this.logger.info('Successfully updated module checksums');
     });
   }
 }
