@@ -136,27 +136,33 @@ class GitHubService extends Action {
    * @returns {Promise<Array<Object>>} Array of annotations
    */
   async getAnnotations(runId) {
-    return this.execute(`get annotations for run '${runId}'`, async () => {
-      const response = await this.github.rest.actions.listJobsForWorkflowRun({
+    return this.execute(`get annotations for '${runId}' run`, async () => {
+      const run = await this.github.rest.actions.getWorkflowRun({
         owner: this.context.repo.owner,
         repo: this.context.repo.repo,
         run_id: runId
       });
-      const allAnnotations = [];
-      for (const job of response.data.jobs) {
-        if (job.steps) {
-          for (const step of job.steps) {
-            if (step.conclusion && step.conclusion !== 'success') {
-              allAnnotations.push({
-                level: step.conclusion === 'failure' ? 'failure' : 'warning',
-                message: step.name,
-                job_name: job.name
-              });
-            }
-          }
+      if (!run.data.check_suite_id) return [];
+      const suite = await this.github.rest.checks.listForSuite({
+        owner: this.context.repo.owner,
+        repo: this.context.repo.repo,
+        check_suite_id: run.data.check_suite_id
+      });
+      const annotations = [];
+      for (const check of suite.data.check_runs) {
+        if (check.output?.annotations_count > 0) {
+          const response = await this.github.rest.checks.listAnnotations({
+            owner: this.context.repo.owner,
+            repo: this.context.repo.repo,
+            check_run_id: check.id
+          });
+          annotations.push(...response.data.map(a => ({
+            level: a.annotation_level,
+            message: a.message
+          })));
         }
       }
-      return allAnnotations;
+      return annotations;
     }, false);
   }
 
