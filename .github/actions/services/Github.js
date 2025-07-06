@@ -142,18 +142,17 @@ class GitHubService extends Action {
         repo: this.context.repo.repo,
         run_id: runId
       });
-      
+      // DEBUG start
       console.log('=== DETAILED ANNOTATION DEBUG ===');
       console.log('Workflow run check_suite_id:', workflowRun.data.check_suite_id);
-      
+      // DEBUG end
       if (!workflowRun.data.check_suite_id) return [];
-      
       const checkRuns = await this.github.rest.checks.listForSuite({
         owner: this.context.repo.owner,
         repo: this.context.repo.repo,
         check_suite_id: workflowRun.data.check_suite_id
       });
-      
+      // DEBUG start
       console.log('Number of check runs:', checkRuns.data.check_runs.length);
       checkRuns.data.check_runs.forEach((checkRun, i) => {
         console.log(`Check run ${i + 1}:`, {
@@ -165,18 +164,22 @@ class GitHubService extends Action {
           annotations_count: checkRun.output?.annotations_count
         });
       });
-      
+      // DEBUG end
       const annotations = [];
       for (const checkRun of checkRuns.data.check_runs) {
         if (checkRun.output?.annotations_url) {
           try {
+            // DEBUG start
             console.log('Fetching annotations from:', checkRun.output.annotations_url);
+            // DEBUG end
             const response = await this.github.request(checkRun.output.annotations_url);
+            // DEBUG start
             console.log('Annotation response:', {
               status: response.status,
               data_length: response.data?.length || 0,
               data: response.data
             });
+            // DEBUG end
             if (response.data && response.data.length > 0) {
               annotations.push(...response.data.map(annotation => ({
                 level: annotation.annotation_level,
@@ -186,12 +189,16 @@ class GitHubService extends Action {
               })));
             }
           } catch (error) {
+            // DEBUG start
             console.log('Annotation fetch error:', error.message);
+            // DEBUG end
             continue;
           }
         }
       }
+      // DEBUG start
       console.log('=== END DETAILED DEBUG ===');
+      // DEBUG end
       return annotations;
     }, false);
   }
