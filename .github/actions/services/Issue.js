@@ -43,7 +43,6 @@ class IssueService extends Action {
         console.log(`Annotation ${i + 1}:`, annotation);
       });
       // DEBUG end
-
       // Create issue if any annotations exist (warnings, errors, etc.)
       return annotations.length > 0;
     }, false);
