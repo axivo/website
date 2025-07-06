@@ -1,6 +1,30 @@
-.DS_Store
+# Environment
+.env
+.env.local
+
+# Hugo
 **/.hugo_build.lock
 **/archetypes
 **/hugo_stats.json
 **/public
 **/resources
+
+# Logs
+*.log
+logs/
+
+# MacOS
+**/.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+
+# Temporary files
+*.bak
+*.swp
+*.tmp
+*~
+
+# VS Code
+.history/
