@@ -17,6 +17,38 @@ const Action = require('../core/Action');
  */
 class GitHubService extends Action {
   /**
+   * Creates an annotation for the current workflow run
+   * 
+   * @param {string} message - Annotation message
+   * @param {string} [level='warning'] - Annotation level (warning, error, notice)
+   * @returns {Promise<Object>} Created check run data
+   */
+  async createAnnotation(message, level = 'warning') {
+    return this.execute('create annotation', async () => {
+      const checkRun = await this.github.rest.checks.create({
+        owner: this.context.repo.owner,
+        repo: this.context.repo.repo,
+        name: level,
+        head_sha: this.context.sha,
+        status: 'completed',
+        conclusion: 'neutral',
+        output: {
+          title: level,
+          summary: message,
+          annotations: [{
+            path: level,
+            start_line: 1,
+            end_line: 1,
+            annotation_level: level,
+            message: message
+          }]
+        }
+      });
+      return checkRun.data;
+    });
+  }
+
+  /**
    * Creates a signed commit using GitHub GraphQL API
    * 
    * @param {string} branch - Branch name
@@ -137,50 +169,29 @@ class GitHubService extends Action {
    */
   async getAnnotations(runId) {
     return this.execute(`get annotations for '${runId}' run`, async () => {
-      // DEBUG start
-      console.log('=== GETANNOTATIONS DEBUG ===');
-      console.log('Looking for run ID:', runId);
-      // DEBUG end
-      const run = await this.github.rest.actions.getWorkflowRun({
+      const workflowRun = await this.github.rest.actions.getWorkflowRun({
         owner: this.context.repo.owner,
         repo: this.context.repo.repo,
         run_id: runId
       });
-      // DEBUG start
-      console.log('Run data:', { id: run.data.id, check_suite_id: run.data.check_suite_id });
-      // DEBUG end
-      if (!run.data.check_suite_id) return [];
-      const suite = await this.github.rest.checks.listForSuite({
+      if (!workflowRun.data.check_suite_id) return [];
+      const checkRuns = await this.github.rest.checks.listForSuite({
         owner: this.context.repo.owner,
         repo: this.context.repo.repo,
-        check_suite_id: run.data.check_suite_id
+        check_suite_id: workflowRun.data.check_suite_id
       });
-      // DEBUG start
-      console.log('Check suite runs:', suite.data.check_runs.length);
-      // DEBUG end
       const annotations = [];
-      for (const check of suite.data.check_runs) {
-        // DEBUG start
-        console.log(`Check run: ${check.name}, annotations_count: ${check.output?.annotations_count || 0}`);
-        // DEBUG end
-        if (check.output?.annotations_count > 0) {
-          const response = await this.github.rest.checks.listAnnotations({
-            owner: this.context.repo.owner,
-            repo: this.context.repo.repo,
-            check_run_id: check.id
-          });
-          // DEBUG start
-          console.log(`Found ${response.data.length} annotations for check ${check.name}`);
-          // DEBUG end
-          annotations.push(...response.data.map(a => ({
-            level: a.annotation_level,
-            message: a.message
+      for (const checkRun of checkRuns.data.check_runs) {
+        if (checkRun.output?.annotations_url) {
+          const response = await this.github.request(checkRun.output.annotations_url);
+          annotations.push(...response.data.map(annotation => ({
+            level: annotation.annotation_level,
+            message: annotation.message,
+            path: annotation.path,
+            line: annotation.start_line
           })));
         }
       }
-      // DEBUG start
-      console.log('Total annotations found:', annotations.length);
-      // DEBUG end
       return annotations;
     }, false);
   }
@@ -261,23 +272,6 @@ class GitHubService extends Action {
         updatedAt: response.data.updated_at
       };
     }, false);
-  }
-
-  /**
-   * Gets workflow run logs
-   * 
-   * @param {number} id - Workflow run ID
-   * @returns {Promise<string>} Workflow run logs data
-   */
-  async getWorkflowRunLogs(id) {
-    return this.execute(`get workflow run '${id}' logs`, async () => {
-      const response = await this.github.rest.actions.downloadWorkflowRunLogs({
-        owner: this.context.repo.owner,
-        repo: this.context.repo.repo,
-        run_id: parseInt(id, 10)
-      });
-      return response.data;
-    }, false, true);
   }
 
   /**

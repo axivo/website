@@ -69,32 +69,7 @@ class IssueService extends Action {
           }
         }
       }
-      const hasWarnings = await this.execute('validate workflow warnings', async () => {
-        const logsData = await this.gitHubService.getWorkflowRunLogs(id);
-        if (!logsData) return false;
-        // DEBUG start - check previous run logs
-        if (id > 16101957575) {
-          console.log('=== CHECKING PREVIOUS RUN LOGS ===');
-          const prevRunLogs = await this.gitHubService.getWorkflowRunLogs(16101957575);
-          if (prevRunLogs) {
-            const lines = prevRunLogs.split('\n');
-            const warningLines = lines.filter(line =>
-              line.toLowerCase().includes('warning')
-            );
-            console.log('Previous run total lines:', lines.length);
-            console.log('Previous run warning lines:', warningLines.length);
-            warningLines.slice(0, 10).forEach((line, i) => {
-              console.log(`Prev warning ${i + 1}:`, line);
-            });
-          }
-        }
-        // DEBUG end
-        const regex = /(^|:)warning:/i;
-        const hasMatch = regex.test(logsData);
-        console.log('Regex match result:', hasMatch);
-        return hasMatch;
-      }, false);
-      return hasFailures || hasWarnings;
+      return hasFailures;
     }, false);
   }
 
