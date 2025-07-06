@@ -35,15 +35,28 @@ class IssueService extends Action {
    */
   async #validate(id) {
     return this.execute('validate workflow status', async () => {
+      // DEBUG start
+      console.log('=== VALIDATION DEBUG START ===');
+      console.log('Workflow run ID:', id);
+      // DEBUG end
       let hasFailures = false;
       const workflowRun = await this.gitHubService.getWorkflowRun(id);
+      // DEBUG start
+      console.log('Workflow conclusion:', workflowRun.conclusion);
+      // DEBUG end
       if (['cancelled', 'failure'].includes(workflowRun.conclusion)) return true;
       const jobs = await this.gitHubService.listJobs();
+      // DEBUG start
+      console.log('Number of jobs:', jobs.length);
+      // DEBUG end
       for (const job of jobs) {
         if (job.steps) {
           const failedSteps = job.steps.filter(step =>
             step.status === 'completed' && step.conclusion !== 'success'
           );
+          // DEBUG start
+          console.log(`Job ${job.name}: ${failedSteps.length} failed steps`);
+          // DEBUG end
           if (failedSteps.length) {
             hasFailures = true;
             break;
