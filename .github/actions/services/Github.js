@@ -178,11 +178,10 @@ class GitHubService extends Action {
       console.log('=== DETAILED ANNOTATION DEBUG ===');
       console.log('Workflow run check_suite_id:', workflowRun.data.check_suite_id);
       // DEBUG end
-      if (!workflowRun.data.check_suite_id) return [];
-      const checkRuns = await this.github.rest.checks.listForSuite({
+      const checkRuns = await this.github.rest.checks.listForRef({
         owner: this.context.repo.owner,
         repo: this.context.repo.repo,
-        check_suite_id: workflowRun.data.check_suite_id
+        ref: this.context.sha
       });
       // DEBUG start
       console.log('Number of check runs:', checkRuns.data.check_runs.length);
