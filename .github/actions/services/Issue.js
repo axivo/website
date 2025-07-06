@@ -35,41 +35,17 @@ class IssueService extends Action {
    */
   async #validate(id) {
     return this.execute('validate workflow status', async () => {
-      const annotations = await this.gitHubService.getAnnotations(id);
+      const annotations = await this.gitHubService.getAnnotations();
       // DEBUG start
       console.log('=== ANNOTATIONS DEBUG ===');
       console.log('Total annotations:', annotations.length);
       annotations.forEach((annotation, i) => {
         console.log(`Annotation ${i + 1}:`, annotation);
       });
-      console.log('=== VALIDATION DEBUG START ===');
-      console.log('Workflow run ID:', id);
       // DEBUG end
-      let hasFailures = false;
-      const workflowRun = await this.gitHubService.getWorkflowRun(id);
-      // DEBUG start
-      console.log('Workflow conclusion:', workflowRun.conclusion);
-      // DEBUG end
-      if (['cancelled', 'failure'].includes(workflowRun.conclusion)) return true;
-      const jobs = await this.gitHubService.listJobs();
-      // DEBUG start
-      console.log('Number of jobs:', jobs.length);
-      // DEBUG end
-      for (const job of jobs) {
-        if (job.steps) {
-          const failedSteps = job.steps.filter(step =>
-            step.status === 'completed' && step.conclusion !== 'success'
-          );
-          // DEBUG start
-          console.log(`Job ${job.name}: ${failedSteps.length} failed steps`);
-          // DEBUG end
-          if (failedSteps.length) {
-            hasFailures = true;
-            break;
-          }
-        }
-      }
-      return hasFailures;
+
+      // Create issue if any annotations exist (warnings, errors, etc.)
+      return annotations.length > 0;
     }, false);
   }
 

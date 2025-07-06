@@ -162,21 +162,14 @@ class GitHubService extends Action {
   }
 
   /**
-   * Gets annotations for a workflow run
+   * Gets annotations for the current workflow run
    * 
-   * @param {number} runId - Workflow run ID
    * @returns {Promise<Array<Object>>} Array of annotations
    */
-  async getAnnotations(runId) {
-    return this.execute(`get annotations for '${runId}' run`, async () => {
-      const workflowRun = await this.github.rest.actions.getWorkflowRun({
-        owner: this.context.repo.owner,
-        repo: this.context.repo.repo,
-        run_id: runId
-      });
+  async getAnnotations() {
+    return this.execute('get annotations', async () => {
       // DEBUG start
       console.log('=== DETAILED ANNOTATION DEBUG ===');
-      console.log('Workflow run check_suite_id:', workflowRun.data.check_suite_id);
       // DEBUG end
       const checkRuns = await this.github.rest.checks.listForRef({
         owner: this.context.repo.owner,
