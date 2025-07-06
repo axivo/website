@@ -105,10 +105,6 @@ class WorkflowHandler extends Action {
    */
   async updateModuleChecksums() {
     return this.execute('update module checksums', async () => {
-      if (this.config.get('issue.createLabels')) {
-        this.logger.info('Updating repository labels...');
-        await this.labelService.update();
-      }
       this.logger.info('Updating Hugo module checksums...');
       await this.hugoService.updateModuleChecksums();
       this.logger.info('Module checksum update complete');
