@@ -7,6 +7,12 @@ on:
       - .github/workflows/documentation.yml
       - docs/**
       - k3s-cluster/**
+  push:
+    branches:
+      - main
+    paths:
+      - docs/**
+      - k3s-cluster/**
 
 concurrency:
   cancel-in-progress: false
@@ -85,6 +91,7 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+    if: github.event_name == 'push'
     needs: build
     runs-on: ubuntu-latest
     steps:
