@@ -58,9 +58,6 @@ class IssueService extends Action {
       });
       if (!issueBody) return null;
       const labelNames = this.config.get('workflow.labels');
-      if (this.config.get('issue.createLabels') && label) {
-        await Promise.all(labelNames.map(labelName => label.add(labelName)));
-      }
       return this.gitHubService.createIssue(
         this.config.get('workflow.title'),
         issueBody,
