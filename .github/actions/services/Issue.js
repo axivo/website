@@ -35,7 +35,13 @@ class IssueService extends Action {
    */
   async #validate(id) {
     return this.execute('validate workflow status', async () => {
+      const annotations = await this.gitHubService.getAnnotations(id);
       // DEBUG start
+      console.log('=== ANNOTATIONS DEBUG ===');
+      console.log('Total annotations:', annotations.length);
+      annotations.forEach((annotation, i) => {
+        console.log(`Annotation ${i + 1}:`, annotation);
+      });
       console.log('=== VALIDATION DEBUG START ===');
       console.log('Workflow run ID:', id);
       // DEBUG end
@@ -66,17 +72,24 @@ class IssueService extends Action {
       const hasWarnings = await this.execute('validate workflow warnings', async () => {
         const logsData = await this.gitHubService.getWorkflowRunLogs(id);
         if (!logsData) return false;
-        // DEBUG start
-        console.log('=== LOG CONTENT DEBUG ===');
-        console.log('Log length:', logsData.length);
-        console.log('First 1000 chars:', logsData.substring(0, 1000));
-        const warningLines = logsData.split('\n').filter(line => line.toLowerCase().includes('warning'));
-        console.log('Lines containing "warning":', warningLines.length);
-        warningLines.forEach((line, index) => {
-          console.log(`Warning line ${index + 1}:`, line);
-        });
+        // DEBUG start - check previous run logs
+        if (id > 16101957575) {
+          console.log('=== CHECKING PREVIOUS RUN LOGS ===');
+          const prevRunLogs = await this.gitHubService.getWorkflowRunLogs(16101957575);
+          if (prevRunLogs) {
+            const lines = prevRunLogs.split('\n');
+            const warningLines = lines.filter(line =>
+              line.toLowerCase().includes('warning')
+            );
+            console.log('Previous run total lines:', lines.length);
+            console.log('Previous run warning lines:', warningLines.length);
+            warningLines.slice(0, 10).forEach((line, i) => {
+              console.log(`Prev warning ${i + 1}:`, line);
+            });
+          }
+        }
         // DEBUG end
-        const regex = /(^|:|[)warning(:|])/i;
+        const regex = /(^|:|\[)warning(:|\])/i;
         const hasMatch = regex.test(logsData);
         console.log('Regex match result:', hasMatch);
         return hasMatch;

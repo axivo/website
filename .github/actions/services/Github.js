@@ -130,6 +130,37 @@ class GitHubService extends Action {
   }
 
   /**
+   * Gets annotations for a workflow run
+   * 
+   * @param {number} runId - Workflow run ID
+   * @returns {Promise<Array<Object>>} Array of annotations
+   */
+  async getAnnotations(runId) {
+    return this.execute(`get annotations for run '${runId}'`, async () => {
+      const response = await this.github.rest.actions.listJobsForWorkflowRun({
+        owner: this.context.repo.owner,
+        repo: this.context.repo.repo,
+        run_id: runId
+      });
+      const allAnnotations = [];
+      for (const job of response.data.jobs) {
+        if (job.steps) {
+          for (const step of job.steps) {
+            if (step.conclusion && step.conclusion !== 'success') {
+              allAnnotations.push({
+                level: step.conclusion === 'failure' ? 'failure' : 'warning',
+                message: step.name,
+                job_name: job.name
+              });
+            }
+          }
+        }
+      }
+      return allAnnotations;
+    }, false);
+  }
+
+  /**
   * Gets a label from a repository
   *
   * @param {string} name - Label name
