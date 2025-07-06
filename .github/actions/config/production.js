@@ -24,7 +24,7 @@ module.exports = {
      * @type {boolean}
      * @default false
      */
-    createLabels: false,
+    createLabels: true,
 
     /**
      * Predefined issue label definitions used across the repository
