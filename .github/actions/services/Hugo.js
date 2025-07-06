@@ -48,7 +48,7 @@ class HugoService extends Action {
       if (gc) buildArgs.push('--gc');
       if (minify) buildArgs.push('--minify');
       await Promise.all(sites.map(site => {
-        this.logger.info(`Building documentation sites...`);
+        this.logger.info(`Building '${site}' documentation site...`);
         return this.shellService.execute('hugo', [...buildArgs, '-s', site], {
           env: { ...process.env, ...this.config.get('workflow.hugo.environment') },
           output: true
