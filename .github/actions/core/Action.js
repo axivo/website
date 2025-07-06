@@ -37,7 +37,7 @@ class Action {
     this.github = github;
     this.logger = new Logger(params, {
       context: this.constructor.name,
-      level: this.config.get('workflow.logLevel') || 'info'
+      level: this.config.get('workflow.logLevel')
     });
     this.actionError.setHandler();
   }

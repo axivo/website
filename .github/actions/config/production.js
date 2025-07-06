@@ -24,7 +24,7 @@ module.exports = {
      * @type {boolean}
      * @default false
      */
-    createLabels: true,
+    createLabels: false,
 
     /**
      * Predefined issue label definitions used across the repository
@@ -308,6 +308,29 @@ module.exports = {
      */
     hugo: {
       /**
+       * Environment variables for Hugo execution
+       * 
+       * @type {Object}
+       */
+      environment: {
+        /**
+         * Hugo environment setting
+         * 
+         * @type {string}
+         * @default 'production'
+         */
+        HUGO_ENV: 'production',
+
+        /**
+         * Timezone for Hugo operations
+         * 
+         * @type {string}
+         * @default 'America/New_York'
+         */
+        TZ: 'America/New_York'
+      },
+
+      /**
        * Log level for Hugo command execution
        * 
        * Controls the verbosity of output from Hugo commands. Available levels
@@ -320,14 +343,36 @@ module.exports = {
       logLevel: 'info',
 
       /**
-       * Hugo website directory configurations
+       * Hugo modules directory configurations for update operations
+       * 
+       * Array of Hugo module paths that need to be updated during module
+       * checksum operations. Each entry represents a directory containing
+       * Hugo modules for dependency management.
+       * 
+       * @type {Array<string>}
+       */
+      modules: [
+        /**
+         * Global modules directory path
+         * 
+         * Contains shared Hugo modules and dependencies used across
+         * multiple sites in the project.
+         * 
+         * @type {string}
+         * @default './global'
+         */
+        './global'
+      ],
+
+      /**
+       * Hugo site directory configurations
        * 
        * Array of Hugo site paths to be built. Each entry represents a Hugo site
        * directory that should be processed during build operations.
        * 
        * @type {Array<string>}
        */
-      websites: [
+      sites: [
         /**
          * Documentation site path
          * 
@@ -377,7 +422,7 @@ module.exports = {
      * @type {string}
      * @default 'info'
      */
-    logLevel: 'debug',
+    logLevel: 'info',
 
     /**
      * Path to the Handlebars template for workflow-generated issues
