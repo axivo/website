@@ -53,7 +53,7 @@ class IssueService extends Action {
       const hasWarnings = await this.execute('validate workflow warnings', async () => {
         const logsData = await this.gitHubService.getWorkflowRunLogs(id);
         if (!logsData) return false;
-        const regex = /(^|:)warning:/i;
+        const regex = /(^|:|\[)warning(:|])/i;
         return regex.test(logsData);
       }, false);
       return hasFailures || hasWarnings;
