@@ -142,17 +142,41 @@ class GitHubService extends Action {
         repo: this.context.repo.repo,
         run_id: runId
       });
+      
+      console.log('=== DETAILED ANNOTATION DEBUG ===');
+      console.log('Workflow run check_suite_id:', workflowRun.data.check_suite_id);
+      
       if (!workflowRun.data.check_suite_id) return [];
+      
       const checkRuns = await this.github.rest.checks.listForSuite({
         owner: this.context.repo.owner,
         repo: this.context.repo.repo,
         check_suite_id: workflowRun.data.check_suite_id
       });
+      
+      console.log('Number of check runs:', checkRuns.data.check_runs.length);
+      checkRuns.data.check_runs.forEach((checkRun, i) => {
+        console.log(`Check run ${i + 1}:`, {
+          name: checkRun.name,
+          status: checkRun.status,
+          conclusion: checkRun.conclusion,
+          has_output: !!checkRun.output,
+          annotations_url: checkRun.output?.annotations_url,
+          annotations_count: checkRun.output?.annotations_count
+        });
+      });
+      
       const annotations = [];
       for (const checkRun of checkRuns.data.check_runs) {
         if (checkRun.output?.annotations_url) {
           try {
+            console.log('Fetching annotations from:', checkRun.output.annotations_url);
             const response = await this.github.request(checkRun.output.annotations_url);
+            console.log('Annotation response:', {
+              status: response.status,
+              data_length: response.data?.length || 0,
+              data: response.data
+            });
             if (response.data && response.data.length > 0) {
               annotations.push(...response.data.map(annotation => ({
                 level: annotation.annotation_level,
@@ -162,11 +186,12 @@ class GitHubService extends Action {
               })));
             }
           } catch (error) {
-            // Skip if annotation URL fails
+            console.log('Annotation fetch error:', error.message);
             continue;
           }
         }
       }
+      console.log('=== END DETAILED DEBUG ===');
       return annotations;
     }, false);
   }
