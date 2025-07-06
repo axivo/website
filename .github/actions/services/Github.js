@@ -17,6 +17,38 @@ const Action = require('../core/Action');
  */
 class GitHubService extends Action {
   /**
+   * Creates an annotation for the current workflow run
+   * 
+   * @param {string} message - Annotation message
+   * @param {string} [level='warning'] - Annotation level (warning, error, notice)
+   * @returns {Promise<Object>} Created check run data
+   */
+  async createAnnotation(message, level = 'warning') {
+    return this.execute('create annotation', async () => {
+      const checkRun = await this.github.rest.checks.create({
+        owner: this.context.repo.owner,
+        repo: this.context.repo.repo,
+        name: level,
+        head_sha: this.context.sha,
+        status: 'completed',
+        conclusion: 'neutral',
+        output: {
+          title: level,
+          summary: message,
+          annotations: [{
+            path: level,
+            start_line: 1,
+            end_line: 1,
+            annotation_level: level,
+            message: message
+          }]
+        }
+      });
+      return checkRun.data;
+    });
+  }
+
+  /**
    * Creates a signed commit using GitHub GraphQL API
    * 
    * @param {string} branch - Branch name
