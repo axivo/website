@@ -80,7 +80,7 @@ class WorkflowHandler extends Action {
     return this.execute('report workflow issue', async () => {
       this.logger.info('Checking for workflow issues...');
       if (this.config.get('issue.createLabels')) {
-        this.logger.warning('Set "createLabels: false" after initial setup');
+        this.core.warning('Set "createLabels: false" after initial setup');
       }
       const templatePath = this.config.get('workflow.template');
       const templateContent = await this.fileService.read(templatePath);

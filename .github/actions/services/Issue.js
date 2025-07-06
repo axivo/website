@@ -89,7 +89,7 @@ class IssueService extends Action {
           }
         }
         // DEBUG end
-        const regex = /(^|:|\[)warning(:|\])/i;
+        const regex = /(^|:)warning:/i;
         const hasMatch = regex.test(logsData);
         console.log('Regex match result:', hasMatch);
         return hasMatch;
@@ -112,7 +112,7 @@ class IssueService extends Action {
     return this.execute('report workflow issue', async () => {
       const { content, service } = template;
       const hasIssues = await this.#validate(context.runId);
-      // if (!hasIssues) return null;
+      if (!hasIssues) return null;
       const repoUrl = context.payload.repository.html_url;
       const isPullRequest = Boolean(context.payload.pull_request);
       const branchName = isPullRequest
