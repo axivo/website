@@ -137,31 +137,50 @@ class GitHubService extends Action {
    */
   async getAnnotations(runId) {
     return this.execute(`get annotations for '${runId}' run`, async () => {
+      // DEBUG start
+      console.log('=== GETANNOTATIONS DEBUG ===');
+      console.log('Looking for run ID:', runId);
+      // DEBUG end
       const run = await this.github.rest.actions.getWorkflowRun({
         owner: this.context.repo.owner,
         repo: this.context.repo.repo,
         run_id: runId
       });
+      // DEBUG start
+      console.log('Run data:', { id: run.data.id, check_suite_id: run.data.check_suite_id });
+      // DEBUG end
       if (!run.data.check_suite_id) return [];
       const suite = await this.github.rest.checks.listForSuite({
         owner: this.context.repo.owner,
         repo: this.context.repo.repo,
         check_suite_id: run.data.check_suite_id
       });
+      // DEBUG start
+      console.log('Check suite runs:', suite.data.check_runs.length);
+      // DEBUG end
       const annotations = [];
       for (const check of suite.data.check_runs) {
+        // DEBUG start
+        console.log(`Check run: ${check.name}, annotations_count: ${check.output?.annotations_count || 0}`);
+        // DEBUG end
         if (check.output?.annotations_count > 0) {
           const response = await this.github.rest.checks.listAnnotations({
             owner: this.context.repo.owner,
             repo: this.context.repo.repo,
             check_run_id: check.id
           });
+          // DEBUG start
+          console.log(`Found ${response.data.length} annotations for check ${check.name}`);
+          // DEBUG end
           annotations.push(...response.data.map(a => ({
             level: a.annotation_level,
             message: a.message
           })));
         }
       }
+      // DEBUG start
+      console.log('Total annotations found:', annotations.length);
+      // DEBUG end
       return annotations;
     }, false);
   }
