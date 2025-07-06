@@ -23,6 +23,7 @@ defaults:
     shell: bash
 
 permissions:
+  checks: write
   id-token: write
   issues: write
   pages: write
