@@ -174,11 +174,10 @@ class GitHubService extends Action {
         repo: this.context.repo.repo,
         run_id: runId
       });
-      if (!workflowRun.data.check_suite_id) return [];
-      const checkRuns = await this.github.rest.checks.listForSuite({
+      const checkRuns = await this.github.rest.checks.listForRef({
         owner: this.context.repo.owner,
         repo: this.context.repo.repo,
-        check_suite_id: workflowRun.data.check_suite_id
+        ref: workflowRun.data.head_sha
       });
       const annotations = [];
       for (const checkRun of checkRuns.data.check_runs) {
