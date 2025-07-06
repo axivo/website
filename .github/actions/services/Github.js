@@ -151,13 +151,20 @@ class GitHubService extends Action {
       const annotations = [];
       for (const checkRun of checkRuns.data.check_runs) {
         if (checkRun.output?.annotations_url) {
-          const response = await this.github.request(checkRun.output.annotations_url);
-          annotations.push(...response.data.map(annotation => ({
-            level: annotation.annotation_level,
-            message: annotation.message,
-            path: annotation.path,
-            line: annotation.start_line
-          })));
+          try {
+            const response = await this.github.request(checkRun.output.annotations_url);
+            if (response.data && response.data.length > 0) {
+              annotations.push(...response.data.map(annotation => ({
+                level: annotation.annotation_level,
+                message: annotation.message,
+                path: annotation.path,
+                line: annotation.start_line
+              })));
+            }
+          } catch (error) {
+            // Skip if annotation URL fails
+            continue;
+          }
         }
       }
       return annotations;
