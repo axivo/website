@@ -21,6 +21,11 @@ logs/
 Icon
 ._*
 
+# Node.js
+node_modules/
+package.json
+package-lock.json
+
 # Temporary files
 *.bak
 *.swp
