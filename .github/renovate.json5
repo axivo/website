@@ -6,7 +6,22 @@
   "customManagers": [
     {
       "customType": "regex",
-      "datasourceTemplate": "node",
+      "datasourceTemplate": "golang-version",
+      "depNameTemplate": "go",
+      "managerFilePatterns": [
+        "**/go.mod",
+        "**/go.sum",
+        ".github/workflows/*.yml"
+      ],
+      "matchStrings": [
+        "go\\s+(?<currentValue>.+)",
+        "with:[\\s\\S]+?go-version:\\s+(?<currentValue>.+)"
+      ],
+      "versioningTemplate": "go"
+    },
+    {
+      "customType": "regex",
+      "datasourceTemplate": "node-version",
       "depNameTemplate": "node",
       "managerFilePatterns": [
         ".github/workflows/checksums.yml",
@@ -45,6 +60,18 @@
     "dependency"
   ],
   "packageRules": [
+    {
+      "enabled": true,
+      "matchDatasources": [
+        "golang-version"
+      ],
+      "matchDepNames": [
+        "go"
+      ],
+      "matchUpdateTypes": [
+        "minor"
+      ]
+    },
     {
       "enabled": true,
       "matchDatasources": [
