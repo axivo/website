@@ -30,6 +30,7 @@ jobs:
         uses: actions/setup-go@v5
         with:
           go-version: 1.22
+          cache: false
 
       - name: Setup hugo
         uses: peaceiris/actions-hugo@v3
