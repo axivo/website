@@ -15,7 +15,7 @@
       ],
       "matchStrings": [
         "go\\s+(?<currentValue>.+)",
-        "with:[\\s\\S]+?go-version:\\s+(?<currentValue>.+)"
+        "with:[\\s\\r]+?go-version:\\s+(?<currentValue>.+)"
       ],
       "versioningTemplate": "go"
     },
@@ -28,7 +28,7 @@
         ".github/workflows/documentation.yml"
       ],
       "matchStrings": [
-        "with:[\\s\\S]+?node-version:\\s+(?<currentValue>.+)"
+        "with:[\\s\\r]+?node-version:\\s+(?<currentValue>.+)"
       ],
       "versioningTemplate": "node"
     },
@@ -38,14 +38,12 @@
       "depNameTemplate": "gohugoio/hugo",
       "extractVersionTemplate": "^v(?<version>.+)$",
       "managerFilePatterns": [
-        ".github/workflows/checksums.yml",
-        ".github/workflows/documentation.yml",
-        "docs/hugo.yaml",
-        "k3s-cluster/hugo.yaml"
+        "**/hugo.yaml",
+        ".github/workflows/*.yml"
       ],
       "matchStrings": [
-        "with:[\\s\\S]+?hugo-version:\\s+(?<currentValue>.+)",
-        "hugoVersion:[\\s\\S]+?min:\\s+(?<currentValue>.+)"
+        "hugoVersion:[\\s\\S]+?min:\\s+(?<currentValue>.+)",
+        "with:[\\s\\r]+?hugo-version:\\s+(?<currentValue>.+)"
       ]
     }
   ],
@@ -70,7 +68,8 @@
       ],
       "matchUpdateTypes": [
         "minor"
-      ]
+      ],
+      "rangeStrategy": "pin"
     },
     {
       "enabled": true,
