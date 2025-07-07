@@ -54,7 +54,7 @@ jobs:
             const workflow = new Workflow({ github, context, core, exec });
             await workflow.configureRepository();
 
-      - name: Update module checksums
+      - name: Update modules
         uses: actions/github-script@v7
         with:
           script: |
