@@ -17,7 +17,7 @@
         "go\\s+(?<currentValue>.+)",
         "with:[\\s\\r]+?go-version:\\s+(?<currentValue>.+)"
       ],
-      "versioningTemplate": "loose"
+      "versioningTemplate": "go"
     },
     {
       "customType": "regex",
@@ -69,10 +69,7 @@
       "matchDepNames": [
         "go"
       ],
-      "matchUpdateTypes": [
-        "major",
-        "minor"
-      ]
+      "rangeStrategy": "bump"
     },
     {
       "enabled": true,
