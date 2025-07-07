@@ -340,7 +340,7 @@ module.exports = {
        * @type {string}
        * @default 'info'
        */
-      logLevel: 'info',
+      logLevel: 'debug',
 
       /**
        * Hugo modules directory configurations for update operations
