@@ -3,6 +3,7 @@
  * 
  * This module defines the production configuration values used throughout the application.
  */
+
 module.exports = {
   /**
    * Issue-specific configuration

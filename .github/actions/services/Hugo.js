@@ -42,7 +42,6 @@ class HugoService extends Action {
     const { gc = true, minify = true } = options;
     return this.execute('build documentation sites', async () => {
       Object.assign(process.env, this.config.get('workflow.hugo.environment'));
-      console.log('DEBUG:', JSON.stringify(process.env, null, 2));
       const sites = this.config.get('workflow.hugo.sites');
       this.logger.info(`Building ${sites.length} documentation sites...`);
       const args = ['--logLevel', this.config.get('workflow.hugo.logLevel')];

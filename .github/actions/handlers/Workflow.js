@@ -5,6 +5,7 @@
  * @author AXIVO
  * @license BSD-3-Clause
  */
+
 const Action = require('../core/Action');
 const config = require('../config');
 const FileService = require('../services/File');
