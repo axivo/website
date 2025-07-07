@@ -422,7 +422,7 @@ module.exports = {
      * @type {string}
      * @default 'info'
      */
-    logLevel: 'debug',
+    logLevel: 'info',
 
     /**
      * Path to the Handlebars template for workflow-generated issues
