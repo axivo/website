@@ -1,6 +1,6 @@
 module github.com/axivo/website/k3s-cluster
 
-go 1.22
+go 1.24
 
 require (
 	github.com/axivo/website/global v1.0.2 // indirect
