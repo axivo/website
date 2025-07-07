@@ -60,9 +60,6 @@ jobs:
 
       - name: Build documentation
         uses: actions/github-script@v7
-        env:
-          HUGO_ENV: production
-          TZ: America/New_York
         with:
           script: |
             const { Workflow } = require('./.github/actions/handlers');
