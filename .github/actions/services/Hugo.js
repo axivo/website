@@ -63,17 +63,15 @@ class HugoService extends Action {
   async updateModules() {
     return this.execute('update modules', async () => {
       this.logger.info('Updating modules...');
-      Object.assign(process.env, this.config.get('workflow.hugo.environment'));
-      const args = ['--logLevel', this.config.get('workflow.hugo.logLevel')];
-      await this.shellService.execute('hugo', ['mod', 'clean', ...args, '--all'], { output: true, silent: false });
+      await this.shellService.execute('hugo', ['mod', 'clean', '--all'], { output: true, silent: false });
       const modules = this.config.get('workflow.hugo.modules');
       const sites = this.config.get('workflow.hugo.sites');
       const allDirs = [...modules, ...sites];
       await Promise.all(allDirs.map(dir =>
-        this.shellService.execute('hugo', ['mod', 'get', ...args, '-s', dir], { output: true, silent: false })
+        this.shellService.execute('hugo', ['mod', 'get', '-s', dir], { output: true, silent: false })
       ));
       await Promise.all(allDirs.map(dir =>
-        this.shellService.execute('hugo', ['mod', 'tidy', ...args, '-s', dir], { output: true, silent: false })
+        this.shellService.execute('hugo', ['mod', 'tidy', '-s', dir], { output: true, silent: false })
       ));
       const statusResult = await this.gitService.getStatus();
       const files = [...statusResult.modified, ...statusResult.untracked];
