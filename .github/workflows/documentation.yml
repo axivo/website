@@ -4,7 +4,6 @@ on:
   pull_request:
     paths:
       - .github/actions/**
-      - .github/workflows/*.yml
       - docs/**
       - k3s-cluster/**
   push:
