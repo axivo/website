@@ -46,10 +46,12 @@ class HugoService extends Action {
       const args = ['--logLevel', this.config.get('workflow.hugo.logLevel')];
       if (gc) args.push('--gc');
       if (minify) args.push('--minify');
+      const environment = this.config.get('workflow.hugo.environment');
+      if (this.config.get('workflow.hugo.logLevel') === 'debug') environment.ACTIONS_STEP_DEBUG = 'true';
       await Promise.all(sites.map(site => {
         this.logger.info(`Building '${site}' documentation site...`);
         return this.shellService.execute('hugo', [...args, '-s', site], {
-          env: { ...process.env, ...this.config.get('workflow.hugo.environment') },
+          env: { ...process.env, ...environment },
           output: true
         });
       }));
@@ -67,14 +69,22 @@ class HugoService extends Action {
       this.logger.info('Updating module checksums...');
       const args = ['--logLevel', this.config.get('workflow.hugo.logLevel')];
       await this.shellService.execute('hugo', ['mod', 'clean', '--all', ...args], { output: true });
+      const environment = this.config.get('workflow.hugo.environment');
+      if (this.config.get('workflow.hugo.logLevel') === 'debug') environment.ACTIONS_STEP_DEBUG = 'true';
       const modules = this.config.get('workflow.hugo.modules');
       const sites = this.config.get('workflow.hugo.sites');
       const allDirs = [...modules, ...sites];
       await Promise.all(allDirs.map(dir =>
-        this.shellService.execute('hugo', ['mod', 'get', '-u', ...args, '-s', dir], { output: true })
+        this.shellService.execute('hugo', ['mod', 'get', '-u', ...args, '-s', dir], {
+          env: { ...process.env, ...environment },
+          output: true
+        })
       ));
       await Promise.all(allDirs.map(dir =>
-        this.shellService.execute('hugo', ['mod', 'tidy', ...args, '-s', dir], { output: true })
+        this.shellService.execute('hugo', ['mod', 'tidy', ...args, '-s', dir], {
+          env: { ...process.env, ...environment },
+          output: true
+        })
       ));
       const statusResult = await this.gitService.getStatus();
       const files = [...statusResult.modified, ...statusResult.untracked];
