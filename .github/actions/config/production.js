@@ -334,13 +334,13 @@ module.exports = {
        * Log level for Hugo command execution
        * 
        * Controls the verbosity of output from Hugo commands. Available levels
-       * in order of increasing verbosity: DEBUG, INFO, WARN, ERROR.
+       * in order of increasing verbosity: debug|info|warn|error.
        * Higher verbosity levels include all lower level messages.
        * 
        * @type {string}
-       * @default 'INFO'
+       * @default 'info'
        */
-      logLevel: 'DEBUG',
+      logLevel: 'warn',
 
       /**
        * Hugo modules directory configurations for update operations
