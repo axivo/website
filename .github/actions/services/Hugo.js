@@ -48,12 +48,11 @@ class HugoService extends Action {
       if (minify) args.push('--minify');
       const environment = this.config.get('workflow.hugo.environment');
       if (this.config.get('workflow.hugo.logLevel') === 'debug') environment.ACTIONS_STEP_DEBUG = 'true';
+      Object.assign(process.env, environment);
+      console.log('DEBUG:', JSON.stringify(process.env, null, 2));
       await Promise.all(sites.map(site => {
         this.logger.info(`Building '${site}' documentation site...`);
-        return this.shellService.execute('hugo', [...args, '-s', site], {
-          env: { ...process.env, ...environment },
-          output: true
-        });
+        return this.shellService.execute('hugo', [...args, '-s', site], { output: true });
       }));
       this.logger.info(`Successfully built ${sites.length} documentation sites`);
     });
@@ -67,24 +66,19 @@ class HugoService extends Action {
   async updateModuleChecksums() {
     return this.execute('update module checksums', async () => {
       this.logger.info('Updating module checksums...');
-      const args = ['--logLevel', this.config.get('workflow.hugo.logLevel')];
-      await this.shellService.execute('hugo', ['mod', 'clean', '--all', ...args], { output: true });
       const environment = this.config.get('workflow.hugo.environment');
       if (this.config.get('workflow.hugo.logLevel') === 'debug') environment.ACTIONS_STEP_DEBUG = 'true';
+      Object.assign(process.env, environment);
+      const args = ['--logLevel', this.config.get('workflow.hugo.logLevel')];
+      await this.shellService.execute('hugo', ['mod', 'clean', '--all', ...args], { output: true });
       const modules = this.config.get('workflow.hugo.modules');
       const sites = this.config.get('workflow.hugo.sites');
       const allDirs = [...modules, ...sites];
       await Promise.all(allDirs.map(dir =>
-        this.shellService.execute('hugo', ['mod', 'get', '-u', ...args, '-s', dir], {
-          env: { ...process.env, ...environment },
-          output: true
-        })
+        this.shellService.execute('hugo', ['mod', 'get', '-u', ...args, '-s', dir], { output: true })
       ));
       await Promise.all(allDirs.map(dir =>
-        this.shellService.execute('hugo', ['mod', 'tidy', ...args, '-s', dir], {
-          env: { ...process.env, ...environment },
-          output: true
-        })
+        this.shellService.execute('hugo', ['mod', 'tidy', ...args, '-s', dir], { output: true })
       ));
       const statusResult = await this.gitService.getStatus();
       const files = [...statusResult.modified, ...statusResult.untracked];
