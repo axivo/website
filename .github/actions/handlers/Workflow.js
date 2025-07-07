@@ -107,7 +107,7 @@ class WorkflowHandler extends Action {
     return this.execute('update modules', async () => {
       this.logger.info('Updating modules...');
       await this.hugoService.updateModules();
-      this.logger.info('Successfully updated modules');
+      this.logger.info('Modules update complete');
     });
   }
 }

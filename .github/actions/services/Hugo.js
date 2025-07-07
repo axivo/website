@@ -62,7 +62,6 @@ class HugoService extends Action {
    */
   async updateModules() {
     return this.execute('update modules', async () => {
-      this.logger.info('Updating modules...');
       await this.shellService.execute('hugo', ['mod', 'clean', '--all'], { output: true });
       await this.shellService.execute('hugo', ['mod', 'get', '-u', './...'], { output: true });
       const modules = this.config.get('workflow.hugo.modules');
