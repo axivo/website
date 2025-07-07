@@ -63,6 +63,7 @@
   "packageRules": [
     {
       "enabled": true,
+      "extractVersion": "^(?<version>\\d+\\.\\d+)",
       "matchDatasources": [
         "golang-version"
       ],
