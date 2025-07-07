@@ -1,4 +1,4 @@
-name: Module Checksums
+name: Modules
 
 on:
   pull_request:

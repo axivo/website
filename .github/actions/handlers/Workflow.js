@@ -43,7 +43,7 @@ class WorkflowHandler extends Action {
   }
 
   /**
-   * Build documentation sites
+   * Build Hugo documentation
    * 
    * @returns {Promise<void>}
    */
@@ -99,15 +99,15 @@ class WorkflowHandler extends Action {
   }
 
   /**
-   * Update Hugo module checksums
+   * Update Hugo modules
    * 
    * @returns {Promise<void>}
    */
-  async updateModuleChecksums() {
-    return this.execute('update module checksums', async () => {
-      this.logger.info('Updating module checksums...');
-      await this.hugoService.updateModuleChecksums();
-      this.logger.info('Successfully updated module checksums');
+  async updateModules() {
+    return this.execute('update modules', async () => {
+      this.logger.info('Updating modules...');
+      await this.hugoService.updateModules();
+      this.logger.info('Successfully updated modules');
     });
   }
 }
