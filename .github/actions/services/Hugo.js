@@ -41,13 +41,10 @@ class HugoService extends Action {
   async buildSites(options = {}) {
     const { gc = true, minify = true } = options;
     return this.execute('build documentation sites', async () => {
-      const logLevel = this.config.get('workflow.hugo.logLevel');
-      const environment = this.config.get('workflow.hugo.environment');
-      if (logLevel === 'debug') environment.ACTIONS_STEP_DEBUG = 'true';
       Object.assign(process.env, this.config.get('workflow.hugo.environment'));
       const sites = this.config.get('workflow.hugo.sites');
       this.logger.info(`Building ${sites.length} documentation sites...`);
-      const args = ['--logLevel', logLevel];
+      const args = ['--logLevel', this.config.get('workflow.hugo.logLevel')];
       if (gc) args.push('--gc');
       if (minify) args.push('--minify');
       await Promise.all(sites.map(site => {
