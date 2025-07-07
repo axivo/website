@@ -17,7 +17,7 @@
         "go\\s+(?<currentValue>.+)",
         "with:[\\s\\r]+?go-version:\\s+(?<currentValue>.+)"
       ],
-      "versioningTemplate": "regex:^(?<major>\\d+)\\.(?<minor>\\d+)$"
+      "versioningTemplate": "loose"
     },
     {
       "customType": "regex",
