@@ -1,4 +1,4 @@
-name: Update Module Checksums
+name: Module Checksums
 
 on:
   pull_request:
@@ -16,10 +16,11 @@ defaults:
 
 permissions:
   contents: write
+  issues: write
 
 jobs:
   update:
-    name: Update Module Checksums
+    name: Update
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -31,65 +32,35 @@ jobs:
           extended: true
           hugo-version: 0.145.0
 
+      - name: Setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install node dependencies
+        run: npm install handlebars
+
+      - name: Configure repository
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { Workflow } = require('./.github/actions/handlers');
+            const workflow = new Workflow({ github, context, core, exec });
+            await workflow.configureRepository();
+
       - name: Update module checksums
         uses: actions/github-script@v7
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const fs = require('fs/promises');
-            const runGit = async (args) => (await exec.getExecOutput('git', args)).stdout.trim();
-            try {
-              await Promise.all([
-                runGit(['config', 'user.name', 'github-actions[bot]']),
-                runGit(['config', 'user.email', '41898282+github-actions[bot]@users.noreply.github.com'])
-              ]);
-              await runGit(['fetch', 'origin', process.env.GITHUB_HEAD_REF]);
-              await runGit(['switch', process.env.GITHUB_HEAD_REF]);
-              await exec.exec('hugo', ['mod', 'clean', '--all']);
-              await exec.exec('hugo', ['mod', 'get', '-u', './...']);
-              const modules = ['docs', 'k3s-cluster'];
-              await Promise.all(modules.map(item =>
-                exec.exec('hugo', ['mod', 'tidy', '-s', item])
-              ));
-              const files = (await runGit(['diff', '--name-only'])).split('\n').filter(Boolean);
-              if (files.length === 0) {
-                core.info('No file changes detected');
-                return;
-              }
-              const additions = await Promise.all((await runGit(['diff', '--name-only', '--diff-filter=ACMR']))
-                .split('\n')
-                .filter(Boolean)
-                .map(async file => {
-                  const contents = await fs.readFile(file, 'utf-8');
-                  return {
-                    path: file,
-                    contents: Buffer.from(contents).toString('base64')
-                  };
-                })
-              );
-              const deletions = (await runGit(['diff', '--name-only', '--diff-filter=D']))
-                .split('\n')
-                .filter(Boolean)
-                .map(file => ({ path: file }));
-              const input = {
-                branch: {
-                  repositoryNameWithOwner: context.payload.repository.full_name,
-                  branchName: context.payload.pull_request.head.ref
-                },
-                expectedHeadOid: context.payload.pull_request.head.sha,
-                fileChanges: {
-                  additions: additions,
-                  deletions: deletions
-                },
-                message: { headline: 'chore(github-action): update module checksums' }
-              };
-              const mutation = `
-                mutation CreateCommitOnBranch($input: CreateCommitOnBranchInput!) {
-                  createCommitOnBranch(input: $input) { commit { oid } }
-                }
-              `;
-              const { createCommitOnBranch } = await github.graphql(mutation, { input });
-              core.info('Signed commit created with OID: ' + createCommitOnBranch.commit.oid);
-            } catch (error) {
-              core.setFailed(error.message);
-            }
+            const { Workflow } = require('./.github/actions/handlers');
+            const workflow = new Workflow({ github, context, core, exec });
+            await workflow.updateModuleChecksums();
+
+      - name: Report workflow issue
+        uses: actions/github-script@v7
+        if: always()
+        with:
+          script: |
+            const { Workflow } = require('./.github/actions/handlers');
+            const workflow = new Workflow({ github, context, core, exec });
+            await workflow.reportIssue();
