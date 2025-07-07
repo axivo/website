@@ -60,34 +60,32 @@ class HugoService extends Action {
    * 
    * @returns {Promise<Object>} Update operation result
    */
-  async updateModuleChecksums() {
-    return this.execute('update module checksums', async () => {
-      this.logger.info('Updating module checksums...');
-      Object.assign(process.env, this.config.get('workflow.hugo.environment'));
-      const args = ['--logLevel', this.config.get('workflow.hugo.logLevel')];
-      await this.shellService.execute('hugo', ['mod', 'clean', '--all', ...args], { output: true, silent: false });
+  async updateModules() {
+    return this.execute('update modules', async () => {
+      this.logger.info('Updating modules...');
+      await this.shellService.execute('hugo', ['mod', 'clean', '--all'], { output: true, silent: false });
       const modules = this.config.get('workflow.hugo.modules');
       const sites = this.config.get('workflow.hugo.sites');
       const allDirs = [...modules, ...sites];
       await Promise.all(allDirs.map(dir =>
-        this.shellService.execute('hugo', ['mod', 'get', '-u', ...args, '-s', dir], { output: true, silent: false })
+        this.shellService.execute('hugo', ['mod', 'get', '-u', '-s', dir], { output: true, silent: false })
       ));
       await Promise.all(allDirs.map(dir =>
-        this.shellService.execute('hugo', ['mod', 'tidy', ...args, '-s', dir], { output: true, silent: false })
+        this.shellService.execute('hugo', ['mod', 'tidy', '-s', dir], { output: true, silent: false })
       ));
       const statusResult = await this.gitService.getStatus();
       const files = [...statusResult.modified, ...statusResult.untracked];
       if (!files.length) {
-        this.logger.info('No module checksum changes to commit');
+        this.logger.info('No module changes to commit');
         return { updated: 0 };
       }
       const branch = process.env.GITHUB_HEAD_REF;
       const result = await this.gitService.signedCommit(
         branch,
         files,
-        'chore(github-action): update module checksums'
+        'chore(github-action): update modules'
       );
-      this.logger.info('Successfully updated module checksums');
+      this.logger.info('Successfully updated modules');
       return result;
     });
   }
