@@ -68,10 +68,7 @@ Helm chart values template, see [`values.j2`](https://{{< param variables.reposi
 
 #### AlertManager
 
-Helm chart values template used for additional AlertManager configuration rules, see [`config_alertmanager.j2`](https://{{< param variables.repository.cluster >}}/blob/main/roles/victoria-metrics/templates/config_alertmanager.j2) for details.
-
-> [!TIP]
-> Additional alerts can be implemented into [`alerts`](https://{{< param variables.repository.cluster >}}blob/main/roles/victoria-metrics/templates/alerts) directory, see [`node_health.js`](https://{{< param variables.repository.cluster >}}blob/main/roles/victoria-metrics/templates/alerts/node_health.j2) for details.
+Helm chart values template used for additional AlertManager configuration rules, see [`config_alertmanager.j2`](https://{{< param variables.repository.cluster >}}/blob/main/roles/victoria-metrics/templates/config_alertmanager.j2) for details. User-defined alerts can also be implemented, see [`node_health.js`](https://{{< param variables.repository.cluster >}}blob/main/roles/victoria-metrics/templates/alerts/node_health.j2) for details.
 
 {{% /steps %}}
 
