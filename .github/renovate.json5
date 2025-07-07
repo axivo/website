@@ -47,6 +47,9 @@
       ]
     }
   ],
+  "excludeCommitPaths": [
+    "node_modules/**"
+  ],
   "extends": [
     ":semanticCommitTypeAll(chore)",
     "config:recommended"
