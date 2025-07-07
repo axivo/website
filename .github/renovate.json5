@@ -6,6 +6,19 @@
   "customManagers": [
     {
       "customType": "regex",
+      "datasourceTemplate": "node",
+      "depNameTemplate": "node",
+      "managerFilePatterns": [
+        ".github/workflows/checksums.yml",
+        ".github/workflows/documentation.yml"
+      ],
+      "matchStrings": [
+        "with:[\\s\\S]+?node-version:\\s+(?<currentValue>.+)"
+      ],
+      "versioningTemplate": "node"
+    },
+    {
+      "customType": "regex",
       "datasourceTemplate": "github-releases",
       "depNameTemplate": "gohugoio/hugo",
       "extractVersionTemplate": "^v(?<version>.+)$",
@@ -16,7 +29,7 @@
         "k3s-cluster/hugo.yaml"
       ],
       "matchStrings": [
-        "hugo-version:\\s+(?<currentValue>.+)",
+        "with:[\\s\\S]+?hugo-version:\\s+(?<currentValue>.+)",
         "hugoVersion:[\\s\\S]+?min:\\s+(?<currentValue>.+)"
       ]
     }
@@ -32,6 +45,18 @@
     "dependency"
   ],
   "packageRules": [
+    {
+      "enabled": true,
+      "matchDatasources": [
+        "node-version"
+      ],
+      "matchDepNames": [
+        "node"
+      ],
+      "matchUpdateTypes": [
+        "major"
+      ]
+    },
     {
       "enabled": true,
       "matchDepTypes": [
