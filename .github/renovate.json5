@@ -6,6 +6,34 @@
   "customManagers": [
     {
       "customType": "regex",
+      "datasourceTemplate": "golang-version",
+      "depNameTemplate": "go",
+      "managerFilePatterns": [
+        "**/go.mod",
+        "**/go.sum",
+        ".github/workflows/*.yml"
+      ],
+      "matchStrings": [
+        "go\\s+(?<currentValue>.+)",
+        "with:[\\s\\S]+?go-version:\\s+(?<currentValue>.+)"
+      ],
+      "versioningTemplate": "go"
+    },
+    {
+      "customType": "regex",
+      "datasourceTemplate": "node-version",
+      "depNameTemplate": "node",
+      "managerFilePatterns": [
+        ".github/workflows/checksums.yml",
+        ".github/workflows/documentation.yml"
+      ],
+      "matchStrings": [
+        "with:[\\s\\S]+?node-version:\\s+(?<currentValue>.+)"
+      ],
+      "versioningTemplate": "node"
+    },
+    {
+      "customType": "regex",
       "datasourceTemplate": "github-releases",
       "depNameTemplate": "gohugoio/hugo",
       "extractVersionTemplate": "^v(?<version>.+)$",
@@ -16,7 +44,7 @@
         "k3s-cluster/hugo.yaml"
       ],
       "matchStrings": [
-        "hugo-version:\\s+(?<currentValue>.+)",
+        "with:[\\s\\S]+?hugo-version:\\s+(?<currentValue>.+)",
         "hugoVersion:[\\s\\S]+?min:\\s+(?<currentValue>.+)"
       ]
     }
@@ -32,6 +60,30 @@
     "dependency"
   ],
   "packageRules": [
+    {
+      "enabled": true,
+      "matchDatasources": [
+        "golang-version"
+      ],
+      "matchDepNames": [
+        "go"
+      ],
+      "matchUpdateTypes": [
+        "minor"
+      ]
+    },
+    {
+      "enabled": true,
+      "matchDatasources": [
+        "node-version"
+      ],
+      "matchDepNames": [
+        "node"
+      ],
+      "matchUpdateTypes": [
+        "major"
+      ]
+    },
     {
       "enabled": true,
       "matchDepTypes": [

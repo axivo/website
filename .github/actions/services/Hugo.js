@@ -49,10 +49,7 @@ class HugoService extends Action {
       if (minify) args.push('--minify');
       await Promise.all(sites.map(site => {
         this.logger.info(`Building '${site}' documentation site...`);
-        return this.shellService.execute('hugo', [...args, '-s', site], {
-          output: true,
-          silent: false
-        });
+        return this.shellService.execute('hugo', [...args, '-s', site], { output: true, silent: false });
       }));
       this.logger.info(`Successfully built ${sites.length} documentation sites`);
     });
@@ -68,24 +65,15 @@ class HugoService extends Action {
       this.logger.info('Updating module checksums...');
       Object.assign(process.env, this.config.get('workflow.hugo.environment'));
       const args = ['--logLevel', this.config.get('workflow.hugo.logLevel')];
-      await this.shellService.execute('hugo', ['mod', 'clean', '--all', ...args], {
-        output: true,
-        silent: false
-      });
+      await this.shellService.execute('hugo', ['mod', 'clean', '--all', ...args], { output: true, silent: false });
       const modules = this.config.get('workflow.hugo.modules');
       const sites = this.config.get('workflow.hugo.sites');
       const allDirs = [...modules, ...sites];
       await Promise.all(allDirs.map(dir =>
-        this.shellService.execute('hugo', ['mod', 'get', '-u', ...args, '-s', dir], {
-          output: true,
-          silent: false
-        })
+        this.shellService.execute('hugo', ['mod', 'get', '-u', ...args, '-s', dir], { output: true, silent: false })
       ));
       await Promise.all(allDirs.map(dir =>
-        this.shellService.execute('hugo', ['mod', 'tidy', ...args, '-s', dir], {
-          output: true,
-          silent: false
-        })
+        this.shellService.execute('hugo', ['mod', 'tidy', ...args, '-s', dir], { output: true, silent: false })
       ));
       const statusResult = await this.gitService.getStatus();
       const files = [...statusResult.modified, ...statusResult.untracked];

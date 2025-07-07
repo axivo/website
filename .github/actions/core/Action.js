@@ -5,6 +5,7 @@
  * @author AXIVO
  * @license BSD-3-Clause
  */
+
 const ActionError = require('./Error');
 const Logger = require('./Logger');
 
