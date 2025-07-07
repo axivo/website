@@ -41,10 +41,12 @@ class HugoService extends Action {
   async buildSites(options = {}) {
     const { gc = true, minify = true } = options;
     return this.execute('build documentation sites', async () => {
+      const logLevel = this.config.get('workflow.hugo.logLevel');
+      const environment = this.config.get('workflow.hugo.environment');
+      if (logLevel === 'debug') environment.ACTIONS_STEP_DEBUG = 'true';
       Object.assign(process.env, this.config.get('workflow.hugo.environment'));
       const sites = this.config.get('workflow.hugo.sites');
       this.logger.info(`Building ${sites.length} documentation sites...`);
-      const logLevel = this.config.get('workflow.hugo.logLevel');
       const args = ['--logLevel', logLevel];
       if (gc) args.push('--gc');
       if (minify) args.push('--minify');
@@ -52,7 +54,7 @@ class HugoService extends Action {
         this.logger.info(`Building '${site}' documentation site...`);
         return this.shellService.execute('hugo', [...args, '-s', site], {
           output: true,
-          silent: logLevel !== 'debug'
+          silent: false
         });
       }));
       this.logger.info(`Successfully built ${sites.length} documentation sites`);
@@ -68,11 +70,10 @@ class HugoService extends Action {
     return this.execute('update module checksums', async () => {
       this.logger.info('Updating module checksums...');
       Object.assign(process.env, this.config.get('workflow.hugo.environment'));
-      const logLevel = this.config.get('workflow.hugo.logLevel');
-      const args = ['--logLevel', logLevel];
+      const args = ['--logLevel', this.config.get('workflow.hugo.logLevel')];
       await this.shellService.execute('hugo', ['mod', 'clean', '--all', ...args], {
         output: true,
-        silent: logLevel !== 'debug'
+        silent: false
       });
       const modules = this.config.get('workflow.hugo.modules');
       const sites = this.config.get('workflow.hugo.sites');
@@ -80,13 +81,13 @@ class HugoService extends Action {
       await Promise.all(allDirs.map(dir =>
         this.shellService.execute('hugo', ['mod', 'get', '-u', ...args, '-s', dir], {
           output: true,
-          silent: logLevel !== 'debug'
+          silent: false
         })
       ));
       await Promise.all(allDirs.map(dir =>
         this.shellService.execute('hugo', ['mod', 'tidy', ...args, '-s', dir], {
           output: true,
-          silent: logLevel !== 'debug'
+          silent: false
         })
       ));
       const statusResult = await this.gitService.getStatus();
