@@ -5,7 +5,6 @@
  * @author AXIVO
  * @license BSD-3-Clause
  */
-
 const Action = require('../core/Action');
 const config = require('../config');
 const FileService = require('../services/File');
@@ -81,7 +80,9 @@ class WorkflowHandler extends Action {
     return this.execute('report workflow issue', async () => {
       this.logger.info('Checking for workflow issues...');
       if (this.config.get('issue.createLabels')) {
-        await this.gitHubService.createAnnotation('Set "createLabels: false" after initial setup');
+        const message = 'Set "createLabels: false" after initial setup';
+        await this.gitHubService.createAnnotation(message);
+        this.logger.warning(message);
       }
       const templatePath = this.config.get('workflow.template');
       const templateContent = await this.fileService.read(templatePath);
