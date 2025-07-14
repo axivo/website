@@ -375,6 +375,18 @@ module.exports = {
        */
       sites: [
         /**
+         * Collaboration platform documentation path
+         * 
+         * Claude collaboration platform documentation website built from
+         * the claude directory. Contains user guides, tutorials, profile
+         * system documentation, and platform setup instructions.
+         * 
+         * @type {string}
+         * @default './claude'
+         */
+        './claude',
+
+        /**
          * Documentation site path
          * 
          * Primary documentation website built from Hugo content in the docs directory.

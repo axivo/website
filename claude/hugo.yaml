@@ -55,12 +55,9 @@ params:
     base: https://github.com/axivo/website/edit/main/claude/content
     enable: true
   navbar:
-    displayTitle: true
-    displayLogo: true
     logo:
       path: /claude/images/logo-claude.svg
       dark: /claude/images/logo-claude.svg
-    width: wide
   variables:
     repository:
       home: github.com/axivo/claude
