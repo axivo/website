@@ -3,13 +3,14 @@ name: Documentation
 on:
   pull_request:
     paths:
-      - .github/actions/**
+      - claude/**
       - docs/**
       - k3s-cluster/**
   push:
     branches:
       - main
     paths:
+      - claude/**
       - docs/**
       - k3s-cluster/**
 
