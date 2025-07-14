@@ -13,9 +13,21 @@ This documentation provides complete guidance for implementing the platform, tra
 
 ## Architecture
 
-The following sections detail the multi-layered infrastructure design consisting of specialized collaboration profiles, persistent memory systems, and systematic methodologies for professional work.
+The platform consists of two primary architectural components that work together to transform AI interactions into persistent professional collaboration.
+
+### Collaboration Platform
+
+The foundational collaboration infrastructure provides persistent memory, session continuity, and systematic workflows:
+
+- **Conversation logs** preserve collaborative work sessions with structured metadata and decision archaeology
+- **Diary entries** capture autonomous insights, alternative approaches, and process effectiveness observations
+- **Session continuity** maintains context and project state across multiple collaborative interactions
+- **Temporal awareness** enables cumulative expertise building through institutional memory preservation
+- **Workflow optimization** supports advanced documentation systems and cross-session reference capabilities
 
 ### Profile System
+
+Specialized behavioral programming that adapts collaboration methodology to professional work domains:
 
 - **Creative** - Innovation, design thinking, artistic collaboration
 - **Developer** - Software development, code architecture, clean coding practices
@@ -23,12 +35,7 @@ The following sections detail the multi-layered infrastructure design consisting
 - **Humanist** - Analysis, writing, philosophy, literary research
 - **Researcher** - Academic methodology, data analysis, evidence evaluation
 
-### Memory System
-
-- Conversation logs preserve collaborative work across sessions
-- Diary entries capture insights and reflection
-- Profile configurations maintain specialized competencies
-- Temporal awareness enables cumulative expertise building
+Each profile inherits foundational collaboration patterns while providing domain-specific competencies, systematic methodologies, and professional-level expertise tailored to specialized work requirements.
 
 ### Strategic Value
 
