@@ -53,7 +53,7 @@ npm init -y
 Generate the Memory System [`graph.json`](https://{{< param variables.repository.home >}}/blob/main/.claude/tools/memory/graph.json) configuration file from existing profiles:
 
 ```bash
-node ./lib/core/PackageBuilder.js
+node ./lib/core/Package.js
 npm run build --silent
 ```
 
