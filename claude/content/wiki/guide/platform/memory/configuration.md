@@ -44,10 +44,10 @@ build:
 - **`process.additionalProfiles`** - When `true`, processes additional profile files beyond the main profile list
 - **`process.commonProfilesFirst`** - When `true`, processes common infrastructure files before individual profiles
 - **`process.stopOnCriticalError`** - When `true`, halts build on any file processing error
-- **`outputPath`** - Path to the generated memory graph file (relative paths resolved from tool directory)
+- **`outputPath`** - Relative path to generated memory system graph file, resolved from tool directory
 - **`profiles`** - Explicit list of [profile](/claude/wiki/guide/profile) files to process, see related [tutorial](/claude/tutorials/handbook/profile/design)
-- **`profilesPath.common`** - Path to shared infrastructure profiles directory
-- **`profilesPath.domain`** - Path to individual profile files directory
+- **`profilesPath.common`** - Relative path to shared infrastructure profiles directory
+- **`profilesPath.domain`** - Relative path to individual profile files directory
 - **`relations`** - Array of valid relation types for validation
 
 #### File Processing Order
@@ -86,6 +86,7 @@ Defines directory locations for external dependencies and tool integration using
 path:
   conversations: /Users/username/github/claude/.claude/data/conversations
   diary: /Users/username/github/claude/.claude/data/diary
+  documentation: /Users/username/github/claude/.claude/data
   tool: /Users/username/github/claude/.claude/tools/memory
 ```
 
@@ -94,11 +95,12 @@ path:
 
 #### Options
 
-- **`conversations`** - Directory for conversation log storage
-- **`diary`** - Directory for diary entry storage  
-- **`tool`** - Memory builder tool directory containing [templates](/claude/wiki/guide/platform/memory/templates) and configuration
+- **`conversations`** - Absolute path to conversation logs storage directory
+- **`diary`** - Absolute path to diary entries storage directory
+- **`documentation`** - Absolute path to documentation system graph directory
+- **`tool`** - Absolute path to builder tool directory containing [templates](/claude/wiki/guide/platform/memory/templates) and configuration
 
 > [!NOTE]
-> The `conversations` and `diary` directory paths support flexible location configuration including network shares, NAS servers accessed through SMB/NFS mounts, or cloud storage mount points. Use absolute paths for mounted directories (e.g., `/Volumes/backup/claude/conversations`).
+> The `conversations`, `diary` and `documentation` directory paths support flexible location configuration including network shares, NAS servers accessed through SMB/NFS mounts, or cloud storage mount points.
 
-Profile YAML files can reference these paths using `{path.conversations}`, `{path.diary}`, and `{path.tool}` placeholders.
+Profile YAML files can reference these paths using `{path.conversations}`, `{path.diary}`, `{path.documentation}` and `{path.tool}` placeholders.

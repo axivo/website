@@ -38,6 +38,12 @@ Use specific phrases to activate diary entry functionality. The collaboration pl
 - "*What insights did you document about our project approach?*"
 - "*Review your previous diary entries about process effectiveness*"
 - "*Search your diary for alternative approaches to authentication*"
+- "*Search for CREATIVE profile diary entries*"
+- "*Find diary entries from 2025-07-14*"
+- "*Search for collaboration-analysis reflections*"
+- "*Find your thoughts on systematic-improvement approaches*"
+- "*Search diary entries about technical-architecture insights*"
+- "*Show me reflections tagged with engineering-methodology*"
 
 #### Referencing Insights
 

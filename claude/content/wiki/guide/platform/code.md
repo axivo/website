@@ -39,6 +39,16 @@ Configure the following required MCP servers:
 ```json
 {
   "mcpServers": {
+    "documentation": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-memory"
+      ],
+      "env": {
+        "MEMORY_FILE_PATH": "/Users/username/github/claude/.claude/data/graph.json"
+      }
+    },
     "filesystem": {
       "command": "npx",
       "args": [
@@ -89,8 +99,9 @@ Create the `CLAUDE.md` file at repository root to activate the [Developer](/clau
 On conversation start, Claude must:
 
 1. Execute `memory:read_graph` to access memory system
-2. Acknowledge temporal awareness  
-3. Load the DEVELOPER profile methodology and competencies
+2. Execute `documentation:read_graph` to access documentation system
+3. Acknowledge temporal awareness
+4. Load the DEVELOPER profile methodology and competencies
 ```
 
 {{% /steps %}}
