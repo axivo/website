@@ -37,6 +37,12 @@ Use specific phrases to activate conversation logs functionality. The collaborat
 - "*What did we decide about the API design in our previous logs?*"
 - "*Search conversation logs for solutions to database performance issues*"
 - "*Review the conversation log from our collaboration on the user interface*"
+- "*Search for entries from June 26, 2025*"
+- "*Find all ENGINEER profile documentation*"
+- "*Search for infrastructure-troubleshooting entries*"
+- "*Find troubleshooting documentation from July*"
+- "*Search for diary entries with system-design tags*"
+- "*Find conversation logs about Kubernetes configuration*"
 
 #### Referencing Information
 

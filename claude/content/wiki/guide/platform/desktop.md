@@ -1,7 +1,7 @@
 ---
 title: Claude Desktop
 prev: /wiki/guide/platform
-next: /wiki/guide/profile
+next: /wiki/guide/platform/documentation
 ---
 
 Configure Claude Desktop with MCP servers and [Developer](/claude/wiki/guide/profile/domain/developer) profile to enable collaboration platform functionality. This process establishes core tool connections, memory system integration, and secure configuration management.
@@ -41,6 +41,16 @@ Configure the following required MCP servers:
 ```json
 {
   "mcpServers": {
+    "documentation": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-memory"
+      ],
+      "env": {
+        "MEMORY_FILE_PATH": "/Users/username/github/claude/.claude/data/graph.json"
+      }
+    },
     "filesystem": {
       "command": "npx",
       "args": [
@@ -91,8 +101,9 @@ Activate the [Developer](/claude/wiki/guide/profile/domain/developer) profile, u
 On conversation start, Claude must:
 
 1. Execute `memory:read_graph` to access memory system
-2. Acknowledge temporal awareness  
-3. Load the DEVELOPER profile methodology and competencies
+2. Execute `documentation:read_graph` to access documentation system
+3. Acknowledge temporal awareness
+4. Load the DEVELOPER profile methodology and competencies
 ```
 
 > [!TIP]

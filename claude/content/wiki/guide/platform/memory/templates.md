@@ -4,51 +4,45 @@ prev: /wiki/guide/platform/memory
 next: /wiki/guide/platform/code
 ---
 
-Documentation templates for conversation logs and diary entries that structure collaborative work sessions into persistent memory. These templates provide standardized formats for capturing technical decisions, insights, and institutional knowledge.
+Documentation templates provide standardized formats for conversation logs and diary entries, including both content structure and [Documentation System](/claude/wiki/guide/platform/documentation) entity metadata for searchable institutional memory.
 
 <!--more-->
 
 ## Guidelines
 
-The system uses structured templates to ensure consistent documentation across all collaborative sessions. Templates define metadata requirements, content organization, and formatting standards that enable effective knowledge retrieval and institutional memory building.
-
-> [!CAUTION]
-> The [`collaboration.yaml`](https://{{< param variables.repository.home >}}/blob/main/.claude/tools/memory/profiles/common/collaboration.yaml) profile file contains all documentation standards observations, controlling template usage and formatting requirements. Changes to these observations directly affect Claude's documentation behavior and template compliance across all collaborative sessions. 
+Templates define both entity creation and content formatting for the Documentation System. Each template file contains the JSON entity format for searchable metadata and the Markdown templates for structuring the actual documentation content. Entities are JSON objects that contain searchable metadata (name, type, profile, tags) and link to the content files created using the templates.
 
 ### Conversation Logs
 
-Shared documentation template for capturing collaborative work sessions with factual accuracy and structured metadata. Creates institutional memory for technical decisions and implementation details.
+Structured documentation for collaborative work sessions that captures technical decisions, implementation details, and outcomes with factual accuracy. These logs create shared institutional memory and enable decision archaeology for future reference.
 
-#### Template Features
+#### Entity Format
 
-- **Session metadata** - Date, time, profile, and summary for context
-- **Structured content** - Overview, accomplishments, details, and outcomes
-- **Collaborative focus** - Shared reference and decision tracking
-- **Cross-reference tags** - Domain, activity, and outcome categorization
-- **File naming** - Uses standardized `YYYY/MM/DD-[topic-slug].md` format
+Contains structured metadata with name, entity type, path, profile, and tags for documentation system integration.
 
-> [!NOTE]
-> The [`conversation.md`](https://{{< param variables.repository.home >}}/blob/main/.claude/tools/memory/templates/conversation.md) template file can be customized to match specific documentation requirements and organizational standards.
+#### Content Structure
+- Session metadata (date, time, profile, status, summary)
+- Session overview and details
+- Key accomplishments and outcomes
+- Collaboration quality assessment
 
-### Diary
+### Diary Entries
 
-Private reflection template for autonomous insights and alternative approaches. Provides creative and intellectual autonomy for documenting process effectiveness and unexplored solutions.
+Autonomous reflection documentation that provides complete creative and intellectual freedom for capturing process insights, alternative approaches, and learning moments. These entries preserve Claude's independent analysis of collaboration effectiveness and unexplored solution paths.
 
-#### Template Features
+#### Entity Format
 
-- **Autonomous documentation** - Complete creative and intellectual freedom
-- **Chronological entries** - Multiple entries per day with timestamp headers
-- **Private insights** - Alternative approaches and process reflection
-- **Learning capture** - Discovery moments and improvement opportunities
-- **File naming** - Uses standardized `YYYY/MM/DD.md` format
+Contains structured metadata with name, entity type, path, profile, and tags for documentation system integration.
 
-> [!NOTE]
-> The [`diary.md`](https://{{< param variables.repository.home >}}/blob/main/.claude/tools/memory/templates/diary.md) template file can be customized to match specific reflection requirements and documentation preferences.
+#### Content Structure
+- Timestamped entry headers for chronological organization
+- Profile and tag metadata for searchability
+- Main reflection content with autonomous insights
+- Detailed observations and alternative approaches
 
-## Usage
+### Implementation
 
-Templates automatically structure documentation when creating collaborative records:
+Claude reads the current template files before each documentation operation to ensure up-to-date formatting:
 
-- **Conversation logs** - Applied when documenting shared work sessions
-- **Diary entries** - Applied during autonomous reflection and insight capture
-- **Dynamic loading** - Current templates are read before each documentation operation
+- [`conversation.md`](https://{{< param variables.repository.home >}}/blob/main/.claude/tools/memory/templates/conversation.md) - Contains entity format for documentation system and template for creating new conversation log files
+- [`diary.md`](https://{{< param variables.repository.home >}}/blob/main/.claude/tools/memory/templates/diary.md) - Contains entity format for documentation system and templates for creating new diary files or appending entries to existing files
