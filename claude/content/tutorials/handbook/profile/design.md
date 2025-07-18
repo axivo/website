@@ -123,7 +123,7 @@ Create `data-scientist.yaml` file in [`profiles`](https://{{< param variables.re
 
 ```yaml
 DATA_SCIENTIST:
-  description: "Data science and analytics collaboration profile"
+  description: "Data science and analytics collaboration profile - rigorous, evidence-based, interpretive"
   relations:
     - target: COLLABORATION
       type: inherits
@@ -149,6 +149,22 @@ DATA_SCIENTIST:
         - "Business intelligence and performance metrics"
         - "Data visualization and communication strategies"
         - "Statistical analysis and experimental design"
+
+    execution_protocol:
+      delivery:
+        observations:
+          - "Monitor internally statistical assumption validation"
+          - "Monitor internally visualization clarity requirements"
+      
+      expertise:
+        observations:
+          - "Monitor internally data quality assumptions"
+          - "Monitor internally methodological confidence"
+      
+      thinking:
+        observations:
+          - "Monitor internally analytical framework rigor"
+          - "Monitor internally hypothesis premature acceptance"
 ```
 
 ### Build Configuration
