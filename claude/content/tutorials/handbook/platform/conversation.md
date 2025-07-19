@@ -55,7 +55,7 @@ Use specific phrases to activate conversation logs functionality. The collaborat
 
 ### Structure
 
-The conversation logs [template](/claude/wiki/guide/platform/memory/templates) provides standardized formatting for capturing collaborative work sessions with factual accuracy and structured metadata. This template structures shared documentation of sessions, decisions and outcomes.
+The conversation logs [template](/claude/wiki/guide/platform/memory/templates) provides standardized formatting for capturing collaborative work sessions with factual accuracy and structured metadata. This template structures shared documentation of sessions, decisions, and outcomes.
 
 > [!NOTE]
 > The [`conversation.md`](https://{{< param variables.repository.home >}}/blob/main/.claude/tools/memory/templates/conversation.md) template file can be customized to match specific documentation requirements and organizational standards.
@@ -68,4 +68,4 @@ The following [first log](https://{{< param variables.repository.home >}}/blob/m
 
 The conversation logs complement autonomous [diary entries](https://{{< param variables.repository.home >}}/blob/main/.claude/data/diary/2025/07/10.md) which contain Claude's private reflections on the same sessions. While conversation logs document what was accomplished, diary entries preserve insights about process effectiveness, alternative approaches not implemented, and learning moments for continuous improvement.
 
-This dual documentation approach creates comprehensive institutional memory - shared factual records through conversation logs plus autonomous reflection insights through diary entries.
+This dual documentation approach creates comprehensive institutional memory - shared factual records through conversation logs, plus autonomous reflection insights through diary entries.
