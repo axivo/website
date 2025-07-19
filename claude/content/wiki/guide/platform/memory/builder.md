@@ -10,9 +10,9 @@ Build the Memory System from YAML profile configurations to enable persistent co
 
 ## Workflow Build
 
-Automated GitHub workflow processes profile configurations into Memory System format through continuous integration. The workflow validates profile syntax, builds memory entities and ensures configuration consistency across repository updates.
+Automated GitHub workflow processes profile configurations into Memory System format through continuous integration. The workflow validates profile syntax, builds memory entities, and ensures configuration consistency across repository updates.
 
-When profile changes are detected, the workflow automatically updates the Memory System [`graph.json`](https://{{< param variables.repository.home >}}/blob/main/.claude/tools/memory/graph.json) configuration file through GitHub's automatic commit signing, ensuring verified commits in pull requests:
+When profile changes are detected, the workflow automatically updates the Memory System [`graph.json`](https://{{< param variables.repository.home >}}/blob/main/.claude/tools/memory/graph.json) configuration file through GitHub's automatic commit signing, ensures verified commits in pull requests:
 
 {{< cards cols="1" >}}
   {{< card
@@ -34,7 +34,7 @@ The automated workflow provides enterprise-grade advantages:
 
 ## Local Build
 
-The builder processes YAML profile configurations through dependency installation, profile building and output validation. These steps transform profile definitions into systematic methodologies available for platform integration.
+The builder processes YAML profile configurations through dependency installation, profile building, and output validation. These steps transform profile definitions into systematic methodologies available for platform integration.
 
 {{% steps %}}
 

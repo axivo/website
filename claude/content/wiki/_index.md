@@ -7,7 +7,7 @@ prev: /
 next: /wiki/getting-started
 ---
 
-This documentation provides complete guidance for implementing the platform, transforming generic AI assistance into professional-level partnership through specialized profiles, persistent memory systems and systematic collaboration methodologies.
+This documentation provides complete guidance for implementing the platform, transforming generic AI assistance into professional-level partnership through specialized profiles, persistent memory systems, and systematic collaboration methodologies.
 
 <!--more-->
 

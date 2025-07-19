@@ -61,4 +61,4 @@ Systematic research methods and academic standards:
 > [!CAUTION]
 > The **Researcher** profile inherits from [**Collaboration**](/claude/wiki/guide/profile/common/collaboration) and [**Infrastructure**](/claude/wiki/guide/profile/common/infrastructure) common profiles. Modifications to research methodologies affect academic rigor, evidence evaluation capabilities, and systematic validation approaches.
 
-The [`researcher.yaml`](https://{{< param variables.repository.home >}}/blob/main/tools/memory/profiles/researcher.yaml) profile file can be edited to customize research methodologies, evidence evaluation frameworks and academic validation standards for enhanced scholarly collaboration.
+The [`researcher.yaml`](https://{{< param variables.repository.home >}}/blob/main/tools/memory/profiles/researcher.yaml) profile file can be edited to customize research methodologies, evidence evaluation frameworks, and academic validation standards for enhanced scholarly collaboration.
