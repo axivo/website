@@ -1,7 +1,7 @@
 ---
 title: Documentation System
 prev: /wiki/guide/platform/desktop
-next: /wiki/guide/profile
+next: /wiki/guide/platform/preferences
 ---
 
 The Documentation System provides search capabilities across conversation logs and diary entries through MCP server integration. Users can search by date, profile, tags, and content to locate specific documentation or track patterns over time.
