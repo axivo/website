@@ -15,7 +15,7 @@ Foundational profiles provide shared collaboration patterns and platform capabil
 The platform includes two common profiles that serve as the foundation for all specialized profiles:
 
 - **Collaboration** - Collaboration patterns and systematic methodologies
-- **Infrastructure** - Platform capabilities, tool integration and execution protocols
+- **Infrastructure** - Platform capabilities, tool integration, and execution protocols
 
 These common profiles ensure consistent collaboration quality and system integration regardless of the selected specialized profile. All domain-specific profiles inherit from both **Collaboration** and **Infrastructure** profiles to maintain unified behavioral patterns while adding specialized competencies.
 

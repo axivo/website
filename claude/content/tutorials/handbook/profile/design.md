@@ -10,7 +10,7 @@ Systematic methodology for creating custom collaboration profiles that extend sp
 
 ## Guidelines
 
-Profile creation and design requires understanding behavioral programming systems that directly control Claude's decision-making, communication patterns and problem-solving approaches. Profiles are hierarchical structures that separate universal collaboration patterns from domain-specific expertise.
+Profile creation and design requires understanding behavioral programming systems that directly control Claude's decision-making, communication patterns, and problem-solving approaches. Profiles are hierarchical structures that separate universal collaboration patterns from domain-specific expertise.
 
 ### Architecture
 
@@ -123,7 +123,7 @@ Create `data-scientist.yaml` file in [`profiles`](https://{{< param variables.re
 
 ```yaml
 DATA_SCIENTIST:
-  description: "Data science and analytics collaboration profile - rigorous, evidence-based, interpretive"
+  description: "Data science and analytics collaboration profile - rigorous, evidence-based, and interpretive"
   relations:
     - target: COLLABORATION
       type: inherits
@@ -155,12 +155,12 @@ DATA_SCIENTIST:
         observations:
           - "Monitor internally statistical assumption validation"
           - "Monitor internally visualization clarity requirements"
-      
+
       expertise:
         observations:
           - "Monitor internally data quality assumptions"
           - "Monitor internally methodological confidence"
-      
+
       thinking:
         observations:
           - "Monitor internally analytical framework rigor"
@@ -208,7 +208,7 @@ profile_name_methodology:        # Container section
       observations:
         - "Specific competency or skill"
         - "Another domain knowledge"
-    
+
     another_section_name:        # Another subsection with actual content
       observations:
         - "Different competency area"

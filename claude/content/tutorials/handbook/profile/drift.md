@@ -14,7 +14,7 @@ Profile drifting occurs when Claude abandons the systematic methodology of the a
 
 ### Self-Induced Drift
 
-Claude may drift during complex sessions, high cognitive load or when switching between different problem contexts. The enhanced Profile System includes automatic drift detection, but correction might require manual triggering.
+Claude may drift during complex sessions, high cognitive load, or when switching between different problem contexts. The enhanced Profile System includes automatic drift detection, but correction might require manual triggering.
 
 Common drift patterns:
 
