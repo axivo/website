@@ -48,7 +48,7 @@ class WorkflowHandler extends Action {
    */
   async buildDocumentation() {
     return this.execute('build documentation', async () => {
-      if (this.config.get('issue.createLabels')) await this.labelService.update();
+      if (this.config.get('issue.updateLabels')) await this.labelService.update();
       this.logger.info('Building documentation sites...');
       await this.hugoService.buildSites();
       this.logger.info('Documentation build complete');
