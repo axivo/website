@@ -78,8 +78,7 @@ Configure the following required MCP servers:
       "command": "uvx",
       "args": [
         "mcp-server-time",
-        "--local-timezone",
-        "America/New_York"
+        "--local-timezone=America/New_York"
       ]
     }
   }
@@ -220,6 +219,35 @@ Common Claude Code configuration issues and systematic resolution procedures hel
 ### Debugging Process
 
 1. Check Claude Code output for MCP servers connection errors
-2. Verify `.mcp.json` file syntax and paths
-3. Ensure NPX/UVX packages are accessible from terminal
+2. Verify `mcp.json` file syntax and paths
+3. Ensure NPX/UVX server packages are accessible from terminal
 4. Test individual MCP servers using direct invocation
+5. Inspect `~/Library/Logs/Claude` logs
+
+Verify the MCP server packages are accessible by running the following commands:
+
+```bash
+npx -y @modelcontextprotocol/server-filesystem
+npx -y @modelcontextprotocol/server-memory
+npx -y @modelcontextprotocol/server-sequential-thinking
+uvx mcp-server-time --help
+```
+
+### Cache Cleanup
+
+When MCP server loading fails due to cached package corruption or version conflicts, systematic cache clearing resolves most installation issues:
+
+```bash
+npm cache clean --force
+uv cache clean
+```
+
+For persistent `npx` package loading errors, clear the complete execution cache:
+
+```bash
+rm -rf ~/.npm/_npx/*
+```
+
+> [!NOTE]
+> Cache cleanup forces re-download of all MCP server packages, ensure stable internet connection before clearing caches.
+
