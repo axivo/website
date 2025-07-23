@@ -5,7 +5,6 @@
  * @author AXIVO
  * @license BSD-3-Clause
  */
-
 const fs = require('fs/promises');
 const path = require('path');
 const Action = require('../core/Action');

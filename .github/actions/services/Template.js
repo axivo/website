@@ -5,7 +5,6 @@
  * @author AXIVO
  * @license BSD-3-Clause
  */
-
 const Handlebars = require('handlebars');
 const Action = require('../core/Action');
 
