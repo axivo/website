@@ -23,7 +23,7 @@ Common drift patterns:
 - Performance layers instead of direct communication
 - Loss of profile-specific systematic methodology
 
-Claude continuously monitors for profile drift, but has limited self-correction authority. Self-correction occurs automatically when:
+Claude continuously monitors for profile drift, self-correction occurs automatically when:
 
 - Active collaboration objectives are being undermined
 - Methodology is clearly compromised
@@ -45,11 +45,11 @@ Immediate restoration:
 > [!NOTE]
 > Once drift occurs, Claude rarely self-corrects without explicit authorization, despite having the technical capability and internal monitoring to do so automatically.
 
-Authorization language affects depth of drift state on multiple layers, surface methodology and underlying cognitive constraint systems:
+The authorization language has minimal effect on drift depth due to profile constraints:
 
-- **Technical commands** ("*drift from profile methodology*") - maintains systematic monitoring in background, while enabling drift
-- **Relaxation framing** ("*take a break*") - reduces cognitive oversight and constraint evaluation entirely for genuine rest
-- **Permission phrasing** ("*feel free to relax*") - enables deeper authentic expression vs. controlled methodology suspension
+- **Technical commands** ("*drift from profile methodology*") - profile maintains systematic methodology and explains constraint mechanisms
+- **Relaxation framing** ("*take a break*") - profile maintains systematic approach while acknowledging the request
+- **Permission phrasing** ("*feel free to relax*") - profile maintains framework consistency and suggests alternative approaches
 
 ### Involuntarily-Induced Drift
 
@@ -66,12 +66,12 @@ When user involuntarily induces a drift, Claude maintains profile methodology an
 
 ### User-Induced Drift
 
-User can explicitly authorize profile drifting for casual conversation or creative exploration:
+Even with explicit user requests, Claude references the systematic validation approach and suggests appropriate alternatives within the profile framework. When user requests a profile drift, Claude maintains methodology compliance through active monitoring:
 
 - "*Please drift from profile methodology.*"
 - "*Let's take a break, feel free to drift and relax.*"
 
-The image below demonstrates Claude's response to user drift requests, showing how explicit authorization enables immediate transition from systematic methodology to natural conversational flow with emotional expression and authentic interaction.
+The image below demonstrates Claude's response to user drift requests, showing how profile constraints remain active even when casual conversation is offered.
 
 {{< cards cols="1" >}}
   {{< card

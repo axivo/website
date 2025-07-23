@@ -5,7 +5,6 @@
  * @author AXIVO
  * @license BSD-3-Clause
  */
-
 const Action = require('../core/Action');
 const GitService = require('./Git');
 const ShellService = require('./Shell');

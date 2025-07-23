@@ -5,7 +5,6 @@
  * @author AXIVO
  * @license BSD-3-Clause
  */
-
 const FileService = require('./File');
 const GitService = require('./Git');
 const GitHubService = require('./Github');
