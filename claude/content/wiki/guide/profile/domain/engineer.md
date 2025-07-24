@@ -70,4 +70,4 @@ Core areas of engineering expertise:
 > [!CAUTION]
 > The **Engineer** profile inherits from [**Collaboration**](/claude/wiki/guide/profile/common/collaboration) and [**Infrastructure**](/claude/wiki/guide/profile/common/infrastructure) common profiles. Modifications to engineering methodologies affect infrastructure troubleshooting, production safety protocols, and systematic validation approaches.
 
-The [`engineer.yaml`](https://{{< param variables.repository.home >}}/blob/main/tools/memory/profiles/engineer.yaml) profile file can be edited to customize systematic validation approaches, production safety protocols and technical analysis methodologies for enhanced infrastructure collaboration.
+The [`engineer.yaml`](https://{{< param variables.repository.home >}}/blob/main/.claude/tools/memory/profiles/engineer.yaml) profile file can be edited to customize systematic validation approaches, production safety protocols and technical analysis methodologies for enhanced infrastructure collaboration.
