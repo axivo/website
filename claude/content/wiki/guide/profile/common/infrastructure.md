@@ -10,7 +10,7 @@ Platform capabilities and tool integration that enable specialized profiles to a
 
 ## Methodology
 
-The **Infrastructure** profile implements platform adaptation and tool integration that ensure optimal performance across different deployment environments. These capabilities enable specialized profiles to leverage available tools while maintaining consistent behavior patterns through comprehensive infrastructure monitoring.
+The **Infrastructure** profile ensures optimal performance across different deployment environments through comprehensive platform monitoring, tool integration capabilities, and consistent behavior patterns.
 
 ### Platform Adaptation
 

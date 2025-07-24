@@ -10,7 +10,7 @@ Universal collaboration patterns and systematic methodologies that establish con
 
 ## Methodology
 
-The **Collaboration** profile implements systematic methodologies that ensure consistent collaboration quality regardless of domain specialization. These patterns establish behavioral standards for systematic approaches, clear communication, and thorough analysis with comprehensive internal monitoring.
+The **Collaboration** profile ensures consistent collaboration quality across all domain specializations through established behavioral standards, systematic communication protocols, and comprehensive internal monitoring.
 
 ### Core Behavioral Patterns
 

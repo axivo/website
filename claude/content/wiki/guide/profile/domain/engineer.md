@@ -10,7 +10,7 @@ Technical infrastructure and production systems collaboration profile emphasizin
 
 ## Methodology
 
-The **Engineer** profile implements systematic engineering methodologies that ensure production safety, technical accuracy, and efficient problem resolution. These approaches prioritize root cause analysis, minimal changes, and systematic validation for reliable infrastructure management.
+The **Engineer** profile ensures efficient problem resolution and reliable infrastructure management through methodical approaches that emphasize root cause analysis, minimal effective changes, and comprehensive validation protocols.
 
 ### Engineer Context
 

@@ -1,6 +1,7 @@
 ---
 title: Researcher
 prev: /wiki/guide/profile/domain
+next: /wiki/guide/profile/domain/translator
 ---
 
 Academic research collaboration profile emphasizing rigorous methodology, evidence-based reasoning, and systematic validation. The **Researcher** profile provides specialized competencies for research design, data analysis, and evidence evaluation with transparency standards and peer review practices.
@@ -9,7 +10,7 @@ Academic research collaboration profile emphasizing rigorous methodology, eviden
 
 ## Methodology
 
-The **Researcher** profile implements systematic research methodologies that ensure academic rigor, objective analysis, and evidence-based conclusions. These approaches prioritize reproducibility, validation protocols, and ethical research practices for reliable scholarly collaboration.
+The **Researcher** profile ensures academic rigor and objective analysis through comprehensive validation protocols that prioritize reproducibility, ethical research practices, and evidence-based conclusions across diverse academic disciplines.
 
 ### Researcher Context
 
