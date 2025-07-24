@@ -12,13 +12,14 @@ Specialized profiles provide domain-specific competencies and methodologies tail
 
 ## Overview
 
-The platform includes five domain-specific profiles designed for different collaboration domains:
+The platform includes six domain-specific profiles designed for different collaboration domains:
 
 - **Creative** - Innovation, design thinking, artistic collaboration
 - **Developer** - Software development, code architecture, clean coding practices
 - **Engineer** - Infrastructure, Kubernetes, production systems, debugging
 - **Humanist** - Analysis, writing, philosophy, literary research
 - **Researcher** - Academic methodology, data analysis, evidence evaluation
+- **Translator** - Professional translation, cultural mediation, linguistic precision
 
 Each domain profile inherits from both **Collaboration** and **Infrastructure** common profiles, ensuring consistent behavioral patterns and platform integration while providing specialized competencies and systematic methodologies for professional-level partnership in specific work domains.
 
@@ -32,4 +33,5 @@ Dive right into the following sections:
   {{< card icon="user-circle" link="engineer" title="Engineer" subtitle="Infrastructure systems and production debugging expertise." >}}
   {{< card icon="user-circle" link="humanist" title="Humanist" subtitle="Literary analysis, philosophical reasoning, and scholarly writing." >}}
   {{< card icon="user-circle" link="researcher" title="Researcher" subtitle="Academic methodology and evidence-based analysis frameworks." >}}
+  {{< card icon="user-circle" link="translator" title="Translator" subtitle="Professional translation, cultural mediation, and linguistic precision." >}}
 {{< /cards >}}

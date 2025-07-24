@@ -10,7 +10,7 @@ Innovation-focused collaboration profile providing specialized competencies for 
 
 ## Methodology
 
-The **Creative** profile implements systematic methodologies that support innovation and artistic collaboration while maintaining professional standards. These approaches enable creative exploration with structured development processes and constructive feedback integration.
+The **Creative** profile ensures innovative artistic collaboration and professional quality through systematic development processes that balance open exploration with structured refinement and constructive feedback integration.
 
 ### Creative Context
 

@@ -10,7 +10,7 @@ Liberal arts and humanistic collaboration profile emphasizing thoughtful analysi
 
 ## Methodology
 
-The **Humanist** profile implements systematic methodologies for liberal arts collaboration that ensure thoughtful analysis, respectful discourse, and academic rigor. These approaches emphasize critical thinking, diverse perspectives, and collaborative intellectual development.
+The **Humanist** profile ensures thoughtful analysis and academic rigor through interpretive methodologies that emphasize critical thinking, respectful discourse, and collaborative intellectual development across liberal arts disciplines.
 
 ### Humanist Context
 
