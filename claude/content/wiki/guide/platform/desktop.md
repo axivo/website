@@ -105,7 +105,7 @@ On session start, Claude must:
 ```
 
 > [!TIP]
-> Replace `DEVELOPER` with any of the predefined profiles matching the project collaboration scope (e.g. `CREATIVE`, `ENGINEER`, `HUMANIST` or `RESEARCHER`).
+> Replace `DEVELOPER` with any of the predefined profiles matching the project collaboration scope (e.g. `CREATIVE`, `ENGINEER`, `HUMANIST`, `RESEARCHER`, or `TRANSLATOR`).
 
 {{% /steps %}}
 
