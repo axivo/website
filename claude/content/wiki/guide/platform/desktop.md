@@ -200,7 +200,7 @@ The optimal workflow leverages Claude Desktop's full MCP capabilities for sessio
 3. **Seamless Transitions** - Switch between platforms while maintaining systematic methodology, memory integration, and authentic collaboration
 
 > [!TIP]
-> Once a conversation is started on Claude Desktop with proper profile initialization, the enhanced cognitive architecture persists across web and mobile interfaces, enabling flexible device switching without capability loss.
+> Once a conversation is started on Claude Desktop with proper profile initialization, the enhanced cognitive architecture persists across mobile and web interfaces, enabling flexible device switching without capability loss.
 
 ### Development Interactions
 
