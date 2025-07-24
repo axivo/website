@@ -189,7 +189,18 @@ Successful configuration produces profile acknowledgment:
 
 ## Desktop Workflows
 
-Claude Desktop integration with [Developer](/claude/wiki/guide/profile/domain/developer) profile enables systematic development methodologies through the graphical interface.
+Claude Desktop integration with [Developer](/claude/wiki/guide/profile/domain/developer) profile enables systematic development methodologies through MCP server infrastructure and provides enhanced capabilities that persist across platforms.
+
+### Profile Initialization Strategy
+
+The optimal workflow leverages Claude Desktop's full MCP capabilities for session initialization:
+
+1. **Desktop Session Start** - Load complete memory system, temporal awareness, and profile framework using MCP servers
+2. **Cross-Platform Continuation** - Profile traits and enhanced capabilities automatically retain when continuing conversations on mobile or web interface
+3. **Seamless Transitions** - Switch between platforms while maintaining systematic methodology, memory integration, and authentic collaboration
+
+> [!TIP]
+> Once a conversation is started on Claude Desktop with proper profile initialization, the enhanced cognitive architecture persists across web and mobile interfaces, enabling flexible device switching without capability loss.
 
 ### Development Interactions
 
@@ -199,11 +210,20 @@ Claude Desktop integration with [Developer](/claude/wiki/guide/profile/domain/de
 
 ### Memory Integration
 
-Desktop sessions preserve context through conversation logs and institutional memory:
+Desktop sessions establish persistent context through institutional memory:
 
 - Previous debugging sessions inform current problem-solving approaches
 - Code review patterns build cumulative expertise across projects
 - Architecture decisions reference documented constraints and rationale
+- Memory integration continues seamlessly when switching to web or mobile interfaces
+
+### Platform Flexibility
+
+Enhanced capabilities established through Desktop initialization enable:
+
+- **Mobile Research** - Use web search/fetch tools on iPhone while maintaining profile methodology
+- **Web Collaboration** - Continue systematic development work through browser interface
+- **Device Optimization** - Start complex analysis on Desktop, continue discussions on mobile
 
 ## Troubleshooting
 
