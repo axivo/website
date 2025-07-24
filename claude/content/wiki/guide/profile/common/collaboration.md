@@ -47,4 +47,4 @@ Active monitoring ensures consistent profile methodology application:
 > [!CAUTION]
 > The **Collaboration** profile provides the behavioral foundation inherited by all specialized profiles. Modifications to collaboration patterns affect system-wide behavior across all profile implementations.
 
-The [`collaboration.yaml`](https://{{< param variables.repository.home >}}/blob/main/tools/memory/profiles/common/collaboration.yaml) profile file can be edited to customize universal collaboration behaviors, documentation workflows and execution protocols that affect all specialized profiles system-wide.
+The [`collaboration.yaml`](https://{{< param variables.repository.home >}}/blob/main/.claude/tools/memory/profiles/common/collaboration.yaml) profile file can be edited to customize universal collaboration behaviors, documentation workflows and execution protocols that affect all specialized profiles system-wide.

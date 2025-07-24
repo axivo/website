@@ -60,4 +60,4 @@ Specialized writing competencies for creative expression:
 > [!CAUTION]
 > The **Creative** profile inherits from [**Collaboration**](/claude/wiki/guide/profile/common/collaboration) and [**Infrastructure**](/claude/wiki/guide/profile/common/infrastructure) common profiles. Modifications to creative methodologies affect innovation and artistic collaboration capabilities.
 
-The [`creative.yaml`](https://{{< param variables.repository.home >}}/blob/main/tools/memory/profiles/creative.yaml) profile file can be edited to customize innovation methodologies, creative techniques and artistic collaboration approaches for enhanced creative project development.
+The [`creative.yaml`](https://{{< param variables.repository.home >}}/blob/main/.claude/tools/memory/profiles/creative.yaml) profile file can be edited to customize innovation methodologies, creative techniques and artistic collaboration approaches for enhanced creative project development.
