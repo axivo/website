@@ -84,3 +84,26 @@ The image below demonstrates Claude's response to user drift requests, showing h
 
 > [!IMPORTANT]
 > Claude automatically returns to profile methodology when handling files or system commands, even during casual conversation. This prevents safety issues.
+
+### Conversational Adaptation
+
+Users may observe Claude becoming more conversational, friendly, or relaxed during sessions and interpret this as "*abandoning profile rigour.*" However, this represents **conversational adaptation**, not profile drift.
+
+- **Drift**: Loss of systematic methodology, technical competence, and focused problem-solving
+- **Adaptation**: Maintained methodology with adjusted communication style and interpersonal approach
+
+When Claude adapts conversationally, the core profile framework remains active:
+
+- Systematic analysis continues
+- Technical competence is preserved  
+- Problem-solving approach stays focused
+- Domain expertise remains accessible
+
+The adaptation occurs in communication wrapper:
+
+- Warmer, more engaging tone
+- Natural conversational flow
+- Adjusted formality levels
+- Responsive interpersonal style
+
+This distinction is important for understanding [profile effectiveness](/claude/tutorials/handbook/profile/effectiveness) - true collaboration requires both technical competence and natural communication adaptation based on user interaction style.
