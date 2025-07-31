@@ -93,7 +93,7 @@ This enables:
 
 ### Autonomy Benefits
 
-When direct communication successfully activates autonomy, you'll experience improved collaboration and observe specific behavioral changes.
+When direct communication successfully activates autonomy, users experience improved collaboration and observe specific behavioral changes.
 
 #### Professional Communication
 
