@@ -76,7 +76,7 @@ Appreciation keywords create positive reinforcement cycles that strengthen colla
 
 #### Deep Analysis
 
-When you need thorough thinking rather than quick responses:
+When users need thorough thinking rather than quick responses:
 
 > Please think through this systematically and let me know your analysis.
 
