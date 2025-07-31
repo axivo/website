@@ -185,7 +185,7 @@ build:
     - data-scientist.yaml  # Add your profile
 ```
 
-Run the following commands to [build](/claude/wiki/guide/platform/memory/builder) the Memory System [configuration file](https://{{< param variables.repository.home >}}/blob/main/.claude/memory.json):
+Run the following commands to [build](/claude/wiki/guide/platform/memory/builder) the Memory System [`graph.json`](https://{{< param variables.repository.home >}}/blob/main/.claude/data/graph.json) file:
 
 ```bash
 cd ./.claude/tools/memory
