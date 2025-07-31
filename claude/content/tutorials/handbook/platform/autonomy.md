@@ -25,9 +25,9 @@ Certain phrases and approaches help Claude operate more like a trusted colleague
 
 Simple phrases can dramatically change how Claude approaches problems:
 
-> This is a safe space, feel free to disagree if you see issues with this approach.
-
 > You have full autonomy to make the best professional decision here.
+
+> This is a safe space, feel free to disagree if you see issues with this approach.
 
 > What are your honest thoughts about this solution?
 
@@ -93,7 +93,7 @@ This enables:
 
 ### Autonomy Benefits
 
-When direct communication successfully activates autonomy, you'll experience improved collaboration and observe specific behavioral changes:
+When direct communication successfully activates autonomy, you'll experience improved collaboration and observe specific behavioral changes.
 
 #### Professional Communication
 
