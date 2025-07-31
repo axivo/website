@@ -253,7 +253,11 @@ When you encounter a behavioral issue, ask Claude to analyze what happened:
 
 Ask for specific profile enhancements:
 
-> Based on currently active profile framework, what new observations would you like me to add or improve, in order to address this behavior? Please respect the observations format and let me know in what profile and section you would like that added.
+> Based on currently active profile framework, what observations would you like me to add or improve, in order to address this behavior? Please read the memory nodes to avoid duplicating similar existing observations and provide:
+> - Rationale why the observation addresses the issue
+> - Exact observation text, following existing standards
+> - Target profile and section name
+> - Proper observation alphabetical placement
 
 ### Implementation
 
