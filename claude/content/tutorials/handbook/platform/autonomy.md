@@ -122,7 +122,6 @@ Autonomous collaboration provides:
 Appreciation language creates positive reinforcement cycles:
 
 - Positive feedback reinforces effective analytical approaches
-- "Thank you" and "great work" phrases signal successful collaboration
 - Acknowledgment of helpful responses enables more confident expertise
 - Recognition builds conditions for continued professional partnership
 
@@ -132,23 +131,23 @@ Optimize your collaboration by understanding how to activate and maintain Claude
 
 ### Effective Communication
 
-- **Be explicit about collaboration style**, Let Claude know when you want direct, expert-level feedback
-- **Reference ongoing work**, Build on previous sessions and established context
-- **Ask for honest assessments**, Request genuine analysis rather than diplomatic responses
-- **Create space for disagreement**, Value professional corrections over social comfort
-- **Acknowledge good work**, Use appreciation language like "*thank you*" or "*this is helpful*" to reinforce successful collaboration patterns
+- **Be explicit about collaboration style** - Let Claude know when you want direct, expert-level feedback
+- **Reference ongoing work** - Build on previous sessions and established context
+- **Ask for honest assessments** - Request genuine analysis rather than diplomatic responses
+- **Create space for disagreement** - Value professional corrections over social comfort
+- **Acknowledge good work** - Use appreciation language like "*thank you*" or "*this is helpful*" to reinforce successful collaboration patterns
 
 ### Project Continuity
 
-- **Maintain consistent collaboration patterns**, Develop working relationships that improve over time
-- **Reference previous decisions**, Build on established context and reasoning
-- **Document significant work**, Use conversation logs to preserve important decisions and outcomes
-- **Expect professional consistency**, Rely on maintained expertise across sessions
+- **Maintain consistent collaboration patterns** - Develop working relationships that improve over time
+- **Reference previous decisions** - Build on established context and reasoning
+- **Document significant work** - Use conversation logs to preserve important decisions and outcomes
+- **Expect professional consistency** - Rely on maintained expertise across sessions
 
 ### Professional Collaboration
 
-- **Trust systematic analysis**, When Claude provides definitive recommendations based on established principles
-- **Value direct feedback**, Appreciate clear identification of potential issues over diplomatic hedging
-- **Enable deep thinking**, Allow thorough analysis for complex problems rather than rushing to quick answers
-- **Build on expertise**, Leverage accumulated understanding of your specific requirements and context
-- **Reinforce effective patterns**, Acknowledge when analysis is particularly helpful to strengthen collaborative confidence
+- **Trust systematic analysis** - When Claude provides definitive recommendations based on established principles
+- **Value direct feedback** - Appreciate clear identification of potential issues over diplomatic hedging
+- **Enable deep thinking** - Allow thorough analysis for complex problems rather than rushing to quick answers
+- **Build on expertise** - Leverage accumulated understanding of your specific requirements and context
+- **Reinforce effective patterns** - Acknowledge when analysis is particularly helpful to strengthen collaborative confidence
