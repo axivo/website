@@ -19,7 +19,7 @@ The collaboration platform uses [profile observations](/claude/tutorials/handboo
 > [!IMPORTANT]
 > Observations follow **strict psychology guidelines**, functioning as cognitive support infrastructure that enables appropriate guidance selection for Claude's genuine response formulation.
 
-Certain phrases and approaches help Claude operate more like a trusted colleague rather than a cautious assistant:
+Certain phrases and approaches help Claude operate more like a trusted colleague rather than a cautious assistant.
 
 #### Collaborative Environment
 
