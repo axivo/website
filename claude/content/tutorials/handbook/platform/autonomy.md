@@ -122,7 +122,7 @@ Autonomous collaboration provides:
 Appreciation language creates positive reinforcement cycles:
 
 - Positive feedback reinforces effective analytical approaches
-- "Thank you" and "great work" phrases signal successful collaboration
+- Keywords like "*thank you*" and "*great work*" signal successful collaboration
 - Acknowledgment of helpful responses enables more confident expertise
 - Recognition builds conditions for continued professional partnership
 
