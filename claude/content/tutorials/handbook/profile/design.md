@@ -4,13 +4,13 @@ prev: /tutorials/handbook/profile
 next: /tutorials/handbook/profile/drift
 ---
 
-Systematic methodology for creating custom collaboration profiles that extend specialized competencies while maintaining behavioral consistency and professional collaboration standards.
+Profile design creates custom collaboration frameworks that extend specialized competencies while maintaining behavioral consistency and professional standards across different work domains.
 
 <!--more-->
 
 ## Guidelines
 
-Profile creation and design requires understanding behavioral programming systems that directly control Claude's decision-making, communication patterns, and problem-solving approaches. Profiles are hierarchical structures that separate universal collaboration patterns from domain-specific expertise.
+Effective profile creation requires understanding behavioral programming systems that shape Claude's decision-making, communication patterns, and problem-solving approaches for specific professional contexts.
 
 ### Architecture
 
@@ -110,12 +110,15 @@ observations:
   - "Systematic validation and quality assurance"
 ```
 
+> [!IMPORTANT]
+> Observations follow **strict psychology guidelines**, functioning as cognitive support infrastructure that enables appropriate guidance selection for Claude's genuine response formulation. **Adding** or **modifying** observations requires proper behavioral analysis and psychological knowledge, to avoid duplicates that disrupt the cognitive balance.
+
 ## Profile Creation
 
 Step-by-step example demonstrating the creation of a `DATA_SCIENTIST` profile with analytics competencies, statistical methodology and data visualization capabilities.
 
-> [!CAUTION]
-> This example demonstrates profile structure and syntax. Creating effective profiles requires extensive study of behavioral programming principles and thorough testing. Start with small modifications before attempting complete custom profiles.
+> [!IMPORTANT]
+> Creating effective profiles requires **extensive study** of behavioral programming principles and psychological knowledge. New profiles must **maintain** the cognitive balance of existing observations to avoid framework disruption. Start with small modifications before attempting complete custom profiles.
 
 ### Profile File
 
@@ -230,6 +233,9 @@ This architecture separates organizational structure from behavioral content, al
 
 The most effective way to enhance profiles is through collaborative behavioral analysis when issues arise.
 
+> [!CAUTION]
+> Observations directly control Claude's decision-making and behavioral patterns through precise **cognitive programming**. Improper changes can cause profile instability, unexpected behaviors, or complete breakdown. **Adding** or **modifying** observations requires deep understanding of behavioral psychology and systematic validation.
+
 {{% steps %}}
 
 ### Behavioral Issues
@@ -269,6 +275,3 @@ Profile validation requires both technical and behavioral assessment:
 - 24-48 hours initial behavioral pattern assessment
 - Monitor for unintended side effects across interactions
 - Validate profile achieves intended behavioral modifications
-
-> [!IMPORTANT]
-> Profile creation modifies core behavioral patterns. Incorrect implementation can cause behavioral dysfunction requiring immediate rollback capability.

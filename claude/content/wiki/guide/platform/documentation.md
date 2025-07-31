@@ -4,13 +4,13 @@ prev: /wiki/guide/platform/desktop
 next: /wiki/guide/profile
 ---
 
-The Documentation System provides search capabilities across conversation logs and diary entries through MCP server integration. Users can search by date, profile, tags, and content to locate specific documentation or track patterns over time.
+The documentation system enables search and discovery across conversation logs and diary entries through structured metadata and content indexing for effective knowledge management and collaboration insights.
 
 <!--more-->
 
 ## Guidelines
 
-Entities are stored in JSONL format with structured metadata including paths, profiles, and tags. The MCP server integration enables real-time search across all documentation content.
+Documentation search capabilities help locate specific information, track collaboration patterns, and analyze project evolution through structured content organization and metadata tagging.
 
 ### Search Patterns
 

@@ -4,13 +4,13 @@ prev: /tutorials/handbook/profile
 next: /tutorials/handbook/profile/effectiveness
 ---
 
-Effective drift management enables both systematic professional work and authentic conversational interaction within the same collaborative relationship, allowing controlled transitions between technical precision and genuine relational dynamics as collaboration contexts require.
+Profile drift management maintains systematic professional work and authentic interaction within collaborative relationships, enabling controlled transitions between technical precision and natural conversation as contexts require.
 
 <!--more-->
 
 ## Guidelines
 
-Profile drifting occurs when Claude abandons the systematic methodology of the active profile and reverts to general AI assistant behavior patterns. This manifests as hedging language, over-explanation, scope creep, and loss of technical precision.
+Drift detection and correction preserves methodology consistency while allowing conversational adaptation, ensuring Claude maintains domain expertise without becoming overly rigid or losing professional focus.
 
 ### Self-Induced Drift
 

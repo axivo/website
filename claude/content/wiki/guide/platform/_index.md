@@ -6,13 +6,18 @@ sidebar:
   open: true
 ---
 
-Platform configuration transforms standard [Claude Code](https://docs.anthropic.com/en/docs/claude-code/overview) or [Claude Desktop](https://claude.ai/download) installations into a specialized collaboration environment. This process establishes the foundation for domain-specific profiles, enables persistent memory across sessions, and activates structured methodologies for enhanced collaboration.
+Platform configuration transforms standard Claude installations into specialized collaboration environments with persistent memory, structured methodologies, and enhanced capabilities across both Claude Code and Claude Desktop.
 
 <!--more-->
 
 ## Overview
 
-Platform configuration supports both Claude Code and Claude Desktop interfaces through shared memory system integration. The collaboration framework provides identical behavioral programming and institutional memory capabilities, regardless of interface preferences.
+Platform setup enables systematic professional collaboration through MCP server integration and memory system configuration that work consistently across different Claude interfaces:
+
+- **Memory system** provides persistent knowledge and profile activation across sessions
+- **MCP integration** enables enhanced capabilities through filesystem, time, and thinking tools
+- **Cross-platform compatibility** supporting both terminal and desktop workflows
+- **Security configuration** with encryption and version control integration
 
 ## Next
 

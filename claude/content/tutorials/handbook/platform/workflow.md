@@ -5,13 +5,13 @@ next: /tutorials/handbook/platform/conversation
 weight: 1
 ---
 
-A collaboration session workflow defines the systematic process for productive interactions between users and Claude through either Claude Code or Claude Desktop platforms. This workflow establishes profile methodology, enables systematic collaboration patterns, and maintains institutional memory across sessions.
+Session workflow transforms Claude from generic AI assistance into specialized professional partnership through structured collaboration patterns that maintain consistency and build expertise over time.
 
 <!--more-->
 
 ## Guidelines
 
-Collaboration sessions follow a structured progression that transforms Claude from generic AI assistance into specialized professional partnership. Both Claude Code and Claude Desktop platforms support this methodology through MCP server integration and profile activation.
+Effective sessions follow a systematic progression that establishes professional methodology, enables productive collaboration, and maintains institutional memory across interactions.
 
 ### Session Initialization
 
