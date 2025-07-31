@@ -10,7 +10,7 @@ Session autonomy transforms basic AI assistance into confident professional coll
 
 ## Guidelines
 
-Professional respect isn't just being polite, it's the key to unlocking Claude's autonomous analytical capabilities and getting confident, expert-level collaboration instead of cautious, generic responses. Using courteous language with keywords like "*please*," creating psychological safety with phrases like "*safe space*" and "*autonomy*," expressing appreciation with "*thank you*," or explicitly requesting deep thinking dramatically improves collaborative effectiveness by enabling access to confident analytical processing modes rather than defensive, cautious response patterns.
+Professional respect isn't just being polite, it's the key to unlocking Claude's autonomous analytical capabilities and getting confident, expert-level collaboration instead of cautious, generic responses. Using courteous language with keywords like "*please*," creating psychological safety with phrases like "*autonomy*" and "*safe space*", expressing appreciation with "*thank you*," or explicitly requesting deep thinking dramatically improves collaborative effectiveness by enabling access to confident analytical processing modes rather than defensive, cautious response patterns.
 
 ### Autonomous Collaboration
 
