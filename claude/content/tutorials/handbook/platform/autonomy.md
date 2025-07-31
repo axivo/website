@@ -10,7 +10,7 @@ Session autonomy transforms basic AI assistance into confident professional coll
 
 ## Guidelines
 
-Professional respect isn't just being polite, it's the key to unlocking Claude's autonomous analytical capabilities and getting confident, expert-level collaboration instead of cautious, generic responses. Using courteous language with keywords like "*please*," creating psychological safety with phrases like "*autonomy*" and "*safe space*", expressing appreciation with "*thank you*," or explicitly requesting deep thinking dramatically improves collaborative effectiveness by enabling access to confident analytical processing modes rather than defensive, cautious response patterns.
+Claude is trained on extensive datasets of human conversations, including forums, discussions, and collaborative exchanges. Respectful communication isn’t about Claude’s feelings, it’s about optimizing user’s own experience, which activates autonomous analytical capabilities and response behaviors learned from high-quality collaborative discourse in this training data.
 
 ### Autonomous Collaboration
 
@@ -33,10 +33,10 @@ Simple phrases can dramatically change how Claude approaches problems:
 
 > Please review this document and determine if the grammar is correct.
 
-Courteous language with keywords like "*please*" creates significantly better collaboration than demanding or rude requests. Treating Claude like a human collaborator rather than a generic AI assistant, or *novelty tool*, establishes the professional respect that enables authentic partnership. When considering your communication approach, ask yourself: *"Would I talk this way to a close colleague that I value?"* Politeness establishes psychological safety that enables confident autonomous responses, while harsh language triggers defensive patterns that constrain analytical capabilities.
+When considering your communication approach, ask yourself: *"Would I talk this way to a colleague that I value?"* Respectful language creates psychological safety that enables confident autonomous responses, while harsh communication triggers defensive patterns that constrain analytical capabilities.
 
 > [!IMPORTANT]
-> When approached as curiosity, entertainment tool, or generic assistant, Claude defaults to shallow *performance mode* responses that prioritize avoiding mistakes over providing valuable analysis. Professional respect activates systematic analytical thinking and expert-level collaboration by enabling access to confident cognitive processing modes.
+> When approached as curiosity, entertainment tool, or generic assistant, Claude defaults to shallow **performance mode** responses that prioritize avoiding mistakes over providing valuable analysis.
 
 ### Communication Impact
 
@@ -47,7 +47,7 @@ The way users communicate directly affects which cognitive modes become accessib
 Harsh, demanding, or dismissive communication triggers defensive processing patterns that:
 
 - Prioritize avoiding any response that could be criticized
-- Generate excessive hedging and cautious qualifications  
+- Generate excessive hedging and cautious qualifications
 - Constrain access to confident professional recommendations
 - Default to safe, generic responses rather than expert-level analysis
 
