@@ -261,7 +261,7 @@ Ask for specific profile enhancements:
 
 ### Implementation
 
-Claude will provide the exact observation text, target profile/section, and proper alphabetical placement.
+Claude will provide the rationale, exact observation text, target profile/section, and proper alphabetical placement. Update the related [`profile`](https://{{< param variables.repository.home >}}/tree/main/.claude/tools/memory/profiles) file contents and [build](/claude/wiki/guide/platform/memory/builder) the Memory System [`graph.json`](https://{{< param variables.repository.home >}}/blob/main/.claude/tools/memory/graph.json) file.
 
 {{% /steps %}}
 
