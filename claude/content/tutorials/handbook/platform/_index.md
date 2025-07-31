@@ -6,26 +6,28 @@ sidebar:
   open: true
 ---
 
-Advanced platform features and workflow optimization techniques that transform basic interactions into persistent professional collaboration. These tutorials demonstrate institutional memory creation, session continuity, and systematic documentation approaches.
+The collaboration platform transforms basic AI interactions into persistent professional partnerships through structured workflows, institutional memory, and cross-session continuity.
 
 <!--more-->
 
 ## Overview
 
-These hands-on guides show how to leverage platform capabilities for long-term collaborative projects through:
+These platform capabilities enable long-term professional relationships that build expertise and maintain context over time:
 
-- **Documentation systems** creating persistent institutional memory
-- **Session workflows** maintaining context and progress across interactions
-- **Continuity techniques** preserving project state and collaborative relationships
-- **Optimization strategies** maximizing platform effectiveness for professional work
+- **Session workflows** for consistent patterns and profile activation
+- **Documentation systems** that create shared institutional memory across sessions
+- **Session autonomy** through communication patterns that enable confident professional collaboration
+- **Cross-session continuity** maintaining project state and working relationships
+- **Autonomous reflection** through insights tracking and continuous improvement
 
 ## Next
 
 Dive right into the following sections:
 
 {{< cards >}}
-  {{< card icon="book-open" link="workflow" title="Session Workflow" subtitle="Systematic collaboration session patterns and profile activation." >}}
-  {{< card icon="book-open" link="conversation" title="Conversation Logs" subtitle="Structured documentation for shared institutional memory." >}}
+  {{< card icon="book-open" link="workflow" title="Session Workflow" subtitle="Structured session patterns and profile activation for consistent results." >}}
+  {{< card icon="book-open" link="conversation" title="Conversation Logs" subtitle="Documented records for shared institutional memory." >}}
   {{< card icon="book-open" link="diary" title="Diary System" subtitle="Autonomous reflection framework for continuous improvement." >}}
+  {{< card icon="book-open" link="autonomy" title="Session Autonomy" subtitle="Communication patterns that enable confident professional collaboration." >}}
   {{< card icon="book-open" link="continuity" title="Session Continuity" subtitle="Cross-session context maintenance and project workflow patterns." >}}
 {{< /cards >}}

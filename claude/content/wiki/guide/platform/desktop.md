@@ -4,13 +4,13 @@ prev: /wiki/guide/platform
 next: /wiki/guide/platform/documentation
 ---
 
-Configure Claude Desktop with MCP servers and [Developer](/claude/wiki/guide/profile/domain/developer) profile to enable collaboration platform functionality. This process establishes core tool connections, memory system integration, and secure configuration management.
+Claude Desktop setup enables GUI-based collaboration with enhanced capabilities through MCP server integration and profile activation for systematic professional workflows across different domains.
 
 <!--more-->
 
 ## Setup
 
-The collaboration platform requires four essential MCP servers to provide complete functionality. These servers enable systematic development methodologies, institutional memory, and temporal awareness that transform Claude Desktop from generic assistance into specialized [Developer](/claude/wiki/guide/profile/domain/developer) profile partnership.
+Desktop collaboration requires MCP server configuration that transforms Claude Desktop from generic assistance into specialized professional partnership with persistent memory and domain-specific methodologies.
 
 {{% steps %}}
 

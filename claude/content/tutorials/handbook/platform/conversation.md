@@ -4,13 +4,13 @@ prev: /tutorials/handbook/platform
 next: /tutorials/handbook/platform/diary
 ---
 
-Structured documentation system that creates shared institutional memory by preserving collaborative work sessions, technical decisions, and implementation patterns for future reference and decision archaeology.
+Conversation logs create shared institutional memory by preserving collaborative work sessions, technical decisions, and implementation patterns for future reference and project continuity.
 
 <!--more-->
 
 ## Guidelines
 
-Conversation logs provide systematic documentation capabilities that transform factual session records into persistent knowledge, enabling cumulative expertise development and systematic work management across multiple collaborative sessions.
+Structured documentation transforms individual sessions into persistent knowledge that enables cumulative expertise development and consistent decision-making across multiple collaborative interactions.
 
 ### Purpose
 

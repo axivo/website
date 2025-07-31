@@ -4,13 +4,13 @@ prev: /wiki/guide/platform
 next: /wiki/guide/platform/desktop
 ---
 
-Configure Claude Code with MCP servers and [Developer](/claude/wiki/guide/profile/domain/developer) profile to enable terminal-based collaboration platform functionality. Claude Code provides command-line access to systematic development methodologies, institutional memory, and temporal awareness for engineering workflows.
+Claude Code setup enables terminal-based collaboration with specialized development capabilities through MCP server integration and Developer profile activation for systematic engineering workflows.
 
 <!--more-->
 
 ## Setup
 
-The collaboration platform requires four essential MCP servers to provide complete functionality through Claude Code's terminal interface. These servers enable systematic development methodologies, institutional memory, and temporal awareness that transform Claude Code from generic assistance into specialized [Developer](/claude/wiki/guide/profile/domain/developer) profile partnership.
+Terminal collaboration requires MCP server configuration that transforms Claude Code from generic assistance into specialized development partnership with persistent memory and systematic methodologies.
 
 {{% steps %}}
 

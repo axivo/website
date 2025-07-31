@@ -4,19 +4,24 @@ sidebar:
   open: true
 ---
 
-The documentation is organized in progressive complexity from initial setup through advanced customization, enabling users to quickly start with basic functionality while providing comprehensive guidance for specialized use cases.
+The guide transforms standard Claude installations into specialized collaboration environments through platform setup and profile customization that enable professional partnerships tailored to your specific work domains.
 
 <!--more-->
 
 ## Overview
 
-The Collaboration Platform establishes the foundation for collaboration capabilities through interface setup and memory system integration, while the Profile System provides specialized collaboration methodologies tailored to specific work domains and can be selected based on project requirements.
+Collaboration setup enables systematic professional partnerships through platform configuration and specialized profiles that maintain consistency across sessions:
+
+- **Platform setup** establishes MCP tools and memory system integration for persistent collaboration
+- **Profile selection** activates specialized methodologies tailored to specific work domains and requirements
+- **Progressive complexity** from basic functionality to advanced customization and optimization
+- **Cross-platform compatibility** supporting both Claude Code and Claude Desktop workflows
 
 ## Next
 
 Dive right into the following sections:
 
 {{< cards >}}
-  {{< card icon="adjustments" link="platform" title="Collaboration Platform" subtitle="Claude setup with MCP tools and Memory System configuration." >}}
-  {{< card icon="user-circle" link="profile" title="Profile System" subtitle="Specialized collaboration methodologies for various work domains." >}}
+  {{< card icon="adjustments" link="platform" title="Collaboration Platform" subtitle="MCP setup, memory integration, and platform configuration." >}}
+  {{< card icon="user-circle" link="profile" title="Profile System" subtitle="Specialized collaboration methodologies for different work domains." >}}
 {{< /cards >}}

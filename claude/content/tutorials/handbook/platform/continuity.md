@@ -4,13 +4,13 @@ prev: /tutorials/handbook/platform
 next: /tutorials/handbook/profile
 ---
 
-Techniques for maintaining conversation context and progress across multiple sessions through systematic reference strategies and cross-session workflow patterns.
+Session continuity leverages the established session workflow to maintain context between conversations through systematic reference and documentation patterns.
 
 <!--more-->
 
 ## Guidelines
 
-Session continuity leverages the established session workflow to maintain context between conversations through systematic reference and documentation patterns.
+Effective continuity enables seamless project progression across multiple sessions by preserving context, decisions, and momentum through structured documentation and reference strategies.
 
 ### Cross-Session References
 

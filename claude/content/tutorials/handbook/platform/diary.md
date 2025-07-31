@@ -4,13 +4,13 @@ prev: /tutorials/handbook/platform
 next: /tutorials/handbook/platform/continuity
 ---
 
-Autonomous reflection framework that captures Claude's insights, alternative approaches, and process effectiveness observations under complete creative and intellectual autonomy.
+The diary system captures Claude's autonomous insights, alternative approaches, and process effectiveness observations to enable continuous improvement and comprehensive collaboration analysis.
 
 <!--more-->
 
 ## Guidelines
 
-Diary entries provide autonomous documentation capabilities that preserve process insights and enable continuous improvement through systematic reflection on collaborative effectiveness, diagnostic approaches, and alternative solution exploration.
+Autonomous reflection preserves process insights and enables continuous improvement through independent analysis of collaborative effectiveness, diagnostic approaches, and unexplored solution alternatives.
 
 ### Purpose
 
