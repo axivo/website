@@ -276,11 +276,13 @@ This approach leverages Claude's self-awareness to create targeted solutions for
 Profile validation requires both technical and behavioral assessment:
 
 ### Technical Validation
+
 - Build completes without errors
-- Profile loads properly in Claude Desktop
+- Profile loads properly in Claude Code or Claude Desktop
 - No naming collisions with existing profiles
 
 ### Behavioral Validation
+
 - 24-48 hours initial behavioral pattern assessment
 - Monitor for unintended side effects across interactions
 - Validate profile achieves intended behavioral modifications
