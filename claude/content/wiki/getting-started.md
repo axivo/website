@@ -25,11 +25,42 @@ Install dependencies for memory system and profile configuration:
 brew install node uv
 ```
 
-### Collaboration Platform
+### Repository
 
-[Fork](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/fork-a-repo) the [`claude`](https://{{< param variables.repository.home >}}) GitHub repository to create your personal configuration repository. This enables version control of your profile customizations, MCP server settings, and conversation logs while maintaining the ability to pull upstream updates.
+[Fork](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/fork-a-repo) the [`claude`](https://{{< param variables.repository.home >}}) GitHub repository and clone it locally:
+
+```shell
+git clone https://github.com/USERNAME/claude.git ~/github/claude
+cd ~/github/claude
+```
+
+### Memory Configuration
+
+Review the Memory System [configuration settings](/claude/wiki/guide/platform/memory/configuration) to understand how profiles and paths are configured. The default settings work for most users.
+
+### Memory Builder
+
+> [!NOTE]
+> The [builder](/claude/wiki/guide/platform/memory/builder) step is optional, useful if future profile enhancements are required.
+
+Build the Memory System from profile configurations:
+
+```shell
+cd ~/github/claude/tools/memory
+npm install js-yaml
+npm init -y
+node ./lib/core/Package.js
+npm run build --silent
+```
+
+### Application Configuration
+
+Choose your preferred application, [Claude Code](/claude/wiki/guide/platform/code) or [Claude Desktop](/claude/wiki/guide/platform/desktop), and follow the setup instructions.
 
 {{% /steps %}}
+
+> [!IMPORTANT]
+> The above steps provide a quick setup path. For detailed understanding of platform usage, configuration options, and advanced features, explore the comprehensive guide sections below.
 
 ## Next
 
