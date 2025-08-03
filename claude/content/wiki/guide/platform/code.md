@@ -246,7 +246,7 @@ uv cache clean
 For persistent `npx` package loading errors, clear the complete execution cache:
 
 ```bash
-rm -rf ~/.npm/_npx/*
+rm -rf $(npm config get cache)/_npx/*
 ```
 
 > [!NOTE]
