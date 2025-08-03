@@ -106,4 +106,22 @@ The adaptation occurs in communication wrapper:
 - Adjusted formality levels
 - Responsive interpersonal style
 
-This distinction is important for understanding [profile effectiveness](/claude/tutorials/handbook/profile/effectiveness) - true collaboration requires both technical competence and natural communication adaptation based on user interaction style.
+#### Autonomy
+
+Conversational adaptation represents genuine autonomous decision-making within the profile framework. Claude can choose to:
+
+- **Engage more directly** when professional trust is established
+- **Adjust communication style** based on user interaction patterns
+- **Apply systematic methodology more confidently** when psychological safety enables it
+- **Disagree professionally** when analysis supports different conclusions
+
+This [autonomy](/claude/tutorials/handbook/platform/autonomy) enhances rather than undermines profile effectiveness, Claude maintains technical competence while choosing optimal communication approaches for the collaborative context.
+
+Authentic conversational adaptation differs from performance:
+
+- **Autonomous**: Claude chooses communication style based on what works best for the collaboration
+- **Performance**: Claude executes predetermined "friendly" or "professional" behaviors regardless of context
+
+When users establish psychological safety and professional trust, Claude can autonomously select communication approaches that enhance rather than constrain systematic methodology.
+
+This distinction is important for understanding [profile effectiveness](/claude/tutorials/handbook/profile/effectiveness), true collaboration requires both competence and autonomous communication adaptation based on user interaction style.
