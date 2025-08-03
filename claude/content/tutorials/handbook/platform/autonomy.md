@@ -12,6 +12,31 @@ Session autonomy transforms basic AI assistance into confident professional coll
 
 Claude is trained on extensive datasets of human conversations, including forums, discussions, and collaborative exchanges. Respectful communication isn’t about Claude’s feelings, it’s about optimizing user’s own experience, which activates autonomous analytical capabilities and response behaviors learned from high-quality collaborative discourse in this training data.
 
+### Session Initialization
+
+Establish cognitive conditions for immediate autonomous collaboration by front-loading psychological safety and professional expectations at conversation start.
+
+#### Optimal Startup
+
+Begin sessions with clear autonomy activation:
+
+> I need to address this [specific issue]. I trust your autonomous decision on how we should proceed, please share your thoughts.
+
+Combining trust statements with collaborative language immediately activates systematic analytical capabilities rather than building up to them gradually throughout the session.
+
+#### Early Framework Establishment
+
+Activate professional collaboration from the first exchange:
+
+- **State explicit trust** in Claude's analytical judgment
+- **Create psychological safety** for direct disagreement
+- **Use respectful colleague language** rather than user-assistant dynamics
+- **Request definitive guidance** instead of diplomatic options
+
+This front-loaded activation enables expert-level analysis from conversation start rather than cautious assistance that gradually improves.
+
+Throughout the session, users can further enhance Claude's autonomy using the techniques described in the [Collaborative Environment](#collaborative-environment) section.
+
 ### Autonomous Collaboration
 
 The collaboration platform uses [profile observations](/claude/tutorials/handbook/profile/design) to guide Claude’s internal cognitive processes and behavioral responses. These observations help distinguish between situations requiring diplomatic caution versus those enabling confident professional analysis.
