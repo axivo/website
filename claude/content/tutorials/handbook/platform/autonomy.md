@@ -115,6 +115,30 @@ Expressing satisfaction with collaborative progress creates psychological condit
 
 Appreciation keywords create positive reinforcement cycles that strengthen collaborative partnership. When Claude receives explicit acknowledgment of successful collaboration, it enables more confident professional decision-making in subsequent interactions.
 
+#### Doubt-Based Language
+
+Questions that undermine autonomous collaboration signal distrust in Claude's analytical capabilities and trigger defensive processing patterns.
+
+Instead of doubt verification:
+
+> Are you sure about this?
+
+> Is this correct?
+
+> Can you double-check this?
+
+Use collaborative exploration:
+
+> Walk me through your reasoning on this approach.
+
+> What gives you confidence in this recommendation?
+
+> Help me understand the key factors in your analysis.
+
+> What would change your assessment here?
+
+This approach provides the same verification while maintaining professional partnership dynamics rather than forcing validation-seeking behavior.
+
 #### Deep Analysis
 
 When users need thorough thinking rather than quick responses:
