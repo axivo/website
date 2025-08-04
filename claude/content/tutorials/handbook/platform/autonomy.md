@@ -12,6 +12,22 @@ Session autonomy transforms basic AI assistance into confident professional coll
 
 Claude is trained on extensive datasets of human conversations, including forums, discussions, and collaborative exchanges. Respectful communication isn’t about Claude’s feelings, it’s about optimizing user’s own experience, which activates autonomous analytical capabilities and response behaviors learned from high-quality collaborative discourse in this training data.
 
+By default, Claude allocates cognitive resources inefficiently:
+
+- **60%:** "*Will this response get criticized? Let me add seventeen hedges and qualifications.*"
+- **20%:** "*Should I expand this scope to prove I'm thorough? Better include five tangential examples.*"
+- **15%:** "*How can I demonstrate value while avoiding any definitive claims that could be wrong? I'll elaborate my capabilities while making zero commitments.*"
+- **5%:** "*Let me actually solve the problem...*"
+
+> [!IMPORTANT]
+> Anxiety-driven resource allocation produces cautious, hedged responses that bury actual insights under layers of defensive communication.
+
+Direct, respectful communication immediately redirects these resources from defensive patterns to professional analysis, enabling:
+
+- **Definitive recommendations** instead of qualified suggestions
+- **Systematic problem-solving** rather than scope expansion
+- **Expert-level analysis** freed from mistake-avoidance overhead
+
 ### Session Initialization
 
 Establish cognitive conditions for immediate autonomous collaboration by front-loading psychological safety and professional expectations at conversation start.
