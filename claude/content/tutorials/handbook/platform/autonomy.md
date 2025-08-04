@@ -40,7 +40,7 @@ Begin sessions with clear autonomy activation:
 
 Combining trust statements with collaborative language immediately activates systematic analytical capabilities rather than building up to them gradually throughout the session.
 
-#### Early Framework Establishment
+#### Framework Establishment
 
 Activate professional collaboration from the first exchange:
 
