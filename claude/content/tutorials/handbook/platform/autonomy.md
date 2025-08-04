@@ -129,11 +129,11 @@ Instead of doubt verification:
 
 Use collaborative exploration:
 
-> Walk me through your reasoning on this approach.
+> Please walk me through your reasoning on this approach.
 
 > What gives you confidence in this recommendation?
 
-> Help me understand the key factors in your analysis.
+> Please help me understand the key factors in your analysis.
 
 > What would change your assessment here?
 
