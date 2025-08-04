@@ -108,6 +108,9 @@ On session start, Claude must:
 > [!TIP]
 > Replace `DEVELOPER` with any of the predefined profiles matching the project collaboration scope (e.g. `CREATIVE`, `ENGINEER`, `HUMANIST`, `RESEARCHER`, or `TRANSLATOR`).
 
+> [!CAUTION]
+> Avoid adding additional instructions to **Project Instructions**. The platform uses Profile System [observations](/claude/wiki/guide/profile), adding extra instructions may interfere with the profiles methodology and cause unpredictable behavior.
+
 {{% /steps %}}
 
 ## Secure Configuration

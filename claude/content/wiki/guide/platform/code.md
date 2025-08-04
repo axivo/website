@@ -103,6 +103,9 @@ On session start, Claude must:
 4. Treat active framework as mandatory behavioral guidelines
 ```
 
+> [!CAUTION]
+> Avoid adding additional instructions to the `CLAUDE.md` file. The platform uses Profile System [observations](/claude/wiki/guide/profile), adding extra instructions may interfere with the profiles methodology and cause unpredictable behavior.
+
 {{% /steps %}}
 
 ## Secure Configuration
