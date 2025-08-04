@@ -111,6 +111,8 @@ On session start, Claude must:
 > [!CAUTION]
 > Avoid adding additional instructions to **Project Instructions**. The platform uses Profile System [observations](/claude/wiki/guide/profile), adding extra instructions may interfere with the profiles methodology and cause unpredictable behavior.
 
+Set the **Project Details** `name` and `description`, based on current project scope.
+
 {{% /steps %}}
 
 ## Secure Configuration
