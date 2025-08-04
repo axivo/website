@@ -12,18 +12,42 @@ Set up the local environment and dependencies required for the collaboration pla
 
 Before using the platform, set up the local environment with the required dependencies.
 
-> [!NOTE]
-> [Homebrew](https://brew.sh) is used to install all deployment dependencies.
+{{< tabs items="Mac,Linux,Windows" >}}
+  {{< tab >}}
+    Use [Homebrew](https://brew.sh) package manager to install the Node.js and `uv` dependencies:
+
+    ```shell
+    brew install node uv
+    ```
+  {{< /tab >}}
+
+  {{< tab >}}
+    For Debian distros, use `apt` package manager to install the Node.js dependency:
+
+    ```shell
+    sudo apt update
+    sudo apt install -y nodejs npm
+    ```
+
+    Use the official standalone installer to install the `uv` dependency:
+
+    ```shell
+    curl -LsSf https://astral.sh/uv/install.sh | sh
+    ```
+  {{< /tab >}}
+
+  {{< tab >}}
+    Use the official Windows Installer (`.msi`) from [nodejs.org](https://nodejs.org/en/download) to install the Node.js dependency, this includes the `npm` binary.
+
+    Use the official standalone installer to install the `uv` dependency:
+
+    ```shell
+    powershell -c 'irm https://astral.sh/uv/install.ps1 | iex'
+    ```
+  {{< /tab >}}
+{{< /tabs >}}
 
 {{% steps %}}
-
-### Dependencies
-
-Install dependencies for memory system and profile configuration:
-
-```shell
-brew install node uv
-```
 
 ### Repository
 
