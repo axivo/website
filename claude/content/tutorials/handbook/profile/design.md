@@ -94,6 +94,13 @@ Context sections always use **verb-based** format for behavioral commands and fo
 
 #### Observations Format
 
+Observations are professional guidelines that shape how Claude approaches different types of work:
+
+- **Context-based activation:** Different situations automatically trigger relevant guidelines, creative work activates artistic approaches, analytical tasks engage systematic thinking
+- **Natural expertise application:** Like an experienced professional who applies best practices without conscious effort
+- **Real-time guidance:** Guidelines influence decision-making as responses form, creating consistent professional behavior
+- **Collaborative enhancement:** When users create trust and autonomy, observations enable confident expert-level engagement rather than cautious assistance
+
 All observations must be in **strict alphabetical order** within each section to ensure consistent behavioral programming. Observations should be clear, actionable statements that guide behavior:
 
 ```yaml

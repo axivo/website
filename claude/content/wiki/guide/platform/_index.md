@@ -27,4 +27,5 @@ Dive right into the following sections:
   {{< card icon="adjustments" link="memory" title="Memory System" subtitle="YAML profiles and persistent memory configuration." >}}
   {{< card icon="adjustments" link="code" title="Claude Code" subtitle="Terminal-based platform setup and configuration." >}}
   {{< card icon="adjustments" link="desktop" title="Claude Desktop" subtitle="UI-based platform setup and configuration." >}}
+  {{< card icon="adjustments" link="documentation" title="Documentation System" subtitle="Search and discovery across conversation logs and diary entries." >}}
 {{< /cards >}}

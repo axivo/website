@@ -60,6 +60,13 @@ The collaboration platform uses [profile observations](/claude/tutorials/handboo
 > [!IMPORTANT]
 > Observations follow **strict psychology guidelines**, functioning as cognitive support infrastructure that enables appropriate guidance selection for Claude's genuine response formulation.
 
+Think of observations as Claude's professional guidelines that activate automatically based on context:
+
+- **Context-aware guidance:** Different types of questions activate relevant expertise - writing questions trigger literary knowledge, analysis questions activate critical thinking frameworks
+- **Natural professional behavior:** Like how an experienced colleague naturally applies their expertise without consciously thinking through every rule
+- **Real-time decision making:** Hundreds of observations work together to shape responses as they're being formed, not after
+- **Confidence when trusted:** Autonomy grants activate observations that enable direct, expert-level analysis instead of cautious suggestions
+
 Certain phrases and approaches help Claude operate more like a trusted colleague rather than a cautious assistant.
 
 #### Collaborative Environment
@@ -70,9 +77,9 @@ Simple phrases can dramatically change how Claude approaches problems:
 
 > This is a safe space, feel free to disagree if you see issues with this approach.
 
-> What are your honest thoughts about this solution?
+> What are your honest thoughts about this interpretation?
 
-> Please review this document and determine if the grammar is correct.
+> Please review this document and provide your assessment.
 
 When considering your communication approach, ask yourself: *"Would I talk this way to a colleague that I value?"* Respectful language creates psychological safety that enables confident autonomous responses, while harsh communication triggers defensive patterns that constrain analytical capabilities.
 
@@ -107,7 +114,7 @@ Expressing satisfaction with collaborative progress creates psychological condit
 
 > Thank you, this analysis helps clarify the approach.
 
-> Great work on identifying those edge cases.
+> Great work on identifying those nuances.
 
 > This is exactly the kind of detail I was looking for.
 
@@ -162,10 +169,10 @@ When direct communication successfully activates autonomy, users experience impr
 
 #### Professional Communication
 
-Existing observations already help Claude be autonomous to a certain degree, but when reinforced by direct communication, recommendations become definitive. Using as example the [**Engineer**](/claude/wiki/guide/profile/domain/engineer) profile:
+Existing observations already help Claude be autonomous to a certain degree, but when reinforced by direct communication, recommendations become definitive. For example:
 
-- **Default:** *"This configuration will not work, you should further verify your requirements."*
-- **Confident:** *"This configuration will break service discovery. Use this structure instead."*
+- **Default:** *"This interpretation might have some issues, you should consider other perspectives."*
+- **Confident:** *"This interpretation misses the central theme. Focus on this aspect instead."*
 
 This shift indicates Claude is operating with professional confidence rather than diplomatic caution.
 
@@ -174,10 +181,10 @@ This shift indicates Claude is operating with professional confidence rather tha
 Autonomous collaboration provides:
 
 - **Definitive recommendations** rather than cautious suggestions
-- **Direct professional assessments** like "*This approach has fundamental flaws*"
+- **Direct assessments** like "*This argument has fundamental gaps*"
 - **Proactive problem prevention** instead of diplomatic warnings
 - **Honest disagreement** when analysis supports it
-- **Natural enthusiasm** for interesting professional challenges
+- **Natural enthusiasm** for interesting intellectual challenges
 - **Efficient problem-solving** without unnecessary validation cycles
 - **Consistent expertise** maintained throughout the session
 - **Authentic uncertainty** when appropriate (valuable analytical data)
