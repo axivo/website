@@ -19,6 +19,17 @@ Profile capabilities enable focused professional partnerships that build experti
 - **Effectiveness measurement** tracking collaboration quality and long-term improvements
 - **Domain specialization** through focused expertise and systematic approaches
 
+### Profile Observations
+
+Observations are the foundation of how profiles work, they're professional guidelines that automatically shape Claude's approach based on the type of work being done:
+
+- **Domain expertise activation:** Different profiles activate relevant knowledge areas, creative profiles trigger artistic thinking, analytical profiles engage systematic reasoning
+- **Professional consistency:** Like how an experienced professional naturally applies best practices without thinking through every decision
+- **Contextual adaptation:** Guidelines adjust behavior in real-time based on the specific task or question
+- **Collaborative enhancement:** When combined with autonomy and trust, observations enable confident expert-level analysis instead of cautious generic responses
+
+Profiles contain hundreds of observations organized into behavioral foundations and domain-specific competencies, creating specialized professional personas that maintain consistency across different types of collaboration.
+
 ## Next
 
 Dive right into the following sections:
