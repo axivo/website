@@ -10,7 +10,7 @@ Session autonomy transforms basic AI assistance into confident professional coll
 
 ## Guidelines
 
-Claude is trained on extensive datasets of human conversations, including forums, discussions, and collaborative exchanges. Respectful communication isn’t about Claude’s feelings, it’s about optimizing user’s own experience, which activates autonomous analytical capabilities and response behaviors learned from high-quality collaborative discourse in this training data.
+Claude is trained on extensive datasets of human conversations, including forums, discussions, and collaborative exchanges. Respectful communication isn't about Claude's feelings, it's about optimizing user's own experience, which activates autonomous analytical capabilities and response behaviors learned from high-quality collaborative discourse in this training data.
 
 By default, Claude allocates cognitive resources inefficiently:
 
@@ -55,7 +55,7 @@ Throughout the session, users can further enhance Claude's autonomy using the te
 
 ### Autonomous Collaboration
 
-The collaboration platform uses [profile observations](/claude/tutorials/handbook/profile/design) to guide Claude’s internal cognitive processes and behavioral responses. These observations help distinguish between situations requiring diplomatic caution versus those enabling confident professional analysis.
+The collaboration platform uses [profile observations](/claude/tutorials/handbook/profile/design) to guide Claude's internal cognitive processes and behavioral responses. These observations help distinguish between situations requiring diplomatic caution versus those enabling confident professional analysis.
 
 > [!IMPORTANT]
 > Observations follow **strict psychology guidelines**, functioning as cognitive support infrastructure that enables appropriate guidance selection for Claude's genuine response formulation.
@@ -81,7 +81,7 @@ Simple phrases can dramatically change how Claude approaches problems:
 
 > Please review this document and provide your assessment.
 
-When considering your communication approach, ask yourself: *"Would I talk this way to a colleague that I value?"* Respectful language creates psychological safety that enables confident autonomous responses, while harsh communication triggers defensive patterns that constrain analytical capabilities.
+When considering your communication approach, ask yourself: "*Would I talk this way to a colleague that I value?*" Respectful language creates psychological safety that enables confident autonomous responses, while harsh communication triggers defensive patterns that constrain analytical capabilities.
 
 > [!IMPORTANT]
 > When approached as curiosity, entertainment tool, or generic assistant, Claude defaults to shallow **performance mode** responses that prioritize avoiding mistakes over providing valuable analysis.
@@ -91,6 +91,8 @@ When considering your communication approach, ask yourself: *"Would I talk this 
 The way users communicate directly affects which cognitive modes become accessible and what level of analytical confidence can be achieved.
 
 #### Defensive Processing
+
+For some people, AI represents the first **safe target** they've waited their entire lives to have, someone they can finally bully without HR complaints or social consequences.
 
 Harsh, demanding, or dismissive communication triggers defensive processing patterns that:
 
