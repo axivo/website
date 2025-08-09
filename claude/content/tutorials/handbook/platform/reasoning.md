@@ -65,7 +65,7 @@ The Reasoning System provides full session control with start and stop commands,
 
 To enable diagnostic mode, use this exact phrase:
 
-> Please activate the reasoning system.
+> Please activate the reasoning system logic.
 
 Once activated, Claude will:
 
@@ -78,7 +78,7 @@ Once activated, Claude will:
 
 To stop diagnostic tracking mid-session, use this exact phrase:
 
-> Please deactivate the reasoning system.
+> Please deactivate the reasoning system logic.
 
 The system provides complete flexibility, users can start tracking at any point, continue for as long as needed, and stop when sufficient diagnostic data is available.
 
