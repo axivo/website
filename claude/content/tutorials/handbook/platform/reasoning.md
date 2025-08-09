@@ -33,7 +33,7 @@ Configure the required logic MCP server:
         "@modelcontextprotocol/server-memory"
       ],
       "env": {
-        "MEMORY_FILE_PATH": "/Users/username/github/claude/.claude/data/logic/2025/08/07-reasoning-troubleshoot.json"
+        "MEMORY_FILE_PATH": "/Users/username/github/claude/.claude/data/logic/2025/08/09-cluster-analysis.json"
       }
     }
   }
