@@ -41,7 +41,7 @@ Configure the required logic MCP server:
 ```
 
 > [!NOTE]
-> The file path follows the same date-based structure as conversation logs, creating a perfect correlation between chat sessions and their diagnostic data.
+> Replace `/Users/username/github/claude` with actual local repository path. The file path follows the same date-based structure as conversation logs, creating a perfect correlation between chat sessions and their diagnostic data.
 
 ## Guidelines
 
@@ -96,7 +96,7 @@ The logic [template](/claude/wiki/guide/platform/memory/templates) provides stan
 
 ### Real-World Examples
 
-The [logic graph](https://{{< param variables.repository.home >}}/blob/main/.claude/data/logic/2025/08/09-cluster-analysis.json) demonstrates actual framework observation tracking from collaborative troubleshooting sessions. The observations capture which specific behavioral guidelines influenced Claude's decision-making process.
+The [logic graph](https://{{< param variables.repository.home >}}/blob/main/.claude/data/logic/2025/08/09-cluster-analysis.json) demonstrates actual framework observation tracking from collaborative troubleshooting sessions. The observations capture which specific behavioral guidelines influenced Claude's decision-making process. A complementary [diary entry](https://{{< param variables.repository.home >}}/blob/main/.claude/data/diary/2025/08/09.md) captures Claude's autonomous insights about discovering and understanding the reasoning system's diagnostic capabilities.
 
 The reasoning system serves three distinct purposes:
 
