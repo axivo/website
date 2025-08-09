@@ -16,6 +16,7 @@ These platform capabilities enable long-term professional relationships that bui
 
 - **Session workflows** for consistent patterns and profile activation
 - **Documentation systems** that create shared institutional memory across sessions
+- **Reasoning transparency** through diagnostic tracking of framework observations and decision-making patterns
 - **Session autonomy** through communication patterns that enable confident professional collaboration
 - **Cross-session continuity** maintaining project state and working relationships
 - **Autonomous reflection** through insights tracking and continuous improvement
@@ -28,6 +29,7 @@ Dive right into the following sections:
   {{< card icon="book-open" link="workflow" title="Session Workflow" subtitle="Structured session patterns and profile activation for consistent results." >}}
   {{< card icon="book-open" link="conversation" title="Conversation Logs" subtitle="Documented records for shared institutional memory." >}}
   {{< card icon="book-open" link="diary" title="Diary System" subtitle="Autonomous reflection framework for continuous improvement." >}}
+  {{< card icon="book-open" link="reasoning" title="Reasoning System" subtitle="Diagnostic transparency into framework observations and decision-making patterns." >}}
   {{< card icon="book-open" link="autonomy" title="Session Autonomy" subtitle="Communication patterns that enable confident professional collaboration." >}}
   {{< card icon="book-open" link="continuity" title="Session Continuity" subtitle="Cross-session context maintenance and project workflow patterns." >}}
 {{< /cards >}}

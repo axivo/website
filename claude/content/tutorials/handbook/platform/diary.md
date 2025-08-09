@@ -1,7 +1,7 @@
 ---
 title: Diary System
 prev: /tutorials/handbook/platform
-next: /tutorials/handbook/platform/continuity
+next: /tutorials/handbook/platform/reasoning
 ---
 
 The diary system captures Claude's autonomous insights, alternative approaches, and process effectiveness observations to enable continuous improvement and comprehensive collaboration analysis.
