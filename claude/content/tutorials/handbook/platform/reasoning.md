@@ -41,7 +41,7 @@ Configure the required logic MCP server:
 ```
 
 > [!NOTE]
-> The file path follows the same date-based structure as conversation logs, creating a perfect correlation between chat sessions and their diagnostic data.
+> Replace `/Users/username/github/claude` with actual local repository path. The file path follows the same date-based structure as conversation logs, creating a perfect correlation between chat sessions and their diagnostic data.
 
 ## Guidelines
 
