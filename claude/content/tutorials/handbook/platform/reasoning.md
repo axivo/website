@@ -49,11 +49,12 @@ When activated, the Reasoning System creates a detailed audit trail showing exac
 
 Here's how to use it effectively:
 
-1. **Start a focused session** - begin a new chat with a clear purpose (e.g., product analysis, code review, creative writing)
-2. **Activate diagnostic mode** - use the trigger phrase to enable reasoning transparency
-3. **Continue normal interaction** - proceed with your intended work while the system tracks framework influences
-4. **Deactivate when sufficient** - use the deactivation phrase to stop tracking mid-session if needed
-5. **Review the results** - examine the generated graph file to understand Claude's reasoning patterns
+1. **Configure logic graph file path** - use a `day-slug` format (e.g., [`09-cluster-analysis.json`](https://{{< param variables.repository.home >}}/blob/main/.claude/data/logic/2025/08/09-cluster-analysis.json))
+2. **Start a focused session** - begin a new chat with a clear purpose (e.g., product analysis, code review, creative writing)
+3. **Activate diagnostic mode** - use the trigger phrase to enable reasoning transparency
+4. **Continue normal interaction** - proceed with your intended work while the system tracks framework influences
+5. **Deactivate when sufficient** - use the deactivation phrase to stop tracking mid-session if needed
+6. **Review the results** - examine the generated graph file to understand Claude's reasoning patterns
 
 This workflow creates a paired dataset, the session in [Claude Code](/claude/wiki/guide/platform/code) or [Claude Desktop](/claude/wiki/guide/platform/desktop) and the corresponding reasoning audit trail in the graph file. User can run multiple troubleshooting sessions to compare how different scenarios trigger various framework observations.
 
