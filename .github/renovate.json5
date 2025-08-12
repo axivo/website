@@ -74,15 +74,14 @@
     },
     {
       "enabled": true,
+      "extractVersion": "^(?<version>\\d+)",
       "matchDatasources": [
         "node-version"
       ],
       "matchDepNames": [
         "node"
       ],
-      "matchUpdateTypes": [
-        "major"
-      ]
+      "rangeStrategy": "bump"
     },
     {
       "enabled": true,
