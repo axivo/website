@@ -78,7 +78,7 @@
         "node-version"
       ],
       "matchDepNames": [
-        "node"
+        "node:latest"
       ],
       "matchUpdateTypes": [
         "major"
