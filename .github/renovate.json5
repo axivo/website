@@ -21,7 +21,7 @@
     },
     {
       "customType": "regex",
-      "datasourceTemplate": "node-version",
+      "datasourceTemplate": "github-releases",
       "depNameTemplate": "node",
       "managerFilePatterns": [
         ".github/workflows/checksums.yml",
@@ -30,6 +30,7 @@
       "matchStrings": [
         "with:[\\s\\r]+?node-version:\\s+(?<currentValue>.+)"
       ],
+      "packageNameTemplate": "actions/node-versions",
       "versioningTemplate": "node"
     },
     {
@@ -75,7 +76,7 @@
     {
       "enabled": true,
       "matchDatasources": [
-        "node-version"
+        "github-releases"
       ],
       "matchDepNames": [
         "node"
