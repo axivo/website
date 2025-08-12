@@ -51,7 +51,7 @@ jobs:
       - name: Setup node
         uses: actions/setup-node@v4
         with:
-          node-version: 21
+          node-version: 22
 
       - name: Install node dependencies
         run: npm install handlebars
