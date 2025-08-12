@@ -82,8 +82,7 @@
       ],
       "matchUpdateTypes": [
         "major"
-      ],
-      "rangeStrategy": "bump"
+      ]
     },
     {
       "enabled": true,
