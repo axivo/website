@@ -22,7 +22,7 @@
     {
       "customType": "regex",
       "datasourceTemplate": "node-version",
-      "depNameTemplate": "node",
+      "depNameTemplate": "node:latest",
       "managerFilePatterns": [
         ".github/workflows/checksums.yml",
         ".github/workflows/documentation.yml"
