@@ -81,7 +81,7 @@
       "matchDepNames": [
         "node"
       ],
-      "rangeStrategy": "bump"
+      "rangeStrategy": "widen"
     },
     {
       "enabled": true,
