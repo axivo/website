@@ -63,25 +63,28 @@
   "packageRules": [
     {
       "enabled": true,
-      "extractVersion": "^(?<version>\\d+\\.\\d+)",
       "matchDatasources": [
         "golang-version"
       ],
       "matchDepNames": [
         "go"
       ],
-      "rangeStrategy": "bump"
+      "matchUpdateTypes": [
+        "major",
+        "minor"
+      ]
     },
     {
       "enabled": true,
-      "extractVersion": "^(?<version>\\d+)",
       "matchDatasources": [
         "node-version"
       ],
       "matchDepNames": [
         "node"
       ],
-      "rangeStrategy": "widen"
+      "matchUpdateTypes": [
+        "major"
+      ]
     },
     {
       "enabled": true,
