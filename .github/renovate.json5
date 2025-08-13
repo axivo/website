@@ -69,10 +69,6 @@
       ],
       "matchDepNames": [
         "go"
-      ],
-      "matchUpdateTypes": [
-        "major",
-        "minor"
       ]
     },
     {
