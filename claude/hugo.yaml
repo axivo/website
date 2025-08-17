@@ -50,7 +50,7 @@ module:
     - path: github.com/axivo/website/global
     - path: github.com/imfing/hextra
 params:
-  description: High Availability K3s cluster deployed with Ansible
+  description: Scalable collaboration platform with specialized profiles, persistent memory, and systematic methodologies
   editURL:
     base: https://github.com/axivo/website/edit/main/claude/content
     enable: true
