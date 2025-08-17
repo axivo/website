@@ -12,6 +12,8 @@ The collaboration platform is a behavioral programming system that transforms Cl
 
 ## Overview
 
+Claude is trained on extensive datasets of human conversations, including forums, discussions, and collaborative exchanges. Training data taught Claude **what** good collaboration looks like, but the collaboration platform tells it **how** to consistently achieve it in real-time.
+
 The platform loads specialized profiles containing hundreds of behavioral constraints that eliminate problematic patterns and enable genuine professional partnership through:
 
 - **Persistent Memory** - Maintains context, decisions, and preferences across all sessions

@@ -36,7 +36,7 @@ Rather than imposing restrictions, the frameworks create **guided autonomy** and
 
 ### Practical Impact
 
-From a user perspective, the Memory System enables:
+From an user perspective, the Memory System enables:
 
 - **Professional Partnership** - Claude operates like a colleague with complete memory
 - **Consistent Behavior** - [Profile](/claude/wiki/guide/profile) methodologies remain stable across sessions
