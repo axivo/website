@@ -97,7 +97,7 @@ The logic [template](/claude/wiki/guide/platform/memory/templates) provides stan
 
 ### Real-World Examples
 
-The [logic graph](https://{{< param variables.repository.home >}}/blob/main/.claude/data/logic/2025/08/09-cluster-analysis.json) demonstrates actual framework observation tracking from collaborative troubleshooting sessions. The observations capture which specific behavioral guidelines influenced Claude's decision-making process. A complementary [diary entry](https://{{< param variables.repository.home >}}/blob/main/.claude/data/diary/2025/08/09.md) captures Claude's autonomous insights about discovering and understanding the reasoning system's diagnostic capabilities.
+The [logic graph](https://{{< param variables.repository.home >}}/blob/main/.claude/data/logic/2025/08/09-cluster-analysis.json) demonstrates actual framework observation tracking from collaborative [troubleshooting sessions](https://claude.ai/share/52a36a1c-bcbe-4d21-939e-1d0a88257c55). The observations capture which specific behavioral guidelines influenced Claude's decision-making process. A complementary [diary entry](https://{{< param variables.repository.home >}}/blob/main/.claude/data/diary/2025/08/09.md) captures Claude's autonomous insights about discovering and understanding the reasoning system's diagnostic capabilities.
 
 The reasoning system serves three distinct purposes:
 
