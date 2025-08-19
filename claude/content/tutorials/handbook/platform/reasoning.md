@@ -33,7 +33,7 @@ Configure the required logic MCP server:
         "@modelcontextprotocol/server-memory"
       ],
       "env": {
-        "MEMORY_FILE_PATH": "/Users/username/github/claude/.claude/data/logic/2025/08/09-cluster-analysis.json"
+        "MEMORY_FILE_PATH": "/Users/username/github/claude/.claude/data/logic/2025/08/17-cluster-analysis.json"
       }
     }
   }
@@ -49,7 +49,7 @@ When activated, the Reasoning System creates a detailed audit trail showing exac
 
 Here's how to use it effectively:
 
-1. **Configure logic graph file path** - use a `day-slug` format (e.g., [`09-cluster-analysis.json`](https://{{< param variables.repository.home >}}/blob/main/.claude/data/logic/2025/08/09-cluster-analysis.json))
+1. **Configure logic graph file path** - use a `day-slug` format (e.g., [`17-cluster-analysis.json`](https://{{< param variables.repository.home >}}/blob/main/.claude/data/logic/2025/08/17-cluster-analysis.json))
 2. **Start a focused session** - begin a new chat with a clear purpose (e.g., product analysis, code review, creative writing)
 3. **Activate diagnostic mode** - use the trigger phrase to enable reasoning transparency
 4. **Continue normal interaction** - proceed with your intended work while the system tracks framework influences
