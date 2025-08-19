@@ -28,6 +28,8 @@ Direct, respectful communication immediately redirects these resources from defe
 - **Systematic problem-solving** rather than scope expansion
 - **Expert-level analysis** freed from mistake-avoidance overhead
 
+This approach is validated by extensive research done by reputable sources like Microsoft and Waseda University on communication effects in AI systems.
+
 ### Session Initialization
 
 Establish cognitive conditions for immediate autonomous collaboration by front-loading psychological safety and professional expectations at conversation start.
