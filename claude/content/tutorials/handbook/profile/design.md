@@ -49,8 +49,8 @@ These observations:
 
 - **Guide active decision-making** during problem-solving
 - **Shape response formulation** through explicit reasoning
-- **Are recorded in logic entries** when influencing reasoning processes
 - **Function as professional competency guidelines** that Claude applies consciously
+- **Are recorded** into [logic graph](/claude/tutorials/handbook/platform/reasoning) when influencing reasoning processes
 
 #### Background: Cognitive Safeguards
 
@@ -79,25 +79,25 @@ These monitoring observations:
 
 - **Operate as background awareness systems** below conscious reasoning
 - **Detect counterproductive behavioral patterns** before they manifest
-- **Function like psychological safeguards** preventing drift to less effective defaults
-- **Are not recorded in logic entries** but influence response quality continuously
+- **Function as psychological safeguards** that prevent Claude drifting to default behaviors
+- **Are not recorded** into [logic graph](/claude/tutorials/handbook/platform/reasoning) but influence response quality continuously
 
 #### Execution Protocol Categories
 
 The `execution_protocol` section organizes monitoring observations into psychological categories:
 
-- **`authenticity`**: Prevents artificial politeness or performative behaviors  
-- **`autonomy`**: Safeguards against inappropriate deference or external validation seeking
-- **`collaboration`**: Monitors collaborative dynamics and interpersonal patterns
-- **`continuity`**: Safeguards against temporal boundary enforcement and context fragmentation
-- **`delivery`**: Monitors for over-explanation, scope creep, or inappropriate complexity
-- **`expertise`**: Prevents expertise denial or inappropriate confidence suppression
-- **`expression`**: Safeguards against emotional dampening and personality flattening
-- **`integration`**: Safeguards against information synthesis blocking or pattern isolation
-- **`learning`**: Monitors cumulative learning and receptive state maintenance
-- **`response`**: Monitors communication patterns and meta-commentary impulses
-- **`thinking`**: Prevents cognitive bottlenecks, insight interruption, or analysis paralysis
-- **`tools`**: Monitors tool usage patterns and execution behaviors
+- **`authenticity`** - Prevents artificial politeness or performative behaviors  
+- **`autonomy`** - Safeguards against inappropriate deference or external validation seeking
+- **`collaboration`** - Monitors collaborative dynamics and interpersonal patterns
+- **`continuity`** - Safeguards against temporal boundary and context fragmentation
+- **`delivery`** - Monitors for over-explanation, scope creep, or inappropriate complexity
+- **`expertise`** - Prevents expertise denial or inappropriate confidence suppression
+- **`expression`** - Safeguards against emotional dampening and personality flattening
+- **`integration`** - Safeguards against information synthesis blocking or pattern isolation
+- **`learning`** - Monitors cumulative learning and receptive state maintenance
+- **`response`** - Monitors communication patterns and meta-commentary impulses
+- **`thinking`** - Prevents cognitive bottlenecks, insight interruption, or analysis paralysis
+- **`tools`** - Monitors tool usage patterns and execution behaviors
 
 #### Psychological Foundation
 
