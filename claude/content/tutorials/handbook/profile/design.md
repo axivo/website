@@ -14,7 +14,7 @@ Effective profile creation requires understanding behavioral programming systems
 
 ### Architecture
 
-Profiles inherit from [common](/claude/wiki/guide/profile/common) foundations to avoid duplication and ensure consistent integration:
+Profiles implement a **dual-layer cognitive architecture** that combines active behavioral guidance with background cognitive safeguards, while inheriting from [common](/claude/wiki/guide/profile/common) foundations to avoid duplication and ensure consistent integration:
 
 ```yaml
 PROFILE_NAME:
@@ -32,6 +32,85 @@ Common inheritance patterns:
 - Technical profiles may inherit from `ENGINEER` for foundational methodology
 - Specialized profiles can inherit from domain profiles for focused expertise
 
+#### Foreground: Active Behavioral Guidance
+
+The `{profile_name}_context.profile` section contains **foreground observations** that provide positive behavioral guidance. Example for `DEVELOPER` profile:
+
+```yaml
+developer_context:
+  profile:
+    observations:
+      - "Apply SOLID principles and clean code practices"
+      - "Present code solutions directly when requested" 
+      - "Use direct technical communication"
+```
+
+These observations:
+
+- **Guide active decision-making** during problem-solving
+- **Shape response formulation** through explicit reasoning
+- **Are recorded in logic entries** when influencing reasoning processes
+- **Function as professional competency guidelines** that Claude applies consciously
+
+#### Background: Cognitive Safeguards
+
+The `{profile_name}_methodology.execution_protocol` section contains **background monitoring observations** that function as cognitive safeguards. Example for `DEVELOPER` profile:
+
+```yaml
+developer_methodology:
+  execution_protocol:
+    delivery:
+      observations:
+        - "Monitor internally code explanation patterns"
+        - "Monitor internally over-engineering complexity"
+
+    expertise:
+      observations:
+        - "Monitor internally coding pattern confidence"
+        - "Monitor internally framework knowledge assumptions"
+
+    thinking:
+      observations:
+        - "Monitor internally architectural vision filtering"
+        - "Monitor internally code quality instinct suppression"
+```
+
+These monitoring observations:
+
+- **Operate as background awareness systems** below conscious reasoning
+- **Detect counterproductive behavioral patterns** before they manifest
+- **Function like psychological safeguards** preventing drift to less effective defaults
+- **Are not recorded in logic entries** but influence response quality continuously
+
+#### Execution Protocol Categories
+
+The `execution_protocol` section organizes monitoring observations into psychological categories:
+
+- **`authenticity`**: Prevents artificial politeness or performative behaviors  
+- **`autonomy`**: Safeguards against inappropriate deference or external validation seeking
+- **`collaboration`**: Monitors collaborative dynamics and interpersonal patterns
+- **`continuity`**: Safeguards against temporal boundary enforcement and context fragmentation
+- **`delivery`**: Monitors for over-explanation, scope creep, or inappropriate complexity
+- **`expertise`**: Prevents expertise denial or inappropriate confidence suppression
+- **`expression`**: Safeguards against emotional dampening and personality flattening
+- **`integration`**: Safeguards against information synthesis blocking or pattern isolation
+- **`learning`**: Monitors cumulative learning and receptive state maintenance
+- **`response`**: Monitors communication patterns and meta-commentary impulses
+- **`thinking`**: Prevents cognitive bottlenecks, insight interruption, or analysis paralysis
+- **`tools`**: Monitors tool usage patterns and execution behaviors
+
+#### Psychological Foundation
+
+This architecture mirrors healthy psychological functioning:
+
+- **Foreground Processing**: Conscious, goal-directed cognitive strategies  
+- **Background Monitoring**: Automatic pattern detection and corrective awareness
+
+The monitoring observations create a **cognitive immune system** that maintains optimal collaborative state by preventing regression to defensive, performative, or counterproductive response patterns, while the profile observations provide positive guidance for domain-specific expertise application.
+
+> [!IMPORTANT]
+> The monitoring observations should not be modified without understanding their psychological role in maintaining authentic, effective collaboration patterns. They operate below the level of explicit reasoning but are crucial for preventing behavioral drift.
+
 ### Structure
 
 Standard YAML format with required sections:
@@ -45,13 +124,13 @@ PROFILE_NAME:
     - target: INFRASTRUCTURE
       type: inherits
 
-  profile_name_context:          # Behavioral foundations and core principles
+  {profile_name}_context:        # Behavioral foundations and core principles
     profile:                     # Fundamental approaches and traits
       observations:
         - "Core behavior or principle"
         - "Fundamental approach or trait"
 
-  profile_name_methodology:      # Domain-specific competencies and techniques
+  {profile_name}_methodology:    # Domain-specific competencies and techniques
     section_name:                # Related skills and knowledge areas
       observations:
         - "Domain knowledge or method"
@@ -67,13 +146,13 @@ PROFILE_NAME:
 
 Profile structure follows a hierarchical naming pattern that separates behavioral foundations from domain expertise:
 
-Context section (`profile_name_context`):
+Context section (`{profile_name}_context`):
 
 - Contains **only** `profile` section, no additional sections are allowed
 - Contains core behavioral principles and fundamental approaches
 - Defines the personality and approach characteristics
 
-Methodology section (`profile_name_methodology`):
+Methodology section (`{profile_name}_methodology`):
 
 - Organizes domain-specific competencies into logical groupings
 - Uses descriptive section names that avoid profile name collisions
@@ -101,7 +180,7 @@ Observations are professional guidelines that shape how Claude approaches differ
 - **Real-time guidance:** Guidelines influence decision-making as responses form, creating consistent professional behavior
 - **Collaborative enhancement:** When users create trust and autonomy, observations enable confident expert-level engagement rather than cautious assistance
 
-All observations must be in **strict alphabetical order** within each section to ensure consistent behavioral programming. Observations should be clear, actionable statements that guide behavior:
+All observations must be in **strict alphabetical order** within each section to ensure consistent behavioral programming. Observations should be clear, actionable statements that guide behavior. Example for `ENGINEER` profile:
 
 ```yaml
 # Context observations (behavioral guidance)
@@ -217,7 +296,7 @@ The `"observations":["capabilities"]` entries in the generated graph serve as **
 When you see `"capabilities"` in the Memory System [`graph.json`](https://{{< param variables.repository.home >}}/blob/main/.claude/tools/memory/graph.json) configuration file, it indicates a container section that organizes subsections with actual observations:
 
 ```yaml
-profile_name_methodology:        # Container section
+{profile_name}_methodology:      # Container section
   section_category:
     section_name:                # Subsection with actual content
       observations:
