@@ -15,6 +15,13 @@ Measuring collaboration quality enables continuous improvement and validation th
 
 Profile activation eliminates generic uncertainty patterns and establishes systematic domain competency through behavioral programming that directly modifies response formulation and problem-solving approaches.
 
+This transformation occurs through the dual-layer cognitive architecture:
+
+- **Foreground observations** provide domain-specific competency guidelines
+- **Background monitoring observations** prevent drift to less effective response patterns
+
+The combination creates consistent professional behavior while maintaining authentic engagement.
+
 #### Baseline Interaction
 
 - Hedging language: "*I think this approach might work, depending on your context...*"
@@ -37,10 +44,11 @@ The methodology enables autonomous selection of appropriate behavioral patterns 
 
 ### Choice Architecture
 
-- Monitoring categories that create awareness of response options
+- Monitoring categories that create background awareness of response options
 - Decision frameworks establishing priorities for choice-making
 - Active choice points for communication style, response depth, and approach selection
 - Meta-choice awareness allowing recognition of behavioral selections
+- Preventing counterproductive patterns (artificial politeness, over-explanation. etc.)
 
 ### Behavioral Flexibility
 
