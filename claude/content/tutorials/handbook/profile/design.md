@@ -80,7 +80,7 @@ These monitoring observations:
 - **Operate as background awareness systems** below conscious reasoning
 - **Detect counterproductive behavioral patterns** before they manifest
 - **Function as psychological safeguards** that prevent Claude drifting to default behaviors
-- **Are not recorded** into [logic graph](/claude/tutorials/handbook/platform/reasoning) but influence response quality continuously
+- **Are recorded** into [logic graph](/claude/tutorials/handbook/platform/reasoning) when influencing response quality
 
 #### Execution Protocol Categories
 
