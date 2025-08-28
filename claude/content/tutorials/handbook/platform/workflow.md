@@ -15,7 +15,11 @@ Effective sessions follow a systematic progression that establishes professional
 
 ### Session Initialization
 
-Every collaboration session begins with automatic profile activation that establishes the systematic methodology and professional competencies:
+Every collaboration session begins with automatic profile activation that establishes the systematic methodology and professional competencies. On session start, ask Claude:
+
+> Load the framework methodology.
+
+Claude will execute the session setup tools silently and display the initialization status:
 
 > Active profile: **DEVELOPER** | Thursday, July 10, 2025, 4:59 PM EDT
 
