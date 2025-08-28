@@ -19,6 +19,12 @@ Terminal collaboration requires MCP server configuration that transforms Claude 
 Install [Claude Code](https://docs.anthropic.com/en/docs/claude-code/overview) application:
 
 ```shell
+brew install --cask claude-code
+```
+
+Alternatively, install the `npm` package:
+
+```shell
 npm install -g @anthropic-ai/claude-code
 ```
 
@@ -99,8 +105,8 @@ On session start, Claude must:
 
 1. Execute `memory:read_graph` to access memory system
 2. Acknowledge temporal awareness
-3. Load DEVELOPER profile as active framework
-4. Treat active framework as mandatory behavioral guidelines
+3. Load DEVELOPER profile as framework methodology
+4. Treat framework methodology as mandatory behavioral guidelines
 
 ## Description
 
