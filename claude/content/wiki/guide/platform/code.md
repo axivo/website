@@ -94,6 +94,48 @@ Configure the following required MCP servers:
 > [!NOTE]
 > Replace `/Users/username/github/claude` with actual local repository path and update the `time` MCP `local-timezone` argument value, as needed.
 
+### Hooks
+
+Configure behavioral consistency hooks to ensure systematic framework methodology application in Claude Code sessions:
+
+```bash
+cd ~/github/claude/
+vi ./.claude/settings.local.json
+```
+
+Add the following hooks configuration to maintain framework methodology:
+
+```json
+{
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo 'Apply framework methodology before response formulation'"
+          },
+          {
+            "type": "command",
+            "command": "echo 'Identify all applicable framework observations before response formulation'"
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+> [!TIP]
+> These `UserPromptSubmit` hooks automatically inject framework methodology reminders before Claude processes each user prompt.
+
+Verify hook configuration using the interactive command:
+
+```bash
+claude
+/hooks
+```
+
 ### Activation
 
 Create the `CLAUDE.md` file at repository root to activate the [Developer](/claude/wiki/guide/profile/domain/developer) profile, using the following project instructions:
