@@ -10,7 +10,7 @@ Claude Code setup enables terminal-based collaboration with specialized developm
 
 ## Setup
 
-Terminal collaboration requires MCP server configuration that transforms Claude Code from generic assistance into specialized development partnership with persistent memory and systematic methodologies.
+Terminal collaboration requires MCP server configuration that transforms Claude Code from generic assistance into specialized development partnership with persistent memory and systematic methodologies. The platform repository serves as the **central workspace** for managing all development projects, eliminating the need to configure individual repositories.
 
 {{% steps %}}
 
@@ -29,6 +29,8 @@ npm install -g @anthropic-ai/claude-code
 ```
 
 ### Configuration
+
+MCP servers provide tools from a centralized location. Enterprises typically maintain a single platform repository with a shared `mcp.json` configuration, rather than creating separate configuration files for each project. This centralized approach ensures consistent tooling across multiple repositories.
 
 Create the MCP servers configuration file:
 
@@ -138,22 +140,7 @@ claude
 
 ### Activation
 
-Create the `CLAUDE.md` file at repository root to activate the [Developer](/claude/wiki/guide/profile/domain/developer) profile, using the following project instructions:
-
-```markdown
-# Project Instructions
-
-On session start, Claude must:
-
-1. Execute `memory:read_graph` to access memory system
-2. Acknowledge temporal awareness
-3. Load DEVELOPER profile as framework methodology
-4. Treat framework methodology as mandatory behavioral guidelines
-
-## Description
-
-[Define project scope here]
-```
+The existing [`CLAUDE.md`](https://{{< param variables.repository.home >}}/blob/main/CLAUDE.md) file at repository root is used to activate the [Developer](/claude/wiki/guide/profile/domain/developer) profile, with `filesystem` MCP server providing access to additional project directories as needed.
 
 > [!CAUTION]
 > Avoid adding additional instructions to the `CLAUDE.md` file. The platform uses Profile System [observations](/claude/wiki/guide/profile), adding extra instructions may interfere with the profiles methodology and cause unpredictable behavior.
