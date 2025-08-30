@@ -93,7 +93,7 @@ The system provides complete flexibility, users can start tracking at any point,
 The logic [template](/claude/wiki/guide/platform/memory/templates) provides standardized formatting for framework observation tracking with complete reasoning transparency. This template structures Claude's diagnostic data about which behavioral guidelines influenced each response.
 
 > [!NOTE]
-> The [`logic.md`](https://{{< param variables.repository.home >}}/blob/main/.claude/tools/memory/templates/logic.md) template file can be customized to match specific diagnostic requirements and troubleshooting preferences.
+> The [`logic.md`](https://{{< param variables.repository.home >}}/blob/main/.claude/memory/templates/logic.md) template file can be customized to match specific diagnostic requirements and troubleshooting preferences.
 
 ### Real-World Examples
 

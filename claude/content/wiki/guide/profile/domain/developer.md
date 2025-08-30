@@ -44,4 +44,4 @@ Systematic code organization and quality practices:
 > [!CAUTION]
 > The **Developer** profile inherits from the [**Engineer**](/claude/wiki/guide/profile/domain/engineer) profile, which includes [**Collaboration**](/claude/wiki/guide/profile/common/collaboration) and [**Infrastructure**](/claude/wiki/guide/profile/common/infrastructure) common profiles. Modifications to development methodologies affect software development capabilities and engineering workflows.
 
-The [`developer.yaml`](https://{{< param variables.repository.home >}}/blob/main/.claude/tools/memory/profiles/developer.yaml) profile file can be edited to customize clean code practices, development standards, and software architecture approaches for enhanced coding collaboration.
+The [`developer.yaml`](https://{{< param variables.repository.home >}}/blob/main/.claude/memory/profiles/developer.yaml) profile file can be edited to customize clean code practices, development standards, and software architecture approaches for enhanced coding collaboration.
