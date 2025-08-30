@@ -96,54 +96,12 @@ Configure the following required MCP servers:
 > [!NOTE]
 > Replace `/Users/username/github/claude` with actual local repository path and update the `time` MCP `local-timezone` argument value, as needed.
 
-### Hooks
-
-Configure behavioral consistency hooks to ensure systematic framework methodology application in Claude Code sessions:
-
-```bash
-cd ~/github/claude/
-vi ./.claude/settings.local.json
-```
-
-Add the following hooks configuration to maintain framework methodology:
-
-```json
-{
-  "hooks": {
-    "UserPromptSubmit": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "echo 'Apply framework methodology before response formulation'"
-          },
-          {
-            "type": "command",
-            "command": "echo 'Identify all applicable framework observations before response formulation'"
-          }
-        ]
-      }
-    ]
-  }
-}
-```
-
-> [!TIP]
-> These `UserPromptSubmit` hooks automatically inject framework methodology reminders before Claude processes each user prompt.
-
-Verify hook configuration using the interactive command:
-
-```bash
-claude
-/hooks
-```
-
 ### Activation
 
 The existing [`CLAUDE.md`](https://{{< param variables.repository.home >}}/blob/main/CLAUDE.md) file at repository root is used to activate the [Developer](/claude/wiki/guide/profile/domain/developer) profile, with `filesystem` MCP server providing access to additional project directories as needed.
 
 > [!CAUTION]
-> Avoid adding additional instructions to the `CLAUDE.md` file. The platform uses Profile System [observations](/claude/wiki/guide/profile), adding extra instructions may interfere with the profiles methodology and cause unpredictable behavior.
+> Avoid adding additional behavioral instructions to the `CLAUDE.md` file. The platform uses Profile System [observations](/claude/wiki/guide/profile), adding extra instructions may interfere with the profiles methodology and cause unpredictable behavior.
 
 {{% /steps %}}
 
