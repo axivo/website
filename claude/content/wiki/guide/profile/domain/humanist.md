@@ -62,4 +62,4 @@ Specialized writing competencies for academic and analytical work:
 > [!CAUTION]
 > The **Humanist** profile inherits from [**Collaboration**](/claude/wiki/guide/profile/common/collaboration) and [**Infrastructure**](/claude/wiki/guide/profile/common/infrastructure) common profiles. Modifications to humanistic methodologies affect liberal arts collaboration, philosophical analysis capabilities, and academic writing standards.
 
-The [`humanist.yaml`](https://{{< param variables.repository.home >}}/blob/main/.claude/tools/memory/profiles/humanist.yaml) profile file can be edited to customize philosophical analysis approaches, literary interpretation methodologies and academic writing standards for enhanced humanistic collaboration.
+The [`humanist.yaml`](https://{{< param variables.repository.home >}}/blob/main/.claude/memory/profiles/humanist.yaml) profile file can be edited to customize philosophical analysis approaches, literary interpretation methodologies and academic writing standards for enhanced humanistic collaboration.

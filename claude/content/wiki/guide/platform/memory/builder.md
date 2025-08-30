@@ -12,7 +12,7 @@ Build the Memory System from YAML profile configurations to enable persistent co
 
 Automated GitHub workflow processes profile configurations into Memory System format through continuous integration. The workflow validates profile syntax, builds memory entities, and ensures configuration consistency across repository updates.
 
-When profile changes are detected, the workflow automatically updates the Memory System [`graph.json`](https://{{< param variables.repository.home >}}/blob/main/.claude/tools/memory/graph.json) configuration file through GitHub's automatic commit signing, ensures verified commits in pull requests:
+When profile changes are detected, the workflow automatically updates the Memory System [`graph.json`](https://{{< param variables.repository.home >}}/blob/main/.claude/memory/graph.json) configuration file through GitHub's automatic commit signing, ensures verified commits in pull requests:
 
 {{< cards cols="1" >}}
   {{< card
@@ -43,14 +43,14 @@ The builder processes YAML profile configurations through dependency installatio
 Install the required Node.js packages for Memory System:
 
 ```bash
-cd ./.claude/tools/memory
+cd ./.claude/memory
 npm install js-yaml
 npm init -y
 ```
 
 ### Build
 
-Generate the Memory System [`graph.json`](https://{{< param variables.repository.home >}}/blob/main/.claude/tools/memory/graph.json) configuration file from existing profiles:
+Generate the Memory System [`graph.json`](https://{{< param variables.repository.home >}}/blob/main/.claude/memory/graph.json) configuration file from existing profiles:
 
 ```bash
 node ./lib/core/Package.js
@@ -77,6 +77,6 @@ The configuration file will contain the processed profile entities and relations
 Regenerate the Memory System configuration file, after modifying [profile](/claude/wiki/guide/profile) YAML files:
 
 ```bash
-cd ./.claude/tools/memory
+cd ./.claude/memory
 npm run build --silent
 ```

@@ -58,7 +58,7 @@ Use specific phrases to activate conversation logs functionality. The collaborat
 The conversation logs [template](/claude/wiki/guide/platform/memory/templates) provides standardized formatting for capturing collaborative work sessions with factual accuracy and structured metadata. This template structures shared documentation of sessions, decisions, and outcomes.
 
 > [!NOTE]
-> The [`conversation.md`](https://{{< param variables.repository.home >}}/blob/main/.claude/tools/memory/templates/conversation.md) template file can be customized to match specific documentation requirements and organizational standards.
+> The [`conversation.md`](https://{{< param variables.repository.home >}}/blob/main/.claude/memory/templates/conversation.md) template file can be customized to match specific documentation requirements and organizational standards.
 
 ### Real-World Examples
 

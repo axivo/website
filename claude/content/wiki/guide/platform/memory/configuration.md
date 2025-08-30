@@ -11,7 +11,7 @@ Technical reference for the Memory Builder configuration system that processes Y
 
 ## Settings
 
-The [`builder.yaml`](https://{{< param variables.repository.home >}}/blob/main/.claude/tools/memory/config/builder.yaml) file contains the settings required to [build](/claude/wiki/guide/platform/memory/builder) the Memory System configuration file used by Anthropic's `memory` MCP server.
+The [`builder.yaml`](https://{{< param variables.repository.home >}}/blob/main/.claude/memory/config/builder.yaml) file contains the settings required to [build](/claude/wiki/guide/platform/memory/builder) the Memory System configuration file used by Anthropic's `memory` MCP server.
 
 ### Build
 
@@ -86,7 +86,7 @@ Defines directory locations for external dependencies and tool integration using
 path:
   conversations: /Users/username/github/claude/.claude/data/conversations
   diary: /Users/username/github/claude/.claude/data/diary
-  tool: /Users/username/github/claude/.claude/tools/memory
+  tool: /Users/username/github/claude/.claude/memory
 ```
 
 > [!NOTE]

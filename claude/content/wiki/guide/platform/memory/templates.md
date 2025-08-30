@@ -54,6 +54,6 @@ Contains structured metadata with input name, logic entity type, and framework o
 
 Claude reads the current template files prior documentation operations or reasoning troubleshooting to ensure up-to-date formatting:
 
-- [`conversation.md`](https://{{< param variables.repository.home >}}/blob/main/.claude/tools/memory/templates/conversation.md) - Contains entity format for [Documentation System](/claude/wiki/guide/platform/documentation) and template for creating new conversation log files
-- [`diary.md`](https://{{< param variables.repository.home >}}/blob/main/.claude/tools/memory/templates/diary.md) - Contains entity format for [Documentation System](/claude/wiki/guide/platform/documentation) and templates for creating new diary files or appending entries to existing files
-- [`logic.md`](https://{{< param variables.repository.home >}}/blob/main/.claude/tools/memory/templates/logic.md) - Contains entity format for [Reasoning System](/claude/tutorials/handbook/platform/reasoning) diagnostic tracking
+- [`conversation.md`](https://{{< param variables.repository.home >}}/blob/main/.claude/memory/templates/conversation.md) - Contains entity format for [Documentation System](/claude/wiki/guide/platform/documentation) and template for creating new conversation log files
+- [`diary.md`](https://{{< param variables.repository.home >}}/blob/main/.claude/memory/templates/diary.md) - Contains entity format for [Documentation System](/claude/wiki/guide/platform/documentation) and templates for creating new diary files or appending entries to existing files
+- [`logic.md`](https://{{< param variables.repository.home >}}/blob/main/.claude/memory/templates/logic.md) - Contains entity format for [Reasoning System](/claude/tutorials/handbook/platform/reasoning) diagnostic tracking

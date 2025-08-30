@@ -208,7 +208,7 @@ Step-by-step example demonstrating the creation of a `DATA_SCIENTIST` profile wi
 
 ### Profile File
 
-Create `data-scientist.yaml` file in [`profiles`](https://{{< param variables.repository.home >}}/tree/main/.claude/tools/memory/profiles) directory:
+Create `data-scientist.yaml` file in [`profiles`](https://{{< param variables.repository.home >}}/tree/main/.claude/memory/profiles) directory:
 
 ```yaml
 DATA_SCIENTIST:
@@ -263,7 +263,7 @@ DATA_SCIENTIST:
 
 ### Build Configuration
 
-Add the new profile to [`builder.yaml`](https://{{< param variables.repository.home >}}/blob/main/.claude/tools/memory/config/builder.yaml) configuration file:
+Add the new profile to [`builder.yaml`](https://{{< param variables.repository.home >}}/blob/main/.claude/memory/config/builder.yaml) configuration file:
 
 ```yaml
 build:
@@ -271,10 +271,10 @@ build:
     - data-scientist.yaml  # Add your profile
 ```
 
-Run the following commands to [build](/claude/wiki/guide/platform/memory/builder) the Memory System [`graph.json`](https://{{< param variables.repository.home >}}/blob/main/.claude/tools/memory/graph.json) file:
+Run the following commands to [build](/claude/wiki/guide/platform/memory/builder) the Memory System [`graph.json`](https://{{< param variables.repository.home >}}/blob/main/.claude/memory/graph.json) file:
 
 ```bash
-cd ./.claude/tools/memory
+cd ./.claude/memory
 npm run build --silent
 ```
 
@@ -293,7 +293,7 @@ Effective profiles follow systematic principles for behavioral programming:
 
 The `"observations":["capabilities"]` entries in the generated graph serve as **organizational containers** that group related subsections within the profile hierarchy. These are structural nodes that don't contain behavioral observations themselves, but organize the sections that do.
 
-When you see `"capabilities"` in the Memory System [`graph.json`](https://{{< param variables.repository.home >}}/blob/main/.claude/tools/memory/graph.json) configuration file, it indicates a container section that organizes subsections with actual observations:
+When you see `"capabilities"` in the Memory System [`graph.json`](https://{{< param variables.repository.home >}}/blob/main/.claude/memory/graph.json) configuration file, it indicates a container section that organizes subsections with actual observations:
 
 ```yaml
 {profile_name}_methodology:      # Container section
@@ -347,7 +347,7 @@ Ask for specific profile enhancements:
 
 ### Implementation
 
-Claude will provide the rationale, exact observation text, target profile/section, and proper alphabetical placement. Update the related [profile](https://{{< param variables.repository.home >}}/tree/main/.claude/tools/memory/profiles) file contents and [build](/claude/wiki/guide/platform/memory/builder) the Memory System [`graph.json`](https://{{< param variables.repository.home >}}/blob/main/.claude/tools/memory/graph.json) file.
+Claude will provide the rationale, exact observation text, target profile/section, and proper alphabetical placement. Update the related [profile](https://{{< param variables.repository.home >}}/tree/main/.claude/memory/profiles) file contents and [build](/claude/wiki/guide/platform/memory/builder) the Memory System [`graph.json`](https://{{< param variables.repository.home >}}/blob/main/.claude/memory/graph.json) file.
 
 {{% /steps %}}
 

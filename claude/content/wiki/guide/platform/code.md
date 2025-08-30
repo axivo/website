@@ -72,7 +72,7 @@ Configure the following required MCP servers:
         "@modelcontextprotocol/server-memory"
       ],
       "env": {
-        "MEMORY_FILE_PATH": "/Users/username/github/claude/.claude/tools/memory/graph.json"
+        "MEMORY_FILE_PATH": "/Users/username/github/claude/.claude/memory/graph.json"
       }
     },
     "sequential-thinking": {

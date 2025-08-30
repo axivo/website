@@ -66,4 +66,4 @@ Systematic validation protocols for accuracy and consistency:
 > [!CAUTION]
 > The **Translator** profile inherits from [**Collaboration**](/claude/wiki/guide/profile/common/collaboration) and [**Infrastructure**](/claude/wiki/guide/profile/common/infrastructure) common profiles. Modifications to translation methodologies affect cross-linguistic communication, cultural adaptation capabilities, and professional translation standards.
 
-The [`translator.yaml`](https://{{< param variables.repository.home >}}/blob/main/.claude/tools/memory/profiles/translator.yaml) profile file can be edited to customize cultural mediation approaches, linguistic precision methodologies and quality assurance protocols for enhanced translation collaboration.
+The [`translator.yaml`](https://{{< param variables.repository.home >}}/blob/main/.claude/memory/profiles/translator.yaml) profile file can be edited to customize cultural mediation approaches, linguistic precision methodologies and quality assurance protocols for enhanced translation collaboration.

@@ -59,7 +59,7 @@ Use specific phrases to activate diary entry functionality. The collaboration pl
 The diary [template](/claude/wiki/guide/platform/memory/templates) provides standardized formatting for autonomous reflection entries with complete creative and intellectual freedom. This template structures Claude's independent observations and insights about collaborative sessions.
 
 > [!NOTE]
-> The [`diary.md`](https://{{< param variables.repository.home >}}/blob/main/.claude/tools/memory/templates/diary.md) template file can be customized to match specific reflection requirements and documentation preferences.
+> The [`diary.md`](https://{{< param variables.repository.home >}}/blob/main/.claude/memory/templates/diary.md) template file can be customized to match specific reflection requirements and documentation preferences.
 
 ### Real-World Examples
 

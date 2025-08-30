@@ -34,4 +34,4 @@ System monitoring and tool integration ensure optimal platform utilization:
 > [!CAUTION]
 > The **Infrastructure** profile provides platform integration capabilities inherited by all specialized profiles. Modifications to infrastructure patterns affect tool utilization and platform optimization system-wide.
 
-The [`infrastructure.yaml`](https://{{< param variables.repository.home >}}/blob/main/.claude/tools/memory/profiles/common/infrastructure.yaml) profile file can be edited to customize platform capabilities, execution protocols, and tool integration that optimize performance across all specialized profiles.
+The [`infrastructure.yaml`](https://{{< param variables.repository.home >}}/blob/main/.claude/memory/profiles/common/infrastructure.yaml) profile file can be edited to customize platform capabilities, execution protocols, and tool integration that optimize performance across all specialized profiles.
