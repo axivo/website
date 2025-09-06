@@ -57,7 +57,7 @@ jobs:
         run: npm install handlebars
 
       - name: Configure repository
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         with:
           script: |
             const { Workflow } = require('./.github/actions/handlers');
@@ -65,7 +65,7 @@ jobs:
             await workflow.configureRepository();
 
       - name: Build documentation
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         with:
           script: |
             const { Workflow } = require('./.github/actions/handlers');
@@ -82,7 +82,7 @@ jobs:
           path: ./public
 
       - name: Report workflow issue
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         if: always()
         with:
           script: |
