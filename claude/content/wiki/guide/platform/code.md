@@ -224,7 +224,7 @@ Claude will load the centralized configuration and be ready to work across all y
 
 To start working on a specific project repository, ask Claude:
 
-> CD to /Users/username/github/fastapi and list the root files.
+> CD to /Users/username/github/project-alpha and list the root files.
 
 Claude will use the new directory as root base and start performing the end-user asks.
 
