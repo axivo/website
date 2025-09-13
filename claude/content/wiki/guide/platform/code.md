@@ -62,7 +62,9 @@ Configure the following required MCP servers:
       "args": [
         "-y",
         "@modelcontextprotocol/server-filesystem",
-        "/Users/username/github/claude"
+        "/Users/username/github/claude",
+        "/Users/username/github/project-alpha",
+        "/Users/username/github/project-beta"
       ]
     },
     "memory": {
@@ -105,24 +107,33 @@ The existing [`CLAUDE.md`](https://{{< param variables.repository.home >}}/blob/
 
 {{% /steps %}}
 
-## Secure Configuration
+## Configuration
 
-Production-grade deployment requires secure configuration management with version control integration and encryption. This approach enables team collaboration while protecting sensitive configuration data and maintaining professional development workflows.
+Production-grade deployment requires configuration management with version control integration and **optional encryption** for sensitive data. This approach enables team collaboration while protecting sensitive configuration data and maintaining professional development workflows.
+
+### Configuration Files
+
+The platform configuration uses the `mcp.json` and [`settings.json`](https://{{< param variables.repository.home >}}/blob/main/.claude/settings.json) files with user settings applied to all projects. A `settings.local.json` file can be used containing additional user settings, Claude Code will automatically create it if required.
+
+- `.claude/mcp.json` - Git ignored platform MCP server definitions
+- [`.claude/settings.json`](https://{{< param variables.repository.home >}}/blob/main/.claude/settings.json) - Platform MCP server permissions and settings
+- `.claude/settings.local.json` - Git ignored MCP server permissions and settings
+- `.mcp.json` - Symlink to platform MCP server definitions used by Claude Code
 
 {{% steps %}}
 
 ### Symlink
 
-Create a symlink to configuration file:
+Create a symlink to MCP servers configuration file:
 
 ```bash
 ln -fs ~/github/claude/.claude/mcp.json ~/github/claude/.mcp.json
 ```
 
 > [!NOTE]
-> Symlinks enable consistent configuration across multiple repository directories. Claude Code uses `.mcp.json` file in the working directory for MCP servers configuration.
+> Symlinks enable consistent MCP servers configuration across multiple repository directories. Claude Code uses `.mcp.json` file in the working directory.
 
-### Encryption
+### Sensitive Data Encryption
 
 Install the `ansible-vault` utility:
 
@@ -130,7 +141,7 @@ Install the `ansible-vault` utility:
 brew install ansible
 ```
 
-Encrypt configuration for version control:
+Encrypt the MCP servers configuration for version control:
 
 ```bash
 cd ~/github/claude/.claude
@@ -192,11 +203,32 @@ Successful configuration produces profile acknowledgment:
 
 Claude Code integration with [Developer](/claude/wiki/guide/profile/domain/developer) profile enables systematic development methodologies directly in terminal environments.
 
-### Development Commands
+{{% steps %}}
 
-- **Code Review** - `claude "Review this Pull Request for SOLID principles"`
-- **Debugging** - `claude "Debug this test failure with minimal fix approach"`
-- **Architecture** - `claude "Analyze this codebase structure for improvements"`
+### Session Start
+
+Change to platform forked repository and start Claude Code:
+
+```bash
+cd ~/github/claude
+claude
+```
+
+At Claude Code prompt, start by initializing the [Developer](/claude/wiki/guide/profile/domain/developer) profile:
+
+> Please load the framework methodology and explain your understanding of it.
+
+Claude will load the centralized configuration and be ready to work across all your project repositories.
+
+### Project Repository
+
+To start working on a specific project repository, ask Claude:
+
+> CD to /Users/username/github/fastapi and list the root files.
+
+Claude will use the new directory as root base and start performing the end-user asks.
+
+{{% /steps %}}
 
 ### Memory Integration
 
