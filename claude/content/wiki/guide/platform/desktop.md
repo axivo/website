@@ -56,7 +56,9 @@ Configure the following required MCP servers:
       "args": [
         "-y",
         "@modelcontextprotocol/server-filesystem",
-        "/Users/username/github/claude"
+        "/Users/username/github/claude",
+        "/Users/username/github/project-alpha",
+        "/Users/username/github/project-beta"
       ]
     },
     "memory": {
@@ -115,15 +117,15 @@ Set the **Project Details** `name` and `description`, based on current project s
 
 {{% /steps %}}
 
-## Secure Configuration
+## Configuration
 
-Production-grade deployment requires secure configuration management with version control integration and encryption. This approach enables team collaboration while protecting sensitive configuration data and maintaining professional development workflows.
+Production-grade deployment requires configuration management with version control integration and **optional encryption** for sensitive data. This approach enables team collaboration while protecting sensitive configuration data and maintaining professional development workflows.
 
 {{% steps %}}
 
 ### Symlink
 
-Create a symlink to configuration file:
+Create a symlink to MCP servers configuration file:
 
 ```bash
 rm -f ~/Library/Application\ Support/Claude/claude_desktop_config.json
@@ -134,7 +136,7 @@ ln -fs ~/github/claude/.claude/mcp.json \
 > [!NOTE]
 > Symlinks enable consistent configuration across multiple repository directories. Claude Desktop uses `claude_desktop_config.json` in the Application Support directory for MCP servers configuration.
 
-### Encryption
+### Sensitive Data Encryption
 
 Install the `ansible-vault` utility:
 
@@ -142,7 +144,7 @@ Install the `ansible-vault` utility:
 brew install ansible
 ```
 
-Encrypt configuration for version control:
+Encrypt the MCP servers configuration for version control:
 
 ```bash
 cd ~/github/claude/.claude
