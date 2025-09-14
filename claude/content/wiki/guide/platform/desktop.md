@@ -83,7 +83,7 @@ Configure the following required MCP servers:
 ```
 
 > [!NOTE]
-> Replace `/Users/username/github/claude` with actual local repository path and update the `time` MCP `local-timezone` argument value, as needed.
+> Replace `/Users/username/github/claude` with actual local repository path and update the `time` MCP `local-timezone` argument value, as needed. Review the [`settings.json`](https://{{< param variables.repository.home >}}/blob/main/.claude/settings.json) file to apply the correct MCP tool permissions.
 
 ### Activation
 
