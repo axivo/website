@@ -27,7 +27,6 @@ System monitoring and tool integration ensure optimal platform utilization:
 - **Platform optimization** adapting to specific deployment environments dynamically
 - **Response protocols** ensuring completion and compliance standards
 - **Temporal awareness** maintaining consistent time operations across contexts
-- **Complex analysis** employing `sequential-thinking:sequentialthinking` for advanced workflows
 
 ## Configuration
 
