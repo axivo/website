@@ -71,13 +71,6 @@ Configure the following required MCP servers:
         "MEMORY_FILE_PATH": "/Users/username/github/claude/.claude/memory/graph.json"
       }
     },
-    "sequential-thinking": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-sequential-thinking"
-      ]
-    },
     "time": {
       "command": "uvx",
       "args": [
@@ -257,7 +250,6 @@ Verify the MCP server packages are accessible by running the following commands:
 ```bash
 npx -y @modelcontextprotocol/server-filesystem
 npx -y @modelcontextprotocol/server-memory
-npx -y @modelcontextprotocol/server-sequential-thinking
 uvx mcp-server-time --help
 ```
 
