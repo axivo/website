@@ -80,7 +80,7 @@ logging:
 
 ### Path
 
-Defines directory locations for external dependencies and tool integration using absolute paths required for Anthropic's [`filesystem`](https://github.com/modelcontextprotocol/servers/tree/main/src/filesystem) MCP server.
+Defines directory locations for external dependencies and tool integration using absolute paths.
 
 ```yaml
 path:

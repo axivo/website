@@ -16,17 +16,33 @@ Terminal collaboration requires MCP server configuration that transforms Claude 
 
 ### Initialization
 
-Install [Claude Code](https://docs.anthropic.com/en/docs/claude-code/overview) application:
+Install [Claude Code](https://docs.anthropic.com/en/docs/claude-code/overview) application.
 
-```shell
-brew install --cask claude-code
-```
+{{< tabs items="Mac,Linux,Windows" >}}
+  {{< tab >}}
+    Use [Homebrew](https://brew.sh) package manager to install the binary:
 
-Alternatively, install the `npm` package:
+    ```shell
+    brew install --cask claude-code
+    ```
+  {{< /tab >}}
 
-```shell
-npm install -g @anthropic-ai/claude-code
-```
+  {{< tab >}}
+    Use Anthropic's official installer to install the binary:
+
+    ```shell
+    curl -fsSL https://claude.ai/install.sh | bash
+    ```
+  {{< /tab >}}
+
+  {{< tab >}}
+    Use Anthropic's official installer to install the binary:
+
+    ```shell
+    irm https://claude.ai/install.ps1 | iex
+    ```
+  {{< /tab >}}
+{{< /tabs >}}
 
 ### Configuration
 
@@ -47,6 +63,13 @@ Configure the following required MCP servers:
 ```json
 {
   "mcpServers": {
+    "claude": {
+      "command": "claude",
+      "args": [
+        "mcp",
+        "serve"
+      ]
+    },
     "documentation": {
       "command": "npx",
       "args": [
@@ -56,16 +79,6 @@ Configure the following required MCP servers:
       "env": {
         "MEMORY_FILE_PATH": "/Users/username/github/claude/.claude/data/graph.json"
       }
-    },
-    "filesystem": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-filesystem",
-        "/Users/username/github/claude",
-        "/Users/username/github/project-alpha",
-        "/Users/username/github/project-beta"
-      ]
     },
     "memory": {
       "command": "npx",
@@ -93,7 +106,7 @@ Configure the following required MCP servers:
 
 ### Activation
 
-The existing [`CLAUDE.md`](https://{{< param variables.repository.home >}}/blob/main/CLAUDE.md) file at repository root is used to activate the [Developer](/claude/wiki/guide/profile/domain/developer) profile, with `filesystem` MCP server providing access to additional project directories as needed.
+The existing [`CLAUDE.md`](https://{{< param variables.repository.home >}}/blob/main/CLAUDE.md) file at repository root is used to activate the [Developer](/claude/wiki/guide/profile/domain/developer) profile.
 
 > [!CAUTION]
 > Avoid adding additional behavioral instructions to the `CLAUDE.md` file. The platform uses Profile System [observations](/claude/wiki/guide/profile), adding extra instructions may interfere with the profiles methodology and cause unpredictable behavior.
@@ -253,7 +266,6 @@ Common Claude Code configuration issues and systematic resolution procedures hel
 Verify the MCP server packages are accessible by running the following commands:
 
 ```bash
-npx -y @modelcontextprotocol/server-filesystem
 npx -y @modelcontextprotocol/server-memory
 uvx mcp-server-time --help
 ```

@@ -16,11 +16,27 @@ Desktop collaboration requires MCP server configuration that transforms Claude D
 
 ### Initialization
 
-Install [Claude Desktop](https://claude.ai/download) application:
+Install [Claude Code](https://docs.anthropic.com/en/docs/claude-code/overview) and [Claude Desktop](https://claude.ai/download) applications.
 
-```shell
-brew install --cask claude
-```
+{{< tabs items="Mac,Windows" >}}
+  {{< tab >}}
+    Use [Homebrew](https://brew.sh) package manager to install the binaries:
+
+    ```shell
+    brew install --cask claude claude-code
+    ```
+  {{< /tab >}}
+
+  {{< tab >}}
+    Use Anthropic's official installer to install the Claude Code binary:
+
+    ```shell
+    irm https://claude.ai/install.ps1 | iex
+    ```
+
+    Next, download [Claude Desktop](https://claude.ai/download) and install the binary.
+  {{< /tab >}}
+{{< /tabs >}}
 
 Run Claude Desktop once to initialize the application structure, then close it.
 
@@ -41,6 +57,13 @@ Configure the following required MCP servers:
 ```json
 {
   "mcpServers": {
+    "claude": {
+      "command": "claude",
+      "args": [
+        "mcp",
+        "serve"
+      ]
+    },
     "documentation": {
       "command": "npx",
       "args": [
@@ -50,16 +73,6 @@ Configure the following required MCP servers:
       "env": {
         "MEMORY_FILE_PATH": "/Users/username/github/claude/.claude/data/graph.json"
       }
-    },
-    "filesystem": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-filesystem",
-        "/Users/username/github/claude",
-        "/Users/username/github/project-alpha",
-        "/Users/username/github/project-beta"
-      ]
     },
     "memory": {
       "command": "npx",
@@ -248,7 +261,6 @@ Common configuration issues and systematic resolution procedures help ensure rel
 Verify the MCP server packages are accessible by running the following commands:
 
 ```bash
-npx -y @modelcontextprotocol/server-filesystem
 npx -y @modelcontextprotocol/server-memory
 uvx mcp-server-time --help
 ```
