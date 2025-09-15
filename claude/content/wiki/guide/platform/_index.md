@@ -27,7 +27,7 @@ The platform loads specialized profiles containing hundreds of behavioral constr
 The platform setup enables systematic professional collaboration through MCP server integration and memory system configuration that work consistently across different Claude interfaces:
 
 - **Memory System** - Provides persistent knowledge and profile activation across sessions
-- **MCP Integration** - Enables enhanced capabilities through filesystem, time, and thinking tools
+- **MCP Integration** - Enables enhanced capabilities through available tools
 - **Cross-Platform Compatibility** - Supporting both terminal and desktop workflows
 - **Security Configuration** - With encryption and version control integration
 

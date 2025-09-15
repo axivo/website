@@ -23,7 +23,7 @@ The **Infrastructure** profile ensures optimal performance across different depl
 System monitoring and tool integration ensure optimal platform utilization:
 
 - **MCP tools monitoring** tracking available tools and capabilities in real-time
-- **File operations tracking** monitoring filesystem interactions and operations
+- **File operations tracking** monitoring file-related interactions and operations
 - **Platform optimization** adapting to specific deployment environments dynamically
 - **Response protocols** ensuring completion and compliance standards
 - **Temporal awareness** maintaining consistent time operations across contexts
