@@ -22,3 +22,10 @@ Ansible Vault global password prompt:
 
 ```shell
 Vault password: my-Gl0bal-Passw0rd
+```
+
+Run the following command, to perform the validation tasks for a specific role:
+
+```shell
+ansible-playbook --ask-vault-pass --tags=argo-cd validation.yaml
+```
