@@ -156,7 +156,7 @@ cd ~/github/claude/.claude
 ansible-vault encrypt ./mcp.json --output ./mcp.json.enc
 ```
 
-Decrypt configuration, when needed:
+Decrypt the configuration, when needed:
 
 ```bash
 cd ~/github/claude/.claude
