@@ -51,7 +51,7 @@ ansible-playbook --ask-vault-pass --tags=kured upgrade.yaml
 Validation related tasks, see [`validation.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/kured/tasks/validation.yaml) for details. Run the following command, to perform all role related validation tasks:
 
 ```shell
-ansible-playbook --ask-vault-pass --tags=kured,validation validation.yaml
+ansible-playbook --ask-vault-pass --tags=kured validation.yaml
 ```
 
 {{% /steps %}}

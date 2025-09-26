@@ -53,7 +53,7 @@ ansible-playbook --ask-vault-pass --tags=helm upgrade.yaml
 Validation related tasks, see [`validation.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/helm/tasks/validation.yaml) for details. Run the following command, to perform all role related validation tasks:
 
 ```shell
-ansible-playbook --ask-vault-pass --tags=helm,validation validation.yaml
+ansible-playbook --ask-vault-pass --tags=helm validation.yaml
 ```
 
 {{% /steps %}}

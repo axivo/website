@@ -58,7 +58,7 @@ The upgrade will trigger the [Kured](/k3s-cluster/wiki/guide/configuration/roles
 Validation related tasks, see [`validation.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/k3s/tasks/validation.yaml) for details. Run the following command, to perform all role related validation tasks:
 
 ```shell
-ansible-playbook --ask-vault-pass --tags=k3s,validation validation.yaml
+ansible-playbook --ask-vault-pass --tags=k3s validation.yaml
 ```
 
 {{% /steps %}}

@@ -60,7 +60,7 @@ User related tasks, see [`user.yaml`](https://{{< param variables.repository.clu
 Validation related tasks, see [`validation.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/cluster/tasks/validation.yaml) for details. Run the following command, to perform all role related validation tasks:
 
 ```shell
-ansible-playbook --ask-vault-pass --tags=cluster,validation validation.yaml
+ansible-playbook --ask-vault-pass --tags=cluster validation.yaml
 ```
 
 {{% /steps %}}

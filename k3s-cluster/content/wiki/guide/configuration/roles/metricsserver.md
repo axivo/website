@@ -44,7 +44,7 @@ ansible-playbook --ask-vault-pass --tags=metrics-server upgrade.yaml
 Validation related tasks, see [`validation.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/metrics-server/tasks/validation.yaml) for details. Run the following command, to perform all role related validation tasks:
 
 ```shell
-ansible-playbook --ask-vault-pass --tags=metrics-server,validation validation.yaml
+ansible-playbook --ask-vault-pass --tags=metrics-server validation.yaml
 ```
 
 {{% /steps %}}
