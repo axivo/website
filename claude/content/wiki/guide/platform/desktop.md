@@ -25,6 +25,7 @@ Install [Claude Code](https://docs.anthropic.com/en/docs/claude-code/overview) a
     ```shell
     brew install --cask claude claude-code
     claude config set -g autoUpdates false
+    claude config set -g installMethod global
     ```
   {{< /tab >}}
 

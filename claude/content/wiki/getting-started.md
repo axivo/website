@@ -70,7 +70,7 @@ Review the Memory System [configuration settings](/claude/wiki/guide/platform/me
 Build the Memory System from profile configurations:
 
 ```shell
-cd ~/github/claude/memory
+cd ~/github/claude/.claude/memory
 npm install js-yaml
 npm init -y
 node ./lib/core/Package.js

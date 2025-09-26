@@ -51,7 +51,7 @@ ansible-playbook --ask-vault-pass --tags=external-dns upgrade.yaml
 Validation related tasks, see [`validation.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/external-dns/tasks/validation.yaml) for details. Run the following command, to perform all role related validation tasks:
 
 ```shell
-ansible-playbook --ask-vault-pass --tags=external-dns,validation validation.yaml
+ansible-playbook --ask-vault-pass --tags=external-dns validation.yaml
 ```
 
 {{% /steps %}}

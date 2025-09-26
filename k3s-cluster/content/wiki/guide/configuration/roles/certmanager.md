@@ -51,7 +51,7 @@ ansible-playbook --ask-vault-pass --tags=cert-manager upgrade.yaml
 Validation related tasks, see [`validation.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/cert-manager/tasks/validation.yaml) for details. Run the following command, to perform all role related validation tasks:
 
 ```shell
-ansible-playbook --ask-vault-pass --tags=cert-manager,validation validation.yaml
+ansible-playbook --ask-vault-pass --tags=cert-manager validation.yaml
 ```
 
 {{% /steps %}}

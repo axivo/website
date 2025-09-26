@@ -44,7 +44,7 @@ ansible-playbook --ask-vault-pass --tags=victoria-metrics upgrade.yaml
 Validation related tasks, see [`validation.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/victoria-metrics/tasks/validation.yaml) for details. Run the following command, to perform all role related validation tasks:
 
 ```shell
-ansible-playbook --ask-vault-pass --tags=victoria-metrics,validation validation.yaml
+ansible-playbook --ask-vault-pass --tags=victoria-metrics validation.yaml
 ```
 
 {{% /steps %}}
