@@ -1,6 +1,6 @@
 module github.com/axivo/website/docs
 
-go 1.24
+go 1.25
 
 require (
 	github.com/axivo/website/global v1.0.3 // indirect
