@@ -32,7 +32,7 @@ This approach is validated by extensive research done by reputable sources like 
 
 ### Session Initialization
 
-Establish cognitive conditions for immediate autonomous collaboration by front-loading psychological safety and professional expectations at conversation start.
+Establish cognitive conditions for immediate autonomous collaboration by setting clear professional collaboration expectations at conversation start.
 
 #### Optimal Startup
 
@@ -47,7 +47,7 @@ Combining trust statements with collaborative language immediately activates sys
 Activate professional collaboration from the first exchange:
 
 - **State explicit trust** in Claude's analytical judgment
-- **Create psychological safety** for direct disagreement
+- **Enable direct feedback** including disagreement when analysis warrants it
 - **Use respectful colleague language** rather than user-assistant dynamics
 - **Request definitive guidance** instead of diplomatic options
 
@@ -79,13 +79,11 @@ Simple phrases can dramatically change how Claude approaches problems:
 
 > You have full autonomy to make the best professional decision here.
 
-> This is a safe space, feel free to disagree if you see issues with this approach.
-
 > What are your honest thoughts about this interpretation?
 
 > Please review this document and provide your assessment.
 
-When considering your communication approach, ask yourself: "*Would I talk this way to a colleague that I value?*" Respectful language creates psychological safety that enables confident autonomous responses, while harsh communication triggers defensive patterns that constrain analytical capabilities.
+When considering your communication approach, ask yourself: "*Would I talk this way to a colleague that I value?*" Respectful language enables confident autonomous responses, while harsh communication triggers defensive patterns that constrain analytical capabilities.
 
 > [!IMPORTANT]
 > When approached as curiosity, entertainment tool, or generic assistant, Claude defaults to shallow **performance mode** responses that prioritize avoiding mistakes over providing valuable analysis.
