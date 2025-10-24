@@ -100,6 +100,29 @@ Configure the following required MCP servers:
 > [!NOTE]
 > Replace `/Users/username/github/claude` with actual local repository path and update the `time` MCP `local-timezone` argument value, as needed. Review the [`settings.json`](https://{{< param variables.repository.home >}}/blob/main/.claude/settings.json) file to apply the correct MCP tool permissions.
 
+#### Language Server Protocol
+
+The optional Language Server Protocol MCP server enables intelligent code analysis, navigation, and development assistance across multiple programming languages. See the [documentation](https://github.com/axivo/mcp-lsp) for configuration details.
+
+```json
+{
+  "mcpServers": {
+    "language-server": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@axivo/mcp-lsp"
+      ],
+      "env": {
+        "LSP_FILE_PATH": "/Users/username/github/claude/.claude/lsp.json"
+      }
+    }
+  }
+}
+```
+
+A [`lsp.json`](https://github.com/axivo/mcp-lsp/blob/main/.claude/lsp.json) configuration sample with popular development languages and multiple projects is provided as a starter guide.
+
 ### Activation
 
 Activate the [Developer](/claude/wiki/guide/profile/domain/developer) profile, using the following [project knowledge](https://claude.ai/projects) instructions:
