@@ -50,7 +50,16 @@ class HugoService extends Action {
         this.logger.info(`Building '${site}' documentation site...`);
         return this.shellService.execute('hugo', [...args, '-s', site], { output: true, silent: false });
       }));
-      this.logger.info(`Successfully built ${sites.length} documentation sites`);
+      const word = sites.length === 1 ? 'site' : 'sites';
+      this.logger.info(`Successfully built ${sites.length} documentation ${word}`);
+      this.logger.info('Fixing file permissions in public directory...');
+      await this.shellService.execute('find', ['public', '-type', 'f', '-exec', 'chmod', '0644', '{}', ';'], {
+        output: true, silent: false
+      });
+      await this.shellService.execute('find', ['public', '-type', 'd', '-exec', 'chmod', '0755', '{}', ';'], {
+        output: true, silent: false
+      });
+      this.logger.info('Successfully fixed file permissions');
     });
   }
 
