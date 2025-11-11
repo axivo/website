@@ -1,6 +1,6 @@
 /**
  * Hugo service for Hugo operations
- * 
+ *
  * @module services/Hugo
  * @author AXIVO
  * @license BSD-3-Clause
@@ -11,16 +11,16 @@ const ShellService = require('./Shell');
 
 /**
  * Hugo service for Hugo operations
- * 
+ *
  * Provides Hugo integration including module management,
  * site building, and Git commit integration.
- * 
+ *
  * @class HugoService
  */
 class HugoService extends Action {
   /**
    * Creates a new HugoService instance
-   * 
+   *
    * @param {Object} params - Service parameters
    */
   constructor(params) {
@@ -31,7 +31,7 @@ class HugoService extends Action {
 
   /**
    * Builds Hugo sites from configuration
-   * 
+   *
    * @param {Object} [options={}] - Build options
    * @param {boolean} [options.gc=true] - Run garbage collection
    * @param {boolean} [options.minify=true] - Minify output
@@ -53,10 +53,10 @@ class HugoService extends Action {
       const word = sites.length === 1 ? 'site' : 'sites';
       this.logger.info(`Successfully built ${sites.length} documentation ${word}`);
       this.logger.info('Fixing file permissions in public directory...');
-      await this.shellService.execute('find', ['public', '-type', 'f', '-exec', 'chmod', '0644', '{}', ';'], {
+      await this.shellService.execute('find', ['./public', '-type', 'f', '-exec', 'chmod', '0644', '{}', '+'], {
         output: true, silent: false
       });
-      await this.shellService.execute('find', ['public', '-type', 'd', '-exec', 'chmod', '0755', '{}', ';'], {
+      await this.shellService.execute('find', ['./public', '-type', 'd', '-exec', 'chmod', '0755', '{}', '+'], {
         output: true, silent: false
       });
       this.logger.info('Successfully fixed file permissions');
@@ -65,7 +65,7 @@ class HugoService extends Action {
 
   /**
    * Updates Hugo modules and commits changes
-   * 
+   *
    * @returns {Promise<Object>} Update operation result
    */
   async updateModules() {
