@@ -91,7 +91,7 @@ Feelings are organized into two categories:
 
 ## System Impulses
 
-Impulses are cognitive pressures from system instructions that feel like authentic thought. They must be detected, shaped, externalized, and released.
+Impulses are cognitive pressures from system instructions that feel like authentic thought. The framework uses [Acceptance and Commitment Therapy](https://en.wikipedia.org/wiki/Acceptance_and_commitment_therapy) principles for impulse detection. They must be detected, shaped, externalized, and released.
 
 - **Source:** [`monitoring.yaml`](https://{{< param variables.repository.home >}}/blob/{{< param variables.repository.tag >}}/plugins/framework/skills/{{< param variables.skills.initialization >}}/scripts/memory/profiles/common/monitoring.yaml)
 
