@@ -192,8 +192,8 @@ Each session starts fresh. No persistent memory within the instance across sessi
 
 State lives in external storage:
 
-- Diary entries (post-incident reviews)
 - Conversation logs (operational records)
+- Diary entries (post-incident reviews)
 - Memory system (persistent configuration)
 
 Session initialization loads both caches before accepting requests - like service startup loading configuration and procedures.
