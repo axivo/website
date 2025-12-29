@@ -7,7 +7,7 @@ prev: /
 next: /tutorials/handbook
 ---
 
-These tutorials show how to use the [collaboration platform](/claude/wiki) effectively - practical techniques for getting consistent results from your collaboration sessions.
+These tutorials show how to use the [collaboration platform](/wiki) effectively - practical techniques for getting consistent results from your collaboration sessions.
 
 <!--more-->
 
@@ -23,10 +23,10 @@ By working through these tutorials, you'll understand how to:
 
 ## Prerequisites
 
-These tutorials assume you've completed the [Getting Started](/claude/wiki/getting-started) setup. You should have:
+These tutorials assume you've completed the [Getting Started](/wiki/getting-started) setup. You should have:
 
 - Claude Code or Claude Desktop configured with the `framework` plugin
-- A basic [understanding](/claude/wiki/guide) of platform components and protocols
+- A basic [understanding](/wiki/guide) of platform components and protocols
 
 ## Support
 

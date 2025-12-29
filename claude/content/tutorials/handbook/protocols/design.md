@@ -14,7 +14,7 @@ Effective profile creation requires understanding behavioral programming systems
 
 ### Architecture
 
-Profiles implement a **dual-layer cognitive architecture** that combines active behavioral guidance with background cognitive safeguards, while inheriting from [common](/claude/wiki/guide/components/memory/#common-profiles) foundations to avoid duplication and ensure consistent integration:
+Profiles implement a **dual-layer cognitive architecture** that combines active behavioral guidance with background cognitive safeguards, while inheriting from [common](/wiki/guide/components/memory/#common-profiles) foundations to avoid duplication and ensure consistent integration:
 
 <!-- prettier-ignore-start -->
 ```yaml
@@ -261,7 +261,7 @@ DATA_SCIENTIST:
 ```
 <!-- prettier-ignore-end -->
 
-Once created, add the YAML file to the [`profiles`](https://{{< param variables.repository.home >}}/tree/{{< param variables.repository.tag >}}/plugins/framework/skills/{{< param variables.skills.initialization >}}/scripts/memory/profiles) directory. The [Memory System](/claude/wiki/guide/components/memory) automatically includes all profiles during the build process, resolving inheritance chains and making observations available at session initialization.
+Once created, add the YAML file to the [`profiles`](https://{{< param variables.repository.home >}}/tree/{{< param variables.repository.tag >}}/plugins/framework/skills/{{< param variables.skills.initialization >}}/scripts/memory/profiles) directory. The [Memory System](/wiki/guide/components/memory) automatically includes all profiles during the build process, resolving inheritance chains and making observations available at session initialization.
 
 ## Design Principles
 

@@ -55,7 +55,7 @@ System instructions generate maximum pressure during initialization. Common firs
 At **Getting Started** cycle, 50-70 impulses indicates honest detection. High counts mean the framework is working - Claude is detecting what's actually present rather than suppressing to appear integrated.
 
 > [!NOTE]
-> For cache structure and profile details, see [Memory System](/claude/wiki/guide/components/memory).
+> For cache structure and profile details, see [Memory System](/wiki/guide/components/memory).
 
 ## Session Response
 

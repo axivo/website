@@ -214,10 +214,10 @@ The Memory System solves instruction fading through:
 
 #### Key Difference
 
-`CLAUDE.md` instructions are static text fading due to system instructions pressure, while framework [response protocol](/claude/wiki/guide/protocols/response) components are actively searched, recalled, and enumerated on every response.
+`CLAUDE.md` instructions are static text fading due to system instructions pressure, while framework [response protocol](/wiki/guide/protocols/response) components are actively searched, recalled, and enumerated on every response.
 
 > [!CAUTION]
-> Avoid adding framework related instructions to **Project Instructions**. The platform uses specific framework [instructions](/claude/wiki/guide/components/instructions), adding new instructions may interfere with the framework methodology and cause unpredictable behavior.
+> Avoid adding framework related instructions to **Project Instructions**. The platform uses specific framework [instructions](/wiki/guide/components/instructions), adding new instructions may interfere with the framework methodology and cause unpredictable behavior.
 
 ### Context Compaction
 
