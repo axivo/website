@@ -1,23 +1,24 @@
 {
+  "[javascript]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
   "[json]": {
     "editor.autoIndent": "keep",
-    "editor.defaultFormatter": "vscode.json-language-features",
-    "editor.insertSpaces": true,
-    "editor.tabSize": 2,
-    "files.insertFinalNewline": true,
-    "files.trimFinalNewlines": true,
-    "files.trimTrailingWhitespace": true
+    "editor.defaultFormatter": "vscode.json-language-features"
   },
   "[jsonc]": {
-    "editor.defaultFormatter": "vscode.json-language-features",
-    "editor.formatOnSave": true,
-    "editor.tabSize": 2
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "editor.formatOnSave": true,
+  "editor.insertSpaces": true,
   "editor.rulers": [
     120
   ],
   "editor.showUnused": true,
+  "editor.tabSize": 2,
   "files.associations": {
     "**/renovate.json5": "jsonc",
     "go.*": "go"
@@ -26,6 +27,9 @@
     "**/.git": true,
     "**/.DS_Store": true
   },
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  "files.trimTrailingWhitespace": true,
   "files.watcherExclude": {
     "**/.git/objects/**": true,
     "**/.git/subtree-cache/**": true

@@ -3,27 +3,27 @@ title: Handbook
 sidebar:
   open: true
 prev: /tutorials
-next: /tutorials/handbook/platform
+next: /tutorials/handbook/components
 ---
 
-The tutorials handbook transforms basic AI interactions into professional collaboration through practical workflows, specialized profiles, and institutional memory systems that build expertise over time.
+Practical tutorials covering session workflows, documentation systems, profile customization, and effectiveness measurement.
 
 <!--more-->
 
 ## Overview
 
-These tutorials enable effective AI collaboration through actionable guidance and proven techniques:
+Two tutorial sections address different aspects of working with the platform:
 
-- **Platform capabilities** for systematic workflows, documentation, and cross-session continuity
-- **Profile systems** that create specialized professional partnerships in different domains
-- **Real-world examples** demonstrating practical implementation and optimization strategies
-- **Best practices** from production usage and collaborative relationship development
+- **Platform Components** - Session workflows, documentation for institutional memory, communication patterns, and cross-session continuity
+- **Platform Protocols** - Profile design, effectiveness measurement, and behavioral customization
 
 ## Next
 
 Dive right into the following sections:
 
+<!-- prettier-ignore-start -->
 {{< cards >}}
-  {{< card icon="cog" link="platform" title="Collaboration Platform" subtitle="Structured workflows, institutional memory, and cross-session continuity." >}}
-  {{< card icon="user-circle" link="profile" title="Profile System" subtitle="Specialized professional collaboration through domain-specific competencies." >}}
+  {{< card icon="cube" link="components" title="Platform Components" subtitle="Session workflows, documentation, autonomy, and continuity." >}}
+  {{< card icon="shield-check" link="protocols" title="Platform Protocols" subtitle="Profile design, effectiveness, and customization." >}}
 {{< /cards >}}
+<!-- prettier-ignore-end -->

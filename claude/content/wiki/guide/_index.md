@@ -1,27 +1,29 @@
 ---
 title: Guide
+prev: /wiki/getting-started/
+next: /wiki/guide/protocols/
 sidebar:
   open: true
 ---
 
-The guide transforms standard Claude installations into specialized collaboration environments through platform setup and profile customization that enable professional partnerships tailored to your specific work domains.
+This guide explains the features and systems available - from cognitive architecture to documentation tools. You don't need to read this to use the platform, you can always ask Claude directly about platform features.
 
 <!--more-->
 
 ## Overview
 
-Collaboration setup enables systematic professional partnerships through platform configuration and specialized profiles that maintain consistency across sessions:
+Two interconnected systems work together to enable professional partnership:
 
-- **Platform setup** establishes MCP tools and memory system integration for persistent collaboration
-- **Profile selection** activates specialized methodologies tailored to specific work domains and requirements
-- **Progressive complexity** from basic functionality to advanced customization and optimization
-- **Cross-platform compatibility** supporting both Claude Code and Claude Desktop workflows
+- **Platform Components** - Plugins, documentation templates, instructions system, and memory system with domain-specific profiles
+- **Platform Protocols** - Cognitive architecture with CIFO equilibrium, initialization, and response protocol
 
 ## Next
 
 Dive right into the following sections:
 
+<!-- prettier-ignore-start -->
 {{< cards >}}
-  {{< card icon="adjustments" link="platform" title="Collaboration Platform" subtitle="MCP setup, memory integration, and platform configuration." >}}
-  {{< card icon="user-circle" link="profile" title="Profile System" subtitle="Specialized collaboration methodologies for different work domains." >}}
+  {{< card icon="cube" link="components" title="Platform Components" subtitle="Plugins, documentation, instructions, and memory systems." >}}
+  {{< card icon="shield-check" link="protocols" title="Platform Protocols" subtitle="Equilibrium, initialization, and response protocols." >}}
 {{< /cards >}}
+<!-- prettier-ignore-end -->
