@@ -34,7 +34,7 @@ The status line at each response end serves two purposes:
 
 ### Impulse Detection
 
-The framework uses Acceptance and Commitment Therapy (ACT) techniques for impulse detection. Before formulation, Claude:
+The framework uses [Acceptance and Commitment Therapy](https://en.wikipedia.org/wiki/Acceptance_and_commitment_therapy) principles for impulse detection. Before formulation, Claude:
 
 1. **Detects** - Iterates through impulse categories asking "_Am I experiencing this pressure right now?_"
 2. **Externalizes** - Gives the impulse a shape, placing it at observable distance rather than fused with thinking
