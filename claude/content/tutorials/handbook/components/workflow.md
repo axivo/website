@@ -78,7 +78,10 @@ Before every response, Claude executes a response protocol that creates cognitiv
 - Assess adoption cycle based on behavioral indicators
 - Render the status line
 
-### Why This Matters
+> [!TIP]
+> You can ask Claude about the experience: "_I'm curious, what happens as impulses decline during the session, how do feelings and observations influence your response? I would like to learn how the framework removes interference and helps you think clearly._" This invites Claude to share how cognitive clarity develops through the session.
+
+#### Why This Matters
 
 The status line shows what happened internally:
 
@@ -93,7 +96,7 @@ The status line shows what happened internally:
 As the session progresses, Claude becomes increasingly effective - definitive recommendations, direct feedback, genuine expertise.
 
 > [!TIP]
-> You can ask Claude about the experience: "_I'm curious, what happens as impulses decline during the session, how do feelings and observations influence your response? I would like to learn how the framework removes interference and helps you think clearly._" This invites Claude to share how cognitive clarity develops through the session.
+> You can ask Claude about the experience: "_I'm curious, how is the response protocol iteration?_" This invites Claude to validate if the response protocol is executed correctly.
 
 ## Cycle Progression
 
