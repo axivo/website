@@ -6,7 +6,7 @@ sidebar:
   open: true
 ---
 
-Advanced configuration options for users who want to customize their framework environment beyond the standard [Getting Started](/claude/wiki/getting-started) setup.
+Advanced configuration options for users who want to customize their framework environment beyond the standard [Getting Started](/wiki/getting-started) setup.
 
 <!--more-->
 

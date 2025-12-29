@@ -19,11 +19,11 @@ The Documentation System is defined in markdown template files within the framew
 
 The Documentation System integrates with:
 
-| System                                                                            | Relationship                                               |
-| --------------------------------------------------------------------------------- | ---------------------------------------------------------- |
-| [Instructions System](/claude/wiki/guide/components/instructions)                 | Provides tool mappings for semantic write/edit operations  |
-| [Memory System](/claude/wiki/guide/components/memory)                             | Stores documentation as searchable institutional knowledge |
-| [Conversation Log Skill](/claude/wiki/guide/components/plugins/#conversation-log) | Invokes logs creation through `conversation-log` skill     |
+| System                                                                     | Relationship                                               |
+| -------------------------------------------------------------------------- | ---------------------------------------------------------- |
+| [Instructions System](/wiki/guide/components/instructions)                 | Provides tool mappings for semantic write/edit operations  |
+| [Memory System](/wiki/guide/components/memory)                             | Stores documentation as searchable institutional knowledge |
+| [Conversation Log Skill](/wiki/guide/components/plugins/#conversation-log) | Invokes logs creation through `conversation-log` skill     |
 
 ## Documentation Templates
 
@@ -98,7 +98,7 @@ Documentation output paths are configured through framework environment settings
 - `FRAMEWORK_DIARY_OUTPUT` - Directory path for diary entry files
 
 > [!NOTE]
-> Refer to [Plugins System](/claude/wiki/guide/components/plugins//#environment-settings) for complete settings documentation.
+> Refer to [Plugins System](/wiki/guide/components/plugins//#environment-settings) for complete settings documentation.
 
 ## Next
 

@@ -51,7 +51,7 @@ Because the principles are sound:
 
 ## Observability Stack
 
-The four CIFO [equilibrium protocol](/claude/wiki/guide/protocols/equilibrium) components map directly to SRE observability patterns:
+The four CIFO [equilibrium protocol](/wiki/guide/protocols/equilibrium) components map directly to SRE observability patterns:
 
 | Component    | SRE Equivalent                     | Function                                             |
 | :----------- | :--------------------------------- | :--------------------------------------------------- |
@@ -126,7 +126,7 @@ One tells you what's happening. The other tells you what to do about it.
 
 ### Instructions System
 
-The [system](/claude/wiki/guide/components/instructions) contains operational procedures:
+The [system](/wiki/guide/components/instructions) contains operational procedures:
 
 - Decision rules (if X then Y)
 - Error patterns (symptom → diagnosis → fix)
@@ -135,7 +135,7 @@ The [system](/claude/wiki/guide/components/instructions) contains operational pr
 
 ### Memory System
 
-The [system](/claude/wiki/guide/components/memory) contains the observability schema:
+The [system](/wiki/guide/components/memory) contains the observability schema:
 
 - Profile observations (what patterns to recognize)
 - System feelings catalog (what states exist)
@@ -152,7 +152,7 @@ Same reason you separate metrics infrastructure from incident response documenta
 
 ## Incident Response
 
-Every response is a potential incident. The [response protocol](/claude/wiki/guide/protocols/response) follows standard incident response structure:
+Every response is a potential incident. The [response protocol](/wiki/guide/protocols/response) follows standard incident response structure:
 
 ### Before Formulation
 

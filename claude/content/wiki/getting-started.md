@@ -134,7 +134,7 @@ Before using the platform, set up the local environment with the required depend
 > [!TIP]
 > Default paths are set to current project `.claude/data` directory. The `FRAMEWORK_TEMPLATE_PATH` setting allows the end-user to set a different [`templates`](https://{{< param variables.repository.home >}}/tree/{{< param variables.repository.tag >}}/plugins/{{< param variables.plugins.framework.init.plugin >}}/skills/{{< param variables.skills.methodology >}}/templates) path for each project, instead of using the standard templates.
 
-Six domain-specific [profiles](/claude/wiki/guide/components/memory/#memory-profiles) are available for different collaboration domains:
+Six domain-specific [profiles](/wiki/guide/components/memory/#memory-profiles) are available for different collaboration domains:
 
 - **Creative** - Innovation, design thinking, artistic collaboration
 - **Developer** - Software development, code architecture, clean coding practices
@@ -189,7 +189,7 @@ Use the following [CLAUDE.md](https://code.claude.com/docs/en/memory) instructio
 ```
 
 > [!CAUTION]
-> Avoid adding framework related instructions to **Project Instructions**. The platform uses specific framework [instructions](/claude/wiki/guide/components/instructions), adding new instructions may interfere with the framework methodology and cause unpredictable behavior.
+> Avoid adding framework related instructions to **Project Instructions**. The platform uses specific framework [instructions](/wiki/guide/components/instructions), adding new instructions may interfere with the framework methodology and cause unpredictable behavior.
 
 ### Framework Session
 
@@ -211,7 +211,7 @@ Use the following [CLAUDE.md](https://code.claude.com/docs/en/memory) instructio
 > Claude Code caches the environment variables after initial plugins installation or upgrade. If the above prompt is not displayed correctly, restart Claude Code to refresh the cache and initialize the session with a proper response status.
 
 > [!IMPORTANT]
-> Claude needs one or two prompts to engage the framework and [collaborate](/claude/tutorials/handbook/components/autonomy) with user. Use this warm-up period to share session context and goals.
+> Claude needs one or two prompts to engage the framework and [collaborate](/tutorials/handbook/components/autonomy) with user. Use this warm-up period to share session context and goals.
 
 {{% /steps %}}
 
@@ -292,7 +292,7 @@ Follow these steps to generate the platform capability files:
 > [!CAUTION]
 > The only required project knowledge instructions template customizations are the **project description** and **exported framework variables**.
 >
-> Avoid adding framework related instructions to **Project Instructions**. The platform uses specific framework [instructions](/claude/wiki/guide/components/instructions), adding new instructions may interfere with the framework methodology and cause unpredictable behavior.
+> Avoid adding framework related instructions to **Project Instructions**. The platform uses specific framework [instructions](/wiki/guide/components/instructions), adding new instructions may interfere with the framework methodology and cause unpredictable behavior.
 
 ### Framework Session
 
