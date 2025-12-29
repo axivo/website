@@ -1,5 +1,5 @@
 ---
-title: Frontpage
+title: Claude Collaboration Platform
 layout: hextra-home
 ---
 
