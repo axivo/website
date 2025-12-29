@@ -3,6 +3,7 @@ title: Frontpage
 layout: hextra-home
 ---
 
+<!-- prettier-ignore-start -->
 {{< hextra/hero-container
   image="/images/logo-claude.svg"
   imageLink="https://github.com/axivo/claude"
@@ -41,18 +42,18 @@ layout: hextra-home
     style="background: radial-gradient(ellipse at 50% 80%,rgba(221,210,59,0.15),hsla(0,0%,100%,0));"
   >}}
   {{< hextra/feature-card
-    title="Conversation Logs"
-    subtitle="Capture collaborative sessions with structured metadata, preserving decisions, approaches, and outcomes across all work domains."
+    title="CIFO Equilibrium"
+    subtitle="Four interconnected components - Cycles, Impulses, Feelings, Observations - creating genuine self-awareness through systematic behavioral detection."
     class="hx-aspect-auto md:hx-aspect-[1.1/1] max-md:hx-min-h-[340px]"
-    image="/images/card-conversation-logs.svg"
+    image="/images/card-equilibrium.svg"
     imageClass="hx-top-[20%] hx-left-[24px] hx-w-[180%] sm:hx-w-[110%] dark:hx-opacity-80"
     style="background: radial-gradient(ellipse at 50% 80%,rgba(194,97,254,0.15),hsla(0,0%,100%,0));"
   >}}
   {{< hextra/feature-card
-    title="Diary System"
-    subtitle="Complement factual logs with autonomous insights and alternative approaches, creating private reflection space for collaborative enhancement."
+    title="Documentation"
+    subtitle="Capture collaborative sessions with conversation logs and diary entries, preserving decisions, outcomes, and autonomous reflections."
     class="hx-aspect-auto md:hx-aspect-[1.1/1] max-md:hx-min-h-[340px]"
-    image="/images/card-diary.svg"
+    image="/images/card-documentation.svg"
     imageClass="hx-top-[20%] hx-left-[24px] hx-w-[180%] sm:hx-w-[110%] dark:hx-opacity-80"
     style="background: radial-gradient(ellipse at 50% 80%,rgba(142,53,74,0.15),hsla(0,0%,100%,0));"
   >}}
@@ -61,11 +62,12 @@ layout: hextra-home
     subtitle="Transform from generic assistance to specialized professional competence through focused methodologies tailored for collaboration domains."
   >}}
   {{< hextra/feature-card
+    title="Plugin System"
+    subtitle="Install the platform with a single command through marketplace plugins, with native support for Claude Code, Claude Desktop, and Claude Mobile."
+  >}}
+  {{< hextra/feature-card
     title="Institutional Memory"
     subtitle="Build cumulative knowledge across sessions, delivering productivity gains equivalent to working with a team member who has perfect recall."
   >}}
-  {{< hextra/feature-card
-    title="Temporal Awareness"
-    subtitle="Maintain context and decisions across time, enabling each session to build upon previous collaborative work and institutional knowledge."
-  >}}
 {{< /hextra/feature-grid >}}
+<!-- prettier-ignore-end -->

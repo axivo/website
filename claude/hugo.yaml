@@ -8,11 +8,11 @@ menu:
   main:
     - name: Documentation
       identifier: wiki
-      pageRef: /wiki
+      pageRef: /wiki/
       weight: 1
     - name: Tutorials
       identifier: tutorials
-      pageRef: /tutorials
+      pageRef: /tutorials/
       weight: 2
     - name: Search
       params:
@@ -59,6 +59,31 @@ params:
       path: /claude/images/logo-claude.svg
       dark: /claude/images/logo-claude.svg
   variables:
+    plugins:
+      analysis:
+        review:
+          command: review
+          plugin: code-review
+      collaboration:
+        brainstorm:
+          command: brainstorm
+          plugin: brainstorming
+        log:
+          command: log
+          plugin: conversation-log
+      framework:
+        init:
+          command: init
+          plugin: framework
+        package:
+          command: package
+          plugin: framework
     repository:
       home: github.com/axivo/claude
+      tag: main
+    skills:
+      conversation: conversation-log
+      initialization: framework-initialization
+      review: code-review
+      methodology: framework-methodology
 publishDir: ../public/claude
