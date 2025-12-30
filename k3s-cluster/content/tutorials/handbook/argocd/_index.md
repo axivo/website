@@ -13,7 +13,7 @@ This repository uses [ArgoCD](https://argoproj.github.io/cd) to deploy applicati
 See the related role variables, defined into [`main.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/argo-cd/defaults/main.yaml) defaults file. Review the [`README.md`](https://{{< param variables.repository.cluster >}}/tree/main/roles/argo-cd) file, for additional details and the advanced configuration settings, listed below.
 
 > [!IMPORTANT]
-> A [role upgrade](/k3s-cluster/wiki/guide/configuration/roles/argocd/#upgrade) is required, in order to apply any changes related to configuration.
+> A [role upgrade](/wiki/guide/configuration/roles/argocd/#upgrade) is required, in order to apply any changes related to configuration.
 
 ### Credentials
 
@@ -23,9 +23,9 @@ While still implemented, the `admin` credentials are disabled by default and `us
 argocd_resources:
   server:
     users:
-      - name: '{{ argocd_map.credentials.server.user.name }}'
-        password: '{{ argocd_map.credentials.server.user.password }}'
-        permissions: 'apiKey, login'
+      - name: "{{ argocd_map.credentials.server.user.name }}"
+        password: "{{ argocd_map.credentials.server.user.password }}"
+        permissions: "apiKey, login"
         role: admin
         enabled: true
 ```
@@ -40,7 +40,7 @@ The `name` and `password` keys listed above are defined into [`all.yaml`](https:
 Additional configuration parameters can be defined into [`config_params.j2`](https://{{< param variables.repository.cluster >}}/blob/main/roles/argo-cd/templates/config_params.j2) template.
 
 > [!TIP]
-> Perform a [role validation](/k3s-cluster/wiki/guide/configuration/roles/argocd/#validation), to visualize all rendered templates and variables.
+> Perform a [role validation](/wiki/guide/configuration/roles/argocd/#validation), to visualize all rendered templates and variables.
 
 ### RBAC
 
@@ -48,7 +48,7 @@ Additional RBAC policies can be defined into [`config_rbac.j2`](https://{{< para
 
 ## Repository Setup
 
-Login into [ArgoCD UI](/k3s-cluster/tutorials/handbook/externaldns/#argocd), navigate to `ArgoCD Settings` > `Repositories` and connect to official project repository:
+Login into [ArgoCD UI](/tutorials/handbook/externaldns/#argocd), navigate to `ArgoCD Settings` > `Repositories` and connect to official project repository:
 
 | Key     | Value                                                         |
 | :------ | :------------------------------------------------------------ |

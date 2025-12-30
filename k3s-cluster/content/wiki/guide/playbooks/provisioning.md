@@ -3,12 +3,12 @@ title: Provisioning
 prev: /wiki/guide/playbooks
 ---
 
-The playbook allows the end-user to perform an initial cluster deployment, or a cluster re-deployment, after a performed [cluster reset](/k3s-cluster/wiki/guide/playbooks/reset).
+The playbook allows the end-user to perform an initial cluster deployment, or a cluster re-deployment, after a performed [cluster reset](/wiki/guide/playbooks/reset).
 
 <!--more-->
 
 > [!IMPORTANT]
-> Refer to the Ansible [tutorial](/k3s-cluster/tutorials/handbook/ansible), for usage of encrypted variables and files.
+> Refer to the Ansible [tutorial](/tutorials/handbook/ansible), for usage of encrypted variables and files.
 
 ## Execution
 

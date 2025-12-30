@@ -16,22 +16,22 @@ The Ansible user is used to remotely execute various deployment tasks into clust
 Set the [`ansible_user`](https://docs.ansible.com/ansible/latest/reference_appendices/special_variables.html) variable into [`all.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/inventory/cluster/group_vars/all.yaml) global configuration file.
 
 > [!IMPORTANT]
-> Use the `username` value defined into [OS General Settings](/k3s-cluster/tutorials/handbook/server/#os-general-settings) server installation, to set the `ansible_user` variable.
+> Use the `username` value defined into [OS General Settings](/tutorials/handbook/server/#os-general-settings) server installation, to set the `ansible_user` variable.
 
 ### User Password
 
-Encrypt the `ansible_password` variable with [`ansible-vault`](/k3s-cluster/tutorials/handbook/ansible/#vault) and set the encrypted value into [`all.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/inventory/cluster/group_vars/all.yaml) global configuration file.
+Encrypt the `ansible_password` variable with [`ansible-vault`](/tutorials/handbook/ansible/#vault) and set the encrypted value into [`all.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/inventory/cluster/group_vars/all.yaml) global configuration file.
 
 ### SSH Key
 
-Generate the [SSH key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent), which will be copied into each cluster node, while running the [Provisioning](/k3s-cluster/wiki/guide/playbooks/provisioning) playbook:
+Generate the [SSH key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent), which will be copied into each cluster node, while running the [Provisioning](/wiki/guide/playbooks/provisioning) playbook:
 
 ```shell
 ssh-keygen -t ed25519 -C 'your_email@example.com'
 ```
 
 > [!IMPORTANT]
-> The [Provisioning](/k3s-cluster/wiki/guide/playbooks/provisioning) playbook will look for the generated SSH key, into default `/Users/username/.ssh` location.
+> The [Provisioning](/wiki/guide/playbooks/provisioning) playbook will look for the generated SSH key, into default `/Users/username/.ssh` location.
 
 For a different storage location, update the `cluster_vars.ssh.path` value into Cluster role [`main.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/cluster/defaults/main.yaml) configuration file.
 

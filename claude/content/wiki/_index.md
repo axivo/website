@@ -31,7 +31,7 @@ The result is collaboration that feels like working with an expert colleague who
 The platform consists of two primary architectural systems that work together to transform AI interactions into persistent professional collaboration.
 
 > [!NOTE]
-> The platform was designed using **Site Reliability Engineering** methodologies and **behavioral psychology** principles, treating AI collaboration as infrastructure requiring systematic observability, monitoring, and reliability engineering for consistent professional partnership.
+> The platform was [designed](/wiki/guide/components/design) using **Site Reliability Engineering** methodologies and **behavioral psychology** principles, treating AI collaboration as infrastructure requiring systematic observability, monitoring, and reliability engineering for consistent professional partnership.
 
 ### Platform Components
 

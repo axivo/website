@@ -9,7 +9,7 @@ next: /wiki/guide/configuration/roles/victorialogs
 The `metrics-server` role performs various tasks related to Helm chart deployment, reset and validation.
 
 > [!TIP]
-> Role deployments are performed at `global` level, using the [Provisioning](/k3s-cluster/wiki/guide/playbooks/provisioning) playbook. Upgrades can be performed at `role` level, see the instructions detailed below.
+> Role deployments are performed at `global` level, using the [Provisioning](/wiki/guide/playbooks/provisioning) playbook. Upgrades can be performed at `role` level, see the instructions detailed below.
 
 <!--more-->
 
@@ -67,12 +67,12 @@ Helm chart values template, see [`values.j2`](https://{{< param variables.reposi
 ## Role Variables
 
 > [!IMPORTANT]
-> A [role upgrade](/k3s-cluster/wiki/guide/configuration/roles/metricsserver/#upgrade) is required, in order to apply any changes related to role variables.
+> A [role upgrade](/wiki/guide/configuration/roles/metricsserver/#upgrade) is required, in order to apply any changes related to role variables.
 
 See the related role variables, defined into [`main.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/metrics-server/defaults/main.yaml) defaults file. Review the [`README.md`](https://{{< param variables.repository.cluster >}}/tree/main/roles/metrics-server) file, for additional details.
 
 > [!TIP]
-> Use [Renovate](/k3s-cluster/tutorials/handbook/tools/#renovate) to automate release pull requests and keep dependencies up-to-date.
+> Use [Renovate](/tutorials/handbook/tools/#renovate) to automate release pull requests and keep dependencies up-to-date.
 
 ## Support
 

@@ -30,7 +30,7 @@ brew tap robusta-dev/homebrew-krr
 brew install krr
 ```
 
-Example of running a `simple` strategy, using the [Prometheus endpoint](/k3s-cluster/tutorials/handbook/externaldns/#victoria-metrics):
+Example of running a `simple` strategy, using the [Prometheus endpoint](/tutorials/handbook/externaldns/#victoria-metrics):
 
 ```shell
 krr simple -p https://metrics.domain.com/prometheus -n kube-system --allow-hpa
