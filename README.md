@@ -22,7 +22,7 @@ For local development and testing, use the following commands:
 
 ```shell
 # Run the Hugo server with live reloading
-hugo server --disableFastRender -Ds ./docs
+hugo server --disableFastRender -Ds docs
 
 # Generate static site
 hugo -s ./docs
@@ -30,7 +30,9 @@ hugo -s ./docs
 # If you need to manually update modules for local testing
 hugo mod clean --all
 hugo mod get -u ./...
+hugo mod tidy -s claude
 hugo mod tidy -s docs
+hugo mod tidy -s k3s-cluster
 
 # For Hextra main branch update (local testing only)
 hugo mod get -u github.com/imfing/hextra@main
