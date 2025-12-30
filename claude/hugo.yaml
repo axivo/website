@@ -1,7 +1,9 @@
 baseURL: https://axivo.com/claude/
 languages:
   en:
-    title: AXIVO | Claude
+    params:
+      parentTitle: AXIVO
+    title: Claude
 markup:
   _merge: shallow
 menu:
@@ -23,11 +25,6 @@ menu:
         icon: github
       url: https://github.com/axivo/claude
       weight: 4
-    - name: Parent
-      params:
-        icon: folder
-      url: ../
-      weight: 5
   sidebar:
     - identifier: more
       name: More

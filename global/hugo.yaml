@@ -47,6 +47,7 @@ params:
     enable: true
     width: normal
   navbar:
+    parentTitle: AXIVO
     displayTitle: true
     displayLogo: true
     # logo:
