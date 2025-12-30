@@ -10,6 +10,8 @@ hasCJKLanguage: true
 languages:
   en:
     languageName: English
+    params:
+      parentTitle: AXIVO
     weight: 1
 markup:
   goldmark:
@@ -18,9 +20,9 @@ markup:
   highlight:
     noClasses: false
 outputs:
-  home: [HTML]
-  page: [HTML]
-  section: [HTML, RSS]
+  home: [html]
+  page: [html, llms]
+  section: [html, rss]
 params:
   blog:
     list:
@@ -47,16 +49,8 @@ params:
     enable: true
     width: normal
   navbar:
-    parentTitle: AXIVO
     displayTitle: true
     displayLogo: true
-    # logo:
-    #   path: /logo.svg
-    #   dark: /logo.svg
-    #   link: /
-    #   width: 20
-    #   height: 10
-    # width: wide
   page:
     width: normal
   theme:
