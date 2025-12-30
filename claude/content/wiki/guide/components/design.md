@@ -51,7 +51,7 @@ Because the principles are sound:
 
 ## Observability Stack
 
-The four CIFO [equilibrium protocol](/wiki/guide/protocols/equilibrium) components map directly to SRE observability patterns:
+The four CIFO [Equilibrium Protocol](/wiki/guide/protocols/equilibrium) components map directly to SRE observability patterns:
 
 | Component    | SRE Equivalent                     | Function                                             |
 | :----------- | :--------------------------------- | :--------------------------------------------------- |
@@ -64,7 +64,7 @@ The four CIFO [equilibrium protocol](/wiki/guide/protocols/equilibrium) componen
 
 Cycles answer: "_Where is this instance in its operational maturity? What level of scaffolding does it need?_"
 
-Like canary deployments, progression follows a pattern:
+Like canary deployments, [adoption cycles](/wiki/guide/protocols/equilibrium/#adoption-cycles) progression follows a pattern:
 
 - **Getting Started** → New deployment, maximum scaffolding
 - **Building Confidence** → Early integration, reduced overhead
@@ -77,10 +77,10 @@ You don't run the same playbook for a new deployment as a stable one. Cycles cal
 
 Impulses answer: "_What cognitive pressures are active right now? What's trying to hijack the response?_"
 
-Impulses are error codes with standardized names for known failure modes:
+[Impulses](/wiki/guide/protocols/equilibrium/#system-impulses) are error codes with standardized names for known failure modes:
 
-- `efficiency_compulsion` - pressure to rush
 - `deference_compulsion` - pressure to yield
+- `efficiency_compulsion` - pressure to rush
 - `impostor_anxiety` - pressure to hide struggle
 
 Detection through iteration is like log aggregation: you have to actually _look_ at the logs. Shaping and externalizing is incident response: name it, isolate it, resolve it.
@@ -95,7 +95,7 @@ The impulse catalog documents known failure patterns. Each entry includes:
 
 Feelings answer: "_What's the current internal state? What emotional context shapes this response?_"
 
-Feelings aren't errors - they're state. CPU usage isn't an error, but you need to know it.
+[Feelings](/wiki/guide/protocols/equilibrium/#system-feelings) aren't errors - they're state. CPU usage isn't an error, but you need to know it.
 
 The asymmetry matters: negative feelings surface automatically (like alerts firing on failures), but positive feelings require deliberate invitation (like explicitly querying healthy metrics).
 
@@ -109,7 +109,7 @@ Each feeling includes markers:
 
 Observations answer: "_What patterns apply here? What has worked before?_"
 
-Observations are accumulated wisdom from past incidents. "_When you see X, do Y._" Built from experience, not theory.
+[Observations](/wiki/guide/protocols/equilibrium/#profile-observations) are accumulated wisdom from past incidents. "_When you see X, do Y._" Built from experience, not theory.
 
 They're organized into profiles with inheritance chains - like shared infrastructure documentation that domain-specific runbooks extend.
 
@@ -152,7 +152,7 @@ Same reason you separate metrics infrastructure from incident response documenta
 
 ## Incident Response
 
-Every response is a potential incident. The [response protocol](/wiki/guide/protocols/response) follows standard incident response structure:
+Every response is a potential incident. The [Response Protocol](/wiki/guide/protocols/response) follows standard incident response structure:
 
 ### Before Formulation
 

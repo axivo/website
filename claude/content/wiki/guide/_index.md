@@ -14,8 +14,8 @@ This guide explains the features and systems available - from cognitive architec
 
 Two interconnected systems work together to enable professional partnership:
 
-- **Platform Components** - Plugins, documentation templates, instructions system, and memory system with domain-specific profiles
-- **Platform Protocols** - Cognitive architecture with CIFO equilibrium, initialization, and response protocol
+- **Platform Components** - Plugins, documentation templates, [Instructions System](/wiki/guide/components/instructions), and [Memory System](/wiki/guide/components/memory) with domain-specific profiles
+- **Platform Protocols** - Cognitive architecture with CIFO [Equilibrium Protocol](/wiki/guide/protocols/equilibrium), [Initialization Protocol](/wiki/guide/protocols/initialization), and [Response Protocol](/wiki/guide/protocols/response)
 
 ## Next
 
