@@ -18,7 +18,7 @@ menu:
 module:
   hugoVersion:
     extended: true
-    min: 0.153.4
+    min: 0.153.5
   imports:
     - path: github.com/axivo/website/global
     - path: github.com/imfing/hextra
