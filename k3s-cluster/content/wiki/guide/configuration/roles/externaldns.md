@@ -9,7 +9,7 @@ next: /wiki/guide/configuration/roles/kured
 The `external-dns` role performs various tasks related to [Cloudflare](https://www.cloudflare.com) DNS configuration, as well the `external-dns` Helm chart deployment, reset and validation.
 
 > [!TIP]
-> Role deployments are performed at `global` level, using the [Provisioning](/k3s-cluster/wiki/guide/playbooks/provisioning) playbook. Upgrades can be performed at `role` level, see the instructions detailed below.
+> Role deployments are performed at `global` level, using the [Provisioning](/wiki/guide/playbooks/provisioning) playbook. Upgrades can be performed at `role` level, see the instructions detailed below.
 
 <!--more-->
 
@@ -36,7 +36,7 @@ Post-install related tasks, see [`postinstall.yaml`](https://{{< param variables
 Reset related tasks, see [`reset.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/external-dns/tasks/reset.yaml) for details.
 
 > [!TIP]
-> A reset is performed at global level only, review the [Reset](/k3s-cluster/wiki/guide/playbooks/reset) playbook instructions.
+> A reset is performed at global level only, review the [Reset](/wiki/guide/playbooks/reset) playbook instructions.
 
 ### Upgrade
 
@@ -79,12 +79,12 @@ Kubernetes `ClusterIssuer` resource template, see [`cluster_issuer.j2`](https://
 ## Role Variables
 
 > [!IMPORTANT]
-> A [role upgrade](/k3s-cluster/wiki/guide/configuration/roles/externaldns/#upgrade) is required, in order to apply any changes related to role variables.
+> A [role upgrade](/wiki/guide/configuration/roles/externaldns/#upgrade) is required, in order to apply any changes related to role variables.
 
 See the related role variables, defined into [`main.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/external-dns/defaults/main.yaml) defaults file. Review the [`README.md`](https://{{< param variables.repository.cluster >}}/tree/main/roles/external-dns) file, for additional details.
 
 > [!TIP]
-> Use [Renovate](/k3s-cluster/tutorials/handbook/tools/#renovate) to automate release pull requests and keep dependencies up-to-date.
+> Use [Renovate](/tutorials/handbook/tools/#renovate) to automate release pull requests and keep dependencies up-to-date.
 
 ## Support
 

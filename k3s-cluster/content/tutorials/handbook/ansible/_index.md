@@ -57,10 +57,10 @@ ansible_password: !vault |
           36613833363662323261373266333565633430643639366435303061313039643637
 ```
 
-Insert the `ansible_password` encrypted output into [`all.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/inventory/cluster/group_vars/all.yaml) group variables file, while respecting the *existing* indentation.
+Insert the `ansible_password` encrypted output into [`all.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/inventory/cluster/group_vars/all.yaml) group variables file, while respecting the _existing_ indentation.
 
 > [!TIP]
-> Once all variables have been initially encrypted with the same global password, they can be decrypted or updated with the [Vault](/k3s-cluster/wiki/guide/playbooks/vault) playbook.
+> Once all variables have been initially encrypted with the same global password, they can be decrypted or updated with the [Vault](/wiki/guide/playbooks/vault) playbook.
 
 ### Playbook Usage
 

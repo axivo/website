@@ -9,7 +9,7 @@ next: /wiki/guide/configuration/roles/certmanager
 The `argo-cd` role performs various tasks related to Helm chart deployment, reset and validation.
 
 > [!TIP]
-> Role deployments are performed at `global` level, using the [Provisioning](/k3s-cluster/wiki/guide/playbooks/provisioning) playbook. Upgrades can be performed at `role` level, see the instructions detailed below.
+> Role deployments are performed at `global` level, using the [Provisioning](/wiki/guide/playbooks/provisioning) playbook. Upgrades can be performed at `role` level, see the instructions detailed below.
 
 <!--more-->
 
@@ -36,7 +36,7 @@ Post-install related tasks, see [`postinstall.yaml`](https://{{< param variables
 Reset related tasks, see [`reset.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/argo-cd/tasks/reset.yaml) for details.
 
 > [!TIP]
-> A reset is performed at global level only, review the [Reset](/k3s-cluster/wiki/guide/playbooks/reset) playbook instructions.
+> A reset is performed at global level only, review the [Reset](/wiki/guide/playbooks/reset) playbook instructions.
 
 ### Upgrade
 
@@ -114,12 +114,12 @@ Kubernetes `HTTPRoute` resource template, see [`http_route_secure.j2`](https://{
 ## Role Variables
 
 > [!IMPORTANT]
-> A [role upgrade](/k3s-cluster/wiki/guide/configuration/roles/argocd/#upgrade) is required, in order to apply any changes related to role variables.
+> A [role upgrade](/wiki/guide/configuration/roles/argocd/#upgrade) is required, in order to apply any changes related to role variables.
 
-See the related role variables, defined into [`main.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/argo-cd/defaults/main.yaml) defaults file. Review the [`README.md`](https://{{< param variables.repository.cluster >}}/tree/main/roles/argo-cd) file, for additional details and refer to ArgoCD [tutorial](/k3s-cluster/tutorials/handbook/argocd), for advanced configuration settings.
+See the related role variables, defined into [`main.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/argo-cd/defaults/main.yaml) defaults file. Review the [`README.md`](https://{{< param variables.repository.cluster >}}/tree/main/roles/argo-cd) file, for additional details and refer to ArgoCD [tutorial](/tutorials/handbook/argocd), for advanced configuration settings.
 
 > [!TIP]
-> Use [Renovate](/k3s-cluster/tutorials/handbook/tools/#renovate) to automate release pull requests and keep dependencies up-to-date.
+> Use [Renovate](/tutorials/handbook/tools/#renovate) to automate release pull requests and keep dependencies up-to-date.
 
 ## Support
 

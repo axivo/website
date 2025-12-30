@@ -10,7 +10,7 @@ weight: 2
 The `k3s` role performs various tasks related to OS configuration, K3s cluster deployment, reset and validation.
 
 > [!TIP]
-> Role deployments are performed at `global` level, using the [Provisioning](/k3s-cluster/wiki/guide/playbooks/provisioning) playbook. Upgrades can be performed at `role` level, see the instructions detailed below.
+> Role deployments are performed at `global` level, using the [Provisioning](/wiki/guide/playbooks/provisioning) playbook. Upgrades can be performed at `role` level, see the instructions detailed below.
 
 <!--more-->
 
@@ -41,7 +41,7 @@ Main role related tasks, see [`main.yaml`](https://{{< param variables.repositor
 Reset related tasks, see [`reset.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/k3s/tasks/reset.yaml) for details.
 
 > [!TIP]
-> A reset is performed at global level only, review the [Reset](/k3s-cluster/wiki/guide/playbooks/reset) playbook instructions.
+> A reset is performed at global level only, review the [Reset](/wiki/guide/playbooks/reset) playbook instructions.
 
 ### Upgrade
 
@@ -51,7 +51,7 @@ Upgrade related tasks, see [`upgrade.yaml`](https://{{< param variables.reposito
 ansible-playbook --ask-vault-pass --tags=k3s upgrade.yaml
 ```
 
-The upgrade will trigger the [Kured](/k3s-cluster/wiki/guide/configuration/roles/kured) role execution, performing safe automatic node reboots.
+The upgrade will trigger the [Kured](/wiki/guide/configuration/roles/kured) role execution, performing safe automatic node reboots.
 
 ### Validation
 
@@ -100,12 +100,12 @@ Service configuration template, see [`service.j2`](https://{{< param variables.r
 ## Role Variables
 
 > [!IMPORTANT]
-> A [role upgrade](/k3s-cluster/wiki/guide/configuration/roles/k3s/#upgrade) is required, in order to apply any changes related to role variables.
+> A [role upgrade](/wiki/guide/configuration/roles/k3s/#upgrade) is required, in order to apply any changes related to role variables.
 
 See the related role variables, defined into [`main.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/k3s/defaults/main.yaml) defaults file. Review the [`README.md`](https://{{< param variables.repository.cluster >}}/tree/main/roles/k3s) file, for additional details.
 
 > [!TIP]
-> Use [Renovate](/k3s-cluster/tutorials/handbook/tools/#renovate) to automate release pull requests and keep dependencies up-to-date.
+> Use [Renovate](/tutorials/handbook/tools/#renovate) to automate release pull requests and keep dependencies up-to-date.
 
 ## Support
 

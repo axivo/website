@@ -30,7 +30,7 @@ https://hooks.slack.com/services/<token>/<token>/<token>
 
 ### Notify URL
 
-Encrypt the `global_map.credentials.kured.slack.notify.url` value with [`ansible-vault`](/k3s-cluster/tutorials/handbook/ansible/#vault) and insert it into 
+Encrypt the `global_map.credentials.kured.slack.notify.url` value with [`ansible-vault`](/tutorials/handbook/ansible/#vault) and insert it into
 [`all.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/inventory/cluster/group_vars/all.yaml) group variables file. Notify URL decrypted format:
 
 ```yaml

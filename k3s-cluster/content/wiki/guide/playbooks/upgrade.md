@@ -8,7 +8,7 @@ The playbook allows the end-user to perform a cluster component upgrade, for exa
 <!--more-->
 
 > [!IMPORTANT]
-> Refer to the Ansible [tutorial](/k3s-cluster/tutorials/handbook/ansible), for usage of encrypted variables and files.
+> Refer to the Ansible [tutorial](/tutorials/handbook/ansible), for usage of encrypted variables and files.
 
 ## Execution
 
@@ -26,7 +26,7 @@ Vault password: my-Gl0bal-Passw0rd
 
 ## Renovate
 
-Follow the steps detailed below, prior merging a [Renovate](/k3s-cluster/tutorials/handbook/tools/#renovate) dependency branch.
+Follow the steps detailed below, prior merging a [Renovate](/tutorials/handbook/tools/#renovate) dependency branch.
 
 {{% steps %}}
 

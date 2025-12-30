@@ -8,7 +8,7 @@ The playbook allows the end-user to perform various Ansible Vault related tasks,
 <!--more-->
 
 > [!IMPORTANT]
-> Refer to the Ansible [tutorial](/k3s-cluster/tutorials/handbook/ansible), for usage of encrypted variables and files.
+> Refer to the Ansible [tutorial](/tutorials/handbook/ansible), for usage of encrypted variables and files.
 
 ## Execution
 

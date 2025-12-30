@@ -18,7 +18,7 @@ Due to the intricate nature of its requirements, Cilium is deployed in three ste
 
 ## Dependencies
 
-See below the required Cilium dependencies, used into chart configuration. 
+See below the required Cilium dependencies, used into chart configuration.
 
 ### CertManager
 
@@ -30,6 +30,7 @@ During chart post-install provisioning, Cilium Hubble is configured to take adva
 
 > [!IMPORTANT]
 > Cilium details the following instructions, into their `cert-manager` [installation](https://docs.cilium.io/en/latest/observability/hubble/configuration/tls) steps:
+>
 > > Please make sure that your issuer is able to create certificates under the `cilium.io` domain name.
 >
 > CertManager cannot control a domain not owned by end-user, therefore the above listed `Certificate` and `ClusterIssuer` resources are created.
@@ -42,7 +43,7 @@ Refer to Cilium Hubble [documentation](https://docs.cilium.io/en/stable/gettings
 
 #### Usage Example
 
-This is an example of `Gateway` and `HTTPRoute` resources usage for [Cilium Hubble UI](/k3s-cluster/tutorials/handbook/externaldns/#cilium), as replacement for `Ingress` resource:
+This is an example of `Gateway` and `HTTPRoute` resources usage for [Cilium Hubble UI](/tutorials/handbook/externaldns/#cilium), as replacement for `Ingress` resource:
 
 - `Gateway` resource template, see [`gateway.j2`](https://{{< param variables.repository.cluster >}}/blob/main/roles/cilium/templates/gateway.j2)
 - `HTTPRoute` insecure resource template, see [`http_route_insecure.j2`](https://{{< param variables.repository.cluster >}}/blob/main/roles/cilium/templates/http_route_insecure.j2)

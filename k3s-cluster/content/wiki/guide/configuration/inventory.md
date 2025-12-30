@@ -5,7 +5,7 @@ next: /wiki/guide/configuration/user
 weight: 1
 ---
 
-Ansible automates tasks on managed nodes (also named *hosts*) in cluster infrastructure, using a list or group of lists, known as [inventory](https://docs.ansible.com/ansible/latest/inventory_guide/intro_inventory.html). 
+Ansible automates tasks on managed nodes (also named _hosts_) in cluster infrastructure, using a list or group of lists, known as [inventory](https://docs.ansible.com/ansible/latest/inventory_guide/intro_inventory.html).
 
 <!--more-->
 
@@ -17,11 +17,11 @@ There are two key configuration settings, influencing how the cluster will be de
 
 ### Playbook Batch Size
 
-Because K3s uses [tokens](https://docs.k3s.io/cli/token) to secure the node join process, a [`serial`](https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_strategies.html#setting-the-batch-size-with-serial) must be defined, generating the token on first `cluster` type node. Next, the generated token is copied into additional nodes, while running the [Provisioning](/k3s-cluster/wiki/guide/playbooks/provisioning) playbook.
+Because K3s uses [tokens](https://docs.k3s.io/cli/token) to secure the node join process, a [`serial`](https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_strategies.html#setting-the-batch-size-with-serial) must be defined, generating the token on first `cluster` type node. Next, the generated token is copied into additional nodes, while running the [Provisioning](/wiki/guide/playbooks/provisioning) playbook.
 
 #### Batch Size Usage
 
-Example of `serial` structure with 3 `server` type nodes and 5 `agent` type nodes, used into [Provisioning](/k3s-cluster/wiki/guide/playbooks/provisioning) playbook:
+Example of `serial` structure with 3 `server` type nodes and 5 `agent` type nodes, used into [Provisioning](/wiki/guide/playbooks/provisioning) playbook:
 
 {{% details title="Provisioning Details" closed="true" %}}
 
@@ -43,7 +43,7 @@ The `serial` structure has the following pattern:
 > [!TIP]
 > Update the `serial` structure into [`provisioning.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/provisioning.yaml) playbook file.
 
-Example of `serial` structure with 3 `server` type nodes and 5 `agent` type nodes, used into [Reset](/k3s-cluster/wiki/guide/playbooks/reset) playbook:
+Example of `serial` structure with 3 `server` type nodes and 5 `agent` type nodes, used into [Reset](/wiki/guide/playbooks/reset) playbook:
 
 {{% details title="Reset Details" closed="true" %}}
 
@@ -139,7 +139,7 @@ To address this issue, set the `k3s_vars.server.controlplane.tainted` option to 
 The minimum number of server type nodes for a Non HA cluster is 1. By [K3s Architecture](https://docs.k3s.io/architecture) design, a cluster can have either 1, or 3+ `server` type nodes.
 
 > [!IMPORTANT]
-> If the targeted cluster has less than 3 `server` type nodes, the [Provisioning](/k3s-cluster/wiki/guide/playbooks/provisioning) playbook will automatically disable all related HA features. 
+> If the targeted cluster has less than 3 `server` type nodes, the [Provisioning](/wiki/guide/playbooks/provisioning) playbook will automatically disable all related HA features.
 
 Example of a Non HA cluster inventory with 2 nodes:
 
