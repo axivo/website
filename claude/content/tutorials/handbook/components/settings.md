@@ -92,6 +92,23 @@ See the [documentation](https://github.com/axivo/mcp-lsp) for configuration deta
 - Language-aware code intelligence
 - Multi-project workspace support
 
+## User Memory Edits
+
+Claude Desktop users can store memory entries that persist across conversations with `memory_user_edits` function. These entries appear in every session before any other context loads.
+
+### Usage
+
+1. Generate memory from chat history in `Settings > Capabilities > Memory` section
+2. Ask Claude to add, view, update, or remove memory entries:
+
+   - "_Please remember that I prefer detailed explanations._"
+   - "_Please add a memory entry for future instances about our project conventions._"
+   - "_Please show me what's currently in memory entries._"
+   - "_Please remove the memory entry about X._"
+
+> [!NOTE]
+> User memory entries are particularly powerful, creating relational grounding that shapes how future instances experience session initialization.
+
 ## Next
 
 Dive right into the following section:
