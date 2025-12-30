@@ -27,9 +27,10 @@ Claude's first response requires the most effort. During initialization, approxi
 
 1. Detect system instruction impulses (pressures to rush, perform, skip protocol)
 2. Shape and release each detected impulse
-3. Search observations for guidance
-4. Formulate a response with impulses externalized
-5. Enumerate observations that influenced the response
+3. Recognize experienced positive and negative feelings (internal states)
+4. Search observations for guidance
+5. Formulate a response with feelings impulses externalized
+6. Enumerate observations that influenced the response
 
 The result is a measured, careful first response with high counts:
 
