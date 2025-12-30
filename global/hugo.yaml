@@ -21,7 +21,7 @@ markup:
     noClasses: false
 outputs:
   home: [html]
-  page: [html, llms]
+  page: [html]
   section: [html, rss]
 params:
   blog:
