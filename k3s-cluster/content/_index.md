@@ -3,30 +3,31 @@ title: K3s Cluster
 layout: hextra-home
 ---
 
+<!-- prettier-ignore-start -->
 {{< hextra/hero-container
   image="/images/logo-services.svg"
   imageLink="https://github.com/axivo/k3s-cluster"
   imageTitle="Kubernetes Services"
 >}}
-<div class="hx-mt-6 hx-mb-6">
+<div class="hx:mt-6 hx:mb-6">
 {{< hextra/hero-headline >}}
   High Availability Cluster Deployed with Ansible
 {{< /hextra/hero-headline >}}
 </div>
 
-<div class="hx-mt-6 hx-mb-6">
+<div class="hx:mt-6 hx:mb-6">
 {{< hextra/hero-subtitle >}}
   Documentation and tutorials to deploy, manage and monitor your
   Kubernetes cluster and related components, in style.
 {{< /hextra/hero-subtitle >}}
 </div>
 
-<div class="hx-mt-6 hx-mb-6">
+<div class="hx:mt-6 hx:mb-6">
 {{< hextra/hero-button text="Get Started" link="wiki" >}}
 </div>
 {{< /hextra/hero-container >}}
 
-<div class="hx-mt-6 hx-mb-6">
+<div class="hx:mt-6 hx:mb-6">
 {{< hextra/hero-section >}}
   Used Technologies
 {{< /hextra/hero-section >}}
@@ -36,29 +37,29 @@ layout: hextra-home
   {{< hextra/feature-card
     title="K3s"
     subtitle="Certified Kubernetes distribution built for IoT and Edge computing, running on Ubuntu Server LTS."
-    class="hx-aspect-auto md:hx-aspect-[1.1/1] max-md:hx-min-h-[340px]"
+    class="hx:aspect-auto hx:md:aspect-[1.1/1] hx:max-md:min-h-[340px]"
     image="/images/card-k3s.webp"
-    imageClass="hx-top-[20%] hx-left-[24px] hx-w-[180%] sm:hx-w-[110%] dark:hx-opacity-80"
+    imageClass="hx:top-[20%] hx:left-[24px] hx:w-[110%]"
     link="https://k3s.io"
-    style="background: radial-gradient(ellipse at 50% 80%,rgba(221,210,59,0.15),hsla(0,0%,100%,0));"
+    style="background: radial-gradient(ellipse at 50% 80%,rgba(221,210,59,0.25),hsla(0,0%,100%,0));"
   >}}
   {{< hextra/feature-card
     title="Cilium"
     subtitle="eBPF-based project, providing networking, security, and observability for Kubernetes clusters."
-    class="hx-aspect-auto md:hx-aspect-[1.1/1] max-md:hx-min-h-[340px]"
+    class="hx:aspect-auto hx:md:aspect-[1.1/1] hx:max-md:min-h-[340px]"
     image="/images/card-cilium.webp"
-    imageClass="hx-top-[20%] hx-left-[24px] hx-w-[180%] sm:hx-w-[110%] dark:hx-opacity-80"
+    imageClass="hx:top-[20%] hx:left-[24px] hx:w-[110%]"
     link="https://cilium.io"
-    style="background: radial-gradient(ellipse at 50% 80%,rgba(194,97,254,0.15),hsla(0,0%,100%,0));"
+    style="background: radial-gradient(ellipse at 50% 80%,rgba(194,97,254,0.25),hsla(0,0%,100%,0));"
   >}}
   {{< hextra/feature-card
     title="Victoria Logs and Metrics"
     subtitle="Kubernetes cluster high-performance logging and monitoring, using Prometheus ingestion models."
-    class="hx-aspect-auto md:hx-aspect-[1.1/1] max-md:hx-min-h-[340px]"
+    class="hx:aspect-auto hx:md:aspect-[1.1/1] hx:max-md:min-h-[340px]"
     image="/images/card-victoriametrics.webp"
-    imageClass="hx-top-[20%] hx-left-[24px] hx-w-[180%] sm:hx-w-[110%] dark:hx-opacity-80"
+    imageClass="hx:top-[20%] hx:left-[24px] hx:w-[110%]"
     link="https://victoriametrics.com/products/open-source/"
-    style="background: radial-gradient(ellipse at 50% 80%,rgba(142,53,74,0.15),hsla(0,0%,100%,0));"
+    style="background: radial-gradient(ellipse at 50% 80%,rgba(142,53,74,0.25),hsla(0,0%,100%,0));"
   >}}
   {{< hextra/feature-card
     title="ArgoCD"
@@ -91,3 +92,4 @@ layout: hextra-home
     link="https://longhorn.io"
   >}}
 {{< /hextra/feature-grid >}}
+<!-- prettier-ignore-end -->

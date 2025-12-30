@@ -1,7 +1,9 @@
 baseURL: https://axivo.com/k3s-cluster/
 languages:
   en:
-    title: AXIVO | K3s Cluster
+    params:
+      parentTitle: AXIVO
+    title: K3s Cluster
 markup:
   _merge: shallow
 menu:
@@ -23,11 +25,6 @@ menu:
         icon: github
       url: https://github.com/axivo/k3s-cluster
       weight: 4
-    - name: Parent
-      params:
-        icon: folder
-      url: ../
-      weight: 5
   sidebar:
     - identifier: more
       name: More
