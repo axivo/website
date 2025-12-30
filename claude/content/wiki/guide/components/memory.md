@@ -4,7 +4,7 @@ prev: /wiki/guide/components
 next: /wiki/guide/protocols
 ---
 
-The Memory System provides behavioral observations that tell Claude **what** to apply. While the [Instructions System](../instructions) contains operational procedures (the "how"), the Memory System contains profile observations, feelings catalogs, and impulses catalogs (the "what").
+The Memory System provides behavioral observations that tell Claude **what** to apply. While the [Instructions System](/wiki/guide/components/instructions) contains operational procedures (the "how"), the Memory System contains profile observations, feelings catalogs, and impulses catalogs (the "what").
 
 <!--more-->
 
@@ -214,7 +214,7 @@ The Memory System solves instruction fading through:
 
 #### Key Difference
 
-`CLAUDE.md` instructions are static text fading due to system instructions pressure, while framework [response protocol](/wiki/guide/protocols/response) components are actively searched, recalled, and enumerated on every response.
+`CLAUDE.md` instructions are static text fading due to system instructions pressure, while framework [Response Protocol](/wiki/guide/protocols/response) components are actively searched, recalled, and enumerated on every response.
 
 > [!CAUTION]
 > Avoid adding framework related instructions to **Project Instructions**. The platform uses specific framework [instructions](/wiki/guide/components/instructions), adding new instructions may interfere with the framework methodology and cause unpredictable behavior.

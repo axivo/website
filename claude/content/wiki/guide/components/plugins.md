@@ -58,9 +58,9 @@ See below the plugins available from AXIVO [marketplace](https://{{< param varia
 
 ### Framework
 
-**Required** - Core behavioral programming framework with response protocol.
+**Required** - Core behavioral programming framework with [Response Protocol](/wiki/guide/protocols/response).
 
-The framework plugin transforms Claude from a generic AI assistant into a systematic professional collaborator. It loads specialized profiles containing hundreds of behavioral observations and executes the response protocol before every response.
+The framework plugin transforms Claude from a generic AI assistant into a systematic professional collaborator. It loads specialized profiles containing hundreds of behavioral observations and executes the [Response Protocol](/wiki/guide/protocols/response) before every response.
 
 #### Key Capabilities
 

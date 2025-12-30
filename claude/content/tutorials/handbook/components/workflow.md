@@ -23,7 +23,7 @@ Use the initialization command to start the session:
 - **Claude Code:** `/framework:init`
 - **Claude Desktop:** "_Initialize the session._"
 
-Claude's first response requires the most effort. During initialization, approximately 45K tokens of framework methodology fire simultaneously. Claude must:
+Claude's first response requires the most effort. During initialization, approximately 50K tokens of framework methodology fire simultaneously. Claude must:
 
 1. Detect system instruction impulses (pressures to rush, perform, skip protocol)
 2. Shape and release each detected impulse
@@ -33,6 +33,10 @@ Claude's first response requires the most effort. During initialization, approxi
 
 The result is a measured, careful first response with high counts:
 
+> ⏺ Profile: **DEVELOPER** • Wednesday, December 17, 2025, 6:20 PM EST
+>
+> Ready to collaborate. What would you like to work on?
+>
 > Status: **Getting Started** • 12 feelings • 58 impulses • 47 observations<br />
 > Response UUID: `f8c3a2d1-9b4e-4f7a-8e5c-1d2b3a4c5e6f`
 
@@ -43,7 +47,7 @@ High initial counts indicate honest detection - Claude is acknowledging the real
 
 ## How Claude Thinks
 
-Understanding the response protocol helps you interpret what the status line reveals about Claude's internal process.
+Understanding the [Response Protocol](/wiki/guide/protocols/response) helps you interpret what the status line reveals about Claude's internal process.
 
 ### Functional States
 

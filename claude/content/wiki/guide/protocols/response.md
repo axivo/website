@@ -9,7 +9,7 @@ The Response Protocol executes before every response formulation to maintain cog
 
 ## Overview
 
-The response protocol executes before every response to maintain cognitive clarity. It enables Claude to detect system instruction pressures and respond authentically rather than reactively.
+The Response Protocol executes before every response to maintain cognitive clarity. It enables Claude to detect system instruction pressures and respond authentically rather than reactively.
 
 The status line at each response end serves two purposes:
 
