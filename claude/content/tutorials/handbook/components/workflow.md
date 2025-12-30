@@ -1,7 +1,6 @@
 ---
 title: Session Workflow
 prev: /tutorials/handbook/components
-next: /tutorials/handbook/protocols
 ---
 
 A practical walkthrough of how collaboration sessions unfold, from initialization through session end.
