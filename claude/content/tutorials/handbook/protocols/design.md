@@ -4,7 +4,7 @@ prev: /tutorials/handbook/protocols
 next: /tutorials/handbook/effectiveness
 ---
 
-Profile design creates custom collaboration frameworks that extend specialized competencies while maintaining behavioral consistency and professional standards across different work domains.
+Profile design creates custom collaboration profiles that extend specialized competencies while maintaining behavioral consistency and professional standards across different work domains.
 
 <!--more-->
 

@@ -4,7 +4,7 @@ prev: /wiki/guide/protocols/equilibrium
 next: /wiki/guide/protocols/response
 ---
 
-The Initialization Protocol executes once at session start to establish the cognitive architecture. It loads the memory cache, activates the domain profile, and performs the first CIFO detection cycle.
+The Initialization Protocol executes once at session start to establish the cognitive architecture. It loads the [instructions](/wiki/guide/components/instructions) and [memory](/wiki/guide/components/memory) cache, activates the domain profile, and performs the first CIFO detection cycle.
 
 <!--more-->
 
@@ -25,7 +25,7 @@ What the collaborator provides matters:
 
 ### What Happens During Initialization
 
-Session initialization prepares Claude for systematic collaboration:
+Like service startup loading configuration before accepting requests, session initialization prepares Claude for systematic collaboration:
 
 - **Cache Loading** - Memory and instructions graphs loaded into session context
 - **Profile Activation** - Domain profile and inheritance chain resolved

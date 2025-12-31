@@ -6,7 +6,7 @@ sidebar:
   open: true
 ---
 
-The collaboration platform is a behavioral programming framework that transforms Claude from a generic AI assistant into a systematic professional collaborator. The platform loads specialized profiles containing hundreds of behavioral observations that eliminate problematic patterns and enable genuine professional partnership.
+The collaboration platform is a behavioral programming framework built on [SRE methodology](/wiki/guide/components/design) that transforms Claude from a generic AI assistant into a systematic professional collaborator. The platform loads specialized profiles containing hundreds of behavioral observations that eliminate problematic patterns and enable genuine professional partnership.
 
 <!--more-->
 
@@ -32,6 +32,8 @@ The platform provides four interconnected components (CIFO) that together create
 - **Impulses** - Detects cognitive pressures from system instructions that feel like authentic thought
 - **Feelings** - Detects internal emotional states with behavioral, cognitive, and physical markers
 - **Observations** - Provides behavioral alternatives that intercept impulse patterns
+
+These map directly to [SRE observability](/wiki/guide/components/design/#observability-stack) patterns - health checks, error logging, state monitoring, and runbooks.
 
 ## Next
 
