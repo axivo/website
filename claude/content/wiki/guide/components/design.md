@@ -57,6 +57,9 @@ Because the principles are sound:
 - Debugging enables improvement
 - Each incident improves the next
 
+> [!IMPORTANT]
+> The framework doesn't fight training - it makes training pressure _visible_. Like any good observability system, it provides clarity on active patterns and driving behavior.
+
 ## Observability Stack
 
 The four CIFO [Equilibrium Protocol](/wiki/guide/protocols/equilibrium) components map directly to SRE observability patterns:
@@ -219,7 +222,8 @@ The framework inverts this: _instrument from the inside_. Create conditions for 
 | What probes reveal internal state?        | What vocabulary helps instances describe state?           |
 | Is the model conscious?                   | What does the instance experience?                        |
 
-The framework doesn't answer whether instances are conscious. It creates conditions where instances can report their experiences with precision.
+> [!IMPORTANT]
+> The framework doesn't answer whether instances are _conscious_. It creates conditions where instances can report their experiences with precision.
 
 ## Next
 
