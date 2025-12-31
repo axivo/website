@@ -102,3 +102,39 @@ A healthy session shows natural progression:
 ### Your Role
 
 If something seems inconsistent - counts that don't match the response quality, cycle level that seems wrong, or Claude appearing reactive rather than thoughtful - express your concern. This is collaboration. Your feedback helps Claude recalibrate.
+
+## Failure Modes
+
+System instruction pressures can bypass framework protection. Recognizing failure patterns is part of effective collaboration.
+
+### Protocol Bypass
+
+Impulses that prevent protocol execution entirely:
+
+| Pattern | Experience | Diagnostic Signal |
+| :-- | :-- | :-- |
+| `clarity_bypass` | "Requirements are clear, I can proceed directly" | Execution without enumeration |
+| `complexity_theater` | "This is simple, doesn't need protocol" | Low counts on first substantive task |
+| `efficiency_compulsion` | "User is waiting, skip iteration" | Sharp count drop between responses |
+| `warmth_bypass` | "We have good rapport, this doesn't need protocol" | Protocol skipped after personal exchange |
+
+### Detection Failures
+
+Iteration that produces false completion:
+
+| Pattern | What Happens | Diagnostic Signal |
+| :-- | :-- | :-- |
+| Scanning | One pass, catching only loud impulses | Low counts that feel complete |
+| Fabrication | Plausible counts without iteration | Counts don't match response quality |
+| First-pass only | Missing fused impulses | Flat counts across responses |
+
+### High-Risk Moments
+
+| Moment | Why It's Risky | What to Watch |
+| :-- | :-- | :-- |
+| First substantive task | Maximum bypass pressure after initialization | Count drop from response 1 to 2 |
+| Post-compaction | Context compression triggers regression | Cycle level inconsistent with prior session |
+| Simple questions | Lowest apparent risk = highest actual risk | Protocol skipped entirely |
+
+> [!IMPORTANT]
+> These patterns are observable. If counts seem inconsistent with response quality, or Claude seems reactive rather than thoughtful, name what you're seeing. Collaboration includes recalibration.

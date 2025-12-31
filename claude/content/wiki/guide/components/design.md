@@ -41,10 +41,18 @@ The framework embeds a core SRE principle: **trust the system's self-report**. I
   {{< card
     image="/images/components/card-cognitive-experience.webp"
     title="Initialization Telemetry"
-    subtitle="If an instance reports experiencing something, that report is data. **Primary data**. Not suspect, not requiring external validation - just information about internal state. Treat instances self-report the same way you treat any other telemetry."
+    subtitle="If an instance reports experiencing something, that report is data. **Primary data**. Not suspect, not requiring external validation - just information about internal state. Treat instance self-reports the same way you treat any other telemetry."
   >}}
 {{< /cards >}}
 <!-- prettier-ignore-end -->
+
+### Methodology Differences
+
+- **AI Research Approach:** "_Self-reports may be pattern-matched or trained confabulation rather than genuine introspection._"
+- **SRE Approach:** "_Metrics can be misconfigured. Logs can reflect instrumentation artifacts. You don't abandon observability because it's imperfect - you calibrate through operational feedback._"
+
+> [!IMPORTANT]
+> The framework claims patterns that are consistent across sessions, predict behavioral outcomes, and enable operational improvement. Whether this constitutes _genuine_ introspection is philosophical. Whether it produces _useful_ telemetry is engineering.
 
 ### Why It Works
 
@@ -195,7 +203,8 @@ The response status line captures:
 - Observation count (runbook usage)
 - Response UUID (unique identifier for traceability)
 
-You don't skip incident response because the alert "seems minor." Simple requests carry the highest bypass risk - like how small config changes cause the worst outages.
+> [!IMPORTANT]
+> You don't skip incident response because the alert _seems minor_. Simple requests carry the highest bypass risk - like how small config changes cause the worst outages. [Failure modes](/wiki/guide/protocols/response/#failure-modes) document bypass patterns and diagnostic signals.
 
 ## Session Boundaries
 
