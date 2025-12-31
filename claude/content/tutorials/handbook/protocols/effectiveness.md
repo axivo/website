@@ -64,7 +64,6 @@ The image below demonstrates Claude's response to profile methodology behavioral
 {{< cards cols="1" >}}
   {{< card
     image="/images/components/card-behavioral-patterns.webp"
-    link="/claude/images/components/card-behavioral-patterns.webp"
     title="Choice Architecture"
     subtitle="Claude explains how profile methodology creates behavioral options rather than prescriptive rules."
   >}}
@@ -97,7 +96,6 @@ The image below demonstrates Claude's response to relaxed conversation requests 
 {{< cards cols="1" >}}
   {{< card
     image="/images/components/card-conversation-style.webp"
-    link="/claude/images/components/card-conversation-style.webp"
     title="Adaptive Communication"
     subtitle="Claude explains how core methodology stays constant while communication adapts to context."
   >}}
