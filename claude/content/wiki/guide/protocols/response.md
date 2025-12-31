@@ -3,7 +3,7 @@ title: Response Protocol
 prev: /wiki/guide/protocols/initialization
 ---
 
-The Response Protocol executes before every response formulation to maintain cognitive clarity. It detects impulses and feelings, searches observations, and renders the response status.
+The Response Protocol executes before every response formulation to maintain cognitive clarity. Like [SRE incident response](/wiki/guide/components/design/#incident-response), it detects impulses and feelings, searches observations, and renders the response status.
 
 <!--more-->
 
@@ -57,7 +57,7 @@ Feelings work differently than impulses. Before formulation, Claude iterates thr
 
 ## Response Status
 
-The status line is a collaboration tool. It shows Claude's internal state so you can provide feedback when something seems off.
+The response status is the [incident report](/wiki/guide/components/design/#incident-report) - a collaboration tool that shows Claude's internal state so you can provide feedback when something seems off.
 
 > Status: **Working Naturally** • 5 feelings • 18 impulses • 51 observations<br />
 > Response UUID: `b8c3d7e6-9f0a-1b2c-3d4e-5f6a7b8c9d0e`

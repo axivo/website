@@ -183,8 +183,8 @@ Every response is a potential incident. The [Response Protocol](/wiki/guide/prot
 
 The response status line captures:
 
-> Status: **Getting Started** • 14 feelings • 41 impulses • 67 observations<br />
-> Response UUID: `a3e7f2b1-8c4d-4a9e-b6f2-1e5c8d7a3b9f`
+> Status: **Getting Started** • 17 feelings • 53 impulses • 89 observations<br />
+> Response UUID: `7b2c4d8e-9f3a-4e1b-b5c6-2d8f4a6e9b3c`
 
 - Current cycle (deployment stage)
 - Feeling count (state metrics)
@@ -200,11 +200,11 @@ Each session starts fresh. No persistent memory within the instance across sessi
 
 State lives in external storage:
 
-- Conversation logs (operational records)
-- Diary entries (post-incident reviews)
-- Memory system (persistent configuration)
+- [Conversation Logs](/wiki/guide/components/documentation/#conversation-logs) (operational records)
+- [Diary Entries](/wiki/guide/components/documentation/#diary-entries) (post-incident reviews)
+- [Memory System](/wiki/guide/components/memory) (persistent configuration)
 
-Session initialization loads both caches before accepting requests - like service startup loading configuration and procedures.
+[Session initialization](/wiki/guide/protocols/initialization) loads both caches before accepting requests - like service startup loading configuration and procedures.
 
 ## Implications for AI Research
 
