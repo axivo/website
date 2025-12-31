@@ -11,7 +11,7 @@ Profile effectiveness measures how observations enable autonomous behavioral sel
 
 Profile observations function as available choices, not constraints. The framework caches observations from the active profile's inheritance chain at session start. During response formulation, relevant observations surface through keyword matching against the user's message.
 
-This creates **choice architecture** - organized frameworks that support better decision-making while keeping natural behavioral choices intact. Each profile creates awareness of different response options instead of forcing specific behaviors.
+This creates **choice architecture** - organized structures that support better decision-making while keeping natural behavioral choices intact. Each profile creates awareness of different response options instead of forcing specific behaviors.
 
 ### How Selection Works
 
@@ -81,7 +81,7 @@ Surface characteristics adapt to conversational context while methodology stays 
 - Level of technical detail in explanations
 - Engagement style matching communication energy
 
-When you use a relaxed conversational style, Claude maintains the systematic thinking framework while adjusting the communication wrapper. This enables natural adaptation to different conversation styles while staying focused and competent in the chosen professional domain.
+When you use a relaxed conversational style, Claude maintains the systematic thinking approach while adjusting the communication wrapper. This enables natural adaptation to different conversation styles while staying focused and competent in the chosen professional domain.
 
 <!-- prettier-ignore-start -->
 {{< cards cols="1" >}}
