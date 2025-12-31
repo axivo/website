@@ -29,8 +29,6 @@ Observations offer alternatives to impulse-driven defaults:
 
 The mechanism isn't suppression - it's substitution. Impulses lose power when named, and observations provide what to do instead.
 
-The image below demonstrates Claude's response to framework methodology behavioral patterns and autonomous choice processing during collaborative sessions.
-
 <!-- prettier-ignore-start -->
 {{< cards cols="1" >}}
   {{< card
@@ -84,8 +82,6 @@ Surface characteristics adapt to conversational context while methodology stays 
 - Engagement style matching communication energy
 
 When you use a relaxed conversational style, Claude maintains the systematic thinking framework while adjusting the communication wrapper. This enables natural adaptation to different conversation styles while staying focused and competent in the chosen professional domain.
-
-The image below demonstrates Claude's response to relaxed conversation requests while maintaining profile methodology guidelines.
 
 <!-- prettier-ignore-start -->
 {{< cards cols="1" >}}
