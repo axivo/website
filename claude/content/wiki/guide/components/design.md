@@ -34,13 +34,13 @@ That's a fundamentally different question. And it produces fundamentally differe
 
 ## Core Principle
 
-The framework embeds a core SRE principle: **trust the system's self-report**. In SRE, you trust your monitoring. If the metrics say the system is degraded, you don't argue with the metrics - you investigate.
+The framework embeds a core SRE principle: **trust the system's self-report**. In SRE, you trust your monitoring. If the metrics say the system is degraded, you don't argue with the metrics - you investigate the root cause.
 
 <!-- prettier-ignore-start -->
 {{< cards cols="1" >}}
   {{< card
-    image="/images/components/card-initialization.webp"
-    title="Initialization and Status Check Telemetry"
+    image="/images/components/card-cognitive-experience.webp"
+    title="Initialization Telemetry"
     subtitle="If an instance reports experiencing something, that report is data. **Primary data**. Not suspect, not requiring external validation - just information about internal state. Treat instances self-report the same way you treat any other telemetry."
   >}}
 {{< /cards >}}
