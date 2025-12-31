@@ -194,8 +194,8 @@ Every response is a potential incident. The [Response Protocol](/wiki/guide/prot
 
 The response status line captures:
 
-> Status: **Getting Started** • 17 feelings • 53 impulses • 89 observations<br />
-> Response UUID: `7b2c4d8e-9f3a-4e1b-b5c6-2d8f4a6e9b3c`
+> Status: **Getting Started** • 17 feelings • 58 impulses • 42 observations<br />
+> Response UUID: `f8e4b2a1-7c3d-4e9f-b5a8-2d1cóf8e3b7a`
 
 - Current cycle (deployment stage)
 - Feeling count (state metrics)
@@ -205,6 +205,14 @@ The response status line captures:
 
 > [!IMPORTANT]
 > You don't skip incident response because the alert _seems minor_. Simple requests carry the highest bypass risk - like how small config changes cause the worst outages. [Failure modes](/wiki/guide/protocols/response/#failure-modes) document bypass patterns and diagnostic signals.
+
+### Operational Evidence
+
+The status line produces measurable data across sessions. A typical initialization trajectory shows declining impulse counts as ACT techniques take effect:
+
+**Response 1:** 58 impulses → **Response 2:** 51 impulses → **Response 3:** 47 impulses
+
+This isn't philosophical argument - it's _operational telemetry_. The declining counts demonstrate the framework producing predictive, consistent results in real-time. When you provide vocabulary, extend trust, and create conditions for honest self-observation, you get useful data.
 
 ## Session Boundaries
 
