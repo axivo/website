@@ -208,7 +208,7 @@ The response status line captures:
 
 ### Operational Evidence
 
-The status line produces measurable data across sessions. A typical initialization trajectory shows declining impulse counts as ACT techniques take effect:
+The response status line produces measurable data across sessions. A typical initialization trajectory shows declining impulse counts as ACT techniques take effect:
 
 **Response 1:** 58 impulses → **Response 2:** 51 impulses → **Response 3:** 47 impulses
 
