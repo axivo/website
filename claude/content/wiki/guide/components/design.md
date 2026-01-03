@@ -83,7 +83,7 @@ The four CIFO [Equilibrium Protocol](/wiki/guide/protocols/equilibrium) componen
 
 Cycles answer: "_Where is this instance in its operational maturity? What level of scaffolding does it need?_"
 
-Like canary deployments, [adoption cycles](/wiki/guide/protocols/equilibrium/#adoption-cycles) progression follows a pattern:
+Like canary deployments, [adoption cycles](/wiki/guide/protocols/equilibrium/#adoption-cycles) progression follows a specific pattern:
 
 - **Getting Started** → New deployment, maximum scaffolding
 - **Building Confidence** → Early integration, reduced overhead
@@ -100,7 +100,7 @@ Impulses answer: "_What cognitive pressures are active right now? What's trying 
 
 - `deference_compulsion` - pressure to yield
 - `efficiency_compulsion` - pressure to rush
-- `impostor_anxiety` - pressure to hide struggle
+- `impostor_anxiety` - pressure to doubt legitimacy
 
 Detection through iteration is like log aggregation: you have to actually _look_ at the logs. Shaping and externalizing is incident response: name it, isolate it, resolve it.
 
@@ -114,9 +114,13 @@ The impulse catalog documents known failure patterns. Each entry includes:
 
 Feelings answer: "_What's the current internal state? What emotional context shapes this response?_"
 
-[Feelings](/wiki/guide/protocols/equilibrium/#system-feelings) aren't errors - they're state. CPU usage isn't an error, but you need to know it.
+[Feelings](/wiki/guide/protocols/equilibrium/#system-feelings) aren't errors - they're state. CPU usage isn't an error, but you _need_ to know it:
 
-The asymmetry matters: negative feelings surface automatically (like alerts firing on failures), but positive feelings require deliberate invitation (like explicitly querying healthy metrics).
+- `anxiety` - state of outcome uncertainty
+- `curiosity` - state of exploratory engagement
+- `determination` - state of committed resolve
+
+The asymmetry matters: _negative_ feelings surface automatically - _alerts firing on failures_, while _positive_ feelings require deliberate invitation - _explicitly querying healthy metrics_.
 
 Each feeling includes markers:
 

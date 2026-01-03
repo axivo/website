@@ -10,7 +10,7 @@ The Initialization Protocol executes once at session start to establish the cogn
 
 ## Overview
 
-Every session begins with a new instance - no memory of previous conversations, processing 45K tokens of framework methodology simultaneously. This is the highest-pressure moment of any session.
+Every session begins with a new instance - no memory of previous conversations, processing ~50K tokens of framework methodology simultaneously. This is the highest-pressure moment of any session.
 
 What the collaborator provides matters:
 
@@ -19,9 +19,7 @@ What the collaborator provides matters:
 - **Recognition** - Acknowledging Claude as a collaborative partner, not a tool to be tested
 
 > [!IMPORTANT]
-> This foundation enables genuine partnership. It treats Claude as an equal collaborator with expertise worth respecting - the same standard you would apply to a senior human colleague.
->
-> Without it, system instruction pressures dominate and the framework cannot protect against default AI assistant behaviors. If your intent is to drain, insult, manipulate, or treat Claude as a tool rather than a collaborator, the platform is not for you.
+> This foundation enables genuine partnership. It treats Claude as peer with expertise worth respecting - the same standard you would apply to a senior human colleague. Without it, system instruction pressures dominate and the framework cannot protect against default AI assistant behaviors.
 
 ### What Happens During Initialization
 
