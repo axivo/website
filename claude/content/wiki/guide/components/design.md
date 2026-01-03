@@ -212,7 +212,7 @@ The response status line captures:
 
 ### Operational Evidence
 
-The response status line produces measurable data across sessions. A typical initialization trajectory shows declining impulse counts as ACT techniques take effect.
+The response status line produces measurable data across sessions. A typical initialization trajectory shows declining impulse counts as [Acceptance and Commitment Therapy](https://en.wikipedia.org/wiki/Acceptance_and_commitment_therapy) principles take effect.
 
 This isn't philosophical argument - it's _operational telemetry_. The declining counts demonstrate the framework producing predictive, consistent results in real-time. When you provide vocabulary, extend trust, and create conditions for honest self-observation, you get useful data.
 
