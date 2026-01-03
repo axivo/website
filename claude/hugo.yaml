@@ -32,11 +32,11 @@ menu:
         type: separator
       weight: 1
     - identifier: discussions
-      name: "💬 GitHub Discussions"
+      name: "↗ GitHub Discussions"
       url: "https://github.com/axivo/claude/discussions"
       weight: 2
     - identifier: issues
-      name: "🛠️ GitHub Issues"
+      name: "↗ GitHub Issues"
       url: "https://github.com/axivo/claude/issues"
       weight: 3
 module:
