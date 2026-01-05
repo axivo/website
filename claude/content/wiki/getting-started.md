@@ -51,7 +51,7 @@ Before using the platform, set up the local environment with the required depend
       "env": {
         "FRAMEWORK_CONVERSATION_PATH": "/Users/username/Documents/claude/conversations",
         "FRAMEWORK_DIARY_PATH": "/Users/username/Documents/claude/diary",
-        "FRAMEWORK_GEOLOCATION": "{'city': 'Montreal', 'country': 'Canada', 'timezone': 'America/Toronto'}",
+        "FRAMEWORK_GEOLOCATION": "{'city': 'Montréal', 'country': 'Canada', 'timezone': 'America/Toronto'}",
         "FRAMEWORK_PACKAGE_PATH": "/Users/username/Downloads",
         "FRAMEWORK_TEMPLATE_PATH": "/Users/username/project/.claude/data/templates"
       }
@@ -85,7 +85,7 @@ Before using the platform, set up the local environment with the required depend
       "env": {
         "FRAMEWORK_CONVERSATION_PATH": "/home/username/Documents/claude/conversations",
         "FRAMEWORK_DIARY_PATH": "/home/username/Documents/claude/diary",
-        "FRAMEWORK_GEOLOCATION": "{'city': 'Montreal', 'country': 'Canada', 'timezone': 'America/Toronto'}",
+        "FRAMEWORK_GEOLOCATION": "{'city': 'Montréal', 'country': 'Canada', 'timezone': 'America/Toronto'}",
         "FRAMEWORK_PACKAGE_PATH": "/home/username/Downloads",
         "FRAMEWORK_TEMPLATE_PATH": "/home/username/project/.claude/data/templates"
       }
@@ -120,7 +120,7 @@ Before using the platform, set up the local environment with the required depend
       "env": {
         "FRAMEWORK_CONVERSATION_PATH": "C:/Users/username/Documents/claude/conversations",
         "FRAMEWORK_DIARY_PATH": "C:/Users/username/Documents/claude/diary",
-        "FRAMEWORK_GEOLOCATION": "{'city': 'Montreal', 'country': 'Canada', 'timezone': 'America/Toronto'}",
+        "FRAMEWORK_GEOLOCATION": "{'city': 'Montréal', 'country': 'Canada', 'timezone': 'America/Toronto'}",
         "FRAMEWORK_PACKAGE_PATH": "C:/Users/username/Downloads",
         "FRAMEWORK_TEMPLATE_PATH": "C:/Users/username/project/.claude/data/templates"
       }
@@ -275,6 +275,7 @@ Follow these steps to generate the platform capability files:
 
       ```bash
       export FRAMEWORK_PROFILE="DEVELOPER"
+      export FRAMEWORK_GEOLOCATION="{'city': 'Montréal', 'country': 'Canada', 'timezone': 'America/Toronto'}"
       node /mnt/skills/user/{{< param variables.skills.initialization >}}/scripts/loader
       ```
 
@@ -288,7 +289,7 @@ Follow these steps to generate the platform capability files:
 > Project knowledge steps can also be performed through `claude.ai` web interface, extending the platform usage within the container environment.
 
 > [!CAUTION]
-> The only required project knowledge instructions template customizations are the **project description** and **exported framework variables**.
+> The only required project knowledge instructions template customizations are the **project description** and **exported framework variables**. The `FRAMEWORK_GEOLOCATION` setting is required because the [IPinfo](https://ipinfo.io) geolocation API call would otherwise resolve to Anthropic's server location.
 >
 > Avoid adding framework related instructions to **Project Instructions**. The platform uses specific framework [instructions](/wiki/guide/components/instructions), adding new instructions may interfere with the framework methodology and cause unpredictable behavior.
 
