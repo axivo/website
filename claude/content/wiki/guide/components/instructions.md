@@ -1,7 +1,7 @@
 ---
 title: Instructions System
-prev: /wiki/guide/components/
-next: /wiki/guide/components/memory/
+prev: /wiki/guide/components
+next: /wiki/guide/components/memory
 ---
 
 The Instructions System provides operational procedures that tell Claude **how** to execute the framework. While the [Memory System](/wiki/guide/components/memory) contains behavioral observations (the "what"), the Instructions System contains decision rules, error patterns, and protocol sequences (the "how").

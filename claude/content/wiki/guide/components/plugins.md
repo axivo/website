@@ -1,7 +1,7 @@
 ---
 title: Plugins System
-prev: /wiki/guide/components/
-next: /wiki/guide/components/documentation/
+prev: /wiki/guide/components
+next: /wiki/guide/components/documentation
 weight: 1
 ---
 

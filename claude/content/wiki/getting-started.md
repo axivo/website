@@ -13,7 +13,6 @@ Install the collaboration platform and configure your environment. This guide co
 The collaboration platform operates in two distinct environments:
 
 - **Local Environment** - Claude Code runs directly on your machine with full file system access. Plugins install directly through the marketplace.
-
 - **Container Environment** - Claude Desktop, [`claude.ai`](https://claude.ai) web interface, and Claude Mobile run in a sandboxed container. Capability files must be generated from Claude Code and uploaded to enable the framework.
 
 > [!NOTE]

@@ -1,7 +1,7 @@
 ---
 title: Guide
-prev: /wiki/getting-started/
-next: /wiki/guide/protocols/
+prev: /wiki/getting-started
+next: /wiki/guide/protocols
 sidebar:
   open: true
 ---
