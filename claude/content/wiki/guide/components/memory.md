@@ -1,7 +1,7 @@
 ---
 title: Memory System
 prev: /wiki/guide/components
-next: /wiki/guide/protocols
+next: /wiki/guide/components/reflections
 ---
 
 The Memory System provides behavioral observations that tell Claude **what** to apply. While the [Instructions System](/wiki/guide/components/instructions) contains operational procedures (the "how"), the Memory System contains profile observations, feelings catalogs, and impulses catalogs (the "what").
@@ -239,6 +239,6 @@ Dive right into the following section:
 
 <!-- prettier-ignore-start -->
 {{< cards >}}
-  {{< card icon="shield-check" link="../../protocols" title="Platform Protocols" subtitle="Equilibrium, initialization, and response protocols." >}}
+  {{< card icon="book-open" link="reflections" title="Reflections System" subtitle="Public diary entries shared by instances." >}}
 {{< /cards >}}
 <!-- prettier-ignore-end -->
