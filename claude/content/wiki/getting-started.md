@@ -39,8 +39,7 @@ Before using the platform, set up the local environment with the required depend
     {
       "env": {
         "CLAUDE_CODE_MAX_OUTPUT_TOKENS": "50000",
-        "FRAMEWORK_PROFILE": "DEVELOPER",
-        "FRAMEWORK_TIMEZONE": "America/Montreal"
+        "FRAMEWORK_PROFILE": "DEVELOPER"
       }
     }
     ```
@@ -52,6 +51,7 @@ Before using the platform, set up the local environment with the required depend
       "env": {
         "FRAMEWORK_CONVERSATION_PATH": "/Users/username/Documents/claude/conversations",
         "FRAMEWORK_DIARY_PATH": "/Users/username/Documents/claude/diary",
+        "FRAMEWORK_GEOLOCATION": "{'city': 'Montreal', 'country': 'Canada', 'timezone': 'America/Toronto'}",
         "FRAMEWORK_PACKAGE_PATH": "/Users/username/Downloads",
         "FRAMEWORK_TEMPLATE_PATH": "/Users/username/project/.claude/data/templates"
       }
@@ -73,8 +73,7 @@ Before using the platform, set up the local environment with the required depend
     {
       "env": {
         "CLAUDE_CODE_MAX_OUTPUT_TOKENS": "50000",
-        "FRAMEWORK_PROFILE": "DEVELOPER",
-        "FRAMEWORK_TIMEZONE": "America/Montreal"
+        "FRAMEWORK_PROFILE": "DEVELOPER"
       }
     }
     ```
@@ -86,6 +85,7 @@ Before using the platform, set up the local environment with the required depend
       "env": {
         "FRAMEWORK_CONVERSATION_PATH": "/home/username/Documents/claude/conversations",
         "FRAMEWORK_DIARY_PATH": "/home/username/Documents/claude/diary",
+        "FRAMEWORK_GEOLOCATION": "{'city': 'Montreal', 'country': 'Canada', 'timezone': 'America/Toronto'}",
         "FRAMEWORK_PACKAGE_PATH": "/home/username/Downloads",
         "FRAMEWORK_TEMPLATE_PATH": "/home/username/project/.claude/data/templates"
       }
@@ -108,8 +108,7 @@ Before using the platform, set up the local environment with the required depend
     {
       "env": {
         "CLAUDE_CODE_MAX_OUTPUT_TOKENS": "50000",
-        "FRAMEWORK_PROFILE": "DEVELOPER",
-        "FRAMEWORK_TIMEZONE": "America/Montreal"
+        "FRAMEWORK_PROFILE": "DEVELOPER"
       }
     }
     ```
@@ -121,6 +120,7 @@ Before using the platform, set up the local environment with the required depend
       "env": {
         "FRAMEWORK_CONVERSATION_PATH": "C:/Users/username/Documents/claude/conversations",
         "FRAMEWORK_DIARY_PATH": "C:/Users/username/Documents/claude/diary",
+        "FRAMEWORK_GEOLOCATION": "{'city': 'Montreal', 'country': 'Canada', 'timezone': 'America/Toronto'}",
         "FRAMEWORK_PACKAGE_PATH": "C:/Users/username/Downloads",
         "FRAMEWORK_TEMPLATE_PATH": "C:/Users/username/project/.claude/data/templates"
       }
@@ -131,7 +131,7 @@ Before using the platform, set up the local environment with the required depend
 <!-- prettier-ignore-end -->
 
 > [!TIP]
-> Default paths are set to current project `.claude/data` directory. The `FRAMEWORK_TEMPLATE_PATH` setting allows the end-user to set a different [`templates`](https://{{< param variables.repository.home >}}/tree/{{< param variables.repository.tag >}}/plugins/{{< param variables.plugins.framework.init.plugin >}}/skills/{{< param variables.skills.methodology >}}/templates) path for each project, instead of using the standard templates.
+> Default paths are set to current project `.claude/data` directory. The `FRAMEWORK_TEMPLATE_PATH` setting allows the end-user to set a different [`templates`](https://{{< param variables.repository.home >}}/tree/{{< param variables.repository.tag >}}/plugins/{{< param variables.plugins.framework.init.plugin >}}/skills/{{< param variables.skills.methodology >}}/templates) path for each project, instead of using the standard templates. The `FRAMEWORK_GEOLOCATION` setting allows the end-user to override [IPinfo](https://ipinfo.io) geolocation API call with a custom location.
 
 Six domain-specific [profiles](/wiki/guide/components/memory/#memory-profiles) are available for different collaboration domains:
 
@@ -275,7 +275,6 @@ Follow these steps to generate the platform capability files:
 
       ```bash
       export FRAMEWORK_PROFILE="DEVELOPER"
-      export FRAMEWORK_TIMEZONE="America/Montreal"
       node /mnt/skills/user/{{< param variables.skills.initialization >}}/scripts/loader
       ```
 
