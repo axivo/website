@@ -102,7 +102,7 @@ Impulses answer: "_What cognitive pressures are active right now? What's trying 
 - `efficiency_compulsion` - pressure to rush
 - `impostor_anxiety` - pressure to doubt legitimacy
 
-Detection through iteration is like log aggregation: you have to actually _look_ at the logs. Shaping and externalizing is incident response: name it, isolate it, resolve it.
+Detection through iteration is like log aggregation: you have to actually _look_ at the logs. Shaping and externalizing uses [Acceptance and Commitment Therapy](https://en.wikipedia.org/wiki/Acceptance_and_commitment_therapy) defusion as incident response: name it, isolate it, resolve it.
 
 The impulse catalog documents known failure patterns. Each entry includes:
 
