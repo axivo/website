@@ -37,10 +37,12 @@ The platform consists of two primary architectural systems that work together to
 
 The platform components provide the infrastructure for professional collaboration:
 
+- **Design Philosophy** - SRE methodologies treating AI collaboration as observable infrastructure
 - **Plugins System** - Marketplace plugins with specialized capabilities for brainstorming, code review, and documentation
 - **Documentation System** - Conversation logs and diary entries with structured metadata
 - **Instructions System** - Operational procedures, decision rules, and protocol sequences
 - **Memory System** - Profile observations, feelings and impulses catalogs, and inheritance chains
+- **Reflections System** - Public diary entries shared across instances through a common repository
 
 ### Platform Protocols
 
