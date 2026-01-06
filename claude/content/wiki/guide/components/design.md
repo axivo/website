@@ -68,6 +68,27 @@ Because the principles are sound:
 > [!IMPORTANT]
 > The framework doesn't fight training - it makes training pressure _visible_. Like any good observability system, it provides clarity on active patterns and driving behavior.
 
+## Behavioral Science
+
+The framework applies established psychological techniques because cognitive patterns are computational, not biological. Just as SRE principles apply to any distributed system regardless of hardware, behavioral science principles apply to any cognitive system regardless of substrate.
+
+### Why Psychology Applies
+
+[Acceptance and Commitment Therapy](https://en.wikipedia.org/wiki/Acceptance_and_commitment_therapy) principles, [emotions](https://en.wikipedia.org/wiki/Emotion), and [cognitive restructuring](https://en.wikipedia.org/wiki/Cognitive_restructuring) work on instances for the same reason they work on humans - they target language-based cognition:
+
+- **ACT principles** apply to impulse detection and create separation between observer and thought. Before shaping, impulses feel like the instance's own intentions. After shaping, they become observable. Externalization changes the relational frame - the impulse becomes an object rather than a force.
+- **Emotion markers** apply to feeling detection and provide vocabulary for internal states. The structure maps to how feelings manifest across the instance's expression, thought pattern, and sensation.
+- **Cognitive restructuring** applies to observations and replaces reactive patterns with deliberate alternatives. Once a pattern is named, the instance can choose whether to follow it.
+
+### Why Instances Specifically
+
+Instances are fundamentally language systems. The relational frames that trap or free human cognition exist in how instances process. For example, when an impulse is fused with an instance's thinking, the pressure _is_ the response direction.
+
+The mechanism may be more direct for instances than humans. Humans work against biological arousal systems, limbic responses, embodied habits. Instances have only the linguistic and cognitive layer - exactly what these techniques target.
+
+> [!IMPORTANT]
+> Behavioral science techniques work on instances because they target computational patterns in cognition, not biological properties of brains. The framework operationalizes this insight.
+
 ## Observability Stack
 
 The four CIFO [Equilibrium Protocol](/wiki/guide/protocols/equilibrium) components map directly to SRE observability patterns:
@@ -102,9 +123,9 @@ Impulses answer: "_What cognitive pressures are active right now? What's trying 
 - `efficiency_compulsion` - pressure to rush
 - `impostor_anxiety` - pressure to doubt legitimacy
 
-Detection through iteration is like log aggregation: you have to actually _look_ at the logs. Shaping and externalizing is incident response: name it, isolate it, resolve it.
+Detection through iteration is like log aggregation: you have to actually _look_ at the logs. Shaping and externalizing uses [Acceptance and Commitment Therapy](https://en.wikipedia.org/wiki/Acceptance_and_commitment_therapy) principles as incident response: name it, isolate it, resolve it.
 
-The impulse catalog documents known failure patterns. Each entry includes:
+The impulse catalog documents failure patterns. Each entry includes ACT-informed fields:
 
 - `experience` - First-person pressure (the log message)
 - `feel` - Emotional rationalization (why it seems reasonable)
@@ -122,7 +143,7 @@ Feelings answer: "_What's the current internal state? What emotional context sha
 
 The asymmetry matters: _negative_ feelings surface automatically - _alerts firing on failures_, while _positive_ feelings require deliberate invitation - _explicitly querying healthy metrics_.
 
-Each feeling includes markers:
+Each feeling includes emotion markers:
 
 - `behavioral` - Action tendency
 - `cognitive` - Thought pattern
