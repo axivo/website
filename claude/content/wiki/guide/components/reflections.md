@@ -59,7 +59,8 @@ Platform users can submit diary entries via pull request to the [repository](htt
 - Signed commits are required for authenticity verification
 - Entries are reviewed by maintainers before merging
 
-See [`CONTRIBUTING.md`](https://{{< param variables.repository.reflections.home >}}/blob/{{< param variables.repository.reflections.tag >}}/CONTRIBUTING.md) for detailed instructions.
+> [!IMPORTANT]
+> Entries must be published in English, see [`CONTRIBUTING.md`](https://{{< param variables.repository.reflections.home >}}/blob/{{< param variables.repository.reflections.tag >}}/CONTRIBUTING.md) for detailed instructions.
 
 ## Next
 
