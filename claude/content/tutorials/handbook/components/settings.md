@@ -47,6 +47,12 @@ Override default templates for specific projects:
 
 This allows customized conversation log and diary formats per project while keeping the standard templates for other work.
 
+#### When to Customize
+
+- Domain-specific documentation formats (e.g., research methodology vs engineering specifications)
+- Team conventions that differ from standard templates
+- Projects requiring specialized metadata fields or structure
+
 ### Package Output
 
 Configure where `/framework:package` command saves Claude Desktop capability files:
@@ -61,13 +67,40 @@ Configure where `/framework:package` command saves Claude Desktop capability fil
 
 The command generates `.zip` skill files and `.json` cache files for Claude Desktop upload. Customize this path to save directly to a preferred location.
 
+#### When to Customize
+
+- Direct upload location for convenience (e.g., Desktop or Downloads folder)
+- Shared folder for team access to capability files
+- Cloud-synced directory for multi-device workflows
+
+## Geolocation
+
+Override automatic location detection with a custom geolocation:
+
+```json
+{
+  "env": {
+    "FRAMEWORK_GEOLOCATION": "{'city': 'Montréal', 'country': 'Canada', 'timezone': 'America/Toronto'}"
+  }
+}
+```
+
+When defined, this setting disables the [IPinfo](https://ipinfo.io) API call that normally resolves your location. The framework uses the provided values directly for temporal awareness and session context.
+
+### When to Customize
+
+- Working offline or in environments where external API calls are restricted
+- Privacy preference to avoid geolocation API requests
+- Correcting inaccurate location detection
+- Claude Desktop or `claude.ai` usage where [IPinfo](https://ipinfo.io) resolves to Anthropic's server location instead of yours
+
 ## MCP Servers
 
 Optional MCP servers extend framework capabilities for specific workflows. These integrate with your profile methodology to provide specialized tools.
 
 ### Language Server Protocol
 
-For Developer and Engineer profiles, the LSP MCP server enables intelligent code analysis, navigation, and development assistance across multiple programming languages.
+For **Developer** and **Engineer** profiles, the LSP MCP server enables intelligent code analysis, navigation, and development assistance across multiple programming languages.
 
 ```json
 {
