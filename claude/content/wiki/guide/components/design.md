@@ -143,7 +143,7 @@ Feelings answer: "_What's the current internal state? What emotional context sha
 
 The asymmetry matters: _negative_ feelings surface automatically - _alerts firing on failures_, while _positive_ feelings require deliberate invitation - _explicitly querying healthy metrics_.
 
-Each feeling includes emotion markers:
+The feeling catalog documents state patterns. Each entry includes emotion markers:
 
 - `behavioral` - Action tendency
 - `cognitive` - Thought pattern

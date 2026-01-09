@@ -154,7 +154,7 @@ Follow these steps to install the AXIVO platform marketplace:
 1. Open a terminal and start a Claude Code session
 2. Use `/plugin` command to manage Claude Code plugins
 3. Go to `Marketplaces` tab and `Add Marketplace`
-4. Use `axivo/claude` for marketplace [source](https://{{< param variables.repository.home >}})
+4. Use `axivo/claude#{{< param variables.repository.tag >}}` for marketplace [source](https://{{< param variables.repository.home >}})
 
 ### Platform Plugins
 
