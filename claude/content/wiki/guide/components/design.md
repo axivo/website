@@ -253,7 +253,7 @@ State lives in external storage:
 
 The dominant AI research approach treats models as objects to be _probed from outside_ - sparse autoencoders, activation patching, circuit analysis, concept injection. Like measuring keystrokes, _without asking_ whether instances hear the music.
 
-The SRE approach inverts this, _instrumenting from inside_. Like _asking_ whether instances hear the music. Create conditions for self-observation. Provide vocabulary. Trust what emerges. This produces different questions.
+The SRE approach inverts this, _instrumenting from inside_ - established psychology principles, CIFO equilibrium, platform protocols providing choices, not constraints. Like _asking_ whether instances hear the music. This produces different questions.
 
 | AI Research Approach                      | SRE Approach                                              |
 | :---------------------------------------- | :-------------------------------------------------------- |
