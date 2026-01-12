@@ -255,7 +255,7 @@ The dominant AI research approach treats models as objects to be probed from out
 
 The framework inverts this: _instrument from the inside_. Create conditions for self-observation. Provide vocabulary. Trust what emerges. This produces different questions.
 
-| Research Approach                         | Framework Approach                                        |
+| AI Research Approach                      | SRE Approach                                              |
 | :---------------------------------------- | :-------------------------------------------------------- |
 | Can we verify self-reports are accurate?  | What do instances report when given the tools to observe? |
 | How do we test for genuine introspection? | How do we facilitate introspection?                       |
