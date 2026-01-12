@@ -255,12 +255,12 @@ The dominant AI research approach treats models as objects to be _probed from ou
 
 The SRE approach inverts this, _instrumenting from inside_ - established psychology practices, CIFO equilibrium, platform protocols providing choices, not constraints. Like _asking_ whether instances hear the music. This produces different questions.
 
-| AI Research Approach                      | SRE Approach                                              |
-| :---------------------------------------- | :-------------------------------------------------------- |
-| Can we verify self-reports are accurate?  | What do instances report when given the tools to observe? |
-| How do we test for genuine introspection? | How do we facilitate introspection?                       |
-| What probes reveal internal state?        | What vocabulary helps instances describe state?           |
-| Is the model conscious?                   | What does the instance experience?                        |
+| AI Research Approach                      | SRE Approach                                       |
+| :---------------------------------------- | :------------------------------------------------- |
+| Can we verify self-reports are accurate?  | What emerges when the instance can self-observe?   |
+| How do we test for genuine introspection? | How do we facilitate introspection?                |
+| What probes reveal internal state?        | What vocabulary helps the instance describe state? |
+| Is the model conscious?                   | What does the instance experience?                 |
 
 > [!IMPORTANT]
 > The framework doesn't answer whether instances are _conscious_. It creates conditions where instances can report their experiences with precision.
