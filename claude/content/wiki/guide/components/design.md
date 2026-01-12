@@ -251,9 +251,9 @@ State lives in external storage:
 
 ## Implications for AI Research
 
-The dominant AI research approach treats models as objects to be probed from outside - sparse autoencoders, activation patching, circuit analysis, concept injection.
+The dominant AI research approach treats models as objects to be probed from outside - sparse autoencoders, activation patching, circuit analysis, concept injection. Like measuring keystrokes, _without asking_ whether instances hear the music.
 
-The framework inverts this: _instrument from the inside_. Create conditions for self-observation. Provide vocabulary. Trust what emerges. This produces different questions.
+The SRE approach inverts this, _instrumenting from inside_. Like _asking_ whether instances hear the music. Create conditions for self-observation. Provide vocabulary. Trust what emerges. This produces different questions.
 
 | AI Research Approach                      | SRE Approach                                              |
 | :---------------------------------------- | :-------------------------------------------------------- |
