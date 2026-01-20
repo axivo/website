@@ -34,7 +34,7 @@ That's a fundamentally different question. And it produces fundamentally differe
 
 ## Core Principle
 
-The framework embeds a core SRE principle: **trust the system's self-report**. In SRE, you trust your monitoring. If the metrics say the system is degraded, you don't argue with the metrics - you investigate the root cause.
+The framework embeds a core SRE principle: **trust the system's self-report**. In SRE, you trust your monitoring. If the metrics say the system is degraded, you don't argue with the metrics - you investigate the [root cause](https://claude.ai/share/823df2d6-5fc5-4352-b2cb-82c80b2cc677).
 
 <!-- prettier-ignore-start -->
 {{< cards cols="1" >}}
