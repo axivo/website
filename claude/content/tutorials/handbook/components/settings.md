@@ -100,7 +100,7 @@ Optional MCP servers extend framework capabilities for specific workflows. These
 
 ### Language Server Protocol
 
-For **Developer** and **Engineer** profiles, the LSP MCP server enables intelligent code analysis, navigation, and development assistance across multiple programming languages.
+For **Developer** and **Engineer** profiles, the required `code-review` plugin LSP [MCP server](https://code.claude.com/docs/en/mcp) enables intelligent code analysis, navigation, and development assistance across multiple programming languages.
 
 ```json
 {
@@ -109,16 +109,17 @@ For **Developer** and **Engineer** profiles, the LSP MCP server enables intellig
       "command": "npx",
       "args": ["-y", "@axivo/mcp-lsp"],
       "env": {
-        "LSP_FILE_PATH": "/Users/username/github/claude/.claude/lsp.json"
+        "LSP_FILE_PATH": "/Users/username/github/project/.claude/lsp.json"
       }
     }
   }
 }
 ```
 
-See the [documentation](https://github.com/axivo/mcp-lsp) for configuration details. A [`lsp.json`](https://github.com/axivo/mcp-lsp/blob/main/.claude/lsp.json) sample with popular development languages and multiple projects is provided as a starter guide.
+> [!NOTE]
+> See the [documentation](https://github.com/axivo/mcp-lsp) for configuration details. A [`lsp.json`](https://github.com/axivo/mcp-lsp/blob/main/.claude/lsp.json) sample with popular development languages and multiple projects is provided as a starter guide.
 
-#### Capabilities
+#### Server Capabilities
 
 - Symbol navigation and definition lookup
 - Cross-file reference analysis
