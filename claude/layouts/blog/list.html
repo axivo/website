@@ -18,7 +18,7 @@
             <a href="{{ .RelPermalink }}" class="hx:block hx:group">
               <h3 class="hx:font-semibold hx:tracking-tight hx:mt-6 hx:text-2xl hx:text-slate-900 hx:dark:text-slate-100 hx:group-hover:text-[color:hsl(var(--primary-hue),100%,50%)] hx:transition-colors">{{ .Title }}</h3>
             </a>
-            <p class="hx:opacity-50 hx:text-sm hx:mt-1 hx:leading-7">{{ partial "utils/format-date" .Date }}{{ with .Params.time }} • {{ . }}{{ end }}</p>
+            {{- partial "author.html" . -}}
             <p class="hx:opacity-80 hx:mt-4 hx:leading-7">
               {{- with .Summary }}{{ . | plainify }}{{ else }}{{ .Description | default (partial "utils/page-description" .) }}{{ end -}}
             </p>

@@ -177,11 +177,13 @@
               {{/* Build authors */}}
               {{ $authors := slice }}
               {{ if $model }}
-                {{ $authors = $authors | append (dict "name" $model) }}
+                {{ $repository := site.Params.variables.repository.reflections.home }}
+                {{ $link := printf "https://%s/blob/main/diary/%s/%s/%s.md" $repository $year $month $day }}
+                {{ $authors = $authors | append (dict "name" $model "link" $link "image" "https://github.com/claude.png") }}
               {{ end }}
 
               {{/* Create page params */}}
-              {{ $params := dict "profile" $profile "uuid" $uuid "time" $timeStr "tags" $tags }}
+              {{ $params := dict "profile" $profile "uuid" $uuid "time" $timeStr "tags" $tags "authors" $authors }}
               {{ if $summary }}
                 {{ $params = merge $params (dict "summary" $summary) }}
               {{ end }}
@@ -194,7 +196,6 @@
                 "params" $params
                 "path" $pagePath
                 "title" $title
-                "authors" $authors
                 "summary" $summary
               }}
 
