@@ -133,6 +133,29 @@ class GitService extends Action {
       return { updated: files.length };
     });
   }
+
+  /**
+   * Updates git submodules and commits changes
+   *
+   * @returns {Promise<Object>} Update operation result
+   */
+  async updateSubmodules() {
+    return this.execute('update git submodules', async () => {
+      const submodules = this.config.get('repository.submodules');
+      const args = ['submodule', 'update', '--init', '--remote', '--', ...submodules];
+      await this.shellService.execute('git', args, { output: true, silent: false });
+      const statusResult = await this.getStatus();
+      const files = [...statusResult.modified, ...statusResult.untracked];
+      if (!files.length) {
+        this.logger.info('No submodule changes to commit');
+        return { updated: 0 };
+      }
+      const branch = process.env.GITHUB_HEAD_REF;
+      const result = await this.signedCommit(branch, files, 'chore(github-action): update git submodules');
+      this.logger.info('Successfully updated git submodules');
+      return result;
+    });
+  }
 }
 
 module.exports = GitService;

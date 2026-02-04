@@ -92,7 +92,7 @@ class WorkflowHandler extends Action {
   }
 
   /**
-   * Update Hugo modules
+   * Update hugo modules
    *
    * @returns {Promise<void>}
    */
@@ -105,25 +105,15 @@ class WorkflowHandler extends Action {
   }
 
   /**
-   * Update submodules
+   * Update git submodules
    *
-   * @returns {Promise<Object>} Update operation result
+   * @returns {Promise<void>}
    */
   async updateSubmodules() {
-    return this.execute('update git submodules', async () => {
-      const submodules = this.config.get('repository.submodules');
-      const args = ['submodule', 'update', '--init', '--remote', '--', ...submodules];
-      await this.gitService.shellService.execute('git', args, { output: true, silent: false });
-      const statusResult = await this.gitService.getStatus();
-      const files = [...statusResult.modified, ...statusResult.untracked];
-      if (!files.length) {
-        this.logger.info('No submodule changes to commit');
-        return { updated: 0 };
-      }
-      const branch = process.env.GITHUB_HEAD_REF;
-      const result = await this.gitService.signedCommit(branch, files, 'chore(github-action): update git submodules');
-      this.logger.info('Successfully updated git submodules');
-      return result;
+    return this.execute('update submodules', async () => {
+      this.logger.info('Updating submodules...');
+      await this.gitService.updateSubmodules();
+      this.logger.info('Submodules update complete');
     });
   }
 }
