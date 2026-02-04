@@ -1,6 +1,6 @@
 /**
  * Git service for managing git operations
- * 
+ *
  * @module services/Git
  * @author AXIVO
  * @license BSD-3-Clause
@@ -12,16 +12,16 @@ const ShellService = require('./Shell');
 
 /**
  * Git service for managing git operations
- * 
+ *
  * Provides Git operations for documentation workflows including configuration
  * and signed commits via GitHub API.
- * 
+ *
  * @class GitService
  */
 class GitService extends Action {
   /**
    * Creates a new Git service instance
-   * 
+   *
    * @param {Object} params - Service parameters
    */
   constructor(params) {
@@ -33,7 +33,7 @@ class GitService extends Action {
 
   /**
    * Gets staged changes from git
-   * 
+   *
    * @private
    * @returns {Promise<Object>} Object with additions and deletions arrays
    */
@@ -65,7 +65,7 @@ class GitService extends Action {
 
   /**
    * Configures git repository with user identity
-   * 
+   *
    * @returns {Promise<void>}
    */
   async configure() {
@@ -80,7 +80,7 @@ class GitService extends Action {
 
   /**
    * Gets the git status
-   * 
+   *
    * @returns {Promise<Object>} Git status information
    */
   async getStatus() {
@@ -102,7 +102,7 @@ class GitService extends Action {
 
   /**
    * Creates a signed commit using GitHub GraphQL API
-   * 
+   *
    * @param {string} branch - Git branch reference
    * @param {Array<string>} files - Modified files to commit
    * @param {string} message - Commit message
