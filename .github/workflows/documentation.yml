@@ -44,6 +44,9 @@ jobs:
         with:
           node-version: 24
 
+      - name: Install node dependencies
+        run: npm install handlebars
+
       - name: Configure repository
         uses: actions/github-script@v8
         with:
