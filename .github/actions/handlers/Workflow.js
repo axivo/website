@@ -1,6 +1,6 @@
 /**
  * Workflow handler for common workflow operations
- * 
+ *
  * @module handlers/Workflow
  * @author AXIVO
  * @license BSD-3-Clause
@@ -17,16 +17,16 @@ const TemplateService = require('../services/Template');
 
 /**
  * Workflow handler for Hugo site generation operations
- * 
+ *
  * Provides orchestration for repository configuration, Hugo module management,
  * site generation, and issue reporting for Hugo workflows.
- * 
+ *
  * @class WorkflowHandler
  */
 class WorkflowHandler extends Action {
   /**
    * Creates a new WorkflowHandler instance
-   * 
+   *
    * @param {Object} params - Handler parameters
    */
   constructor(params) {
@@ -43,7 +43,7 @@ class WorkflowHandler extends Action {
 
   /**
    * Build Hugo documentation
-   * 
+   *
    * @returns {Promise<void>}
    */
   async buildDocumentation() {
@@ -57,7 +57,7 @@ class WorkflowHandler extends Action {
 
   /**
    * Configure repository
-   * 
+   *
    * @returns {Promise<void>}
    */
   async configureRepository() {
@@ -70,7 +70,7 @@ class WorkflowHandler extends Action {
 
   /**
    * Report workflow issues
-   * 
+   *
    * @returns {Promise<void>}
    */
   async reportIssue() {
