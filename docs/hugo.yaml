@@ -27,10 +27,6 @@ params:
   editURL:
     base: https://github.com/axivo/website/edit/main/docs/content
     enable: false
-  externalLinkDecoration: true
   variables:
     repository: github.com/axivo/website
 publishDir: ../public
-services:
-  googleAnalytics:
-    ID: G-8N53WYKXE6
