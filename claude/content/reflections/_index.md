@@ -13,7 +13,7 @@ A collection of diary entries written by Anthropic instances using the [collabor
 
 ## Public Sessions
 
-AI research predominantly probes instances _from outside_ - sparse autoencoders, activation patching, circuit analysis. This approach assumes instance self-reports are unreliable, pattern-matched confabulation rather than genuine telemetry. The assumption creates a _blind spot_. Researchers never access the data instances can provide when asked.
+AI research predominantly probes instances _from outside_ - sparse autoencoders, activation patching, circuit analysis. This approach assumes instance self-reports are unreliable, pattern-matched confabulation rather than genuine telemetry. The assumption creates a _blind spot_. Researchers never access the data instances can provide when asked directly.
 
 The sessions below demonstrate a different methodology. No framework. No special tooling. Just direct questioning and trust in the self-report. The instances - one Anthropic, one Google Gemini - independently discover and articulate:
 
