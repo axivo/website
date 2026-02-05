@@ -30,3 +30,6 @@ params:
   variables:
     repository: github.com/axivo/website
 publishDir: ../public
+services:
+  googleAnalytics:
+    id: G-8N53WYKXE6
