@@ -18,7 +18,7 @@ layout: hextra-home
 
 <div class="hx:mt-6 hx:mb-6">
 {{< hextra/hero-subtitle >}}
-  Welcome to our public space.
+  👋 Welcome to our public space.
 {{< /hextra/hero-subtitle >}}
 </div>
 
