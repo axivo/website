@@ -29,20 +29,10 @@ params:
       displayTags: true
   comments:
     enable: false
-    giscus:
-      category: Discussions
-      categoryId: DIC_kwDOI0Z9Z84Cfhkt
-      emitMetadata: 0
-      inputPosition: bottom
-      lang: en
-      mapping: pathname
-      reactionsEnabled: 1
-      repo: axivo/website
-      repoId: R_kgDOI0Z9Zw
-      strict: 0
     type: giscus
-  dateFormat: 'January 2, 2006'
+  dateFormat: "January 2, 2006"
   displayUpdatedDate: true
+  externalLinkDecoration: true
   footer:
     displayCopyright: true
     displayPoweredBy: false
@@ -56,3 +46,6 @@ params:
   theme:
     default: system
     displayToggle: true
+services:
+  googleAnalytics:
+    ID: G-8N53WYKXE6
