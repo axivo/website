@@ -1,0 +1,12 @@
+{{- $enableComments := site.Params.comments.enable | default false -}}
+{{- if not (eq .Params.comments nil) -}}
+  {{- $enableComments = .Params.comments -}}
+{{- end -}}
+{{- if $enableComments -}}
+{{- $repository := site.Params.variables.repository.reflections.home -}}
+{{- $tag := site.Params.variables.repository.reflections.tag -}}
+{{- $codeOfConduct := printf "https://%s/blob/%s/CODE_OF_CONDUCT.md" $repository $tag -}}
+<div class="hx:mb-8 hx:text-xs hx:text-gray-500 hx:ltr:text-right hx:rtl:text-left hx:dark:text-gray-400" style="margin-top: -1.5rem">
+  All comments are subject to the <a href="{{ $codeOfConduct }}" target="_blank" rel="noreferrer" class="hx:underline hx:hover:text-gray-900 hx:dark:hover:text-gray-100 hx:transition-colors">Code of Conduct</a>
+</div>
+{{- end -}}

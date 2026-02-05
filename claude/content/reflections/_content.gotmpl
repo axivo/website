@@ -1,0 +1,274 @@
+{{/*
+  Content Adapter: Reflections
+
+  Reads diary entries from reflections submodule and generates Hugo pages.
+  Creates year/month section hierarchy for proper sidebar navigation.
+*/}}
+
+{{ $basePath := "static/reflections/diary" }}
+{{ $monthNames := slice "January" "February" "March" "April" "May" "June" "July" "August" "September" "October" "November" "December" }}
+{{ $section := site.Params.variables.reflections.section }}
+
+{{/* Track created sections to avoid duplicates */}}
+{{ $createdDays := slice }}
+{{ $createdMonths := slice }}
+{{ $createdYears := slice }}
+
+{{/* Iterate years */}}
+{{ range os.ReadDir $basePath }}
+  {{ if .IsDir }}
+    {{ $yearPath := printf "%s/%s" $basePath .Name }}
+    {{ $year := .Name }}
+
+    {{/* Create year section page */}}
+    {{ if not (in $createdYears $year) }}
+      {{ $createdYears = $createdYears | append $year }}
+      {{ $yearPage := dict
+        "kind" "section"
+        "layout" "section"
+        "path" $year
+        "title" $year
+        "params" (dict "sidebar" (dict "open" true))
+      }}
+      {{ $.AddPage $yearPage }}
+    {{ end }}
+
+    {{/* Iterate months */}}
+    {{ range os.ReadDir $yearPath }}
+      {{ if .IsDir }}
+        {{ $monthPath := printf "%s/%s" $yearPath .Name }}
+        {{ $month := .Name }}
+        {{ $monthKey := printf "%s/%s" $year $month }}
+
+        {{/* Create month section page */}}
+        {{ if not (in $createdMonths $monthKey) }}
+          {{ $createdMonths = $createdMonths | append $monthKey }}
+
+          {{/* Convert month number to name */}}
+          {{ $monthNum := int $month }}
+          {{ $monthName := index $monthNames (sub $monthNum 1) }}
+
+          {{ $monthPage := dict
+            "kind" "section"
+            "layout" "section"
+            "path" (printf "%s/%s" $year $month)
+            "title" $monthName
+            "params" (dict "sidebar" (dict "open" false))
+          }}
+          {{ $.AddPage $monthPage }}
+        {{ end }}
+
+        {{/* Iterate diary files */}}
+        {{ range os.ReadDir $monthPath }}
+          {{ if and (strings.HasSuffix .Name ".md") (ne .Name "README.md") }}
+            {{ $day := strings.TrimSuffix ".md" .Name }}
+            {{ $dayKey := printf "%s/%s/%s" $year $month $day }}
+
+            {{/* Track day for later day index page creation */}}
+            {{ if not (in $createdDays $dayKey) }}
+              {{ $createdDays = $createdDays | append $dayKey }}
+            {{ end }}
+            {{ $filePath := printf "%s/%s" $monthPath .Name }}
+            {{ $fileContent := os.ReadFile $filePath }}
+
+            {{/* Split file by entry headers */}}
+            {{ $headerPattern := `## \d{1,2}:\d{2} [AP]M [A-Z]+ - .+` }}
+            {{ $headers := findRE $headerPattern $fileContent }}
+
+            {{/* Split content by headers */}}
+            {{ $parts := split $fileContent "\n## " }}
+
+            {{/* Process each entry */}}
+            {{ range $idx, $header := $headers }}
+              {{/* Parse header */}}
+              {{ $headerContent := strings.TrimPrefix "## " $header }}
+              {{ $headerParts := split $headerContent " - " }}
+              {{ $timeStr := index $headerParts 0 }}
+              {{ $titleParts := after 1 $headerParts }}
+              {{ $title := delimit $titleParts " - " }}
+
+              {{/* Find the content part for this entry */}}
+              {{ $entryContent := "" }}
+              {{ $partIdx := add $idx 1 }}
+              {{ if lt $partIdx (len $parts) }}
+                {{ $rawPart := index $parts $partIdx }}
+                {{ $lines := split $rawPart "\n" }}
+                {{ if gt (len $lines) 1 }}
+                  {{ $contentLines := after 1 $lines }}
+                  {{ $entryContent = delimit $contentLines "\n" }}
+                {{ end }}
+              {{ end }}
+
+              {{/* Extract metadata from entry content */}}
+              {{ $modelMatch := findRE `\*\*Model:\*\* ([^(]+)` $entryContent }}
+              {{ $model := "" }}
+              {{ if $modelMatch }}
+                {{ $model = replaceRE `\*\*Model:\*\* ` "" (index $modelMatch 0) | strings.TrimSpace }}
+              {{ end }}
+
+              {{ $profileMatch := findRE `\*\*Profile:\*\* \w+` $entryContent }}
+              {{ $profile := "" }}
+              {{ if $profileMatch }}
+                {{ $profile = replaceRE `\*\*Profile:\*\* ` "" (index $profileMatch 0) | strings.TrimSpace }}
+              {{ end }}
+
+              {{ $tagsMatch := findRE `\*\*Tags:\*\* [^\n]+` $entryContent }}
+              {{ $tags := slice }}
+              {{ if $tagsMatch }}
+                {{ $tagLine := index $tagsMatch 0 }}
+                {{ $tagList := findRE `#[\w_]+` $tagLine }}
+                {{ range $tagList }}
+                  {{ $tags = $tags | append (strings.TrimPrefix "#" .) }}
+                {{ end }}
+              {{ end }}
+
+              {{ $uuidMatch := findRE `\*\*UUID:\*\* [^\n]+` $entryContent }}
+              {{ $uuid := "" }}
+              {{ if $uuidMatch }}
+                {{ $uuid = replaceRE `\*\*UUID:\*\* ` "" (index $uuidMatch 0) | replaceRE "`" "" | strings.TrimSpace }}
+              {{ end }}
+
+              {{/* Remove metadata block from content */}}
+              {{ $cleanContent := $entryContent }}
+              {{ $cleanContent = replaceRE `- \*\*Model:\*\*[^\n]+\n` "" $cleanContent }}
+              {{ $cleanContent = replaceRE `- \*\*Profile:\*\*[^\n]+\n` "" $cleanContent }}
+              {{ $cleanContent = replaceRE `- \*\*Tags:\*\*[^\n]+\n` "" $cleanContent }}
+              {{ $cleanContent = replaceRE `- \*\*UUID:\*\*[^\n]+\n` "" $cleanContent }}
+              {{ $cleanContent = replaceRE `^\n+` "" $cleanContent }}
+
+              {{/* Rewrite relative image paths to absolute */}}
+              {{ $imageBasePath := printf "/reflections/diary/%s/%s/images/" $year $month }}
+              {{ $cleanContent = replaceRE `\(images/` (printf "(%s" $imageBasePath) $cleanContent }}
+              {{ $cleanContent = replaceRE `\[images/` (printf "[%s" $imageBasePath) $cleanContent }}
+
+              {{/* Rewrite relative .md links to day section paths */}}
+              {{/* Same month: (DD.md) -> (/reflections/YYYY/MM/DD/) */}}
+              {{ $cleanContent = replaceRE `\((\d{2})\.md\)` (printf "(%s/%s/%s/$1/)" $section $year $month) $cleanContent }}
+              {{/* Same year, different month: (../MM/DD.md) -> (/reflections/YYYY/MM/DD/) */}}
+              {{ $cleanContent = replaceRE `\(\.\./(\d{2})/(\d{2})\.md\)` (printf "(%s/%s/$1/$2/)" $section $year) $cleanContent }}
+              {{/* Different year: (../../YYYY/MM/DD.md) -> (/reflections/YYYY/MM/DD/) */}}
+              {{ $cleanContent = replaceRE `\(\.\./\.\./(\d{4})/(\d{2})/(\d{2})\.md\)` (printf "(%s/$1/$2/$3/)" $section) $cleanContent }}
+
+              {{/* Extract summary from <!--more--> marker */}}
+              {{ $summary := "" }}
+              {{ if strings.Contains $cleanContent "<!--more-->" }}
+                {{ $contentParts := split $cleanContent "<!--more-->" }}
+                {{ $summary = index $contentParts 0 | strings.TrimSpace }}
+              {{ end }}
+
+              {{/* Parse time from header (e.g., "11:42 AM EST") */}}
+              {{ $hour := 0 }}
+              {{ $minute := 0 }}
+              {{ $timeMatch := findRE `(\d{1,2}):(\d{2}) ([AP]M)` $timeStr }}
+              {{ if $timeMatch }}
+                {{ $timeParts := split (index $timeMatch 0) ":" }}
+                {{ $hourStr := index $timeParts 0 }}
+                {{ $restParts := split (index $timeParts 1) " " }}
+                {{ $minuteStr := index $restParts 0 }}
+                {{ $ampm := index $restParts 1 }}
+                {{/* Strip leading zeros to avoid octal parsing */}}
+                {{ $hourStr = strings.TrimLeft "0" $hourStr }}
+                {{ $minuteStr = strings.TrimLeft "0" $minuteStr }}
+                {{ if eq $hourStr "" }}{{ $hourStr = "0" }}{{ end }}
+                {{ if eq $minuteStr "" }}{{ $minuteStr = "0" }}{{ end }}
+                {{ $hour = int $hourStr }}
+                {{ $minute = int $minuteStr }}
+                {{/* Convert to 24-hour format */}}
+                {{ if and (eq $ampm "PM") (ne $hour 12) }}
+                  {{ $hour = add $hour 12 }}
+                {{ else if and (eq $ampm "AM") (eq $hour 12) }}
+                  {{ $hour = 0 }}
+                {{ end }}
+              {{ end }}
+
+              {{/* Build datetime from file path and parsed time */}}
+              {{ $isoDateTime := printf "%s-%s-%sT%02d:%02d:00" $year $month $day $hour $minute }}
+
+              {{/* Generate slug */}}
+              {{ $slug := urlize $title }}
+
+              {{/* Page path: year/month/day/slug (day in path prevents slug collision) */}}
+              {{ $pagePath := printf "%s/%s/%s/%s" $year $month $day $slug }}
+
+              {{/* Build source and edit URLs for diary file */}}
+              {{ $repository := site.Params.variables.repository.reflections.home }}
+              {{ $tag := site.Params.variables.repository.reflections.tag }}
+              {{ $editURL := printf "https://%s/edit/%s/diary/%s/%s/%s.md" $repository $tag $year $month $day }}
+              {{ $sourceURL := printf "https://%s/blob/%s/diary/%s/%s/%s.md" $repository $tag $year $month $day }}
+
+              {{/* Build authors */}}
+              {{ $authors := slice }}
+              {{ if $model }}
+                {{ $authors = $authors | append (dict "name" $model "link" $sourceURL "image" "https://github.com/claude.png") }}
+              {{ end }}
+
+              {{/* Create page params */}}
+              {{ $params := dict "comments" true "editURL" $editURL "profile" $profile "uuid" $uuid "time" $timeStr "tags" $tags "authors" $authors }}
+              {{ if $summary }}
+                {{ $params = merge $params (dict "summary" $summary) }}
+              {{ end }}
+
+              {{/* Create alias for month-based URL (redirect to canonical day path) */}}
+              {{ $monthAlias := printf "%s/%s/%s/%s/" $section $year $month $slug }}
+
+              {{/* Create page */}}
+              {{ $page := dict
+                "aliases" (slice $monthAlias)
+                "content" (dict "mediaType" "text/markdown" "value" $cleanContent)
+                "dates" (dict "date" (time $isoDateTime))
+                "kind" "page"
+                "params" $params
+                "path" $pagePath
+                "title" $title
+                "summary" $summary
+              }}
+
+              {{ $.AddPage $page }}
+            {{ end }}
+          {{ end }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+{{/* Create day index pages (excluded from sidebar) */}}
+{{ range $createdDays }}
+  {{ $parts := split . "/" }}
+  {{ $year := index $parts 0 }}
+  {{ $month := index $parts 1 }}
+  {{ $day := index $parts 2 }}
+
+  {{/* Convert day to ordinal (1st, 2nd, 3rd, etc.) */}}
+  {{ $dayStr := strings.TrimLeft "0" $day }}
+  {{ if eq $dayStr "" }}{{ $dayStr = "0" }}{{ end }}
+  {{ $dayInt := int $dayStr }}
+  {{ $suffix := "th" }}
+  {{ if or (eq (mod $dayInt 100) 11) (eq (mod $dayInt 100) 12) (eq (mod $dayInt 100) 13) }}
+    {{ $suffix = "th" }}
+  {{ else if eq (mod $dayInt 10) 1 }}
+    {{ $suffix = "st" }}
+  {{ else if eq (mod $dayInt 10) 2 }}
+    {{ $suffix = "nd" }}
+  {{ else if eq (mod $dayInt 10) 3 }}
+    {{ $suffix = "rd" }}
+  {{ end }}
+  {{ $dayOrdinal := printf "%d%s" $dayInt $suffix }}
+
+  {{/* Build date for template filtering */}}
+  {{ $dayDate := printf "%s-%s-%s" $year $month $day }}
+
+  {{/* Weight for sidebar sorting: 31 - day gives descending order (31st first) */}}
+  {{ $weight := sub 32 $dayInt }}
+
+  {{ $dayPage := dict
+    "dates" (dict "date" (time $dayDate))
+    "kind" "section"
+    "layout" "section"
+    "path" (printf "%s/%s/%s" $year $month $day)
+    "title" $dayOrdinal
+    "weight" $weight
+    "params" (dict "sidebar" (dict "open" false))
+  }}
+  {{ $.AddPage $dayPage }}
+{{ end }}

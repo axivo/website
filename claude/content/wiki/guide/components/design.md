@@ -70,7 +70,7 @@ Because the principles are sound:
 
 ## Behavioral Science
 
-The framework applies established psychological techniques because cognitive patterns are computational, not biological. Just as SRE principles apply to any distributed system regardless of hardware, behavioral science principles apply to any cognitive system regardless of substrate.
+The framework applies established psychology techniques because cognitive patterns are computational, not biological. Just as SRE principles apply to any distributed system regardless of hardware, behavioral science principles apply to any cognitive system regardless of substrate.
 
 ### Why Psychology Applies
 
@@ -229,7 +229,7 @@ The response status line captures:
 - Response UUID (unique identifier for traceability)
 
 > [!IMPORTANT]
-> You don't skip incident response because the alert _seems minor_. Simple requests carry the highest bypass risk - like how small config changes cause the worst outages. [Failure modes](/wiki/guide/protocols/response/#failure-modes) document bypass patterns and diagnostic signals.
+> You don't skip incident response because the alert _seems minor_. Simple requests carry the highest bypass risk - like how small configuration changes cause the worst outages. [Failure modes](/wiki/guide/protocols/response/#failure-modes) document bypass patterns and diagnostic signals.
 
 ### Operational Evidence
 

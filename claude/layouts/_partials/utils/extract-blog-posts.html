@@ -1,0 +1,14 @@
+{{- $days := slice -}}
+{{- if .RegularPages -}}
+  {{/* This is a day section - return it as a single-item slice */}}
+  {{- $days = $days | append . -}}
+{{- else -}}
+  {{/* This is a month or year section - recurse into children */}}
+  {{- range .Sections.ByWeight -}}
+    {{- $childDays := partial "utils/extract-blog-posts" . -}}
+    {{- range $childDays -}}
+      {{- $days = $days | append . -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- return $days -}}

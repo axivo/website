@@ -24,17 +24,54 @@ defaults:
 
 permissions:
   checks: write
+  contents: write
   id-token: write
   issues: write
   pages: write
 
 jobs:
-  build:
-    name: Build
+  update:
+    name: Update
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
+        with:
+          submodules: true
+
+      - name: Setup node
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+
+      - name: Install node dependencies
+        run: npm install handlebars
+
+      - name: Configure repository
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const { Workflow } = require('./.github/actions/handlers');
+            const workflow = new Workflow({ github, context, core, exec });
+            await workflow.configureRepository();
+
+      - name: Update git submodules
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const { Workflow } = require('./.github/actions/handlers');
+            const workflow = new Workflow({ github, context, core, exec });
+            await workflow.updateSubmodules();
+
+  build:
+    name: Build
+    needs: update
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          submodules: true
 
       - name: Setup go
         uses: actions/setup-go@v6
@@ -55,14 +92,6 @@ jobs:
 
       - name: Install node dependencies
         run: npm install handlebars
-
-      - name: Configure repository
-        uses: actions/github-script@v8
-        with:
-          script: |
-            const { Workflow } = require('./.github/actions/handlers');
-            const workflow = new Workflow({ github, context, core, exec });
-            await workflow.configureRepository();
 
       - name: Build documentation
         uses: actions/github-script@v8

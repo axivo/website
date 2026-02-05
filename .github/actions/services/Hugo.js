@@ -69,7 +69,7 @@ class HugoService extends Action {
    * @returns {Promise<Object>} Update operation result
    */
   async updateModules() {
-    return this.execute('update modules', async () => {
+    return this.execute('update hugo modules', async () => {
       await this.shellService.execute('hugo', ['mod', 'clean', '--all'], { output: true, silent: false });
       await this.shellService.execute('hugo', ['mod', 'get', '-u', './...'], { output: true, silent: false });
       const modules = this.config.get('workflow.hugo.modules');
@@ -85,12 +85,8 @@ class HugoService extends Action {
         return { updated: 0 };
       }
       const branch = process.env.GITHUB_HEAD_REF;
-      const result = await this.gitService.signedCommit(
-        branch,
-        files,
-        'chore(github-action): update modules'
-      );
-      this.logger.info('Successfully updated modules');
+      const result = await this.gitService.signedCommit(branch, files, 'chore(github-action): update hugo modules');
+      this.logger.info('Successfully updated hugo modules');
       return result;
     });
   }

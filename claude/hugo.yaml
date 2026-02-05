@@ -1,4 +1,8 @@
 baseURL: https://axivo.com/claude/
+cascade:
+  - _target:
+      kind: term
+    type: blog
 languages:
   en:
     params:
@@ -12,19 +16,23 @@ menu:
       identifier: wiki
       pageRef: /wiki/
       weight: 1
+    - name: Reflections
+      identifier: reflections
+      pageRef: /reflections/
+      weight: 2
     - name: Tutorials
       identifier: tutorials
       pageRef: /tutorials/
-      weight: 2
+      weight: 3
     - name: Search
       params:
         type: search
-      weight: 3
+      weight: 4
     - name: GitHub
       params:
         icon: github
       url: https://github.com/axivo/claude
-      weight: 4
+      weight: 5
   sidebar:
     - identifier: more
       name: More
@@ -47,10 +55,23 @@ module:
     - path: github.com/axivo/website/global
     - path: github.com/imfing/hextra
 params:
+  blog:
+    list:
+      displayTags: true
+  comments:
+    enable: false
+    giscus:
+      repo: axivo/claude-reflections
+      repoId: R_kgDOQzvnGQ
+      category: Reflections
+      categoryId: DIC_kwDOQzvnGc4C15M9
+      mapping: "og:title"
+    type: giscus
   description: Scalable collaboration platform with specialized profiles, persistent memory, and systematic methodologies
   editURL:
     base: https://github.com/axivo/website/edit/main/claude/content
-    enable: true
+    enable: false
+  externalLinkDecoration: true
   navbar:
     logo:
       path: /claude/images/logo-claude.svg
@@ -75,6 +96,9 @@ params:
         package:
           command: package
           plugin: framework
+    reflections:
+      path: /claude/reflections
+      section: /reflections
     repository:
       home: github.com/axivo/claude
       reflections:
@@ -87,3 +111,6 @@ params:
       review: code-review
       methodology: framework-methodology
 publishDir: ../public/claude
+services:
+  googleAnalytics:
+    ID: G-8N53WYKXE6

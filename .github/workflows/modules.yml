@@ -3,8 +3,8 @@ name: Modules
 on:
   pull_request:
     paths:
-      - '**/go.mod'
-      - '**/go.sum'
+      - "**/go.mod"
+      - "**/go.sum"
 
 concurrency:
   cancel-in-progress: true
@@ -54,7 +54,7 @@ jobs:
             const workflow = new Workflow({ github, context, core, exec });
             await workflow.configureRepository();
 
-      - name: Update modules
+      - name: Update hugo modules
         uses: actions/github-script@v8
         with:
           script: |
