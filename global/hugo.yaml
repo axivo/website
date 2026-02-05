@@ -46,6 +46,3 @@ params:
   theme:
     default: system
     displayToggle: true
-services:
-  googleAnalytics:
-    ID: G-8N53WYKXE6
