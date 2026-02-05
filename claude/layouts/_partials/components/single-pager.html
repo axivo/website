@@ -1,0 +1,45 @@
+{{/* Blog single page navigation - navigates across all blog entries by date */}}
+
+{{- $allEntries := where site.RegularPages "Section" .Section -}}
+{{- $allEntries = $allEntries.ByDate.Reverse -}}
+
+{{- $prev := false -}}
+{{- $next := false -}}
+{{- $found := false -}}
+
+{{- range $i, $page := $allEntries -}}
+  {{- if eq $page.RelPermalink $.RelPermalink -}}
+    {{- $found = true -}}
+  {{- else if not $found -}}
+    {{- $next = $page -}}
+  {{- else if and $found (not $prev) -}}
+    {{- $prev = $page -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if or $prev $next -}}
+  <div class="hx:mb-8 hx:flex hx:items-center hx:border-t hx:pt-8 hx:border-gray-200 hx:dark:border-neutral-800 hx:contrast-more:border-neutral-400 hx:dark:contrast-more:border-neutral-400 hx:print:hidden">
+    {{- if $prev -}}
+      {{- $linkTitle := partial "utils/title" $prev -}}
+      <a
+        href="{{ $prev.RelPermalink }}"
+        title="{{ $linkTitle }}"
+        class="hx:flex hx:items-center hx:gap-1 hx:py-4 hx:text-base hx:font-medium hx:text-gray-600 hx:transition-colors [word-break:break-word] hx:hover:text-primary-600 hx:dark:text-gray-300 hx:md:text-lg hx:ltr:pr-4 hx:rtl:pl-4"
+      >
+        {{- partial "utils/icon.html" (dict "name" "chevron-right" "attributes" `class="hx:inline hx:h-5 hx:shrink-0 hx:ltr:rotate-180"`) -}}
+        {{- $linkTitle -}}
+      </a>
+    {{- end -}}
+    {{- if $next -}}
+      {{- $linkTitle := partial "utils/title" $next -}}
+      <a
+        href="{{ $next.RelPermalink }}"
+        title="{{ $linkTitle }}"
+        class="hx:flex hx:items-center hx:gap-1 hx:py-4 hx:text-base hx:font-medium hx:text-gray-600 hx:transition-colors [word-break:break-word] hx:hover:text-primary-600 hx:dark:text-gray-300 hx:md:text-lg hx:ltr:ml-auto hx:ltr:pl-4 hx:ltr:text-right hx:rtl:mr-auto hx:rtl:pr-4 hx:rtl:text-left"
+      >
+        {{- $linkTitle -}}
+        {{- partial "utils/icon.html" (dict "name" "chevron-right" "attributes" `class="hx:inline hx:h-5 hx:shrink-0 hx:rtl:-rotate-180"`) -}}
+      </a>
+    {{- end -}}
+  </div>
+{{- end -}}

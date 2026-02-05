@@ -1,9 +1,11 @@
 <div class="hx:mt-4 hx:mb-6 hx:text-gray-500 hx:dark:text-gray-400 hx:text-sm hx:flex hx:items-center hx:flex-wrap hx:gap-y-2">
   {{- with $date := .Date -}}
-    <span class="hx:mr-1">
+    {{- $basePath := site.Params.variables.reflections.path -}}
+    {{- $dayUrl := printf "%s/%s/" $basePath ($date.Format "2006/01/02") -}}
+    <a href="{{ $dayUrl }}" class="hx:mr-1 hx:hover:text-gray-900 hx:dark:hover:text-gray-100 hx:transition-colors">
       {{- partial "utils/format-date" $date -}}
-      {{- with $.Params.time }} • {{ . }}{{ end -}}
-    </span>
+    </a>
+    {{- with $.Params.time }}<span class="hx:mr-1">• {{ . }}</span>{{ end -}}
   {{- end -}}
   {{- if and .Date .Params.authors -}}
     <span class="hx:mr-1">—</span>

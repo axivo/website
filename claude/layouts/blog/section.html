@@ -1,0 +1,49 @@
+{{ define "main" }}
+  <div class="hx:mx-auto hx:flex hextra-max-page-width">
+    {{ partial "sidebar.html" (dict "context" .) }}
+    <article class="hx:w-full hx:break-words hx:flex hx:min-h-[calc(100vh-var(--navbar-height))] hx:min-w-0 hx:justify-center hx:pb-8 hx:pr-[calc(env(safe-area-inset-right)-1.5rem)]">
+      <main class="hx:w-full hx:min-w-0 hextra-max-content-width hx:px-6 hx:pt-4 hx:md:px-12">
+        {{ partial "breadcrumb.html" (dict "page" . "enable" true) }}
+        <div class="content">
+          <h1>{{ .FirstSection.LinkTitle }}</h1>
+        </div>
+        {{- $days := partial "utils/extract-blog-posts" . -}}
+        {{/* Collect all posts from day sections for pagination */}}
+        {{- $allPosts := slice -}}
+        {{- range $days -}}
+          {{- range .RegularPages.ByDate.Reverse -}}
+            {{- $allPosts = $allPosts | append . -}}
+          {{- end -}}
+        {{- end -}}
+        {{- $pagerSize := site.Params.blog.list.pagerSize | default 10 -}}
+        {{- $paginator := .Paginate $allPosts $pagerSize -}}
+        {{/* Group paginated posts back by day section */}}
+        {{- $currentDay := "" -}}
+        {{- range $paginator.Pages -}}
+          {{- $day := .Parent -}}
+          {{- if ne $day.RelPermalink $currentDay -}}
+            {{- $currentDay = $day.RelPermalink -}}
+            <div class="content">
+              <h2>{{- $day.Title -}}<span class="hx:absolute hx:-mt-20" id="{{ $day.Title | anchorize }}"></span></h2>
+            </div>
+          {{- end -}}
+          {{- partial "post.html" . -}}
+        {{- end -}}
+        {{- if gt $paginator.TotalPages 1 -}}
+          {{ partial "components/blog-pager.html" $paginator }}
+        {{- end -}}
+      </main>
+    </article>
+    {{/* Build day-grouped structure from paginated posts for ToC */}}
+    {{- $tocDays := slice -}}
+    {{- $tocCurrentDay := "" -}}
+    {{- range $paginator.Pages -}}
+      {{- $day := .Parent -}}
+      {{- if ne $day.RelPermalink $tocCurrentDay -}}
+        {{- $tocCurrentDay = $day.RelPermalink -}}
+        {{- $tocDays = $tocDays | append $day -}}
+      {{- end -}}
+    {{- end -}}
+    {{ partial "components/blog-toc.html" (dict "sections" $tocDays) }}
+  </div>
+{{- end -}}

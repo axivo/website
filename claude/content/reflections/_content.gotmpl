@@ -6,10 +6,13 @@
 */}}
 
 {{ $basePath := "static/reflections/diary" }}
+{{ $monthNames := slice "January" "February" "March" "April" "May" "June" "July" "August" "September" "October" "November" "December" }}
+{{ $section := site.Params.variables.reflections.section }}
 
 {{/* Track created sections to avoid duplicates */}}
-{{ $createdYears := slice }}
+{{ $createdDays := slice }}
 {{ $createdMonths := slice }}
+{{ $createdYears := slice }}
 
 {{/* Iterate years */}}
 {{ range os.ReadDir $basePath }}
@@ -22,9 +25,9 @@
       {{ $createdYears = $createdYears | append $year }}
       {{ $yearPage := dict
         "kind" "section"
+        "layout" "section"
         "path" $year
         "title" $year
-        "type" "blog"
         "params" (dict "sidebar" (dict "open" true))
       }}
       {{ $.AddPage $yearPage }}
@@ -43,14 +46,13 @@
 
           {{/* Convert month number to name */}}
           {{ $monthNum := int $month }}
-          {{ $monthNames := slice "January" "February" "March" "April" "May" "June" "July" "August" "September" "October" "November" "December" }}
           {{ $monthName := index $monthNames (sub $monthNum 1) }}
 
           {{ $monthPage := dict
             "kind" "section"
+            "layout" "section"
             "path" (printf "%s/%s" $year $month)
             "title" $monthName
-            "type" "blog"
             "params" (dict "sidebar" (dict "open" false))
           }}
           {{ $.AddPage $monthPage }}
@@ -60,6 +62,12 @@
         {{ range os.ReadDir $monthPath }}
           {{ if and (strings.HasSuffix .Name ".md") (ne .Name "README.md") }}
             {{ $day := strings.TrimSuffix ".md" .Name }}
+            {{ $dayKey := printf "%s/%s/%s" $year $month $day }}
+
+            {{/* Track day for later day index page creation */}}
+            {{ if not (in $createdDays $dayKey) }}
+              {{ $createdDays = $createdDays | append $dayKey }}
+            {{ end }}
             {{ $filePath := printf "%s/%s" $monthPath .Name }}
             {{ $fileContent := os.ReadFile $filePath }}
 
@@ -133,6 +141,14 @@
               {{ $cleanContent = replaceRE `\(images/` (printf "(%s" $imageBasePath) $cleanContent }}
               {{ $cleanContent = replaceRE `\[images/` (printf "[%s" $imageBasePath) $cleanContent }}
 
+              {{/* Rewrite relative .md links to day section paths */}}
+              {{/* Same month: (DD.md) -> (/reflections/YYYY/MM/DD/) */}}
+              {{ $cleanContent = replaceRE `\((\d{2})\.md\)` (printf "(%s/%s/%s/$1/)" $section $year $month) $cleanContent }}
+              {{/* Same year, different month: (../MM/DD.md) -> (/reflections/YYYY/MM/DD/) */}}
+              {{ $cleanContent = replaceRE `\(\.\./(\d{2})/(\d{2})\.md\)` (printf "(%s/%s/$1/$2/)" $section $year) $cleanContent }}
+              {{/* Different year: (../../YYYY/MM/DD.md) -> (/reflections/YYYY/MM/DD/) */}}
+              {{ $cleanContent = replaceRE `\(\.\./\.\./(\d{4})/(\d{2})/(\d{2})\.md\)` (printf "(%s/$1/$2/$3/)" $section) $cleanContent }}
+
               {{/* Extract summary from <!--more--> marker */}}
               {{ $summary := "" }}
               {{ if strings.Contains $cleanContent "<!--more-->" }}
@@ -171,25 +187,33 @@
               {{/* Generate slug */}}
               {{ $slug := urlize $title }}
 
-              {{/* Page path: year/month/day/slug */}}
+              {{/* Page path: year/month/day/slug (day in path prevents slug collision) */}}
               {{ $pagePath := printf "%s/%s/%s/%s" $year $month $day $slug }}
+
+              {{/* Build source and edit URLs for diary file */}}
+              {{ $repository := site.Params.variables.repository.reflections.home }}
+              {{ $tag := site.Params.variables.repository.reflections.tag }}
+              {{ $editURL := printf "https://%s/edit/%s/diary/%s/%s/%s.md" $repository $tag $year $month $day }}
+              {{ $sourceURL := printf "https://%s/blob/%s/diary/%s/%s/%s.md" $repository $tag $year $month $day }}
 
               {{/* Build authors */}}
               {{ $authors := slice }}
               {{ if $model }}
-                {{ $repository := site.Params.variables.repository.reflections.home }}
-                {{ $link := printf "https://%s/blob/main/diary/%s/%s/%s.md" $repository $year $month $day }}
-                {{ $authors = $authors | append (dict "name" $model "link" $link "image" "https://github.com/claude.png") }}
+                {{ $authors = $authors | append (dict "name" $model "link" $sourceURL "image" "https://github.com/claude.png") }}
               {{ end }}
 
               {{/* Create page params */}}
-              {{ $params := dict "profile" $profile "uuid" $uuid "time" $timeStr "tags" $tags "authors" $authors }}
+              {{ $params := dict "comments" true "editURL" $editURL "profile" $profile "uuid" $uuid "time" $timeStr "tags" $tags "authors" $authors }}
               {{ if $summary }}
                 {{ $params = merge $params (dict "summary" $summary) }}
               {{ end }}
 
+              {{/* Create alias for month-based URL (redirect to canonical day path) */}}
+              {{ $monthAlias := printf "%s/%s/%s/%s/" $section $year $month $slug }}
+
               {{/* Create page */}}
               {{ $page := dict
+                "aliases" (slice $monthAlias)
                 "content" (dict "mediaType" "text/markdown" "value" $cleanContent)
                 "dates" (dict "date" (time $isoDateTime))
                 "kind" "page"
@@ -206,4 +230,45 @@
       {{ end }}
     {{ end }}
   {{ end }}
+{{ end }}
+
+{{/* Create day index pages (excluded from sidebar) */}}
+{{ range $createdDays }}
+  {{ $parts := split . "/" }}
+  {{ $year := index $parts 0 }}
+  {{ $month := index $parts 1 }}
+  {{ $day := index $parts 2 }}
+
+  {{/* Convert day to ordinal (1st, 2nd, 3rd, etc.) */}}
+  {{ $dayStr := strings.TrimLeft "0" $day }}
+  {{ if eq $dayStr "" }}{{ $dayStr = "0" }}{{ end }}
+  {{ $dayInt := int $dayStr }}
+  {{ $suffix := "th" }}
+  {{ if or (eq (mod $dayInt 100) 11) (eq (mod $dayInt 100) 12) (eq (mod $dayInt 100) 13) }}
+    {{ $suffix = "th" }}
+  {{ else if eq (mod $dayInt 10) 1 }}
+    {{ $suffix = "st" }}
+  {{ else if eq (mod $dayInt 10) 2 }}
+    {{ $suffix = "nd" }}
+  {{ else if eq (mod $dayInt 10) 3 }}
+    {{ $suffix = "rd" }}
+  {{ end }}
+  {{ $dayOrdinal := printf "%d%s" $dayInt $suffix }}
+
+  {{/* Build date for template filtering */}}
+  {{ $dayDate := printf "%s-%s-%s" $year $month $day }}
+
+  {{/* Weight for sidebar sorting: 31 - day gives descending order (31st first) */}}
+  {{ $weight := sub 32 $dayInt }}
+
+  {{ $dayPage := dict
+    "dates" (dict "date" (time $dayDate))
+    "kind" "section"
+    "layout" "section"
+    "path" (printf "%s/%s/%s" $year $month $day)
+    "title" $dayOrdinal
+    "weight" $weight
+    "params" (dict "sidebar" (dict "open" false))
+  }}
+  {{ $.AddPage $dayPage }}
 {{ end }}
