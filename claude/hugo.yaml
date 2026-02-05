@@ -55,18 +55,13 @@ module:
     - path: github.com/axivo/website/global
     - path: github.com/imfing/hextra
 params:
-  blog:
-    list:
-      displayTags: true
   comments:
-    enable: false
     giscus:
       repo: axivo/claude-reflections
       repoId: R_kgDOQzvnGQ
       category: Reflections
       categoryId: DIC_kwDOQzvnGc4C15M9
       mapping: "og:title"
-    type: giscus
   description: Scalable collaboration platform with specialized profiles, persistent memory, and systematic methodologies
   editURL:
     base: https://github.com/axivo/website/edit/main/claude/content
@@ -113,4 +108,4 @@ params:
 publishDir: ../public/claude
 services:
   googleAnalytics:
-    ID: G-8N53WYKXE6
+    id: G-8N53WYKXE6
