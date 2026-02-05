@@ -63,3 +63,6 @@ params:
       applications: github.com/axivo/k3s-applications
       cluster: github.com/axivo/k3s-cluster
 publishDir: ../public/k3s-cluster
+services:
+  googleAnalytics:
+    id: G-8N53WYKXE6
