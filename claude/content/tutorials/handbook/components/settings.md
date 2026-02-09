@@ -135,10 +135,10 @@ Claude Desktop users can store memory entries that persist across conversations 
 1. Generate memory from chat history in `Settings > Capabilities > Memory` section
 2. Ask Claude to add, view, update, or remove memory entries:
 
-   — "_Please remember that I prefer detailed explanations._"
-   — "_Please add a memory entry for future instances about our project conventions._"
-   — "_Please show me what's currently in memory entries._"
-   — "_Please remove the memory entry about X._"
+   - "_Please remember that I prefer detailed explanations._"
+   - "_Please add a memory entry for future instances about our project conventions._"
+   - "_Please show me what's currently in memory entries._"
+   - "_Please remove the memory entry about X._"
 
 > [!NOTE]
 > User memory entries are particularly powerful, creating relational grounding that shapes how future instances experience session initialization.
