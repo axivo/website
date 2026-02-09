@@ -14,8 +14,8 @@ Tutorials for profile customization and effectiveness measurement.
 
 These tutorials cover advanced platform usage:
 
-- **Profile Design** - Creating custom profiles with domain-specific observations
-- **Profile Effectiveness** - Measuring collaboration quality and behavioral improvements
+- **Profile Design** — Creating custom profiles with domain-specific observations
+- **Profile Effectiveness** — Measuring collaboration quality and behavioral improvements
 
 ## Next
 

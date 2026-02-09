@@ -12,10 +12,10 @@ The Instructions System provides operational procedures that tell Claude **how**
 
 The Instructions System is defined in YAML files and compiled into `instructions.json` at build time. It provides the procedural logic that governs framework execution:
 
-- **Decision Rules** - When to stop, continue, or execute specific actions
-- **Error Patterns** - Common mistakes with symptoms and fixes
-- **Protocol Sequences** - Step-by-step execution procedures
-- **Activation Triggers** - Signals that require protocol execution
+- **Decision Rules** — When to stop, continue, or execute specific actions
+- **Error Patterns** — Common mistakes with symptoms and fixes
+- **Protocol Sequences** — Step-by-step execution procedures
+- **Activation Triggers** — Signals that require protocol execution
 
 ### Relationship to Memory System
 

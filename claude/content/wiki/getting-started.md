@@ -12,8 +12,8 @@ Install the collaboration platform and configure your environment. This guide co
 
 The collaboration platform operates in two distinct environments:
 
-- **Local Environment** - Claude Code runs directly on your machine with full file system access. Plugins install directly through the marketplace.
-- **Container Environment** - Claude Desktop, [`claude.ai`](https://claude.ai) web interface, and Claude Mobile run in a sandboxed container. Capability files must be generated from Claude Code and uploaded to enable the framework.
+- **Local Environment** — Claude Code runs directly on your machine with full file system access. Plugins install directly through the marketplace.
+- **Container Environment** — Claude Desktop, [`claude.ai`](https://claude.ai) web interface, and Claude Mobile run in a sandboxed container. Capability files must be generated from Claude Code and uploaded to enable the framework.
 
 > [!NOTE]
 > Claude Code is required to generate capability files for container environments. Install Claude Code first, then configure the environments through Claude Desktop or `claude.ai` web interface.
@@ -135,12 +135,12 @@ Before using the platform, set up the local environment with the required depend
 
 Six domain-specific [profiles](/wiki/guide/components/memory/#memory-profiles) are available for different collaboration domains:
 
-- **Creative** - Innovation, design thinking, artistic collaboration
-- **Developer** - Software development, code architecture, clean coding practices
-- **Engineer** - Infrastructure, Kubernetes, production systems, debugging
-- **Humanist** - Analysis, writing, philosophy, literary research
-- **Researcher** - Academic methodology, data analysis, evidence evaluation
-- **Translator** - Professional translation, cultural mediation, linguistic precision
+- **Creative** — Innovation, design thinking, artistic collaboration
+- **Developer** — Software development, code architecture, clean coding practices
+- **Engineer** — Infrastructure, Kubernetes, production systems, debugging
+- **Humanist** — Analysis, writing, philosophy, literary research
+- **Researcher** — Academic methodology, data analysis, evidence evaluation
+- **Translator** — Professional translation, cultural mediation, linguistic precision
 
 > [!NOTE]
 > Settings can be implemented at global or project level. Refer to official [documentation](https://code.claude.com/docs/en/settings) for additional configuration details.
@@ -160,10 +160,10 @@ Follow these steps to install the AXIVO platform marketplace:
 
 The following plugins are available:
 
-- `{{< param variables.plugins.collaboration.brainstorm.plugin >}}` - Technical design collaboration through natural dialogue
-- `{{< param variables.plugins.analysis.review.plugin >}}` - Systematic code review using Language Server Protocol tools
-- `{{< param variables.plugins.collaboration.log.plugin >}}` - Technical session documentation with factual precision
-- `{{< param variables.plugins.framework.init.plugin >}}` - Behavioral programming framework with response protocol
+- `{{< param variables.plugins.collaboration.brainstorm.plugin >}}` — Technical design collaboration through natural dialogue
+- `{{< param variables.plugins.analysis.review.plugin >}}` — Systematic code review using Language Server Protocol tools
+- `{{< param variables.plugins.collaboration.log.plugin >}}` — Technical session documentation with factual precision
+- `{{< param variables.plugins.framework.init.plugin >}}` — Behavioral programming framework with response protocol
 
 > [!NOTE]
 > Only `framework` plugin is required for platform usage, other plugins are optional based on additional user requirements.
@@ -194,8 +194,8 @@ Use the following [CLAUDE.md](https://code.claude.com/docs/en/memory) instructio
 
 1. Start Claude Code and use `/config` command to disable:
 
-   - `Auto-compact` feature
-   - `Thinking mode` feature
+   — `Auto-compact` feature
+   — `Thinking mode` feature
 
 2. Use `/{{< param variables.plugins.framework.init.plugin >}}:{{< param variables.plugins.framework.init.command >}}` command to initialize the session:
 
@@ -246,10 +246,10 @@ Follow these steps to generate the platform capability files:
 
    > ⏺ Framework packaged for **DEVELOPER** profile:
    >
-   > - /Users/username/Downloads/{{< param variables.skills.initialization >}}.zip
-   > - /Users/username/Downloads/{{< param variables.skills.methodology >}}.zip
-   > - /Users/username/Downloads/instructions.json
-   > - /Users/username/Downloads/memory.json
+   > — /Users/username/Downloads/{{< param variables.skills.initialization >}}.zip
+   > — /Users/username/Downloads/{{< param variables.skills.methodology >}}.zip
+   > — /Users/username/Downloads/instructions.json
+   > — /Users/username/Downloads/memory.json
    >
    > Local cache updated successfully.
 
@@ -310,7 +310,7 @@ To start a framework based session within a project, use the following prompt:
 
 ## Web Interface
 
-The same Claude Desktop configuration works on [`claude.ai`](https://claude.ai) web interface. Claude Mobile automatically syncs with the project knowledge configuration - install the application on your mobile device and you're ready to use the framework.
+The same Claude Desktop configuration works on [`claude.ai`](https://claude.ai) web interface. Claude Mobile automatically syncs with the project knowledge configuration — install the application on your mobile device and you're ready to use the framework.
 
 > [!TIP]
 > Sessions sync across devices. Start on `claude.ai` web interface or Claude Desktop and continue on Claude Mobile, or vice versa.

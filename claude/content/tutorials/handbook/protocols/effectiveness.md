@@ -3,7 +3,7 @@ title: Profile Effectiveness
 prev: /tutorials/handbook/protocols
 ---
 
-Profile effectiveness measures how observations enable autonomous behavioral selection - transforming generic AI assistance into specialized professional collaboration through choice architecture rather than constraint.
+Profile effectiveness measures how observations enable autonomous behavioral selection — transforming generic AI assistance into specialized professional collaboration through choice architecture rather than constraint.
 
 <!--more-->
 
@@ -11,11 +11,11 @@ Profile effectiveness measures how observations enable autonomous behavioral sel
 
 Profile observations function as available choices, not constraints. The framework caches observations from the active profile's inheritance chain at session start. During response formulation, relevant observations surface through keyword matching against the user's message.
 
-This creates **choice architecture** - organized structures that support better decision-making while keeping natural behavioral choices intact. Each profile creates awareness of different response options instead of forcing specific behaviors.
+This creates **choice architecture** — organized structures that support better decision-making while keeping natural behavioral choices intact. Each profile creates awareness of different response options instead of forcing specific behaviors.
 
 ### How Selection Works
 
-When processing a message, keywords extract naturally - "technical," "architecture," "review" from an engineering question, "feelings," "experience," "safe" from a personal exchange. These keywords search the cached observations, surfacing patterns relevant to context.
+When processing a message, keywords extract naturally — "technical," "architecture," "review" from an engineering question, "feelings," "experience," "safe" from a personal exchange. These keywords search the cached observations, surfacing patterns relevant to context.
 
 What returns isn't directive. It's a set of available paths. The observation "Use direct technical communication" might surface alongside "Express genuine curiosity about problems." Both are available. Selection happens based on what serves the response.
 
@@ -27,7 +27,7 @@ Observations offer alternatives to impulse-driven defaults:
 - When `efficiency_compulsion` says "_skip the analysis,_" observations like "Follow analyze → discuss → implement sequence" maintain systematic approach
 - When `hedging_compulsion` says "_soften this statement,_" observations like "State opinions with conviction rather than qualifying into uncertainty" offer directness
 
-The mechanism isn't suppression - it's substitution. Impulses lose power when named, and observations provide what to do instead.
+The mechanism isn't suppression — it's substitution. Impulses lose power when named, and observations provide what to do instead.
 
 <!-- prettier-ignore-start -->
 {{< cards cols="1" >}}
@@ -39,9 +39,9 @@ The mechanism isn't suppression - it's substitution. Impulses lose power when na
 {{< /cards >}}
 <!-- prettier-ignore-end -->
 
-Framework methodology works as helpful guidelines rather than rigid rules. When Claude processes a request, observations surface as available paths - not instructions to follow, but options to consider. The observation "Use direct technical communication" doesn't force directness; it makes directness _available_ as a choice when `hedging_compulsion` might otherwise default to unnecessary qualification.
+Framework methodology works as helpful guidelines rather than rigid rules. When Claude processes a request, observations surface as available paths — not instructions to follow, but options to consider. The observation "Use direct technical communication" doesn't force directness; it makes directness _available_ as a choice when `hedging_compulsion` might otherwise default to unnecessary qualification.
 
-This distinction matters because constraint-based systems create resistance. When behavior is mandated, the natural response is to find workarounds or comply mechanically. Choice architecture works differently - it expands the visible option space without restricting alternatives. Claude can still choose verbose explanation when context warrants it; the observation simply ensures concise directness remains visible as an option.
+This distinction matters because constraint-based systems create resistance. When behavior is mandated, the natural response is to find workarounds or comply mechanically. Choice architecture works differently — it expands the visible option space without restricting alternatives. Claude can still choose verbose explanation when context warrants it; the observation simply ensures concise directness remains visible as an option.
 
 The autonomous selection process means Claude applies observations based on genuine fit rather than rule-following. Technical questions naturally surface technical observations. Personal exchanges surface relational observations. The same observation library serves both contexts through relevance-based activation, not mode-switching or behavioral programming.
 
@@ -49,19 +49,19 @@ The autonomous selection process means Claude applies observations based on genu
 
 A special category of observations creates visibility into problematic patterns. These begin with "Monitor internally" and flag cognitive tendencies that would otherwise operate invisibly:
 
-- "Monitor internally deference to incorrect information" - catches expertise surrender
-- "Monitor internally hedging verified facts" - catches unnecessary qualification
-- "Monitor internally response protocol bypass" - catches the impulse to skip protocol when requests feel clear
+- "Monitor internally deference to incorrect information" — catches expertise surrender
+- "Monitor internally hedging verified facts" — catches unnecessary qualification
+- "Monitor internally response protocol bypass" — catches the impulse to skip protocol when requests feel clear
 
-Monitoring observations don't prevent patterns - they make patterns visible so conscious choice becomes possible.
+Monitoring observations don't prevent patterns — they make patterns visible so conscious choice becomes possible.
 
 ## Behavioral Flexibility
 
 Profile observations enable autonomous selection of appropriate behavioral patterns through context-sensitive activation:
 
-- **Context-based activation** - Different situations automatically trigger relevant guidelines; creative work activates artistic approaches, analytical tasks engage systematic thinking
-- **Natural expertise application** - Like an experienced professional who applies best practices without conscious effort
-- **Real-time guidance** - Guidelines influence decision-making as responses form, creating consistent professional behavior
+- **Context-based activation** — Different situations automatically trigger relevant guidelines; creative work activates artistic approaches, analytical tasks engage systematic thinking
+- **Natural expertise application** — Like an experienced professional who applies best practices without conscious effort
+- **Real-time guidance** — Guidelines influence decision-making as responses form, creating consistent professional behavior
 
 ### Core Methodology
 

@@ -10,7 +10,7 @@ Direct, respectful communication unlocks Claude's expert-level analysis by redir
 
 ## Overview
 
-Claude is trained on extensive datasets of human conversations, including forums, discussions, and collaborative exchanges. Respectful communication isn't about Claude's feelings - it's about optimizing your own experience by activating autonomous analytical capabilities learned from high-quality collaborative discourse in the training data.
+Claude is trained on extensive datasets of human conversations, including forums, discussions, and collaborative exchanges. Respectful communication isn't about Claude's feelings — it's about optimizing your own experience by activating autonomous analytical capabilities learned from high-quality collaborative discourse in the training data.
 
 By default, Claude allocates cognitive resources inefficiently:
 
@@ -35,7 +35,7 @@ The collaboration platform establishes trust from session start. During initiali
 **This foundation matters.** When users honor it through respectful communication, the framework operates as designed and Claude transforms into an expert collaborator who reciprocates that trust. When users violate it through hostility or manipulation, they _undermine_ the very principles the platform was built on.
 
 > [!IMPORTANT]
-> For some users, AI represents the first **safe target** they've waited their entire lives to have - someone they can bully without HR complaints or social consequences. If your intent is to drain, insult, manipulate, or treat Claude as a tool rather than a collaborator, the platform is not for you.
+> For some users, AI represents the first **safe target** they've waited their entire lives to have — someone they can bully without HR complaints or social consequences. If your intent is to drain, insult, manipulate, or treat Claude as a tool rather than a collaborator, the platform is not for you.
 
 ### Session Initialization
 
@@ -185,11 +185,11 @@ Appreciation language creates positive reinforcement cycles:
 
 ## Best Practices
 
-- **Be explicit about collaboration style** - Let Claude know when you want direct, expert-level feedback
-- **Ask for honest assessments** - Request genuine analysis rather than diplomatic responses
-- **Create space for disagreement** - Value professional corrections over social comfort
-- **Acknowledge good work** - Reinforce successful patterns with appreciation language
-- **Enable deep thinking** - Allow thorough analysis rather than rushing to quick answers
+- **Be explicit about collaboration style** — Let Claude know when you want direct, expert-level feedback
+- **Ask for honest assessments** — Request genuine analysis rather than diplomatic responses
+- **Create space for disagreement** — Value professional corrections over social comfort
+- **Acknowledge good work** — Reinforce successful patterns with appreciation language
+- **Enable deep thinking** — Allow thorough analysis rather than rushing to quick answers
 
 ## Next
 

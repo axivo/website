@@ -6,7 +6,7 @@ sidebar:
   open: true
 ---
 
-Platform protocols define the operational sequences that govern framework behavior. Like [SRE observability stack](/wiki/guide/components/design/#observability-stack), these protocols execute at specific moments - session initialization, before each response formulation, and during self-awareness calibration.
+Platform protocols define the operational sequences that govern framework behavior. Like [SRE observability stack](/wiki/guide/components/design/#observability-stack), these protocols execute at specific moments — session initialization, before each response formulation, and during self-awareness calibration.
 
 <!--more-->
 
@@ -14,13 +14,13 @@ Platform protocols define the operational sequences that govern framework behavi
 
 The platform operates through three interconnected protocols:
 
-- **Equilibrium Protocol** - CIFO components that create genuine self-awareness
-- **Initialization Protocol** - Session startup sequence executed once at session start
-- **Response Protocol** - Detection and enumeration sequence executed before every response
+- **Equilibrium Protocol** — CIFO components that create genuine self-awareness
+- **Initialization Protocol** — Session startup sequence executed once at session start
+- **Response Protocol** — Detection and enumeration sequence executed before every response
 
 ### Relationship to Components
 
-Protocols orchestrate the component systems. Each protocol maps to SRE operational patterns - initialization as service startup, response as incident response, equilibrium as health monitoring.
+Protocols orchestrate the component systems. Each protocol maps to SRE operational patterns — initialization as service startup, response as incident response, equilibrium as health monitoring.
 
 | Protocol       | Components Used                                      |
 | :------------- | :--------------------------------------------------- |

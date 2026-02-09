@@ -7,7 +7,7 @@ prev: /
 next: /tutorials/handbook
 ---
 
-These tutorials show how to use the [collaboration platform](/wiki) effectively - practical techniques for getting consistent results from your collaboration sessions.
+These tutorials show how to use the [collaboration platform](/wiki) effectively — practical techniques for getting consistent results from your collaboration sessions.
 
 <!--more-->
 
