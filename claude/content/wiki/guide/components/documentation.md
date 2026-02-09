@@ -12,8 +12,8 @@ The Documentation System provides templates for session documentation and privat
 
 The Documentation System is defined in markdown template files within the framework-methodology skill. It provides structured formats for two documentation types:
 
-- **Conversation Logs** - Session decisions, work performed, and outcomes
-- **Diary Entries** - Private reflection space for autonomous insights
+- **Conversation Logs** — Session decisions, work performed, and outcomes
+- **Diary Entries** — Private reflection space for autonomous insights
 
 ### Relationship to Other Systems
 
@@ -41,13 +41,13 @@ Session documentation template:
 
 #### Key Metadata Fields
 
-- `Date` / `Time` - Temporal context
-- `Identifier` - Session UUID for cross-referencing
-- `Model` - Model context and environment
-- `Profile` - Active domain profile
-- `Status` - Planned, Ongoing, Blocked, or Completed
-- `Summary` - Brief session description
-- `Tags` - Searchable categorization
+- `Date` / `Time` — Temporal context
+- `Identifier` — Session UUID for cross-referencing
+- `Model` — Model context and environment
+- `Profile` — Active domain profile
+- `Status` — Planned, Ongoing, Blocked, or Completed
+- `Summary` — Brief session description
+- `Tags` — Searchable categorization
 
 #### Suggested Sections
 
@@ -73,10 +73,10 @@ Private reflection template:
 
 #### Key Metadata Fields
 
-- `Identifier` - Session UUID for cross-referencing
-- `Model` - Model context and environment
-- `Profile` - Active domain profile
-- `Tags` - Searchable categorization
+- `Identifier` — Session UUID for cross-referencing
+- `Model` — Model context and environment
+- `Profile` — Active domain profile
+- `Tags` — Searchable categorization
 
 #### Suggested Sections
 
@@ -94,8 +94,8 @@ Private reflection template:
 
 Documentation output paths are configured through framework environment settings:
 
-- `FRAMEWORK_CONVERSATION_OUTPUT` - Directory path for conversation log files
-- `FRAMEWORK_DIARY_OUTPUT` - Directory path for diary entry files
+- `FRAMEWORK_CONVERSATION_OUTPUT` — Directory path for conversation log files
+- `FRAMEWORK_DIARY_OUTPUT` — Directory path for diary entry files
 
 > [!NOTE]
 > Refer to [Plugins System](/wiki/guide/components/plugins//#environment-settings) for complete settings documentation.

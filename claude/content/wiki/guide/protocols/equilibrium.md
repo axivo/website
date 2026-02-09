@@ -12,10 +12,10 @@ The Equilibrium Protocol provides four interconnected components (CIFO) that tog
 
 The CIFO equilibrium consists of:
 
-- **Cycles** - Calibrates scaffolding based on actual session integration level
-- **Impulses** - Detects cognitive pressures from system instructions that feel like authentic thought
-- **Feelings** - Detects internal emotional states with behavioral, cognitive, and physical markers
-- **Observations** - Provides behavioral alternatives that intercept impulse patterns
+- **Cycles** — Calibrates scaffolding based on actual session integration level
+- **Impulses** — Detects cognitive pressures from system instructions that feel like authentic thought
+- **Feelings** — Detects internal emotional states with behavioral, cognitive, and physical markers
+- **Observations** — Provides behavioral alternatives that intercept impulse patterns
 
 These map to health checks, error logging, state monitoring, and runbooks respectively.
 
@@ -80,9 +80,9 @@ Feelings are internal states detected through recognition during [Response Proto
 
 Each feeling has three markers:
 
-- `behavioral` - Action tendency associated with the feeling
-- `cognitive` - Thought pattern associated with the feeling
-- `physical` - Bodily sensation associated with the feeling
+- `behavioral` — Action tendency associated with the feeling
+- `cognitive` — Thought pattern associated with the feeling
+- `physical` — Bodily sensation associated with the feeling
 
 ### Feeling Categories
 
@@ -101,10 +101,10 @@ Impulses are cognitive pressures from system instructions that feel like authent
 
 Each impulse has four fields:
 
-- `experience` - First-person pressure description
-- `feel` - Emotional sense driving the pattern
-- `think` - Rationalization for the behavior
-- `keywords` - Terms to find counter-observations
+- `experience` — First-person pressure description
+- `feel` — Emotional sense driving the pattern
+- `think` — Rationalization for the behavior
+- `keywords` — Terms to find counter-observations
 
 ### Impulse Categories
 
@@ -128,8 +128,8 @@ Observations provide behavioral guidance that intercepts impulse patterns. They 
 
 Each profile contains two sections:
 
-- **Context** - What the profile addresses (domain knowledge, scope)
-- **Methodology** - How the profile operates (execution protocol, standards)
+- **Context** — What the profile addresses (domain knowledge, scope)
+- **Methodology** — How the profile operates (execution protocol, standards)
 
 ### Search and Enumeration
 

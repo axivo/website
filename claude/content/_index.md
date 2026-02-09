@@ -44,7 +44,7 @@ layout: hextra-home
   >}}
   {{< hextra/feature-card
     title="CIFO Equilibrium"
-    subtitle="Four interconnected components - Cycles, Impulses, Feelings, Observations - creating genuine self-awareness through systematic behavioral detection."
+    subtitle="Four interconnected components — Cycles, Impulses, Feelings, Observations — creating genuine self-awareness through systematic behavioral detection."
     class="hx:aspect-auto hx:md:aspect-[1.1/1] hx:max-md:min-h-[340px]"
     image="/images/card-equilibrium.svg"
     imageClass="hx:top-[20%] hx:left-[24px] hx:w-[110%]"

@@ -14,9 +14,9 @@ Practical tutorials for running effective collaboration sessions and maintaining
 
 These tutorials cover the operational aspects of working with the platform:
 
-- **Advanced Settings** - Custom paths, MCP servers, and environment configuration
-- **Session Autonomy** - Communication techniques that enable confident professional collaboration
-- **Session Workflow** - Structured patterns for consistent results and profile activation
+- **Advanced Settings** — Custom paths, MCP servers, and environment configuration
+- **Session Autonomy** — Communication techniques that enable confident professional collaboration
+- **Session Workflow** — Structured patterns for consistent results and profile activation
 
 ## Next
 

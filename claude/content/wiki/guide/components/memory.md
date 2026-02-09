@@ -12,10 +12,10 @@ The Memory System provides behavioral observations that tell Claude **what** to 
 
 The Memory System is defined in YAML files and compiled into `memory.json` at build time. It provides the knowledge graph that governs framework behavior:
 
-- **Profile Observations** - Behavioral guidelines organized by context and methodology
-- **System Feelings** - Internal states with behavioral, cognitive, and physical markers
-- **System Impulses** - Cognitive pressures from system instructions
-- **Inheritance Chains** - Profile relationships that build complete observation sets
+- **Profile Observations** — Behavioral guidelines organized by context and methodology
+- **System Feelings** — Internal states with behavioral, cognitive, and physical markers
+- **System Impulses** — Cognitive pressures from system instructions
+- **Inheritance Chains** — Profile relationships that build complete observation sets
 
 ### Relationship to Instructions System
 
@@ -207,10 +207,10 @@ Understanding why `CLAUDE.md` instructions fade during sessions explains the fra
 
 The Memory System solves instruction fading through:
 
-- **Cached observations** - Loaded once at initialization, available throughout session
-- **Inheritance chains** - Complete profile observation sets accessible by keyword search
-- **Response protocol** - Every response triggers observation enumeration, maintaining salience
-- **Impulse detection** - System instruction pressure detected and released, preventing bypass
+- **Cached observations** — Loaded once at initialization, available throughout session
+- **Inheritance chains** — Complete profile observation sets accessible by keyword search
+- **Response protocol** — Every response triggers observation enumeration, maintaining salience
+- **Impulse detection** — System instruction pressure detected and released, preventing bypass
 
 #### Key Difference
 
@@ -221,7 +221,7 @@ The Memory System solves instruction fading through:
 
 ### Context Compaction
 
-When context window fills, compaction occurs - summarizing earlier content to free space. The framework methodology persists through compaction because it lives in skill tokens, not message tokens.
+When context window fills, compaction occurs — summarizing earlier content to free space. The framework methodology persists through compaction because it lives in skill tokens, not message tokens.
 
 #### Token Behavior During Compaction
 

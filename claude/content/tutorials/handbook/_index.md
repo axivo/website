@@ -14,8 +14,8 @@ Practical tutorials covering session workflows, documentation systems, profile c
 
 Two tutorial sections address different aspects of working with the platform:
 
-- **Platform Components** - Session workflows, documentation for institutional memory, communication patterns, and cross-session continuity
-- **Platform Protocols** - Profile design, effectiveness measurement, and behavioral customization
+- **Platform Components** — Session workflows, documentation for institutional memory, communication patterns, and cross-session continuity
+- **Platform Protocols** — Profile design, effectiveness measurement, and behavioral customization
 
 ## Next
 

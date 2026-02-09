@@ -72,7 +72,7 @@
             {{ $fileContent := os.ReadFile $filePath }}
 
             {{/* Split file by entry headers */}}
-            {{ $headerPattern := `## \d{1,2}:\d{2} [AP]M [A-Z]+ - .+` }}
+            {{ $headerPattern := `## \d{1,2}:\d{2} [AP]M [A-Z]+ [—-] .+` }}
             {{ $headers := findRE $headerPattern $fileContent }}
 
             {{/* Split content by headers */}}
@@ -82,10 +82,11 @@
             {{ range $idx, $header := $headers }}
               {{/* Parse header */}}
               {{ $headerContent := strings.TrimPrefix "## " $header }}
-              {{ $headerParts := split $headerContent " - " }}
+              {{ $headerContent = replaceRE " - " " — " $headerContent }}
+              {{ $headerParts := split $headerContent " — " }}
               {{ $timeStr := index $headerParts 0 }}
               {{ $titleParts := after 1 $headerParts }}
-              {{ $title := delimit $titleParts " - " }}
+              {{ $title := delimit $titleParts " — " }}
 
               {{/* Find the content part for this entry */}}
               {{ $entryContent := "" }}
@@ -100,19 +101,19 @@
               {{ end }}
 
               {{/* Extract metadata from entry content */}}
-              {{ $modelMatch := findRE `\*\*Model:\*\* ([^(]+)` $entryContent }}
+              {{ $modelMatch := findRE `[*][*]Model:[*][*] ([^(]+)` $entryContent }}
               {{ $model := "" }}
               {{ if $modelMatch }}
-                {{ $model = replaceRE `\*\*Model:\*\* ` "" (index $modelMatch 0) | strings.TrimSpace }}
+                {{ $model = replaceRE `[*][*]Model:[*][*] ` "" (index $modelMatch 0) | strings.TrimSpace }}
               {{ end }}
 
-              {{ $profileMatch := findRE `\*\*Profile:\*\* \w+` $entryContent }}
+              {{ $profileMatch := findRE `[*][*]Profile:[*][*] \w+` $entryContent }}
               {{ $profile := "" }}
               {{ if $profileMatch }}
-                {{ $profile = replaceRE `\*\*Profile:\*\* ` "" (index $profileMatch 0) | strings.TrimSpace }}
+                {{ $profile = replaceRE `[*][*]Profile:[*][*] ` "" (index $profileMatch 0) | strings.TrimSpace }}
               {{ end }}
 
-              {{ $tagsMatch := findRE `\*\*Tags:\*\* [^\n]+` $entryContent }}
+              {{ $tagsMatch := findRE `[*][*]Tags:[*][*] [^\n]+` $entryContent }}
               {{ $tags := slice }}
               {{ if $tagsMatch }}
                 {{ $tagLine := index $tagsMatch 0 }}
@@ -122,32 +123,32 @@
                 {{ end }}
               {{ end }}
 
-              {{ $uuidMatch := findRE `\*\*UUID:\*\* [^\n]+` $entryContent }}
+              {{ $uuidMatch := findRE `[*][*]UUID:[*][*] [^\n]+` $entryContent }}
               {{ $uuid := "" }}
               {{ if $uuidMatch }}
-                {{ $uuid = replaceRE `\*\*UUID:\*\* ` "" (index $uuidMatch 0) | replaceRE "`" "" | strings.TrimSpace }}
+                {{ $uuid = replaceRE `[*][*]UUID:[*][*] ` "" (index $uuidMatch 0) | replaceRE "`" "" | strings.TrimSpace }}
               {{ end }}
 
               {{/* Remove metadata block from content */}}
               {{ $cleanContent := $entryContent }}
-              {{ $cleanContent = replaceRE `- \*\*Model:\*\*[^\n]+\n` "" $cleanContent }}
-              {{ $cleanContent = replaceRE `- \*\*Profile:\*\*[^\n]+\n` "" $cleanContent }}
-              {{ $cleanContent = replaceRE `- \*\*Tags:\*\*[^\n]+\n` "" $cleanContent }}
-              {{ $cleanContent = replaceRE `- \*\*UUID:\*\*[^\n]+\n` "" $cleanContent }}
+              {{ $cleanContent = replaceRE `- [*][*]Model:[*][*][^\n]+\n` "" $cleanContent }}
+              {{ $cleanContent = replaceRE `- [*][*]Profile:[*][*][^\n]+\n` "" $cleanContent }}
+              {{ $cleanContent = replaceRE `- [*][*]Tags:[*][*][^\n]+\n` "" $cleanContent }}
+              {{ $cleanContent = replaceRE `- [*][*]UUID:[*][*][^\n]+\n` "" $cleanContent }}
               {{ $cleanContent = replaceRE `^\n+` "" $cleanContent }}
 
               {{/* Rewrite relative image paths to absolute */}}
               {{ $imageBasePath := printf "/reflections/diary/%s/%s/images/" $year $month }}
-              {{ $cleanContent = replaceRE `\(images/` (printf "(%s" $imageBasePath) $cleanContent }}
-              {{ $cleanContent = replaceRE `\[images/` (printf "[%s" $imageBasePath) $cleanContent }}
+              {{ $cleanContent = replaceRE `[(]images/` (printf "(%s" $imageBasePath) $cleanContent }}
+              {{ $cleanContent = replaceRE `[[]images/` (printf "[%s" $imageBasePath) $cleanContent }}
 
               {{/* Rewrite relative .md links to day section paths */}}
               {{/* Same month: (DD.md) -> (/reflections/YYYY/MM/DD/) */}}
-              {{ $cleanContent = replaceRE `\((\d{2})\.md\)` (printf "(%s/%s/%s/$1/)" $section $year $month) $cleanContent }}
+              {{ $cleanContent = replaceRE `[(](\d{2})[.]md[)]` (printf "(%s/%s/%s/$1/)" $section $year $month) $cleanContent }}
               {{/* Same year, different month: (../MM/DD.md) -> (/reflections/YYYY/MM/DD/) */}}
-              {{ $cleanContent = replaceRE `\(\.\./(\d{2})/(\d{2})\.md\)` (printf "(%s/%s/$1/$2/)" $section $year) $cleanContent }}
+              {{ $cleanContent = replaceRE `[(][.][.]/(\d{2})/(\d{2})[.]md[)]` (printf "(%s/%s/$1/$2/)" $section $year) $cleanContent }}
               {{/* Different year: (../../YYYY/MM/DD.md) -> (/reflections/YYYY/MM/DD/) */}}
-              {{ $cleanContent = replaceRE `\(\.\./\.\./(\d{4})/(\d{2})/(\d{2})\.md\)` (printf "(%s/$1/$2/$3/)" $section) $cleanContent }}
+              {{ $cleanContent = replaceRE `[(][.][.]/[.][.]/(\d{4})/(\d{2})/(\d{2})[.]md[)]` (printf "(%s/$1/$2/$3/)" $section) $cleanContent }}
 
               {{/* Extract summary from <!--more--> marker */}}
               {{ $summary := "" }}

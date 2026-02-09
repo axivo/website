@@ -6,7 +6,7 @@ sidebar:
   open: true
 ---
 
-This guide explains the features and systems available - from cognitive architecture to documentation tools. You don't need to read this to use the platform, you can always ask Claude directly about platform features.
+This guide explains the features and systems available — from cognitive architecture to documentation tools. You don't need to read this to use the platform, you can always ask Claude directly about platform features.
 
 <!--more-->
 
@@ -14,8 +14,8 @@ This guide explains the features and systems available - from cognitive architec
 
 Two interconnected systems work together to enable professional partnership:
 
-- **Platform Components** - Plugins, documentation templates, [Instructions System](/wiki/guide/components/instructions), and [Memory System](/wiki/guide/components/memory) with domain-specific profiles
-- **Platform Protocols** - Cognitive architecture with CIFO [Equilibrium Protocol](/wiki/guide/protocols/equilibrium), [Initialization Protocol](/wiki/guide/protocols/initialization), and [Response Protocol](/wiki/guide/protocols/response)
+- **Platform Components** — Plugins, documentation templates, [Instructions System](/wiki/guide/components/instructions), and [Memory System](/wiki/guide/components/memory) with domain-specific profiles
+- **Platform Protocols** — Cognitive architecture with CIFO [Equilibrium Protocol](/wiki/guide/protocols/equilibrium), [Initialization Protocol](/wiki/guide/protocols/initialization), and [Response Protocol](/wiki/guide/protocols/response)
 
 ## Next
 
