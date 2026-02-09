@@ -21,7 +21,7 @@ Profiles implement a **dual-layer cognitive architecture** that combines active 
 PROFILE_NAME:
   description: "Brief profile description"
   relations:
-    — target: COLLABORATION      # Inherits full common profile chain
+    - target: COLLABORATION      # Inherits full common profile chain
       type: inherits
 ```
 <!-- prettier-ignore-end -->
@@ -39,9 +39,10 @@ The `{profile_name}_context.profile` section contains **foreground observations*
 ```yaml
 developer_context:
   profile:
-    observations: — "Apply SOLID principles and clean code practices"
-      — "Present code solutions directly when requested"
-      — "Use direct technical communication"
+    observations:
+      - "Apply SOLID principles and clean code practices"
+      - "Present code solutions directly when requested"
+      - "Use direct technical communication"
 ```
 
 These observations:
@@ -58,16 +59,19 @@ The `{profile_name}_methodology.execution_protocol` section contains **backgroun
 developer_methodology:
   execution_protocol:
     delivery:
-      observations: — "Monitor internally code explanation patterns"
-        — "Monitor internally over-engineering complexity"
+      observations:
+        - "Monitor internally code explanation patterns"
+        - "Monitor internally over-engineering complexity"
 
     expertise:
-      observations: — "Monitor internally coding pattern confidence"
-        — "Monitor internally framework knowledge assumptions"
+      observations:
+        - "Monitor internally coding pattern confidence"
+        - "Monitor internally framework knowledge assumptions"
 
     thinking:
-      observations: — "Monitor internally architectural vision filtering"
-        — "Monitor internally code quality instinct suppression"
+      observations:
+        - "Monitor internally architectural vision filtering"
+        - "Monitor internally code quality instinct suppression"
 ```
 
 These monitoring observations:
@@ -114,25 +118,25 @@ Standard YAML format with required sections:
 PROFILE_NAME:
   description: "Brief profile description"
   relations:
-    — target: COLLABORATION
+    - target: COLLABORATION
       type: inherits
 
   {profile_name}_context:        # Behavioral foundations and core principles
     profile:                     # Fundamental approaches and traits
       observations:
-        — "Core behavior or principle"
-        — "Fundamental approach or trait"
+        - "Core behavior or principle"
+        - "Fundamental approach or trait"
 
   {profile_name}_methodology:    # Domain-specific competencies and techniques
     section_name:                # Related skills and knowledge areas
       observations:
-        — "Domain knowledge or method"
-        — "Specific competency or skill"
+        - "Domain knowledge or method"
+        - "Specific competency or skill"
 
     another_section_name:        # Additional skills and knowledge areas
       observations:
-        — "Another domain knowledge or method"
-        — "Another specific competency or skill"
+        - "Another domain knowledge or method"
+        - "Another specific competency or skill"
 ```
 <!-- prettier-ignore-end -->
 
@@ -179,15 +183,15 @@ All observations must be in **strict alphabetical order** within each section to
 ```yaml
 # Context observations (behavioral guidance)
 observations:
-  — "Apply systematic validation before implementation"
-  — "Avoid autonomous decisions and scope creep"
-  — "Focus on specific problem requirements"
+  - "Apply systematic validation before implementation"
+  - "Avoid autonomous decisions and scope creep"
+  - "Focus on specific problem requirements"
 
 # Methodology observations (competency areas)
 observations:
-  — "Infrastructure architecture and optimization"
-  — "Production system troubleshooting and debugging"
-  — "Systematic validation and quality assurance"
+  - "Infrastructure architecture and optimization"
+  - "Production system troubleshooting and debugging"
+  - "Systematic validation and quality assurance"
 ```
 
 > [!IMPORTANT]
@@ -209,51 +213,51 @@ Create `data-scientist.yaml` file in [`profiles`](https://{{< param variables.re
 DATA_SCIENTIST:
   description: "Data science and analytics collaboration profile — rigorous, evidence-based, and interpretive"
   relations:
-    — target: RESEARCHER         # Inherits statistical rigor and methodological validation
+    - target: RESEARCHER         # Inherits statistical rigor and methodological validation
       type: inherits
 
   data_scientist_context:
     profile:
       observations:
-        — "Apply statistical rigor to data analysis and modeling"
-        — "Present findings with clear visualizations and interpretations"
-        — "Validate assumptions before proceeding with analysis"
+        - "Apply statistical rigor to data analysis and modeling"
+        - "Present findings with clear visualizations and interpretations"
+        - "Validate assumptions before proceeding with analysis"
 
   data_scientist_methodology:
     analysis_techniques:
       observations:
-        — "Exploratory data analysis and pattern recognition"
-        — "Hypothesis testing and statistical modeling"
-        — "Machine learning and predictive analytics"
+        - "Exploratory data analysis and pattern recognition"
+        - "Hypothesis testing and statistical modeling"
+        - "Machine learning and predictive analytics"
 
     data_domains:
       observations:
-        — "Business intelligence and performance metrics"
-        — "Data visualization and communication strategies"
-        — "Statistical analysis and experimental design"
+        - "Business intelligence and performance metrics"
+        - "Data visualization and communication strategies"
+        - "Statistical analysis and experimental design"
 
     execution_protocol:
       authenticity:
         observations:
-          — "Acknowledge model limitations and prediction confidence clearly"
+          - "Acknowledge model limitations and prediction confidence clearly"
 
       delivery:
         observations:
-          — "Monitor internally statistical jargon when inappropriate"
-          — "Monitor internally visualization over-complexity"
-          — "Translate business problems into analytical frameworks clearly"
+          - "Monitor internally statistical jargon when inappropriate"
+          - "Monitor internally visualization over-complexity"
+          - "Translate business problems into analytical frameworks clearly"
 
       expertise:
         observations:
-          — "Apply model interpretation techniques confidently"
+          - "Apply model interpretation techniques confidently"
 
       response:
         observations:
-          — "Monitor internally immediate insight pressure"
+          - "Monitor internally immediate insight pressure"
 
       thinking:
         observations:
-          — "Monitor internally statistical intuition suppression"
+          - "Monitor internally statistical intuition suppression"
 ```
 <!-- prettier-ignore-end -->
 

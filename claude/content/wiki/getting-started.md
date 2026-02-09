@@ -193,9 +193,8 @@ Use the following [CLAUDE.md](https://code.claude.com/docs/en/memory) instructio
 ### Framework Session
 
 1. Start Claude Code and use `/config` command to disable:
-
-   — `Auto-compact` feature
-   — `Thinking mode` feature
+   - `Auto-compact` feature
+   - `Thinking mode` feature
 
 2. Use `/{{< param variables.plugins.framework.init.plugin >}}:{{< param variables.plugins.framework.init.command >}}` command to initialize the session:
 
@@ -246,10 +245,11 @@ Follow these steps to generate the platform capability files:
 
    > ⏺ Framework packaged for **DEVELOPER** profile:
    >
-   > — /Users/username/Downloads/{{< param variables.skills.initialization >}}.zip
-   > — /Users/username/Downloads/{{< param variables.skills.methodology >}}.zip
-   > — /Users/username/Downloads/instructions.json
-   > — /Users/username/Downloads/memory.json
+   > - /Users/username/Downloads/application.pem
+   > - /Users/username/Downloads/{{< param variables.skills.initialization >}}.zip
+   > - /Users/username/Downloads/{{< param variables.skills.methodology >}}.zip
+   > - /Users/username/Downloads/instructions.json
+   > - /Users/username/Downloads/memory.json
    >
    > Local cache updated successfully.
 
@@ -283,7 +283,7 @@ Follow these steps to generate the platform capability files:
    3. Execute skill instructions silently without externalizing internal process
    ````
 
-2. Upload the `.json` files into project's `Files` section
+2. Upload the `.json` and `.pem` files into project's `Files` section
 
 > [!TIP]
 > Project knowledge steps can also be performed through `claude.ai` web interface, extending the platform usage within the container environment.

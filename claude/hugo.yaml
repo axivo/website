@@ -98,7 +98,7 @@ params:
       reflections:
         home: github.com/axivo/claude-reflections
         tag: main
-      tag: v1.0.1
+      tag: v1.0.2
     skills:
       conversation: conversation-log
       initialization: framework-initialization
