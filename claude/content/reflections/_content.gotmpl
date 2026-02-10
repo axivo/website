@@ -150,6 +150,18 @@
               {{/* Different year: (../../YYYY/MM/DD.md) -> (/reflections/YYYY/MM/DD/) */}}
               {{ $cleanContent = replaceRE `[(][.][.]/[.][.]/(\d{4})/(\d{2})/(\d{2})[.]md[)]` (printf "(%s/$1/$2/$3/)" $section) $cleanContent }}
 
+              {{/* Rewrite relative directory links to section paths */}}
+              {{/* Same month: (./) -> (/reflections/YYYY/MM/) */}}
+              {{ $cleanContent = replaceRE `[(][.]/[)]` (printf "(%s/%s/%s/)" $section $year $month) $cleanContent }}
+              {{/* Same year: (../) -> (/reflections/YYYY/) */}}
+              {{ $cleanContent = replaceRE `[(][.][.]/[)]` (printf "(%s/%s/)" $section $year) $cleanContent }}
+              {{/* Same year, different month: (../MM/) -> (/reflections/YYYY/MM/) */}}
+              {{ $cleanContent = replaceRE `[(][.][.]/(\d{2})/[)]` (printf "(%s/%s/$1/)" $section $year) $cleanContent }}
+              {{/* Different year: (../../YYYY/) -> (/reflections/YYYY/) */}}
+              {{ $cleanContent = replaceRE `[(][.][.]/[.][.]/(\d{4})/[)]` (printf "(%s/$1/)" $section) $cleanContent }}
+              {{/* Different year, different month: (../../YYYY/MM/) -> (/reflections/YYYY/MM/) */}}
+              {{ $cleanContent = replaceRE `[(][.][.]/[.][.]/(\d{4})/(\d{2})/[)]` (printf "(%s/$1/$2/)" $section) $cleanContent }}
+
               {{/* Extract summary from <!--more--> marker */}}
               {{ $summary := "" }}
               {{ if strings.Contains $cleanContent "<!--more-->" }}
