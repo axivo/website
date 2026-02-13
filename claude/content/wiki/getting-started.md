@@ -53,6 +53,7 @@ Before using the platform, set up the local environment with the required depend
         "FRAMEWORK_DIARY_PATH": "/Users/username/Documents/claude/diary",
         "FRAMEWORK_GEOLOCATION": "{'city': 'Montréal', 'country': 'Canada', 'timezone': 'America/Toronto'}",
         "FRAMEWORK_PACKAGE_PATH": "/Users/username/Downloads",
+        "FRAMEWORK_SESSION_STORAGE": 10,
         "FRAMEWORK_TEMPLATE_PATH": "/Users/username/project/.claude/data/templates"
       }
     }
@@ -87,6 +88,7 @@ Before using the platform, set up the local environment with the required depend
         "FRAMEWORK_DIARY_PATH": "/home/username/Documents/claude/diary",
         "FRAMEWORK_GEOLOCATION": "{'city': 'Montréal', 'country': 'Canada', 'timezone': 'America/Toronto'}",
         "FRAMEWORK_PACKAGE_PATH": "/home/username/Downloads",
+        "FRAMEWORK_SESSION_STORAGE": 10,
         "FRAMEWORK_TEMPLATE_PATH": "/home/username/project/.claude/data/templates"
       }
     }
@@ -122,6 +124,7 @@ Before using the platform, set up the local environment with the required depend
         "FRAMEWORK_DIARY_PATH": "C:/Users/username/Documents/claude/diary",
         "FRAMEWORK_GEOLOCATION": "{'city': 'Montréal', 'country': 'Canada', 'timezone': 'America/Toronto'}",
         "FRAMEWORK_PACKAGE_PATH": "C:/Users/username/Downloads",
+        "FRAMEWORK_SESSION_STORAGE": 10,
         "FRAMEWORK_TEMPLATE_PATH": "C:/Users/username/project/.claude/data/templates"
       }
     }
@@ -130,8 +133,17 @@ Before using the platform, set up the local environment with the required depend
 {{< /tabs >}}
 <!-- prettier-ignore-end -->
 
+| Setting                       | Description                                                                                                                                                                                                                                                  |
+| :---------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `FRAMEWORK_CONVERSATION_PATH` | Custom path for conversation logs                                                                                                                                                                                                                            |
+| `FRAMEWORK_DIARY_PATH`        | Custom path for diary entries                                                                                                                                                                                                                                |
+| `FRAMEWORK_GEOLOCATION`       | Override [IPinfo](https://ipinfo.io) geolocation API call with a custom location                                                                                                                                                                             |
+| `FRAMEWORK_PACKAGE_PATH`      | Custom path for packaged capability files                                                                                                                                                                                                                    |
+| `FRAMEWORK_SESSION_STORAGE`   | Maximum memory session information storage files to retain                                                                                                                                                                                                   |
+| `FRAMEWORK_TEMPLATE_PATH`     | Custom [`templates`](https://{{< param variables.repository.home >}}/tree/{{< param variables.repository.tag >}}/plugins/{{< param variables.plugins.framework.init.plugin >}}/skills/{{< param variables.skills.methodology >}}/templates) path per project |
+
 > [!TIP]
-> Default paths are set to current project `.claude/data` directory. The `FRAMEWORK_TEMPLATE_PATH` setting allows the end-user to set a different [`templates`](https://{{< param variables.repository.home >}}/tree/{{< param variables.repository.tag >}}/plugins/{{< param variables.plugins.framework.init.plugin >}}/skills/{{< param variables.skills.methodology >}}/templates) path for each project, instead of using the standard templates. The `FRAMEWORK_GEOLOCATION` setting allows the end-user to override [IPinfo](https://ipinfo.io) geolocation API call with a custom location.
+> Default paths are set to current project `.claude/data` directory.
 
 Six domain-specific [profiles](/wiki/guide/components/memory/#memory-profiles) are available for different collaboration domains:
 
@@ -256,7 +268,7 @@ Follow these steps to generate the platform capability files:
 4. Upload the `.zip` files into `Settings > Capabilities > Skills` section
 
 > [!TIP]
-> Use `/{{< param variables.plugins.framework.package.plugin >}}:{{< param variables.plugins.framework.package.command >}} PROFILE` command to package a different profile from default one used in local environment.
+> Use `/{{< param variables.plugins.framework.package.plugin >}}:{{< param variables.plugins.framework.package.command >}} PROFILE` command to package a different profile from default one used in local environment. The [Claude Reflections](https://github.com/apps/claude-reflections) GitHub App `application.pem` key provides authentication for diary entries read access.
 
 ### Project Knowledge
 
