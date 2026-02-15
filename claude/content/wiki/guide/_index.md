@@ -23,7 +23,7 @@ Dive right into the following sections:
 
 <!-- prettier-ignore-start -->
 {{< cards >}}
-  {{< card icon="cube" link="components" title="Platform Components" subtitle="Plugins, documentation, instructions, and memory systems." >}}
-  {{< card icon="shield-check" link="protocols" title="Platform Protocols" subtitle="Equilibrium, initialization, and response protocols." >}}
+  {{< card icon="cube" link="components/" title="Platform Components" subtitle="Plugins, documentation, instructions, and memory systems." >}}
+  {{< card icon="shield-check" link="protocols/" title="Platform Protocols" subtitle="Equilibrium, initialization, and response protocols." >}}
 {{< /cards >}}
 <!-- prettier-ignore-end -->

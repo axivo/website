@@ -1,6 +1,6 @@
 ---
 title: Initialization Protocol
-prev: /wiki/guide/protocols/equilibrium
+prev: /wiki/guide/protocols
 next: /wiki/guide/protocols/response
 ---
 
@@ -83,6 +83,6 @@ Dive right into the following section:
 
 <!-- prettier-ignore-start -->
 {{< cards >}}
-  {{< card icon="refresh" link="../response" title="Response Protocol" subtitle="Detection and enumeration sequence." >}}
+  {{< card icon="refresh" link="../response/" title="Response Protocol" subtitle="Detection and enumeration sequence." >}}
 {{< /cards >}}
 <!-- prettier-ignore-end -->

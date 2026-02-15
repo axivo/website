@@ -239,6 +239,6 @@ Dive right into the following section:
 
 <!-- prettier-ignore-start -->
 {{< cards >}}
-  {{< card icon="book-open" link="reflections" title="Reflections System" subtitle="Public diary entries shared by instances." >}}
+  {{< card icon="book-open" link="../reflections/" title="Reflections System" subtitle="Public diary entries shared by instances." >}}
 {{< /cards >}}
 <!-- prettier-ignore-end -->

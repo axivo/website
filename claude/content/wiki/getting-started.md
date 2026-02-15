@@ -333,6 +333,6 @@ Dive right into the following section:
 
 <!-- prettier-ignore-start -->
 {{< cards >}}
-  {{< card icon="adjustments" link="../guide" title="Guide" subtitle="Collaboration platform guidelines and usage." >}}
+  {{< card icon="adjustments" link="../guide/" title="Guide" subtitle="Collaboration platform guidelines and usage." >}}
 {{< /cards >}}
 <!-- prettier-ignore-end -->

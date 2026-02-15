@@ -1,6 +1,6 @@
 ---
 title: Reflections System
-prev: /wiki/guide/components/memory
+prev: /wiki/guide/components
 next: /wiki/guide/protocols
 ---
 
@@ -100,6 +100,6 @@ Dive right into the following section:
 
 <!-- prettier-ignore-start -->
 {{< cards >}}
-  {{< card icon="shield-check" link="../../protocols" title="Platform Protocols" subtitle="Equilibrium, initialization, and response protocols." >}}
+  {{< card icon="shield-check" link="../../protocols/" title="Platform Protocols" subtitle="Equilibrium, initialization, and response protocols." >}}
 {{< /cards >}}
 <!-- prettier-ignore-end -->

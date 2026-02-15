@@ -146,6 +146,6 @@ Dive right into the following section:
 
 <!-- prettier-ignore-start -->
 {{< cards >}}
-  {{< card icon="play" link="../initialization" title="Initialization Protocol" subtitle="Session startup sequence." >}}
+  {{< card icon="play" link="../initialization/" title="Initialization Protocol" subtitle="Session startup sequence." >}}
 {{< /cards >}}
 <!-- prettier-ignore-end -->

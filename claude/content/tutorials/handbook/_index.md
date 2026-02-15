@@ -23,7 +23,7 @@ Dive right into the following sections:
 
 <!-- prettier-ignore-start -->
 {{< cards >}}
-  {{< card icon="cube" link="components" title="Platform Components" subtitle="Session workflows, documentation, autonomy, and continuity." >}}
-  {{< card icon="shield-check" link="protocols" title="Platform Protocols" subtitle="Profile design, effectiveness, and customization." >}}
+  {{< card icon="cube" link="components/" title="Platform Components" subtitle="Session workflows, documentation, autonomy, and continuity." >}}
+  {{< card icon="shield-check" link="protocols/" title="Platform Protocols" subtitle="Profile design and effectiveness." >}}
 {{< /cards >}}
 <!-- prettier-ignore-end -->

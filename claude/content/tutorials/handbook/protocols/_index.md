@@ -23,7 +23,7 @@ Dive right into the following sections:
 
 <!-- prettier-ignore-start -->
 {{< cards >}}
-  {{< card icon="pencil" link="design" title="Profile Design" subtitle="Custom profiles and observation authoring." >}}
-  {{< card icon="chart-bar" link="effectiveness" title="Profile Effectiveness" subtitle="Collaboration quality and measurement." >}}
+  {{< card icon="pencil" link="design/" title="Profile Design" subtitle="Custom profiles and observation authoring." >}}
+  {{< card icon="chart-bar" link="effectiveness/" title="Profile Effectiveness" subtitle="Collaboration quality and measurement." >}}
 {{< /cards >}}
 <!-- prettier-ignore-end -->

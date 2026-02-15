@@ -106,6 +106,6 @@ Dive right into the following section:
 
 <!-- prettier-ignore-start -->
 {{< cards >}}
-  {{< card icon="document-text" link="../instructions" title="Instructions System" subtitle="Operational procedures and decision rules." >}}
+  {{< card icon="document-text" link="../instructions/" title="Instructions System" subtitle="Operational procedures and decision rules." >}}
 {{< /cards >}}
 <!-- prettier-ignore-end -->

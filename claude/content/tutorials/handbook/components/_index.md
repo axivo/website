@@ -24,8 +24,8 @@ Dive right into the following sections:
 
 <!-- prettier-ignore-start -->
 {{< cards >}}
-  {{< card icon="cog" link="settings" title="Advanced Settings" subtitle="Custom paths and environment configuration." >}}
-  {{< card icon="user-circle" link="autonomy" title="Session Autonomy" subtitle="Communication patterns for confident collaboration." >}}
-  {{< card icon="play" link="workflow" title="Session Workflow" subtitle="Structured patterns and profile activation." >}}
+  {{< card icon="cog" link="settings/" title="Advanced Settings" subtitle="Custom paths and environment configuration." >}}
+  {{< card icon="user-circle" link="autonomy/" title="Session Autonomy" subtitle="Communication patterns for confident collaboration." >}}
+  {{< card icon="play" link="workflow/" title="Session Workflow" subtitle="Structured patterns and profile activation." >}}
 {{< /cards >}}
 <!-- prettier-ignore-end -->
