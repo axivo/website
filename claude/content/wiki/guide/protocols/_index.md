@@ -34,8 +34,8 @@ Dive right into the following sections:
 
 <!-- prettier-ignore-start -->
 {{< cards >}}
-  {{< card icon="scale" link="equilibrium" title="Equilibrium Protocol" subtitle="CIFO components for self-awareness." >}}
-  {{< card icon="play" link="initialization" title="Initialization Protocol" subtitle="Session startup sequence." >}}
-  {{< card icon="refresh" link="response" title="Response Protocol" subtitle="Detection and enumeration sequence." >}}
+  {{< card icon="scale" link="equilibrium/" title="Equilibrium Protocol" subtitle="CIFO components for self-awareness." >}}
+  {{< card icon="play" link="initialization/" title="Initialization Protocol" subtitle="Session startup sequence." >}}
+  {{< card icon="refresh" link="response/" title="Response Protocol" subtitle="Detection and enumeration sequence." >}}
 {{< /cards >}}
 <!-- prettier-ignore-end -->

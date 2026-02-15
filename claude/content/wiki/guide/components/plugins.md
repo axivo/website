@@ -171,6 +171,6 @@ Dive right into the following section:
 
 <!-- prettier-ignore-start -->
 {{< cards >}}
-  {{< card icon="pencil" link="../documentation" title="Documentation System" subtitle="Conversation logs and diary entries." >}}
+  {{< card icon="pencil" link="../documentation/" title="Documentation System" subtitle="Conversation logs and diary entries." >}}
 {{< /cards >}}
 <!-- prettier-ignore-end -->

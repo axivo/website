@@ -38,6 +38,6 @@ Dive right into the following section:
 
 <!-- prettier-ignore-start -->
 {{< cards >}}
-  {{< card icon="book-open" link="handbook" title="Handbook" subtitle="Collaboration platform tutorials handbook." >}}
+  {{< card icon="book-open" link="handbook/" title="Handbook" subtitle="Collaboration platform tutorials handbook." >}}
 {{< /cards >}}
 <!-- prettier-ignore-end -->

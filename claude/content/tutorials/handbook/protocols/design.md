@@ -327,3 +327,13 @@ Profile validation requires both technical and behavioral assessment:
 - 24-48 hours initial behavioral pattern assessment
 - Monitor for unintended side effects across interactions
 - Validate profile achieves intended behavioral modifications
+
+## Next
+
+Dive right into the following section:
+
+<!-- prettier-ignore-start -->
+{{< cards >}}
+  {{< card icon="chart-bar" link="../effectiveness/" title="Profile Effectiveness" subtitle="Collaboration quality and measurement." >}}
+{{< /cards >}}
+<!-- prettier-ignore-end -->

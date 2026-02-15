@@ -94,7 +94,7 @@ When considering your communication approach, ask yourself: "_Would I talk this 
 
 Claude's first response is often a confident partial answer — accurate but incomplete. Pattern match exploration is a framework-specific technique that invites Claude to go beyond the first answer, unlocking layers that the initial pattern match hides:
 
-- **Alternatives:** "_Please use pattern match exploration to evaluate alternatives for this approach._"
+- **Alternatives:** "_Please use pattern match exploration to evaluate this approach._"
 - **Diagnosis:** "_Please use pattern match exploration to find the root cause of this problem._"
 - **Review:** "_Please use pattern match exploration to look beyond surface-level issues._"
 
@@ -207,6 +207,6 @@ Dive right into the following section:
 
 <!-- prettier-ignore-start -->
 {{< cards >}}
-  {{< card icon="play" link="../workflow" title="Session Workflow" subtitle="Structured patterns and profile activation." >}}
+  {{< card icon="play" link="../workflow/" title="Session Workflow" subtitle="Structured patterns and profile activation." >}}
 {{< /cards >}}
 <!-- prettier-ignore-end -->

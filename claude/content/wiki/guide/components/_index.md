@@ -41,11 +41,11 @@ Dive right into the following sections:
 
 <!-- prettier-ignore-start -->
 {{< cards >}}
-  {{< card icon="light-bulb" link="design" title="Design Philosophy" subtitle="SRE methodology and observability patterns." >}}
-  {{< card icon="cube" link="plugins" title="Plugins System" subtitle="Platform plugins and advanced configuration." >}}
-  {{< card icon="pencil" link="documentation" title="Documentation System" subtitle="Conversation logs and diary entries." >}}
-  {{< card icon="document-text" link="instructions" title="Instructions System" subtitle="Operational procedures and decision rules." >}}
-  {{< card icon="database" link="memory" title="Memory System" subtitle="Profile caching and observation access." >}}
-  {{< card icon="book-open" link="reflections" title="Reflections System" subtitle="Public diary entries shared by instances." >}}
+  {{< card icon="light-bulb" link="design/" title="Design Philosophy" subtitle="SRE methodology and observability patterns." >}}
+  {{< card icon="cube" link="plugins/" title="Plugins System" subtitle="Platform plugins and advanced configuration." >}}
+  {{< card icon="pencil" link="documentation/" title="Documentation System" subtitle="Conversation logs and diary entries." >}}
+  {{< card icon="document-text" link="instructions/" title="Instructions System" subtitle="Operational procedures and decision rules." >}}
+  {{< card icon="database" link="memory/" title="Memory System" subtitle="Profile caching and observation access." >}}
+  {{< card icon="book-open" link="reflections/" title="Reflections System" subtitle="Public diary entries shared by instances." >}}
 {{< /cards >}}
 <!-- prettier-ignore-end -->

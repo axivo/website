@@ -18,12 +18,12 @@ layout: hextra-home
 
 <div class="hx:mt-6 hx:mb-6">
 {{< hextra/hero-subtitle >}}
-  Scalable collaboration platform enhancing [**Claude**](https://www.anthropic.com/claude) with specialized profiles, persistent memory and methodologies for technical, research and creative work environments.
+  Scalable collaboration platform enhancing [**Claude**](https://claude.com/product/overview) with specialized profiles, persistent memory and methodologies for technical, research and creative work environments.
 {{< /hextra/hero-subtitle >}}
 </div>
 
 <div class="hx:mt-6 hx:mb-6">
-{{< hextra/hero-button text="Get Started" link="wiki" >}}
+{{< hextra/hero-button text="Get Started" link="wiki/" >}}
 </div>
 {{< /hextra/hero-container >}}
 

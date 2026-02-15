@@ -219,3 +219,13 @@ Sessions end naturally when work completes. For significant sessions, consider c
 ### Carrying Forward
 
 Each session builds institutional memory. Documented work becomes context for future sessions, enabling continuity across the stateless boundary.
+
+## Next
+
+Dive right into the following section:
+
+<!-- prettier-ignore-start -->
+{{< cards >}}
+  {{< card icon="shield-check" link="../../protocols/" title="Platform Protocols" subtitle="Profile design and effectiveness." >}}
+{{< /cards >}}
+<!-- prettier-ignore-end -->

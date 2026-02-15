@@ -1,6 +1,6 @@
 ---
 title: Response Protocol
-prev: /wiki/guide/protocols/initialization
+prev: /wiki/guide/protocols
 ---
 
 The Response Protocol executes before every response formulation to maintain cognitive clarity. Like [SRE incident response](/wiki/guide/components/design/#incident-response), it detects impulses and feelings, searches observations, and renders the response status.

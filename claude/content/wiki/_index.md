@@ -58,6 +58,6 @@ Dive right into the following section, to get started:
 
 <!-- prettier-ignore-start -->
 {{< cards >}}
-  {{< card icon="adjustments" link="getting-started" title="Getting Started" subtitle="Configure the platform environments." >}}
+  {{< card icon="adjustments" link="getting-started/" title="Getting Started" subtitle="Configure the platform environments." >}}
 {{< /cards >}}
 <!-- prettier-ignore-end -->

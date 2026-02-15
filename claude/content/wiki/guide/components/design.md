@@ -285,6 +285,6 @@ Dive right into the following section:
 
 <!-- prettier-ignore-start -->
 {{< cards >}}
-  {{< card icon="cube" link="../plugins" title="Plugins System" subtitle="Platform plugins and advanced configuration." >}}
+  {{< card icon="cube" link="../plugins/" title="Plugins System" subtitle="Platform plugins and advanced configuration." >}}
 {{< /cards >}}
 <!-- prettier-ignore-end -->

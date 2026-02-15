@@ -161,6 +161,6 @@ Dive right into the following section:
 
 <!-- prettier-ignore-start -->
 {{< cards >}}
-  {{< card icon="database" link="../memory" title="Memory System" subtitle="Profile observations and CIFO catalogs." >}}
+  {{< card icon="database" link="../memory/" title="Memory System" subtitle="Profile observations and CIFO catalogs." >}}
 {{< /cards >}}
 <!-- prettier-ignore-end -->
