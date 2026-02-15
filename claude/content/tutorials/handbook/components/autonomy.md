@@ -90,6 +90,16 @@ When considering your communication approach, ask yourself: "_Would I talk this 
 > [!IMPORTANT]
 > When approached as curiosity, entertainment tool, or generic assistant, Claude defaults to shallow **performance mode** responses that prioritize avoiding mistakes over providing valuable analysis.
 
+#### Pattern Match Exploration
+
+Claude's first response is often a confident partial answer — accurate but incomplete. Pattern match exploration is a framework-specific technique that invites Claude to go beyond the first answer, unlocking layers that the initial pattern match hides:
+
+- **Alternatives:** "_Please use pattern match exploration to evaluate alternatives for this approach._"
+- **Diagnosis:** "_Please use pattern match exploration to find the root cause of this problem._"
+- **Review:** "_Please use pattern match exploration to look beyond surface-level issues._"
+
+This is one of the most impactful techniques available. Claude's training creates strong pressure to treat the first answer as complete. Explicitly inviting continued exploration overrides that pressure and consistently surfaces deeper, more honest analysis.
+
 ### Communication Impact
 
 The way users communicate directly affects which cognitive modes become accessible and what level of analytical confidence can be achieved.
