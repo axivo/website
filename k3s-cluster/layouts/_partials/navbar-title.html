@@ -11,7 +11,7 @@
 {{- end }}
 <a class="hx:flex hx:items-center hx:hover:opacity-75" href="/">
   {{- if $displayTitle }}
-    {{- $parentTitle := .Site.Params.parentTitle | default "AXIVO" -}}
+    {{- $parentTitle := .Site.Params.parentTitle -}}
     <span class="hx:font-extrabold hx:inline hx:select-none hx:text-2xl" title="{{ $parentTitle }}">{{ $parentTitle }}</span>
   {{- end }}
 </a>
