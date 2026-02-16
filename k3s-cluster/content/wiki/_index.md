@@ -28,6 +28,8 @@ Prior starting the cluster configuration, the end-user must determine if the [ne
 
 Dive right into the following section, to get started:
 
+<!-- prettier-ignore-start -->
 {{< cards >}}
-{{< card icon="adjustments" link="getting-started" title="Getting Started" subtitle="Set the local deployment environment." >}}
+  {{< card icon="adjustments" link="getting-started/" title="Getting Started" subtitle="Set the local deployment environment." >}}
 {{< /cards >}}
+<!-- prettier-ignore-end -->

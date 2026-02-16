@@ -37,6 +37,8 @@ brew install sshpass
 
 Dive right into the following section:
 
+<!-- prettier-ignore-start -->
 {{< cards >}}
-  {{< card icon="adjustments" link="../guide" title="Guide" subtitle="Configure the cluster for deployments." >}}
+  {{< card icon="adjustments" link="../guide/" title="Guide" subtitle="Configure the cluster for deployments." >}}
 {{< /cards >}}
+<!-- prettier-ignore-end -->

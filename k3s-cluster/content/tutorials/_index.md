@@ -17,6 +17,8 @@ If you encounter any role related problems or want to suggest a new feature, fee
 
 Dive right into the following section, to get started:
 
+<!-- prettier-ignore-start -->
 {{< cards >}}
-  {{< card icon="book-open" link="handbook" title="Handbook" subtitle="Browse the available tutorials." >}}
+  {{< card icon="book-open" link="handbook/" title="Handbook" subtitle="Browse the available tutorials." >}}
 {{< /cards >}}
+<!-- prettier-ignore-end -->

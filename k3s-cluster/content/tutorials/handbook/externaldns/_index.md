@@ -12,12 +12,14 @@ This repository uses [ExternalDNS](https://github.com/kubernetes-sigs/external-d
 
 Generate the Cloudflare domain [API token](https://developers.cloudflare.com/fundamentals/api/get-started/create-token/), with following permissions:
 
+<!-- prettier-ignore-start -->
 {{< filetree/container >}}
-{{< filetree/folder name="ACCOUNT" >}}
-{{< filetree/folder name="domain.com - Zone:Read, DNS:Edit" state="closed" >}}
-{{< /filetree/folder >}}
-{{< /filetree/folder >}}
+  {{< filetree/folder name="ACCOUNT" >}}
+    {{< filetree/folder name="domain.com - Zone:Read, DNS:Edit" state="closed" >}}
+    {{< /filetree/folder >}}
+  {{< /filetree/folder >}}
 {{< /filetree/container >}}
+<!-- prettier-ignore-end -->
 
 Encrypt the `global_map.credentials.externaldns.cloudflare.api.token` value with [`ansible-vault`](/tutorials/handbook/ansible/#vault) and insert it into
 [`all.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/inventory/cluster/group_vars/all.yaml) group variables file.

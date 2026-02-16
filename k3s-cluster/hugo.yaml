@@ -10,11 +10,11 @@ menu:
   main:
     - name: Documentation
       identifier: wiki
-      pageRef: /wiki
+      pageRef: /wiki/
       weight: 1
     - name: Tutorials
       identifier: tutorials
-      pageRef: /tutorials
+      pageRef: /tutorials/
       weight: 2
     - name: Search
       params:
@@ -33,11 +33,11 @@ menu:
       weight: 1
     - identifier: discussions
       name: "↗ GitHub Discussions"
-      url: "https://github.com/axivo/k3s-cluster/discussions"
+      url: https://github.com/axivo/k3s-cluster/discussions
       weight: 2
     - identifier: issues
       name: "↗ GitHub Issues"
-      url: "https://github.com/axivo/k3s-cluster/issues"
+      url: https://github.com/axivo/k3s-cluster/issues
       weight: 3
 module:
   hugoVersion:
@@ -54,7 +54,8 @@ params:
   navbar:
     logo:
       path: /k3s-cluster/images/logo-services.svg
-      dark: /k3s-cluster/images/logo-services.svg
+      height: 32
+      width: 32
   variables:
     os:
       previous_version: 22.04
