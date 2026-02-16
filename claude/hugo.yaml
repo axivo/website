@@ -69,7 +69,8 @@ params:
   navbar:
     logo:
       path: /claude/images/logo-claude.svg
-      dark: /claude/images/logo-claude.svg
+      height: 32
+      width: 32
   variables:
     plugins:
       analysis:
