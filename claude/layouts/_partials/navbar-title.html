@@ -12,12 +12,12 @@
 <a class="hx:flex hx:items-center hx:hover:opacity-75" href="/">
   {{- if $displayTitle }}
     {{- $parentTitle := .Site.Params.parentTitle | default "AXIVO" -}}
-    <span class="hx:font-extrabold hx:inline hx:select-none" title="{{ $parentTitle }}">{{ $parentTitle }}</span>
+    <span class="hx:text-2xl hx:font-extrabold hx:inline hx:select-none" title="{{ $parentTitle }}">{{ $parentTitle }}</span>
   {{- end }}
 </a>
 {{- if $displayTitle }}<span>—</span>{{- end }}
 <a class="hx:flex hx:items-center hx:hover:opacity-75 hx:ltr:mr-auto hx:rtl:ml-auto" href="{{ $logoLink }}">
   {{- if $displayTitle }}
-    <span class="hx:font-bold hx:inline hx:select-none" title="{{ .Site.Title }}">{{- .Site.Title -}}</span>
+    <span class="hx:text-2xl hx:font-bold hx:inline hx:select-none" title="{{ .Site.Title }}">{{- .Site.Title -}}</span>
   {{- end }}
 </a>
