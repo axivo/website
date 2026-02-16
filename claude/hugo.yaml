@@ -41,11 +41,11 @@ menu:
       weight: 1
     - identifier: discussions
       name: "↗ GitHub Discussions"
-      url: "https://github.com/axivo/claude/discussions"
+      url: https://github.com/axivo/claude/discussions
       weight: 2
     - identifier: issues
       name: "↗ GitHub Issues"
-      url: "https://github.com/axivo/claude/issues"
+      url: https://github.com/axivo/claude/issues
       weight: 3
 module:
   hugoVersion:
