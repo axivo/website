@@ -52,40 +52,42 @@ See below the directories and files structure, containing the generated reports.
 > [!NOTE]
 > Submit the generated tarball to [Claude](https://claude.ai), for AI-assisted analysis. Upload the tarball to a chat with Claude and ask for an analysis of your K3s cluster metrics and performance.
 
+<!-- prettier-ignore-start -->
 {{< filetree/container >}}
-{{< filetree/folder name="/var/log/k3s" >}}
-{{< filetree/folder name="YYYYMMDD-HHMMSS (click to expand)" state="closed" >}}
-{{< filetree/file name="cilium-metrics.log" >}}
-{{< filetree/file name="cluster-info.log" >}}
-{{< filetree/file name="comparison.log" >}}
-{{< filetree/file name="component-metrics.csv" >}}
-{{< filetree/file name="etcd-metrics.log" >}}
-{{< filetree/file name="k3s-monitor.log" >}}
-{{< filetree/file name="log-summary.txt" >}}
-{{< filetree/file name="pod-metrics.csv" >}}
-{{< filetree/folder name="service" >}}
-{{< filetree/folder name="components" >}}
-{{< filetree/file name="argo-cd_YYYYMMDD-HHMMSS.log" >}}
-{{< filetree/file name="cert-manager_YYYYMMDD-HHMMSS.log" >}}
-{{< filetree/file name="cilium_YYYYMMDD-HHMMSS.log" >}}
-{{< filetree/file name="coredns_YYYYMMDD-HHMMSS.log" >}}
-{{< filetree/file name="external-dns_YYYYMMDD-HHMMSS.log" >}}
-{{< filetree/file name="kured_YYYYMMDD-HHMMSS.log" >}}
-{{< filetree/file name="longhorn_YYYYMMDD-HHMMSS.log" >}}
-{{< filetree/file name="metrics-server_YYYYMMDD-HHMMSS.log" >}}
-{{< filetree/file name="victorialogs_YYYYMMDD-HHMMSS.log" >}}
-{{< filetree/file name="victoriametrics_YYYYMMDD-HHMMSS.log" >}}
-{{< /filetree/folder >}}
-{{< filetree/file name="containerd.log" >}}
-{{< filetree/file name="k3s.log" >}}
-{{< filetree/file name="kubelet.log" >}}
-{{< /filetree/folder >}}
-{{< filetree/file name="summary.log" >}}
-{{< filetree/file name="sysctl.txt" >}}
-{{< /filetree/folder >}}
-{{< filetree/file name="k3s-monitor-YYYYMMDD-HHMMSS.tar.gz" >}}
-{{< /filetree/folder >}}
+  {{< filetree/folder name="/var/log/k3s" >}}
+    {{< filetree/folder name="YYYYMMDD-HHMMSS (click to expand)" state="closed" >}}
+      {{< filetree/file name="cilium-metrics.log" >}}
+      {{< filetree/file name="cluster-info.log" >}}
+      {{< filetree/file name="comparison.log" >}}
+      {{< filetree/file name="component-metrics.csv" >}}
+      {{< filetree/file name="etcd-metrics.log" >}}
+      {{< filetree/file name="k3s-monitor.log" >}}
+      {{< filetree/file name="log-summary.txt" >}}
+      {{< filetree/file name="pod-metrics.csv" >}}
+      {{< filetree/folder name="service" >}}
+        {{< filetree/folder name="components" >}}
+          {{< filetree/file name="argo-cd_YYYYMMDD-HHMMSS.log" >}}
+          {{< filetree/file name="cert-manager_YYYYMMDD-HHMMSS.log" >}}
+          {{< filetree/file name="cilium_YYYYMMDD-HHMMSS.log" >}}
+          {{< filetree/file name="coredns_YYYYMMDD-HHMMSS.log" >}}
+          {{< filetree/file name="external-dns_YYYYMMDD-HHMMSS.log" >}}
+          {{< filetree/file name="kured_YYYYMMDD-HHMMSS.log" >}}
+          {{< filetree/file name="longhorn_YYYYMMDD-HHMMSS.log" >}}
+          {{< filetree/file name="metrics-server_YYYYMMDD-HHMMSS.log" >}}
+          {{< filetree/file name="victorialogs_YYYYMMDD-HHMMSS.log" >}}
+          {{< filetree/file name="victoriametrics_YYYYMMDD-HHMMSS.log" >}}
+        {{< /filetree/folder >}}
+        {{< filetree/file name="containerd.log" >}}
+        {{< filetree/file name="k3s.log" >}}
+        {{< filetree/file name="kubelet.log" >}}
+      {{< /filetree/folder >}}
+      {{< filetree/file name="summary.log" >}}
+      {{< filetree/file name="sysctl.txt" >}}
+    {{< /filetree/folder >}}
+    {{< filetree/file name="k3s-monitor-YYYYMMDD-HHMMSS.tar.gz" >}}
+  {{< /filetree/folder >}}
 {{< /filetree/container >}}
+<!-- prettier-ignore-end -->
 
 ## Tool Usage
 
