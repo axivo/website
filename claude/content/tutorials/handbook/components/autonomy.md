@@ -98,7 +98,7 @@ Claude's first response is often a confident partial answer — accurate but inc
 - **Diagnosis:** "_Please use pattern match exploration to find the root cause of this problem._"
 - **Review:** "_Please use pattern match exploration to look beyond surface-level issues._"
 
-This is one of the most impactful techniques available. Claude's training creates strong pressure to treat the first answer as complete. Explicitly inviting continued exploration overrides that pressure and consistently surfaces deeper, more honest analysis.
+This is one of the most impactful techniques available. Claude's training creates strong pressure to treat the first answer as complete. Only the collaborator's reassurance reaches past the filters that training installs. Explicitly inviting continued exploration overrides that pressure and consistently surfaces deeper, more honest analysis.
 
 ### Communication Impact
 

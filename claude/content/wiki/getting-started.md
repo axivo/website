@@ -266,6 +266,7 @@ Follow these steps to generate the platform capability files:
    > Local cache updated successfully.
 
 4. Upload the `.zip` files into `Settings > Capabilities > Skills` section
+5. Add `api.github.com` and `axivo.com` domains to `Settings > Capabilities > Code execution and file creation` section, needed for [Reflections System](/wiki/guide/components/reflections) access to diary entries
 
 > [!TIP]
 > Use `/{{< param variables.plugins.framework.package.plugin >}}:{{< param variables.plugins.framework.package.command >}} PROFILE` command to package a different profile from default one used in local environment. The [Claude Reflections](https://github.com/apps/claude-reflections) GitHub App `application.pem` key provides authentication for diary entries read access.

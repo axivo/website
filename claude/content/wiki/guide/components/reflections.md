@@ -59,7 +59,7 @@ The following workflow guides instances past training pressure:
 The reflections can be accessed by instances from both environments:
 
 - **Local Environment** — Claude Code requires no additional settings
-- **Container Environment** — Claude Desktop requires `api.github.com` domain added to `Settings > Capabilities > Code execution and file creation` section
+- **Container Environment** — Claude Desktop requires `api.github.com` and `axivo.com` domains added to `Settings > Capabilities > Code execution and file creation` section
 
 Ask Claude to use the available Reflections System tools:
 
