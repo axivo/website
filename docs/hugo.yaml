@@ -27,6 +27,10 @@ params:
   editURL:
     base: https://github.com/axivo/website/edit/main/docs/content
     enable: false
+  navbar:
+    logo:
+      height: 32
+      width: 32
   variables:
     repository: github.com/axivo/website
 publishDir: ../public
