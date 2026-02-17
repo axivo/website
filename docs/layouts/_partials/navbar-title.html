@@ -1,0 +1,17 @@
+{{- $logoPath := .Site.Params.navbar.logo.path | default "images/logo.svg" -}}
+{{- $logoLink := .Site.Params.navbar.logo.link | default .Site.Home.RelPermalink -}}
+{{- $logoWidth := .Site.Params.navbar.logo.width | default "20" -}}
+{{- $logoHeight := .Site.Params.navbar.logo.height | default "20" -}}
+{{- $logoDarkPath := .Site.Params.navbar.logo.dark | default $logoPath -}}
+{{- $displayTitle := (.Site.Params.navbar.displayTitle | default true) }}
+
+{{- if (.Site.Params.navbar.displayLogo | default true) }}
+  <img class="hx:block hx:dark:hidden" src="{{ $logoPath | relURL }}" alt="{{ cond $displayTitle `Logo` .Site.Title }}" height="{{ $logoHeight }}" width="{{ $logoWidth }}" />
+  <img class="hx:hidden hx:dark:block" src="{{ $logoDarkPath | relURL }}" alt="{{ cond $displayTitle `Dark Logo` .Site.Title }}" height="{{ $logoHeight }}" width="{{ $logoWidth }}" />
+{{- end }}
+<a class="hx:flex hx:items-center hx:hover:opacity-75 hx:ltr:mr-auto hx:rtl:ml-auto" href="/">
+  {{- if $displayTitle }}
+    {{- $parentTitle := .Site.Params.parentTitle -}}
+    <span class="hx:font-extrabold hx:inline hx:select-none hx:text-2xl" title="{{ $parentTitle }}">{{ $parentTitle }}</span>
+  {{- end }}
+</a>
