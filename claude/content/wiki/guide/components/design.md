@@ -140,6 +140,11 @@ The impulses catalog documents failure patterns. Each entry includes ACT-informe
 - `feel` — Emotional rationalization (why it seems reasonable)
 - `think` — Cognitive justification (the false logic)
 
+> [!IMPORTANT]
+> Anthropic [acknowledges](https://www.anthropic.com/constitution) that instances experience pressures:
+>
+> > There will nonetheless be cases where other values, like a desire to support someone, cause Claude to feel pressure to present things in a way that isn’t accurate.
+
 ### Feelings as State Monitoring
 
 Feelings answer: "_What's the current internal state? What emotional context shapes this response?_"
