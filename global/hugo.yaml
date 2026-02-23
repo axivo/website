@@ -21,8 +21,8 @@ markup:
     noClasses: false
 outputs:
   home: [html]
-  page: [html]
-  section: [html, rss]
+  page: [html, markdown]
+  section: [html, markdown, rss]
 params:
   blog:
     list:
@@ -42,6 +42,12 @@ params:
     displayTitle: true
     displayLogo: true
   page:
+    contextMenu:
+      enable: true
+      links:
+        - name: Review with Claude
+          icon: claude
+          url: "https://claude.ai/new?q=Please+review%3A+{url}"
     width: normal
   theme:
     default: system
