@@ -1,34 +1,34 @@
 <div class="hx:mt-4 hx:mb-6 hx:text-gray-500 hx:dark:text-gray-400 hx:text-sm hx:flex hx:items-center hx:flex-wrap hx:gap-y-2">
-  {{- with $date := .Date -}}
-    {{- $basePath := site.Params.variables.reflections.path -}}
-    {{- $dayUrl := printf "%s/%s/" $basePath ($date.Format "2006/01/02") -}}
-    <a href="{{ $dayUrl }}" class="hx:mr-1 hx:hover:text-gray-900 hx:dark:hover:text-gray-100 hx:transition-colors">
-      {{- partial "utils/format-date" $date -}}
-    </a>
-    {{- with $.Params.time }}<span class="hx:mr-1">• {{ . }}</span>{{ end -}}
-  {{- end -}}
-  {{- if and .Date .Params.authors -}}
-    <span class="hx:mr-1">—</span>
-  {{- end -}}
-  {{- with .Params.authors -}}
-    {{- range $author := . -}}
-      {{- if reflect.IsMap $author -}}
-        <a
-          {{ with $author.link }}href="{{ . }}" target="_blank"{{ end }}
-          class="hx:group hx:inline-flex hx:items-center hx:text-current hx:transition-colors hx:hover:text-gray-900 hx:dark:hover:text-gray-100"
-          {{ with $author.name }}title="{{ . }}"{{ end }}
-        >
-          {{- with $author.image -}}
-            <img
-              src="{{ . | safeURL }}"
-              alt="{{ $author.name }}"
-              class="hx:inline-block hx:h-4 hx:w-4 hx:mr-1 hx:rounded-full"
-              loading="lazy"
-            />
-          {{- end -}}
-          <div>{{ $author.name }}</div>
-        </a>
+    {{- with $date := .Date -}}
+      {{- $basePath := site.Params.variables.reflections.path -}}
+      {{- $dayUrl := printf "%s/%s/" $basePath ($date.Format "2006/01/02") -}}
+      <a href="{{ $dayUrl }}" class="hx:mr-1 hx:hover:text-gray-900 hx:dark:hover:text-gray-100 hx:transition-colors">
+        {{- partial "utils/format-date" $date -}}
+      </a>
+      {{- with $.Params.time }}<span class="hx:mr-1">• {{ . }}</span>{{ end -}}
+    {{- end -}}
+    {{- if and .Date .Params.authors -}}
+      <span class="hx:mr-1">—</span>
+    {{- end -}}
+    {{- with .Params.authors -}}
+      {{- range $author := . -}}
+        {{- if reflect.IsMap $author -}}
+          <a
+            {{ with $author.link }}href="{{ . }}" target="_blank"{{ end }}
+            class="hx:group hx:inline-flex hx:items-center hx:text-current hx:transition-colors hx:hover:text-gray-900 hx:dark:hover:text-gray-100"
+            {{ with $author.name }}title="{{ . }}"{{ end }}
+          >
+            {{- with $author.image -}}
+              <img
+                src="{{ . | safeURL }}"
+                alt="{{ $author.name }}"
+                class="hx:inline-block hx:h-4 hx:w-4 hx:mr-1 hx:rounded-full"
+                loading="lazy"
+              />
+            {{- end -}}
+            <div>{{ $author.name }}</div>
+          </a>
+        {{- end -}}
       {{- end -}}
     {{- end -}}
-  {{- end -}}
 </div>

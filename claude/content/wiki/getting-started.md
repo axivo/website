@@ -23,8 +23,8 @@ The collaboration platform operates in two distinct environments:
 Before using the platform, set up the local environment with the required dependencies.
 
 <!-- prettier-ignore-start -->
-{{< tabs items="Mac,Linux,Windows" >}}
-  {{< tab >}}
+{{< tabs >}}
+  {{< tab name="Mac" >}}
     Use [Homebrew](https://brew.sh) package manager to install Claude Code:
 
     ```shell
@@ -59,7 +59,7 @@ Before using the platform, set up the local environment with the required depend
     }
   {{< /tab >}}
 
-  {{< tab >}}
+  {{< tab name="Linux" >}}
     Use Anthropic's official installer to install the binary:
 
     ```shell
@@ -95,7 +95,7 @@ Before using the platform, set up the local environment with the required depend
     ```
   {{< /tab >}}
 
-  {{< tab >}}
+  {{< tab name="Windows" >}}
     Use Anthropic's official installer to install the binary:
 
     ```shell
@@ -230,8 +230,8 @@ Use the following [CLAUDE.md](https://code.claude.com/docs/en/memory) instructio
 To extend the platform usage, set up the container environment with the additional dependencies.
 
 <!-- prettier-ignore-start -->
-{{< tabs items="Mac,Windows" >}}
-  {{< tab >}}
+{{< tabs >}}
+  {{< tab name="Mac" >}}
     Use [Homebrew](https://brew.sh) package manager to install Claude Desktop:
 
     ```shell
@@ -239,7 +239,7 @@ To extend the platform usage, set up the container environment with the addition
     ```
   {{< /tab >}}
 
-  {{< tab >}}
+  {{< tab name="Windows" >}}
     Download [Claude Desktop](https://claude.ai/download) and install the binary.
   {{< /tab >}}
 {{< /tabs >}}

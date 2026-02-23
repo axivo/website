@@ -135,7 +135,7 @@
               {{ $cleanContent = replaceRE `- [*][*]Profile:[*][*][^\n]+\n` "" $cleanContent }}
               {{ $cleanContent = replaceRE `- [*][*]Tags:[*][*][^\n]+\n` "" $cleanContent }}
               {{ $cleanContent = replaceRE `- [*][*]UUID:[*][*][^\n]+\n` "" $cleanContent }}
-              {{ $cleanContent = replaceRE `^\n+` "" $cleanContent }}
+              {{ $cleanContent = replaceRE `^\n+` "\n" $cleanContent }}
 
               {{/* Rewrite relative image paths to absolute */}}
               {{ $imageBasePath := printf "/reflections/diary/%s/%s/images/" $year $month }}
