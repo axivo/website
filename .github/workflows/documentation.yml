@@ -82,7 +82,7 @@ jobs:
       - name: Setup hugo
         uses: peaceiris/actions-hugo@v3
         with:
-          hugo-version: 0.154.2
+          hugo-version: 0.156.0
           extended: true
 
       - name: Setup node
