@@ -1,5 +1,5 @@
 {{- /* Plyr partial: renders HTML5 audio, HTML5 video, Vimeo, or YouTube */ -}}
-<div>
+<div class="hx:mx-auto hx:my-6 hx:rounded-md hx:overflow-hidden">
   {{- if eq .type "audio" -}}
     <audio controls
       {{- if eq (printf "%v" .autoplay) "true" }} autoplay{{ end -}}
