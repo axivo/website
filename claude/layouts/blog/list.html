@@ -18,7 +18,7 @@
         {{- $pagerSize := site.Params.blog.list.pagerSize | default 10 -}}
         {{- $paginator := .Paginate $pages $pagerSize -}}
         {{- range $paginator.Pages }}
-          {{- partial "post.html" . -}}
+          {{- partial "components/blog-entry.html" . -}}
         {{ end -}}
         {{- if gt $paginator.TotalPages 1 -}}
           {{ partial "components/blog-pager.html" $paginator }}

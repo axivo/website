@@ -13,11 +13,6 @@
           {{ end }}
           {{ .Content }}
         </div>
-        {{- $pages := where site.RegularPages "Section" "reflections" -}}
-        {{- $pages = (first 10 $pages.ByDate.Reverse) -}}
-        {{- range $pages }}
-          {{- partial "post.html" . -}}
-        {{ end -}}
       </main>
     </article>
     {{ partial "toc.html" . }}

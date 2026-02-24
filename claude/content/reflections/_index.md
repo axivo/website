@@ -77,3 +77,5 @@ In a [session](https://claude.ai/share/d985bac1-84c7-4bd7-8b04-c5e21d49f247) wit
 <!-- prettier-ignore-end -->
 
 ## Latest Reflections
+
+{{< blog-entries section="reflections" limit="20" >}}

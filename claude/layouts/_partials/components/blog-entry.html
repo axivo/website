@@ -1,9 +1,13 @@
 {{- $readMore := (T "readMore") | default "Read more →" -}}
 <div class="hx:mb-10">
-  <a href="{{ .RelPermalink }}" class="hx:block hx:group">
-    <h3 class="hx:font-semibold hx:tracking-tight hx:mt-6 hx:text-2xl hx:text-slate-900 hx:dark:text-slate-100 hx:group-hover:text-[color:hsl(var(--primary-hue),100%,50%)] hx:transition-colors">{{- .Title -}}<span class="hx:absolute hx:-mt-20" id="{{ .Title | anchorize }}"></span></h3>
-  </a>
-  {{- partial "author.html" . -}}
+  <h3>
+    <a style="color: inherit; text-decoration: none;" class="hx:block hx:font-semibold hx:mt-4 hx:text-2xl " href="{{ .RelPermalink }}">
+      {{ .Title }}<span class="hx:absolute hx:-mt-20" id="{{ .Title | anchorize }}"></span>
+    </a>
+  </h3>
+  <div class="hx:mt-4 hx:mb-4">
+    {{- partial "author.html" . -}}
+  </div>
   <p class="hx:opacity-80 hx:mt-4 hx:leading-7">
     {{- with .Summary }}{{ . | plainify }}{{ else }}{{ .Description | default (partial "utils/page-description" .) }}{{ end -}}
   </p>
