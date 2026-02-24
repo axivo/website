@@ -98,6 +98,29 @@ When defined, this setting disables the [IPinfo](https://ipinfo.io) API call tha
 
 Optional MCP servers extend framework capabilities for specific workflows. These integrate with your profile methodology to provide specialized tools.
 
+### Claude Code
+
+The Claude Code [MCP server](https://code.claude.com/docs/en/mcp) exposes Claude Code tools to Claude Desktop, enabling file operations, code search, and terminal access from the desktop application.
+
+```json
+{
+  "mcpServers": {
+    "claude": {
+      "command": "claude",
+      "args": ["mcp", "serve"],
+      "env": {}
+    }
+  }
+}
+```
+
+#### Server Capabilities
+
+- File reading and writing
+- Code search and navigation
+- Terminal command execution
+- Project context awareness
+
 ### Language Server Protocol
 
 For **Developer** and **Engineer** profiles, the required `code-review` plugin LSP [MCP server](https://code.claude.com/docs/en/mcp) enables intelligent code analysis, navigation, and development assistance across multiple programming languages.
@@ -125,6 +148,29 @@ For **Developer** and **Engineer** profiles, the required `code-review` plugin L
 - Cross-file reference analysis
 - Language-aware code intelligence
 - Multi-project workspace support
+
+### Safari
+
+For macOS users, the Safari [MCP server](https://github.com/axivo/mcp-safari) enables browser automation for visual testing, web research, and interactive browsing sessions.
+
+```json
+{
+  "mcpServers": {
+    "safari": {
+      "command": "npx",
+      "args": ["-y", "@axivo/mcp-safari"],
+      "env": {}
+    }
+  }
+}
+```
+
+#### Server Capabilities
+
+- Page navigation and screenshot capture
+- Element interaction (click, type, scroll)
+- JavaScript execution in browser context
+- Tab management
 
 ## User Memory Edits
 

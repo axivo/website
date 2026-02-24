@@ -245,6 +245,9 @@ To extend the platform usage, set up the container environment with the addition
 {{< /tabs >}}
 <!-- prettier-ignore-end -->
 
+> [!NOTE]
+> Add the Claude Code MCP server in `claude_desktop_config.json` configuration file as detailed in [Advanced Settings](/tutorials/handbook/components/settings) tutorial, if access to local files is required.
+
 {{% steps %}}
 
 ### Platform Capabilities
