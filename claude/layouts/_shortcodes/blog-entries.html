@@ -1,0 +1,20 @@
+{{- /*
+  A shortcode to display the latest blog entries from a content section.
+
+  @param {string} section The content section to query.
+  @param {int} [limit=10] The maximum number of entries to display.
+
+  @example {{< blog-entries section="reflections" limit=10 >}}
+*/ -}}
+{{- $section := .Get "section" -}}
+{{- $limit := .Get "limit" | default 10 -}}
+{{- if not $section -}}
+  {{- errorf "blog-entries 'section' must be supplied" -}}
+{{- end -}}
+{{- $pages := where site.RegularPages "Section" $section -}}
+{{- $pages = (first (int $limit) $pages.ByDate.Reverse) -}}
+<div class="not-prose">
+{{- range $pages }}
+  {{- partial "components/blog-entry.html" . -}}
+{{ end -}}
+</div>

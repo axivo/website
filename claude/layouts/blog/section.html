@@ -27,7 +27,7 @@
               <h2>{{- $day.Title -}}<span class="hx:absolute hx:-mt-20" id="{{ $day.Title | anchorize }}"></span></h2>
             </div>
           {{- end -}}
-          {{- partial "post.html" . -}}
+          {{- partial "components/blog-entry.html" . -}}
         {{- end -}}
         {{- if gt $paginator.TotalPages 1 -}}
           {{ partial "components/blog-pager.html" $paginator }}
