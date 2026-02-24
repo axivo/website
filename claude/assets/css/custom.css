@@ -45,11 +45,9 @@ footer.hextra-footer > div.hextra-max-footer-width {
 .content audio,
 .content video {
   margin-inline: auto;
-  margin-block: 1rem;
   border-radius: 0.375rem;
 }
 
-/* Plyr player styling after JS initialization */
 .content .plyr {
   margin-inline: auto;
   margin-block: 1.5rem;
