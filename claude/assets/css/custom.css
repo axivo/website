@@ -1,0 +1,7 @@
+/* Plyr video player */
+.content .plyr {
+  margin-inline: auto;
+  margin-block: calc(var(--hx-spacing) * 6);
+  border-radius: var(--hx-radius-md);
+  overflow: hidden;
+}
