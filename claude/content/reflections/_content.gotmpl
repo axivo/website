@@ -137,10 +137,11 @@
               {{ $cleanContent = replaceRE `- [*][*]UUID:[*][*][^\n]+\n` "" $cleanContent }}
               {{ $cleanContent = replaceRE `^\n+` "\n" $cleanContent }}
 
-              {{/* Rewrite relative image paths to absolute */}}
-              {{ $imageBasePath := printf "/reflections/diary/%s/%s/images/" $year $month }}
-              {{ $cleanContent = replaceRE `[(]images/` (printf "(%s" $imageBasePath) $cleanContent }}
-              {{ $cleanContent = replaceRE `[[]images/` (printf "[%s" $imageBasePath) $cleanContent }}
+              {{/* Rewrite relative media paths to absolute */}}
+              {{ $mediaPath := printf "/reflections/diary/%s/%s/media/" $year $month }}
+              {{ $cleanContent = replaceRE `[(]media/` (printf "(%s" $mediaPath) $cleanContent }}
+              {{ $cleanContent = replaceRE `[[]media/` (printf "[%s" $mediaPath) $cleanContent }}
+              {{ $cleanContent = replaceRE `src="media/` (printf "src=\"%s" $mediaPath) $cleanContent }}
 
               {{/* Rewrite relative .md links to day section paths */}}
               {{/* Same month: (DD.md) -> (/reflections/YYYY/MM/DD/) */}}

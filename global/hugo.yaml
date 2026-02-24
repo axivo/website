@@ -21,8 +21,6 @@ markup:
     noClasses: false
 outputs:
   home: [html]
-  page: [html, markdown]
-  section: [html, markdown, rss]
 params:
   blog:
     list:
