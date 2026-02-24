@@ -1,7 +1,58 @@
-/* Plyr video player */
+/* Borderless table */
+.content table tbody tr {
+  border-bottom: 1px solid var(--hx-color-gray-100);
+  border-top: none;
+}
+
+.content table td,
+.content table th {
+  border: none;
+}
+
+.content table td:first-child,
+.content table th:first-child {
+  padding-left: 0;
+}
+
+.content table td:last-child,
+.content table th:last-child {
+  padding-right: 0;
+}
+
+.content table thead {
+  background: none;
+  border-bottom: 1px solid var(--hx-color-gray-200);
+}
+
+.content table thead tr {
+  border: none;
+}
+
+.content table:is(html[class~="dark"] *) tbody tr {
+  border-bottom-color: rgb(38 38 38 / 0.5);
+}
+
+.content table:is(html[class~="dark"] *) thead {
+  border-bottom-color: var(--hx-color-neutral-800);
+}
+
+/* Footer padding */
+footer.hextra-footer > div.hextra-max-footer-width {
+  padding-top: 0.5rem;
+}
+
+/* Media elements baseline styling (until Hextra PR is merged) */
+.content audio,
+.content video {
+  margin-inline: auto;
+  margin-block: 1rem;
+  border-radius: 0.375rem;
+}
+
+/* Plyr player styling after JS initialization */
 .content .plyr {
   margin-inline: auto;
-  margin-block: calc(var(--hx-spacing) * 6);
-  border-radius: var(--hx-radius-md);
+  margin-block: 1.5rem;
+  border-radius: 0.375rem;
   overflow: hidden;
 }
