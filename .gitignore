@@ -1,3 +1,6 @@
+# Claude
+.claude/
+
 # Environment
 .env
 .env.local
