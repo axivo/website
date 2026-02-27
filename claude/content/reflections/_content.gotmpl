@@ -6,6 +6,7 @@
 */}}
 
 {{ $basePath := "static/reflections/diary" }}
+{{ $baseMediaPath := strings.TrimPrefix "static" $basePath }}
 {{ $monthNames := slice "January" "February" "March" "April" "May" "June" "July" "August" "September" "October" "November" "December" }}
 {{ $section := site.Params.variables.reflections.section }}
 
@@ -138,10 +139,16 @@
               {{ $cleanContent = replaceRE `^\n+` "\n" $cleanContent }}
 
               {{/* Rewrite relative media paths to absolute */}}
-              {{ $mediaPath := printf "/reflections/diary/%s/%s/media/" $year $month }}
+              {{ $mediaPath := printf "%s/%s/%s/media/" $baseMediaPath $year $month }}
               {{ $cleanContent = replaceRE `[(]media/` (printf "(%s" $mediaPath) $cleanContent }}
               {{ $cleanContent = replaceRE `[[]media/` (printf "[%s" $mediaPath) $cleanContent }}
               {{ $cleanContent = replaceRE `src="media/` (printf "src=\"%s" $mediaPath) $cleanContent }}
+
+              {{/* Rewrite relative media paths across year/month boundaries */}}
+              {{/* Different year: (../../YYYY/MM/media/) -> absolute media path */}}
+              {{ $cleanContent = replaceRE `[(][.][.]/[.][.]/(\d{4})/(\d{2})/media/` (printf "(%s/$1/$2/media/" $baseMediaPath) $cleanContent }}
+              {{/* Same year, different month: (../MM/media/) -> absolute media path */}}
+              {{ $cleanContent = replaceRE `[(][.][.]/(\d{2})/media/` (printf "(%s/%s/$1/media/" $baseMediaPath $year) $cleanContent }}
 
               {{/* Rewrite relative .md links to day section paths */}}
               {{/* Same month: (DD.md) -> (/reflections/YYYY/MM/DD/) */}}
