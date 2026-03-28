@@ -57,10 +57,22 @@ Hardware architecture used to identify the cluster node hardware architecture. T
 arch
 ```
 
-Command output:
+Example command output:
 
 ```shell
 aarch64
+```
+```shell
+x86_64
+```
+
+The CPU architecture is now set in the inventory/cluster/group_vars/all.yaml file under `global_map`
+```
+global_map:
+  cpu_architecture:
+    # making it easier to switch to amd64/x86_64 for those who uses that
+    short: 'arm64'
+    long: 'aarch64'
 ```
 
 > [!IMPORTANT]
