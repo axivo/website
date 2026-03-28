@@ -70,6 +70,20 @@ The setting allows the end-user to control where the Kubernetes pods will be dep
 > [!TIP]
 > Update the setting into `k3s` role [`main.yaml`](https://{{< param variables.repository.cluster >}}/blob/main/roles/k3s/defaults/main.yaml) variables file.
 
+### `global_map.cpu_architecture`
+
+#### `global_map.cpu_architecture.short`
+
+This setting allows the end-user to define the CPU architecture for all nodes in the cluster. Most likely your choice will either be: `amd64`or `arm64`
+
+#### `global_map.cpu_architecture.long`
+
+This setting allows the end-user to define the CPU architecture for all nodes in the cluster. Most likely your choice will either be: `?x86_64?`or `aarc64`
+
+> [!TIP]
+> Make sure that the short and long name for the CPU architecture matches, so arm64 + aarc64, not amd64 + aarc64 - that would be a wrong combination.
+
+
 {{% /steps %}}
 
 ## Configuration
