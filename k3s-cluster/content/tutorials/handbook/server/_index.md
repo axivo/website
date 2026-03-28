@@ -84,8 +84,8 @@ Example for `k3s` binary defined into [`main.yaml`](https://{{< param variables.
 k3s_vars:
   release:
     k3s:
-      checksum: sha256sum-arm64.txt
-      file: k3s-arm64
+      checksum: sha256sum-{{ global_map.cpu_architecture.short }}.txt
+      file: k3s-{{ global_map.cpu_architecture.short }}
       name: k3s
 ```
 
