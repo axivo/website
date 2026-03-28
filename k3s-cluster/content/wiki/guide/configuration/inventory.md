@@ -78,7 +78,7 @@ This setting allows the end-user to define the CPU architecture for all nodes in
 
 #### `global_map.cpu_architecture.long`
 
-This setting allows the end-user to define the CPU architecture for all nodes in the cluster. Most likely your choice will either be: `?x86_64?`or `aarc64`
+This setting allows the end-user to define the CPU architecture for all nodes in the cluster. Most likely your choice will either be: `x86_64`or `aarc64`
 
 > [!TIP]
 > Make sure that the short and long name for the CPU architecture matches, so arm64 + aarc64, not amd64 + aarc64 - that would be a wrong combination.
