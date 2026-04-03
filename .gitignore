@@ -32,3 +32,12 @@ node_modules/
 
 # VS Code
 .history/
+
+# OpenNext
+.open-next
+
+# Wrangler
+.wrangler
+.dev.vars*
+!.dev.vars.example
+!.env.example
