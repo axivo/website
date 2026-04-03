@@ -29,7 +29,7 @@
   ],
   "prConcurrentLimit": 0,
   "prHourlyLimit": 0,
-  "rangeStrategy": "update-lockfile",
+  "rangeStrategy": "bump",
   "semanticCommits": "enabled",
   "separateMajorMinor": false,
   "separateMinorPatch": false
