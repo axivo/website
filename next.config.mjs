@@ -10,14 +10,12 @@ import nextra from 'nextra'
 const withNextra = nextra({
   contentDirBasePath: '/',
   defaultShowCopyCode: true,
-  latex: true,
   search: false
 })
 
 const nextConfig = withNextra({
-  images: { unoptimized: true },
-  output: 'export',
   reactStrictMode: true
 })
 
 export { nextConfig as default }
+import('@opennextjs/cloudflare').then(m => m.initOpenNextCloudflareForDev());

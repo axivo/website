@@ -10,11 +10,14 @@ For local development and testing, use the following commands:
 # Install the dependencies
 npm install
 
-# Generate static site
+# Build the application
 npm run build
 
 # Run the development server with Turbopack
 npm run dev
+
+# Build and preview on Cloudflare Workers runtime
+npm run preview
 ```
 
 ## Code Formatting
