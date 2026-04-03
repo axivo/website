@@ -1,0 +1,89 @@
+---
+title: Helm
+description: >-
+  Ansible role configuration for Helm package manager installation and setup in the K3s cluster.
+---
+
+import { Steps } from 'nextra/components'
+import { Var } from '@axivo/website'
+import { repository } from '@axivo/website/k3s-cluster'
+
+# Helm
+
+[Helm](https://helm.sh/docs) is a package manager for Kubernetes. It has the ability to provide, share, and use software built for Kubernetes.
+
+The `helm` role performs various tasks related to OS configuration, reset, and validation. It installs the [Balto](https://helm.baltorepo.com/stable/debian/packages/helm) stable Debian-based repository needed for the `helm` package, as well as the related [`diff`](https://github.com/databus23/helm-diff/releases) Helm plugin.
+
+> [!TIP]
+>
+> Role deployments are performed at `global` level, using the [Provisioning](/k3s-cluster/wiki/playbooks/provisioning) playbook. Upgrades can be performed at `role` level — see the instructions detailed below.
+
+## Role Tasks
+
+See the related role tasks listed below.
+
+<Steps>
+### Facts
+
+Ansible facts — see <Var code href={`https://${repository.home}/blob/${repository.tag}/roles/helm/tasks/facts.yaml`}>facts.yaml</Var> for details.
+
+### Main
+
+Main role related tasks — see <Var code href={`https://${repository.home}/blob/${repository.tag}/roles/helm/tasks/main.yaml`}>main.yaml</Var> for details.
+
+### Plugins
+
+Plugin related tasks — see <Var code href={`https://${repository.home}/blob/${repository.tag}/roles/helm/tasks/plugins.yaml`}>plugins.yaml</Var> for details.
+
+### Reset
+
+Reset related tasks — see <Var code href={`https://${repository.home}/blob/${repository.tag}/roles/helm/tasks/reset.yaml`}>reset.yaml</Var> for details.
+
+> [!TIP]
+>
+> A reset is performed at global level only — review the [Reset](/k3s-cluster/wiki/playbooks/reset) playbook instructions.
+
+### Upgrade
+
+Upgrade related tasks — see <Var code href={`https://${repository.home}/blob/${repository.tag}/roles/helm/tasks/upgrade.yaml`}>upgrade.yaml</Var> for details. Run the following command to perform a role upgrade:
+
+```shell
+ansible-playbook --ask-vault-pass --tags=helm upgrade.yaml
+```
+
+### Validation
+
+Validation related tasks — see <Var code href={`https://${repository.home}/blob/${repository.tag}/roles/helm/tasks/validation.yaml`}>validation.yaml</Var> for details. Run the following command to perform all role related validation tasks:
+
+```shell
+ansible-playbook --ask-vault-pass --tags=helm validation.yaml
+```
+
+</Steps>
+
+## Role Templates
+
+See the related role templates listed below.
+
+<Steps>
+### Service
+
+Service template used to periodically clean the cache — see <Var code href={`https://${repository.home}/blob/${repository.tag}/roles/helm/templates/service.j2`}>service.j2</Var> for details.
+
+### Timer
+
+Service timer template — see <Var code href={`https://${repository.home}/blob/${repository.tag}/roles/helm/templates/timer.j2`}>timer.j2</Var> for details.
+
+</Steps>
+
+## Role Variables
+
+> [!IMPORTANT]
+>
+> A [role upgrade](/k3s-cluster/wiki/configuration/roles/helm/#upgrade) is required in order to apply any changes related to role variables.
+
+See the related role variables, defined in the <Var code href={`https://${repository.home}/blob/${repository.tag}/roles/helm/defaults/main.yaml`}>main.yaml</Var> defaults file. Review the <Var code href={`https://${repository.home}/tree/${repository.tag}/roles/helm`}>README.md</Var> file for additional details.
+
+> [!TIP]
+>
+> Use [Renovate](/k3s-cluster/tutorials/configuration/tools/#renovate) to automate release pull requests and keep dependencies up-to-date.

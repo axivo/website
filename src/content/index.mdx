@@ -1,0 +1,36 @@
+---
+template: splash
+title: Imagine. Create.
+description: >-
+  AXIVO creates open-source projects empowering engineers to deliver beautiful software experiences.
+---
+
+import { Hero, CardGrid, FeatureCard } from "@axivo/website";
+
+<Hero title="Imagine. Create." image={{ dark: "/home/hero-dark.svg", light: "/home/hero.svg" }}>
+  Welcome to our public space. Our goal is to create projects empowering
+  engineers to deliver beautiful experiences to the open-source community.
+</Hero>
+
+## Latest Projects
+
+<CardGrid>
+  <FeatureCard
+    title="Claude Collaboration Platform"
+    href="/claude"
+    image="/home/card-claude.webp"
+    styleContainer={{ marginLeft: "auto", marginRight: "-3rem" }}
+  >
+    Scalable framework enabling Anthropic instances to use specialized profiles,
+    persistent memory and methodologies.
+  </FeatureCard>
+  <FeatureCard
+    title="K3s Cluster"
+    href="/k3s-cluster"
+    image="/home/card-k3s-cluster.webp"
+    styleContainer={{ marginLeft: "auto", marginRight: "-3rem" }}
+  >
+    Comprehensive framework for deploying and managing production-ready
+    Kubernetes clusters, leveraging Ansible automation.
+  </FeatureCard>
+</CardGrid>

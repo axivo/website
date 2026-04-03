@@ -1,0 +1,98 @@
+---
+title: K3s
+description: >-
+  Ansible role configuration for K3s lightweight Kubernetes distribution deployment and management.
+---
+
+import { Steps } from 'nextra/components'
+import { Var } from '@axivo/website'
+import { repository } from '@axivo/website/k3s-cluster'
+
+# K3s
+
+[K3s](https://k3s.io) is a highly available, certified Kubernetes distribution designed for production workloads, packaged as a single binary that reduces the dependencies and steps needed to install.
+
+The `k3s` role performs various tasks related to OS configuration, K3s cluster deployment, reset, and validation.
+
+> [!TIP]
+>
+> Role deployments are performed at `global` level, using the [Provisioning](/k3s-cluster/wiki/playbooks/provisioning) playbook. Upgrades can be performed at `role` level — see the instructions detailed below.
+
+## Role Tasks
+
+See the related role tasks listed below.
+
+<Steps>
+### Configuration
+
+Configuration related tasks — see <Var code href={`https://${repository.home}/blob/${repository.tag}/roles/k3s/tasks/configuration.yaml`}>configuration.yaml</Var> for details.
+
+### Facts
+
+Ansible facts — see <Var code href={`https://${repository.home}/blob/${repository.tag}/roles/k3s/tasks/facts.yaml`}>facts.yaml</Var> for details.
+
+### Load Balancer
+
+Load balancer related tasks — see <Var code href={`https://${repository.home}/blob/${repository.tag}/roles/k3s/tasks/loadbalancer.yaml`}>loadbalancer.yaml</Var> for details.
+
+### Main
+
+Main role related tasks — see <Var code href={`https://${repository.home}/blob/${repository.tag}/roles/k3s/tasks/main.yaml`}>main.yaml</Var> for details.
+
+### Reset
+
+Reset related tasks — see <Var code href={`https://${repository.home}/blob/${repository.tag}/roles/k3s/tasks/reset.yaml`}>reset.yaml</Var> for details.
+
+> [!TIP]
+>
+> A reset is performed at global level only — review the [Reset](/k3s-cluster/wiki/playbooks/reset) playbook instructions.
+
+### Upgrade
+
+Upgrade related tasks — see <Var code href={`https://${repository.home}/blob/${repository.tag}/roles/k3s/tasks/upgrade.yaml`}>upgrade.yaml</Var> for details. Run the following command to perform a role upgrade:
+
+```shell
+ansible-playbook --ask-vault-pass --tags=k3s upgrade.yaml
+```
+
+The upgrade will trigger the [Kured](/k3s-cluster/wiki/configuration/roles/kured) role execution, performing safe automatic node reboots.
+
+### Validation
+
+Validation related tasks — see <Var code href={`https://${repository.home}/blob/${repository.tag}/roles/k3s/tasks/validation.yaml`}>validation.yaml</Var> for details. Run the following command to perform all role related validation tasks:
+
+```shell
+ansible-playbook --ask-vault-pass --tags=k3s validation.yaml
+```
+
+</Steps>
+
+## Role Templates
+
+See the related role templates listed below.
+
+<Steps>
+### Configuration
+
+- **Cluster** — Cluster configuration template, see <Var code href={`https://${repository.home}/blob/${repository.tag}/roles/k3s/templates/config.j2`}>config.j2</Var> for details.
+- **HAProxy** — HAProxy configuration template, see <Var code href={`https://${repository.home}/blob/${repository.tag}/roles/k3s/templates/haproxy.j2`}>haproxy.j2</Var> for details.
+- **KeepAlived** — KeepAlived configuration template, see <Var code href={`https://${repository.home}/blob/${repository.tag}/roles/k3s/templates/keepalived.j2`}>keepalived.j2</Var> for details.
+- **Registries** — [Registries](https://docs.k3s.io/installation/registry-mirror) configuration template, see <Var code href={`https://${repository.home}/blob/${repository.tag}/roles/k3s/templates/registries.j2`}>registries.j2</Var> for details.
+
+### Service
+
+Service configuration template — see <Var code href={`https://${repository.home}/blob/${repository.tag}/roles/k3s/templates/service.j2`}>service.j2</Var> for details.
+
+</Steps>
+
+## Role Variables
+
+> [!IMPORTANT]
+>
+> A [role upgrade](/k3s-cluster/wiki/configuration/roles/k3s/#upgrade) is required in order to apply any changes related to role variables.
+
+See the related role variables, defined in the <Var code href={`https://${repository.home}/blob/${repository.tag}/roles/k3s/defaults/main.yaml`}>main.yaml</Var> defaults file. Review the <Var code href={`https://${repository.home}/tree/${repository.tag}/roles/k3s`}>README.md</Var> file for additional details.
+
+> [!TIP]
+>
+> Use [Renovate](/k3s-cluster/tutorials/configuration/tools/#renovate) to automate release pull requests and keep dependencies up-to-date.

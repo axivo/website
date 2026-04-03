@@ -1,0 +1,136 @@
+@reference "tailwindcss";
+
+a.cta {
+  @apply mt-[1.25em] inline-block rounded-full px-6 py-3 text-white no-underline transition-all duration-300 ease-in-out select-none;
+  background: linear-gradient(to bottom, #238aff, #4150f5);
+  box-shadow: 0 1px 2px #00295738;
+  text-shadow: 0 1px 1px #00387838;
+}
+
+a.ctaLink {
+  @apply mt-[1.25em] ml-4 md:ml-8;
+}
+
+:global(.dark) a.cta {
+  background: linear-gradient(to bottom, #d0dfff, #b2c7ff);
+  box-shadow: 0 1px 2px rgb(178 199 255 / 20%);
+  color: #000;
+  text-shadow: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-drag: none;
+}
+
+a.cta span {
+  @apply inline-block transition-all duration-300 ease-in-out;
+}
+
+a.cta:hover {
+  @apply brightness-[1.05];
+  box-shadow: 0 5px 30px -10px #0078ffab;
+}
+
+:global(.dark) a.cta:hover {
+  box-shadow: 0 5px 30px -10px rgb(178 199 255 / 50%);
+}
+
+a.cta:hover span {
+  @apply translate-x-[3px];
+}
+
+a.cta:active {
+  @apply brightness-[0.95];
+  box-shadow: 0 1px 3px #00295738;
+}
+
+:global(.dark) a.cta:active {
+  box-shadow: 0 1px 3px rgb(178 199 255 / 20%);
+}
+
+a.cta:active span {
+  @apply translate-x-[5px];
+}
+
+a.cta:focus-visible {
+  @apply outline-offset-2;
+  outline: 2px solid
+    hsl(var(--nextra-primary-hue) var(--nextra-primary-saturation) 77%);
+}
+
+a.cta:focus-visible span {
+  @apply translate-x-[3px];
+}
+
+.container {
+  @apply mx-auto;
+  max-width: var(--nextra-content-width);
+  padding-left: max(env(safe-area-inset-left), 2rem);
+  padding-right: max(env(safe-area-inset-right), 2rem);
+}
+
+.content {
+  @apply flex max-w-[70rem] items-center gap-8;
+}
+
+.hero {
+  @apply py-8;
+}
+
+.image {
+  @apply shrink-0;
+  width: clamp(12rem, 30vw, 24rem);
+}
+
+.tagline {
+  @apply flex flex-wrap items-center leading-normal;
+  font-feature-settings: initial;
+  font-size: clamp(1rem, 3vw, 1.4rem);
+}
+
+.tagline p {
+  @apply w-full;
+}
+
+.text {
+  @apply -mt-8 flex-1;
+}
+
+.textCompact {
+  @apply flex-1;
+}
+
+.title {
+  @apply inline-flex leading-tight font-bold tracking-[-2px];
+  background-clip: text;
+  background-image: linear-gradient(146deg, #000, #757a7d);
+  font-feature-settings: initial;
+  font-size: clamp(2.5rem, 8vw, 4rem);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+:global(.dark) .title {
+  background-image: linear-gradient(146deg, #fff, #757a7d);
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    padding-left: max(env(safe-area-inset-left), 1rem);
+    padding-right: max(env(safe-area-inset-right), 1rem);
+  }
+
+  .content {
+    @apply flex-col-reverse gap-4 text-center;
+  }
+
+  .hero {
+    @apply py-4;
+  }
+
+  .image {
+    width: clamp(8rem, 40vw, 12rem);
+  }
+
+  .text {
+    @apply mt-0;
+  }
+}

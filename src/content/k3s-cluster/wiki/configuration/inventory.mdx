@@ -1,0 +1,185 @@
+---
+title: Inventory
+description: >-
+  Ansible inventory configuration for defining managed nodes and deployment batch size in the K3s cluster.
+---
+
+import { Var } from "@axivo/website";
+import { repository } from "@axivo/website/k3s-cluster";
+
+# Inventory
+
+Ansible automates tasks on managed nodes (also named _hosts_) in the cluster infrastructure, using a list or group of lists known as [inventory](https://docs.ansible.com/ansible/latest/inventory_guide/intro_inventory.html).
+
+## Important Settings
+
+There are two key configuration settings, influencing how the cluster will be deployed.
+
+### Playbook Batch Size
+
+Because K3s uses [tokens](https://docs.k3s.io/cli/token) to secure the node join process, a [serial](https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_strategies.html#setting-the-batch-size-with-serial) must be defined, generating the token on the first `cluster` type node. Next, the generated token is copied to additional nodes while running the [Provisioning](/k3s-cluster/wiki/playbooks/provisioning) playbook.
+
+#### Batch Size Usage
+
+Example of `serial` structure with 3 `server` type nodes and 5 `agent` type nodes, used in the [Provisioning](/k3s-cluster/wiki/playbooks/provisioning) playbook:
+
+<details>
+<summary>Provisioning Details</summary>
+
+```yaml
+serial:
+  - 1
+  - 2
+  - 5
+```
+
+The `serial` structure has the following pattern:
+
+- `1` — first `server` type node, where the K3s token is generated
+- `2` — two additional `server` type nodes, where the K3s token is copied
+- `5` — five additional `agent` type nodes, where the K3s token is copied
+
+</details>
+
+> [!TIP]
+>
+> Update the `serial` structure in the <Var code href={`https://${repository.home}/blob/${repository.tag}/provisioning.yaml`}>provisioning.yaml</Var> playbook file.
+
+Example of `serial` structure with 3 `server` type nodes and 5 `agent` type nodes, used in the [Reset](/k3s-cluster/wiki/playbooks/reset) playbook:
+
+<details>
+  <summary>Reset Details</summary>
+
+```yaml
+serial:
+  - 3
+  - 5
+```
+
+The `serial` structure has the following pattern:
+
+- `3` — `server` type nodes are reset first
+- `5` — `agent` type nodes are reset
+
+</details>
+
+> [!TIP]
+>
+> Update the `serial` structure in the <Var code href={`https://${repository.home}/blob/${repository.tag}/reset.yaml`}>reset.yaml</Var> playbook file.
+
+### `k3s_vars.cluster.controlplane.tainted`
+
+The setting allows the end-user to control where the Kubernetes pods will be deployed. In a scenario where there is only a single `agent` type node or none deployed, setting the value to `false` will allow pods to be deployed on any cluster node type.
+
+> [!TIP]
+>
+> Update the setting in the `k3s` role <Var code href={`https://${repository.home}/blob/${repository.tag}/roles/k3s/defaults/main.yaml`}>main.yaml</Var> variables file.
+
+## Cluster Nodes
+
+The <Var code href={`https://${repository.home}/blob/${repository.tag}/inventory/cluster/hosts.yaml`}>hosts.yaml</Var> inventory file contains the list of `server` and `agent` cluster node types.
+
+> [!IMPORTANT]
+>
+> Please review the [K3s Architecture](https://docs.k3s.io/architecture) for further details.
+
+### High Availability
+
+The minimum number of `server` type nodes for a [HA cluster](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/ha-topology/) is 3. Ideally, a cluster should have a starting point of 6 nodes — 3 tainted `server` type nodes (running control-plane and datastore components) and 3 `agent` type nodes (where Kubernetes pods are deployed).
+
+Example of an HA cluster inventory with 4 nodes:
+
+<details>
+<summary>Inventory Details</summary>
+
+Inventory, set in the <Var code href={`https://${repository.home}/blob/${repository.tag}/inventory/cluster/hosts.yaml`}>hosts.yaml</Var> inventory file:
+
+```yaml
+server:
+  hosts:
+    apollo:
+    boreas:
+    cerus:
+
+agent:
+  hosts:
+    chaos:
+
+cluster:
+  children:
+    server:
+    agent:
+```
+
+Batch size, set in the <Var code href={`https://${repository.home}/blob/${repository.tag}/provisioning.yaml`}>provisioning.yaml</Var> playbook file:
+
+```yaml
+serial:
+  - 1
+  - 2
+  - 1
+```
+
+Batch size, set in the <Var code href={`https://${repository.home}/blob/${repository.tag}/reset.yaml`}>reset.yaml</Var> playbook file:
+
+```yaml
+serial:
+  - 3
+  - 1
+```
+
+</details>
+
+#### Single Point of Failure
+
+> [!CAUTION]
+>
+> The above detailed configuration will introduce a SPOF, since Kubernetes pods are deployed to a single `agent` type node or none.
+
+To address this issue, set the `k3s_vars.server.controlplane.tainted` option to `false` in the `k3s` role <Var code href={`https://${repository.home}/blob/${repository.tag}/roles/k3s/defaults/main.yaml`}>main.yaml</Var> variables file.
+
+### Non High Availability
+
+The minimum number of `server` type nodes for a non-HA cluster is 1. By [K3s Architecture](https://docs.k3s.io/architecture) design, a cluster can have either 1 or 3+ `server` type nodes.
+
+> [!IMPORTANT]
+>
+> If the targeted cluster has fewer than 3 `server` type nodes, the [Provisioning](/k3s-cluster/wiki/playbooks/provisioning) playbook will automatically disable all related HA features.
+
+Example of a non-HA cluster inventory with 2 nodes:
+
+<details>
+<summary>Inventory Details</summary>
+
+Inventory, set in the <Var code href={`https://${repository.home}/blob/${repository.tag}/inventory/cluster/hosts.yaml`}>hosts.yaml</Var> inventory file:
+
+```yaml
+server:
+  hosts:
+    apollo:
+
+agent:
+  hosts:
+    chaos:
+
+cluster:
+  children:
+    server:
+    agent:
+```
+
+Batch size, set in the <Var code href={`https://${repository.home}/blob/${repository.tag}/provisioning.yaml`}>provisioning.yaml</Var> playbook file:
+
+```yaml
+serial:
+  - 1
+```
+
+Batch size, set in the <Var code href={`https://${repository.home}/blob/${repository.tag}/reset.yaml`}>reset.yaml</Var> playbook file:
+
+```yaml
+serial:
+  - 2
+```
+
+</details>

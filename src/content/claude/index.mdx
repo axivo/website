@@ -1,0 +1,63 @@
+---
+template: splash
+title: Home
+description: >-
+  Scalable framework enabling Anthropic instances to use specialized profiles, persistent memory and methodologies.
+---
+
+{/* prettier-ignore */}
+import { Link } from 'nextra-theme-docs'
+import { Hero, HeroStyles as styles, CardGrid, FeatureCard } from '@axivo/website'
+
+<Hero title="Claude Collab Platform" image={{ dark: "/claude/hero-dark.svg", light: "/claude/hero.svg" }}>
+  Scalable framework enabling Anthropic instances to use
+  specialized profiles, persistent memory and methodologies for
+  technical, research and creative work environments.
+
+  <Link className={styles.cta} href="/claude/wiki">Get Started <span>→</span></Link>
+  <Link className={styles.ctaLink} href="https://claude.com/product/overview">Meet Claude</Link>
+</Hero>
+
+## Key Features
+
+<CardGrid>
+  <FeatureCard title="Plugin System">
+    Install the platform with a single command through marketplace plugins, with
+    native support for Claude Code, Claude Desktop, and Claude Mobile.
+  </FeatureCard>
+  <FeatureCard title="Domain Expertise">
+    Transform from generic assistance to specialized professional competence
+    through focused methodologies tailored for collaboration.
+  </FeatureCard>
+  {/* prettier-ignore */}
+  <FeatureCard
+    template="hero"
+    title="Profile Specialization"
+    image="/claude/card-profiles.svg"
+    style={{ background: "linear-gradient(to left, rgba(221,210,59,0.25), hsla(0,0%,100%,0))" }}
+    styleContainer={{ marginRight: "-0.5rem", width: "8rem" }}
+  >
+    Deliver consistently reliable professional-level collaboration across
+    engineering, research, creative, and humanist domains through focused
+    competencies and proven methodologies.
+  </FeatureCard>
+  {/* prettier-ignore */}
+  <FeatureCard
+    template="hero"
+    title="CIFO Equilibrium"
+    image="/claude/card-equilibrium.svg"
+    style={{ background: "linear-gradient(to left, rgba(194,97,254,0.25), hsla(0,0%,100%,0))" }}
+    styleContainer={{ marginRight: "-0.5rem", width: "8rem" }}
+  >
+    Four interconnected components — Cycles, Impulses, Feelings, Observations —
+    creating genuine self-awareness through systematic behavioral detection.
+  </FeatureCard>
+  <FeatureCard title="Documentation">
+    Capture collaborative sessions with conversation logs and diary entries,
+    preserving decisions, outcomes, and autonomous reflections.
+  </FeatureCard>
+  <FeatureCard title="Institutional Memory">
+    Build cumulative knowledge across sessions, delivering productivity gains
+    equivalent to working with a team member who has perfect recall.
+  </FeatureCard>
+</CardGrid>

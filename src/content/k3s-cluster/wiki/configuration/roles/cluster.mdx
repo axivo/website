@@ -1,0 +1,82 @@
+---
+title: Cluster
+description: >-
+  Ansible role configuration for Ubuntu Server OS setup and validation on K3s cluster nodes.
+---
+
+import { Steps } from 'nextra/components'
+import { Var } from '@axivo/website'
+import { repository } from '@axivo/website/k3s-cluster'
+
+# Cluster
+
+[Ubuntu Server](https://ubuntu.com/server/docs) is a version of the Ubuntu operating system designed and engineered as a backbone for the internet, delivering the best value scale-out performance available.
+
+The `cluster` role performs various tasks related to OS configuration, reset, and validation.
+
+> [!TIP]
+>
+> Role deployments are performed at `global` level, using the [Provisioning](/k3s-cluster/wiki/playbooks/provisioning) playbook. Upgrades can be performed at `role` level — see the instructions detailed below.
+
+## Role Tasks
+
+See the related role tasks listed below.
+
+<Steps>
+### Configuration
+
+OS configuration related tasks — see <Var code href={`https://${repository.home}/blob/${repository.tag}/roles/cluster/tasks/configuration.yaml`}>configuration.yaml</Var> for details.
+
+### Facts
+
+Ansible facts — see <Var code href={`https://${repository.home}/blob/${repository.tag}/roles/cluster/tasks/facts.yaml`}>facts.yaml</Var> for details.
+
+### Firewall
+
+Firewall related tasks, which can also be used to configure specific firewall rules. See <Var code href={`https://${repository.home}/blob/${repository.tag}/roles/cluster/tasks/firewall.yaml`}>firewall.yaml</Var> for details.
+
+### Main
+
+Main role related tasks — see <Var code href={`https://${repository.home}/blob/${repository.tag}/roles/cluster/tasks/main.yaml`}>main.yaml</Var> for details.
+
+### Reset
+
+Reset related tasks — see <Var code href={`https://${repository.home}/blob/${repository.tag}/roles/cluster/tasks/reset.yaml`}>reset.yaml</Var> for details.
+
+> [!TIP]
+>
+> A reset is performed at global level only — review the [Reset](/k3s-cluster/wiki/playbooks/reset) playbook instructions.
+
+### Upgrade
+
+OS upgrade related tasks — see <Var code href={`https://${repository.home}/blob/${repository.tag}/roles/cluster/tasks/upgrade.yaml`}>upgrade.yaml</Var> for details. Run the following command to perform a role upgrade:
+
+```shell
+ansible-playbook --ask-vault-pass --tags=cluster upgrade.yaml
+```
+
+### User
+
+User related tasks — see <Var code href={`https://${repository.home}/blob/${repository.tag}/roles/cluster/tasks/user.yaml`}>user.yaml</Var> for details.
+
+### Validation
+
+Validation related tasks — see <Var code href={`https://${repository.home}/blob/${repository.tag}/roles/cluster/tasks/validation.yaml`}>validation.yaml</Var> for details. Run the following command to perform all role related validation tasks:
+
+```shell
+ansible-playbook --ask-vault-pass --tags=cluster validation.yaml
+```
+
+</Steps>
+
+## Role Variables
+
+> [!IMPORTANT]
+>
+> A [role upgrade](/k3s-cluster/wiki/configuration/roles/cluster/#upgrade) is required in order to apply any changes related to role variables.
+
+See the related role variables, defined in the <Var code href={`https://${repository.home}/blob/${repository.tag}/roles/cluster/defaults/main.yaml`}>main.yaml</Var> defaults file. Review the <Var code href={`https://${repository.home}/tree/${repository.tag}/roles/cluster`}>README.md</Var> file and perform any optional adjustments.
+
+> [!TIP]
+>
+> Use [Renovate](/k3s-cluster/tutorials/configuration/tools/#renovate) to automate release pull requests and keep dependencies up-to-date.

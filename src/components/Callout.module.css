@@ -1,0 +1,73 @@
+@reference "tailwindcss";
+
+.attribution {
+  @apply mt-2 text-sm;
+  color: var(--callout-color);
+}
+
+.body p {
+  @apply leading-5;
+}
+
+.callout {
+  @apply my-4 px-4 text-sm leading-5;
+  border-left: 4px solid var(--callout-color);
+}
+
+.caution {
+  --callout-color: rgb(207, 34, 46);
+}
+
+:global(.dark) .caution {
+  --callout-color: rgb(248, 81, 73);
+}
+
+.important {
+  --callout-color: rgb(130, 80, 223);
+}
+
+:global(.dark) .important {
+  --callout-color: rgb(163, 113, 247);
+}
+
+.note {
+  --callout-color: rgb(9, 105, 218);
+}
+
+:global(.dark) .note {
+  --callout-color: rgb(65, 132, 228);
+}
+
+.quote {
+  --callout-color: rgb(0, 128, 128);
+}
+
+:global(.dark) .quote {
+  --callout-color: rgb(94, 194, 194);
+}
+
+.tip {
+  --callout-color: rgb(26, 127, 55);
+}
+
+:global(.dark) .tip {
+  --callout-color: rgb(63, 185, 80);
+}
+
+.title {
+  @apply mb-2 flex items-center text-base font-bold;
+  color: var(--callout-color);
+}
+
+.title svg {
+  @apply mr-2 size-4;
+  fill: var(--callout-color);
+}
+
+.warning {
+  --callout-color: rgb(207, 135, 0);
+}
+
+:global(.dark) .warning {
+  --callout-color: rgb(210, 153, 34);
+}

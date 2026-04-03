@@ -1,5 +1,0 @@
-{{- $nested := eq (.Get "nested") "true" -}}
-
-<div class="hextra-steps hx:ml-4 hx:mb-12 hx:ltr:border-l hx:rtl:border-r hx:border-gray-200 hx:ltr:pl-6 hx:rtl:pr-6 hx:dark:border-neutral-800 {{ if not $nested }}[counter-reset:step]{{ end }}">
-  {{- .Inner -}}
-</div>

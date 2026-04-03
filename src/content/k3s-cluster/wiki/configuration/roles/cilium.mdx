@@ -1,0 +1,114 @@
+---
+title: Cilium
+description: >-
+  Ansible role configuration for Cilium eBPF-based networking and security in the K3s cluster.
+---
+
+import { Steps } from 'nextra/components'
+import { Var } from '@axivo/website'
+import { repository } from '@axivo/website/k3s-cluster'
+
+# Cilium
+
+[Cilium](https://docs.cilium.io/en/stable) is an open source, cloud native solution for providing, securing, and observing network connectivity between workloads, fueled by the revolutionary Kernel technology eBPF.
+
+The `cilium` role performs various tasks related to Helm chart deployment, reset, and validation.
+
+> [!TIP]
+>
+> Role deployments are performed at `global` level, using the [Provisioning](/k3s-cluster/wiki/playbooks/provisioning) playbook. Upgrades can be performed at `role` level — see the instructions detailed below.
+
+## Role Tasks
+
+See the related role tasks listed below.
+
+<Steps>
+### Facts
+
+Ansible facts — see <Var code href={`https://${repository.home}/blob/${repository.tag}/roles/cilium/tasks/facts.yaml`}>facts.yaml</Var> for details.
+
+### Main
+
+Main role related tasks — see <Var code href={`https://${repository.home}/blob/${repository.tag}/roles/cilium/tasks/main.yaml`}>main.yaml</Var> for details.
+
+### Post-Install
+
+Post-install related tasks — see <Var code href={`https://${repository.home}/blob/${repository.tag}/roles/cilium/tasks/postinstall.yaml`}>postinstall.yaml</Var> for details.
+
+### Reset
+
+Reset related tasks — see <Var code href={`https://${repository.home}/blob/${repository.tag}/roles/cilium/tasks/reset.yaml`}>reset.yaml</Var> for details.
+
+> [!TIP]
+>
+> A reset is performed at global level only — review the [Reset](/k3s-cluster/wiki/playbooks/reset) playbook instructions.
+
+### Upgrade
+
+Upgrade related tasks — see <Var code href={`https://${repository.home}/blob/${repository.tag}/roles/cilium/tasks/upgrade.yaml`}>upgrade.yaml</Var> for details. Run the following command to perform a role upgrade:
+
+```shell
+ansible-playbook --ask-vault-pass --tags=cilium upgrade.yaml
+```
+
+### Validation
+
+Validation related tasks — see <Var code href={`https://${repository.home}/blob/${repository.tag}/roles/cilium/tasks/validation.yaml`}>validation.yaml</Var> for details. Run the following command to perform all role related validation tasks:
+
+```shell
+ansible-playbook --ask-vault-pass --tags=cilium validation.yaml
+```
+
+</Steps>
+
+## Role Templates
+
+See the related role templates listed below.
+
+> [!TIP]
+>
+> Perform a role validation to visualize all rendered templates and variables.
+
+<Steps>
+### Helm Chart
+
+Helm chart values template — see <Var code href={`https://${repository.home}/blob/${repository.tag}/roles/cilium/templates/values.j2`}>values.j2</Var> for details.
+
+### Certificate
+
+Kubernetes `Certificate` resource template — see <Var code href={`https://${repository.home}/blob/${repository.tag}/roles/cilium/templates/certificate.j2`}>certificate.j2</Var> for details.
+
+### Cluster Issuer
+
+Kubernetes `ClusterIssuer` resource template — see <Var code href={`https://${repository.home}/blob/${repository.tag}/roles/cilium/templates/cluster_issuer.j2`}>cluster_issuer.j2</Var> for details.
+
+### Gateway
+
+Kubernetes `Gateway` resource template — see <Var code href={`https://${repository.home}/blob/${repository.tag}/roles/cilium/templates/gateway.j2`}>gateway.j2</Var> for details.
+
+### HTTP Route
+
+- **Insecure Route** — Kubernetes `HTTPRoute` resource template, see <Var code href={`https://${repository.home}/blob/${repository.tag}/roles/cilium/templates/http_route_insecure.j2`}>http_route_insecure.j2</Var> for details.
+- **Secure Route** — Kubernetes `HTTPRoute` resource template, see <Var code href={`https://${repository.home}/blob/${repository.tag}/roles/cilium/templates/http_route_secure.j2`}>http_route_secure.j2</Var> for details.
+
+### L2 Announcement Policy
+
+Kubernetes `CiliumL2AnnouncementPolicy` resource template — see <Var code href={`https://${repository.home}/blob/${repository.tag}/roles/cilium/templates/l2_announcement_policy.j2`}>l2_announcement_policy.j2</Var> for details.
+
+### Load Balancer IP Pool
+
+Kubernetes `CiliumLoadBalancerIPPool` resource template — see <Var code href={`https://${repository.home}/blob/${repository.tag}/roles/cilium/templates/loadbalancer_ip_pool.j2`}>loadbalancer_ip_pool.j2</Var> for details.
+
+</Steps>
+
+## Role Variables
+
+> [!IMPORTANT]
+>
+> A [role upgrade](/k3s-cluster/wiki/configuration/roles/cilium/#upgrade) is required in order to apply any changes related to role variables.
+
+See the related role variables, defined in the <Var code href={`https://${repository.home}/blob/${repository.tag}/roles/cilium/defaults/main.yaml`}>main.yaml</Var> defaults file. Review the <Var code href={`https://${repository.home}/tree/${repository.tag}/roles/cilium`}>README.md</Var> file for additional details.
+
+> [!TIP]
+>
+> Use [Renovate](/k3s-cluster/tutorials/configuration/tools/#renovate) to automate release pull requests and keep dependencies up-to-date.

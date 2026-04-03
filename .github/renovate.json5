@@ -3,50 +3,6 @@
   "assignees": [
     "fmunteanu"
   ],
-  "customManagers": [
-    {
-      "customType": "regex",
-      "datasourceTemplate": "golang-version",
-      "depNameTemplate": "go",
-      "managerFilePatterns": [
-        "**/go.mod",
-        "**/go.sum",
-        ".github/workflows/*.yml"
-      ],
-      "matchStrings": [
-        "go\\s+(?<currentValue>.+)",
-        "with:[\\s\\r]+?go-version:\\s+(?<currentValue>.+)"
-      ],
-      "versioningTemplate": "go"
-    },
-    {
-      "customType": "regex",
-      "datasourceTemplate": "node-version",
-      "depNameTemplate": "node",
-      "managerFilePatterns": [
-        ".github/workflows/checksums.yml",
-        ".github/workflows/documentation.yml"
-      ],
-      "matchStrings": [
-        "with:[\\s\\r]+?node-version:\\s+(?<currentValue>.+)"
-      ],
-      "versioningTemplate": "node"
-    },
-    {
-      "customType": "regex",
-      "datasourceTemplate": "github-releases",
-      "depNameTemplate": "gohugoio/hugo",
-      "extractVersionTemplate": "^v(?<version>.+)$",
-      "managerFilePatterns": [
-        "**/hugo.yaml",
-        ".github/workflows/*.yml"
-      ],
-      "matchStrings": [
-        "hugoVersion:[\\s\\S]+?min:\\s+(?<currentValue>.+)",
-        "with:[\\s\\r]+?hugo-version:\\s+(?<currentValue>.+)"
-      ]
-    }
-  ],
   "excludeCommitPaths": [
     "node_modules/**"
   ],
@@ -63,39 +19,14 @@
   "packageRules": [
     {
       "enabled": true,
-      "extractVersion": "^(?<version>\\d+\\.\\d+)",
-      "matchDatasources": [
-        "golang-version"
-      ],
-      "matchDepNames": [
-        "go"
-      ]
-    },
-    {
-      "enabled": true,
-      "matchDatasources": [
-        "node-version"
-      ],
-      "matchDepNames": [
-        "node"
+      "matchManagers": [
+        "npm"
       ],
       "matchUpdateTypes": [
-        "major"
-      ]
-    },
-    {
-      "enabled": true,
-      "matchDepTypes": [
-        "direct",
-        "indirect"
-      ],
-      "matchManagers": [
-        "gomod"
+        "major",
+        "minor"
       ]
     }
-  ],
-  "postUpdateOptions": [
-    "gomodTidy"
   ],
   "prConcurrentLimit": 0,
   "prHourlyLimit": 0,

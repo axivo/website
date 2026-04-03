@@ -1,0 +1,14 @@
+@import "nextra-theme-docs/style.css";
+@import "tailwindcss";
+@import "./markdown.css";
+@import "./navbar.css";
+
+/* Hide breadcrumb when it has no children (dynamic routes) */
+.nextra-breadcrumb:not(:has(*)) {
+  display: none;
+}
+
+/* Page Width */
+:root:root {
+  --nextra-content-width: 80rem;
+}

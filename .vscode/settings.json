@@ -12,6 +12,9 @@
   "[markdown]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
+  "[mdx]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
   "editor.formatOnSave": true,
   "editor.insertSpaces": true,
   "editor.rulers": [
@@ -20,8 +23,7 @@
   "editor.showUnused": true,
   "editor.tabSize": 2,
   "files.associations": {
-    "**/renovate.json5": "jsonc",
-    "go.*": "go"
+    "**/renovate.json5": "jsonc"
   },
   "files.exclude": {
     "**/.git": true,
@@ -34,7 +36,7 @@
     "**/.git/objects/**": true,
     "**/.git/subtree-cache/**": true
   },
-  "javascript.validate.enable": true,
+  "js/ts.validate.enabled": true,
   "json.schemas": [
     {
       "fileMatch": [

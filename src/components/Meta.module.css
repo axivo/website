@@ -1,0 +1,39 @@
+@reference "tailwindcss";
+
+.author {
+  @apply inline-flex items-center text-current transition-colors;
+}
+
+.avatar {
+  @apply mr-1.5 rounded-full;
+}
+
+.container {
+  @apply flex flex-wrap items-center gap-y-2 text-sm text-gray-500;
+}
+
+:global(.dark) .container {
+  @apply text-gray-400;
+}
+
+.dash {
+  @apply mx-1;
+}
+
+.date {
+  @apply mr-1 transition-colors;
+}
+
+.date:hover,
+.author:hover {
+  @apply text-slate-700;
+}
+
+:global(.dark) .date:hover,
+:global(.dark) .author:hover {
+  @apply text-slate-200;
+}
+
+.separator {
+  @apply mr-1;
+}

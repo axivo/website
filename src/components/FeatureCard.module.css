@@ -1,0 +1,92 @@
+@reference "tailwindcss";
+
+.body {
+  @apply opacity-80;
+}
+
+.body p {
+  line-height: inherit;
+}
+
+.card,
+.cardHero {
+  @apply flex overflow-hidden rounded-2xl px-7 py-6 no-underline;
+  background-color: white;
+  box-shadow:
+    0 8px 16px rgb(0 0 0 / 8%),
+    0 1px 2px rgb(0 0 0 / 4%),
+    0 0 0 1px rgb(0 0 0 / 3%);
+  color: #000;
+  transition: box-shadow 0.3s ease;
+}
+
+.card {
+  @apply flex-col gap-2;
+}
+
+.cardHero {
+  @apply flex-row items-center gap-8;
+}
+
+:global(.dark) .card,
+:global(.dark) .cardHero {
+  background-color: #202020;
+  box-shadow:
+    0 8px 16px rgb(255 255 255 / 8%),
+    0 1px 2px rgb(255 255 255 / 4%),
+    0 0 0 1px rgb(255 255 255 / 3%);
+  color: #fff;
+}
+
+.card:hover,
+.cardHero:hover {
+  box-shadow:
+    0 12px 24px rgb(0 0 0 / 12%),
+    0 2px 4px rgb(0 0 0 / 6%),
+    0 0 0 1px rgb(0 0 0 / 5%);
+}
+
+:global(.dark) .card:hover,
+:global(.dark) .cardHero:hover {
+  box-shadow:
+    0 12px 24px rgb(255 255 255 / 12%),
+    0 2px 4px rgb(255 255 255 / 6%),
+    0 0 0 1px rgb(255 255 255 / 5%);
+}
+
+.grid {
+  @apply my-8 grid grid-cols-2 gap-8;
+  font-feature-settings: initial;
+}
+
+.image {
+  @apply mt-auto;
+}
+
+.imageHero {
+  @apply shrink-0;
+  width: clamp(8rem, 20vw, 14rem);
+}
+
+.textHero {
+  @apply flex flex-1 flex-col gap-2;
+}
+
+.title {
+  @apply leading-tight font-semibold tracking-[-1px];
+  font-size: clamp(1.4rem, 4vw, 1.8rem);
+}
+
+@media screen and (max-width: 768px) {
+  .cardHero {
+    @apply flex-col;
+  }
+
+  .grid {
+    @apply grid grid-cols-1;
+  }
+
+  .imageHero {
+    width: clamp(6rem, 30vw, 10rem);
+  }
+}
