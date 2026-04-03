@@ -1,7 +1,15 @@
+/**
+ * @fileoverview OpenNext configuration for Cloudflare Workers deployment.
+ *
+ * Configures the OpenNext adapter with static assets incremental cache
+ * to serve pre-rendered SSG pages from build assets instead of
+ * re-rendering at runtime on the Workers runtime.
+ */
+
+import { defineCloudflareConfig } from '@opennextjs/cloudflare'
+import staticAssetsIncrementalCache from '@opennextjs/cloudflare/overrides/incremental-cache/static-assets-incremental-cache'
+
 export default defineCloudflareConfig({
-  // For best results consider enabling R2 caching
-  // See https://opennext.js.org/cloudflare/caching for more details
-  // incrementalCache: r2IncrementalCache
-});
-import { defineCloudflareConfig } from "@opennextjs/cloudflare";
-// import r2IncrementalCache from "@opennextjs/cloudflare/overrides/incremental-cache/r2-incremental-cache";
+  enableCacheInterception: true,
+  incrementalCache: staticAssetsIncrementalCache
+})
