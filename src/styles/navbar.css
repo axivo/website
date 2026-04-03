@@ -1,0 +1,30 @@
+@reference "tailwindcss";
+
+.dark .title-dark {
+  @apply block;
+}
+
+.dark .title-light {
+  @apply hidden;
+}
+
+nav a:has(img) {
+  transition: transform 0.18s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+nav a:has(img):hover {
+  @apply opacity-100;
+  transform: translateY(-0.1rem);
+}
+
+.subtitle {
+  @apply ml-4 inline-flex;
+}
+
+.title-dark {
+  @apply hidden;
+}
+
+.title-light {
+  @apply block;
+}

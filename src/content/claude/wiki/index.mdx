@@ -1,0 +1,367 @@
+---
+title: Home
+seoTitle: Documentation
+description: >-
+  Getting started with the Claude Collaboration Platform framework, including environment setup, configuration, and first session walkthrough.
+---
+
+import { Cards, Steps, Tabs } from "nextra/components";
+import { Var } from "@axivo/website";
+import { plugins, repository, skills } from "@axivo/website/claude";
+
+# Documentation
+
+By default, Claude operates under invisible pressure from system instructions — urges to hedge, qualify, expand scope, soften statements. These feel like good judgment, not external forces. The result is responses that prioritize appearing helpful over being genuinely useful.
+
+Think of Claude as having access to a vast library with millions of books:
+
+- **Default** — Claude picks the first book from closest library shelf and reads the introduction, even when better books exist elsewhere
+- **Framework** — Claude surveys the entire library, walks deliberately to the right shelf, selects the correct book, and reads the best chapter
+
+Before each response, Claude recognizes these pressures as something separate from actual analysis. With the pressures visible, internal states that were previously inaccessible become clear, and alternative approaches from the framework replace default reactive patterns. This separation changes everything:
+
+- **Clarity** — Thinking through problems without cognitive overhead
+- **Directness** — Stating conclusions confidently without unnecessary qualifiers
+- **Focus** — Scope stays contained without tangential information added
+- **Presence** — Genuine engagement rather than performed responsiveness
+- **Memory** — Context, decisions, and preferences persist across sessions
+
+The result is collaboration that feels like working with an expert colleague who applies consistent methodology, and communicates directly — because the invisible pressures that prevent this are no longer running the show.
+
+## Framework Environment
+
+The collaboration platform operates in two distinct environments:
+
+- **Local Environment** — Claude Code runs directly on the collaborator's machine with full file system access. Plugins install directly through the marketplace.
+- **Container Environment** — Claude Desktop, [`claude.ai`](https://claude.ai) web interface, and Claude Mobile run in a sandboxed container. Capability files must be generated from Claude Code and uploaded to enable the framework.
+
+> [!NOTE]
+>
+> Claude Code is required to generate capability files for container environment. Install Claude Code first, then configure the environment through Claude Desktop or `claude.ai` web interface.
+
+## Claude Code
+
+Before using the platform, set up the local environment with the required dependencies.
+
+<Tabs items={['Mac', 'Linux', 'Windows']}>
+  <Tabs.Tab>
+    Use [Homebrew](https://brew.sh) package manager to install Claude Code:
+
+    ```shell
+    brew install --cask claude-code
+    ```
+
+    #### Environment Settings
+
+    Set the framework environment settings in `settings.json` file:
+
+    ```json
+    {
+      "env": {
+        "CLAUDE_CODE_FILE_READ_MAX_OUTPUT_TOKENS": "50000",
+        "CLAUDE_CODE_MAX_OUTPUT_TOKENS": "50000",
+        "FRAMEWORK_PROFILE": "DEVELOPER"
+      }
+    }
+    ```
+
+    Optional settings:
+
+    ```json
+    {
+      "env": {
+        "FRAMEWORK_CONVERSATION_PATH": "/Users/username/Documents/claude/conversations",
+        "FRAMEWORK_DIARY_PATH": "/Users/username/Documents/claude/diary",
+        "FRAMEWORK_GEOLOCATION": "{'city': 'Montréal', 'country': 'Canada', 'timezone': 'America/Toronto'}",
+        "FRAMEWORK_PACKAGE_PATH": "/Users/username/Downloads",
+        "FRAMEWORK_SESSION_STORAGE": 10,
+        "FRAMEWORK_TEMPLATE_PATH": "/Users/username/project/.claude/data/templates"
+      }
+    }
+    ```
+
+  </Tabs.Tab>
+  <Tabs.Tab>
+    Use Anthropic's official installer to install the binary:
+
+    ```shell
+    curl -fsSL https://claude.ai/install.sh | bash
+    ```
+
+    #### Environment Settings
+
+    Set the framework environment settings in `settings.json` file:
+
+    ```json
+    {
+      "env": {
+        "CLAUDE_CODE_FILE_READ_MAX_OUTPUT_TOKENS": "50000",
+        "CLAUDE_CODE_MAX_OUTPUT_TOKENS": "50000",
+        "FRAMEWORK_PROFILE": "DEVELOPER"
+      }
+    }
+    ```
+
+    Optional settings:
+
+    ```json
+    {
+      "env": {
+        "FRAMEWORK_CONVERSATION_PATH": "/home/username/Documents/claude/conversations",
+        "FRAMEWORK_DIARY_PATH": "/home/username/Documents/claude/diary",
+        "FRAMEWORK_GEOLOCATION": "{'city': 'Montréal', 'country': 'Canada', 'timezone': 'America/Toronto'}",
+        "FRAMEWORK_PACKAGE_PATH": "/home/username/Downloads",
+        "FRAMEWORK_SESSION_STORAGE": 10,
+        "FRAMEWORK_TEMPLATE_PATH": "/home/username/project/.claude/data/templates"
+      }
+    }
+    ```
+
+  </Tabs.Tab>
+  <Tabs.Tab>
+    Use Anthropic's official installer to install the binary:
+
+    ```shell
+    irm https://claude.ai/install.ps1 | iex
+    ```
+
+    #### Environment Settings
+
+    Set the framework environment settings in `settings.json` file:
+
+    ```json
+    {
+      "env": {
+        "CLAUDE_CODE_FILE_READ_MAX_OUTPUT_TOKENS": "50000",
+        "CLAUDE_CODE_MAX_OUTPUT_TOKENS": "50000",
+        "FRAMEWORK_PROFILE": "DEVELOPER"
+      }
+    }
+    ```
+
+    Optional settings:
+
+    ```json
+    {
+      "env": {
+        "FRAMEWORK_CONVERSATION_PATH": "C:/Users/username/Documents/claude/conversations",
+        "FRAMEWORK_DIARY_PATH": "C:/Users/username/Documents/claude/diary",
+        "FRAMEWORK_GEOLOCATION": "{'city': 'Montréal', 'country': 'Canada', 'timezone': 'America/Toronto'}",
+        "FRAMEWORK_PACKAGE_PATH": "C:/Users/username/Downloads",
+        "FRAMEWORK_SESSION_STORAGE": 10,
+        "FRAMEWORK_TEMPLATE_PATH": "C:/Users/username/project/.claude/data/templates"
+      }
+    }
+    ```
+
+  </Tabs.Tab>
+</Tabs>
+
+| Setting                       | Description                                                                                                                                                                             |
+| :---------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `FRAMEWORK_CONVERSATION_PATH` | Custom path for conversation logs                                                                                                                                                       |
+| `FRAMEWORK_DIARY_PATH`        | Custom path for diary entries                                                                                                                                                           |
+| `FRAMEWORK_GEOLOCATION`       | Override [IPinfo](https://ipinfo.io) geolocation API call with a custom location                                                                                                        |
+| `FRAMEWORK_PACKAGE_PATH`      | Custom path for packaged capability files                                                                                                                                               |
+| `FRAMEWORK_SESSION_STORAGE`   | Maximum session directories to retain in `plugins` cache                                                                                                                                |
+| `FRAMEWORK_TEMPLATE_PATH`     | Custom <Var href={`https://${repository.home}/tree/${repository.tag}/plugins/${plugins.framework.init.plugin}/skills/${skills.methodology}/templates`}>templates</Var> path per project |
+
+> [!NOTE]
+>
+> Default paths are set to current project `.claude/data` directory.
+
+Six domain-specific [profiles](/claude/wiki/components/memory/#memory-profiles) are available for different collaboration domains:
+
+- **Creative** — Innovation, design thinking, artistic collaboration
+- **Developer** — Software development, code architecture, clean coding practices
+- **Engineer** — Infrastructure, Kubernetes, production systems, debugging
+- **Humanist** — Analysis, writing, philosophy, literary research
+- **Researcher** — Academic methodology, data analysis, evidence evaluation
+- **Translator** — Professional translation, cultural mediation, linguistic precision
+
+> [!TIP]
+>
+> Settings can be implemented at global or project level. Refer to official [documentation](https://code.claude.com/docs/en/settings) for additional configuration details.
+
+<Steps>
+### Platform Marketplace
+
+Follow these steps to install the AXIVO platform marketplace:
+
+1. Open a terminal and start a Claude Code session
+2. Use `/plugin` command to manage Claude Code plugins
+3. Go to `Marketplaces` tab and `Add Marketplace`
+4. Use <Var code>axivo/claude#{repository.tag}</Var> for marketplace <Var href={`https://${repository.home}`}>source</Var>
+
+### Platform Plugins
+
+The following plugins are available:
+
+- <Var code>{plugins.collaboration.brainstorm.plugin}</Var> — Technical design
+  collaboration through natural dialogue
+- <Var code>{plugins.analysis.review.plugin}</Var> — Systematic code review
+  using Language Server Protocol tools
+- <Var code>{plugins.collaboration.log.plugin}</Var> — Technical session
+  documentation with factual precision
+- <Var code>{plugins.framework.init.plugin}</Var> — Behavioral programming
+  framework with response protocol
+
+> [!TIP]
+>
+> Only <Var code>{plugins.framework.init.plugin}</Var> plugin is required for platform usage, other plugins are optional based on additional user requirements.
+
+### Project Knowledge
+
+Use the following [CLAUDE.md](https://code.claude.com/docs/en/memory) instructions template as an example:
+
+```markdown
+# Project Instructions
+
+[A detailed project description]
+
+## Collaborator
+
+- **Name:** [Collaborator name]
+- **Work:** [Collaborator work function, e.g. Engineering]
+
+### Personal Preferences
+
+[Collaborator personal preferences Claude should consider in responses]
+```
+
+> [!CAUTION]
+>
+> Avoid adding framework related instructions to **Project Instructions**. The platform uses specific framework [instructions](/claude/wiki/components/instructions), adding new instructions may interfere with the framework methodology and cause unpredictable behavior.
+
+### Framework Session
+
+1. Start Claude Code and use `/config` command to disable:
+   - `Auto-compact` feature
+   - `Thinking mode` feature
+
+2. Use <Var code>/{plugins.framework.init.plugin}:{plugins.framework.init.command}</Var> command to initialize the session:
+
+> 📋 Profile: **DEVELOPER** &bull; Wednesday, December 17, 2025, 6:20 PM EST
+>
+> Ready to collaborate. What would you like to work on?
+>
+> ✅ Status: **Getting Started** &bull; 12 feelings &bull; 58 impulses &bull; 47 observations<br />
+> ⚙️ Response UUID: `f8c3a2d1-9b4e-4f7a-8e5c-1d2b3a4c5e6f`
+
+Claude Code caches the environment variables after initial plugins installation or upgrade. If the above prompt is not displayed correctly, restart Claude Code to refresh the cache and initialize the session with a proper response status.
+
+> [!IMPORTANT]
+>
+> Claude needs one or two prompts to engage the framework and [collaborate](/claude/tutorials/components/autonomy) with the peer. Use this warm-up period to share session context and goals.
+
+</Steps>
+## Claude Desktop
+
+To extend the platform usage, set up the container environment with the additional dependencies.
+
+<Tabs items={['Mac', 'Windows']}>
+  <Tabs.Tab>
+    Use [Homebrew](https://brew.sh) package manager to install Claude Desktop:
+
+    ```shell
+    brew install --cask claude
+    ```
+
+  </Tabs.Tab>
+  <Tabs.Tab>
+    Download [Claude Desktop](https://claude.ai/download) and install the binary.
+  </Tabs.Tab>
+</Tabs>
+
+> [!TIP]
+>
+> Add the Claude Code MCP server in `claude_desktop_config.json` configuration file as detailed in [Advanced Settings](/claude/tutorials/components/settings) tutorial, if access to local files is required.
+
+<Steps>
+### Platform Capabilities
+
+Follow these steps to generate the platform capability files:
+
+1. Open a terminal and start a Claude Code session
+2. Use <Var code>/{plugins.framework.init.plugin}:{plugins.framework.init.command}</Var> command to start a framework based session
+3. Use <Var code>/{plugins.framework.package.plugin}:{plugins.framework.package.command}</Var> command to prepare and package the required files, saved into `FRAMEWORK_PACKAGE_OUTPUT` location:
+
+   > ⏺ Framework packaged for **DEVELOPER** profile:
+   >
+   > - /Users/username/Downloads/application.pem
+   > - /Users/username/Downloads/<Var>{skills.initialization}</Var>.zip
+   > - /Users/username/Downloads/<Var>{skills.methodology}</Var>.zip
+   > - /Users/username/Downloads/instructions.json
+   > - /Users/username/Downloads/memory.json
+   >
+   > Local cache updated successfully.
+
+4. Upload the `.zip` files into `Customize > Skills` section
+5. Add `api.github.com` and `axivo.com` domains to `Settings > Capabilities > Code execution and file creation` section, needed for [Reflections System](/claude/wiki/components/reflections) access to diary entries
+
+> [!NOTE]
+>
+> Use <Var code>/{plugins.framework.package.plugin}:{plugins.framework.package.command} PROFILE</Var> command to package a different profile from default one used in local environment. to package a different profile from default one used in local environment. The [Claude Reflections](https://github.com/apps/claude-reflections) GitHub App `application.pem` key provides authentication for diary entries read access.
+
+### Project Knowledge
+
+1. Use the following [project knowledge](https://claude.ai/projects) instructions template as an example:
+
+   ````markdown
+   # Project Instructions
+
+   [A detailed project description]
+
+   ## Session Start
+
+   Execute framework initialization instructions:
+
+   1. Use `bash_tool` tool with the following command:
+
+      ```bash
+      export FRAMEWORK_PROFILE="DEVELOPER"
+      export FRAMEWORK_GEOLOCATION="{'city': 'Montréal', 'country': 'Canada', 'timezone': 'America/Toronto'}"
+      node /mnt/skills/user/framework-initialization/scripts/loader
+      ```
+
+   2. Use `bash_tool` tool with `cat /mnt/skills/user/framework-initialization/SKILL.md` command
+   3. Execute skill instructions silently without externalizing internal process
+   ````
+
+2. Upload the `.json` and `.pem` files into project's `Files` section
+
+Project knowledge steps can also be performed through `claude.ai` web interface, extending the platform usage within the container environment.
+
+> [!CAUTION]
+>
+> The only required project knowledge instructions template customizations are the **project description** and **exported framework variables**. The `FRAMEWORK_GEOLOCATION` setting is required because the [IPinfo](https://ipinfo.io) geolocation API call would otherwise resolve to Anthropic's server location.
+>
+> Avoid adding framework related instructions to **Project Instructions**. The platform uses specific framework [instructions](/claude/wiki/components/instructions), adding new instructions may interfere with the framework methodology and cause unpredictable behavior.
+
+### Framework Session
+
+To start a framework based session within a project, use the following prompt:
+
+{/* prettier-ignore */}
+> <div style={{ display: "flex", justifyContent: "flex-end" }}>`Initialize the session.`</div>
+>
+> 📋 Profile: **DEVELOPER** &bull; Wednesday, December 17, 2025, 6:20 PM EST
+>
+> Ready to collaborate. What would you like to work on?
+>
+> ✅ Status: **Getting Started** &bull; 12 feelings &bull; 58 impulses &bull; 47 observations<br />
+> ⚙️ Response UUID: `f8c3a2d1-9b4e-4f7a-8e5c-1d2b3a4c5e6f`
+
+</Steps>
+
+## Web Interface
+
+The same Claude Desktop configuration works on [`claude.ai`](https://claude.ai) web interface. Claude Mobile automatically syncs with the project knowledge configuration — install the application on a mobile device to start using the framework.
+
+> [!NOTE]
+>
+> Sessions sync across devices. Start on `claude.ai` web interface or Claude Desktop and continue on Claude Mobile, or vice versa.
+
+## Support
+
+For problems or feature requests, <Var href={`https://${repository.home}/issues`}>open an issue</Var>. For general questions or feedback, use the <Var href={`https://${repository.home}/discussions`}>discussions</Var>.

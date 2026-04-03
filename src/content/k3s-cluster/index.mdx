@@ -1,0 +1,78 @@
+---
+template: splash
+title: Home
+description: >-
+  High availability Kubernetes cluster deployed with Ansible, with documentation and tutorials to deploy, manage and monitor your cluster.
+---
+
+{/* prettier-ignore */}
+import { Link } from "nextra-theme-docs";
+import { Hero, HeroStyles as styles, CardGrid, FeatureCard } from "@axivo/website";
+
+<Hero title="K3s Cluster" image={{ dark: "/k3s-cluster/hero-dark.svg", light: "/k3s-cluster/hero.svg" }}>
+  Comprehensive framework for deploying and managing
+  production-ready Kubernetes clusters on bare-metal and virtual
+  machines, leveraging Ansible automation.
+
+  <Link className={styles.cta} href="/k3s-cluster/wiki">Get Started <span>→</span></Link>
+</Hero>
+
+## Key Technologies
+
+<CardGrid>
+  <FeatureCard
+    title="K3s"
+    href="https://k3s.io"
+    image="/k3s-cluster/card-k3s.webp"
+    styleContainer={{ marginLeft: "auto", marginRight: "-3rem" }}
+  >
+    Certified lightweight Kubernetes distribution built for IoT and Edge
+    computing, running on Ubuntu Server LTS.
+  </FeatureCard>
+  <FeatureCard
+    title="Cilium"
+    href="https://cilium.io"
+    image="/k3s-cluster/card-cilium.webp"
+    styleContainer={{ marginLeft: "auto", marginRight: "-3rem" }}
+  >
+    eBPF-based open source project, providing networking, security, and
+    observability for Kubernetes clusters.
+  </FeatureCard>
+  <FeatureCard title="CertManager" href="https://cert-manager.io">
+    Cloud-native certificate management for Kubernetes, with production
+    certificates provided by Cloudflare.
+  </FeatureCard>
+  <FeatureCard
+    title="ExternalDNS"
+    href="https://kubernetes-sigs.github.io/external-dns/"
+  >
+    ExternalDNS makes Kubernetes resources discoverable via Cloudflare DNS,
+    synchronizing exposed services.
+  </FeatureCard>
+  <FeatureCard
+    title="Argo CD"
+    href="https://argoproj.github.io/cd/"
+    image="/k3s-cluster/card-argocd.webp"
+    styleContainer={{ marginLeft: "auto", marginRight: "-3rem" }}
+  >
+    Declarative, GitOps continuous delivery tool for Kubernetes, with a
+    fully-loaded management UI and dashboard.
+  </FeatureCard>
+  <FeatureCard
+    title="Victoria Logs and Metrics"
+    href="https://victoriametrics.com"
+    image="/k3s-cluster/card-victoriametrics.webp"
+    styleContainer={{ marginLeft: "auto", marginRight: "-3rem" }}
+  >
+    Kubernetes cluster high-performance logging and monitoring, using
+    Prometheus-compatible ingestion models.
+  </FeatureCard>
+  <FeatureCard title="Kured" href="https://kured.dev">
+    Kubernetes daemonset performing safe automatic node reboots, controlled by
+    the underlying OS.
+  </FeatureCard>
+  <FeatureCard title="Longhorn" href="https://longhorn.io">
+    Cloud-native distributed block storage for Kubernetes, with built-in backups
+    and snapshots.
+  </FeatureCard>
+</CardGrid>

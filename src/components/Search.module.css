@@ -1,0 +1,78 @@
+@reference "tailwindcss";
+
+.button {
+  @apply relative w-full rounded-lg px-3 py-2 text-base leading-tight md:w-45 md:text-sm;
+  @apply flex cursor-pointer items-center;
+  background: rgba(0, 0, 0, 0.05);
+}
+
+:global(.dark) .button {
+  background: rgba(249, 250, 251, 0.1);
+}
+
+.button:hover {
+  @apply opacity-85;
+}
+
+.placeholder {
+  @apply text-base font-normal text-gray-600 md:text-sm;
+}
+
+:global(.dark) .placeholder {
+  @apply text-gray-400;
+}
+
+.shortcut {
+  @apply pointer-events-none absolute end-3 select-none;
+  @apply h-5 rounded px-1.5 font-mono text-[10px] font-medium;
+  @apply text-gray-600;
+  @apply border border-gray-200;
+  @apply flex items-center max-sm:hidden;
+  background: #fff;
+}
+
+:global(.dark) .shortcut {
+  @apply text-gray-400;
+  @apply border-neutral-800;
+  background: rgb(var(--nextra-bg));
+}
+
+:global(:root) {
+  --docsearch-container-background: rgba(0, 0, 0, 0.25);
+  --docsearch-footer-background: rgb(var(--nextra-bg));
+  --docsearch-hit-background: rgb(var(--nextra-bg));
+  --docsearch-modal-background: rgb(var(--nextra-bg));
+  --docsearch-modal-width: 600px;
+  --docsearch-searchbox-background: rgb(var(--nextra-bg));
+  --docsearch-searchbox-focus-background: rgb(var(--nextra-bg));
+  --docsearch-text-color: rgb(var(--nextra-fg));
+}
+
+:global(.dark) {
+  --docsearch-container-background: rgba(0, 0, 0, 0.5);
+}
+
+:global(.DocSearch-Container) {
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+:global(.DocSearch-Modal),
+:global(.DocSearch-Form) {
+  border: 1px solid rgb(var(--nextra-bg));
+}
+
+:global(.dark .DocSearch-Modal) {
+  box-shadow:
+    0 16px 48px 0 color-mix(in srgb, currentColor 10%, transparent),
+    0 4px 12px 0 color-mix(in srgb, currentColor 5%, transparent);
+}
+
+:global(.dark .DocSearch-Modal .DocSearch-Footer) {
+  border-top-color: color-mix(in srgb, currentColor 20%, transparent);
+}
+
+:global(.dark .DocSearch-Commands-Key) {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgb(var(--nextra-bg));
+}

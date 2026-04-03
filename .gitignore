@@ -5,13 +5,6 @@
 .env
 .env.local
 
-# Hugo
-**/.hugo_build.lock
-**/archetypes
-**/hugo_stats.json
-**/public
-**/resources
-
 # Logs
 *.log
 *.txt
@@ -24,10 +17,12 @@ logs/
 Icon
 ._*
 
+# Next.js
+.next/
+out/
+
 # Node.js
 node_modules/
-package.json
-package-lock.json
 
 # Temporary files
 *.bak

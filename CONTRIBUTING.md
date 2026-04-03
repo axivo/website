@@ -12,7 +12,7 @@ There are several ways you can contribute to the project:
 
 ### Asking Questions
 
-If you have questions about the website, Hugo configuration, or general inquiries about the project, please use [GitHub Discussions](https://github.com/axivo/website/discussions). This is the best place for community support and Q&A.
+If you have questions about the website or general inquiries about the project, please use [GitHub Discussions](https://github.com/axivo/website/discussions). This is the best place for community support and Q&A.
 
 ### Reporting Bugs
 
@@ -38,14 +38,14 @@ If you have an idea for a new feature or an improvement to an existing one:
 
 ## Project Structure
 
-This project is built with [Hugo](https://gohugo.io/) and uses the [Hextra](https://github.com/imfing/hextra) theme. The repository is structured as follows:
+This project is built with [Next.js](https://nextjs.org/) and uses the [Nextra](https://nextra.site/) docs theme. The repository is structured as follows:
 
-- `docs/`: Main documentation website content
-- `k3s-cluster/`: K3s cluster specific content
-- `.github/workflows/`: GitHub Actions workflows for CI/CD
-- `global/`: Shared resources across the site
-
-Each module (`docs`, `k3s-cluster`, etc.) has its own `go.mod` and `go.sum` files for managing dependencies.
+- `packages/website/`: Local `@axivo/website` package with subpath exports
+- `public/`: Static assets organized by subsite
+- `src/app/`: Next.js app routes with subsite layouts
+- `src/components/`: Shared React components
+- `src/config/`: Site configuration and subsite variables
+- `src/content/`: MDX content organized by subsite
 
 ## Development Workflow
 
@@ -55,8 +55,7 @@ If you'd like to contribute code or documentation changes, please follow this wo
 
 #### Prerequisites
 
-- [Go](https://golang.org/) (version 1.21 or later recommended)
-- [Hugo](https://gohugo.io/) (extended version 0.145.0 or later)
+- [Node.js](https://nodejs.org/) (version 22 or later)
 
 #### Installation
 
@@ -68,28 +67,29 @@ If you'd like to contribute code or documentation changes, please follow this wo
    cd website
    ```
 
-3. **Install Dependencies (macOS):**
+3. **Install Dependencies:**
    ```bash
-   brew install hugo golang
+   npm install
    ```
 
 4. **Create a Branch:** Create a new branch in your fork for your changes (e.g., `git checkout -b feature/my-new-feature` or `git checkout -b fix/issue-123`). Base your branch on the `main` branch.
 
 5. **Launch the Development Server:**
    ```bash
-   hugo server --disableFastRender -Ds ./docs
+   npm run dev
    ```
 
-6. Visit `http://localhost:1313` in your browser to see the website.
+6. Visit `http://localhost:3000` in your browser to see the website.
 
 ### Making Changes
 
 1. **Make Changes:** Implement your code or documentation changes.
 
 2. **Follow Guidelines:**
-   * Adhere to the project's coding style, aim for clarity and consistency with existing code.
+   * Adhere to the project's coding standards documented in `CLAUDE.md`.
    * Perform a self-review of your changes.
    * Test your changes locally using the development server.
+   * Build the static site to verify no errors: `npm run build`
 
 3. **Submit a Pull Request:**
    * Push your changes to your fork (`git push origin feature/my-new-feature`).
@@ -101,10 +101,10 @@ If you'd like to contribute code or documentation changes, please follow this wo
 
 ## Coding Standards
 
-- Follow the existing code style in the project.
+- Include JSDoc `@fileoverview` on every file and `@param`/`@returns` on all functions.
+- Place exports at the bottom of each file.
+- Use alphabetical ordering for imports, exports, and configuration arrays.
 - Write clear, descriptive commit messages.
-- Include comments in your code where necessary.
-- Ensure your changes don't introduce linting errors or warnings.
 
 ## Commit Messages
 
@@ -120,28 +120,16 @@ Example commit message:
 feat: Add K3s monitoring documentation
 
 This adds detailed instructions for setting up monitoring for K3s clusters,
-including Prometheus and Grafana configurations.
+including VictoriaMetrics and VictoriaLogs configurations.
 
 Fixes #123
 ```
 
 ## Dependency Management
 
-This project uses [Renovate Bot](https://github.com/renovatebot) to automate dependency updates. Renovate will automatically create pull requests when new versions of dependencies are available.
-
-### How Renovate Works in This Repository
-
-1. **Automated Scanning**: Renovate regularly scans the repository for dependencies defined in `go.mod` files and other configuration files.
-
-2. **Pull Request Creation**: When updates are available, Renovate creates pull requests with the necessary changes.
-
-3. **Module Checksums**: Our GitHub workflow automatically updates Go module checksums when Renovate PRs are created or updated.
-
-4. **PR Review Process**: Each Renovate PR undergoes the same review process as regular contributions. CI tests will run to verify the updates don't break anything.
+This project uses [Renovate Bot](https://github.com/renovatebot) to automate dependency updates. Renovate creates pull requests when new major or minor versions are available.
 
 Please avoid including unrelated dependency version bumps in your Pull Requests unless the update is directly related to the feature or fix you are contributing.
-
-Note: Manual updates of dependencies are no longer necessary as Renovate handles this process automatically.
 
 ## License
 

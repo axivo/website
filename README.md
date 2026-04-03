@@ -1,53 +1,32 @@
 # AXIVO
 
-Website design powered by [Hugo](https://gohugo.io) and [Hextra](https://github.com/imfing/hextra) theme.
-
-## Quick Start
-
-Install the dependencies:
-
-```shell
-brew install hugo golang
-```
-
-Launch the server:
-
-```shell
-hugo server --disableFastRender -Ds ./docs
-```
+Website powered by [Next.js](https://nextjs.org) and [Nextra](https://nextra.site) docs theme.
 
 ## Local Development
 
 For local development and testing, use the following commands:
 
 ```shell
-# Run the Hugo server with live reloading
-hugo server --disableFastRender -Ds docs
+# Install the dependencies
+npm install
 
 # Generate static site
-hugo -s ./docs
+npm run build
 
-# If you need to manually update modules for local testing
-hugo mod clean --all
-hugo mod get -u ./...
-hugo mod tidy -s claude
-hugo mod tidy -s docs
-hugo mod tidy -s k3s-cluster
+# Run the development server with Turbopack
+npm run dev
+```
 
-# For Hextra main branch update (local testing only)
-hugo mod get -u github.com/imfing/hextra@main
+## Code Formatting
+
+This project uses [Prettier](https://prettier.io) with [prettier-plugin-tailwindcss](https://github.com/tailwindlabs/prettier-plugin-tailwindcss) to automatically sort Tailwind CSS utility classes in `@apply` directives and `class` attributes.
+
+Install the required dependencies:
+
+```shell
+npm install -D prettier prettier-plugin-tailwindcss
 ```
 
 ## Dependency Management
 
-This project uses [Renovate](https://github.com/renovatebot/renovate) to automatically manage dependencies, including Hugo modules and the Hextra theme. Renovate will create pull requests when new versions are available.
-
-The module update commands above are typically only needed for local testing, as Renovate handles dependency updates in pull requests automatically.
-
-If you need to examine the current module configuration, you can use:
-
-```shell
-hugo mod graph
-```
-
-See the [Hugo modules documentation](https://gohugo.io/hugo-modules/) for more details about working with Hugo modules.
+This project uses [Renovate](https://github.com/renovatebot/renovate) to automatically manage `npm` dependencies. Renovate creates pull requests when new major or minor versions are available.

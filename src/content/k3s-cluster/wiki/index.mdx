@@ -1,0 +1,75 @@
+---
+title: Getting Started
+description: >-
+  Getting started with deploying a high-availability K3s cluster using Ansible automation on Ubuntu Server LTS.
+---
+
+import { Steps } from "nextra/components";
+import { Var } from "@axivo/website";
+import { os, repository } from "@axivo/website/k3s-cluster";
+
+# Introduction
+
+The documentation is presented as a learning tool, allowing the end-user to understand all configuration and deployment aspects of a bare-metal based K3s cluster.
+
+## Hardware
+
+The following hardware was used to deploy the cluster:
+
+- 8 x Raspberry Pi 4 Model B with 8GB RAM
+- 8 x GeeekPi [Isolated PoE HAT](https://www.amazon.com/gp/product/B08CVDQWXF/) for Raspberry Pi 4 Model B
+- 8 x Samsung PM883 240GB SSD, connected to same USB port
+- 8 x SLK Tech [Sata to USB](https://www.amazon.com/gp/product/B07S9CKV7X/) cable
+- UniFi [UDM-SE](https://store.ui.com/us/en/collections/unifi-dream-machine/products/udm-se) cloud gateway, for dedicated network management
+- UniFi [USW-Pro-24-POE](https://store.ui.com/us/en/collections/unifi-switching-pro-power-over-ethernet/products/usw-pro-24-poe) switch, powering the Raspberry Pi's
+
+## Network
+
+Prior starting the cluster configuration, the end-user must determine if the [network](/k3s-cluster/tutorials/configuration/network) configuration can support **load balancing** with [external IP addresses](https://kubernetes.io/docs/tutorials/stateless-application/expose-external-ip-address) assigned from a load balancer [IP pool](https://docs.cilium.io/en/stable/network/lb-ipam). Some retail routers do not have this capability.
+
+## Data Encryption
+
+All sensitive data stored in the <Var href={`https://${repository.home}`}>public repository</Var> (passwords, emails, etc.) is safely encrypted with [Ansible Vault](https://docs.ansible.com/ansible/latest/cli/ansible-vault.html).
+
+> [!IMPORTANT]
+>
+> Use the **same global password** for various encrypted settings in your configuration files. See an [example](/k3s-cluster/tutorials/configuration/ansible/#encrypted-variables) to understand the underlying logic.
+
+## Local Environment
+
+Prior starting the cluster configuration, set the local environment for deployments.
+
+> [!NOTE]
+>
+> [Homebrew](https://brew.sh) is used to install all deployment dependencies.
+
+<Steps>
+### ansible
+
+Install the `ansible` binary:
+
+```shell
+brew install ansible ansible-lint
+```
+
+### sshpass
+
+Install the `sshpass` binary:
+
+```shell
+brew install sshpass
+```
+
+</Steps>
+
+## OS Installation
+
+Each cluster node must have Ubuntu Server <Var code>{os.version}+</Var> LTS (64-bit) OS installed, which is a requirement for [Cilium](https://cilium.io). The required `apt` package dependencies also changed compared to the previous Ubuntu Server <Var code>{os.previous_version}</Var> LTS release.
+
+> [!TIP]
+>
+> Read the [OS Installation](/k3s-cluster/tutorials/configuration/server) tutorial on bare-metal infrastructure.
+
+## Support
+
+If you encounter problems or want to request a new feature, feel free to <Var href={`https://${repository.home}/issues`}>open an issue</Var>. For general questions or feedback, please use the <Var href={`https://${repository.home}/discussions`}>discussions</Var>.

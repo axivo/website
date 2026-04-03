@@ -1,0 +1,89 @@
+---
+title: VictoriaMetrics
+description: >-
+  Ansible role configuration for VictoriaMetrics monitoring and time series database in the K3s cluster.
+---
+
+import { Steps } from 'nextra/components'
+import { Var } from '@axivo/website'
+import { repository } from '@axivo/website/k3s-cluster'
+
+# VictoriaMetrics
+
+[VictoriaMetrics](https://docs.victoriametrics.com) is a fast, cost-effective, and scalable monitoring solution and time series database, used as a drop-in replacement for Prometheus.
+
+The `victoria-metrics` role performs various tasks related to Helm chart deployment, reset, and validation.
+
+> [!TIP]
+>
+> Role deployments are performed at `global` level, using the [Provisioning](/k3s-cluster/wiki/playbooks/provisioning) playbook. Upgrades can be performed at `role` level — see the instructions detailed below.
+
+## Role Tasks
+
+See the related role tasks listed below.
+
+<Steps>
+### Facts
+
+Ansible facts — see <Var code href={`https://${repository.home}/blob/${repository.tag}/roles/victoria-metrics/tasks/facts.yaml`}>facts.yaml</Var> for details.
+
+### Main
+
+Main role related tasks — see <Var code href={`https://${repository.home}/blob/${repository.tag}/roles/victoria-metrics/tasks/main.yaml`}>main.yaml</Var> for details.
+
+### Reset
+
+Reset related tasks — see <Var code href={`https://${repository.home}/blob/${repository.tag}/roles/victoria-metrics/tasks/reset.yaml`}>reset.yaml</Var> for details.
+
+### Upgrade
+
+Upgrade related tasks — see <Var code href={`https://${repository.home}/blob/${repository.tag}/roles/victoria-metrics/tasks/upgrade.yaml`}>upgrade.yaml</Var> for details. Run the following command to perform a role upgrade:
+
+```shell
+ansible-playbook --ask-vault-pass --tags=victoria-metrics upgrade.yaml
+```
+
+### Validation
+
+Validation related tasks — see <Var code href={`https://${repository.home}/blob/${repository.tag}/roles/victoria-metrics/tasks/validation.yaml`}>validation.yaml</Var> for details. Run the following command to perform all role related validation tasks:
+
+```shell
+ansible-playbook --ask-vault-pass --tags=victoria-metrics validation.yaml
+```
+
+</Steps>
+
+## Role Templates
+
+See the related role templates listed below.
+
+> [!TIP]
+>
+> Perform a role validation to visualize all rendered templates and variables.
+
+<Steps>
+### Helm Chart
+
+Helm chart values template — see <Var code href={`https://${repository.home}/blob/${repository.tag}/roles/victoria-metrics/templates/values.j2`}>values.j2</Var> for details.
+
+### Configuration
+
+- **AlertManager** — Helm chart values template used for additional AlertManager configuration rules, see <Var code href={`https://${repository.home}/blob/${repository.tag}/roles/victoria-metrics/templates/config_alertmanager.j2`}>config_alertmanager.j2</Var> for details. User-defined alerts can also be implemented — see <Var code href={`https://${repository.home}/blob/${repository.tag}/roles/victoria-metrics/templates/alerts/node_health.j2`}>node_health.j2</Var> for details.
+
+### Credentials
+
+Kubernetes `Secret` resource template containing the user credentials — see <Var code href={`https://${repository.home}/blob/${repository.tag}/roles/victoria-metrics/templates/credentials.j2`}>credentials.j2</Var> for details.
+
+</Steps>
+
+## Role Variables
+
+> [!IMPORTANT]
+>
+> A [role upgrade](/k3s-cluster/wiki/configuration/roles/victoriametrics/#upgrade) is required in order to apply any changes related to role variables.
+
+See the related role variables, defined in the <Var code href={`https://${repository.home}/blob/${repository.tag}/roles/victoria-metrics/defaults/main.yaml`}>main.yaml</Var> defaults file. Review the <Var code href={`https://${repository.home}/tree/${repository.tag}/roles/victoria-metrics`}>README.md</Var> file for additional details.
+
+> [!TIP]
+>
+> Use [Renovate](/k3s-cluster/tutorials/configuration/tools/#renovate) to automate release pull requests and keep dependencies up-to-date.

@@ -1,3 +1,0 @@
-[submodule "axivo/claude-reflections"]
-	path = claude/static/reflections
-	url = https://github.com/axivo/claude-reflections.git

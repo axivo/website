@@ -1,0 +1,39 @@
+@reference "tailwindcss";
+
+.count {
+  @apply text-xs text-gray-400;
+}
+
+.grid {
+  @apply mt-4 grid gap-x-2 gap-y-4;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.tag {
+  @apply inline-flex items-center gap-2 rounded-full px-3 py-1 text-sm text-gray-600 no-underline transition-colors;
+  justify-self: start;
+  background: rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.tag:hover {
+  background: rgba(0, 0, 0, 0.1);
+  border-color: rgba(0, 0, 0, 0.2);
+}
+
+:global(.dark) .tag {
+  @apply text-gray-400;
+  background: rgba(249, 250, 251, 0.1);
+  border-color: rgba(249, 250, 251, 0.15);
+}
+
+:global(.dark) .tag:hover {
+  background: rgba(249, 250, 251, 0.15);
+  border-color: rgba(249, 250, 251, 0.25);
+}
+
+@media screen and (max-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

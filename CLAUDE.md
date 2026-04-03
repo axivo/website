@@ -1,12 +1,23 @@
 # Project Instructions
 
-A Hugo monorepo hosting the [axivo.com](https://axivo.com) website. Contains websites sharing a common [Hextra theme](https://imfing.github.io/hextra/) through a global module, with automated CI/CD via GitHub Actions.
+A Next.js monorepo hosting the [axivo.com](https://axivo.com) website. Contains multiple sections sharing a common [Nextra](https://nextra.site) docs theme, with automated deployment via Cloudflare Pages.
 
-- `/.github/actions` — JS-based CI/CD classes for Hugo builds, git operations, and GitHub Pages deployment
-- `/claude` — [CCP framework](https://github.com/axivo/claude) documentation, reflections blog, and tutorials
-- `/docs` — Project landing page and navigation to subsites
-- `/global` — Shared Hugo module with theme overrides, custom CSS, shortcodes, and static assets
-- `/k3s-cluster` — [High-availability K3s cluster](https://github.com/axivo/k3s-cluster) documentation and tutorials
+- `/packages/website` — Local `@axivo/website` package with subpath exports for shared components and section variables
+- `/public` — Static assets organized by section (`home/`, `claude/`, `k3s-cluster/`)
+- `/src/app` — Next.js app routes with section layouts (`(home)`, `claude`, `k3s-cluster`)
+- `/src/components` — Shared React components (Hero, FeatureCard, Callout, Video, etc.)
+- `/src/config/variables` — Section-specific configuration (`docs.js`, `claude.js`, `k3s-cluster.js`)
+- `/src/content` — MDX content organized by section with Nextra page maps
+
+## Coding Standards
+
+- JSDoc `@fileoverview` on every file, `@param`/`@returns` on all functions
+- No empty lines inside functions
+- Exports at the bottom of each file (except Next.js required inline exports like `metadata` and `dynamic`)
+- Alphabetical ordering for imports, exports, and configuration arrays
+- No hardcoded section names — use `subsite` from section variables
+- No hardcoded domain — use `domain` from `@axivo/website/docs`
+- CSS Modules with `@reference "tailwindcss"` for Tailwind v4
 
 ## Collaborator
 
@@ -15,8 +26,9 @@ A Hugo monorepo hosting the [axivo.com](https://axivo.com) website. Contains web
 
 ### Personal Preferences
 
-I’m a site reliability engineer specialized in:
+I'm a site reliability engineer specialized in:
 
 - Advanced GitHub actions based on JS code
 - Helm charts
 - IaC for Kubernetes clusters
+- Next.js/Nextra static websites

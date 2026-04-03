@@ -1,0 +1,94 @@
+@reference "tailwindcss";
+
+/* Blockquote */
+blockquote {
+  @apply my-4 px-4 text-sm leading-5 font-normal not-italic;
+  border-left: 4px solid rgb(0, 128, 128);
+}
+
+blockquote p {
+  @apply leading-5;
+}
+
+.dark blockquote {
+  border-left-color: rgb(94, 194, 194);
+}
+
+/* Button */
+a.button {
+  @apply inline-block rounded-full px-4 py-1.5 text-sm text-white no-underline transition-all duration-300 ease-in-out select-none;
+  background: linear-gradient(to bottom, #238aff, #4150f5);
+  box-shadow: 0 1px 2px #00295738;
+  text-shadow: 0 1px 1px #00387838;
+}
+
+a.button span {
+  @apply inline-block transition-all duration-300 ease-in-out;
+}
+
+a.button:hover {
+  @apply brightness-[1.05];
+  box-shadow: 0 4px 20px -8px #0078ffab;
+}
+
+a.button:hover span {
+  @apply translate-x-[3px];
+}
+
+a.button:hover span.prev {
+  @apply translate-x-[-3px];
+}
+
+a.button:active {
+  @apply brightness-[0.95];
+}
+
+a.button:focus-visible {
+  @apply outline-offset-2;
+  outline: 2px solid
+    hsl(var(--nextra-primary-hue) var(--nextra-primary-saturation) 77%);
+}
+
+.dark a.button {
+  background: linear-gradient(to bottom, #d0dfff, #b2c7ff);
+  color: #000;
+  text-shadow: none;
+}
+
+.dark a.button:hover {
+  box-shadow: 0 4px 20px -8px rgb(178 199 255 / 50%);
+}
+
+/* Code */
+code.nextra-code {
+  @apply text-xs;
+}
+
+/* Table */
+table {
+  @apply text-sm;
+}
+
+table th {
+  @apply border-0 border-b border-solid border-b-gray-200 py-2 pr-4 pl-0 text-left;
+}
+
+table td {
+  @apply border-0 border-b border-solid border-b-gray-200 py-2 pr-4 pl-0;
+}
+
+table tr {
+  @apply border-none bg-transparent;
+}
+
+table tr:nth-child(even) {
+  @apply bg-transparent;
+}
+
+.dark table th {
+  @apply border-b-gray-700;
+}
+
+.dark table td {
+  @apply border-b-gray-700;
+}

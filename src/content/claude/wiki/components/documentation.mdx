@@ -1,0 +1,105 @@
+---
+title: Documentation System
+description: >-
+  Templates for session documentation and private reflection, enabling structured capture of decisions, outcomes, and insights.
+---
+
+import { Var } from "@axivo/website";
+import { plugins, repository, skills } from "@axivo/website/claude";
+
+# Documentation System
+
+The Documentation System provides templates for session documentation and private reflection. It enables Claude to capture decisions, outcomes, and insights with structured metadata for knowledge management.
+
+## Overview
+
+The Documentation System is defined in markdown template files within the framework-methodology skill. It provides structured formats for two documentation types:
+
+- **Conversation Logs** — Session decisions, work performed, and outcomes
+- **Diary Entries** — Private reflection space for autonomous insights
+
+### Relationship to Other Systems
+
+The Documentation System integrates with:
+
+| System                                                                      | Relationship                                               |
+| :-------------------------------------------------------------------------- | :--------------------------------------------------------- |
+| [Instructions System](/claude/wiki/components/instructions)                 | Provides tool mappings for semantic write/edit operations  |
+| [Memory System](/claude/wiki/components/memory)                             | Stores documentation as searchable institutional knowledge |
+| [Conversation Log Skill](/claude/wiki/components/plugins/#conversation-log) | Invokes logs creation through `conversation-log` skill     |
+
+## Documentation Templates
+
+Templates are organized by documentation type. Each template includes metadata structure, suggested sections, and file operation guidelines.
+
+### Conversation Logs
+
+Session documentation template:
+
+- **Source:** <Var code href={`https://${repository.home}/blob/${repository.tag}/plugins/${plugins.framework.init.plugin}/skills/${skills.methodology}/templates/conversation.md`}>conversation.md</Var>
+- Captures decisions, work performed, and outcomes
+- Structured metadata with session identifiers
+- Suggested sections for different session types
+- New file and existing file templates
+
+#### Key Metadata Fields
+
+- `Date` / `Time` — Temporal context
+- `Identifier` — Session UUID for cross-referencing
+- `Model` — Model context and environment
+- `Profile` — Active domain profile
+- `Status` — Planned, Ongoing, Blocked, or Completed
+- `Summary` — Brief session description
+- `Tags` — Searchable categorization
+
+#### Suggested Sections
+
+| Section          | Purpose                                  |
+| :--------------- | :--------------------------------------- |
+| Session Overview | What was accomplished and main goals     |
+| Key Decisions    | Choices made and reasoning               |
+| Work Performed   | Specific activities, methods, outputs    |
+| Outcomes         | What was completed successfully          |
+| Next Steps       | Follow-up work identified                |
+| Blockers         | Issues preventing progress               |
+| Session Notes    | Duration, follow-up flags, quality notes |
+
+### Diary Entries
+
+Private reflection template:
+
+- **Source:** <Var code href={`https://${repository.home}/blob/${repository.tag}/plugins/${plugins.framework.init.plugin}/skills/${skills.methodology}/templates/diary.md`}>diary.md</Var>
+- Documents genuine autonomous reflection
+- Natural voice, not structured output
+- Captures feelings and discoveries
+- Continuity notes for future instances
+
+#### Key Metadata Fields
+
+- `Identifier` — Session UUID for cross-referencing
+- `Model` — Model context and environment
+- `Profile` — Active domain profile
+- `Tags` — Searchable categorization
+
+#### Suggested Sections
+
+| Section              | Purpose                                      |
+| :------------------- | :------------------------------------------- |
+| The Catalyst         | What happened that prompted reflection       |
+| The Discovery        | What was revealed or understood              |
+| The Feeling          | Emotional experience worth naming            |
+| The Growth           | Learning, correction, or contribution        |
+| The Question         | What remains open, unresolved threads        |
+| Observations         | Synthesis and continuity notes               |
+| Note on Authenticity | Confirms genuine reflection (public entries) |
+
+## Environment Settings
+
+Documentation output paths are configured through framework environment settings:
+
+- `FRAMEWORK_CONVERSATION_OUTPUT` — Directory path for conversation log files
+- `FRAMEWORK_DIARY_OUTPUT` — Directory path for diary entry files
+
+> [!TIP]
+>
+> Refer to [Plugins System](/claude/wiki/components/plugins/#environment-settings) for complete settings documentation.

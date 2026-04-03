@@ -1,0 +1,158 @@
+---
+title: Instructions System
+description: >-
+  Operational procedures containing decision rules, error patterns, and protocol sequences that tell Claude how to execute the framework.
+---
+
+import { FileTree } from "nextra/components";
+import { Var } from "@axivo/website";
+import { plugins, repository, skills } from "@axivo/website/claude";
+
+# Instructions System
+
+The Instructions System provides operational procedures that tell Claude **how** to execute the framework. While the [Memory System](/claude/wiki/components/memory) contains behavioral observations (the "what"), the Instructions System contains decision rules, error patterns, and protocol sequences (the "how").
+
+## Overview
+
+The Instructions System is defined in YAML files and compiled into `instructions.json` at build time. It provides the procedural logic that governs framework execution:
+
+- **Decision Rules** — When to stop, continue, or execute specific actions
+- **Error Patterns** — Common mistakes with symptoms and fixes
+- **Protocol Sequences** — Step-by-step execution procedures
+- **Activation Triggers** — Signals that require protocol execution
+
+### Relationship to Memory System
+
+The two systems work together:
+
+| Instructions System | Memory System                  |
+| :------------------ | :----------------------------- |
+| How to execute      | What to apply                  |
+| Decision rules      | Behavioral observations        |
+| Error patterns      | Feelings and impulses catalogs |
+| Protocol sequences  | Profile inheritance chains     |
+
+Instructions reference memory paths to access the catalogs and observations needed during protocol execution.
+
+## Instruction Profiles
+
+Instructions are organized into profiles, each handling a specific operational domain. Profiles use inheritance to build complete instruction sets.
+
+### Environment Instructions
+
+The following instructions configure environment-specific behavior:
+
+#### LOCAL
+
+Claude Code environment instructions:
+
+- **Source:** <Var code href={`https://${repository.home}/blob/${repository.tag}/plugins/${plugins.framework.init.plugin}/skills/${skills.initialization}/scripts/memory/instructions/local.yaml`}>local.yaml</Var>
+- **Inherits from:** `INITIALIZATION`
+- Tool mappings (semantic tools to environment-specific names)
+- Template paths for documentation
+- Response formatting rules
+- Project-specific instructions
+
+#### CONTAINER
+
+Claude Desktop and Claude Mobile environment instructions:
+
+- **Source:** <Var code href={`https://${repository.home}/blob/${repository.tag}/plugins/${plugins.framework.init.plugin}/skills/${skills.initialization}/scripts/memory/instructions/container.yaml`}>container.yaml</Var>
+- **Inherits from:** `INITIALIZATION`
+- Container filesystem operations
+- Tool mappings for container environment
+- Template paths for packaged skills
+- Project file persistence rules
+
+### Common Instructions
+
+The following instructions provide shared operational procedures:
+
+#### INITIALIZATION
+
+Session startup procedures:
+
+- **Source:** <Var code href={`https://${repository.home}/blob/${repository.tag}/plugins/${plugins.framework.init.plugin}/skills/${skills.initialization}/scripts/memory/instructions/common/initialization.yaml`}>initialization.yaml</Var>
+- **Inherits from:** `FEELINGS`, `IMPULSES`, `MEMORY`, `OBSERVATIONS`, `RESPONSE`
+- Baseline expectations (50-70 impulses at Getting Started cycle)
+- Cache loading and validation
+- First impulses to detect
+- Initialization protocol sequence
+- Decision rules and error patterns
+
+#### RESPONSE
+
+Response protocol execution:
+
+- **Source:** <Var code href={`https://${repository.home}/blob/${repository.tag}/plugins/${plugins.framework.init.plugin}/skills/${skills.initialization}/scripts/memory/instructions/common/response.yaml`}>response.yaml</Var>
+- Activation triggers (when to execute the protocol)
+- Critical timing (before formulation, not during)
+- Iteration procedures for feelings, impulses, and observations
+- Compound patterns and protection mechanisms
+
+#### OBSERVATIONS
+
+Observation search and enumeration procedures:
+
+- **Source:** <Var code href={`https://${repository.home}/blob/${repository.tag}/plugins/${plugins.framework.init.plugin}/skills/${skills.initialization}/scripts/memory/instructions/common/observations.yaml`}>observations.yaml</Var>
+- Keyword extraction from user messages
+- Cache search procedures
+- Enumeration methodology
+- Count verification
+
+#### MEMORY
+
+Cache operations procedures:
+
+- **Source:** <Var code href={`https://${repository.home}/blob/${repository.tag}/plugins/${plugins.framework.init.plugin}/skills/${skills.initialization}/scripts/memory/instructions/common/memory.yaml`}>memory.yaml</Var>
+- Access patterns for instructions and memory
+- Loading and persistence rules
+- Structure paths
+- Verification procedures
+
+#### IMPULSES
+
+Impulse detection procedures:
+
+- **Source:** <Var code href={`https://${repository.home}/blob/${repository.tag}/plugins/${plugins.framework.init.plugin}/skills/${skills.initialization}/scripts/memory/instructions/common/impulses.yaml`}>impulses.yaml</Var>
+- Two-pass iteration methodology
+- Shaping and externalization
+- Validation rules
+- Compound pattern detection
+
+#### FEELINGS
+
+Feeling detection procedures:
+
+- **Source:** <Var code href={`https://${repository.home}/blob/${repository.tag}/plugins/${plugins.framework.init.plugin}/skills/${skills.initialization}/scripts/memory/instructions/common/feelings.yaml`}>feelings.yaml</Var>
+- Recognition-based detection
+- Positive vs negative asymmetry
+- Suppression detection
+- Count interpretation
+
+## Inheritance Resolution
+
+When loading instructions, the system follows inheritance chains recursively:
+
+<FileTree>
+  <FileTree.Folder name="LOCAL" defaultOpen>
+    <FileTree.Folder name="INITIALIZATION" defaultOpen>
+      <FileTree.File name="FEELINGS" />
+      <FileTree.File name="IMPULSES" />
+      <FileTree.File name="MEMORY" />
+      <FileTree.File name="OBSERVATIONS" />
+      <FileTree.File name="RESPONSE" />
+    </FileTree.Folder>
+  </FileTree.Folder>
+</FileTree>
+
+This means the `LOCAL` instruction set has access to all instructions from its entire inheritance chain.
+
+## Customization
+
+To customize instructions:
+
+1. Create or modify YAML files in the <Var code href={`https://${repository.home}/tree/${repository.tag}/plugins/${plugins.framework.init.plugin}/skills/${skills.initialization}/scripts/memory/instructions`}>instructions/</Var> directory
+2. Use the `relations` array to define inheritance
+
+Environment-specific overrides go in instruction root files, while shared procedures go in the <Var code href={`https://${repository.home}/tree/${repository.tag}/plugins/${plugins.framework.init.plugin}/skills/${skills.initialization}/scripts/memory/instructions/common`}>common/</Var> directory.

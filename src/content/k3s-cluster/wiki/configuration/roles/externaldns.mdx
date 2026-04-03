@@ -1,0 +1,93 @@
+---
+title: ExternalDNS
+description: >-
+  Ansible role configuration for ExternalDNS public DNS synchronization with Cloudflare in the K3s cluster.
+---
+
+import { Steps } from 'nextra/components'
+import { Var } from '@axivo/website'
+import { repository } from '@axivo/website/k3s-cluster'
+
+# ExternalDNS
+
+[ExternalDNS](https://kubernetes-sigs.github.io/external-dns/latest/) makes Kubernetes resources discoverable via public DNS servers, by synchronizing exposed Kubernetes Services and Ingresses.
+
+The `external-dns` role performs various tasks related to [Cloudflare](https://www.cloudflare.com) DNS configuration, as well as the `external-dns` Helm chart deployment, reset, and validation.
+
+> [!TIP]
+>
+> Role deployments are performed at `global` level, using the [Provisioning](/k3s-cluster/wiki/playbooks/provisioning) playbook. Upgrades can be performed at `role` level — see the instructions detailed below.
+
+## Role Tasks
+
+See the related role tasks listed below.
+
+<Steps>
+### Facts
+
+Ansible facts — see <Var code href={`https://${repository.home}/blob/${repository.tag}/roles/external-dns/tasks/facts.yaml`}>facts.yaml</Var> for details.
+
+### Main
+
+Main role related tasks — see <Var code href={`https://${repository.home}/blob/${repository.tag}/roles/external-dns/tasks/main.yaml`}>main.yaml</Var> for details.
+
+### Post-Install
+
+Post-install related tasks — see <Var code href={`https://${repository.home}/blob/${repository.tag}/roles/external-dns/tasks/postinstall.yaml`}>postinstall.yaml</Var> for details.
+
+### Reset
+
+Reset related tasks — see <Var code href={`https://${repository.home}/blob/${repository.tag}/roles/external-dns/tasks/reset.yaml`}>reset.yaml</Var> for details.
+
+> [!TIP]
+>
+> A reset is performed at global level only — review the [Reset](/k3s-cluster/wiki/playbooks/reset) playbook instructions.
+
+### Upgrade
+
+Upgrade related tasks — see <Var code href={`https://${repository.home}/blob/${repository.tag}/roles/external-dns/tasks/upgrade.yaml`}>upgrade.yaml</Var> for details. Run the following command to perform a role upgrade:
+
+```shell
+ansible-playbook --ask-vault-pass --tags=external-dns upgrade.yaml
+```
+
+### Validation
+
+Validation related tasks — see <Var code href={`https://${repository.home}/blob/${repository.tag}/roles/external-dns/tasks/validation.yaml`}>validation.yaml</Var> for details. Run the following command to perform all role related validation tasks:
+
+```shell
+ansible-playbook --ask-vault-pass --tags=external-dns validation.yaml
+```
+
+</Steps>
+
+## Role Templates
+
+See the related role templates listed below.
+
+<Steps>
+### Helm Chart
+
+Helm chart values template — see <Var code href={`https://${repository.home}/blob/${repository.tag}/roles/external-dns/templates/values.j2`}>values.j2</Var> for details.
+
+### API Token
+
+Kubernetes `Secret` resource template — see <Var code href={`https://${repository.home}/blob/${repository.tag}/roles/external-dns/templates/api_token.j2`}>api_token.j2</Var> for details.
+
+### Cluster Issuer
+
+Kubernetes `ClusterIssuer` resource template — see <Var code href={`https://${repository.home}/blob/${repository.tag}/roles/external-dns/templates/cluster_issuer.j2`}>cluster_issuer.j2</Var> for details.
+
+</Steps>
+
+## Role Variables
+
+> [!IMPORTANT]
+>
+> A [role upgrade](/k3s-cluster/wiki/configuration/roles/externaldns/#upgrade) is required in order to apply any changes related to role variables.
+
+See the related role variables, defined in the <Var code href={`https://${repository.home}/blob/${repository.tag}/roles/external-dns/defaults/main.yaml`}>main.yaml</Var> defaults file. Review the <Var code href={`https://${repository.home}/tree/${repository.tag}/roles/external-dns`}>README.md</Var> file for additional details.
+
+> [!TIP]
+>
+> Use [Renovate](/k3s-cluster/tutorials/configuration/tools/#renovate) to automate release pull requests and keep dependencies up-to-date.

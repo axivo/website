@@ -1,0 +1,42 @@
+---
+title: User
+description: >-
+  Ansible user configuration for remote task execution on K3s cluster nodes, including SSH key setup.
+---
+
+import { Steps } from 'nextra/components'
+import { Var } from '@axivo/website'
+import { repository } from '@axivo/website/k3s-cluster'
+
+# User
+
+The Ansible user is used to remotely execute various deployment tasks on cluster nodes.
+
+<Steps>
+### User Name
+
+Set the [`ansible_user`](https://docs.ansible.com/ansible/latest/reference_appendices/special_variables.html) variable in the <Var code href={`https://${repository.home}/blob/${repository.tag}/inventory/cluster/group_vars/all.yaml`}>all.yaml</Var> global configuration file.
+
+> [!IMPORTANT]
+>
+> Use the `username` value defined in the [OS General Settings](/k3s-cluster/tutorials/configuration/server/#os-general-settings) server installation to set the `ansible_user` variable.
+
+### User Password
+
+Encrypt the `ansible_password` variable with [`ansible-vault`](/k3s-cluster/tutorials/configuration/ansible/#vault) and set the encrypted value in the <Var code href={`https://${repository.home}/blob/${repository.tag}/inventory/cluster/group_vars/all.yaml`}>all.yaml</Var> global configuration file.
+
+### SSH Key
+
+Generate the [SSH key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent), which will be copied to each cluster node while running the [Provisioning](/k3s-cluster/wiki/playbooks/provisioning) playbook:
+
+```shell
+ssh-keygen -t ed25519 -C 'your_email@example.com'
+```
+
+> [!IMPORTANT]
+>
+> The [Provisioning](/k3s-cluster/wiki/playbooks/provisioning) playbook will look for the generated SSH key in the default `/Users/username/.ssh` location.
+
+For a different storage location, update the `cluster_vars.ssh.path` value in the Cluster role <Var code href={`https://${repository.home}/blob/${repository.tag}/roles/cluster/defaults/main.yaml`}>main.yaml</Var> configuration file.
+
+</Steps>
