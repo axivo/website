@@ -1,0 +1,38 @@
+@reference "tailwindcss";
+
+.subnavbar {
+  @apply sticky z-20 w-full backdrop-blur-md border-b;
+  top: var(--nextra-navbar-height);
+}
+
+.container {
+  @apply mx-auto flex items-center justify-between gap-4 py-1.5;
+  max-width: var(--nextra-content-width);
+  padding-left: max(env(safe-area-inset-left), 1.5rem);
+  padding-right: max(env(safe-area-inset-right), 1.5rem);
+}
+
+.breadcrumb {
+  @apply flex items-center gap-1 overflow-hidden text-sm;
+}
+
+.icon {
+  @apply shrink-0;
+}
+
+.separator {
+  @apply shrink-0 rtl:rotate-180;
+}
+
+.item {
+  @apply whitespace-nowrap transition-colors;
+}
+
+.itemLink {
+  @apply min-w-6 overflow-hidden text-ellipsis;
+}
+
+
+.itemActive {
+  @apply font-medium subpixel-antialiased;
+}

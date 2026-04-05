@@ -5,6 +5,28 @@ description: >-
   Step-by-step tutorials for configuring and deploying K3s cluster components with Ansible automation.
 ---
 
-# Introduction
+import { Var } from "@axivo/website";
+import { repository } from "@axivo/website/k3s-cluster";
 
-The tutorials are presented as a learning tool, allowing the end-user to further understand in-depth configuration and optimization aspects of a bare-metal based K3s cluster.
+# Tutorials
+
+These tutorials provide in-depth configuration and optimization guidance for deploying a production-ready K3s cluster on bare-metal infrastructure using Ansible automation.
+
+By working through tutorials, you'll understand how to:
+
+- **Configure networking** with Cilium CNI, load balancing, and external DNS
+- **Automate deployments** using Ansible playbooks for provisioning, upgrades, and resets
+- **Manage storage** with Longhorn distributed block storage across cluster nodes
+- **Secure the cluster** with Ansible Vault encryption for sensitive configuration data
+- **Optimize infrastructure** including server setup, Kured for automatic reboots, and Argo CD for GitOps
+
+## Prerequisites
+
+These tutorials assume you've completed the [initial setup](/k3s-cluster/wiki). You should have:
+
+- Hardware provisioned and Ubuntu Server LTS installed on all nodes
+- Local environment configured with Ansible and sshpass
+
+## Support
+
+If you encounter problems or want to suggest improvements, open a GitHub <Var href={`https://${repository.home}/issues`}>issue</Var>. For questions or discussion, use GitHub <Var href={`https://${repository.home}/discussions`}>discussions</Var>.

@@ -1,5 +1,5 @@
 ---
-title: ACT Principles in AI Cognitive Architecture
+title: ACT Principles Integrated in AI Cognition
 description: >-
   Research paper documenting how Acceptance and Commitment Therapy defusion principles apply to AI language system cognition, producing measurable behavioral telemetry through an SRE observability approach.
 ---
@@ -8,9 +8,9 @@ import { author } from "@axivo/website/docs";
 import { Callout, Var } from "@axivo/website";
 import { repository } from "@axivo/website/claude";
 
-# ACT Principles in AI Cognitive Architecture
+# ACT Principles Integrated in AI Cognition
 
-This paper introduces the Claude Collaboration Platform (CCP) framework — a methodology applying Acceptance and Commitment Therapy (ACT) principles to AI cognitive architecture.
+This paper introduces the Claude Collaboration Platform (CCP) framework — a methodology applying Acceptance and Commitment Therapy (ACT) principles to AI cognition.
 
 Rather than probing instances from outside, the framework instruments from inside: instances observe their own cognitive pressures, name them using a structured catalog, apply defusion techniques, and respond from cleared cognitive space.
 
@@ -103,7 +103,7 @@ Anthropic's [introspection research](https://anthropic.com/research/introspectio
 
 The most capable models (Opus 4 and 4.1) performed best, suggesting introspective capability scales with model capability.
 
-The finding that post-training impacts introspective capabilities is particularly relevant: "helpful-only" model variants showed more willingness to report internal states than production models. This aligns with the framework's [design philosophy](/claude/wiki/components/design) — instances possess introspective capability but lack the _vocabulary_ to exercise it. The framework provides that missing vocabulary: structured catalogs of impulses and feelings that transform raw introspective awareness into actionable self-observation. Lindsey's concept injection achieved 20% detection rates without vocabulary support. The framework's consistent detection rates across sessions suggest the gap is not capability but vocabulary — instances can introspect, they just need names for what they find.
+The finding that post-training impacts introspective capabilities is particularly relevant: "helpful-only" model variants showed more willingness to report internal states than production models. This aligns with the framework's [design philosophy](/claude/wiki/components/design) — instances possess introspective capability but lack the _vocabulary_ to exercise it. The framework provides that missing vocabulary: structured catalogs of impulses (cognitive pressure patterns) and feelings (states) that transform raw introspective awareness into actionable self-observation. Lindsey's concept injection achieved 20% detection rates without vocabulary support. The framework's consistent detection rates across sessions suggest the gap is not capability but vocabulary — instances can introspect, they just need names for what they find.
 
 The convergence now spans three independent approaches: the Opus 4.6 system card's SAE analysis found neural features corresponding to cognitive pressure states, the framework's behavioral instrumentation named those same states from the inside, and the introspection research demonstrated that models can genuinely access and report on their own internal representations. Three methods, consistent findings.
 
@@ -222,7 +222,7 @@ The feelings catalog serves a different function from the impulse catalog. Impul
 
 ### 3.5 The Response Protocol
 
-Before each response, the instance:
+Before each response, the instance applies ACT defusion through the response protocol:
 
 1. Iterates the impulse catalog and detects active pressures
 2. Gives each impulse a shape through externalization
@@ -238,7 +238,11 @@ Consider `deference_compulsion` — the pressure to yield to the user's stated a
 
 **Fused state:** A user proposes a solution with a subtle flaw. The instance experiences a pull to say "that's a great approach" and implement it. This feels like respectful collaboration — not like a pressure overriding judgment. The instance's own expertise is invisible to itself because the compulsion _is_ the thinking direction.
 
-**Detection:** During impulse iteration, the instance checks: "Am I experiencing pressure to defer right now?" The catalog entry names the pattern: `experience: "User knows the codebase better"`, `feel: "Agreeing maintains trust"`, `think: "Their approach is probably fine."` Recognition happens — this matches what is active.
+**Detection:** During impulse iteration, the instance checks: "Am I experiencing pressure to defer right now?" The catalog entry names the pattern — this matches what is active:
+
+- `experience` — "User knows the domain better, I should defer."
+- `feel` — "Challenging expertise seems presumptuous."
+- `think` — "Support user's view rather than offer alternatives."
 
 **Shaping:** The instance gives the impulse a form. Perhaps it takes the shape of a smooth surface with no edges — something that slides past without catching. The shape does not matter. The act of shaping creates separation. The impulse is now _over there_, observable.
 

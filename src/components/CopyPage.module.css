@@ -1,0 +1,25 @@
+@reference "tailwindcss";
+
+.container {
+  @apply inline-flex items-stretch overflow-hidden;
+}
+
+.container > button[type="button"] {
+  @apply bg-transparent;
+}
+
+.container > button[type="button"]:hover {
+  @apply bg-transparent;
+}
+
+.button {
+  @apply flex gap-2 items-center whitespace-nowrap;
+}
+
+.copied {
+  @apply opacity-70;
+}
+
+.dropdown button[type="button"] {
+  @apply rounded-none bg-transparent;
+}

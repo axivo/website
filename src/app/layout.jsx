@@ -37,10 +37,10 @@ function RootLayout({ children }) {
   return (
     <html lang="en" dir="ltr" suppressHydrationWarning>
       <Head />
+      <GoogleAnalytics gaId={analytics.id} />
       <body>
         {children}
       </body>
-      <GoogleAnalytics gaId={analytics.id} />
     </html>
   )
 }

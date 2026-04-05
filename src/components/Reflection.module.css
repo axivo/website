@@ -1,5 +1,5 @@
 @reference "tailwindcss";
 
 .container h2 {
-  @apply mt-3;
+  @apply mt-5;
 }

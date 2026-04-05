@@ -5,9 +5,9 @@
  */
 
 export const algolia = {
-  apiKey: '51d69e02f96e27f314a79f2ca94af098',
-  appId: 'UKP1GAEB9S',
-  indexName: 'docs'
+  apiKey: '94d5f62b378913a136bf09e67182dfc6',
+  appId: 'Q87QW4FRL5',
+  indexName: 'axivo'
 }
 
 export const analytics = {
@@ -20,10 +20,7 @@ export const author = {
 }
 
 export const crawlers = [
-  'Bingbot',
-  'DuckDuckBot',
-  'Googlebot',
-  'Slurp'
+  '*'
 ]
 
 export const domain = 'axivo.com'
