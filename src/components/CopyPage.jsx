@@ -7,8 +7,7 @@
  * removes the ChatGPT option and keeps only Copy page and Open in Claude.
  *
  * The built-in button is disabled via copyPageButton={false} on each site's Layout
- * component. This component is rendered via the h1 override in mdx-components.js
- * through the PageTitle component.
+ * component. This component is rendered in the Subnavbar component.
  */
 
 'use client'
@@ -18,6 +17,7 @@ import { Button, Select } from 'nextra/components'
 import { useCopy } from 'nextra/hooks'
 import { ArrowRightIcon, ClaudeIcon, CopyIcon, LinkArrowIcon } from 'nextra/icons'
 import { useConfig } from 'nextra-theme-docs'
+import styles from './CopyPage.module.css'
 
 /**
  * Dropdown menu options for the CopyPage button.
@@ -29,7 +29,7 @@ const menuOptions = [
       <Item
         description="Copy page as Markdown for LLMs"
         icon={CopyIcon}
-        title="Copy page"
+        title="Copy Page"
       />
     )
   },
@@ -85,25 +85,16 @@ function CopyPage() {
     )
   }
   return (
-    <div style={{ display: 'flex', justifyContent: 'flex-end', marginLeft: 'auto' }}>
-      <div className="x:border x:inline-flex x:rounded-md x:items-stretch nextra-border x:overflow-hidden">
-        <Button
-          className={(bag) =>
-            cn(
-              'x:ps-2 x:pe-1 x:flex x:gap-2 x:text-sm x:font-medium x:items-center',
-              isCopied && 'x:opacity-70',
-              bag.hover &&
-              'x:bg-gray-200 x:text-gray-900 x:dark:bg-primary-100/5 x:dark:text-gray-50'
-            )
-          }
-          onClick={handleCopy}
-        >
-          <CopyIcon width="16" />
-          {isCopied ? 'Copied' : 'Copy page'}
-        </Button>
+    <div className={cn(styles.container, 'x:text-sm x:text-gray-600 x:dark:text-gray-400')}>
+      <Button
+        className={() => cn(styles.button, 'x:transition-colors x:hover:text-black x:dark:hover:text-gray-200', isCopied && styles.copied)}
+        onClick={handleCopy}
+      >
+        {isCopied ? 'Copied' : 'Copy Page'}
+      </Button>
+      <div className={cn(styles.dropdown, 'x:transition-colors x:hover:text-black x:dark:hover:text-gray-200')}>
         <Select
           anchor={{ to: 'bottom end', gap: 10 }}
-          className="x:rounded-none"
           onChange={handleChange}
           options={menuOptions}
           selectedOption={<ArrowRightIcon width="12" className="x:rotate-90" />}

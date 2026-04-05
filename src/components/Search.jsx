@@ -35,10 +35,12 @@ function removeTracking(selector) {
  * from the Algolia logo link.
  *
  * @param {Object} props
- * @param {string} [props.index] - Algolia index name override for subsite scoping
+ * @param {string} [props.section] - Section name for faceted search scoping
  */
-function Search({ index } = {}) {
-  const config = index ? { ...algolia, indexName: index } : algolia
+function Search({ section } = {}) {
+  const config = section
+    ? { ...algolia, searchParameters: { facetFilters: [`section:${section}`] } }
+    : algolia
   const [isOpen, setIsOpen] = useState(false)
   const [DocSearchModal, setDocSearchModal] = useState(null)
   const searchButtonRef = useRef(null)

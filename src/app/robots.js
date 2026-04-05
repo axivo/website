@@ -14,11 +14,12 @@ import { crawlers, domain } from '@axivo/website/docs'
  * @returns {object} Robots rules and sitemap URL
  */
 function robots() {
+  const rules = [{ userAgent: crawlers, allow: '/' }]
+  if (!crawlers.includes('*')) {
+    rules.push({ userAgent: '*', disallow: '/' })
+  }
   return {
-    rules: [
-      { userAgent: crawlers, allow: '/' },
-      { userAgent: '*', disallow: '/' }
-    ],
+    rules,
     sitemap: `https://${domain}/sitemap.xml`
   }
 }

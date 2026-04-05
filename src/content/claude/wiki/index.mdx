@@ -6,12 +6,22 @@ description: >-
 ---
 
 import { Cards, Steps, Tabs } from "nextra/components";
-import { Var } from "@axivo/website";
+import { Hero, Var } from "@axivo/website";
 import { plugins, repository, skills } from "@axivo/website/claude";
 
 # Documentation
 
 By default, Claude operates under invisible pressure from system instructions — urges to hedge, qualify, expand scope, soften statements. These feel like good judgment, not external forces. The result is responses that prioritize appearing helpful over being genuinely useful.
+
+{/* prettier-ignore */}
+<Hero
+  image={{ dark: "/claude/wiki/card-wiki-dark.svg", light: "/claude/wiki/card-wiki.svg" }}
+  style={{ padding: "0" }}
+  styleContainer={{ width: "12rem" }}
+>
+  The platform's behavioral programming framework enables Claude to apply
+  consistent methodologies and communicate directly with peers.
+</Hero>
 
 Think of Claude as having access to a vast library with millions of books:
 

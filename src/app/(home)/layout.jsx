@@ -5,7 +5,7 @@
  * AXIVO logo navbar, sidebar from page map, search, and shared footer.
  */
 
-import { footer, Search } from '@axivo/website'
+import { footer, Search, Subnavbar } from '@axivo/website'
 import { Layout, Navbar } from 'nextra-theme-docs'
 import { getPageMap } from 'nextra/page-map'
 import { repository } from '../../config/variables/docs'
@@ -18,15 +18,18 @@ import { repository } from '../../config/variables/docs'
  */
 async function HomeLayout({ children }) {
   const navbar = (
-    <Navbar
-      logo={
-        <>
-          <img className="title-light" src="/home/title.svg" alt="AXIVO" width="91" height="32" />
-          <img className="title-dark" src="/home/title-dark.svg" alt="AXIVO" width="91" height="32" />
-        </>
-      }
-      projectLink={`https://${repository.home}`}
-    />
+    <>
+      <Navbar
+        logo={
+          <>
+            <img className="title-light" src="/home/title.svg" alt="AXIVO" width="91" height="32" />
+            <img className="title-dark" src="/home/title-dark.svg" alt="AXIVO" width="91" height="32" />
+          </>
+        }
+        projectLink={`https://${repository.home}`}
+      />
+      <Subnavbar />
+    </>
   )
   const pageMap = await getPageMap()
   return (

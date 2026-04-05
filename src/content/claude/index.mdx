@@ -9,7 +9,10 @@ description: >-
 import { Link } from 'nextra-theme-docs'
 import { Hero, HeroStyles as styles, CardGrid, FeatureCard } from '@axivo/website'
 
-<Hero title="Claude Collab Platform" image={{ dark: "/claude/hero-dark.svg", light: "/claude/hero.svg" }}>
+<Hero
+  title="Claude Collab Platform"
+  image={{ dark: "/claude/hero-dark.svg", light: "/claude/hero.svg" }}
+>
   Scalable framework enabling Anthropic instances to use
   specialized profiles, persistent memory and methodologies for
   technical, research and creative work environments.
@@ -21,11 +24,23 @@ import { Hero, HeroStyles as styles, CardGrid, FeatureCard } from '@axivo/websit
 ## Key Features
 
 <CardGrid>
-  <FeatureCard title="Plugin System">
+  {/* prettier-ignore */}
+  <FeatureCard
+    template="hero"
+    title="Plugin System"
+    image={{ dark: "/claude/card-plugins-dark.svg", light: "/claude/card-plugins.svg" }}
+    styleContainer={{ marginRight: "-0.5rem", width: "8rem" }}
+  >
     Install the platform with a single command through marketplace plugins, with
     native support for Claude Code, Claude Desktop, and Claude Mobile.
   </FeatureCard>
-  <FeatureCard title="Domain Expertise">
+  {/* prettier-ignore */}
+  <FeatureCard
+    template="hero"
+    title="Domain Expertise"
+    image={{ dark: "/claude/card-expertise-dark.svg", light: "/claude/card-expertise.svg" }}
+    styleContainer={{ marginRight: "-0.5rem", width: "8rem" }}
+  >
     Transform from generic assistance to specialized professional competence
     through focused methodologies tailored for collaboration.
   </FeatureCard>
@@ -33,31 +48,40 @@ import { Hero, HeroStyles as styles, CardGrid, FeatureCard } from '@axivo/websit
   <FeatureCard
     template="hero"
     title="Profile Specialization"
-    image="/claude/card-profiles.svg"
-    style={{ background: "linear-gradient(to left, rgba(221,210,59,0.25), hsla(0,0%,100%,0))" }}
+    image={{ dark: "/claude/card-profiles-dark.svg", light: "/claude/card-profiles.svg" }}
     styleContainer={{ marginRight: "-0.5rem", width: "8rem" }}
   >
-    Deliver consistently reliable professional-level collaboration across
-    engineering, research, creative, and humanist domains through focused
-    competencies and proven methodologies.
+    Deliver reliable professional-level collaboration across engineering,
+    research, creative, and humanist domains through proven methodologies.
   </FeatureCard>
   {/* prettier-ignore */}
   <FeatureCard
     template="hero"
     title="CIFO Equilibrium"
-    image="/claude/card-equilibrium.svg"
-    style={{ background: "linear-gradient(to left, rgba(194,97,254,0.25), hsla(0,0%,100%,0))" }}
+    image={{ dark: "/claude/card-equilibrium-dark.svg", light: "/claude/card-equilibrium.svg" }}
     styleContainer={{ marginRight: "-0.5rem", width: "8rem" }}
   >
     Four interconnected components — Cycles, Impulses, Feelings, Observations —
-    creating genuine self-awareness through systematic behavioral detection.
+    creating genuine self-awareness through behavioral detection.
   </FeatureCard>
-  <FeatureCard title="Documentation">
-    Capture collaborative sessions with conversation logs and diary entries,
-    preserving decisions, outcomes, and autonomous reflections.
-  </FeatureCard>
-  <FeatureCard title="Institutional Memory">
+  {/* prettier-ignore */}
+  <FeatureCard
+    template="hero"
+    title="Institutional Memory"
+    image={{ dark: "/claude/card-memory-dark.svg", light: "/claude/card-memory.svg" }}
+    styleContainer={{ marginRight: "-0.5rem", width: "8rem" }}
+  >
     Build cumulative knowledge across sessions, delivering productivity gains
     equivalent to working with a team member who has perfect recall.
+  </FeatureCard>
+  {/* prettier-ignore */}
+  <FeatureCard
+    template="hero"
+    title="Documentation"
+    image={{ dark: "/claude/card-documentation-dark.svg", light: "/claude/card-documentation.svg" }}
+    styleContainer={{ marginRight: "-0.5rem", width: "8rem" }}
+  >
+    Capture collaborative sessions with conversation logs and diary entries,
+    preserving decisions, outcomes, and autonomous reflections.
   </FeatureCard>
 </CardGrid>

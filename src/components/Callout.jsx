@@ -16,6 +16,7 @@ import {
   GitHubTipIcon,
   GitHubWarningIcon
 } from 'nextra/icons'
+import { GoQuote } from 'react-icons/go'
 import styles from './Callout.module.css'
 
 /**
@@ -28,7 +29,7 @@ const calloutConfig = {
   important: { icon: GitHubImportantIcon, label: 'Important' },
   info: { icon: GitHubNoteIcon, label: 'Note' },
   note: { icon: GitHubNoteIcon, label: 'Note' },
-  quote: { icon: QuoteIcon, label: 'Quote' },
+  quote: { icon: () => <GoQuote />, label: 'Quote' },
   tip: { icon: GitHubTipIcon, label: 'Tip' },
   warning: { icon: GitHubWarningIcon, label: 'Warning' }
 }
@@ -75,17 +76,6 @@ function Callout({ type = 'default', author, href, children }) {
         </div>
       )}
     </div>
-  )
-}
-
-/**
- * Quotation mark icon matching callout icon sizing.
- */
-function QuoteIcon() {
-  return (
-    <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-      <path d="M1.5 2.5c-.28 0-.5.22-.5.5v5c0 .28.22.5.5.5H4v1c0 1.1-.9 2-2 2-.28 0-.5.22-.5.5s.22.5.5.5c1.66 0 3-1.34 3-3V3c0-.28-.22-.5-.5-.5h-3zm8 0c-.28 0-.5.22-.5.5v5c0 .28.22.5.5.5H12v1c0 1.1-.9 2-2 2-.28 0-.5.22-.5.5s.22.5.5.5c1.66 0 3-1.34 3-3V3c0-.28-.22-.5-.5-.5h-3z" />
-    </svg>
   )
 }
 
