@@ -9,7 +9,7 @@ export { Breadcrumb } from '../../node_modules/nextra-theme-docs/dist/components
 export { footer } from '../../src/config/site'
 export { Callout } from '../../src/components/Callout'
 export { CardGrid, FeatureCard } from '../../src/components/FeatureCard'
-export { CopyPage } from '../../src/components/CopyPage'
+export { Explore } from '../../src/components/Explore'
 export { Hero, HeroStyles } from '../../src/components/Hero'
 export { Image } from '../../src/components/Image'
 export { Meta } from '../../src/components/Meta'

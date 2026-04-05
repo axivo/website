@@ -83,7 +83,7 @@ a.cta:focus-visible span {
 .tagline {
   @apply flex flex-wrap items-center leading-normal;
   font-feature-settings: initial;
-  font-size: clamp(1rem, 3vw, 1.4rem);
+  font-size: clamp(1.2rem, 3vw, 1.4rem);
 }
 
 .tagline p {
@@ -124,10 +124,6 @@ a.cta:focus-visible span {
 
   .hero {
     @apply py-4;
-  }
-
-  .image {
-    width: clamp(8rem, 40vw, 12rem);
   }
 
   .text {

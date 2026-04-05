@@ -7,8 +7,6 @@
  * The quote type adds attributed citations with optional author link.
  */
 
-import { Children, isValidElement } from 'react'
-import { Link } from 'nextra-theme-docs'
 import {
   GitHubCautionIcon,
   GitHubImportantIcon,
@@ -16,6 +14,8 @@ import {
   GitHubTipIcon,
   GitHubWarningIcon
 } from 'nextra/icons'
+import { Link } from 'nextra-theme-docs'
+import { Children, isValidElement } from 'react'
 import { GoQuote } from 'react-icons/go'
 import styles from './Callout.module.css'
 

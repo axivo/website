@@ -6,8 +6,8 @@
  */
 
 import { footer, Search, Subnavbar } from '@axivo/website'
-import { Layout, Navbar } from 'nextra-theme-docs'
 import { getPageMap } from 'nextra/page-map'
+import { Layout, Navbar } from 'nextra-theme-docs'
 import { repository } from '../../config/variables/docs'
 
 /**

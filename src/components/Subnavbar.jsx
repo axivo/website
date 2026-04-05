@@ -1,10 +1,10 @@
 /**
- * @fileoverview Sticky subnavbar rendering breadcrumbs and CopyPage button.
+ * @fileoverview Sticky subnavbar rendering breadcrumbs and Explore button.
  *
  * Positioned below Nextra's Navbar, this component creates a secondary
  * sticky bar inspired by Anthropic's claude.com layout. It reads the
  * active path from Nextra's config store and renders breadcrumb
- * navigation on the left with the CopyPage button on the right.
+ * navigation on the left with the Explore button on the right.
  *
  * The original Nextra breadcrumb inside the article is hidden via CSS
  * in globals.css to avoid duplication.
@@ -18,13 +18,13 @@ import { ArrowRightIcon } from 'nextra/icons'
 import { useConfig } from 'nextra-theme-docs'
 import { Fragment } from 'react'
 import { GoHome } from 'react-icons/go'
-import { CopyPage } from './CopyPage'
+import { Explore } from './Explore'
 import styles from './Subnavbar.module.css'
 
 /**
  * Sticky breadcrumb bar positioned below the main navbar.
  *
- * Renders breadcrumb navigation on the left and CopyPage button
+ * Renders breadcrumb navigation on the left and Explore button
  * on the right. Only visible on non-page type routes that have
  * breadcrumb content enabled.
  */
@@ -73,7 +73,7 @@ function Subnavbar() {
             )
           })}
         </div>
-        <CopyPage />
+        <Explore />
       </div>
     </div>
   )
