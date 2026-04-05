@@ -10,8 +10,10 @@ import { useMDXComponents as getDocsMDXComponents } from 'nextra-theme-docs'
 import { withGitHubAlert } from 'nextra/components'
 import { Callout } from './src/components/Callout'
 import { PageTitle } from './src/components/PageTitle'
+import { SourceCodeSetter } from './src/components/SourceCode'
 
 const docsComponents = getDocsMDXComponents()
+const NextraWrapper = docsComponents.wrapper
 
 /**
  * Returns merged MDX components with custom overrides.
@@ -27,6 +29,12 @@ function useMDXComponents(components) {
       docsComponents.blockquote
     ),
     h1: PageTitle,
+    wrapper: ({ sourceCode, ...props }) => (
+      <>
+        <SourceCodeSetter sourceCode={sourceCode} />
+        <NextraWrapper {...props} sourceCode={sourceCode} />
+      </>
+    ),
     ...components
   }
 }

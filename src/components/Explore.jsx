@@ -18,6 +18,7 @@ import { ArrowRightIcon, ClaudeIcon, CopyIcon, LinkArrowIcon } from 'nextra/icon
 import { useConfig } from 'nextra-theme-docs'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import styles from './Explore.module.css'
+import { useSourceCode } from './SourceCode'
 
 /**
  * Explore dropdown with page actions: copy as Markdown and open in Claude.
@@ -38,20 +39,20 @@ import styles from './Explore.module.css'
 function Explore() {
   const { normalizePagesResult: { activeThemeContext } } = useConfig()
   const { copy } = useCopy()
+  const sourceCode = useSourceCode()
   const [open, setOpen] = useState(false)
   const containerRef = useRef(null)
   if (activeThemeContext.copyPage === false) {
     return null
   }
   function handleCopy() {
-    const article = document.querySelector('article')
-    if (article) {
-      copy(article.innerText)
+    if (sourceCode) {
+      copy(sourceCode)
     }
     setOpen(false)
   }
   function handleClaude() {
-    const query = `Read from ${location.href} so I can ask questions about it.`
+    const query = `Please read ${location.href} so we can explore this topic together.`
     window.open(
       `https://claude.ai/new?q=${encodeURIComponent(query)}`,
       '_blank'
