@@ -16,7 +16,7 @@ import cn from 'clsx'
 import { useCopy } from 'nextra/hooks'
 import { ArrowRightIcon, ClaudeIcon, CopyIcon, LinkArrowIcon } from 'nextra/icons'
 import { useConfig } from 'nextra-theme-docs'
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import styles from './Explore.module.css'
 import { useSourceCode } from './SourceCode'
 
@@ -42,6 +42,16 @@ function Explore() {
   const sourceCode = useSourceCode()
   const [open, setOpen] = useState(false)
   const containerRef = useRef(null)
+  useEffect(() => {
+    if (!open) return
+    function handleClickOutside(event) {
+      if (containerRef.current && !containerRef.current.contains(event.target)) {
+        setOpen(false)
+      }
+    }
+    document.addEventListener('click', handleClickOutside)
+    return () => document.removeEventListener('click', handleClickOutside)
+  }, [open])
   if (activeThemeContext.copyPage === false) {
     return null
   }
@@ -62,8 +72,6 @@ function Explore() {
   return (
     <div
       className={styles.container}
-      onMouseEnter={() => setOpen(true)}
-      onMouseLeave={() => setOpen(false)}
       ref={containerRef}
     >
       <button
