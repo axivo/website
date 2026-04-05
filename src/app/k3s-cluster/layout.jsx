@@ -8,8 +8,8 @@
 
 import { footer, Search, Subnavbar } from '@axivo/website'
 import { repository, subsite } from '@axivo/website/k3s-cluster'
-import { Layout, Navbar } from 'nextra-theme-docs'
 import { getPageMap } from 'nextra/page-map'
+import { Layout, Navbar } from 'nextra-theme-docs'
 
 const metadata = {
   title: {

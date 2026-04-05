@@ -1,0 +1,63 @@
+@reference "tailwindcss";
+
+.arrow {
+  @apply transition-transform duration-200;
+  transform: rotate(90deg);
+}
+
+.arrowOpen {
+  transform: rotate(-90deg);
+}
+
+.container {
+  @apply relative;
+}
+
+.container::after {
+  content: '';
+  @apply absolute right-0 w-full;
+  top: 100%;
+  height: 0.25rem;
+}
+
+.menu {
+  @apply absolute right-0 rounded-md py-1 text-sm shadow-lg z-30;
+  top: calc(100% + 0.25rem);
+  min-width: 16rem;
+}
+
+:global(.dark) .menu {
+  box-shadow:
+    0 10px 15px -3px rgba(255, 255, 255, 0.08),
+    0 4px 6px -4px rgba(255, 255, 255, 0.06);
+}
+
+.menuItem {
+  @apply flex gap-3 items-center w-full px-3 py-1.5 cursor-pointer text-left;
+}
+
+.menuItem:hover {
+  background-color: var(--x-color-primary-100);
+  color: var(--x-color-primary-800);
+}
+
+:global(.dark) .menuItem:hover {
+  background-color: color-mix(in srgb, var(--x-color-primary-500) 10%, transparent);
+  color: var(--x-color-primary-500);
+}
+
+.menuItemDescription {
+  @apply text-xs text-gray-500 dark:text-gray-400;
+}
+
+.menuItemText {
+  @apply flex flex-col;
+}
+
+.menuItemTitle {
+  @apply font-medium flex gap-1;
+}
+
+.trigger {
+  @apply flex gap-1.5 items-center whitespace-nowrap text-sm cursor-pointer;
+}
