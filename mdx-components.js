@@ -6,6 +6,8 @@
  * and h1 headings use the PageTitle component with copy-page support.
  */
 
+import { readFileSync } from 'node:fs'
+import { join } from 'node:path'
 import { useMDXComponents as getDocsMDXComponents } from 'nextra-theme-docs'
 import { withGitHubAlert } from 'nextra/components'
 import { Callout } from './src/components/Callout'
@@ -14,6 +16,11 @@ import { SourceCodeSetter } from './src/components/SourceCode'
 
 const docsComponents = getDocsMDXComponents()
 const NextraWrapper = docsComponents.wrapper
+
+let timestamps = {}
+try {
+  timestamps = JSON.parse(readFileSync(join(process.cwd(), '.next/timestamps.json'), 'utf8'))
+} catch { }
 
 /**
  * Returns merged MDX components with custom overrides.
@@ -29,12 +36,18 @@ function useMDXComponents(components) {
       docsComponents.blockquote
     ),
     h1: PageTitle,
-    wrapper: ({ sourceCode, ...props }) => (
-      <>
-        <SourceCodeSetter sourceCode={sourceCode} />
-        <NextraWrapper {...props} sourceCode={sourceCode} />
-      </>
-    ),
+    wrapper: ({ sourceCode, metadata, ...props }) => {
+      const updatedMetadata = { ...metadata }
+      if (metadata?.filePath && timestamps[metadata.filePath]) {
+        updatedMetadata.timestamp = timestamps[metadata.filePath]
+      }
+      return (
+        <>
+          <SourceCodeSetter sourceCode={sourceCode} />
+          <NextraWrapper {...props} metadata={updatedMetadata} sourceCode={sourceCode} />
+        </>
+      )
+    },
     ...components
   }
 }
