@@ -7,7 +7,7 @@
 export const algolia = {
   apiKey: '94d5f62b378913a136bf09e67182dfc6',
   appId: 'Q87QW4FRL5',
-  indexName: 'axivo'
+  indexName: 'axivo.com'
 }
 
 export const analytics = {

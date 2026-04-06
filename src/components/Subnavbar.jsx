@@ -30,7 +30,7 @@ import styles from './Subnavbar.module.css'
  */
 function Subnavbar() {
   const { normalizePagesResult: { activePath, activeType } } = useConfig()
-  if (activeType === 'page') {
+  if (activeType === 'page' || !activePath?.length) {
     return null
   }
   return (
