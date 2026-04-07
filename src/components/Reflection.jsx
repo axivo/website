@@ -57,10 +57,7 @@ function collectEntries(items) {
 function filterByDate(entries, date) {
   const parts = date.split('/')
   return entries.filter(entry => {
-    const d = new Date(entry.frontMatter.date)
-    const year = String(d.getFullYear())
-    const month = String(d.getMonth() + 1).padStart(2, '0')
-    const day = String(d.getDate()).padStart(2, '0')
+    const [year, month, day] = entry.frontMatter.date.split('T')[0].split('-')
     if (parts.length === 1) {
       return year === parts[0]
     }
@@ -82,7 +79,7 @@ async function getEntries() {
     route: reflections.path
   })
   return collectEntries(directories)
-    .sort((a, b) => new Date(b.frontMatter.date) - new Date(a.frontMatter.date))
+    .sort((a, b) => b.frontMatter.date.localeCompare(a.frontMatter.date))
 }
 
 /**
@@ -153,20 +150,6 @@ async function Tags() {
 }
 
 /**
- * Returns the ordinal suffix for a day number.
- *
- * @param {number} day - Day of the month
- * @returns {string} Day with ordinal suffix (e.g., "1st", "2nd", "3rd", "4th")
- */
-function ordinal(day) {
-  if (day > 3 && day < 21) {
-    return `${day}th`
-  }
-  const suffixes = ['th', 'st', 'nd', 'rd']
-  return `${day}${suffixes[day % 10] || 'th'}`
-}
-
-/**
  * Formats a date string for display as a page title.
  * Accepts YYYY, YYYY/MM, or YYYY/MM/DD formats.
  *
@@ -183,10 +166,11 @@ function Title({ date }) {
     'January', 'February', 'March', 'April', 'May', 'June',
     'July', 'August', 'September', 'October', 'November', 'December'
   ]
+  const month = months[parseInt(parts[1], 10) - 1]
   if (parts.length === 2) {
-    return months[parseInt(parts[1], 10) - 1]
+    return `${month} ${parts[0]}`
   }
-  return ordinal(parseInt(parts[2], 10))
+  return `${month} ${parseInt(parts[2], 10)}, ${parts[0]}`
 }
 
 export { getEntries, getTags, Reflections, Tags, Title }

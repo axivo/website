@@ -1,10 +1,9 @@
 /**
- * @fileoverview Meta component for blog template pages.
+ * @fileoverview Meta component for reflection entry metadata.
  *
- * Displays entry metadata (date, time, author) below the page title on
- * blog entries. Only renders when the page frontmatter includes
- * template: 'blog'. Reads metadata from Nextra's activeMetadata via
- * useConfig(). Integrated through the PageTitle component.
+ * Displays date, time, and author below entry titles. Used by both
+ * PageTitle (entry pages) and PostCard (listing pages). When no props
+ * are provided, reads from Nextra's activeMetadata via useConfig().
  */
 
 'use client'
@@ -21,27 +20,43 @@ const monthNames = [
 ]
 
 /**
- * Author metadata bar for blog template pages.
- * Renders date (linked to day page), time, and author with avatar
- * (linked to GitHub source file).
+ * Formats parsed time to 12-hour time string.
  *
- * @returns {import('react').ReactElement|null} Author bar or null for non-blog pages
+ * @param {number} hours - Hours (0-23)
+ * @param {string} minutes - Minutes (zero-padded)
+ * @returns {string} Formatted time (e.g., "9:44 AM")
  */
-function Meta() {
-  const { normalizePagesResult: { activeMetadata } } = useConfig()
-  if (activeMetadata?.template !== 'blog') {
+function formatTime(hours, minutes) {
+  const period = hours >= 12 ? 'PM' : 'AM'
+  const formatHours = hours % 12 || 12
+  return `${formatHours}:${minutes} ${period}`
+}
+
+/**
+ * Entry metadata bar with date, time, and author.
+ *
+ * @param {object} [props]
+ * @param {string} [props.author] - Author name
+ * @param {string} [props.date] - ISO date string
+ * @param {string} [props.source] - GitHub source URL
+ * @returns {import('react').ReactElement|null} Metadata bar or null
+ */
+function Meta({ author, date, source } = {}) {
+  if (!date) {
+    const { normalizePagesResult: { activeMetadata } } = useConfig()
+    if (activeMetadata?.template !== 'blog') {
+      return null
+    }
+    ({ author, date, source } = activeMetadata)
+  }
+  if (!date) {
     return null
   }
-  const { date: dateStr, author, source } = activeMetadata
-  if (!dateStr) {
-    return null
-  }
-  const date = new Date(dateStr)
-  const day = date.getDate()
-  const dayPadded = day.toString().padStart(2, '0')
-  const month = monthNames[date.getMonth()]
-  const monthPadded = (date.getMonth() + 1).toString().padStart(2, '0')
-  const year = date.getFullYear()
+  const [datePart, timePart] = date.split('T')
+  const [year, monthPadded, dayPadded] = datePart.split('-')
+  const [hours, minutes] = timePart.split(':')
+  const month = monthNames[parseInt(monthPadded, 10) - 1]
+  const day = parseInt(dayPadded, 10)
   const dayPath = `/claude/reflections/${year}/${monthPadded}/${dayPadded}`
   return (
     <div className={styles.container}>
@@ -49,7 +64,7 @@ function Meta() {
         {month} {day}, {year}
       </a>
       <span className={styles.separator}>&middot;</span>
-      <span>{formatTime(date)}</span>
+      <span>{formatTime(parseInt(hours, 10), minutes)}</span>
       {author && (
         <>
           <span className={styles.dash}>&mdash;</span>
@@ -73,20 +88,6 @@ function Meta() {
       )}
     </div>
   )
-}
-
-/**
- * Formats a Date object to 12-hour time string.
- *
- * @param {Date} date - Date to format
- * @returns {string} Formatted time (e.g., "9:44 AM")
- */
-function formatTime(date) {
-  const hours = date.getHours()
-  const minutes = date.getMinutes().toString().padStart(2, '0')
-  const period = hours >= 12 ? 'PM' : 'AM'
-  const displayHours = hours % 12 || 12
-  return `${displayHours}:${minutes} ${period}`
 }
 
 export { Meta }
