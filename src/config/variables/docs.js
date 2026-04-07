@@ -7,7 +7,13 @@
 export const algolia = {
   apiKey: '94d5f62b378913a136bf09e67182dfc6',
   appId: 'Q87QW4FRL5',
-  indexName: 'axivo.com'
+  indices: [{
+    name: 'axivo.com',
+    searchParameters: {
+      hitsPerPage: 50
+    }
+  }],
+  maxResultsPerGroup: 50
 }
 
 export const analytics = {

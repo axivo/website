@@ -4,8 +4,8 @@ description: >-
   Configure ArgoCD for Helm chart-based application deployment and credential management.
 ---
 
-import { Var } from '@axivo/website'
-import { os, repository } from '@axivo/website/k3s-cluster'
+import { Var } from "@axivo/website";
+import { os, repository } from "@axivo/website/k3s-cluster";
 
 # ArgoCD
 
@@ -54,13 +54,13 @@ Additional RBAC policies can be defined in the <Var code href={`https://${reposi
 
 ## Repository Setup
 
-Log in to the [ArgoCD UI](/k3s-cluster/tutorials/configuration/externaldns/#argocd), navigate to `ArgoCD Settings` > `Repositories`, and connect to the official project repository:
+Log in to the [ArgoCD UI](/k3s-cluster/tutorials/configuration/externaldns/#argo-cd), navigate to `ArgoCD Settings` > `Repositories`, and connect to the official project repository:
 
-| Key     | Value                                                         |
-| :------ | :------------------------------------------------------------ |
-| Method  | `HTTPS`                                                       |
-| Type    | `git`                                                         |
-| Project | `default`                                                     |
+| Key     | Value                                                           |
+| :------ | :-------------------------------------------------------------- |
+| Method  | `HTTPS`                                                         |
+| Type    | `git`                                                           |
+| Project | `default`                                                       |
 | URL     | <Var code>{`https://${repository.applications.home}.git`}</Var> |
 
 ## Applications Provisioning

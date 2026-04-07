@@ -4,9 +4,9 @@ description: >-
   Configure ExternalDNS with Cloudflare to manage public DNS records and Let's Encrypt certificates.
 ---
 
-import { FileTree } from 'nextra/components'
-import { Var } from '@axivo/website'
-import { repository } from '@axivo/website/k3s-cluster'
+import { FileTree } from "nextra/components";
+import { Var } from "@axivo/website";
+import { repository } from "@axivo/website/k3s-cluster";
 
 # ExternalDNS
 
@@ -32,7 +32,7 @@ See below the list of available front-ends once the cluster is provisioned succe
 >
 > Update the `externaldns_vars.cloudflare.host.domain` setting in the <Var code href={`https://${repository.home}/blob/${repository.tag}/roles/external-dns/defaults/main.yaml`}>main.yaml</Var> defaults file.
 
-### ArgoCD
+### Argo CD
 
 - UI — `https://argocd.domain.com`
 
