@@ -7,3 +7,8 @@
 :root:root {
   --nextra-content-width: 80rem;
 }
+
+/* Subnavbar Scroll Offset */
+html:has(.nextra-subnavbar) {
+  scroll-padding-top: calc(var(--nextra-navbar-height) + 3rem);
+}

@@ -39,7 +39,10 @@ function removeTracking(selector) {
  */
 function Search({ section } = {}) {
   const config = section
-    ? { ...algolia, searchParameters: { facetFilters: [`section:${section}`] } }
+    ? { ...algolia, indices: algolia.indices.map(index => ({
+        ...index,
+        searchParameters: { ...index.searchParameters, facetFilters: [`section:${section}`] }
+      }))}
     : algolia
   const [isOpen, setIsOpen] = useState(false)
   const [DocSearchModal, setDocSearchModal] = useState(null)
