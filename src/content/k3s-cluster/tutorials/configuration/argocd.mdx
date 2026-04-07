@@ -1,15 +1,15 @@
 ---
 title: Argo CD
 description: >-
-  Configure ArgoCD for Helm chart-based application deployment and credential management.
+  Configure Argo CD for Helm chart-based application deployment and credential management.
 ---
 
 import { Var } from "@axivo/website";
 import { os, repository } from "@axivo/website/k3s-cluster";
 
-# ArgoCD
+# Argo CD
 
-This repository uses [ArgoCD](https://argoproj.github.io/cd) to deploy applications based on Helm charts. We encourage the community to contribute to the <Var href={`https://${repository.applications.home}`}>official project</Var>.
+This repository uses [Argo CD](https://argoproj.github.io/cd) to deploy applications based on Helm charts. We encourage the community to contribute to the <Var href={`https://${repository.applications.home}`}>official project</Var>.
 
 ## Configuration
 
@@ -54,7 +54,7 @@ Additional RBAC policies can be defined in the <Var code href={`https://${reposi
 
 ## Repository Setup
 
-Log in to the [ArgoCD UI](/k3s-cluster/tutorials/configuration/externaldns/#argo-cd), navigate to `ArgoCD Settings` > `Repositories`, and connect to the official project repository:
+Log in to the [Argo CD UI](/k3s-cluster/tutorials/configuration/externaldns/#argo-cd), navigate to `Argo CD Settings` > `Repositories`, and connect to the official project repository:
 
 | Key     | Value                                                           |
 | :------ | :-------------------------------------------------------------- |
@@ -65,7 +65,7 @@ Log in to the [ArgoCD UI](/k3s-cluster/tutorials/configuration/externaldns/#argo
 
 ## Applications Provisioning
 
-Application charts are released with version control, based on repository tags. See below an example of application provisioning in ArgoCD.
+Application charts are released with version control, based on repository tags. See below an example of application provisioning in Argo CD.
 
 ### Application Resource
 
@@ -99,7 +99,7 @@ spec:
 
 #### Metadata
 
-This repository uses the `kube-system` namespace for ArgoCD role provisioning. Adjust the `metadata.namespace` value accordingly if you deploy ArgoCD in a different namespace.
+This repository uses the `kube-system` namespace for Argo CD role provisioning. Adjust the `metadata.namespace` value accordingly if you deploy Argo CD in a different namespace.
 
 The `spec.destination.name` is inherited from the `metadata.name` value.
 
