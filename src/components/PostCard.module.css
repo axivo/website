@@ -1,39 +1,7 @@
 @reference "tailwindcss";
 
-.author {
-  @apply inline-flex items-center text-current transition-colors;
-}
-
-.author:hover {
-  @apply text-slate-700;
-}
-
-:global(.dark) .author:hover {
-  @apply text-slate-200;
-}
-
-.avatar {
-  @apply mr-1.5 rounded-full;
-}
-
 .card {
   @apply py-4;
-}
-
-.dash {
-  @apply mx-1;
-}
-
-.date {
-  @apply no-underline transition-colors;
-}
-
-.date:hover {
-  @apply text-slate-700;
-}
-
-:global(.dark) .date:hover {
-  @apply text-slate-200;
 }
 
 .description {
@@ -42,18 +10,6 @@
 
 :global(.dark) .description {
   @apply text-gray-400;
-}
-
-.meta {
-  @apply mb-4 flex flex-wrap items-center gap-y-2 text-sm text-gray-500;
-}
-
-:global(.dark) .meta {
-  @apply text-gray-400;
-}
-
-.separator {
-  @apply mx-1;
 }
 
 .tag {
@@ -79,7 +35,7 @@
 }
 
 .tags {
-  @apply flex flex-wrap gap-1.5;
+  @apply mt-2 flex flex-wrap gap-1.5;
 }
 
 .title {
