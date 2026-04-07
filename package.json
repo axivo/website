@@ -26,6 +26,6 @@
     "@tailwindcss/postcss": "^4.2.0",
     "prettier-plugin-tailwindcss": "^0.7.0",
     "tailwindcss": "^4.2.0",
-    "wrangler": "^4.80.0"
+    "wrangler": "^4.81.0"
   }
 }
