@@ -8,6 +8,7 @@
 
 import { readFileSync } from 'node:fs'
 import { join } from 'node:path'
+import * as websiteComponents from '@axivo/website'
 import { useMDXComponents as getDocsMDXComponents } from 'nextra-theme-docs'
 import { withGitHubAlert } from 'nextra/components'
 import { Callout } from './src/components/Callout'
@@ -31,6 +32,7 @@ try {
 function useMDXComponents(components) {
   return {
     ...docsComponents,
+    ...websiteComponents,
     blockquote: withGitHubAlert(
       (props) => <Callout {...props} />,
       docsComponents.blockquote

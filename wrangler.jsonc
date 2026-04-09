@@ -22,5 +22,12 @@
   ],
   "observability": {
     "enabled": true
-  }
+  },
+  "r2_buckets": [
+    {
+      "binding": "CONTENT_BUCKET",
+      "bucket_name": "axivo-website",
+      "remote": true
+    }
+  ]
 }

@@ -10,15 +10,27 @@ For local development and testing, use the following commands:
 # Install the dependencies
 npm install
 
-# Build the application
-npm run build
-
-# Run the development server with Turbopack
-npm run dev
-
 # Build and preview on Cloudflare Workers runtime
 npm run preview
+npx opennextjs-cloudflare build
+npx wrangler dev --remote .open-next/worker.js
 ```
+
+The `prebuild` step runs automatically before each build. It generates git timestamps and R2 content stubs for reflection entries served from Cloudflare R2 storage.
+
+### R2 Content Setup
+
+Reflection entries are served from a Cloudflare R2 bucket at runtime. The prebuild script requires R2 credentials to generate frontmatter stubs for the Nextra page map.
+
+Create a `.dev.vars` file in the project root with the following variables:
+
+```shell
+R2_ACCESS_KEY_ID=<your-access-key>
+R2_SECRET_ACCESS_KEY=<your-secret-key>
+R2_ENDPOINT=<your-r2-endpoint>
+```
+
+For Cloudflare Pages deployments, these values are configured as environment secrets.
 
 ## Code Formatting
 

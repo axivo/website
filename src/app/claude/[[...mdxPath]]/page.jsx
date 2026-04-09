@@ -3,20 +3,93 @@
  *
  * Serves all Nextra content pages through the catch-all route and
  * handles dynamic tag pages by intercepting reflections/tags/{tag}
- * paths. Tag pages render through the same Wrapper component as
- * MDX content, using MDX components for consistent heading styling.
+ * paths. Reflection entries are served from R2 storage when available,
+ * falling back to bundled MDX content. Tag pages render through the
+ * same Wrapper component as MDX content, using MDX components for
+ * consistent heading styling.
  */
 
-import { Breadcrumb, getEntries, getTags, PostCard } from '@axivo/website'
-import reflectionStyles from '../../../components/Reflection.module.css'
+import { Breadcrumb, getEntries, getTags, PostCard, reflectionStyles, useMDXComponents as getMDXComponents } from '@axivo/website'
+import GithubSlugger from 'github-slugger'
 import { subsite } from '@axivo/website/claude'
 import { generateStaticParamsFor, importPage } from 'nextra/pages'
-import { useMDXComponents as getMDXComponents } from '../../../../mdx-components'
+import remarkMdx from 'remark-mdx'
+import remarkParse from 'remark-parse'
+import { SafeMdxRenderer } from 'safe-mdx'
+import { unified } from 'unified'
 import '../../(home)/page.css'
 
 const components = getMDXComponents()
 const nextraStaticParams = generateStaticParamsFor('mdxPath')
 const Wrapper = components.wrapper
+
+/**
+ * Extracts table of contents from an MDAST tree.
+ * Builds Nextra-compatible TOC entries (depth 2-6) with slugged IDs.
+ * Annotates heading nodes with id properties for anchor link support.
+ *
+ * @param {object} mdast - MDAST root node
+ * @returns {object[]} Array of { depth, value, id } heading entries
+ */
+function extractToc(mdast) {
+  const slugger = new GithubSlugger()
+  const headings = []
+  for (const node of mdast.children) {
+    if (node.type === 'heading' && node.depth >= 2 && node.depth <= 6) {
+      const value = node.children.map(c => c.value || '').join('')
+      const id = slugger.slug(value)
+      node.data = { ...node.data, hProperties: { ...node.data?.hProperties, id } }
+      headings.push({ depth: node.depth, value, id })
+    }
+  }
+  return headings
+}
+
+/**
+ * Fetches MDX content and metadata from R2 bucket.
+ *
+ * @param {string} key - R2 object key
+ * @returns {Promise<{ content: string, metadata: object } | null>}
+ */
+async function fetchFromR2(key) {
+  try {
+    const { getCloudflareContext } = await import('@opennextjs/cloudflare')
+    const { env } = await getCloudflareContext({ async: true })
+    const object = await env.CONTENT_BUCKET.get(key)
+    if (!object) return null
+    const content = await object.text()
+    const metadata = { ...object.customMetadata }
+    if (metadata.description) {
+      metadata.description = decodeURIComponent(metadata.description)
+    }
+    if (metadata.tags) {
+      try { metadata.tags = JSON.parse(metadata.tags) } catch { }
+    }
+    return { content, metadata }
+  } catch {
+    return null
+  }
+}
+
+/**
+ * Checks if the path matches a tag page route.
+ *
+ * @param {string[]} path - URL path segments
+ * @returns {boolean} True if path is reflections/tags/{tag}
+ */
+function isTagPage(path) {
+  return path[0] === 'reflections' && path[1] === 'tags' && path[2]
+}
+
+/**
+ * Parses MDX content into an AST for safe rendering.
+ *
+ * @param {string} mdx - Raw MDX content
+ * @returns {object} MDAST root node
+ */
+function parseMdx(mdx) {
+  return unified().use(remarkParse).use(remarkMdx).parse(mdx)
+}
 
 /**
  * Builds an activePath array for Nextra's Breadcrumb component.
@@ -36,7 +109,7 @@ function buildTagBreadcrumb(tag) {
 
 /**
  * Generates page metadata. Returns tag title for tag pages,
- * otherwise delegates to Nextra's importPage metadata.
+ * R2 metadata for reflection entries, or Nextra importPage metadata.
  *
  * @param {object} props - Next.js page props
  * @returns {Promise<object>} Page metadata with title
@@ -76,19 +149,10 @@ async function generateStaticParams() {
 }
 
 /**
- * Checks if the path matches a tag page route.
- *
- * @param {string[]} path - URL path segments
- * @returns {boolean} True if path is reflections/tags/{tag}
- */
-function isTagPage(path) {
-  return path[0] === 'reflections' && path[1] === 'tags' && path[2]
-}
-
-/**
  * Main page component for the claude section catch-all route.
- * Routes tag pages to renderTagPage, splash pages to full-width layout,
- * and all other pages to the standard Nextra docs wrapper.
+ * Routes tag pages to renderTagPage, reflection entries to R2 content,
+ * splash pages to full-width layout, and all other pages to the
+ * standard Nextra docs wrapper.
  *
  * @param {object} props - Next.js page props
  * @returns {Promise<import('react').ReactElement>} Rendered page
@@ -105,6 +169,19 @@ async function Page(props) {
     metadata,
     sourceCode
   } = await importPage([subsite.path, ...path])
+  if (metadata.bucket) {
+    const key = `src/content/${subsite.path}/${path.join('/')}.mdx`
+    const result = await fetchFromR2(key)
+    if (result) {
+      const mdast = parseMdx(result.content)
+      const r2Toc = extractToc(mdast)
+      return (
+        <Wrapper toc={r2Toc} metadata={result.metadata}>
+          <SafeMdxRenderer mdast={mdast} components={components} />
+        </Wrapper>
+      )
+    }
+  }
   if (metadata.template === 'splash') {
     return (
       <div className="splash content-container">

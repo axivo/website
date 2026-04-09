@@ -7,8 +7,10 @@
  */
 
 import Link from 'next/link'
-import { compileMdx } from 'nextra/compile'
-import { MDXRemote } from 'nextra/mdx-remote'
+import remarkMdx from 'remark-mdx'
+import remarkParse from 'remark-parse'
+import { SafeMdxRenderer } from 'safe-mdx'
+import { unified } from 'unified'
 import { Meta } from './Meta'
 import styles from './PostCard.module.css'
 
@@ -21,7 +23,7 @@ import styles from './PostCard.module.css'
  * @param {object} props.post.frontMatter - Entry frontmatter
  * @param {string} [props.readMore='Read more →'] - Read more link text
  */
-async function PostCard({ post, readMore = 'Read more' }) {
+function PostCard({ post, readMore = 'Read more' }) {
   const { author, date, description, source, tags, title } = post.frontMatter
   return (
     <div className={styles.card}>
@@ -42,7 +44,7 @@ async function PostCard({ post, readMore = 'Read more' }) {
       )}
       {description && (
         <div className={styles.description}>
-          <MDXRemote compiledSource={await compileMdx(description)} />
+          <SafeMdxRenderer mdast={unified().use(remarkParse).use(remarkMdx).parse(description)} />
         </div>
       )}
       {readMore && (

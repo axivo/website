@@ -25,6 +25,12 @@ export const author = {
   name: 'Floren Munteanu'
 }
 
+export const cloudflare = {
+  r2: {
+    bucket: 'axivo-website'
+  }
+}
+
 export const crawlers = [
   '*'
 ]
