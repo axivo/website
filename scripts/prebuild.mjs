@@ -15,7 +15,7 @@
 import { GetObjectCommand, HeadObjectCommand, ListObjectsV2Command, S3Client } from '@aws-sdk/client-s3'
 import { config } from 'dotenv'
 import { execSync } from 'node:child_process'
-import { existsSync, mkdirSync, writeFileSync } from 'node:fs'
+import { existsSync, mkdirSync, statSync, writeFileSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { cloudflare } from '../src/config/variables/docs.js'
 import { reflections, subsite } from '../src/config/variables/claude.js'
@@ -252,7 +252,7 @@ async function downloadR2Media(s3) {
   let count = 0
   for (const obj of list.Contents) {
     const filePath = join(cwd, obj.Key)
-    if (existsSync(filePath)) {
+    if (existsSync(filePath) && statSync(filePath).size === obj.Size) {
       continue
     }
     const response = await s3.send(new GetObjectCommand({

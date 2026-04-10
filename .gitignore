@@ -1,7 +1,10 @@
 # Claude
 .claude/
-src/content/claude/reflections/2025/11/17/
-src/content/claude/reflections/2025/12/01/
+public/claude/reflections/diary/*
+src/content/claude/reflections/*
+!src/content/claude/reflections/tags/
+!src/content/claude/reflections/_meta.js
+!src/content/claude/reflections/index.mdx
 
 # Environment
 .env
