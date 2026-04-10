@@ -60,7 +60,7 @@ function Meta({ author, date, source } = {}) {
   const dayPath = `/claude/reflections/${year}/${monthPadded}/${dayPadded}`
   return (
     <div className={styles.container}>
-      <a href={dayPath} className={styles.date}>
+      <a href={dayPath} className={styles.date} title={`${month} ${day}, ${year}`}>
         {month} {day}, {year}
       </a>
       <span className={styles.separator}>&middot;</span>
