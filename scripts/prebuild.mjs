@@ -304,9 +304,11 @@ try {
       }
     })
     const stubs = await generateR2Stubs(s3)
-    console.info(`Generated ${stubs.generated} R2 stubs, deleted ${stubs.deleted} orphaned stubs`)
+    const wordGenerated = stubs.generated === 1 ? 'stub' : 'stubs'
+    const wordDeleted = stubs.deleted === 1 ? 'stub' : 'stubs'
+    console.info(`Generated ${stubs.generated} R2 ${wordGenerated}, deleted ${stubs.deleted} orphaned R2 ${wordDeleted}`)
     const media = await downloadR2Media(s3)
-    console.info(`Downloaded ${media.downloaded} R2 media files, deleted ${media.deleted} orphaned media files`)
+    console.info(`Downloaded ${media.downloaded} R2 media, deleted ${media.deleted} orphaned media`)
   }
 } catch (error) {
   console.error('Failed R2 operations:', error.message)
