@@ -13,7 +13,7 @@
     "@axivo/website": "file:./packages/website",
     "@docsearch/react": "^4.6.0",
     "@next/third-parties": "^16.2.0",
-    "@opennextjs/cloudflare": "^1.18.0",
+    "@opennextjs/cloudflare": "^1.19.0",
     "github-slugger": "^2.0.0",
     "next": "^16.2.2",
     "nextra": "^4.6.0",
