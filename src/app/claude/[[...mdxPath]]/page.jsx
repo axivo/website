@@ -51,22 +51,28 @@ function extractToc(mdast) {
  * @param {string} key - R2 object key
  * @returns {Promise<{ content: string, metadata: object } | null>}
  */
-async function fetchFromR2(key) {
+async function fetchR2Object(key) {
   try {
     const { getCloudflareContext } = await import('@opennextjs/cloudflare')
     const { env } = await getCloudflareContext({ async: true })
     const object = await env.CONTENT_BUCKET.get(key)
-    if (!object) return null
+    if (!object) {
+      console.warn(`R2 fetch returned null for key: ${key}`)
+      return null
+    }
     const content = await object.text()
     const metadata = { ...object.customMetadata }
     if (metadata.description) {
       metadata.description = decodeURIComponent(metadata.description)
     }
     if (metadata.tags) {
-      try { metadata.tags = JSON.parse(metadata.tags) } catch { }
+      try {
+        metadata.tags = JSON.parse(metadata.tags)
+      } catch { }
     }
     return { content, metadata }
-  } catch {
+  } catch (error) {
+    console.error(`R2 fetch failed for key: ${key} - ${error.message}`)
     return null
   }
 }
@@ -171,7 +177,7 @@ async function Page(props) {
   } = await importPage([subsite.path, ...path])
   if (metadata.bucket) {
     const key = `src/content/${subsite.path}/${path.join('/')}.mdx`
-    const result = await fetchFromR2(key)
+    const result = await fetchR2Object(key)
     if (result) {
       const mdast = parseMdx(result.content)
       const r2Toc = extractToc(mdast)
