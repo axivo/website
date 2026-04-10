@@ -29,7 +29,7 @@
 }
 
 .itemLink {
-  @apply min-w-6 overflow-hidden text-ellipsis;
+  @apply overflow-hidden text-ellipsis;
 }
 
 
