@@ -21,7 +21,7 @@ import { cloudflare } from '../src/config/variables/docs.js'
 import { reflections, subsite } from '../src/config/variables/claude.js'
 
 const bucket = cloudflare.r2.bucket
-const bucketMediaPrefix = `public/${subsite.path}${reflections.section}/media/`
+const bucketMediaPrefix = `public/${subsite.path}${reflections.section}/`
 const bucketPrefix = `src/content/${subsite.path}${reflections.section}/`
 const cwd = process.cwd()
 const monthNames = [
