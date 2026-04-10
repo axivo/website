@@ -13,10 +13,10 @@
  * - <Reflections date='2025/11/17' /> — all entries for that day, paginated
  */
 
+import { useMDXComponents as getMDXComponents } from '@axivo/website'
 import { reflections } from '@axivo/website/claude'
 import { normalizePages } from 'nextra/normalize-pages'
 import { getPageMap } from 'nextra/page-map'
-import { useMDXComponents as getMDXComponents } from '../../mdx-components'
 import { PostCard } from './PostCard'
 import { ReflectionPage } from './ReflectionPage'
 import { TagGrid } from './Tag'

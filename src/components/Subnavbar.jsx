@@ -16,7 +16,7 @@ import cn from 'clsx'
 import NextLink from 'next/link'
 import { ArrowRightIcon } from 'nextra/icons'
 import { useConfig } from 'nextra-theme-docs'
-import { Fragment } from 'react'
+import { Fragment, useEffect, useRef } from 'react'
 import { GoHome } from 'react-icons/go'
 import { Explore } from './Explore'
 import styles from './Subnavbar.module.css'
@@ -30,11 +30,44 @@ import styles from './Subnavbar.module.css'
  */
 function Subnavbar() {
   const { normalizePagesResult: { activePath, activeType } } = useConfig()
+  const ref = useRef(null)
+  useEffect(() => {
+    if (!ref.current) {
+      return
+    }
+    const root = document.documentElement
+    const height = ref.current.getBoundingClientRect().height
+    const offset = `calc(var(--nextra-navbar-height) + ${height}px)`
+    root.style.setProperty('--nextra-subnavbar-height', `${height}px`)
+    root.style.setProperty('scroll-padding-top', offset)
+    const sidebar = document.querySelector('.nextra-sidebar')
+    if (sidebar) {
+      sidebar.style.top = offset
+      sidebar.style.height = `calc(100dvh - var(--nextra-navbar-height) - ${height}px)`
+    }
+    const toc = document.querySelector('.nextra-toc > div')
+    if (toc) {
+      toc.style.top = offset
+      toc.style.maxHeight = `calc(100vh - var(--nextra-navbar-height) - ${height}px)`
+    }
+    return () => {
+      root.style.removeProperty('--nextra-subnavbar-height')
+      root.style.removeProperty('scroll-padding-top')
+      if (sidebar) {
+        sidebar.style.removeProperty('top')
+        sidebar.style.removeProperty('height')
+      }
+      if (toc) {
+        toc.style.removeProperty('top')
+        toc.style.removeProperty('max-height')
+      }
+    }
+  }, [])
   if (activeType === 'page' || !activePath?.length) {
     return null
   }
   return (
-    <div className={cn('nextra-subnavbar nextra-border x:bg-nextra-bg/70', styles.subnavbar)}>
+    <div ref={ref} className={cn('nextra-border nextra-subnavbar x:bg-nextra-bg/70', styles.subnavbar)}>
       <div className={styles.container}>
         <div className={cn(styles.breadcrumb, 'x:text-gray-600 x:dark:text-gray-400 x:contrast-more:text-gray-700 x:contrast-more:dark:text-gray-100')}>
           <GoHome size={18} className={styles.icon} />
