@@ -21,7 +21,9 @@ const NextraWrapper = docsComponents.wrapper
 let timestamps = {}
 try {
   timestamps = JSON.parse(readFileSync(join(process.cwd(), '.next/timestamps.json'), 'utf8'))
-} catch { }
+} catch {
+  console.info('Timestamps not available, skipping')
+}
 
 /**
  * Returns merged MDX components with custom overrides.

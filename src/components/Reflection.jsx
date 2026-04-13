@@ -22,8 +22,6 @@ import { ReflectionPage } from './ReflectionPage'
 import { TagGrid } from './Tag'
 import styles from './Reflection.module.css'
 
-const components = getMDXComponents()
-
 /**
  * Default number of entries per page.
  */
@@ -83,6 +81,16 @@ async function getEntries() {
 }
 
 /**
+ * Fetches all unique tags from reflection entries.
+ *
+ * @returns {Promise<string[]>} Array of all tags (may contain duplicates)
+ */
+async function getTags() {
+  const entries = await getEntries()
+  return entries.flatMap(entry => entry.frontMatter.tags || [])
+}
+
+/**
  * Renders a list of reflection entries as PostCard components.
  * When limit is set, shows that many entries without pagination.
  * When limit is omitted, shows all entries with pagination (20 per page).
@@ -121,16 +129,6 @@ async function Reflections({ children, date, limit, style }) {
       </ReflectionPage>
     </div>
   )
-}
-
-/**
- * Fetches all unique tags from reflection entries.
- *
- * @returns {Promise<string[]>} Array of all tags (may contain duplicates)
- */
-async function getTags() {
-  const entries = await getEntries()
-  return entries.flatMap(entry => entry.frontMatter.tags || [])
 }
 
 /**

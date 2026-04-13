@@ -32,33 +32,6 @@ const outputDir = join(cwd, '.next')
 const outputFile = join(outputDir, 'timestamps.json')
 
 /**
- * Gets the last commit timestamp for each tracked file using git log.
- * Uses a COMMIT: prefix delimiter to avoid ambiguity with filenames.
- *
- * @returns {object} Map of relative file paths to epoch milliseconds
- */
-function getTimestamps() {
-  const result = execSync(
-    'git log --format="COMMIT:%at" --name-only --diff-filter=ACMR HEAD',
-    { cwd, encoding: 'utf8' }
-  )
-  const timestamps = {}
-  let currentTime = null
-  for (const line of result.split('\n')) {
-    if (!line) {
-      continue
-    }
-    const match = line.match(/^COMMIT:(\d+)$/)
-    if (match) {
-      currentTime = Number(match[1]) * 1000
-    } else if (currentTime !== null && !timestamps[line]) {
-      timestamps[line] = currentTime
-    }
-  }
-  return timestamps
-}
-
-/**
  * Builds an index page for a reflection year, month, or day directory.
  *
  * @param {Array<string>} parts - Date parts: [year], [year, month], or [year, month, day]
@@ -94,11 +67,11 @@ function buildIndex(parts) {
   }
   lines.push(
     'description: >-',
-    `  Reflections written by Claude instances during ${phrase} collaborative sessions.`,
+    `  Reflections written by Anthropic instances during ${phrase} collaborative sessions.`,
     '---',
     '',
     `export const date = "${parts.join('/')}";`,
-    'import { Reflections, Title } from "@axivo/website";',
+    'import { Reflections, Title } from "@axivo/website/reflections";',
     '',
     '# <Title date={date} />',
     '',
@@ -185,6 +158,41 @@ function cleanupOrphans(rootDir, expected) {
 }
 
 /**
+ * Downloads media files from R2 bucket into the public directory.
+ *
+ * @param {S3Client} s3 - Configured S3 client
+ * @returns {Promise<number>} Number of media files downloaded
+ */
+async function downloadR2Media(s3) {
+  const list = await s3.send(new ListObjectsV2Command({
+    Bucket: bucket,
+    Prefix: bucketMediaPrefix
+  }))
+  if (!list.Contents?.length) {
+    return { downloaded: 0, deleted: 0 }
+  }
+  const expected = new Set()
+  let count = 0
+  for (const obj of list.Contents) {
+    const filePath = join(cwd, obj.Key)
+    expected.add(filePath)
+    if (existsSync(filePath) && statSync(filePath).size === obj.Size) {
+      continue
+    }
+    const response = await s3.send(new GetObjectCommand({
+      Bucket: bucket,
+      Key: obj.Key
+    }))
+    const bytes = await response.Body.transformToByteArray()
+    mkdirSync(dirname(filePath), { recursive: true })
+    writeFileSync(filePath, bytes)
+    count++
+  }
+  const deleted = cleanupOrphans(join(cwd, bucketMediaPrefix), expected)
+  return { downloaded: count, deleted }
+}
+
+/**
  * Generates frontmatter-only stub files from R2 object metadata.
  * Stubs provide Nextra page map entries for R2-backed reflection pages.
  *
@@ -240,38 +248,30 @@ async function generateR2Stubs(s3) {
 }
 
 /**
- * Downloads media files from R2 bucket into the public directory.
+ * Gets the last commit timestamp for each tracked file using git log.
+ * Uses a COMMIT: prefix delimiter to avoid ambiguity with filenames.
  *
- * @param {S3Client} s3 - Configured S3 client
- * @returns {Promise<number>} Number of media files downloaded
+ * @returns {object} Map of relative file paths to epoch milliseconds
  */
-async function downloadR2Media(s3) {
-  const list = await s3.send(new ListObjectsV2Command({
-    Bucket: bucket,
-    Prefix: bucketMediaPrefix
-  }))
-  if (!list.Contents?.length) {
-    return { downloaded: 0, deleted: 0 }
-  }
-  const expected = new Set()
-  let count = 0
-  for (const obj of list.Contents) {
-    const filePath = join(cwd, obj.Key)
-    expected.add(filePath)
-    if (existsSync(filePath) && statSync(filePath).size === obj.Size) {
+function getTimestamps() {
+  const result = execSync(
+    'git log --format="COMMIT:%at" --name-only --diff-filter=ACMR HEAD',
+    { cwd, encoding: 'utf8' }
+  )
+  const timestamps = {}
+  let currentTime = null
+  for (const line of result.split('\n')) {
+    if (!line) {
       continue
     }
-    const response = await s3.send(new GetObjectCommand({
-      Bucket: bucket,
-      Key: obj.Key
-    }))
-    const bytes = await response.Body.transformToByteArray()
-    mkdirSync(dirname(filePath), { recursive: true })
-    writeFileSync(filePath, bytes)
-    count++
+    const match = line.match(/^COMMIT:(\d+)$/)
+    if (match) {
+      currentTime = Number(match[1]) * 1000
+    } else if (currentTime !== null && !timestamps[line]) {
+      timestamps[line] = currentTime
+    }
   }
-  const deleted = cleanupOrphans(join(cwd, bucketMediaPrefix), expected)
-  return { downloaded: count, deleted }
+  return timestamps
 }
 
 try {

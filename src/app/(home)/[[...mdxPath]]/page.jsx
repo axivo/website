@@ -14,16 +14,6 @@ const components = getMDXComponents()
 const Wrapper = components.wrapper
 
 /**
- * Generates static params for all Nextra content pages.
- *
- * @returns {Promise<object[]>} Array of path params for static generation
- */
-async function generateStaticParams() {
-  const params = await generateStaticParamsFor('mdxPath')()
-  return [{ mdxPath: [] }, ...params]
-}
-
-/**
  * Generates page metadata from Nextra's importPage.
  *
  * @param {object} props - Next.js page props
@@ -36,6 +26,16 @@ async function generateMetadata(props) {
     return { ...metadata, title: metadata.seoTitle }
   }
   return metadata
+}
+
+/**
+ * Generates static params for all Nextra content pages.
+ *
+ * @returns {Promise<object[]>} Array of path params for static generation
+ */
+async function generateStaticParams() {
+  const params = await generateStaticParamsFor('mdxPath')()
+  return [{ mdxPath: [] }, ...params]
 }
 
 /**

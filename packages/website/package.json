@@ -1,6 +1,6 @@
 {
   "name": "@axivo/website",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "private": true,
   "main": "index.js",
   "exports": {
@@ -19,6 +19,10 @@
     "./k3s-cluster": {
       "types": "./k3s-cluster.d.ts",
       "import": "./k3s-cluster.js"
+    },
+    "./reflections": {
+      "types": "./reflections.d.ts",
+      "import": "./reflections.js"
     }
   }
 }
