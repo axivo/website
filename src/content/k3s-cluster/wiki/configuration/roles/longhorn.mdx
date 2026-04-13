@@ -4,8 +4,7 @@ description: >-
   Ansible role configuration for Longhorn distributed block storage in the K3s cluster.
 ---
 
-import { Steps } from 'nextra/components'
-import { Var } from '@axivo/website'
+import { Steps, Var } from '@axivo/website'
 import { repository } from '@axivo/website/k3s-cluster'
 
 # Longhorn
@@ -22,7 +21,7 @@ The `longhorn` role performs various tasks related to Helm chart deployment, res
 
 See the related role tasks listed below.
 
-<Steps>
+<Steps format="bullet">
 ### Facts
 
 Ansible facts — see <Var code href={`https://${repository.home}/blob/${repository.tag}/roles/longhorn/tasks/facts.yaml`}>facts.yaml</Var> for details.
@@ -65,7 +64,7 @@ ansible-playbook --ask-vault-pass --tags=longhorn validation.yaml
 
 See the related role templates listed below.
 
-<Steps>
+<Steps format="bullet">
 ### Helm Chart
 
 Helm chart values template — see <Var code href={`https://${repository.home}/blob/${repository.tag}/roles/longhorn/templates/values.j2`}>values.j2</Var> for details.

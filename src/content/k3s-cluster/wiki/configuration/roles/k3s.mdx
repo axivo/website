@@ -4,8 +4,7 @@ description: >-
   Ansible role configuration for K3s lightweight Kubernetes distribution deployment and management.
 ---
 
-import { Steps } from 'nextra/components'
-import { Var } from '@axivo/website'
+import { Steps, Var } from '@axivo/website'
 import { repository } from '@axivo/website/k3s-cluster'
 
 # K3s
@@ -22,7 +21,7 @@ The `k3s` role performs various tasks related to OS configuration, K3s cluster d
 
 See the related role tasks listed below.
 
-<Steps>
+<Steps format="bullet">
 ### Configuration
 
 Configuration related tasks — see <Var code href={`https://${repository.home}/blob/${repository.tag}/roles/k3s/tasks/configuration.yaml`}>configuration.yaml</Var> for details.
@@ -71,7 +70,7 @@ ansible-playbook --ask-vault-pass --tags=k3s validation.yaml
 
 See the related role templates listed below.
 
-<Steps>
+<Steps format="bullet">
 ### Configuration
 
 - **Cluster** — Cluster configuration template, see <Var code href={`https://${repository.home}/blob/${repository.tag}/roles/k3s/templates/config.j2`}>config.j2</Var> for details.

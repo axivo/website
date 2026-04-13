@@ -4,7 +4,7 @@ description: >-
   Set up VLAN isolation, static IP addresses, and network configuration for cluster nodes.
 ---
 
-import { Steps } from 'nextra/components'
+import { Image, Steps } from "@axivo/website";
 
 # Network
 
@@ -19,7 +19,12 @@ It is strongly recommended to set a dedicated VLAN and static IP addresses for e
 
 Create a new VLAN with IPv6 disabled and domain name set to `local`:
 
-[![OS Installation: Network VLAN](/k3s-cluster/tutorials/network-vlan.webp)](/k3s-cluster/tutorials/network-vlan.webp)
+<Image
+  template="card"
+  href="/k3s-cluster/tutorials/network-vlan.webp"
+  src="/k3s-cluster/tutorials/network-vlan.webp"
+  alt="OS Installation: Network VLAN"
+/>
 
 In the above example, the VLAN ID is set to `4` and the subnet netmask to `25`, allowing you to set up to 125 usable hosts, used for your nodes and Kubernetes external IP services.
 
@@ -27,7 +32,12 @@ In the above example, the VLAN ID is set to `4` and the subnet netmask to `25`, 
 
 For each server node, set the static IP address associated with the related network interface MAC address:
 
-[![OS Installation: Network Static IP](/k3s-cluster/tutorials/network-static-ip.webp)](/k3s-cluster/tutorials/network-static-ip.webp)
+<Image
+  template="card"
+  href="/k3s-cluster/tutorials/network-static-ip.webp"
+  src="/k3s-cluster/tutorials/network-static-ip.webp"
+  alt="OS Installation: Network Static IP"
+/>
 
 ### Internet Connectivity
 

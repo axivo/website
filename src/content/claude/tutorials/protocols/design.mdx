@@ -2,9 +2,8 @@
 title: Profile Design
 ---
 
-import { Steps } from 'nextra/components'
-import { Var } from '@axivo/website'
-import { plugins, repository, skills } from '@axivo/website/claude'
+import { Steps, Var } from "@axivo/website";
+import { plugins, repository, skills } from "@axivo/website/claude";
 
 # Profile Design
 
@@ -22,7 +21,7 @@ Profiles implement a **dual-layer cognitive architecture** that combines active 
 PROFILE_NAME:
   description: "Brief profile description"
   relations:
-    - target: COLLABORATION      # Inherits full common profile chain
+    - target: COLLABORATION # Inherits full common profile chain
       type: inherits
 ```
 
@@ -213,7 +212,7 @@ Create `data-scientist.yaml` file in <Var href={`https://${repository.home}/tree
 DATA_SCIENTIST:
   description: "Data science and analytics collaboration profile — rigorous, evidence-based, and interpretive"
   relations:
-    - target: RESEARCHER         # Inherits statistical rigor and methodological validation
+    - target: RESEARCHER # Inherits statistical rigor and methodological validation
       type: inherits
 
   data_scientist_context:

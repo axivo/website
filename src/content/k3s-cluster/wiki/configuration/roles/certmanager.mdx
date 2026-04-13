@@ -4,8 +4,7 @@ description: >-
   Ansible role configuration for CertManager X.509 certificate management in the K3s cluster.
 ---
 
-import { Steps } from 'nextra/components'
-import { Var } from '@axivo/website'
+import { Steps, Var } from '@axivo/website'
 import { repository } from '@axivo/website/k3s-cluster'
 
 # CertManager
@@ -22,7 +21,7 @@ The `cert-manager` role performs various tasks related to Helm chart deployment,
 
 See the related role tasks listed below.
 
-<Steps>
+<Steps format="bullet">
 ### Facts
 
 Ansible facts — see <Var code href={`https://${repository.home}/blob/${repository.tag}/roles/cert-manager/tasks/facts.yaml`}>facts.yaml</Var> for details.
@@ -69,7 +68,7 @@ See the related role templates listed below.
 >
 > Perform a role validation to visualize all rendered templates and variables.
 
-<Steps>
+<Steps format="bullet">
 ### Helm Chart
 
 Helm chart values template — see <Var code href={`https://${repository.home}/blob/${repository.tag}/roles/cert-manager/templates/values.j2`}>values.j2</Var> for details.

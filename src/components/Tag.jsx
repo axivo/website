@@ -8,23 +8,6 @@
 import styles from './Tag.module.css'
 
 /**
- * Tag pill link with name and count.
- *
- * @param {object} props
- * @param {string} props.href - Tag page URL
- * @param {string} props.name - Tag name
- * @param {number} props.count - Number of entries with this tag
- */
-function TagItem({ href, name, count }) {
-  return (
-    <a href={href} className={styles.tag}>
-      <span>{name}</span>
-      <span className={styles.count}>{count}</span>
-    </a>
-  )
-}
-
-/**
  * 3-column grid of tag pills.
  *
  * @param {object} props
@@ -38,6 +21,23 @@ function TagGrid({ tags, basePath = '/claude/reflections/tags' }) {
         <TagItem key={tag} href={`${basePath}/${tag}`} name={tag} count={count} />
       ))}
     </div>
+  )
+}
+
+/**
+ * Tag pill link with name and count.
+ *
+ * @param {object} props
+ * @param {string} props.href - Tag page URL
+ * @param {string} props.name - Tag name
+ * @param {number} props.count - Number of entries with this tag
+ */
+function TagItem({ href, name, count }) {
+  return (
+    <a href={href} className={styles.tag}>
+      <span>{name}</span>
+      <span className={styles.count}>{count}</span>
+    </a>
   )
 }
 

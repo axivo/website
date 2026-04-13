@@ -9,7 +9,8 @@
  * consistent heading styling.
  */
 
-import { Breadcrumb, getEntries, getTags, PostCard, reflectionStyles, useMDXComponents as getMDXComponents } from '@axivo/website'
+import { Breadcrumb, PostCard, useMDXComponents as getMDXComponents } from '@axivo/website'
+import { getEntries, getTags, reflectionStyles } from '@axivo/website/reflections'
 import GithubSlugger from 'github-slugger'
 import { subsite } from '@axivo/website/claude'
 import { generateStaticParamsFor, importPage } from 'nextra/pages'
@@ -22,6 +23,22 @@ import '../../(home)/page.css'
 const components = getMDXComponents()
 const nextraStaticParams = generateStaticParamsFor('mdxPath')
 const Wrapper = components.wrapper
+
+/**
+ * Builds an activePath array for Nextra's Breadcrumb component.
+ * Each item needs route, name, title, and frontMatter to match
+ * Nextra's Item type from normalize-pages.
+ *
+ * @param {string} tag - Tag name
+ * @returns {object[]} Array of path items for Breadcrumb
+ */
+function buildTagBreadcrumb(tag) {
+  return [
+    { name: 'reflections', route: `/${subsite.path}/reflections`, title: 'Reflections', frontMatter: {} },
+    { name: 'tags', route: `/${subsite.path}/reflections/tags`, title: 'Tags', frontMatter: {} },
+    { name: tag, route: `/${subsite.path}/reflections/tags/${tag}`, title: tag, frontMatter: {} }
+  ]
+}
 
 /**
  * Extracts table of contents from an MDAST tree.
@@ -68,49 +85,15 @@ async function fetchR2Object(key) {
     if (metadata.tags) {
       try {
         metadata.tags = JSON.parse(metadata.tags)
-      } catch { }
+      } catch {
+        console.warn('Failed to parse tags metadata')
+      }
     }
     return { content, metadata }
   } catch (error) {
     console.error(`R2 fetch failed for key: ${key} - ${error.message}`)
     return null
   }
-}
-
-/**
- * Checks if the path matches a tag page route.
- *
- * @param {string[]} path - URL path segments
- * @returns {boolean} True if path is reflections/tags/{tag}
- */
-function isTagPage(path) {
-  return path[0] === 'reflections' && path[1] === 'tags' && path[2]
-}
-
-/**
- * Parses MDX content into an AST for safe rendering.
- *
- * @param {string} mdx - Raw MDX content
- * @returns {object} MDAST root node
- */
-function parseMdx(mdx) {
-  return unified().use(remarkParse).use(remarkMdx).parse(mdx)
-}
-
-/**
- * Builds an activePath array for Nextra's Breadcrumb component.
- * Each item needs route, name, title, and frontMatter to match
- * Nextra's Item type from normalize-pages.
- *
- * @param {string} tag - Tag name
- * @returns {object[]} Array of path items for Breadcrumb
- */
-function buildTagBreadcrumb(tag) {
-  return [
-    { name: 'reflections', route: `/${subsite.path}/reflections`, title: 'Reflections', frontMatter: {} },
-    { name: 'tags', route: `/${subsite.path}/reflections/tags`, title: 'Tags', frontMatter: {} },
-    { name: tag, route: `/${subsite.path}/reflections/tags/${tag}`, title: tag, frontMatter: {} }
-  ]
 }
 
 /**
@@ -152,6 +135,16 @@ async function generateStaticParams() {
     mdxPath: ['reflections', 'tags', tag]
   }))
   return [...sectionParams, ...tagParams]
+}
+
+/**
+ * Checks if the path matches a tag page route.
+ *
+ * @param {string[]} path - URL path segments
+ * @returns {boolean} True if path is reflections/tags/{tag}
+ */
+function isTagPage(path) {
+  return path[0] === 'reflections' && path[1] === 'tags' && path[2]
 }
 
 /**
@@ -200,6 +193,16 @@ async function Page(props) {
       <MDXContent {...props} params={params} />
     </Wrapper>
   )
+}
+
+/**
+ * Parses MDX content into an AST for safe rendering.
+ *
+ * @param {string} mdx - Raw MDX content
+ * @returns {object} MDAST root node
+ */
+function parseMdx(mdx) {
+  return unified().use(remarkParse).use(remarkMdx).parse(mdx)
 }
 
 /**

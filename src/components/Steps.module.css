@@ -1,0 +1,28 @@
+@reference "tailwindcss";
+
+:global(.nextra-steps) {
+  @apply border-gray-300;
+}
+
+:global(.nextra-steps) :is(h2, h3:not([style^='visibility:']), h4, h5, h6)::before {
+  box-shadow: inset 0 0 0 1px var(--x-color-gray-300);
+}
+
+:global(.dark) :global(.nextra-steps) {
+  @apply border-neutral-700;
+}
+
+:global(.dark) :global(.nextra-steps) :is(h2, h3:not([style^='visibility:']), h4, h5, h6)::before {
+  box-shadow: inset 0 0 0 1px var(--x-color-neutral-700);
+}
+
+.bullet:is(.bullet) :is(h2, h3:not([style^='visibility:']), h4, h5, h6)::before {
+  @apply flex items-center justify-center size-[34px] text-xl;
+  border-color: rgb(var(--nextra-bg));
+  color: var(--x-color-neutral-800);
+  content: "⏺";
+}
+
+:global(.dark) .bullet:is(.bullet) :is(h2, h3:not([style^='visibility:']), h4, h5, h6)::before {
+  color: var(--x-color-neutral-300);
+}

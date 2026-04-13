@@ -45,7 +45,8 @@ async function sitemap() {
       try {
         const pageMap = await getPageMap(section)
         return extractRoutes(pageMap)
-      } catch {
+      } catch (error) {
+        console.error(`Sitemap error for ${section}:`, error)
         return []
       }
     })
