@@ -9,7 +9,7 @@
 }
 
 .card {
-  @apply mt-5 mb-7 block overflow-hidden rounded-2xl no-underline;
+  @apply mt-5 mb-7 block w-fit overflow-hidden rounded-2xl no-underline;
   background-color: white;
   box-shadow:
     0 8px 16px rgb(0 0 0 / 8%),

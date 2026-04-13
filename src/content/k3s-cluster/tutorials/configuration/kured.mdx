@@ -4,9 +4,8 @@ description: >-
   Configure Kured for automated node reboots with optional Slack notifications.
 ---
 
-import { Steps } from 'nextra/components'
-import { Var } from '@axivo/website'
-import { repository } from '@axivo/website/k3s-cluster'
+import { Image, Steps, Var } from "@axivo/website";
+import { repository } from "@axivo/website/k3s-cluster";
 
 # Kured
 
@@ -16,7 +15,11 @@ This repository uses [Kured](https://kured.dev) to ensure the cluster nodes are 
 
 Slack [notifications](https://kured.dev/docs/configuration/#notifications) can be enabled, allowing the end-user to receive notifications when each cluster node is rebooted.
 
-[![Kured: Slack](/k3s-cluster/tutorials/kured-slack.webp)](/k3s-cluster/tutorials/kured-slack.webp)
+<Image
+  template="card"
+  src="/k3s-cluster/tutorials/kured-slack.webp"
+  alt="Kured: Slack"
+/>
 
 <Steps>
 ### Slack Application

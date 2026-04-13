@@ -4,8 +4,8 @@ description: >-
   Install K3s dependencies and configure cluster access via kubectl and Lens.
 ---
 
-import { Var } from '@axivo/website'
-import { repository } from '@axivo/website/k3s-cluster'
+import { Image, Var } from "@axivo/website";
+import { repository } from "@axivo/website/k3s-cluster";
 
 # K3s
 
@@ -24,7 +24,12 @@ During provisioning, the cluster `.kube/config` file is updated locally — refe
 
 The end-user can use `kubectl` to operate the cluster via local terminal, or [Lens](https://k8slens.dev):
 
-[![K3s: Lens](/k3s-cluster/tutorials/k3s-lens.webp)](/k3s-cluster/tutorials/k3s-lens.webp)
+<Image
+  template="card"
+  href="/k3s-cluster/tutorials/k3s-lens.webp"
+  src="/k3s-cluster/tutorials/k3s-lens.webp"
+  alt="K3s: Lens"
+/>
 
 > [!TIP]
 >

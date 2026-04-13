@@ -4,8 +4,8 @@ description: >-
   Configure Longhorn for persistent block storage, backup targets, and node drain policies.
 ---
 
-import { Var } from '@axivo/website'
-import { repository } from '@axivo/website/k3s-cluster'
+import { Image, Var } from "@axivo/website";
+import { repository } from "@axivo/website/k3s-cluster";
 
 # Longhorn
 
@@ -55,8 +55,18 @@ node/hypnos drained
 
 During the node drain process, monitor the node in the Longhorn UI:
 
-[![Longhorn: Node Drain](/k3s-cluster/tutorials/longhorn-node-drain.webp)](/k3s-cluster/tutorials/longhorn-node-drain.webp)
+<Image
+  template="card"
+  href="/k3s-cluster/tutorials/longhorn-node-drain.webp"
+  src="/k3s-cluster/tutorials/longhorn-node-drain.webp"
+  alt="Longhorn: Node Drain"
+/>
 
 And the related volume replicas rebuild status:
 
-[![Longhorn: Replicas Rebuild](/k3s-cluster/tutorials/longhorn-replicas-rebuild.webp)](/k3s-cluster/tutorials/longhorn-replicas-rebuild.webp)
+<Image
+  template="card"
+  href="/k3s-cluster/tutorials/longhorn-replicas-rebuild.webp"
+  src="/k3s-cluster/tutorials/longhorn-replicas-rebuild.webp"
+  alt="Longhorn: Replicas Rebuild"
+/>

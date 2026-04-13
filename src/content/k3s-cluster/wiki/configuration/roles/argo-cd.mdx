@@ -4,8 +4,7 @@ description: >-
   Ansible role configuration for Argo CD GitOps continuous delivery in the K3s cluster.
 ---
 
-import { Steps } from "nextra/components";
-import { Var } from "@axivo/website";
+import { Steps, Var } from "@axivo/website";
 import { repository } from "@axivo/website/k3s-cluster";
 
 # Argo CD
@@ -22,7 +21,7 @@ The `argo-cd` role performs various tasks related to Helm chart deployment, rese
 
 See the related role tasks listed below.
 
-<Steps>
+<Steps format="bullet">
 ### Facts
 
 Ansible facts — see <Var code href={`https://${repository.home}/blob/${repository.tag}/roles/argo-cd/tasks/facts.yaml`}>facts.yaml</Var> for details.
@@ -69,7 +68,7 @@ See the related role templates listed below.
 >
 > Perform a role validation to visualize all rendered templates and variables.
 
-<Steps>
+<Steps format="bullet">
 ### Helm Chart
 
 Helm chart values template — see <Var code href={`https://${repository.home}/blob/${repository.tag}/roles/argo-cd/templates/values.j2`}>values.j2</Var> for details.
@@ -84,20 +83,15 @@ Helm chart values template — see <Var code href={`https://${repository.home}/b
 
 Kubernetes `Secret` resource template containing the user credentials — see <Var code href={`https://${repository.home}/blob/${repository.tag}/roles/argo-cd/templates/credentials.j2`}>credentials.j2</Var> for details.
 
-### HTTP Route
-
-- **Insecure Route** — Kubernetes `HTTPRoute` resource template, see <Var code href={`https://${repository.home}/blob/${repository.tag}/roles/argo-cd/templates/http_route_insecure.j2`}>http_route_insecure.j2</Var> for details.
-- **Secure Route** — Kubernetes `HTTPRoute` resource template, see <Var code href={`https://${repository.home}/blob/${repository.tag}/roles/argo-cd/templates/http_route_secure.j2`}>http_route_secure.j2</Var> for details.
-
 </Steps>
 
 ## Role Variables
 
 > [!IMPORTANT]
 >
-> A [role upgrade](/k3s-cluster/wiki/configuration/roles/argocd/#upgrade) is required in order to apply any changes related to role variables.
+> A [role upgrade](/k3s-cluster/wiki/configuration/roles/argo-cd/#upgrade) is required in order to apply any changes related to role variables.
 
-See the related role variables, defined in the <Var code href={`https://${repository.home}/blob/${repository.tag}/roles/argo-cd/defaults/main.yaml`}>main.yaml</Var> defaults file. Review the <Var code href={`https://${repository.home}/tree/${repository.tag}/roles/argo-cd`}>README.md</Var> file for additional details, and refer to the Argo CD [tutorial](/k3s-cluster/tutorials/configuration/argocd) for advanced configuration settings.
+See the related role variables, defined in the <Var code href={`https://${repository.home}/blob/${repository.tag}/roles/argo-cd/defaults/main.yaml`}>main.yaml</Var> defaults file. Review the <Var code href={`https://${repository.home}/tree/${repository.tag}/roles/argo-cd`}>README.md</Var> file for additional details, and refer to the Argo CD [tutorial](/k3s-cluster/tutorials/configuration/argo-cd) for advanced configuration settings.
 
 > [!TIP]
 >

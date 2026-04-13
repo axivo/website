@@ -4,8 +4,7 @@ description: >-
   Install and configure Ubuntu Server on bare-metal hardware for K3s cluster nodes.
 ---
 
-import { Steps } from 'nextra/components'
-import { Var } from '@axivo/website'
+import { Image, Steps, Var } from '@axivo/website'
 import { os, repository } from '@axivo/website/k3s-cluster'
 
 # Ubuntu Server
@@ -33,7 +32,11 @@ brew install raspberry-pi-imager
 
 On each cluster node, under `OS Customisation: General` section, set **only** the `hostname`, `username`, and `password`, as well as the `locale` values:
 
-![OS General Settings: Imager General](/k3s-cluster/tutorials/server-imager-general.webp)
+<Image
+  template="card"
+  src="/k3s-cluster/tutorials/server-imager-general.webp"
+  alt="OS General Settings: Imager General"
+/>
 
 > [!IMPORTANT]
 >
@@ -43,7 +46,11 @@ On each cluster node, under `OS Customisation: General` section, set **only** th
 
 On each cluster node, under `OS Customisation: Services` section, enable SSH with password authentication:
 
-![OS General Settings: Imager Services](/k3s-cluster/tutorials/server-imager-services.webp)
+<Image
+  template="card"
+  src="/k3s-cluster/tutorials/server-imager-services.webp"
+  alt="OS General Settings: Imager Services"
+/>
 
 </Steps>
 
