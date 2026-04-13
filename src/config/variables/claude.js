@@ -50,7 +50,7 @@ export const repository = {
     home: 'github.com/axivo/claude-reflections',
     tag: 'main'
   },
-  tag: 'v1.1.0'
+  tag: 'v1.1.1'
 }
 
 export const skills = {
