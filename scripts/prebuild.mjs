@@ -158,18 +158,18 @@ function cleanupOrphans(rootDir, expected) {
 }
 
 /**
- * Downloads media files from R2 bucket into the public directory.
+ * Generates media files from R2 bucket into the public directory.
  *
  * @param {S3Client} s3 - Configured S3 client
- * @returns {Promise<number>} Number of media files downloaded
+ * @returns {Promise<Object>} Object with generated and deleted counts
  */
-async function downloadR2Media(s3) {
+async function generateR2Media(s3) {
   const list = await s3.send(new ListObjectsV2Command({
     Bucket: bucket,
     Prefix: bucketMediaPrefix
   }))
   if (!list.Contents?.length) {
-    return { downloaded: 0, deleted: 0 }
+    return { generated: 0, deleted: 0 }
   }
   const expected = new Set()
   let count = 0
@@ -189,7 +189,7 @@ async function downloadR2Media(s3) {
     count++
   }
   const deleted = cleanupOrphans(join(cwd, bucketMediaPrefix), expected)
-  return { downloaded: count, deleted }
+  return { generated: count, deleted }
 }
 
 /**
@@ -303,12 +303,11 @@ try {
         secretAccessKey: process.env.R2_SECRET_ACCESS_KEY
       }
     })
+    const plural = (count, word) => `${count} ${word}${count === 1 ? '' : 's'}`
     const stubs = await generateR2Stubs(s3)
-    const wordGenerated = stubs.generated === 1 ? 'stub' : 'stubs'
-    const wordDeleted = stubs.deleted === 1 ? 'stub' : 'stubs'
-    console.info(`Generated ${stubs.generated} R2 ${wordGenerated}, deleted ${stubs.deleted} orphaned R2 ${wordDeleted}`)
-    const media = await downloadR2Media(s3)
-    console.info(`Downloaded ${media.downloaded} R2 media, deleted ${media.deleted} orphaned media`)
+    console.info(`Generated ${plural(stubs.generated, 'stub')}, deleted ${plural(stubs.deleted, 'orphaned stub')}`)
+    const media = await generateR2Media(s3)
+    console.info(`Generated ${plural(media.generated, 'media file')}, deleted ${plural(media.deleted, 'orphaned media file')}`)
   }
 } catch (error) {
   console.error('Failed R2 operations:', error.message)

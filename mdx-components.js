@@ -12,6 +12,7 @@ import * as websiteComponents from '@axivo/website'
 import { useMDXComponents as getDocsMDXComponents } from 'nextra-theme-docs'
 import { withGitHubAlert } from 'nextra/components'
 import { Callout } from './src/components/Callout'
+import { Ordered, Unordered } from './src/components/List'
 import { PageTitle } from './src/components/PageTitle'
 import { SourceCodeSetter } from './src/components/SourceCode'
 
@@ -40,6 +41,8 @@ function useMDXComponents(components) {
       docsComponents.blockquote
     ),
     h1: PageTitle,
+    ol: Ordered,
+    ul: Unordered,
     wrapper: ({ sourceCode, metadata, ...props }) => {
       const updatedMetadata = { ...metadata }
       if (metadata?.filePath && timestamps[metadata.filePath]) {
