@@ -158,12 +158,12 @@ function cleanupOrphans(rootDir, expected) {
 }
 
 /**
- * Downloads media files from R2 bucket into the public directory.
+ * Generates media files from R2 bucket into the public directory.
  *
  * @param {S3Client} s3 - Configured S3 client
  * @returns {Promise<number>} Number of media files downloaded
  */
-async function downloadR2Media(s3) {
+async function generateR2Media(s3) {
   const list = await s3.send(new ListObjectsV2Command({
     Bucket: bucket,
     Prefix: bucketMediaPrefix
@@ -307,8 +307,8 @@ try {
     const wordGenerated = stubs.generated === 1 ? 'stub' : 'stubs'
     const wordDeleted = stubs.deleted === 1 ? 'stub' : 'stubs'
     console.info(`Generated ${stubs.generated} R2 ${wordGenerated}, deleted ${stubs.deleted} orphaned R2 ${wordDeleted}`)
-    const media = await downloadR2Media(s3)
-    console.info(`Downloaded ${media.downloaded} R2 media, deleted ${media.deleted} orphaned media`)
+    const media = await generateR2Media(s3)
+    console.info(`Generated ${media.downloaded} R2 media, deleted ${media.deleted} orphaned media`)
   }
 } catch (error) {
   console.error('Failed R2 operations:', error.message)
