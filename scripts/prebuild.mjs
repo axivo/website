@@ -161,7 +161,7 @@ function cleanupOrphans(rootDir, expected) {
  * Generates media files from R2 bucket into the public directory.
  *
  * @param {S3Client} s3 - Configured S3 client
- * @returns {Promise<number>} Number of media files downloaded
+ * @returns {Promise<Object>} Object with generated and deleted counts
  */
 async function generateR2Media(s3) {
   const list = await s3.send(new ListObjectsV2Command({
@@ -169,7 +169,7 @@ async function generateR2Media(s3) {
     Prefix: bucketMediaPrefix
   }))
   if (!list.Contents?.length) {
-    return { downloaded: 0, deleted: 0 }
+    return { generated: 0, deleted: 0 }
   }
   const expected = new Set()
   let count = 0
@@ -189,7 +189,7 @@ async function generateR2Media(s3) {
     count++
   }
   const deleted = cleanupOrphans(join(cwd, bucketMediaPrefix), expected)
-  return { downloaded: count, deleted }
+  return { generated: count, deleted }
 }
 
 /**
@@ -308,7 +308,7 @@ try {
     const wordDeleted = stubs.deleted === 1 ? 'stub' : 'stubs'
     console.info(`Generated ${stubs.generated} R2 ${wordGenerated}, deleted ${stubs.deleted} orphaned R2 ${wordDeleted}`)
     const media = await generateR2Media(s3)
-    console.info(`Generated ${media.downloaded} R2 media, deleted ${media.deleted} orphaned media`)
+    console.info(`Generated ${media.generated} R2 media, deleted ${media.deleted} orphaned media`)
   }
 } catch (error) {
   console.error('Failed R2 operations:', error.message)
