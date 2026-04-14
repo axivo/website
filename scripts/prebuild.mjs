@@ -305,9 +305,9 @@ try {
     })
     const plural = (count, word) => `${count} ${word}${count === 1 ? '' : 's'}`
     const stubs = await generateR2Stubs(s3)
-    console.info(`Generated R2 ${plural(stubs.generated, 'stub')}, deleted orphaned ${plural(stubs.deleted, 'stub')}`)
+    console.info(`Generated ${plural(stubs.generated, 'stub')}, deleted ${plural(stubs.deleted, 'orphaned stub')}`)
     const media = await generateR2Media(s3)
-    console.info(`Generated R2 media ${plural(media.generated, 'file')}, deleted orphaned media ${plural(media.deleted, 'file')}`)
+    console.info(`Generated ${plural(media.generated, 'media file')}, deleted ${plural(media.deleted, 'orphaned media file')}`)
   }
 } catch (error) {
   console.error('Failed R2 operations:', error.message)
