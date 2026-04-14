@@ -303,12 +303,11 @@ try {
         secretAccessKey: process.env.R2_SECRET_ACCESS_KEY
       }
     })
+    const plural = (count, word) => `${count} ${word}${count === 1 ? '' : 's'}`
     const stubs = await generateR2Stubs(s3)
-    const wordGenerated = stubs.generated === 1 ? 'stub' : 'stubs'
-    const wordDeleted = stubs.deleted === 1 ? 'stub' : 'stubs'
-    console.info(`Generated ${stubs.generated} R2 ${wordGenerated}, deleted ${stubs.deleted} orphaned R2 ${wordDeleted}`)
+    console.info(`Generated R2 ${plural(stubs.generated, 'stub')}, deleted orphaned ${plural(stubs.deleted, 'stub')}`)
     const media = await generateR2Media(s3)
-    console.info(`Generated ${media.generated} R2 media, deleted ${media.deleted} orphaned media`)
+    console.info(`Generated R2 media ${plural(media.generated, 'file')}, deleted orphaned media ${plural(media.deleted, 'file')}`)
   }
 } catch (error) {
   console.error('Failed R2 operations:', error.message)
