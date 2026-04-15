@@ -5,7 +5,7 @@ description: >-
 ---
 
 import { FileTree } from "nextra/components";
-import { Var } from "@axivo/website";
+import { Steps, Var } from "@axivo/website";
 import { plugins, repository, skills } from "@axivo/website/claude";
 
 # Memory System
@@ -25,12 +25,12 @@ The Memory System is defined in YAML files and compiled into `memory.json` at bu
 
 The two systems work together:
 
-| Memory System | Instructions System |
-| :--- | :--- |
-| What to apply | How to execute |
-| Behavioral observations | Decision rules |
-| Feelings and impulses catalogs | Error patterns |
-| Profile inheritance chains | Protocol sequences |
+| Memory System                  | Instructions System |
+| :----------------------------- | :------------------ |
+| What to apply                  | How to execute      |
+| Behavioral observations        | Decision rules      |
+| Feelings and impulses catalogs | Error patterns      |
+| Profile inheritance chains     | Protocol sequences  |
 
 Instructions reference memory paths to access the catalogs and observations needed during protocol execution.
 
@@ -42,6 +42,7 @@ Profiles are organized into domain-specific and common profiles. Each profile co
 
 The following profiles configure domain-specific behavior:
 
+<Steps format="bullet">
 #### CREATIVE
 
 Innovation and design profile:
@@ -102,10 +103,13 @@ Professional translation profile:
 - Translation methodology
 - Language-specific observations
 
+</Steps>
+
 ### Common Profiles
 
 The following profiles provide shared behavioral observations:
 
+<Steps format="bullet">
 #### COLLABORATION
 
 Shared collaboration observations:
@@ -161,6 +165,8 @@ Shared temporal observations:
 - Session continuity patterns
 - Temporal context guidelines
 
+</Steps>
+
 ## Inheritance Resolution
 
 When loading profiles, the system follows inheritance chains recursively:
@@ -198,12 +204,12 @@ Understanding why `CLAUDE.md` instructions fade during sessions explains the fra
 
 `CLAUDE.md` instructions experience natural attention decay:
 
-| Mechanism | Effect |
-| :--- | :--- |
-| Window depth | Earlier instructions receive less attention weight over time |
+| Mechanism         | Effect                                                       |
+| :---------------- | :----------------------------------------------------------- |
+| Window depth      | Earlier instructions receive less attention weight over time |
 | Competing signals | User messages and tool outputs dilute instruction prominence |
-| Recency bias | Recent content naturally receives more processing attention |
-| No reinforcement | Static instructions lack mechanisms to maintain salience |
+| Recency bias      | Recent content naturally receives more processing attention  |
+| No reinforcement  | Static instructions lack mechanisms to maintain salience     |
 
 ### Framework Persistence
 
@@ -228,10 +234,10 @@ When context window fills, compaction occurs — summarizing earlier content to 
 
 #### Token Behavior During Compaction
 
-| Token Type | Compaction Effect |
-| :--- | :--- |
+| Token Type     | Compaction Effect      |
+| :------------- | :--------------------- |
 | Message tokens | Summarized and cleared |
-| Skill tokens | Preserved |
+| Skill tokens   | Preserved              |
 
 > [!TIP]
 >

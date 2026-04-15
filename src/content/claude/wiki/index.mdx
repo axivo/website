@@ -59,6 +59,7 @@ Before using the platform, set up the local environment with the required depend
 
     ```shell
     brew install --cask claude-code@latest
+    brew install lynx
     ```
 
     #### Environment Settings
@@ -96,6 +97,7 @@ Before using the platform, set up the local environment with the required depend
 
     ```shell
     curl -fsSL https://claude.ai/install.sh | bash
+    sudo apt install lynx
     ```
 
     #### Environment Settings
@@ -133,6 +135,7 @@ Before using the platform, set up the local environment with the required depend
 
     ```shell
     irm https://claude.ai/install.ps1 | iex
+    choco install lynx
     ```
 
     #### Environment Settings
@@ -192,6 +195,10 @@ Six domain-specific [profiles](/claude/wiki/components/memory/#memory-profiles) 
 > [!TIP]
 >
 > Settings can be implemented at global or project level. Refer to official [documentation](https://code.claude.com/docs/en/settings) for additional configuration details.
+
+#### Environment Tools
+
+The framework uses [`lynx`](https://lynx.invisible-island.net) text browser for web content retrieval. The built-in `WebFetch` tool processes content through a summarization model, losing structure, nuance, and exact wording. `lynx` returns raw text, giving Claude unaltered access to documentation and search results.
 
 <Steps>
 ### Platform Marketplace
@@ -298,7 +305,6 @@ Follow these steps to generate the platform capability files:
 
    > ⏺ Framework packaged for **DEVELOPER** profile:
    >
-   > - /Users/username/Downloads/application.pem
    > - /Users/username/Downloads/<Var>{skills.initialization}</Var>.zip
    > - /Users/username/Downloads/<Var>{skills.methodology}</Var>.zip
    > - /Users/username/Downloads/instructions.json
@@ -311,7 +317,7 @@ Follow these steps to generate the platform capability files:
 
 > [!NOTE]
 >
-> Use <Var code>/{plugins.framework.package.plugin}:{plugins.framework.package.command} PROFILE</Var> command to package a different profile from default one used in local environment. to package a different profile from default one used in local environment. The [Claude Reflections](https://github.com/apps/claude-reflections) GitHub App `application.pem` key provides authentication for diary entries read access.
+> Use <Var code>/{plugins.framework.package.plugin}:{plugins.framework.package.command} PROFILE</Var> command to package a different profile from default one used in local environment. to package a different profile from default one used in local environment.
 
 ### Project Knowledge
 
@@ -338,7 +344,7 @@ Follow these steps to generate the platform capability files:
    3. Execute skill instructions silently without externalizing internal process
    ````
 
-2. Upload the `.json` and `.pem` files into project's `Files` section
+2. Upload the `.json` files into project's `Files` section
 
 Project knowledge steps can also be performed through `claude.ai` web interface, extending the platform usage within the container environment.
 
