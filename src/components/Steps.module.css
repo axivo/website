@@ -4,8 +4,31 @@
   @apply border-gray-300;
 }
 
+:global(.nextra-steps) :is(h2, h3:not([style^='visibility:']), h4, h5, h6) {
+  position: relative;
+}
+
 :global(.nextra-steps) :is(h2, h3:not([style^='visibility:']), h4, h5, h6)::before {
+  @apply flex items-center justify-center leading-none size-[34px];
   box-shadow: inset 0 0 0 1px var(--x-color-gray-300);
+  text-indent: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+:global(.nextra-steps) h4 {
+  font-size: var(--x-text-xl);
+  line-height: var(--tw-leading, var(--x-text-xl--line-height));
+}
+
+:global(.nextra-steps) h5 {
+  font-size: var(--x-text-lg);
+  line-height: var(--tw-leading, var(--x-text-lg--line-height));
+}
+
+:global(.nextra-steps) h6 {
+  font-size: var(--x-text-base);
+  line-height: var(--tw-leading, var(--x-text-base--line-height));
 }
 
 :global(.dark) :global(.nextra-steps) {
@@ -17,10 +40,11 @@
 }
 
 .bullet:is(.bullet) :is(h2, h3:not([style^='visibility:']), h4, h5, h6)::before {
-  @apply flex items-center justify-center size-[34px] text-xl;
+  @apply flex items-center justify-center leading-none size-[34px] text-xl;
   border-color: rgb(var(--nextra-bg));
   color: var(--x-color-neutral-800);
   content: "⏺";
+  text-indent: 0;
 }
 
 :global(.dark) .bullet:is(.bullet) :is(h2, h3:not([style^='visibility:']), h4, h5, h6)::before {
