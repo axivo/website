@@ -1,8 +1,8 @@
 /**
  * @fileoverview R2 metadata API endpoint.
  *
- * Returns custom metadata for R2-backed content entries.
- * Without parameters, lists all entries with metadata.
+ * Returns pre-built metadata manifest for R2-backed content entries.
+ * Without parameters, returns all entries from the manifest.
  * With a `key` parameter, returns metadata for a single entry.
  *
  * @example
@@ -10,7 +10,7 @@
  * GET /metadata?key=src/content/claude/reflections/2025/12/14/first-light.mdx
  */
 
-const contentPrefix = 'src/content/'
+const metadataKey = 'metadata/objects.json'
 
 /**
  * Decodes metadata fields that were encoded during upload.
@@ -52,14 +52,11 @@ export async function GET(request) {
       }
       return Response.json(decodeMetadata(object.customMetadata))
     }
-    const list = await env.CONTENT_BUCKET.list({ prefix: contentPrefix, include: ['customMetadata'] })
-    const results = (list.objects || [])
-      .filter(obj => obj.key.endsWith('.mdx'))
-      .map(obj => ({
-        key: obj.key,
-        ...decodeMetadata(obj.customMetadata || {})
-      }))
-    return Response.json({ objects: results, total: results.length })
+    const object = await env.CONTENT_BUCKET.get(metadataKey)
+    if (!object) {
+      return Response.json({ objects: [], total: 0 })
+    }
+    return Response.json(await object.json())
   } catch (error) {
     return Response.json({ error: error.message }, { status: 500 })
   }
