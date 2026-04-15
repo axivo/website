@@ -5,7 +5,7 @@ description: >-
 ---
 
 import { FileTree } from "nextra/components";
-import { Var } from "@axivo/website";
+import { Steps, Var } from "@axivo/website";
 import { plugins, repository, skills } from "@axivo/website/claude";
 
 # Instructions System
@@ -42,6 +42,7 @@ Instructions are organized into profiles, each handling a specific operational d
 
 The following instructions configure environment-specific behavior:
 
+<Steps format="bullet">
 #### LOCAL
 
 Claude Code environment instructions:
@@ -64,10 +65,13 @@ Claude Desktop and Claude Mobile environment instructions:
 - Template paths for packaged skills
 - Project file persistence rules
 
+</Steps>
+
 ### Common Instructions
 
 The following instructions provide shared operational procedures:
 
+<Steps format="bullet">
 #### INITIALIZATION
 
 Session startup procedures:
@@ -129,6 +133,8 @@ Feeling detection procedures:
 - Positive vs negative asymmetry
 - Suppression detection
 - Count interpretation
+
+</Steps>
 
 ## Inheritance Resolution
 
