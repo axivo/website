@@ -12,7 +12,7 @@
  * Usage: node scripts/prebuild.mjs
  */
 
-import { GetObjectCommand, HeadObjectCommand, ListObjectsV2Command, S3Client } from '@aws-sdk/client-s3'
+import { GetObjectCommand, HeadObjectCommand, ListObjectsV2Command, PutObjectCommand, S3Client } from '@aws-sdk/client-s3'
 import { config } from 'dotenv'
 import { execSync } from 'node:child_process'
 import { existsSync, mkdirSync, readdirSync, rmdirSync, statSync, unlinkSync, writeFileSync } from 'node:fs'
@@ -195,9 +195,10 @@ async function generateR2Media(s3) {
 /**
  * Generates frontmatter-only stub files from R2 object metadata.
  * Stubs provide Nextra page map entries for R2-backed reflection pages.
+ * Collects decoded metadata for each object during iteration.
  *
  * @param {S3Client} s3 - Configured S3 client
- * @returns {Promise<number>} Number of stubs generated
+ * @returns {Promise<Object>} Object with generated, deleted counts and metadata array
  */
 async function generateR2Stubs(s3) {
   const list = await s3.send(new ListObjectsV2Command({
@@ -206,10 +207,11 @@ async function generateR2Stubs(s3) {
   }))
   if (!list.Contents?.length) {
     console.info('No R2 objects found, skipping stub generation')
-    return { generated: 0, deleted: 0 }
+    return { generated: 0, deleted: 0, metadata: [] }
   }
   const expected = new Set()
   const indexDirs = new Set()
+  const metadata = []
   let count = 0
   for (const obj of list.Contents) {
     const filePath = join(cwd, obj.Key)
@@ -222,6 +224,18 @@ async function generateR2Stubs(s3) {
     writeFileSync(filePath, stub)
     expected.add(filePath)
     count++
+    const entry = { key: obj.Key, ...head.Metadata }
+    if (entry.description) {
+      entry.description = decodeURIComponent(entry.description)
+    }
+    if (entry.tags) {
+      try {
+        entry.tags = JSON.parse(entry.tags)
+      } catch {
+        console.warn(`Failed to parse tags for ${obj.Key}`)
+      }
+    }
+    metadata.push(entry)
     const relativeKey = obj.Key.slice(bucketPrefix.length)
     const match = relativeKey.match(/^(\d{4})\/(\d{2})\/(\d{2})\//)
     if (match) {
@@ -244,7 +258,28 @@ async function generateR2Stubs(s3) {
     count++
   }
   const deleted = cleanupOrphans(join(cwd, bucketPrefix), expected)
-  return { generated: count, deleted }
+  return { generated: count, deleted, metadata }
+}
+
+/**
+ * Generates metadata manifest and uploads it to R2.
+ *
+ * @param {S3Client} s3 - Configured S3 client
+ * @param {Array} metadata - Decoded metadata entries from generateR2Stubs
+ * @returns {Promise<number>} Number of metadata entries generated
+ */
+async function generateMetadata(s3, metadata) {
+  if (!metadata.length) {
+    return 0
+  }
+  const objects = metadata.sort((a, b) => (a.date || '').localeCompare(b.date || ''))
+  await s3.send(new PutObjectCommand({
+    Bucket: bucket,
+    Key: 'metadata/objects.json',
+    Body: JSON.stringify({ objects, total: objects.length }),
+    ContentType: 'application/json'
+  }))
+  return objects.length
 }
 
 /**
@@ -308,6 +343,8 @@ try {
     console.info(`Generated ${plural(stubs.generated, 'stub')}, deleted ${plural(stubs.deleted, 'orphaned stub')}`)
     const media = await generateR2Media(s3)
     console.info(`Generated ${plural(media.generated, 'media file')}, deleted ${plural(media.deleted, 'orphaned media file')}`)
+    const metadata = await generateMetadata(s3, stubs.metadata)
+    console.info(`Generated metadata manifest with ${plural(metadata, 'entry')}`)
   }
 } catch (error) {
   console.error('Failed R2 operations:', error.message)
