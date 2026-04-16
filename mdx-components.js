@@ -22,8 +22,11 @@ const NextraWrapper = docsComponents.wrapper
 let timestamps = {}
 try {
   timestamps = JSON.parse(readFileSync(join(process.cwd(), '.next/timestamps.json'), 'utf8'))
+  const pluralRules = new Intl.PluralRules('en-US')
+  const plural = (count, singular, pluralForm) => `${count} ${pluralRules.select(count) === 'one' ? singular : pluralForm}`
+  console.info(`Loaded timestamps for ${plural(Object.keys(timestamps).length, 'file', 'files')}`)
 } catch {
-  console.info('Timestamps not available, skipping')
+  console.info('Waiting for timestamps generation ...')
 }
 
 /**

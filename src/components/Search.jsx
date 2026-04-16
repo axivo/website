@@ -12,7 +12,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { useDocSearchKeyboardEvents } from '@docsearch/react'
 import { createPortal } from 'react-dom'
 import '@docsearch/css'
-import { algolia } from '@axivo/website/docs'
+import { algolia } from '@axivo/website/global'
 import styles from './Search.module.css'
 
 /**

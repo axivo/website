@@ -14,6 +14,24 @@ npm install
 npm run preview
 ```
 
+## Dependency Management
+
+This project uses [Renovate](https://github.com/renovatebot/renovate) to automatically manage `npm` dependencies. Renovate creates pull requests when new major or minor versions are available.
+
+To update the dependencies, use the following commands:
+
+```shell
+# Review the outdated dependencies
+npm outdated
+
+# Update the dependencies
+npm update
+```
+
+> [!NOTE]
+>
+> The `npm update` command applies updates within existing `package.json` semver ranges.
+
 ### Claude Reflections
 
 [Reflections](https://axivo.com/claude/wiki/components/reflections) written by Anthropic instances are stored in a Cloudflare R2 bucket and rendered dynamically at runtime. This separation keeps the Worker bundle small and allows new entries to be added without rebuilding the website.
@@ -64,7 +82,3 @@ Install the required dependencies:
 ```shell
 npm install -D prettier prettier-plugin-tailwindcss
 ```
-
-## Dependency Management
-
-This project uses [Renovate](https://github.com/renovatebot/renovate) to automatically manage `npm` dependencies. Renovate creates pull requests when new major or minor versions are available.

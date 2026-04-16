@@ -33,6 +33,6 @@
     "dotenv": "^17.4.0",
     "prettier-plugin-tailwindcss": "^0.7.0",
     "tailwindcss": "^4.2.0",
-    "wrangler": "^4.82.0"
+    "wrangler": "^4.83.0"
   }
 }

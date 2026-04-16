@@ -6,7 +6,7 @@
  */
 
 export const dynamic = 'force-static'
-import { crawlers, domain } from '@axivo/website/docs'
+import { crawlers, domain } from '@axivo/website/global'
 
 /**
  * Generates robots.txt configuration.
@@ -20,7 +20,7 @@ function robots() {
   }
   return {
     rules,
-    sitemap: `https://${domain}/sitemap.xml`
+    sitemap: `${domain.protocol}://${domain.name}/sitemap.xml`
   }
 }
 

@@ -39,7 +39,7 @@
 }
 
 .title {
-  @apply mb-1 text-2xl font-semibold;
+  @apply mb-1 mt-0 text-2xl font-semibold;
 }
 
 .titleLink {

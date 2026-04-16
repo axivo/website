@@ -41,7 +41,8 @@ export const plugins = {
 
 export const reflections = {
   path: `/${subsite.path}/reflections`,
-  section: '/reflections'
+  section: '/reflections',
+  title: 'Reflections'
 }
 
 export const repository = {
@@ -50,7 +51,7 @@ export const repository = {
     home: 'github.com/axivo/claude-reflections',
     tag: 'main'
   },
-  tag: 'v1.2.0'
+  tag: 'v1.2.1'
 }
 
 export const skills = {

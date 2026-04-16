@@ -1,7 +1,11 @@
 @reference "tailwindcss";
 
 .count {
-  @apply text-xs text-gray-400;
+  @apply text-xs text-gray-600;
+}
+
+:global(.dark) .count {
+  @apply text-gray-400;
 }
 
 .grid {

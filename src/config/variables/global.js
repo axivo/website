@@ -26,8 +26,8 @@ export const author = {
 }
 
 export const cloudflare = {
-  r2: {
-    bucket: 'axivo-website'
+  bucket: {
+    name: 'axivo-website'
   }
 }
 
@@ -35,7 +35,10 @@ export const crawlers = [
   '*'
 ]
 
-export const domain = 'axivo.com'
+export const domain = {
+  name: process.env.NEXT_PUBLIC_DOMAIN,
+  protocol: process.env.NEXT_PUBLIC_PROTOCOL
+}
 
 export const repository = {
   home: 'github.com/axivo/website',

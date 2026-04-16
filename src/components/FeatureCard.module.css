@@ -73,7 +73,7 @@
 }
 
 .title {
-  @apply leading-tight font-semibold tracking-[-1px];
+  @apply mt-0 border-none leading-tight font-semibold tracking-[-1px];
   font-size: clamp(1.4rem, 4vw, 1.8rem);
 }
 

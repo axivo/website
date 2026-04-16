@@ -12,9 +12,9 @@
       "types": "./claude.d.ts",
       "import": "./claude.js"
     },
-    "./docs": {
-      "types": "./docs.d.ts",
-      "import": "./docs.js"
+    "./global": {
+      "types": "./global.d.ts",
+      "import": "./global.js"
     },
     "./k3s-cluster": {
       "types": "./k3s-cluster.d.ts",

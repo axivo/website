@@ -7,7 +7,7 @@
  */
 
 export const dynamic = 'force-static'
-import { domain } from '@axivo/website/docs'
+import { domain } from '@axivo/website/global'
 import { subsite as claude } from '@axivo/website/claude'
 import { subsite as k3sCluster } from '@axivo/website/k3s-cluster'
 import { getPageMap } from 'nextra/page-map'
@@ -54,7 +54,7 @@ async function sitemap() {
   const allRoutes = [...new Set(routesBySection.flat())]
   return allRoutes
     .map((route) => ({
-      url: `https://${domain}${route === '/' ? '' : route}`,
+      url: `${domain.protocol}://${domain.name}${route === '/' ? '' : route}`,
       changeFrequency: 'weekly'
     }))
     .sort((a, b) => a.url.localeCompare(b.url))

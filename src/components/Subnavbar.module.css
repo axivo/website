@@ -28,11 +28,10 @@
   @apply whitespace-nowrap transition-colors;
 }
 
-.itemLink {
-  @apply overflow-hidden text-ellipsis;
-}
-
-
 .itemActive {
   @apply font-medium subpixel-antialiased;
+}
+
+.itemLink {
+  @apply overflow-hidden text-ellipsis;
 }

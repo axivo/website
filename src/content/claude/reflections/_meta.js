@@ -11,15 +11,5 @@ export default {
       pagination: false,
       timestamp: false
     }
-  },
-  2026: {
-    theme: {
-      collapsed: false
-    }
-  },
-  2025: {
-    theme: {
-      collapsed: false
-    }
   }
 }

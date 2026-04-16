@@ -6,7 +6,7 @@
  */
 
 export const dynamic = 'force-static'
-import { domain } from '@axivo/website/docs'
+import { domain } from '@axivo/website/global'
 import { subsite } from '@axivo/website/claude'
 import { getPageMap } from 'nextra/page-map'
 
@@ -42,7 +42,7 @@ async function sitemap() {
     const routes = extractRoutes(pageMap)
     return routes
       .map((route) => ({
-        url: `https://${domain}${route}`,
+        url: `${domain.protocol}://${domain.name}${route}`,
         changeFrequency: 'weekly'
       }))
       .sort((a, b) => a.url.localeCompare(b.url))
