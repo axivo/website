@@ -147,7 +147,7 @@ async function generateStaticParams() {
   const sectionParams = params
     .filter(p => p.mdxPath?.[0] === subsite.path)
     .map(p => ({ mdxPath: p.mdxPath.slice(1) }))
-  const response = await fetch(`https://${domain}/metadata`)
+  const response = await fetch(`${domain.protocol}://${domain.name}/metadata`)
   const { objects } = await response.json()
   const indexDirs = new Set()
   const reflectionParams = objects
@@ -244,10 +244,11 @@ async function Page(props) {
   const pageModule = await importPage([subsite.path, ...path])
   const {
     default: MDXContent,
-    toc,
+    toc: originalToc,
     metadata,
     sourceCode
   } = pageModule
+  const toc = [...originalToc]
   const updateToc = (sectionId, items) => {
     const index = toc.findIndex(item => item.id === sectionId)
     if (index !== -1) {

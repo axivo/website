@@ -20,7 +20,7 @@ function robots() {
   }
   return {
     rules,
-    sitemap: `https://${domain}/sitemap.xml`
+    sitemap: `${domain.protocol}://${domain.name}/sitemap.xml`
   }
 }
 

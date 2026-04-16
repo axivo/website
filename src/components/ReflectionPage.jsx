@@ -108,7 +108,7 @@ function ReflectionPage({ children, pageSize, totalPages }) {
     <div ref={containerRef}>
       {totalPages > 1 && (
         <p className={styles.summary}>
-          ⏺ Showing {start + 1}–{end} of {total} reflections
+          ○ Showing {start + 1}–{end} of {total} reflections
         </p>
       )}
       {pageCards}

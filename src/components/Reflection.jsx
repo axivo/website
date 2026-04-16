@@ -65,7 +65,7 @@ function filterByDate(entries, date) {
  * @returns {Promise<object[]>} Array of R2 metadata objects
  */
 async function fetchMetadata() {
-  const response = await fetch(`https://${domain}/metadata`)
+  const response = await fetch(`${domain.protocol}://${domain.name}/metadata`)
   const { objects } = await response.json()
   return objects
 }

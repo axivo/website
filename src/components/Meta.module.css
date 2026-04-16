@@ -9,7 +9,7 @@
 }
 
 .container {
-  @apply mt-1 flex flex-wrap items-center gap-y-2 text-sm text-gray-500;
+  @apply mt-1 flex flex-wrap items-center gap-y-2 text-sm text-gray-600;
 }
 
 :global(.dark) .container {
@@ -26,12 +26,12 @@
 
 .date:hover,
 .author:hover {
-  @apply text-slate-700;
+  @apply text-gray-900;
 }
 
 :global(.dark) .date:hover,
 :global(.dark) .author:hover {
-  @apply text-slate-200;
+  @apply text-gray-300;
 }
 
 .separator {

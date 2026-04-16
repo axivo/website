@@ -6,11 +6,19 @@
 }
 
 .page {
-  @apply text-sm text-gray-500;
+  @apply text-sm text-gray-600;
+}
+
+:global(.dark) .page {
+  @apply text-gray-400;
 }
 
 .summary {
-  @apply mt-1 text-sm text-gray-500;
+  @apply mt-1 text-sm text-gray-600;
+}
+
+:global(.dark) .summary {
+  @apply text-gray-400;
 }
 
 .trailing {
