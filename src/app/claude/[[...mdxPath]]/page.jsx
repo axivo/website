@@ -11,7 +11,7 @@
 
 import { Breadcrumb, PostCard, useMDXComponents as getMDXComponents } from '@axivo/website'
 import { reflections, subsite } from '@axivo/website/claude'
-import { domain } from '@axivo/website/docs'
+import { domain } from '@axivo/website/global'
 import { getEntries, getTags, reflectionsPageSize, reflectionStyles, renderIndexPage } from '@axivo/website/reflections'
 import GithubSlugger from 'github-slugger'
 import { generateStaticParamsFor, importPage } from 'nextra/pages'

@@ -5,7 +5,7 @@
  * for all pages across every section.
  */
 
-import { analytics, domain } from '@axivo/website/docs'
+import { analytics, domain } from '@axivo/website/global'
 import { GoogleAnalytics } from '@next/third-parties/google'
 import { Head } from 'nextra/components'
 import '../styles/globals.css'

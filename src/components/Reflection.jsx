@@ -15,7 +15,7 @@
 
 import { useMDXComponents as getMDXComponents } from '@axivo/website'
 import { reflections } from '@axivo/website/claude'
-import { domain } from '@axivo/website/docs'
+import { domain } from '@axivo/website/global'
 import { PostCard } from './PostCard'
 import { ReflectionPage } from './ReflectionPage'
 import { TagGrid } from './Tag'

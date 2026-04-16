@@ -6,7 +6,7 @@
  */
 
 export const dynamic = 'force-static'
-import { crawlers, domain } from '@axivo/website/docs'
+import { crawlers, domain } from '@axivo/website/global'
 
 /**
  * Generates robots.txt configuration.
