@@ -109,14 +109,14 @@ async function generateR2Media(s3) {
  * Generates metadata manifest and uploads it to R2.
  *
  * @param {S3Client} s3 - Configured S3 client
- * @param {Array} metadata - Decoded metadata entries
- * @returns {Promise<number>} Number of metadata entries generated
+ * @param {Array} objects - Decoded metadata objects
+ * @returns {Promise<number>} Number of metadata objects generated
  */
-async function generateMetadata(s3, metadata) {
-  if (!metadata.length) {
+async function generateMetadata(s3, objects) {
+  if (!objects.length) {
     return 0
   }
-  const objects = metadata.sort((a, b) => (a.date || '').localeCompare(b.date || ''))
+  objects.sort((a, b) => (a.date || '').localeCompare(b.date || ''))
   await s3.send(new PutObjectCommand({
     Bucket: bucket,
     Key: 'metadata/objects.json',
@@ -190,27 +190,27 @@ try {
       Bucket: bucket,
       Prefix: bucketPrefix
     }))
-    const metadataEntries = []
+    const metadataObjects = []
     for (const obj of (list.Contents || [])) {
       const head = await s3.send(new HeadObjectCommand({
         Bucket: bucket,
         Key: obj.Key
       }))
-      const entry = { key: obj.Key, ...head.Metadata }
-      if (entry.description) {
-        entry.description = decodeURIComponent(entry.description)
+      const object = { key: obj.Key, ...head.Metadata }
+      if (object.description) {
+        object.description = decodeURIComponent(object.description)
       }
-      if (entry.tags) {
+      if (object.tags) {
         try {
-          entry.tags = JSON.parse(entry.tags)
+          object.tags = JSON.parse(object.tags)
         } catch {
           console.warn(`Failed to parse tags for ${obj.Key}`)
         }
       }
-      metadataEntries.push(entry)
+      metadataObjects.push(object)
     }
-    const metadata = await generateMetadata(s3, metadataEntries)
-    console.info(`Generated metadata manifest with ${plural(metadata, 'entry', 'entries')}`)
+    const metadata = await generateMetadata(s3, metadataObjects)
+    console.info(`Generated metadata manifest for ${plural(metadata, 'object', 'objects')}`)
   }
 } catch (error) {
   console.error('Failed R2 operations:', error.message)
