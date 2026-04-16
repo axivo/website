@@ -1,12 +1,12 @@
 # Project Instructions
 
-A Next.js monorepo hosting the [axivo.com](https://axivo.com) website. Contains multiple sections sharing a common [Nextra](https://nextra.site) docs theme, with automated deployment via Cloudflare Pages.
+A Next.js monorepo hosting the [axivo.com](https://axivo.com) website. Contains multiple sections sharing a common [Nextra](https://nextra.site) docs theme, with automated deployment via Cloudflare Workers.
 
 - `/packages/website` — Local `@axivo/website` package with subpath exports for shared components and section variables
 - `/public` — Static assets organized by section (`home/`, `claude/`, `k3s-cluster/`)
 - `/src/app` — Next.js app routes with section layouts (`(home)`, `claude`, `k3s-cluster`)
 - `/src/components` — Shared React components (Hero, FeatureCard, Callout, Video, etc.)
-- `/src/config/variables` — Section-specific configuration (`docs.js`, `claude.js`, `k3s-cluster.js`)
+- `/src/config/variables` — Global and section-specific configuration (`global.js`, `claude.js`, `k3s-cluster.js`)
 - `/src/content` — MDX content organized by section with Nextra page maps
 
 ## Coding Standards
@@ -16,7 +16,7 @@ A Next.js monorepo hosting the [axivo.com](https://axivo.com) website. Contains 
 - Exports at the bottom of each file (except Next.js required inline exports like `metadata` and `dynamic`)
 - Alphabetical ordering for imports, exports, and configuration arrays
 - No hardcoded section names — use `subsite` from section variables
-- No hardcoded domain — use `domain` from `@axivo/website/docs`
+- No hardcoded domain or protocol — use `domain` from `@axivo/website/global`
 - CSS Modules with `@reference "tailwindcss"` for Tailwind v4
 
 ## Collaborator
