@@ -9,6 +9,10 @@
   @apply text-sm text-gray-500;
 }
 
+.summary {
+  @apply mt-1 text-sm text-gray-500;
+}
+
 .trailing {
   @apply text-right;
 }

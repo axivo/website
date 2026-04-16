@@ -41,7 +41,8 @@ export const plugins = {
 
 export const reflections = {
   path: `/${subsite.path}/reflections`,
-  section: '/reflections'
+  section: '/reflections',
+  title: 'Reflections'
 }
 
 export const repository = {

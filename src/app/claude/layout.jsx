@@ -8,7 +8,8 @@
 
 import { footer, Search, Subnavbar } from '@axivo/website'
 import { repository, subsite } from '@axivo/website/claude'
-import { getPageMap } from 'nextra/page-map'
+import { getReflectionPageMap } from '@axivo/website/reflections'
+import { getPageMap, normalizePageMap } from 'nextra/page-map'
 import { Layout, Navbar } from 'nextra-theme-docs'
 
 const metadata = {
@@ -46,6 +47,16 @@ async function ClaudeLayout({ children }) {
     </>
   )
   const pageMap = await getPageMap(`/${subsite.path}`)
+  const yearChildren = await getReflectionPageMap()
+  const reflectionsFolder = pageMap.find(item => item.name === 'reflections')
+  if (reflectionsFolder && yearChildren.length) {
+    reflectionsFolder.children = [
+      ...reflectionsFolder.children.filter(child => !/^\d{4}$/.test(child.name)),
+      ...yearChildren
+    ]
+    const index = pageMap.indexOf(reflectionsFolder)
+    pageMap[index] = normalizePageMap(reflectionsFolder)
+  }
   return (
     <Layout
       copyPageButton={false}

@@ -10,9 +10,10 @@
  */
 
 import { Breadcrumb, PostCard, useMDXComponents as getMDXComponents } from '@axivo/website'
-import { getEntries, getTags, reflectionStyles } from '@axivo/website/reflections'
+import { reflections, subsite } from '@axivo/website/claude'
+import { domain } from '@axivo/website/docs'
+import { getEntries, getTags, reflectionsPageSize, reflectionStyles, renderIndexPage } from '@axivo/website/reflections'
 import GithubSlugger from 'github-slugger'
-import { subsite } from '@axivo/website/claude'
 import { generateStaticParamsFor, importPage } from 'nextra/pages'
 import remarkMdx from 'remark-mdx'
 import remarkParse from 'remark-parse'
@@ -22,6 +23,7 @@ import '../../(home)/page.css'
 
 const components = getMDXComponents()
 const nextraStaticParams = generateStaticParamsFor('mdxPath')
+const reflectionsSection = reflections.section.slice(1)
 const Wrapper = components.wrapper
 
 /**
@@ -34,9 +36,9 @@ const Wrapper = components.wrapper
  */
 function buildTagBreadcrumb(tag) {
   return [
-    { name: 'reflections', route: `/${subsite.path}/reflections`, title: 'Reflections', frontMatter: {} },
-    { name: 'tags', route: `/${subsite.path}/reflections/tags`, title: 'Tags', frontMatter: {} },
-    { name: tag, route: `/${subsite.path}/reflections/tags/${tag}`, title: tag, frontMatter: {} }
+    { name: reflectionsSection, route: reflections.path, title: reflections.title, frontMatter: {} },
+    { name: 'tags', route: `${reflections.path}/tags`, title: 'Tags', frontMatter: {} },
+    { name: tag, route: `${reflections.path}/tags/${tag}`, title: tag, frontMatter: {} }
   ]
 }
 
@@ -106,6 +108,21 @@ async function fetchR2Object(key) {
 async function generateMetadata(props) {
   const params = await props.params
   const path = params.mdxPath || []
+  if (isReflectionEntry(path)) {
+    const key = `src/content/${subsite.path}/${path.join('/')}.mdx`
+    const result = await fetchR2Object(key)
+    if (result) {
+      return {
+        description: result.metadata.description,
+        title: result.metadata.title
+      }
+    }
+  }
+  if (isReflectionIndex(path)) {
+    const date = path.slice(1).join('/')
+    const { metadata } = await renderIndexPage(date)
+    return metadata
+  }
   if (isTagPage(path)) {
     return { title: decodeURIComponent(path[2]) }
   }
@@ -130,11 +147,51 @@ async function generateStaticParams() {
   const sectionParams = params
     .filter(p => p.mdxPath?.[0] === subsite.path)
     .map(p => ({ mdxPath: p.mdxPath.slice(1) }))
+  const response = await fetch(`https://${domain}/metadata`)
+  const { objects } = await response.json()
+  const indexDirs = new Set()
+  const reflectionParams = objects
+    .filter(obj => obj.template === 'blog')
+    .map(obj => {
+      const segments = obj.key
+        .replace('src/content/', '')
+        .replace('.mdx', '')
+        .split('/')
+        .slice(2)
+      const [year, month, day] = segments
+      indexDirs.add(`${year}`)
+      indexDirs.add(`${year}/${month}`)
+      indexDirs.add(`${year}/${month}/${day}`)
+      return { mdxPath: [reflectionsSection, ...segments] }
+    })
+  const indexParams = [...indexDirs].map(dir => ({
+    mdxPath: [reflectionsSection, ...dir.split('/')]
+  }))
   const allTags = await getTags()
   const tagParams = [...new Set(allTags)].map(tag => ({
-    mdxPath: ['reflections', 'tags', tag]
+    mdxPath: [reflectionsSection, 'tags', tag]
   }))
-  return [...sectionParams, ...tagParams]
+  return [...sectionParams, ...reflectionParams, ...indexParams, ...tagParams]
+}
+
+/**
+ * Checks if the path matches a reflection entry route.
+ *
+ * @param {string[]} path - URL path segments
+ * @returns {boolean} True if path is reflections/YYYY/MM/DD/slug
+ */
+function isReflectionEntry(path) {
+  return path[0] === reflectionsSection && path.length === 5 && /^\d{4}$/.test(path[1])
+}
+
+/**
+ * Checks if the path matches a reflection index route.
+ *
+ * @param {string[]} path - URL path segments
+ * @returns {boolean} True if path is reflections/YYYY, reflections/YYYY/MM, or reflections/YYYY/MM/DD
+ */
+function isReflectionIndex(path) {
+  return path[0] === reflectionsSection && path.length >= 2 && path.length <= 4 && /^\d{4}$/.test(path[1])
 }
 
 /**
@@ -144,7 +201,7 @@ async function generateStaticParams() {
  * @returns {boolean} True if path is reflections/tags/{tag}
  */
 function isTagPage(path) {
-  return path[0] === 'reflections' && path[1] === 'tags' && path[2]
+  return path[0] === reflectionsSection && path[1] === 'tags' && path[2]
 }
 
 /**
@@ -159,16 +216,7 @@ function isTagPage(path) {
 async function Page(props) {
   const params = await props.params
   const path = params.mdxPath || []
-  if (isTagPage(path)) {
-    return renderTagPage(decodeURIComponent(path[2]))
-  }
-  const {
-    default: MDXContent,
-    toc,
-    metadata,
-    sourceCode
-  } = await importPage([subsite.path, ...path])
-  if (metadata.bucket) {
+  if (isReflectionEntry(path)) {
     const key = `src/content/${subsite.path}/${path.join('/')}.mdx`
     const result = await fetchR2Object(key)
     if (result) {
@@ -180,6 +228,40 @@ async function Page(props) {
         </Wrapper>
       )
     }
+  }
+  if (isReflectionIndex(path)) {
+    const date = path.slice(1).join('/')
+    const { content, metadata, toc } = await renderIndexPage(date)
+    return (
+      <Wrapper toc={toc} metadata={metadata}>
+        {content}
+      </Wrapper>
+    )
+  }
+  if (isTagPage(path)) {
+    return renderTagPage(decodeURIComponent(path[2]))
+  }
+  const pageModule = await importPage([subsite.path, ...path])
+  const {
+    default: MDXContent,
+    toc,
+    metadata,
+    sourceCode
+  } = pageModule
+  const updateToc = (sectionId, items) => {
+    const index = toc.findIndex(item => item.id === sectionId)
+    if (index !== -1) {
+      toc.splice(index + 1, 0, ...items)
+    }
+  }
+  if (path.length === 1 && path[0] === reflectionsSection) {
+    const entries = await getEntries()
+    const latestToc = entries.slice(0, pageModule.reflectionsPageSize || reflectionsPageSize).map(entry => ({
+      depth: 3,
+      id: entry.route.split('/').pop(),
+      value: entry.frontMatter.title
+    }))
+    updateToc('latest-reflections', latestToc)
   }
   if (metadata.template === 'splash') {
     return (

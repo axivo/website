@@ -6,6 +6,8 @@
  * image. Cards can be static or linked, determined by the href prop.
  */
 
+import { useMDXComponents as getMDXComponents } from '@axivo/website'
+import GithubSlugger from 'github-slugger'
 import Link from 'next/link'
 import { Image } from './Image'
 import styles from './FeatureCard.module.css'
@@ -38,6 +40,9 @@ function CardGrid({ children }) {
  * @param {string} props.title - Card heading
  */
 function FeatureCard({ children, href, image, span, style, styleBody, styleContainer, styleTitle, template, title }) {
+  const components = getMDXComponents()
+  const slugger = new GithubSlugger()
+  const id = slugger.slug(title)
   const isExternal = href?.startsWith('http')
   const isHero = template === 'hero'
   const Tag = href ? Link : 'div'
@@ -47,7 +52,7 @@ function FeatureCard({ children, href, image, span, style, styleBody, styleConta
     return (
       <Tag {...linkProps} className={styles.cardHero} style={spanStyle}>
         <div className={styles.textHero}>
-          <p className={styles.title} style={styleTitle}>{title}</p>
+          <components.h3 className={styles.title} id={id} style={styleTitle}>{title}</components.h3>
           <div className={styles.body} style={styleBody}>{children}</div>
         </div>
         {image && (
@@ -60,7 +65,7 @@ function FeatureCard({ children, href, image, span, style, styleBody, styleConta
   }
   return (
     <Tag {...linkProps} className={styles.card} style={spanStyle}>
-      <p className={styles.title} style={styleTitle}>{title}</p>
+      <components.h3 className={styles.title} id={id} style={styleTitle}>{title}</components.h3>
       <div className={styles.body} style={styleBody}>{children}</div>
       {image && (
         <div className={styles.image} style={styleContainer}>

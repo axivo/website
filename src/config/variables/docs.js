@@ -26,8 +26,8 @@ export const author = {
 }
 
 export const cloudflare = {
-  r2: {
-    bucket: 'axivo-website'
+  bucket: {
+    name: 'axivo-website'
   }
 }
 

@@ -6,6 +6,7 @@
  * (year, month, day) and the reflections landing page.
  */
 
+import { useMDXComponents as getMDXComponents } from '@axivo/website'
 import Link from 'next/link'
 import remarkMdx from 'remark-mdx'
 import remarkParse from 'remark-parse'
@@ -25,13 +26,15 @@ import styles from './PostCard.module.css'
  */
 function PostCard({ post, readMore = 'Read more' }) {
   const { author, date, description, source, tags, title } = post.frontMatter
+  const components = getMDXComponents()
+  const id = post.route.split('/').pop()
   return (
     <div className={styles.card}>
-      <h3 className={styles.title}>
+      <components.h3 className={styles.title} id={id}>
         <Link href={post.route} className={styles.titleLink}>
           {title}
         </Link>
-      </h3>
+      </components.h3>
       {date && <Meta author={author} date={date} source={source} />}
       {tags?.length > 0 && (
         <div className={styles.tags}>
@@ -44,7 +47,7 @@ function PostCard({ post, readMore = 'Read more' }) {
       )}
       {description && (
         <div className={styles.description}>
-          <SafeMdxRenderer mdast={unified().use(remarkParse).use(remarkMdx).parse(description)} />
+          <SafeMdxRenderer components={components} mdast={unified().use(remarkParse).use(remarkMdx).parse(description)} />
         </div>
       )}
       {readMore && (

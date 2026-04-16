@@ -6,8 +6,7 @@
  * 2. Generates a timestamp map from git history for accurate
  *    "Last updated" dates, bypassing @napi-rs/simple-git which
  *    returns incorrect dates on unshallowed repositories
- * 3. Generates frontmatter-only stub files from R2 object metadata
- *    for reflection entries served dynamically from R2 storage
+ * 3. Generates metadata manifest from R2 object metadata
  *
  * Usage: node scripts/prebuild.mjs
  */
@@ -20,98 +19,12 @@ import { dirname, join } from 'node:path'
 import { cloudflare } from '../src/config/variables/docs.js'
 import { reflections, subsite } from '../src/config/variables/claude.js'
 
-const bucket = cloudflare.r2.bucket
+const bucket = cloudflare.bucket.name
 const bucketMediaPrefix = `public/${subsite.path}${reflections.section}/`
 const bucketPrefix = `src/content/${subsite.path}${reflections.section}/`
 const cwd = process.cwd()
-const monthNames = [
-  'January', 'February', 'March', 'April', 'May', 'June',
-  'July', 'August', 'September', 'October', 'November', 'December'
-]
 const outputDir = join(cwd, '.next')
 const outputFile = join(outputDir, 'timestamps.json')
-
-/**
- * Builds an index page for a reflection year, month, or day directory.
- *
- * @param {Array<string>} parts - Date parts: [year], [year, month], or [year, month, day]
- * @returns {string} MDX content for the index page
- */
-function buildIndex(parts) {
-  const [year, month, day] = parts
-  const monthName = month ? monthNames[parseInt(month, 10) - 1] : ''
-  const dayNum = day ? parseInt(day, 10) : null
-  let title
-  let seoTitle
-  let phrase
-  if (day) {
-    title = `${dayNum}`
-    seoTitle = `${monthName} ${dayNum}, ${year}`
-    phrase = `${monthName} ${dayNum}, ${year}`
-  } else if (month) {
-    title = monthName
-    seoTitle = `${monthName} ${year}`
-    phrase = `${monthName} ${year}`
-  } else {
-    title = `"${year}"`
-    seoTitle = null
-    phrase = year
-  }
-  const lines = [
-    '---',
-    'asIndexPage: true',
-    `title: ${title}`
-  ]
-  if (seoTitle) {
-    lines.push(`seoTitle: ${seoTitle}`)
-  }
-  lines.push(
-    'description: >-',
-    `  Reflections written by Anthropic instances during ${phrase} collaborative sessions.`,
-    '---',
-    '',
-    `export const date = "${parts.join('/')}";`,
-    'import { Reflections, Title } from "@axivo/website/reflections";',
-    '',
-    '# <Title date={date} />',
-    '',
-    '{/* prettier-ignore */}',
-    '<Reflections date={date}>',
-    '## Reflections',
-    '</Reflections>',
-    ''
-  )
-  return lines.join('\n')
-}
-
-/**
- * Builds a frontmatter-only stub from R2 object metadata.
- *
- * @param {object} metadata - R2 custom metadata
- * @returns {string} YAML frontmatter block
- */
-function buildStub(metadata) {
-  const lines = ['---']
-  if (metadata.template) lines.push(`template: ${metadata.template}`)
-  if (metadata.title) lines.push(`title: ${metadata.title}`)
-  if (metadata.date) lines.push(`date: ${metadata.date}`)
-  if (metadata.description) {
-    lines.push('description: >-')
-    lines.push(`  ${decodeURIComponent(metadata.description)}`)
-  }
-  if (metadata.author) lines.push(`author: ${metadata.author}`)
-  if (metadata.source) lines.push(`source: ${metadata.source}`)
-  if (metadata.tags) {
-    const tags = JSON.parse(metadata.tags)
-    lines.push('tags:')
-    for (const tag of tags) {
-      lines.push(`  - ${tag}`)
-    }
-  }
-  lines.push('bucket: true')
-  lines.push('---', '')
-  return lines.join('\n')
-}
 
 /**
  * Removes orphaned files and empty directories under year-rooted subdirectories.
@@ -193,79 +106,10 @@ async function generateR2Media(s3) {
 }
 
 /**
- * Generates frontmatter-only stub files from R2 object metadata.
- * Stubs provide Nextra page map entries for R2-backed reflection pages.
- * Collects decoded metadata for each object during iteration.
- *
- * @param {S3Client} s3 - Configured S3 client
- * @returns {Promise<Object>} Object with generated, deleted counts and metadata array
- */
-async function generateR2Stubs(s3) {
-  const list = await s3.send(new ListObjectsV2Command({
-    Bucket: bucket,
-    Prefix: bucketPrefix
-  }))
-  if (!list.Contents?.length) {
-    console.info('No R2 objects found, skipping stub generation')
-    return { generated: 0, deleted: 0, metadata: [] }
-  }
-  const expected = new Set()
-  const indexDirs = new Set()
-  const metadata = []
-  let count = 0
-  for (const obj of list.Contents) {
-    const filePath = join(cwd, obj.Key)
-    const head = await s3.send(new HeadObjectCommand({
-      Bucket: bucket,
-      Key: obj.Key
-    }))
-    const stub = buildStub(head.Metadata)
-    mkdirSync(dirname(filePath), { recursive: true })
-    writeFileSync(filePath, stub)
-    expected.add(filePath)
-    count++
-    const entry = { key: obj.Key, ...head.Metadata }
-    if (entry.description) {
-      entry.description = decodeURIComponent(entry.description)
-    }
-    if (entry.tags) {
-      try {
-        entry.tags = JSON.parse(entry.tags)
-      } catch {
-        console.warn(`Failed to parse tags for ${obj.Key}`)
-      }
-    }
-    metadata.push(entry)
-    const relativeKey = obj.Key.slice(bucketPrefix.length)
-    const match = relativeKey.match(/^(\d{4})\/(\d{2})\/(\d{2})\//)
-    if (match) {
-      const [, year, month, day] = match
-      indexDirs.add(`${year}/${month}/${day}`)
-      indexDirs.add(`${year}/${month}`)
-      indexDirs.add(year)
-    }
-  }
-  for (const dir of indexDirs) {
-    const indexPath = join(cwd, bucketPrefix, dir, 'index.mdx')
-    expected.add(indexPath)
-    if (existsSync(indexPath)) {
-      continue
-    }
-    const parts = dir.split('/')
-    const content = buildIndex(parts)
-    mkdirSync(dirname(indexPath), { recursive: true })
-    writeFileSync(indexPath, content)
-    count++
-  }
-  const deleted = cleanupOrphans(join(cwd, bucketPrefix), expected)
-  return { generated: count, deleted, metadata }
-}
-
-/**
  * Generates metadata manifest and uploads it to R2.
  *
  * @param {S3Client} s3 - Configured S3 client
- * @param {Array} metadata - Decoded metadata entries from generateR2Stubs
+ * @param {Array} metadata - Decoded metadata entries
  * @returns {Promise<number>} Number of metadata entries generated
  */
 async function generateMetadata(s3, metadata) {
@@ -338,13 +182,35 @@ try {
         secretAccessKey: process.env.R2_SECRET_ACCESS_KEY
       }
     })
-    const plural = (count, word) => `${count} ${word}${count === 1 ? '' : 's'}`
-    const stubs = await generateR2Stubs(s3)
-    console.info(`Generated ${plural(stubs.generated, 'stub')}, deleted ${plural(stubs.deleted, 'orphaned stub')}`)
+    const pluralRules = new Intl.PluralRules('en-US')
+    const plural = (count, singular, plural) => `${count} ${pluralRules.select(count) === 'one' ? singular : plural}`
     const media = await generateR2Media(s3)
-    console.info(`Generated ${plural(media.generated, 'media file')}, deleted ${plural(media.deleted, 'orphaned media file')}`)
-    const metadata = await generateMetadata(s3, stubs.metadata)
-    console.info(`Generated metadata manifest with ${plural(metadata, 'entry')}`)
+    console.info(`Generated ${plural(media.generated, 'media file', 'media files')}, deleted ${plural(media.deleted, 'orphaned media file', 'orphaned media files')}`)
+    const list = await s3.send(new ListObjectsV2Command({
+      Bucket: bucket,
+      Prefix: bucketPrefix
+    }))
+    const metadataEntries = []
+    for (const obj of (list.Contents || [])) {
+      const head = await s3.send(new HeadObjectCommand({
+        Bucket: bucket,
+        Key: obj.Key
+      }))
+      const entry = { key: obj.Key, ...head.Metadata }
+      if (entry.description) {
+        entry.description = decodeURIComponent(entry.description)
+      }
+      if (entry.tags) {
+        try {
+          entry.tags = JSON.parse(entry.tags)
+        } catch {
+          console.warn(`Failed to parse tags for ${obj.Key}`)
+        }
+      }
+      metadataEntries.push(entry)
+    }
+    const metadata = await generateMetadata(s3, metadataEntries)
+    console.info(`Generated metadata manifest with ${plural(metadata, 'entry', 'entries')}`)
   }
 } catch (error) {
   console.error('Failed R2 operations:', error.message)
