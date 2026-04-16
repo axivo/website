@@ -16,7 +16,7 @@ import { config } from 'dotenv'
 import { execSync } from 'node:child_process'
 import { existsSync, mkdirSync, readdirSync, rmdirSync, statSync, unlinkSync, writeFileSync } from 'node:fs'
 import { dirname, join } from 'node:path'
-import { cloudflare } from '../src/config/variables/docs.js'
+import { cloudflare } from '../src/config/variables/global.js'
 import { reflections, subsite } from '../src/config/variables/claude.js'
 
 const bucket = cloudflare.bucket.name

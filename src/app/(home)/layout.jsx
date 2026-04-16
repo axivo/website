@@ -8,7 +8,7 @@
 import { footer, Search, Subnavbar } from '@axivo/website'
 import { getPageMap } from 'nextra/page-map'
 import { Layout, Navbar } from 'nextra-theme-docs'
-import { repository } from '../../config/variables/docs'
+import { repository } from '../../config/variables/global'
 
 /**
  * Home section layout with docs theme, logo navbar, and sidebar.
