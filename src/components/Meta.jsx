@@ -8,6 +8,7 @@
 
 'use client'
 
+import { meta } from '@axivo/website/global'
 import { useConfig } from 'nextra-theme-docs'
 import styles from './Meta.module.css'
 
@@ -77,7 +78,7 @@ function Meta({ author, date, source } = {}) {
             <img
               alt={author}
               className={styles.avatar}
-              src="https://github.com/claude.png"
+              src={meta.profile.claude.avatar}
               width="16"
               height="16"
             />

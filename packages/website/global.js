@@ -2,4 +2,4 @@
  * @fileoverview Subpath export for website variables.
  */
 
-export { algolia, analytics, author, cloudflare, crawlers, domain, repository } from '../../src/config/variables/global.js'
+export { algolia, analytics, cloudflare, crawlers, domain, meta, repository } from '../../src/config/variables/global.js'
