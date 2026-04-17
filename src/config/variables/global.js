@@ -37,13 +37,13 @@ export const domain = {
 
 export const meta = {
   profile: {
-    claude: {
-      avatar: 'https://github.com/claude.png'
-    },
-    floren: {
+    architect: {
       avatar: 'https://github.com/fmunteanu.png',
       homepage: 'https://www.linkedin.com/in/florenmunteanu/',
       name: 'Floren Munteanu'
+    },
+    instance: {
+      avatar: 'https://github.com/claude.png'
     }
   }
 }
