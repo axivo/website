@@ -78,7 +78,7 @@ function Meta({ author, date, source } = {}) {
             <img
               alt={author}
               className={styles.avatar}
-              src={meta.profile.claude.avatar}
+              src={meta.profile.instance.avatar}
               width="16"
               height="16"
             />
