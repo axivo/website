@@ -56,7 +56,9 @@ export async function GET(request) {
     if (!object) {
       return Response.json({ objects: [], total: 0 })
     }
-    return Response.json(await object.json())
+    return Response.json(await object.json(), {
+      headers: { 'Cache-Control': 'public, s-maxage=86400, stale-while-revalidate=3600' }
+    })
   } catch (error) {
     return Response.json({ error: error.message }, { status: 500 })
   }

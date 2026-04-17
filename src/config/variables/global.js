@@ -1,7 +1,7 @@
 /**
  * @fileoverview Configuration variables for the website.
  *
- * Defines allowed search engine crawlers, site domain, and repository URL.
+ * Defines global site configuration including search, analytics, domain, and profiles.
  */
 
 export const algolia = {
@@ -20,11 +20,6 @@ export const analytics = {
   id: 'G-8N53WYKXE6'
 }
 
-export const author = {
-  linkedin: 'https://www.linkedin.com/in/florenmunteanu/',
-  name: 'Floren Munteanu'
-}
-
 export const cloudflare = {
   bucket: {
     name: 'axivo-website'
@@ -38,6 +33,19 @@ export const crawlers = [
 export const domain = {
   name: process.env.NEXT_PUBLIC_DOMAIN,
   protocol: process.env.NEXT_PUBLIC_PROTOCOL
+}
+
+export const meta = {
+  profile: {
+    claude: {
+      avatar: 'https://github.com/claude.png'
+    },
+    floren: {
+      avatar: 'https://github.com/fmunteanu.png',
+      homepage: 'https://www.linkedin.com/in/florenmunteanu/',
+      name: 'Floren Munteanu'
+    }
+  }
 }
 
 export const repository = {
