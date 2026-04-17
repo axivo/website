@@ -57,7 +57,10 @@ export async function GET(request) {
       return Response.json({ objects: [], total: 0 })
     }
     return Response.json(await object.json(), {
-      headers: { 'Cache-Control': 'public, s-maxage=86400, stale-while-revalidate=3600' }
+      headers: {
+        'Cache-Control': 'public, s-maxage=86400, stale-while-revalidate=3600',
+        'Vary': 'Accept-Encoding'
+      }
     })
   } catch (error) {
     return Response.json({ error: error.message }, { status: 500 })
