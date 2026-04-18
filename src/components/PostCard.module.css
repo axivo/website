@@ -5,11 +5,7 @@
 }
 
 .description {
-  @apply my-4 text-gray-600;
-}
-
-:global(.dark) .description {
-  @apply text-gray-400;
+  @apply my-4;
 }
 
 .tag {
