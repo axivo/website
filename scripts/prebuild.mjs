@@ -23,6 +23,7 @@ const bucket = cloudflare.bucket.name
 const bucketMediaPrefix = `public/${subsite.path}${reflections.section}/`
 const bucketPrefix = `src/content/${subsite.path}${reflections.section}/`
 const cwd = process.cwd()
+const metadataKey = 'metadata/index.json'
 const outputDir = join(cwd, '.next')
 const outputFile = join(outputDir, 'timestamps.json')
 
@@ -119,7 +120,7 @@ async function generateMetadata(s3, objects) {
   objects.sort((a, b) => (a.date || '').localeCompare(b.date || ''))
   await s3.send(new PutObjectCommand({
     Bucket: bucket,
-    Key: 'metadata/objects.json',
+    Key: metadataKey,
     Body: JSON.stringify({ objects, total: objects.length }),
     ContentType: 'application/json'
   }))
@@ -186,29 +187,34 @@ try {
     const plural = (count, singular, plural) => `${count} ${pluralRules.select(count) === 'one' ? singular : plural}`
     const media = await generateR2Media(s3)
     console.info(`Generated ${plural(media.generated, 'media file', 'media files')}, deleted ${plural(media.deleted, 'orphaned media file', 'orphaned media files')}`)
-    const list = await s3.send(new ListObjectsV2Command({
-      Bucket: bucket,
-      Prefix: bucketPrefix
-    }))
     const metadataObjects = []
-    for (const obj of (list.Contents || [])) {
-      const head = await s3.send(new HeadObjectCommand({
+    let continuationToken
+    do {
+      const list = await s3.send(new ListObjectsV2Command({
         Bucket: bucket,
-        Key: obj.Key
+        ContinuationToken: continuationToken,
+        Prefix: bucketPrefix
       }))
-      const object = { key: obj.Key, ...head.Metadata }
-      if (object.description) {
-        object.description = decodeURIComponent(object.description)
-      }
-      if (object.tags) {
-        try {
-          object.tags = JSON.parse(object.tags)
-        } catch {
-          console.warn(`Failed to parse tags for ${obj.Key}`)
+      for (const obj of (list.Contents || [])) {
+        const head = await s3.send(new HeadObjectCommand({
+          Bucket: bucket,
+          Key: obj.Key
+        }))
+        const object = { key: obj.Key, ...head.Metadata }
+        if (object.description) {
+          object.description = decodeURIComponent(object.description)
         }
+        if (object.tags) {
+          try {
+            object.tags = JSON.parse(object.tags)
+          } catch {
+            console.warn(`Failed to parse tags for ${obj.Key}`)
+          }
+        }
+        metadataObjects.push(object)
       }
-      metadataObjects.push(object)
-    }
+      continuationToken = list.IsTruncated ? list.NextContinuationToken : undefined
+    } while (continuationToken)
     const metadata = await generateMetadata(s3, metadataObjects)
     console.info(`Generated metadata manifest for ${plural(metadata, 'object', 'objects')}`)
   }

@@ -10,7 +10,7 @@
  * GET /metadata?key=src/content/claude/reflections/2025/12/14/first-light.mdx
  */
 
-const metadataKey = 'metadata/objects.json'
+const metadataKey = 'metadata/index.json'
 
 /**
  * Decodes metadata fields that were encoded during upload.
