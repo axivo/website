@@ -24,6 +24,12 @@ export const metadata = {
   },
   appleWebApp: {
     title: 'AXIVO'
+  },
+  icons: {
+    apple: [
+      { url: '/apple-icon.png', rel: 'apple-touch-icon' },
+      { url: '/apple-icon.png', rel: 'apple-touch-icon-precomposed' }
+    ]
   }
 }
 

@@ -26,7 +26,9 @@ function extractRoutes(pageMapItems) {
       routes.push(item.route)
     }
     if ('children' in item) {
-      routes.push(item.route)
+      if (item.children.some((child) => child.name === 'index')) {
+        routes.push(item.route)
+      }
       routes.push(...extractRoutes(item.children))
     }
   }
