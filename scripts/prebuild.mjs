@@ -14,7 +14,7 @@
 import { GetObjectCommand, HeadObjectCommand, ListObjectsV2Command, PutObjectCommand, S3Client } from '@aws-sdk/client-s3'
 import { config } from 'dotenv'
 import { execSync } from 'node:child_process'
-import { existsSync, mkdirSync, readdirSync, rmdirSync, statSync, unlinkSync, writeFileSync } from 'node:fs'
+import { existsSync, mkdirSync, readdirSync, rmdirSync, rmSync, statSync, unlinkSync, writeFileSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { cloudflare } from '../src/config/variables/global.js'
 import { reflections, subsite } from '../src/config/variables/claude.js'
@@ -23,6 +23,7 @@ const bucket = cloudflare.bucket.name
 const bucketMediaPrefix = `public/${subsite.path}${reflections.section}/`
 const bucketPrefix = `src/content/${subsite.path}${reflections.section}/`
 const cwd = process.cwd()
+const fetchCacheDir = join(cwd, '.next', 'cache', 'fetch-cache')
 const metadataKey = cloudflare.bucket.metadata.reflections
 const outputDir = join(cwd, '.next')
 const outputFile = join(outputDir, 'timestamps.json')
@@ -160,6 +161,7 @@ try {
   console.info('Repository already unshallowed or fully cloned')
 }
 mkdirSync(outputDir, { recursive: true })
+rmSync(fetchCacheDir, { force: true, recursive: true })
 try {
   const timestamps = getTimestamps()
   writeFileSync(outputFile, JSON.stringify(timestamps))
