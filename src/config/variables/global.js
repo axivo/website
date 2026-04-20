@@ -4,8 +4,6 @@
  * Defines global site configuration including search, analytics, domain, and profiles.
  */
 
-import { reflections } from "./claude"
-
 export const algolia = {
   apiKey: '94d5f62b378913a136bf09e67182dfc6',
   appId: 'Q87QW4FRL5',
