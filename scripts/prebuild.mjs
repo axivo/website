@@ -161,9 +161,7 @@ try {
   console.info('Repository already unshallowed or fully cloned')
 }
 mkdirSync(outputDir, { recursive: true })
-if (process.env.NEXTJS_ENV !== 'production') {
-  rmSync(fetchCacheDir, { force: true, recursive: true })
-}
+rmSync(fetchCacheDir, { force: true, recursive: true })
 try {
   const timestamps = getTimestamps()
   writeFileSync(outputFile, JSON.stringify(timestamps))
