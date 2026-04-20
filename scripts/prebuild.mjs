@@ -23,7 +23,7 @@ const bucket = cloudflare.bucket.name
 const bucketMediaPrefix = `public/${subsite.path}${reflections.section}/`
 const bucketPrefix = `src/content/${subsite.path}${reflections.section}/`
 const cwd = process.cwd()
-const metadataKey = 'metadata/index.json'
+const metadataKey = cloudflare.bucket.metadata.reflections
 const outputDir = join(cwd, '.next')
 const outputFile = join(outputDir, 'timestamps.json')
 

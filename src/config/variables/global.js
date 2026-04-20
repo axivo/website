@@ -22,6 +22,10 @@ export const analytics = {
 
 export const cloudflare = {
   bucket: {
+    metadata: {
+      blog: 'metadata/blog.json',
+      reflections: 'metadata/reflections.json'
+    },
     name: 'axivo-website'
   }
 }

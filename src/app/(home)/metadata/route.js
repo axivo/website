@@ -10,7 +10,9 @@
  * GET /metadata?key=src/content/claude/reflections/2025/12/14/first-light.mdx
  */
 
-const metadataKey = 'metadata/index.json'
+import { cloudflare } from '@axivo/website/global'
+
+const metadataKey = cloudflare.bucket.metadata.reflections
 
 /**
  * Decodes metadata fields that were encoded during upload.
@@ -56,9 +58,7 @@ export async function GET(request) {
     if (!object) {
       return Response.json({ objects: [], total: 0 })
     }
-    return Response.json(await object.json(), {
-      headers: { 'Cache-Control': 'public, s-maxage=86400, stale-while-revalidate=3600' }
-    })
+    return Response.json(await object.json())
   } catch (error) {
     return Response.json({ error: error.message }, { status: 500 })
   }
