@@ -30,7 +30,7 @@ export const cloudflare = {
   },
   cache: {
     prefixes: [
-      '/claude/reflections'
+      '/'
     ]
   }
 }
