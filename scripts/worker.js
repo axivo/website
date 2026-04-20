@@ -58,7 +58,7 @@ function keyFor(request, id) {
  *
  * @param {Request} request - Incoming request
  * @param {object} env - Worker bindings
- * @param {ExecutionContext} ctx - Execution context for waitUntil
+ * @param {ExecutionContext} ctx - Execution context passed through to OpenNext
  * @returns {Promise<Response>} Response from cache or OpenNext handler
  */
 export default {
@@ -86,7 +86,7 @@ export default {
       !/no-store|no-cache|private/i.test(cacheControl) &&
       !response.headers.has('set-cookie')
     if (cacheable) {
-      ctx.waitUntil(cache.put(cacheKey, response.clone()))
+      await cache.put(cacheKey, response.clone())
     }
     return response
   }
