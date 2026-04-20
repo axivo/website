@@ -52,9 +52,10 @@ function keyFor(request, id) {
 }
 
 /**
- * Worker fetch handler. Serves cached GET/HEAD responses from caches.default
+ * Worker fetch handler. Serves cached GET responses from caches.default
  * when available, otherwise delegates to the OpenNext handler and caches the
- * result if the origin response is marked cacheable.
+ * result if the origin response is marked cacheable. Non-GET requests
+ * bypass the cache to match Cache API semantics (only GET is cacheable).
  *
  * @param {Request} request - Incoming request
  * @param {object} env - Worker bindings
@@ -63,7 +64,7 @@ function keyFor(request, id) {
  */
 export default {
   async fetch(request, env, ctx) {
-    if (request.method !== 'GET' && request.method !== 'HEAD') {
+    if (request.method !== 'GET') {
       return worker.fetch(request, env, ctx)
     }
     if (request.headers.has('rsc') || request.headers.has('next-router-prefetch')) {
