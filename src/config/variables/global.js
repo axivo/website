@@ -27,6 +27,11 @@ export const cloudflare = {
       reflections: 'metadata/reflections.json'
     },
     name: 'axivo-website'
+  },
+  cache: {
+    prefixes: [
+      '/claude/reflections'
+    ]
   }
 }
 

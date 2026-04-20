@@ -1,22 +1,24 @@
 /**
  * @fileoverview Prebuild script for Cloudflare Workers deployment.
  *
- * Performs three operations:
+ * Performs four operations:
  * 1. Unshallows the git repository to access full commit history
  * 2. Generates a timestamp map from git history for accurate
  *    "Last updated" dates, bypassing @napi-rs/simple-git which
  *    returns incorrect dates on unshallowed repositories
  * 3. Generates metadata manifest from R2 object metadata
+ * 4. Purges Cloudflare edge cache for reflection routes
  *
  * Usage: node scripts/prebuild.mjs
  */
 
 import { GetObjectCommand, HeadObjectCommand, ListObjectsV2Command, PutObjectCommand, S3Client } from '@aws-sdk/client-s3'
+import Cloudflare from 'cloudflare'
 import { config } from 'dotenv'
 import { execSync } from 'node:child_process'
 import { existsSync, mkdirSync, readdirSync, rmdirSync, rmSync, statSync, unlinkSync, writeFileSync } from 'node:fs'
 import { dirname, join } from 'node:path'
-import { cloudflare } from '../src/config/variables/global.js'
+import { cloudflare, domain } from '../src/config/variables/global.js'
 import { reflections, subsite } from '../src/config/variables/claude.js'
 
 const bucket = cloudflare.bucket.name
@@ -27,6 +29,8 @@ const fetchCacheDir = join(cwd, '.next', 'cache', 'fetch-cache')
 const metadataKey = cloudflare.bucket.metadata.reflections
 const outputDir = join(cwd, '.next')
 const outputFile = join(outputDir, 'timestamps.json')
+const pluralRules = new Intl.PluralRules('en-US')
+const plural = (count, singular, pluralForm) => `${count} ${pluralRules.select(count) === 'one' ? singular : pluralForm}`
 
 /**
  * Removes orphaned files and empty directories under year-rooted subdirectories.
@@ -155,6 +159,32 @@ function getTimestamps() {
   return timestamps
 }
 
+/**
+ * Purges Cloudflare edge cache for configured route prefixes.
+ *
+ * @returns {Promise<string[]|null>} Array of purged prefixes, or null if skipped or failed
+ */
+async function purgeCache() {
+  if (!process.env.ZONE_API_TOKEN || !process.env.ZONE_ID) {
+    console.info('Cloudflare credentials not found, skipping cache purge')
+    return null
+  }
+  if (!domain.name) {
+    console.info('Domain not configured, skipping cache purge')
+    return null
+  }
+  if (!cloudflare.cache.prefixes.length) {
+    return []
+  }
+  const prefixes = cloudflare.cache.prefixes.map(prefix => `${domain.name}${prefix}`)
+  const client = new Cloudflare({ apiToken: process.env.ZONE_API_TOKEN })
+  await client.cache.purge({
+    zone_id: process.env.ZONE_ID,
+    prefixes
+  })
+  return prefixes
+}
+
 try {
   execSync('git fetch --unshallow', { cwd, stdio: 'pipe' })
 } catch {
@@ -185,8 +215,6 @@ try {
         secretAccessKey: process.env.R2_SECRET_ACCESS_KEY
       }
     })
-    const pluralRules = new Intl.PluralRules('en-US')
-    const plural = (count, singular, plural) => `${count} ${pluralRules.select(count) === 'one' ? singular : plural}`
     const media = await generateR2Media(s3)
     console.info(`Generated ${plural(media.generated, 'media file', 'media files')}, deleted ${plural(media.deleted, 'orphaned media file', 'orphaned media files')}`)
     const metadataObjects = []
@@ -223,3 +251,12 @@ try {
 } catch (error) {
   console.error('Failed R2 operations:', error.message)
 }
+try {
+  const purged = await purgeCache()
+  if (purged?.length) {
+    console.info(`Purged cache for ${plural(purged.length, 'prefix', 'prefixes')}: ${purged.join(', ')}`)
+  }
+} catch (error) {
+  console.error('Failed to purge cache:', error.message)
+}
+
