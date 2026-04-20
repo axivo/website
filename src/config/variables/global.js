@@ -4,6 +4,8 @@
  * Defines global site configuration including search, analytics, domain, and profiles.
  */
 
+import { reflections } from "./claude"
+
 export const algolia = {
   apiKey: '94d5f62b378913a136bf09e67182dfc6',
   appId: 'Q87QW4FRL5',
@@ -22,6 +24,10 @@ export const analytics = {
 
 export const cloudflare = {
   bucket: {
+    metadata: {
+      blog: 'metadata/blog.json',
+      reflections: 'metadata/reflections.json'
+    },
     name: 'axivo-website'
   }
 }

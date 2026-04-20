@@ -21,9 +21,6 @@ import { ReflectionPage } from './ReflectionPage'
 import { TagGrid } from './Tag'
 import styles from './Reflection.module.css'
 
-/**
- * Default number of entries per page.
- */
 const reflectionsPageSize = 20
 
 /**
