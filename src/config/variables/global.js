@@ -43,7 +43,8 @@ export const meta = {
       name: 'Floren Munteanu'
     },
     instance: {
-      avatar: 'https://github.com/claude.png'
+      avatar: 'https://github.com/claude.png',
+      name: 'Claude'
     }
   }
 }
