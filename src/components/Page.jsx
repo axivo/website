@@ -23,8 +23,7 @@ import remarkMdx from 'remark-mdx'
 import remarkParse from 'remark-parse'
 import { SafeMdxRenderer } from 'safe-mdx'
 import { unified } from 'unified'
-import { filterByDate, getPosts, getTags, postsPageSize, renderIndexPage } from './Post'
-import reflectionStyles from './Reflection.module.css'
+import { filterByDate, getPosts, getTags, Posts, postsPageSize, renderIndexPage } from './Post'
 
 const components = getMDXComponents()
 const nextraStaticParams = generateStaticParamsFor('mdxPath')
@@ -153,17 +152,22 @@ function createPage({ source, collection }) {
     const filtered = entries.filter(entry =>
       entry.frontMatter.tags?.includes(tag)
     )
+    const toc = [
+      { depth: 2, id: collection.sectionId, value: collection.sectionTitle },
+      ...filtered.slice(0, postsPageSize).map(entry => ({
+        depth: 3,
+        id: entry.route.split('/').pop(),
+        value: entry.frontMatter.title
+      }))
+    ]
     return (
       <>
         <Subnavbar activePath={buildTagBreadcrumb(tag)} />
-        <Wrapper metadata={{ title: tag }} toc={[]}>
+        <Wrapper metadata={{ title: tag }} toc={toc}>
           <components.h1>{tag}</components.h1>
-          <div className={reflectionStyles.container}>
-            <components.h2>{collection.tagsSectionTitle}</components.h2>
-            {filtered.map(entry => (
-              <PostCard collection={collection} key={entry.route} post={entry} />
-            ))}
-          </div>
+          <Posts collection={collection} entries={filtered}>
+            <components.h2 id={collection.sectionId}>{collection.tagsSectionTitle}</components.h2>
+          </Posts>
         </Wrapper>
       </>
     )
