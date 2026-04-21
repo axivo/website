@@ -20,6 +20,9 @@
       "types": "./k3s-cluster.d.ts",
       "import": "./k3s-cluster.js"
     },
+    "./page": {
+      "import": "./page.js"
+    },
     "./reflections": {
       "types": "./reflections.d.ts",
       "import": "./reflections.js"

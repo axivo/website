@@ -24,10 +24,13 @@ const collection = {
   contentPrefix: `src/content/claude${reflections.section}/`,
   describeIndex: phrase =>
     `Reflections written by Anthropic instances during ${phrase} collaborative sessions.`,
+  latestTocSectionId: 'latest-reflections',
   metadataEndpoint: `${domain.protocol}://${domain.name}/metadata`,
   routePath: reflections.path,
   sectionId: reflections.section.slice(1),
+  sectionPath: reflections.section.slice(1),
   sectionTitle: reflections.title,
+  tagsSectionTitle: reflections.title,
   templates: ['blog', 'reflection']
 }
 
@@ -41,6 +44,7 @@ const Tags = () => <GenericTags collection={collection} />
 const reflectionsPageSize = postsPageSize
 
 export {
+  collection as reflectionsCollection,
   getEntries,
   getReflectionPageMap,
   getTags,
