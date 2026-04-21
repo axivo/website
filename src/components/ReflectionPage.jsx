@@ -34,9 +34,6 @@ function ReflectionPage({ children, pageSize, totalPages }) {
   const start = (page - 1) * pageSize
   const pageCards = allCards.slice(start, start + pageSize)
   useEffect(() => {
-    if (page === 1) {
-      return
-    }
     const sectionId = meta.reflections.path
     const reflectionsLink = document.querySelector(`a[href="#${sectionId}"]`)
     if (!reflectionsLink) {

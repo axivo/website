@@ -21,12 +21,11 @@ import { ReflectionPage as PostPage } from './ReflectionPage'
 import { TagGrid } from './Tag'
 import styles from './Reflection.module.css'
 
-const postsPageSize = 20
-
 const months = [
   'January', 'February', 'March', 'April', 'May', 'June',
   'July', 'August', 'September', 'October', 'November', 'December'
 ]
+const postsPageSize = 20
 
 /**
  * Fetches metadata objects from the collection's metadata endpoint.
@@ -180,8 +179,8 @@ async function getTags(collection) {
  * @param {object} [props.style] - Custom styles for the container
  * @returns {Promise<import('react').ReactElement>} List of PostCard components
  */
-async function Posts({ collection, children, date, limit, style }) {
-  let entries = await getPosts(collection)
+async function Posts({ collection, children, date, entries: entriesProp, limit, style }) {
+  let entries = entriesProp ?? await getPosts(collection)
   if (date) {
     entries = filterByDate(entries, date)
   }
