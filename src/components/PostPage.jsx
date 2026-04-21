@@ -1,31 +1,31 @@
 /**
- * @fileoverview Client-side pagination for Reflections component.
+ * @fileoverview Client-side pagination for post collections.
  *
  * Handles page state and prev/next navigation for paginated
- * reflection entry listings. Receives serialized entries from
- * the server component and renders PostCard for the current page.
- * Updates TOC entries and scroll-spy highlighting on page change.
+ * entry listings. Receives serialized entries from the server
+ * component and renders PostCard for the current page. Updates
+ * TOC entries and scroll-spy highlighting on page change.
  */
 
 'use client'
 
-import { meta } from '@axivo/website/claude'
 import { Children, useEffect, useRef, useState } from 'react'
-import styles from './ReflectionPage.module.css'
+import styles from './PostPage.module.css'
 
 const activeClass = 'x:text-primary-600 x:contrast-more:text-primary-600!'
 const inactiveClass = 'x:text-gray-600 x:hover:text-gray-900 x:dark:text-gray-400 x:dark:hover:text-gray-300'
 const linkClass = 'x:focus-visible:nextra-focus x:ms-3 x:block x:transition-colors x:subpixel-antialiased x:contrast-more:text-gray-900 x:contrast-more:underline x:contrast-more:dark:text-gray-50 x:break-words'
 
 /**
- * Paginated reflection entries with prev/next navigation.
+ * Paginated post entries with prev/next navigation.
  *
  * @param {object} props
  * @param {import('react').ReactNode} props.children - Pre-rendered PostCard components
  * @param {number} props.pageSize - Entries per page
+ * @param {string} props.sectionId - Collection section anchor ID used to locate the TOC
  * @param {number} props.totalPages - Total number of pages
  */
-function ReflectionPage({ children, pageSize, totalPages }) {
+function PostPage({ children, pageSize, sectionId, totalPages }) {
   const [page, setPage] = useState(1)
   const containerRef = useRef(null)
   const observerRef = useRef(null)
@@ -34,14 +34,13 @@ function ReflectionPage({ children, pageSize, totalPages }) {
   const start = (page - 1) * pageSize
   const pageCards = allCards.slice(start, start + pageSize)
   useEffect(() => {
-    const sectionId = meta.reflections.path
-    const reflectionsLink = document.querySelector(`a[href="#${sectionId}"]`)
-    if (!reflectionsLink) {
+    const sectionLink = document.querySelector(`a[href="#${sectionId}"]`)
+    if (!sectionLink) {
       return
     }
-    const tocList = reflectionsLink.closest('ul')
-    const reflectionsItem = reflectionsLink.closest('li')
-    if (!tocList || !reflectionsItem) {
+    const tocList = sectionLink.closest('ul')
+    const sectionItem = sectionLink.closest('li')
+    if (!tocList || !sectionItem) {
       return
     }
     // Remove existing h3 entries
@@ -56,7 +55,7 @@ function ReflectionPage({ children, pageSize, totalPages }) {
     }
     const headings = container.querySelectorAll('h3[id]')
     const tocLinks = new Map()
-    let insertAfter = reflectionsItem
+    let insertAfter = sectionItem
     for (const h3 of headings) {
       const id = h3.getAttribute('id')
       const titleLink = h3.querySelector('a[class]')
@@ -98,14 +97,14 @@ function ReflectionPage({ children, pageSize, totalPages }) {
         observerRef.current.disconnect()
       }
     }
-  }, [page])
+  }, [page, sectionId])
   const total = allCards.length
   const end = Math.min(start + pageSize, total)
   return (
     <div ref={containerRef}>
       {totalPages > 1 && (
         <p className={styles.summary}>
-          ○ Showing {start + 1}–{end} of {total} reflections
+          ○ Showing {start + 1}–{end} of {total} entries
         </p>
       )}
       {pageCards}
@@ -134,4 +133,4 @@ function ReflectionPage({ children, pageSize, totalPages }) {
   )
 }
 
-export { ReflectionPage }
+export { PostPage }

@@ -7,8 +7,7 @@
  * pages via the collection descriptor.
  */
 
-import { meta } from '@axivo/website/blog'
-import { blogCollection } from '@axivo/website/blog-posts'
+import { blogCollection, meta } from '@axivo/website/blog'
 import { createPage } from '@axivo/website/page'
 import '../../(home)/page.css'
 

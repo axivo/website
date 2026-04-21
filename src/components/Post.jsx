@@ -17,7 +17,7 @@
 
 import { useMDXComponents as getMDXComponents } from '@axivo/website'
 import { PostCard } from './PostCard'
-import { ReflectionPage as PostPage } from './ReflectionPage'
+import { PostPage } from './PostPage'
 import { TagGrid } from './Tag'
 import styles from './Reflection.module.css'
 
@@ -201,7 +201,7 @@ async function Posts({ collection, children, date, entries: entriesProp, limit, 
   return (
     <div className={styles.container} style={style}>
       {children}
-      <PostPage pageSize={postsPageSize} totalPages={totalPages}>
+      <PostPage pageSize={postsPageSize} sectionId={collection.sectionId} totalPages={totalPages}>
         {cards}
       </PostPage>
     </div>

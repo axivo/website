@@ -12,10 +12,6 @@
       "types": "./blog.d.ts",
       "import": "./blog.js"
     },
-    "./blog-posts": {
-      "types": "./blog-posts.d.ts",
-      "import": "./blog-posts.js"
-    },
     "./claude": {
       "types": "./claude.d.ts",
       "import": "./claude.js"
@@ -30,10 +26,6 @@
     },
     "./page": {
       "import": "./page.js"
-    },
-    "./reflections": {
-      "types": "./reflections.d.ts",
-      "import": "./reflections.js"
     }
   }
 }

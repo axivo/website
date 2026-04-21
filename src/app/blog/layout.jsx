@@ -6,8 +6,7 @@
  */
 
 import { footer, Search, Subnavbar } from '@axivo/website'
-import { meta, repository } from '@axivo/website/blog'
-import { getBlogPageMap } from '@axivo/website/blog-posts'
+import { getBlogPageMap, meta, repository } from '@axivo/website/blog'
 import { getPageMap, normalizePageMap } from 'nextra/page-map'
 import { Layout, Navbar } from 'nextra-theme-docs'
 
