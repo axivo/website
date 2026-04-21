@@ -28,8 +28,9 @@ import styles from './Subnavbar.module.css'
  * on the right. Only visible on non-page type routes that have
  * breadcrumb content enabled.
  */
-function Subnavbar() {
-  const { normalizePagesResult: { activePath, activeType } } = useConfig()
+function Subnavbar({ activePath: activePathProp } = {}) {
+  const { normalizePagesResult: { activePath: configActivePath, activeType } } = useConfig()
+  const activePath = activePathProp ?? configActivePath
   const ref = useRef(null)
   useEffect(() => {
     if (!ref.current) {
@@ -63,7 +64,7 @@ function Subnavbar() {
       }
     }
   }, [])
-  if (activeType === 'page' || !activePath?.length) {
+  if (!activePath?.length || (!activePathProp && activeType === 'page')) {
     return null
   }
   return (

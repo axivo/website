@@ -16,7 +16,7 @@
  *   - tagsSectionTitle: heading shown above post cards on tag pages
  */
 
-import { Breadcrumb, PostCard, useMDXComponents as getMDXComponents } from '@axivo/website'
+import { PostCard, Subnavbar, useMDXComponents as getMDXComponents } from '@axivo/website'
 import GithubSlugger from 'github-slugger'
 import { generateStaticParamsFor, importPage } from 'nextra/pages'
 import remarkMdx from 'remark-mdx'
@@ -154,14 +154,18 @@ function createPage({ source, collection }) {
       entry.frontMatter.tags?.includes(tag)
     )
     return (
-      <Wrapper toc={[]} metadata={{ title: tag }}>
-        <Breadcrumb activePath={buildTagBreadcrumb(tag)} />
-        <components.h1>{tag}</components.h1>
-        <components.h2 className={reflectionStyles.heading}>{collection.tagsSectionTitle}</components.h2>
-        {filtered.map(entry => (
-          <PostCard collection={collection} key={entry.route} post={entry} />
-        ))}
-      </Wrapper>
+      <>
+        <Subnavbar activePath={buildTagBreadcrumb(tag)} />
+        <Wrapper toc={[]} metadata={{ title: tag }}>
+          <components.h1>{tag}</components.h1>
+          <div className={reflectionStyles.container}>
+            <components.h2>{collection.tagsSectionTitle}</components.h2>
+            {filtered.map(entry => (
+              <PostCard collection={collection} key={entry.route} post={entry} />
+            ))}
+          </div>
+        </Wrapper>
+      </>
     )
   }
 
