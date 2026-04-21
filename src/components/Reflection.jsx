@@ -31,7 +31,7 @@ const collection = {
   sectionPath: meta.reflections.path,
   sectionTitle: meta.reflections.title,
   tagsSectionTitle: meta.reflections.title,
-  templates: ['blog', 'reflection']
+  template: 'reflection'
 }
 
 const getEntries = () => getPosts(collection)

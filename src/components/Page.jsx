@@ -206,7 +206,7 @@ function createPage({ source, collection }) {
     const { objects } = await response.json()
     const indexDirs = new Set()
     const collectionParams = objects
-      .filter(obj => collection.templates.includes(obj.template))
+      .filter(obj => obj.template === collection.template)
       .map(obj => {
         const segments = obj.key
           .replace(collection.contentPrefix, '')

@@ -70,7 +70,7 @@ function filterByDate(entries, date) {
  */
 async function getPostPageMap(collection) {
   const objects = await fetchMetadata(collection.metadataEndpoint)
-  const entries = objects.filter(obj => collection.templates.includes(obj.template))
+  const entries = objects.filter(obj => obj.template === collection.template)
   const tree = {}
   for (const obj of entries) {
     const segments = obj.key
@@ -150,7 +150,7 @@ async function getPostPageMap(collection) {
 async function getPosts(collection) {
   const objects = await fetchMetadata(collection.metadataEndpoint)
   return objects
-    .filter(obj => collection.templates.includes(obj.template))
+    .filter(obj => obj.template === collection.template)
     .map(obj => toEntry(obj, collection.contentPrefix))
     .sort((a, b) => b.frontMatter.date.localeCompare(a.frontMatter.date))
 }

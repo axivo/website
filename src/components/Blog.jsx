@@ -29,7 +29,7 @@ const collection = {
   sectionPath: '',
   sectionTitle: meta.source.title,
   tagsSectionTitle: meta.source.title,
-  templates: ['post']
+  template: 'blog'
 }
 
 const Blog = props => <Posts collection={collection} {...props} />
