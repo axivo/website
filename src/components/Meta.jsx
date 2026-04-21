@@ -39,16 +39,18 @@ function formatTime(hours, minutes) {
  * @param {object} [props]
  * @param {string} [props.author] - Author name
  * @param {string} [props.date] - ISO date string
+ * @param {string} [props.routePath] - Collection route path for date link (e.g. '/blog', '/claude/reflections')
  * @param {string} [props.source] - GitHub source URL
+ * @param {string} [props.template] - Entry template (blog, reflection)
  * @returns {import('react').ReactElement|null} Metadata bar or null
  */
-function Meta({ author, date, source } = {}) {
+function Meta({ author, date, routePath, source, template } = {}) {
   if (!date) {
     const { normalizePagesResult: { activeMetadata } } = useConfig()
-    if (activeMetadata?.template !== 'blog') {
+    if (!['blog', 'reflection'].includes(activeMetadata?.template)) {
       return null
     }
-    ({ author, date, source } = activeMetadata)
+    ({ author, date, routePath, source, template } = activeMetadata)
   }
   if (!date) {
     return null
@@ -58,7 +60,10 @@ function Meta({ author, date, source } = {}) {
   const [hours, minutes] = timePart.split(':')
   const month = monthNames[parseInt(monthPadded, 10) - 1]
   const day = parseInt(dayPadded, 10)
-  const dayPath = `/claude/reflections/${year}/${monthPadded}/${dayPadded}`
+  const isBlog = template === 'blog'
+  const dayPath = `${routePath}/${year}/${monthPadded}/${dayPadded}`
+  const profile = isBlog ? meta.profile.architect : meta.profile.instance
+  const authorHref = isBlog ? profile.homepage : source
   return (
     <div className={styles.container}>
       <a href={dayPath} className={styles.date}>
@@ -70,7 +75,7 @@ function Meta({ author, date, source } = {}) {
         <>
           <span className={styles.dash}>&mdash;</span>
           <a
-            href={source}
+            href={authorHref}
             target="_blank"
             rel="noopener noreferrer"
             className={styles.author}
@@ -78,7 +83,7 @@ function Meta({ author, date, source } = {}) {
             <img
               alt={author}
               className={styles.avatar}
-              src={meta.profile.instance.avatar}
+              src={profile.avatar}
               width="16"
               height="16"
             />
