@@ -7,7 +7,7 @@
  */
 
 import { footer, Search, Subnavbar } from '@axivo/website'
-import { repository, subsite } from '@axivo/website/k3s-cluster'
+import { repository, source } from '@axivo/website/k3s-cluster'
 import { getPageMap } from 'nextra/page-map'
 import { Layout, Navbar } from 'nextra-theme-docs'
 
@@ -34,7 +34,7 @@ async function K3sClusterLayout({ children }) {
               <img className="title-light" src="/home/title.svg" alt="AXIVO" width="91" height="32" />
               <img className="title-dark" src="/home/title-dark.svg" alt="AXIVO" width="91" height="32" />
             </a>
-            <a className="subtitle" href={`/${subsite.path}`}>
+            <a className="subtitle" href={`/${source.path}`}>
               <img className="title-light" src="/k3s-cluster/title.svg" alt="K3s Cluster" width="131" height="32" />
               <img className="title-dark" src="/k3s-cluster/title-dark.svg" alt="K3s Cluster" width="131" height="32" />
             </a>
@@ -45,7 +45,7 @@ async function K3sClusterLayout({ children }) {
       <Subnavbar />
     </>
   )
-  const pageMap = await getPageMap(`/${subsite.path}`)
+  const pageMap = await getPageMap(`/${source.path}`)
   return (
     <Layout
       copyPageButton={false}
@@ -55,7 +55,7 @@ async function K3sClusterLayout({ children }) {
       footer={footer}
       navbar={navbar}
       pageMap={pageMap}
-      search={<Search section={subsite.path} />}
+      search={<Search section={source.path} />}
       sidebar={{ defaultMenuCollapseLevel: 1 }}
     >
       {children}

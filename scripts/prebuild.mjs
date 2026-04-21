@@ -19,11 +19,11 @@ import { execSync } from 'node:child_process'
 import { existsSync, mkdirSync, readdirSync, rmdirSync, rmSync, statSync, unlinkSync, writeFileSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { cloudflare, domain } from '../src/config/variables/global.js'
-import { reflections, subsite } from '../src/config/variables/claude.js'
+import { reflections, source } from '../src/config/variables/claude.js'
 
 const bucket = cloudflare.bucket.name
-const bucketMediaPrefix = `public/${subsite.path}${reflections.section}/`
-const bucketPrefix = `src/content/${subsite.path}${reflections.section}/`
+const bucketMediaPrefix = `public/${source.path}${reflections.section}/`
+const bucketPrefix = `src/content/${source.path}${reflections.section}/`
 const cwd = process.cwd()
 const fetchCacheDir = join(cwd, '.next', 'cache', 'fetch-cache')
 const metadataKey = cloudflare.bucket.metadata.reflections

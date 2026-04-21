@@ -7,7 +7,7 @@
  */
 
 import { useMDXComponents as getMDXComponents } from '@axivo/website'
-import { subsite } from '@axivo/website/k3s-cluster'
+import { source } from '@axivo/website/k3s-cluster'
 import { generateStaticParamsFor, importPage } from 'nextra/pages'
 import '../../(home)/page.css'
 
@@ -23,13 +23,13 @@ const Wrapper = components.wrapper
 async function generateMetadata(props) {
   const params = await props.params
   const path = params.mdxPath || []
-  const { metadata } = await importPage([subsite.path, ...path])
+  const { metadata } = await importPage([source.path, ...path])
   const result = { ...metadata }
   if (result.seoTitle) {
     result.title = result.seoTitle
   }
   if (!result.description) {
-    result.description = `${result.title} — ${subsite.title}`
+    result.description = `${result.title} — ${source.title}`
   }
   return result
 }
@@ -42,7 +42,7 @@ async function generateMetadata(props) {
 async function generateStaticParams() {
   const params = await generateStaticParamsFor('mdxPath')()
   return params
-    .filter(p => p.mdxPath?.[0] === subsite.path)
+    .filter(p => p.mdxPath?.[0] === source.path)
     .map(p => ({ mdxPath: p.mdxPath.slice(1) }))
 }
 
@@ -62,7 +62,7 @@ async function Page(props) {
     toc,
     metadata,
     sourceCode
-  } = await importPage([subsite.path, ...path])
+  } = await importPage([source.path, ...path])
   if (metadata.template === 'splash') {
     return (
       <div className="splash content-container">

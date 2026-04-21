@@ -1,17 +1,18 @@
 /**
- * @fileoverview Page handler factory for subsites with post collections.
+ * @fileoverview Page handler factory for content sources with post
+ * collections.
  *
  * Produces Next.js page exports (generateMetadata, generateStaticParams,
- * Page) for a subsite that combines Nextra-bundled MDX pages with an
- * R2-backed post collection. Claude and blog both use this factory,
- * each passing its own subsite and collection descriptors.
+ * Page) for a content source that combines Nextra-bundled MDX pages with
+ * an R2-backed post collection. Claude and blog both use this factory,
+ * each passing its own source and collection descriptors.
  *
  * Factory input:
- * - subsite: { path, title } — subsite descriptor (e.g. claude or blog)
+ * - source: { path, title } — content source descriptor (e.g. claude or blog)
  * - collection: collection descriptor from Post.jsx, plus:
- *   - sectionPath: URL segment under the subsite that triggers collection
+ *   - sectionPath: URL segment under the source that triggers collection
  *     routing (e.g. 'reflections' for claude, '' for blog where the
- *     collection is the subsite root)
+ *     collection is the source root)
  *   - tagsSectionTitle: heading shown above post cards on tag pages
  */
 
@@ -98,14 +99,14 @@ function parseMdx(mdx) {
 
 /**
  * Creates Next.js page handlers (generateMetadata, generateStaticParams,
- * Page) for a subsite with an R2-backed post collection.
+ * Page) for a content source with an R2-backed post collection.
  *
  * @param {object} config
- * @param {object} config.subsite - Subsite descriptor with path and title
+ * @param {object} config.source - Content source descriptor with path and title
  * @param {object} config.collection - Collection descriptor with sectionPath
  * @returns {{ generateMetadata: Function, generateStaticParams: Function, Page: Function }}
  */
-function createPage({ subsite, collection }) {
+function createPage({ source, collection }) {
   const sectionPath = collection.sectionPath
   const hasSection = sectionPath.length > 0
 
@@ -134,13 +135,13 @@ function createPage({ subsite, collection }) {
 
   const buildTagBreadcrumb = tag => {
     const root = {
-      name: hasSection ? sectionPath : subsite.path,
-      route: hasSection ? collection.routePath : `/${subsite.path}`,
-      title: hasSection ? collection.sectionTitle : subsite.title,
+      name: hasSection ? sectionPath : source.path,
+      route: hasSection ? collection.routePath : `/${source.path}`,
+      title: hasSection ? collection.sectionTitle : source.title,
       frontMatter: {}
     }
-    const tagsRoute = hasSection ? `${collection.routePath}/tags` : `/${subsite.path}/tags`
-    const tagRoute = hasSection ? `${collection.routePath}/tags/${tag}` : `/${subsite.path}/tags/${tag}`
+    const tagsRoute = hasSection ? `${collection.routePath}/tags` : `/${source.path}/tags`
+    const tagRoute = hasSection ? `${collection.routePath}/tags/${tag}` : `/${source.path}/tags/${tag}`
     return [
       root,
       { name: 'tags', route: tagsRoute, title: 'Tags', frontMatter: {} },
@@ -186,13 +187,13 @@ function createPage({ subsite, collection }) {
     if (isTagPage(path)) {
       return { title: decodeURIComponent(hasSection ? path[2] : path[1]) }
     }
-    const { metadata } = await importPage([subsite.path, ...path])
+    const { metadata } = await importPage([source.path, ...path])
     const result = { ...metadata }
     if (result.seoTitle) {
       result.title = result.seoTitle
     }
     if (!result.description) {
-      result.description = `${result.title} — ${subsite.title}`
+      result.description = `${result.title} — ${source.title}`
     }
     return result
   }
@@ -200,7 +201,7 @@ function createPage({ subsite, collection }) {
   async function generateStaticParams() {
     const params = await nextraStaticParams()
     const sectionParams = params
-      .filter(p => p.mdxPath?.[0] === subsite.path)
+      .filter(p => p.mdxPath?.[0] === source.path)
       .map(p => ({ mdxPath: p.mdxPath.slice(1) }))
     const response = await fetch(`${domain.protocol}://${domain.name}/metadata`)
     const { objects } = await response.json()
@@ -257,7 +258,7 @@ function createPage({ subsite, collection }) {
       const tag = decodeURIComponent(hasSection ? path[2] : path[1])
       return renderTagPage(tag)
     }
-    const pageModule = await importPage([subsite.path, ...path])
+    const pageModule = await importPage([source.path, ...path])
     const {
       default: MDXContent,
       toc: originalToc,

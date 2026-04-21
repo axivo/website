@@ -41,11 +41,11 @@ If you have an idea for a new feature or an improvement to an existing one:
 This project is built with [Next.js](https://nextjs.org/) and uses the [Nextra](https://nextra.site/) docs theme. The repository is structured as follows:
 
 - `packages/website/`: Local `@axivo/website` package with subpath exports
-- `public/`: Static assets organized by subsite
-- `src/app/`: Next.js app routes with subsite layouts
+- `public/`: Static assets organized by section
+- `src/app/`: Next.js app routes with section layouts
 - `src/components/`: Shared React components
-- `src/config/`: Site configuration and subsite variables
-- `src/content/`: MDX content organized by subsite
+- `src/config/`: Site configuration and section variables
+- `src/content/`: MDX content organized by section
 
 ## Development Workflow
 

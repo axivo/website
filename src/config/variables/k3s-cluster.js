@@ -1,10 +1,10 @@
 /**
- * @fileoverview Configuration variables for the k3s-cluster subsite.
+ * @fileoverview Configuration variables for the k3s-cluster subsection.
  *
- * Defines the subsite identifier, Ubuntu OS versions, and repository URLs.
+ * Defines the source identifier, Ubuntu OS versions, and repository URLs.
  */
 
-export const subsite = {
+export const source = {
   path: 'k3s-cluster',
   title: 'K3s Cluster'
 }
@@ -19,6 +19,6 @@ export const repository = {
     home: 'github.com/axivo/k3s-applications',
     tag: 'main'
   },
-  home: `github.com/axivo/${subsite.path}`,
+  home: `github.com/axivo/${source.path}`,
   tag: 'main'
 }

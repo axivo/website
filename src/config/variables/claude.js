@@ -1,11 +1,11 @@
 /**
- * @fileoverview Configuration variables for the claude subsite.
+ * @fileoverview Configuration variables for the claude subsection.
  *
- * Defines the subsite identifier, CCP framework plugins, reflections
+ * Defines the source identifier, CCP framework plugins, reflections
  * paths, repository URLs, and skill mappings.
  */
 
-export const subsite = {
+export const source = {
   path: 'claude',
   title: 'Claude Collaboration Platform'
 }
@@ -40,13 +40,13 @@ export const plugins = {
 }
 
 export const reflections = {
-  path: `/${subsite.path}/reflections`,
+  path: `/${source.path}/reflections`,
   section: '/reflections',
   title: 'Reflections'
 }
 
 export const repository = {
-  home: `github.com/axivo/${subsite.path}`,
+  home: `github.com/axivo/${source.path}`,
   reflections: {
     home: 'github.com/axivo/claude-reflections',
     tag: 'main'

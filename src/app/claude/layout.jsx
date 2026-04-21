@@ -7,7 +7,7 @@
  */
 
 import { footer, Search, Subnavbar } from '@axivo/website'
-import { repository, subsite } from '@axivo/website/claude'
+import { repository, source } from '@axivo/website/claude'
 import { getReflectionPageMap } from '@axivo/website/reflections'
 import { getPageMap, normalizePageMap } from 'nextra/page-map'
 import { Layout, Navbar } from 'nextra-theme-docs'
@@ -35,7 +35,7 @@ async function ClaudeLayout({ children }) {
               <img className="title-light" src="/home/title.svg" alt="AXIVO" width="91" height="32" />
               <img className="title-dark" src="/home/title-dark.svg" alt="AXIVO" width="91" height="32" />
             </a>
-            <a className="subtitle" href={`/${subsite.path}`}>
+            <a className="subtitle" href={`/${source.path}`}>
               <img className="title-light" src="/claude/title.svg" alt="Claude" width="78" height="32" />
               <img className="title-dark" src="/claude/title-dark.svg" alt="Claude" width="78" height="32" />
             </a>
@@ -46,7 +46,7 @@ async function ClaudeLayout({ children }) {
       <Subnavbar />
     </>
   )
-  const pageMap = await getPageMap(`/${subsite.path}`)
+  const pageMap = await getPageMap(`/${source.path}`)
   const yearChildren = await getReflectionPageMap()
   const reflectionsFolder = pageMap.find(item => item.name === 'reflections')
   if (reflectionsFolder && yearChildren.length) {
@@ -66,7 +66,7 @@ async function ClaudeLayout({ children }) {
       footer={footer}
       navbar={navbar}
       pageMap={pageMap}
-      search={<Search section={subsite.path} />}
+      search={<Search section={source.path} />}
       sidebar={{ defaultMenuCollapseLevel: 1 }}
     >
       {children}
