@@ -39,7 +39,7 @@ function PostCard({ collection, post, readMore = 'Read more' }) {
       {date && <Meta author={author} date={date} routePath={collection.routePath} source={source} template={template} />}
       {tags?.length > 0 && (
         <div className={styles.tags}>
-          {tags.map(tag => (
+          {[...tags].sort().map(tag => (
             <Link key={tag} href={`${collection.routePath}/tags/${tag}`} className={styles.tag}>
               {tag}
             </Link>

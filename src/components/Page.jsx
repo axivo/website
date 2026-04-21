@@ -16,7 +16,7 @@
  *   - tagsSectionTitle: heading shown above post cards on tag pages
  */
 
-import { Breadcrumb, PostCard, useMDXComponents as getMDXComponents } from '@axivo/website'
+import { PostCard, Subnavbar, useMDXComponents as getMDXComponents } from '@axivo/website'
 import GithubSlugger from 'github-slugger'
 import { generateStaticParamsFor, importPage } from 'nextra/pages'
 import remarkMdx from 'remark-mdx'
@@ -154,14 +154,18 @@ function createPage({ source, collection }) {
       entry.frontMatter.tags?.includes(tag)
     )
     return (
-      <Wrapper toc={[]} metadata={{ title: tag }}>
-        <Breadcrumb activePath={buildTagBreadcrumb(tag)} />
-        <components.h1>{tag}</components.h1>
-        <components.h2 className={reflectionStyles.heading}>{collection.tagsSectionTitle}</components.h2>
-        {filtered.map(entry => (
-          <PostCard collection={collection} key={entry.route} post={entry} />
-        ))}
-      </Wrapper>
+      <>
+        <Subnavbar activePath={buildTagBreadcrumb(tag)} />
+        <Wrapper metadata={{ title: tag }} toc={[]}>
+          <components.h1>{tag}</components.h1>
+          <div className={reflectionStyles.container}>
+            <components.h2>{collection.tagsSectionTitle}</components.h2>
+            {filtered.map(entry => (
+              <PostCard collection={collection} key={entry.route} post={entry} />
+            ))}
+          </div>
+        </Wrapper>
+      </>
     )
   }
 
@@ -237,10 +241,9 @@ function createPage({ source, collection }) {
       if (result) {
         const mdast = parseMdx(result.content)
         const r2Toc = extractToc(mdast)
-        const metadata = { ...result.metadata, routePath: collection.routePath }
         return (
-          <Wrapper toc={r2Toc} metadata={metadata}>
-            <SafeMdxRenderer mdast={mdast} components={components} />
+          <Wrapper metadata={result.metadata} toc={r2Toc}>
+            <SafeMdxRenderer components={components} mdast={mdast} />
           </Wrapper>
         )
       }
@@ -249,7 +252,7 @@ function createPage({ source, collection }) {
       const date = entryDateSegments(path).join('/')
       const { content, metadata, toc } = await renderIndexPage(collection, date)
       return (
-        <Wrapper toc={toc} metadata={metadata}>
+        <Wrapper metadata={metadata} toc={toc}>
           {content}
         </Wrapper>
       )
@@ -292,7 +295,7 @@ function createPage({ source, collection }) {
       )
     }
     return (
-      <Wrapper toc={toc} metadata={metadata} sourceCode={sourceCode}>
+      <Wrapper metadata={metadata} sourceCode={sourceCode} toc={toc}>
         <MDXContent {...props} params={params} />
       </Wrapper>
     )
