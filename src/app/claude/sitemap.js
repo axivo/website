@@ -1,13 +1,13 @@
 /**
- * @fileoverview Sitemap generator for the claude subsite.
+ * @fileoverview Sitemap generator for the claude source.
  *
  * Collects routes from the claude section's Nextra page map and produces
  * a sitemap with URL and change frequency per route.
  */
 
 export const dynamic = 'force-static'
+import { meta } from '@axivo/website/claude'
 import { domain } from '@axivo/website/global'
-import { subsite } from '@axivo/website/claude'
 import { getPageMap } from 'nextra/page-map'
 
 /**
@@ -34,13 +34,13 @@ function extractRoutes(pageMapItems) {
 }
 
 /**
- * Generates the sitemap for the claude subsite.
+ * Generates the sitemap for the claude source.
  *
  * @returns {Promise<object[]>} Sitemap entries with url and changeFrequency
  */
 async function sitemap() {
   try {
-    const pageMap = await getPageMap(`/${subsite.path}`)
+    const pageMap = await getPageMap(`/${meta.source.path}`)
     const routes = extractRoutes(pageMap)
     return routes
       .map((route) => ({
@@ -49,7 +49,7 @@ async function sitemap() {
       }))
       .sort((a, b) => a.url.localeCompare(b.url))
   } catch (error) {
-    console.error(`Sitemap error for /${subsite.path}:`, error)
+    console.error(`Sitemap error for /${meta.source.path}:`, error)
     return []
   }
 }

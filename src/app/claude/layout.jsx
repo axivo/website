@@ -1,5 +1,5 @@
 /**
- * @fileoverview Root layout for the claude section.
+ * @fileoverview Page layout for the claude section.
  *
  * Wraps all claude pages in the Nextra docs theme Layout with
  * dual logo navbar (AXIVO + Claude), sidebar from page map,
@@ -7,14 +7,14 @@
  */
 
 import { footer, Search, Subnavbar } from '@axivo/website'
-import { repository, subsite } from '@axivo/website/claude'
+import { meta, repository } from '@axivo/website/claude'
 import { getReflectionPageMap } from '@axivo/website/reflections'
 import { getPageMap, normalizePageMap } from 'nextra/page-map'
 import { Layout, Navbar } from 'nextra-theme-docs'
 
 const metadata = {
   title: {
-    template: '%s – Claude Collaboration Platform | AXIVO'
+    template: `%s – ${meta.source.title} | ${meta.brand.name}`
   }
 }
 
@@ -24,7 +24,7 @@ const metadata = {
  * @param {object} props
  * @param {import('react').ReactNode} props.children - Page content
  */
-async function ClaudeLayout({ children }) {
+async function PageLayout({ children }) {
   const navbar = (
     <>
       <Navbar
@@ -32,10 +32,10 @@ async function ClaudeLayout({ children }) {
         logo={
           <>
             <a href="/" style={{ display: 'inline-flex' }}>
-              <img className="title-light" src="/home/title.svg" alt="AXIVO" width="91" height="32" />
-              <img className="title-dark" src="/home/title-dark.svg" alt="AXIVO" width="91" height="32" />
+              <img className="title-light" src="/home/title.svg" alt={meta.brand.name} width="91" height="32" />
+              <img className="title-dark" src="/home/title-dark.svg" alt={meta.brand.name} width="91" height="32" />
             </a>
-            <a className="subtitle" href={`/${subsite.path}`}>
+            <a className="subtitle" href={`/${meta.source.path}`}>
               <img className="title-light" src="/claude/title.svg" alt="Claude" width="78" height="32" />
               <img className="title-dark" src="/claude/title-dark.svg" alt="Claude" width="78" height="32" />
             </a>
@@ -46,7 +46,7 @@ async function ClaudeLayout({ children }) {
       <Subnavbar />
     </>
   )
-  const pageMap = await getPageMap(`/${subsite.path}`)
+  const pageMap = await getPageMap(`/${meta.source.path}`)
   const yearChildren = await getReflectionPageMap()
   const reflectionsFolder = pageMap.find(item => item.name === 'reflections')
   if (reflectionsFolder && yearChildren.length) {
@@ -66,7 +66,7 @@ async function ClaudeLayout({ children }) {
       footer={footer}
       navbar={navbar}
       pageMap={pageMap}
-      search={<Search section={subsite.path} />}
+      search={<Search section={meta.source.path} />}
       sidebar={{ defaultMenuCollapseLevel: 1 }}
     >
       {children}
@@ -74,4 +74,4 @@ async function ClaudeLayout({ children }) {
   )
 }
 
-export { ClaudeLayout as default, metadata }
+export { PageLayout as default, metadata }

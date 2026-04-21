@@ -1,14 +1,14 @@
 /**
- * @fileoverview Root layout for the home section.
+ * @fileoverview Page layout for the home section.
  *
  * Wraps all home pages in the Nextra docs theme Layout with
  * AXIVO logo navbar, sidebar from page map, search, and shared footer.
  */
 
 import { footer, Search, Subnavbar } from '@axivo/website'
+import { meta, repository } from '@axivo/website/global'
 import { getPageMap } from 'nextra/page-map'
 import { Layout, Navbar } from 'nextra-theme-docs'
-import { repository } from '../../config/variables/global'
 
 /**
  * Home section layout with docs theme, logo navbar, and sidebar.
@@ -16,14 +16,14 @@ import { repository } from '../../config/variables/global'
  * @param {object} props
  * @param {import('react').ReactNode} props.children - Page content
  */
-async function HomeLayout({ children }) {
+async function PageLayout({ children }) {
   const navbar = (
     <>
       <Navbar
         logo={
           <>
-            <img className="title-light" src="/home/title.svg" alt="AXIVO" width="91" height="32" />
-            <img className="title-dark" src="/home/title-dark.svg" alt="AXIVO" width="91" height="32" />
+            <img className="title-light" src="/home/title.svg" alt={meta.brand.name} width="91" height="32" />
+            <img className="title-dark" src="/home/title-dark.svg" alt={meta.brand.name} width="91" height="32" />
           </>
         }
         projectLink={`https://${repository.home}`}
@@ -49,4 +49,4 @@ async function HomeLayout({ children }) {
   )
 }
 
-export { HomeLayout as default }
+export { PageLayout as default }

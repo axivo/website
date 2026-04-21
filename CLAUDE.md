@@ -15,7 +15,7 @@ A Next.js monorepo hosting the [axivo.com](https://axivo.com) website. Contains 
 - No empty lines inside functions
 - Exports at the bottom of each file (except Next.js required inline exports like `metadata` and `dynamic`)
 - Alphabetical ordering for imports, exports, and configuration arrays
-- No hardcoded section names — use `subsite` from section variables
+- No hardcoded section names — use `source` from section variables
 - No hardcoded domain or protocol — use `domain` from `@axivo/website/global`
 - CSS Modules with `@reference "tailwindcss"` for Tailwind v4
 

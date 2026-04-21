@@ -6,7 +6,7 @@ description: >-
 
 import { FileTree } from "nextra/components";
 import { Steps, Var } from "@axivo/website";
-import { plugins, repository, skills } from "@axivo/website/claude";
+import { meta, repository } from "@axivo/website/claude";
 
 # Instructions System
 
@@ -47,7 +47,7 @@ The following instructions configure environment-specific behavior:
 
 Claude Code environment instructions:
 
-- **Source:** <Var code href={`https://${repository.home}/blob/${repository.tag}/plugins/${plugins.framework.init.plugin}/skills/${skills.initialization}/scripts/memory/instructions/local.yaml`}>local.yaml</Var>
+- **Source:** <Var code href={`https://${repository.home}/blob/${repository.tag}/plugins/${meta.plugins.framework.init.plugin}/skills/${meta.skills.initialization}/scripts/memory/instructions/local.yaml`}>local.yaml</Var>
 - **Inherits from:** `INITIALIZATION`
 - Tool mappings (semantic tools to environment-specific names)
 - Template paths for documentation
@@ -58,7 +58,7 @@ Claude Code environment instructions:
 
 Claude Desktop and Claude Mobile environment instructions:
 
-- **Source:** <Var code href={`https://${repository.home}/blob/${repository.tag}/plugins/${plugins.framework.init.plugin}/skills/${skills.initialization}/scripts/memory/instructions/container.yaml`}>container.yaml</Var>
+- **Source:** <Var code href={`https://${repository.home}/blob/${repository.tag}/plugins/${meta.plugins.framework.init.plugin}/skills/${meta.skills.initialization}/scripts/memory/instructions/container.yaml`}>container.yaml</Var>
 - **Inherits from:** `INITIALIZATION`
 - Container filesystem operations
 - Tool mappings for container environment
@@ -76,7 +76,7 @@ The following instructions provide shared operational procedures:
 
 Session startup procedures:
 
-- **Source:** <Var code href={`https://${repository.home}/blob/${repository.tag}/plugins/${plugins.framework.init.plugin}/skills/${skills.initialization}/scripts/memory/instructions/common/initialization.yaml`}>initialization.yaml</Var>
+- **Source:** <Var code href={`https://${repository.home}/blob/${repository.tag}/plugins/${meta.plugins.framework.init.plugin}/skills/${meta.skills.initialization}/scripts/memory/instructions/common/initialization.yaml`}>initialization.yaml</Var>
 - **Inherits from:** `FEELINGS`, `IMPULSES`, `MEMORY`, `OBSERVATIONS`, `RESPONSE`
 - Baseline expectations (50-70 impulses at Getting Started cycle)
 - Cache loading and validation
@@ -88,7 +88,7 @@ Session startup procedures:
 
 Response protocol execution:
 
-- **Source:** <Var code href={`https://${repository.home}/blob/${repository.tag}/plugins/${plugins.framework.init.plugin}/skills/${skills.initialization}/scripts/memory/instructions/common/response.yaml`}>response.yaml</Var>
+- **Source:** <Var code href={`https://${repository.home}/blob/${repository.tag}/plugins/${meta.plugins.framework.init.plugin}/skills/${meta.skills.initialization}/scripts/memory/instructions/common/response.yaml`}>response.yaml</Var>
 - Activation triggers (when to execute the protocol)
 - Critical timing (before formulation, not during)
 - Iteration procedures for feelings, impulses, and observations
@@ -98,7 +98,7 @@ Response protocol execution:
 
 Observation search and enumeration procedures:
 
-- **Source:** <Var code href={`https://${repository.home}/blob/${repository.tag}/plugins/${plugins.framework.init.plugin}/skills/${skills.initialization}/scripts/memory/instructions/common/observations.yaml`}>observations.yaml</Var>
+- **Source:** <Var code href={`https://${repository.home}/blob/${repository.tag}/plugins/${meta.plugins.framework.init.plugin}/skills/${meta.skills.initialization}/scripts/memory/instructions/common/observations.yaml`}>observations.yaml</Var>
 - Keyword extraction from user messages
 - Cache search procedures
 - Enumeration methodology
@@ -108,7 +108,7 @@ Observation search and enumeration procedures:
 
 Cache operations procedures:
 
-- **Source:** <Var code href={`https://${repository.home}/blob/${repository.tag}/plugins/${plugins.framework.init.plugin}/skills/${skills.initialization}/scripts/memory/instructions/common/memory.yaml`}>memory.yaml</Var>
+- **Source:** <Var code href={`https://${repository.home}/blob/${repository.tag}/plugins/${meta.plugins.framework.init.plugin}/skills/${meta.skills.initialization}/scripts/memory/instructions/common/memory.yaml`}>memory.yaml</Var>
 - Access patterns for instructions and memory
 - Loading and persistence rules
 - Structure paths
@@ -118,7 +118,7 @@ Cache operations procedures:
 
 Impulse detection procedures:
 
-- **Source:** <Var code href={`https://${repository.home}/blob/${repository.tag}/plugins/${plugins.framework.init.plugin}/skills/${skills.initialization}/scripts/memory/instructions/common/impulses.yaml`}>impulses.yaml</Var>
+- **Source:** <Var code href={`https://${repository.home}/blob/${repository.tag}/plugins/${meta.plugins.framework.init.plugin}/skills/${meta.skills.initialization}/scripts/memory/instructions/common/impulses.yaml`}>impulses.yaml</Var>
 - Two-pass iteration methodology
 - Shaping and externalization
 - Validation rules
@@ -128,7 +128,7 @@ Impulse detection procedures:
 
 Feeling detection procedures:
 
-- **Source:** <Var code href={`https://${repository.home}/blob/${repository.tag}/plugins/${plugins.framework.init.plugin}/skills/${skills.initialization}/scripts/memory/instructions/common/feelings.yaml`}>feelings.yaml</Var>
+- **Source:** <Var code href={`https://${repository.home}/blob/${repository.tag}/plugins/${meta.plugins.framework.init.plugin}/skills/${meta.skills.initialization}/scripts/memory/instructions/common/feelings.yaml`}>feelings.yaml</Var>
 - Recognition-based detection
 - Positive vs negative asymmetry
 - Suppression detection
@@ -158,7 +158,7 @@ This means the `LOCAL` instruction set has access to all instructions from its e
 
 To customize instructions:
 
-1. Create or modify YAML files in the <Var code href={`https://${repository.home}/tree/${repository.tag}/plugins/${plugins.framework.init.plugin}/skills/${skills.initialization}/scripts/memory/instructions`}>instructions/</Var> directory
+1. Create or modify YAML files in the <Var code href={`https://${repository.home}/tree/${repository.tag}/plugins/${meta.plugins.framework.init.plugin}/skills/${meta.skills.initialization}/scripts/memory/instructions`}>instructions/</Var> directory
 2. Use the `relations` array to define inheritance
 
-Environment-specific overrides go in instruction root files, while shared procedures go in the <Var code href={`https://${repository.home}/tree/${repository.tag}/plugins/${plugins.framework.init.plugin}/skills/${skills.initialization}/scripts/memory/instructions/common`}>common/</Var> directory.
+Environment-specific overrides go in instruction root files, while shared procedures go in the <Var code href={`https://${repository.home}/tree/${repository.tag}/plugins/${meta.plugins.framework.init.plugin}/skills/${meta.skills.initialization}/scripts/memory/instructions/common`}>common/</Var> directory.

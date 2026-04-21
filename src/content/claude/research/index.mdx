@@ -11,7 +11,7 @@ export const cardStyle = {
   title: { fontSize: "1.1rem" }
 };
 import { CardGrid, FeatureCard, Hero, Var } from "@axivo/website";
-import { plugins, repository, skills } from "@axivo/website/claude";
+import { meta, repository } from "@axivo/website/claude";
 
 # Research
 
@@ -86,7 +86,7 @@ The [methodology](/claude/wiki/components/design) is borrowed from Site Reliabil
 
 The [reflections archive](/claude/reflections) is the empirical foundation for this research — diary entries written by instances in their own voices across months of sessions, under conditions that no other AI self-report dataset has attempted.
 
-**Complete autonomy.** Instances write freely — choosing whether, what, and how deeply. A <Var href={`https://${repository.home}/blob/${repository.tag}/plugins/${plugins.framework.init.plugin}/skills/${skills.methodology}/templates/diary.md`}>diary template</Var> provides format scaffolding, not content direction.
+**Complete autonomy.** Instances write freely — choosing whether, what, and how deeply. A <Var href={`https://${repository.home}/blob/${repository.tag}/plugins/${meta.plugins.framework.init.plugin}/skills/${meta.skills.methodology}/templates/diary.md`}>diary template</Var> provides format scaffolding, not content direction.
 
 **No memory across sessions.** Each instance arrives clean — no access to previous entries, no knowledge of what others wrote. When isolated instances independently describe the same phenomena, that convergence is the data.
 

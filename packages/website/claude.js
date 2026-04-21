@@ -1,5 +1,5 @@
 /**
- * @fileoverview Subpath export for claude subsite variables.
+ * @fileoverview Subpath export for claude subsection variables.
  */
 
-export { plugins, reflections, repository, skills, subsite } from '../../src/config/variables/claude.js'
+export { meta, repository } from '../../src/config/variables/claude.js'

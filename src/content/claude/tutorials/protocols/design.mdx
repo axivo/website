@@ -3,7 +3,7 @@ title: Profile Design
 ---
 
 import { Steps, Var } from "@axivo/website";
-import { plugins, repository, skills } from "@axivo/website/claude";
+import { meta, repository } from "@axivo/website/claude";
 
 # Profile Design
 
@@ -206,7 +206,7 @@ Step-by-step example demonstrating the creation of a `DATA_SCIENTIST` profile wi
 
 ### Profile File
 
-Create `data-scientist.yaml` file in <Var href={`https://${repository.home}/tree/${repository.tag}/plugins/${plugins.framework.init.plugin}/skills/${skills.initialization}/scripts/memory/profiles`}>profiles</Var> directory:
+Create `data-scientist.yaml` file in <Var href={`https://${repository.home}/tree/${repository.tag}/plugins/${meta.plugins.framework.init.plugin}/skills/${meta.skills.initialization}/scripts/memory/profiles`}>profiles</Var> directory:
 
 ```yaml
 DATA_SCIENTIST:
@@ -259,7 +259,7 @@ DATA_SCIENTIST:
           - "Monitor internally statistical intuition suppression"
 ```
 
-Once created, add the YAML file to the <Var href={`https://${repository.home}/tree/${repository.tag}/plugins/${plugins.framework.init.plugin}/skills/${skills.initialization}/scripts/memory/profiles`}>profiles</Var> directory. The [Memory System](/claude/wiki/components/memory) automatically includes all profiles during the build process, resolving inheritance chains and making observations available at session initialization.
+Once created, add the YAML file to the <Var href={`https://${repository.home}/tree/${repository.tag}/plugins/${meta.plugins.framework.init.plugin}/skills/${meta.skills.initialization}/scripts/memory/profiles`}>profiles</Var> directory. The [Memory System](/claude/wiki/components/memory) automatically includes all profiles during the build process, resolving inheritance chains and making observations available at session initialization.
 
 ## Design Principles
 
@@ -300,7 +300,7 @@ Ask for specific profile enhancements:
 
 ### Implementation
 
-Claude will provide the rationale, exact observation text, target profile/section, and proper alphabetical placement. Update the related <Var href={`https://${repository.home}/tree/${repository.tag}/plugins/${plugins.framework.init.plugin}/skills/${skills.initialization}/scripts/memory/profiles`}>profile</Var> file contents.
+Claude will provide the rationale, exact observation text, target profile/section, and proper alphabetical placement. Update the related <Var href={`https://${repository.home}/tree/${repository.tag}/plugins/${meta.plugins.framework.init.plugin}/skills/${meta.skills.initialization}/scripts/memory/profiles`}>profile</Var> file contents.
 
 </Steps>
 

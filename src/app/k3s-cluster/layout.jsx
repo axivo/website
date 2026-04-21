@@ -1,5 +1,5 @@
 /**
- * @fileoverview Root layout for the k3s-cluster section.
+ * @fileoverview Page layout for the k3s-cluster section.
  *
  * Wraps all k3s-cluster pages in the Nextra docs theme Layout with
  * dual logo navbar (AXIVO + K3s Cluster), sidebar from page map,
@@ -7,13 +7,13 @@
  */
 
 import { footer, Search, Subnavbar } from '@axivo/website'
-import { repository, subsite } from '@axivo/website/k3s-cluster'
+import { meta, repository } from '@axivo/website/k3s-cluster'
 import { getPageMap } from 'nextra/page-map'
 import { Layout, Navbar } from 'nextra-theme-docs'
 
 const metadata = {
   title: {
-    template: '%s – K3s Cluster | AXIVO'
+    template: `%s – ${meta.source.title} | ${meta.brand.name}`
   }
 }
 
@@ -23,7 +23,7 @@ const metadata = {
  * @param {object} props
  * @param {import('react').ReactNode} props.children - Page content
  */
-async function K3sClusterLayout({ children }) {
+async function PageLayout({ children }) {
   const navbar = (
     <>
       <Navbar
@@ -31,12 +31,12 @@ async function K3sClusterLayout({ children }) {
         logo={
           <>
             <a href="/" style={{ display: 'inline-flex' }}>
-              <img className="title-light" src="/home/title.svg" alt="AXIVO" width="91" height="32" />
-              <img className="title-dark" src="/home/title-dark.svg" alt="AXIVO" width="91" height="32" />
+              <img className="title-light" src="/home/title.svg" alt={meta.brand.name} width="91" height="32" />
+              <img className="title-dark" src="/home/title-dark.svg" alt={meta.brand.name} width="91" height="32" />
             </a>
-            <a className="subtitle" href={`/${subsite.path}`}>
-              <img className="title-light" src="/k3s-cluster/title.svg" alt="K3s Cluster" width="131" height="32" />
-              <img className="title-dark" src="/k3s-cluster/title-dark.svg" alt="K3s Cluster" width="131" height="32" />
+            <a className="subtitle" href={`/${meta.source.path}`}>
+              <img className="title-light" src="/k3s-cluster/title.svg" alt={meta.source.title} width="131" height="32" />
+              <img className="title-dark" src="/k3s-cluster/title-dark.svg" alt={meta.source.title} width="131" height="32" />
             </a>
           </>
         }
@@ -45,7 +45,7 @@ async function K3sClusterLayout({ children }) {
       <Subnavbar />
     </>
   )
-  const pageMap = await getPageMap(`/${subsite.path}`)
+  const pageMap = await getPageMap(`/${meta.source.path}`)
   return (
     <Layout
       copyPageButton={false}
@@ -55,7 +55,7 @@ async function K3sClusterLayout({ children }) {
       footer={footer}
       navbar={navbar}
       pageMap={pageMap}
-      search={<Search section={subsite.path} />}
+      search={<Search section={meta.source.path} />}
       sidebar={{ defaultMenuCollapseLevel: 1 }}
     >
       {children}
@@ -63,4 +63,4 @@ async function K3sClusterLayout({ children }) {
   )
 }
 
-export { K3sClusterLayout as default, metadata }
+export { PageLayout as default, metadata }

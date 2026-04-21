@@ -6,7 +6,7 @@ description: >-
 ---
 
 import { Steps, Var } from "@axivo/website";
-import { os, repository } from "@axivo/website/k3s-cluster";
+import { meta, repository } from "@axivo/website/k3s-cluster";
 
 # Documentation
 
@@ -64,7 +64,7 @@ brew install sshpass
 
 ## OS Installation
 
-Each cluster node must have Ubuntu Server <Var code>{os.version}+</Var> LTS (64-bit) OS installed, which is a requirement for [Cilium](https://cilium.io). The required `apt` package dependencies also changed compared to the previous Ubuntu Server <Var code>{os.previous_version}</Var> LTS release.
+Each cluster node must have Ubuntu Server <Var code>{meta.os.version}+</Var> LTS (64-bit) OS installed, which is a requirement for [Cilium](https://cilium.io). The required `apt` package dependencies also changed compared to the previous Ubuntu Server <Var code>{meta.os.previous_version}</Var> LTS release.
 
 > [!TIP]
 >

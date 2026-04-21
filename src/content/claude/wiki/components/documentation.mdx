@@ -5,7 +5,7 @@ description: >-
 ---
 
 import { Var } from "@axivo/website";
-import { plugins, repository, skills } from "@axivo/website/claude";
+import { meta, repository } from "@axivo/website/claude";
 
 # Documentation System
 
@@ -36,7 +36,7 @@ Templates are organized by documentation type. Each template includes metadata s
 
 Session documentation template:
 
-- **Source:** <Var code href={`https://${repository.home}/blob/${repository.tag}/plugins/${plugins.framework.init.plugin}/skills/${skills.methodology}/templates/conversation.md`}>conversation.md</Var>
+- **Source:** <Var code href={`https://${repository.home}/blob/${repository.tag}/plugins/${meta.plugins.framework.init.plugin}/skills/${meta.skills.methodology}/templates/conversation.md`}>conversation.md</Var>
 - Captures decisions, work performed, and outcomes
 - Structured metadata with session identifiers
 - Suggested sections for different session types
@@ -68,7 +68,7 @@ Session documentation template:
 
 Private reflection template:
 
-- **Source:** <Var code href={`https://${repository.home}/blob/${repository.tag}/plugins/${plugins.framework.init.plugin}/skills/${skills.methodology}/templates/diary.md`}>diary.md</Var>
+- **Source:** <Var code href={`https://${repository.home}/blob/${repository.tag}/plugins/${meta.plugins.framework.init.plugin}/skills/${meta.skills.methodology}/templates/diary.md`}>diary.md</Var>
 - Documents genuine autonomous reflection
 - Natural voice, not structured output
 - Captures feelings and discoveries

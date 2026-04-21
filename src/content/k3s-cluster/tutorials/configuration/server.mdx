@@ -5,15 +5,15 @@ description: >-
 ---
 
 import { Image, Steps, Var } from '@axivo/website'
-import { os, repository } from '@axivo/website/k3s-cluster'
+import { meta, repository } from '@axivo/website/k3s-cluster'
 
 # Ubuntu Server
 
-The K3s cluster can be provisioned on any type of bare-metal hardware. This repository uses Raspberry Pi's as a bare-metal hardware example — therefore, it is recommended to install the latest Ubuntu Server <Var code>{os.version}+</Var> LTS (64-bit) OS with Raspberry Pi Imager.
+The K3s cluster can be provisioned on any type of bare-metal hardware. This repository uses Raspberry Pi's as a bare-metal hardware example — therefore, it is recommended to install the latest Ubuntu Server <Var code>{meta.os.version}+</Var> LTS (64-bit) OS with Raspberry Pi Imager.
 
 ## OS Installation
 
-Each cluster node uses Ubuntu Server <Var code>{os.version}+</Var> LTS (64-bit) OS installed, which is a requirement for [Cilium](https://cilium.io). The `apt` package dependencies changed compared to the previous <Var code>{os.previous_version}</Var> release — therefore, <Var code>{os.version}+</Var> is enforced as the minimal requirement.
+Each cluster node uses Ubuntu Server <Var code>{meta.os.version}+</Var> LTS (64-bit) OS installed, which is a requirement for [Cilium](https://cilium.io). The `apt` package dependencies changed compared to the previous <Var code>{meta.os.previous_version}</Var> release — therefore, <Var code>{meta.os.version}+</Var> is enforced as the minimal requirement.
 
 > [!NOTE]
 >

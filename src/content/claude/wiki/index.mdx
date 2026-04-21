@@ -7,7 +7,7 @@ description: >-
 
 import { Cards, Tabs } from "nextra/components";
 import { Hero, Steps, Var } from "@axivo/website";
-import { plugins, repository, skills } from "@axivo/website/claude";
+import { meta, repository } from "@axivo/website/claude";
 
 # Documentation
 
@@ -177,7 +177,7 @@ Before using the platform, set up the local environment with the required depend
 | `FRAMEWORK_GEOLOCATION`       | Override [IPinfo](https://ipinfo.io) geolocation API call with a custom location                                                                                                        |
 | `FRAMEWORK_PACKAGE_PATH`      | Custom path for packaged capability files                                                                                                                                               |
 | `FRAMEWORK_SESSION_STORAGE`   | Maximum session directories to retain in `plugins` cache                                                                                                                                |
-| `FRAMEWORK_TEMPLATE_PATH`     | Custom <Var href={`https://${repository.home}/tree/${repository.tag}/plugins/${plugins.framework.init.plugin}/skills/${skills.methodology}/templates`}>templates</Var> path per project |
+| `FRAMEWORK_TEMPLATE_PATH`     | Custom <Var href={`https://${repository.home}/tree/${repository.tag}/plugins/${meta.plugins.framework.init.plugin}/skills/${meta.skills.methodology}/templates`}>templates</Var> path per project |
 
 > [!NOTE]
 >
@@ -214,18 +214,18 @@ Follow these steps to install the AXIVO platform marketplace:
 
 The following plugins are available:
 
-- <Var code>{plugins.collaboration.brainstorm.plugin}</Var> — Technical design
+- <Var code>{meta.plugins.collaboration.brainstorm.plugin}</Var> — Technical design
   collaboration through natural dialogue
-- <Var code>{plugins.analysis.review.plugin}</Var> — Systematic code review
+- <Var code>{meta.plugins.analysis.review.plugin}</Var> — Systematic code review
   using Language Server Protocol tools
-- <Var code>{plugins.collaboration.log.plugin}</Var> — Technical session
+- <Var code>{meta.plugins.collaboration.log.plugin}</Var> — Technical session
   documentation with factual precision
-- <Var code>{plugins.framework.init.plugin}</Var> — Behavioral programming
+- <Var code>{meta.plugins.framework.init.plugin}</Var> — Behavioral programming
   framework with response protocol
 
 > [!TIP]
 >
-> Only <Var code>{plugins.framework.init.plugin}</Var> plugin is required for platform usage, other plugins are optional based on additional user requirements.
+> Only <Var code>{meta.plugins.framework.init.plugin}</Var> plugin is required for platform usage, other plugins are optional based on additional user requirements.
 
 ### Project Knowledge
 
@@ -256,7 +256,7 @@ Use the following [CLAUDE.md](https://code.claude.com/docs/en/memory) instructio
    - `Auto-compact` feature
    - `Thinking mode` feature
 
-2. Use <Var code>/{plugins.framework.init.plugin}:{plugins.framework.init.command}</Var> command to initialize the session:
+2. Use <Var code>/{meta.plugins.framework.init.plugin}:{meta.plugins.framework.init.command}</Var> command to initialize the session:
 
 > 📋 Profile: **DEVELOPER** &bull; Wednesday, December 17, 2025, 6:20 PM EST
 >
@@ -300,13 +300,13 @@ To extend the platform usage, set up the container environment with the addition
 Follow these steps to generate the platform capability files:
 
 1. Open a terminal and start a Claude Code session
-2. Use <Var code>/{plugins.framework.init.plugin}:{plugins.framework.init.command}</Var> command to start a framework based session
-3. Use <Var code>/{plugins.framework.package.plugin}:{plugins.framework.package.command}</Var> command to prepare and package the required files, saved into `FRAMEWORK_PACKAGE_OUTPUT` location:
+2. Use <Var code>/{meta.plugins.framework.init.plugin}:{meta.plugins.framework.init.command}</Var> command to start a framework based session
+3. Use <Var code>/{meta.plugins.framework.package.plugin}:{meta.plugins.framework.package.command}</Var> command to prepare and package the required files, saved into `FRAMEWORK_PACKAGE_OUTPUT` location:
 
    > ⏺ Framework packaged for **DEVELOPER** profile:
    >
-   > - /Users/username/Downloads/<Var>{skills.initialization}</Var>.zip
-   > - /Users/username/Downloads/<Var>{skills.methodology}</Var>.zip
+   > - /Users/username/Downloads/<Var>{meta.skills.initialization}</Var>.zip
+   > - /Users/username/Downloads/<Var>{meta.skills.methodology}</Var>.zip
    > - /Users/username/Downloads/instructions.json
    > - /Users/username/Downloads/memory.json
    >
@@ -317,7 +317,7 @@ Follow these steps to generate the platform capability files:
 
 > [!NOTE]
 >
-> Use <Var code>/{plugins.framework.package.plugin}:{plugins.framework.package.command} PROFILE</Var> command to package a different profile from default one used in local environment. to package a different profile from default one used in local environment.
+> Use <Var code>/{meta.plugins.framework.package.plugin}:{meta.plugins.framework.package.command} PROFILE</Var> command to package a different profile from default one used in local environment. to package a different profile from default one used in local environment.
 
 ### Project Knowledge
 

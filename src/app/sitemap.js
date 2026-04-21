@@ -7,9 +7,10 @@
  */
 
 export const dynamic = 'force-static'
+import { meta as blog } from '@axivo/website/blog'
+import { meta as claude } from '@axivo/website/claude'
 import { domain } from '@axivo/website/global'
-import { subsite as claude } from '@axivo/website/claude'
-import { subsite as k3sCluster } from '@axivo/website/k3s-cluster'
+import { meta as cluster } from '@axivo/website/k3s-cluster'
 import { getPageMap } from 'nextra/page-map'
 
 /**
@@ -41,7 +42,7 @@ function extractRoutes(pageMapItems) {
  * @returns {Promise<object[]>} Sitemap entries with url and changeFrequency
  */
 async function sitemap() {
-  const sections = ['/', `/${claude.path}`, `/${k3sCluster.path}`]
+  const sections = ['/', `/${blog.source.path}`, `/${claude.source.path}`, `/${cluster.source.path}`]
   const routesBySection = await Promise.all(
     sections.map(async (section) => {
       try {

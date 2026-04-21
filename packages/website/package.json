@@ -8,6 +8,14 @@
       "types": "./index.d.ts",
       "import": "./index.js"
     },
+    "./blog": {
+      "types": "./blog.d.ts",
+      "import": "./blog.js"
+    },
+    "./blog-posts": {
+      "types": "./blog-posts.d.ts",
+      "import": "./blog-posts.js"
+    },
     "./claude": {
       "types": "./claude.d.ts",
       "import": "./claude.js"
@@ -19,6 +27,9 @@
     "./k3s-cluster": {
       "types": "./k3s-cluster.d.ts",
       "import": "./k3s-cluster.js"
+    },
+    "./page": {
+      "import": "./page.js"
     },
     "./reflections": {
       "types": "./reflections.d.ts",
