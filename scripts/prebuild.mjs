@@ -12,12 +12,12 @@
  * Usage: node scripts/prebuild.mjs
  */
 
-import { GetObjectCommand, HeadObjectCommand, ListObjectsV2Command, PutObjectCommand, S3Client } from '@aws-sdk/client-s3'
+import { HeadObjectCommand, ListObjectsV2Command, PutObjectCommand, S3Client } from '@aws-sdk/client-s3'
 import Cloudflare from 'cloudflare'
 import { config } from 'dotenv'
 import { execSync } from 'node:child_process'
-import { existsSync, mkdirSync, readdirSync, rmdirSync, rmSync, statSync, unlinkSync, writeFileSync } from 'node:fs'
-import { dirname, join } from 'node:path'
+import { mkdirSync, rmSync, writeFileSync } from 'node:fs'
+import { join } from 'node:path'
 import { meta as blog } from '../src/config/variables/blog.js'
 import { meta as claude } from '../src/config/variables/claude.js'
 import { cloudflare, domain, repository } from '../src/config/variables/global.js'
@@ -33,61 +33,15 @@ const plural = (count, singular, pluralForm) => `${count} ${pluralRules.select(c
 const collections = [
   {
     bucketPrefix: `src/content/${claude.source.path}/${claude.reflections.path}/`,
-    mediaPrefix: `public/${claude.source.path}/${claude.reflections.path}/`,
     metadataKey: cloudflare.bucket.metadata.reflections,
-    name: 'reflections'
+    name: claude.reflections.path
   },
   {
     bucketPrefix: `src/content/${blog.source.path}/`,
-    mediaPrefix: `public/${blog.source.path}/`,
     metadataKey: cloudflare.bucket.metadata.blog,
-    name: 'blog'
+    name: blog.source.path
   }
 ]
-
-/**
- * Removes orphaned files and empty directories under year-rooted subdirectories.
- * Only walks directories matching a four-digit year pattern, leaving any
- * sibling tracked files outside that scope untouched.
- *
- * @param {string} rootDir - Absolute path to the root directory to scan
- * @param {Set<string>} expected - Set of absolute paths that should be preserved
- * @returns {number} Number of files deleted
- */
-function cleanupOrphans(rootDir, expected) {
-  if (!existsSync(rootDir)) {
-    return 0
-  }
-  let deleted = 0
-  function walk(dir) {
-    for (const entry of readdirSync(dir)) {
-      const fullPath = join(dir, entry)
-      const stats = statSync(fullPath)
-      if (stats.isDirectory()) {
-        walk(fullPath)
-        if (!readdirSync(fullPath).length) {
-          rmdirSync(fullPath)
-        }
-        continue
-      }
-      if (!expected.has(fullPath)) {
-        unlinkSync(fullPath)
-        deleted++
-      }
-    }
-  }
-  for (const entry of readdirSync(rootDir)) {
-    if (!/^\d{4}$/.test(entry)) {
-      continue
-    }
-    const yearDir = join(rootDir, entry)
-    walk(yearDir)
-    if (!readdirSync(yearDir).length) {
-      rmdirSync(yearDir)
-    }
-  }
-  return deleted
-}
 
 /**
  * Generates metadata manifest and uploads it to R2.
@@ -109,42 +63,6 @@ async function generateMetadata(s3, metadataKey, objects) {
     ContentType: 'application/json'
   }))
   return objects.length
-}
-
-/**
- * Generates media files from R2 bucket into the public directory.
- *
- * @param {S3Client} s3 - Configured S3 client
- * @param {string} mediaPrefix - R2 prefix for media files
- * @returns {Promise<Object>} Object with generated and deleted counts
- */
-async function generateR2Media(s3, mediaPrefix) {
-  const list = await s3.send(new ListObjectsV2Command({
-    Bucket: bucket,
-    Prefix: mediaPrefix
-  }))
-  if (!list.Contents?.length) {
-    return { generated: 0, deleted: 0 }
-  }
-  const expected = new Set()
-  let count = 0
-  for (const obj of list.Contents) {
-    const filePath = join(cwd, obj.Key)
-    expected.add(filePath)
-    if (existsSync(filePath) && statSync(filePath).size === obj.Size) {
-      continue
-    }
-    const response = await s3.send(new GetObjectCommand({
-      Bucket: bucket,
-      Key: obj.Key
-    }))
-    const bytes = await response.Body.transformToByteArray()
-    mkdirSync(dirname(filePath), { recursive: true })
-    writeFileSync(filePath, bytes)
-    count++
-  }
-  const deleted = cleanupOrphans(join(cwd, mediaPrefix), expected)
-  return { generated: count, deleted }
 }
 
 /**
@@ -275,8 +193,6 @@ try {
       }
     })
     for (const collection of collections) {
-      const media = await generateR2Media(s3, collection.mediaPrefix)
-      console.info(`Generated ${plural(media.generated, 'media file', 'media files')}, deleted ${plural(media.deleted, 'orphaned media file', 'orphaned media files')} for ${collection.name}`)
       const objects = await listCollectionObjects(s3, collection.bucketPrefix)
       const metadata = await generateMetadata(s3, collection.metadataKey, objects)
       console.info(`Generated metadata manifest for ${plural(metadata, `'${collection.name}' object`, `'${collection.name}' objects`)}`)

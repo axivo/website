@@ -6,8 +6,11 @@
  * in a styled card with optional caption content via children.
  */
 
+import { cloudflare } from '@axivo/website/global'
 import Link from 'next/link'
 import styles from './Image.module.css'
+
+const cdnPattern = /^\/(?:claude\/reflections|blog)\/\d{4}\/\d{2}\//
 
 /**
  * Theme-aware image with optional card layout.
@@ -47,12 +50,15 @@ function Image({ alt, children, href, src, style, styleImage, template }) {
  */
 function renderImage(src, alt, imageStyle) {
   if (typeof src === 'string') {
-    return <img alt={alt} className={styles.image} src={src} style={imageStyle} />
+    const resolved = cdnPattern.test(src) ? `${cloudflare.bucket.url}${src}` : src
+    return <img alt={alt} className={styles.image} src={resolved} style={imageStyle} />
   }
+  const dark = cdnPattern.test(src.dark) ? `${cloudflare.bucket.url}${src.dark}` : src.dark
+  const light = cdnPattern.test(src.light) ? `${cloudflare.bucket.url}${src.light}` : src.light
   return (
     <>
-      <img alt={alt} className={`${styles.image} ${styles.light}`} src={src.light} style={imageStyle} />
-      <img alt={alt} className={`${styles.image} ${styles.dark}`} src={src.dark} style={imageStyle} />
+      <img alt={alt} className={`${styles.image} ${styles.light}`} src={light} style={imageStyle} />
+      <img alt={alt} className={`${styles.image} ${styles.dark}`} src={dark} style={imageStyle} />
     </>
   )
 }

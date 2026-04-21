@@ -26,7 +26,8 @@ export const cloudflare = {
       blog: 'metadata/blog.json',
       reflections: 'metadata/reflections.json'
     },
-    name: 'axivo-website'
+    name: 'axivo-website',
+    url: 'https://cdn.axivo.com/public'
   },
   cache: {
     prefixes: [
