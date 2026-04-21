@@ -16,16 +16,17 @@ import { Meta } from './Meta'
 import styles from './PostCard.module.css'
 
 /**
- * Reflection entry card for listing pages.
+ * Post entry card for listing pages.
  *
  * @param {object} props
- * @param {object} props.post - Entry object from getReflections()
+ * @param {object} props.collection - Collection descriptor with routePath
+ * @param {object} props.post - Entry object with route and frontMatter
  * @param {string} props.post.route - Entry URL path
  * @param {object} props.post.frontMatter - Entry frontmatter
  * @param {string} [props.readMore='Read more →'] - Read more link text
  */
-function PostCard({ post, readMore = 'Read more' }) {
-  const { author, date, description, source, tags, title } = post.frontMatter
+function PostCard({ collection, post, readMore = 'Read more' }) {
+  const { author, date, description, source, tags, template, title } = post.frontMatter
   const components = getMDXComponents()
   const id = post.route.split('/').pop()
   return (
@@ -35,11 +36,11 @@ function PostCard({ post, readMore = 'Read more' }) {
           {title}
         </Link>
       </components.h3>
-      {date && <Meta author={author} date={date} source={source} />}
+      {date && <Meta author={author} date={date} routePath={collection.routePath} source={source} template={template} />}
       {tags?.length > 0 && (
         <div className={styles.tags}>
           {tags.map(tag => (
-            <Link key={tag} href={`/claude/reflections/tags/${tag}`} className={styles.tag}>
+            <Link key={tag} href={`${collection.routePath}/tags/${tag}`} className={styles.tag}>
               {tag}
             </Link>
           ))}

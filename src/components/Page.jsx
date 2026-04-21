@@ -159,7 +159,7 @@ function createPage({ source, collection }) {
         <components.h1>{tag}</components.h1>
         <components.h2 className={reflectionStyles.heading}>{collection.tagsSectionTitle}</components.h2>
         {filtered.map(entry => (
-          <PostCard key={entry.route} post={entry} />
+          <PostCard collection={collection} key={entry.route} post={entry} />
         ))}
       </Wrapper>
     )
@@ -237,8 +237,9 @@ function createPage({ source, collection }) {
       if (result) {
         const mdast = parseMdx(result.content)
         const r2Toc = extractToc(mdast)
+        const metadata = { ...result.metadata, routePath: collection.routePath }
         return (
-          <Wrapper toc={r2Toc} metadata={result.metadata}>
+          <Wrapper toc={r2Toc} metadata={metadata}>
             <SafeMdxRenderer mdast={mdast} components={components} />
           </Wrapper>
         )

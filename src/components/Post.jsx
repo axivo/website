@@ -189,14 +189,14 @@ async function Posts({ collection, children, date, limit, style }) {
       <div className={styles.container} style={style}>
         {children}
         {entries.slice(0, parseInt(limit, 10)).map(entry => (
-          <PostCard key={entry.route} post={entry} />
+          <PostCard collection={collection} key={entry.route} post={entry} />
         ))}
       </div>
     )
   }
   const totalPages = Math.ceil(entries.length / postsPageSize)
   const cards = entries.map(entry => (
-    <PostCard key={entry.route} post={entry} />
+    <PostCard collection={collection} key={entry.route} post={entry} />
   ))
   return (
     <div className={styles.container} style={style}>
