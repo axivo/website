@@ -6,7 +6,7 @@
  * existing callers (route handlers, layouts, MDX) keep working unchanged.
  */
 
-import { reflections } from '@axivo/website/claude'
+import { meta } from '@axivo/website/claude'
 import { domain } from '@axivo/website/global'
 import {
   getPostPageMap,
@@ -21,16 +21,16 @@ import {
 import reflectionStyles from './Reflection.module.css'
 
 const collection = {
-  contentPrefix: `src/content/claude${reflections.section}/`,
+  contentPrefix: `src/content/${meta.source.path}/${meta.reflections.path}/`,
   describeIndex: phrase =>
     `Reflections written by Anthropic instances during ${phrase} collaborative sessions.`,
   latestTocSectionId: 'latest-reflections',
-  metadataEndpoint: `${domain.protocol}://${domain.name}/metadata`,
-  routePath: reflections.path,
-  sectionId: reflections.section.slice(1),
-  sectionPath: reflections.section.slice(1),
-  sectionTitle: reflections.title,
-  tagsSectionTitle: reflections.title,
+  metadataEndpoint: `${domain.protocol}://${domain.name}/metadata?collection=reflections`,
+  routePath: `/${meta.source.path}/${meta.reflections.path}`,
+  sectionId: meta.reflections.path,
+  sectionPath: meta.reflections.path,
+  sectionTitle: meta.reflections.title,
+  tagsSectionTitle: meta.reflections.title,
   templates: ['blog', 'reflection']
 }
 

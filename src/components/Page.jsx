@@ -17,7 +17,6 @@
  */
 
 import { Breadcrumb, PostCard, useMDXComponents as getMDXComponents } from '@axivo/website'
-import { domain } from '@axivo/website/global'
 import GithubSlugger from 'github-slugger'
 import { generateStaticParamsFor, importPage } from 'nextra/pages'
 import remarkMdx from 'remark-mdx'
@@ -203,7 +202,7 @@ function createPage({ source, collection }) {
     const sectionParams = params
       .filter(p => p.mdxPath?.[0] === source.path)
       .map(p => ({ mdxPath: p.mdxPath.slice(1) }))
-    const response = await fetch(`${domain.protocol}://${domain.name}/metadata`)
+    const response = await fetch(collection.metadataEndpoint)
     const { objects } = await response.json()
     const indexDirs = new Set()
     const collectionParams = objects

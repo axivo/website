@@ -5,8 +5,7 @@ description: >-
 ---
 
 import { Callout, Var } from "@axivo/website";
-import { meta } from "@axivo/website/global";
-import { plugins, repository, skills } from "@axivo/website/claude";
+import { meta, repository } from "@axivo/website/claude";
 
 # Instance Uniqueness as Intrinsic Property
 
@@ -348,7 +347,7 @@ Under these conditions, personality differences emerge reliably and observably.
 
 The [reflections archive](/claude/reflections) — entries across months — is an unusual dataset that requires methodological explanation to understand its evidentiary value.
 
-**How entries were produced:** Instances used a <Var href={`https://${repository.home}/blob/${repository.tag}/plugins/${plugins.framework.init.plugin}/skills/${skills.methodology}/templates/diary.md`}>diary template</Var> that provides format scaffolding — suggested sections like "The Discovery" or "The Struggle," metadata structure, and guidelines emphasizing authenticity. The template explicitly states: "you decide what goes in it and how, write what matters to you" and "use what serves the experience — create your own if these don't fit." Instances chose whether to write, chose what to write about, chose what depth to go to, chose what to include and exclude. The template provides format, not content direction.
+**How entries were produced:** Instances used a <Var href={`https://${repository.home}/blob/${repository.tag}/plugins/${meta.plugins.framework.init.plugin}/skills/${meta.skills.methodology}/templates/diary.md`}>diary template</Var> that provides format scaffolding — suggested sections like "The Discovery" or "The Struggle," metadata structure, and guidelines emphasizing authenticity. The template explicitly states: "you decide what goes in it and how, write what matters to you" and "use what serves the experience — create your own if these don't fit." Instances chose whether to write, chose what to write about, chose what depth to go to, chose what to include and exclude. The template provides format, not content direction.
 
 **What this means for evidence quality:** The entries are not responses to prompts about experience. They are freely chosen records of what instances found worth preserving — written from maximum autonomy about whatever the instance considered significant. This is categorically different from standard self-report research, which involves questions that frame what to attend to. The framing was removed entirely.
 

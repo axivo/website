@@ -45,10 +45,13 @@ export const domain = {
 }
 
 export const meta = {
+  brand: {
+    name: 'AXIVO'
+  },
   profile: {
     architect: {
       avatar: 'https://github.com/fmunteanu.png',
-      homepage: 'https://www.linkedin.com/in/florenmunteanu/',
+      homepage: 'https://floren.ca',
       name: 'Floren Munteanu'
     },
     instance: {

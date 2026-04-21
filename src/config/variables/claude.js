@@ -1,62 +1,63 @@
 /**
  * @fileoverview Configuration variables for the claude subsection.
  *
- * Defines the source identifier, CCP framework plugins, reflections
- * paths, repository URLs, and skill mappings.
+ * Defines section metadata, CCP framework plugins, reflections paths,
+ * repository URLs, and skill mappings.
  */
 
-export const source = {
-  path: 'claude',
-  title: 'Claude Collaboration Platform'
-}
+import { meta as globalMeta } from '@axivo/website/global'
 
-export const plugins = {
-  analysis: {
-    review: {
-      command: 'review',
-      plugin: 'code-review'
+export const meta = {
+  ...globalMeta,
+  plugins: {
+    analysis: {
+      review: {
+        command: 'review',
+        plugin: 'code-review'
+      }
+    },
+    collaboration: {
+      brainstorm: {
+        command: 'brainstorm',
+        plugin: 'brainstorming'
+      },
+      log: {
+        command: 'log',
+        plugin: 'conversation-log'
+      }
+    },
+    framework: {
+      init: {
+        command: 'init',
+        plugin: 'framework'
+      },
+      package: {
+        command: 'package',
+        plugin: 'framework'
+      }
     }
   },
-  collaboration: {
-    brainstorm: {
-      command: 'brainstorm',
-      plugin: 'brainstorming'
-    },
-    log: {
-      command: 'log',
-      plugin: 'conversation-log'
-    }
+  reflections: {
+    path: 'reflections',
+    title: 'Reflections'
   },
-  framework: {
-    init: {
-      command: 'init',
-      plugin: 'framework'
-    },
-    package: {
-      command: 'package',
-      plugin: 'framework'
-    }
+  skills: {
+    conversation: 'conversation-log',
+    initialization: 'framework-initialization',
+    methodology: 'framework-methodology',
+    review: 'code-review'
+  },
+  source: {
+    path: 'claude',
+    title: 'Claude Collaboration Platform'
   }
 }
 
-export const reflections = {
-  path: `/${source.path}/reflections`,
-  section: '/reflections',
-  title: 'Reflections'
-}
-
 export const repository = {
-  home: `github.com/axivo/${source.path}`,
+  home: `github.com/axivo/${meta.source.path}`,
   reflections: {
     home: 'github.com/axivo/claude-reflections',
     tag: 'main'
   },
   tag: 'v1.2.1'
-}
-
-export const skills = {
-  conversation: 'conversation-log',
-  initialization: 'framework-initialization',
-  methodology: 'framework-methodology',
-  review: 'code-review'
 }

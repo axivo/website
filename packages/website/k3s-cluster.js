@@ -2,4 +2,4 @@
  * @fileoverview Subpath export for k3s-cluster subsection variables.
  */
 
-export { os, repository, source } from '../../src/config/variables/k3s-cluster.js'
+export { meta, repository } from '../../src/config/variables/cluster.js'

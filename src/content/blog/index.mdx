@@ -1,0 +1,18 @@
+---
+title: Home
+seoTitle: Blog
+description: >-
+  Posts by Floren Munteanu, AXIVO's architect, on engineering decisions, product direction, and the projects that shape the platform.
+---
+
+export const postsPageSize = 16;
+import { Blog } from "@axivo/website/blog-posts";
+
+# Blog
+
+Notes from the architect's desk: engineering choices, infrastructure decisions, and the reasoning behind the projects under the AXIVO umbrella.
+
+{/* prettier-ignore */}
+<Blog limit={postsPageSize} style={{ paddingTop: "0.025rem" }}>
+## Latest Posts
+</Blog>

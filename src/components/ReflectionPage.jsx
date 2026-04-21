@@ -9,7 +9,7 @@
 
 'use client'
 
-import { reflections } from '@axivo/website/claude'
+import { meta } from '@axivo/website/claude'
 import { Children, useEffect, useRef, useState } from 'react'
 import styles from './ReflectionPage.module.css'
 
@@ -37,7 +37,7 @@ function ReflectionPage({ children, pageSize, totalPages }) {
     if (page === 1) {
       return
     }
-    const sectionId = reflections.section.slice(1)
+    const sectionId = meta.reflections.path
     const reflectionsLink = document.querySelector(`a[href="#${sectionId}"]`)
     if (!reflectionsLink) {
       return

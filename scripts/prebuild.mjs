@@ -6,8 +6,8 @@
  * 2. Generates a timestamp map from git history for accurate
  *    "Last updated" dates, bypassing @napi-rs/simple-git which
  *    returns incorrect dates on unshallowed repositories
- * 3. Generates metadata manifest from R2 object metadata
- * 4. Purges Cloudflare edge cache for reflection routes
+ * 3. Generates metadata manifests for all R2-backed collections
+ * 4. Purges Cloudflare edge cache for configured route prefixes
  *
  * Usage: node scripts/prebuild.mjs
  */
@@ -18,19 +18,32 @@ import { config } from 'dotenv'
 import { execSync } from 'node:child_process'
 import { existsSync, mkdirSync, readdirSync, rmdirSync, rmSync, statSync, unlinkSync, writeFileSync } from 'node:fs'
 import { dirname, join } from 'node:path'
+import { meta as blog } from '../src/config/variables/blog.js'
+import { meta as claude } from '../src/config/variables/claude.js'
 import { cloudflare, domain } from '../src/config/variables/global.js'
-import { reflections, source } from '../src/config/variables/claude.js'
 
 const bucket = cloudflare.bucket.name
-const bucketMediaPrefix = `public/${source.path}${reflections.section}/`
-const bucketPrefix = `src/content/${source.path}${reflections.section}/`
 const cwd = process.cwd()
 const fetchCacheDir = join(cwd, '.next', 'cache', 'fetch-cache')
-const metadataKey = cloudflare.bucket.metadata.reflections
 const outputDir = join(cwd, '.next')
 const outputFile = join(outputDir, 'timestamps.json')
 const pluralRules = new Intl.PluralRules('en-US')
 const plural = (count, singular, pluralForm) => `${count} ${pluralRules.select(count) === 'one' ? singular : pluralForm}`
+
+const collections = [
+  {
+    bucketPrefix: `src/content/${claude.source.path}/${claude.reflections.path}/`,
+    mediaPrefix: `public/${claude.source.path}/${claude.reflections.path}/`,
+    metadataKey: cloudflare.bucket.metadata.reflections,
+    name: 'reflections'
+  },
+  {
+    bucketPrefix: `src/content/${blog.source.path}/`,
+    mediaPrefix: `public/${blog.source.path}/`,
+    metadataKey: cloudflare.bucket.metadata.blog,
+    name: 'blog'
+  }
+]
 
 /**
  * Removes orphaned files and empty directories under year-rooted subdirectories.
@@ -77,15 +90,38 @@ function cleanupOrphans(rootDir, expected) {
 }
 
 /**
+ * Generates metadata manifest and uploads it to R2.
+ *
+ * @param {S3Client} s3 - Configured S3 client
+ * @param {string} metadataKey - R2 key for the manifest
+ * @param {Array} objects - Decoded metadata objects
+ * @returns {Promise<number>} Number of metadata objects generated
+ */
+async function generateMetadata(s3, metadataKey, objects) {
+  if (!objects.length) {
+    return 0
+  }
+  objects.sort((a, b) => (a.date || '').localeCompare(b.date || ''))
+  await s3.send(new PutObjectCommand({
+    Bucket: bucket,
+    Key: metadataKey,
+    Body: JSON.stringify({ objects, total: objects.length }),
+    ContentType: 'application/json'
+  }))
+  return objects.length
+}
+
+/**
  * Generates media files from R2 bucket into the public directory.
  *
  * @param {S3Client} s3 - Configured S3 client
+ * @param {string} mediaPrefix - R2 prefix for media files
  * @returns {Promise<Object>} Object with generated and deleted counts
  */
-async function generateR2Media(s3) {
+async function generateR2Media(s3, mediaPrefix) {
   const list = await s3.send(new ListObjectsV2Command({
     Bucket: bucket,
-    Prefix: bucketMediaPrefix
+    Prefix: mediaPrefix
   }))
   if (!list.Contents?.length) {
     return { generated: 0, deleted: 0 }
@@ -107,29 +143,8 @@ async function generateR2Media(s3) {
     writeFileSync(filePath, bytes)
     count++
   }
-  const deleted = cleanupOrphans(join(cwd, bucketMediaPrefix), expected)
+  const deleted = cleanupOrphans(join(cwd, mediaPrefix), expected)
   return { generated: count, deleted }
-}
-
-/**
- * Generates metadata manifest and uploads it to R2.
- *
- * @param {S3Client} s3 - Configured S3 client
- * @param {Array} objects - Decoded metadata objects
- * @returns {Promise<number>} Number of metadata objects generated
- */
-async function generateMetadata(s3, objects) {
-  if (!objects.length) {
-    return 0
-  }
-  objects.sort((a, b) => (a.date || '').localeCompare(b.date || ''))
-  await s3.send(new PutObjectCommand({
-    Bucket: bucket,
-    Key: metadataKey,
-    Body: JSON.stringify({ objects, total: objects.length }),
-    ContentType: 'application/json'
-  }))
-  return objects.length
 }
 
 /**
@@ -160,11 +175,55 @@ function getTimestamps() {
 }
 
 /**
+ * Lists all objects under a prefix and enriches each with decoded R2
+ * custom metadata.
+ *
+ * @param {S3Client} s3 - Configured S3 client
+ * @param {string} bucketPrefix - R2 prefix for the collection
+ * @returns {Promise<object[]>} Array of objects with metadata
+ */
+async function listCollectionObjects(s3, bucketPrefix) {
+  const objects = []
+  let continuationToken
+  do {
+    const list = await s3.send(new ListObjectsV2Command({
+      Bucket: bucket,
+      ContinuationToken: continuationToken,
+      Prefix: bucketPrefix
+    }))
+    for (const obj of (list.Contents || [])) {
+      const head = await s3.send(new HeadObjectCommand({
+        Bucket: bucket,
+        Key: obj.Key
+      }))
+      const object = { key: obj.Key, ...head.Metadata }
+      if (object.description) {
+        object.description = decodeURIComponent(object.description)
+      }
+      if (object.tags) {
+        try {
+          object.tags = JSON.parse(object.tags)
+        } catch {
+          console.warn(`Failed to parse tags for ${obj.Key}`)
+        }
+      }
+      objects.push(object)
+    }
+    continuationToken = list.IsTruncated ? list.NextContinuationToken : undefined
+  } while (continuationToken)
+  return objects
+}
+
+/**
  * Purges Cloudflare edge cache for configured route prefixes.
  *
  * @returns {Promise<string[]|null>} Array of purged prefixes, or null if skipped or failed
  */
 async function purgeCache() {
+  if (process.env.NEXTJS_ENV !== 'production') {
+    console.info(`Environment '${process.env.NEXTJS_ENV}' detected, skipping cache purge`)
+    return null
+  }
   if (!process.env.ZONE_API_TOKEN || !process.env.ZONE_ID) {
     console.info('Cloudflare credentials not found, skipping cache purge')
     return null
@@ -215,38 +274,13 @@ try {
         secretAccessKey: process.env.R2_SECRET_ACCESS_KEY
       }
     })
-    const media = await generateR2Media(s3)
-    console.info(`Generated ${plural(media.generated, 'media file', 'media files')}, deleted ${plural(media.deleted, 'orphaned media file', 'orphaned media files')}`)
-    const metadataObjects = []
-    let continuationToken
-    do {
-      const list = await s3.send(new ListObjectsV2Command({
-        Bucket: bucket,
-        ContinuationToken: continuationToken,
-        Prefix: bucketPrefix
-      }))
-      for (const obj of (list.Contents || [])) {
-        const head = await s3.send(new HeadObjectCommand({
-          Bucket: bucket,
-          Key: obj.Key
-        }))
-        const object = { key: obj.Key, ...head.Metadata }
-        if (object.description) {
-          object.description = decodeURIComponent(object.description)
-        }
-        if (object.tags) {
-          try {
-            object.tags = JSON.parse(object.tags)
-          } catch {
-            console.warn(`Failed to parse tags for ${obj.Key}`)
-          }
-        }
-        metadataObjects.push(object)
-      }
-      continuationToken = list.IsTruncated ? list.NextContinuationToken : undefined
-    } while (continuationToken)
-    const metadata = await generateMetadata(s3, metadataObjects)
-    console.info(`Generated metadata manifest for ${plural(metadata, 'object', 'objects')}`)
+    for (const collection of collections) {
+      const media = await generateR2Media(s3, collection.mediaPrefix)
+      console.info(`Generated ${plural(media.generated, 'media file', 'media files')}, deleted ${plural(media.deleted, 'orphaned media file', 'orphaned media files')} for ${collection.name}`)
+      const objects = await listCollectionObjects(s3, collection.bucketPrefix)
+      const metadata = await generateMetadata(s3, collection.metadataKey, objects)
+      console.info(`Generated metadata manifest for ${plural(metadata, 'object', 'objects')} for ${collection.name}`)
+    }
   }
 } catch (error) {
   console.error('Failed R2 operations:', error.message)

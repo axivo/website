@@ -5,7 +5,7 @@ description: >-
 ---
 
 import { Var } from "@axivo/website";
-import { os, repository } from "@axivo/website/k3s-cluster";
+import { meta, repository } from "@axivo/website/k3s-cluster";
 
 # Argo CD
 
@@ -69,7 +69,7 @@ Application charts are released with version control, based on repository tags. 
 
 ### Application Resource
 
-In this example, we will create an Ubuntu Server <Var code>{os.version}</Var> LTS <Var href={`https://${repository.applications.home}/tree/main/apps/ubuntu`}>container</Var>, deployed in the `default` namespace. Navigate to `Applications` and create an application, then edit the resource manifest as `YAML` and paste the following content:
+In this example, we will create an Ubuntu Server <Var code>{meta.os.version}</Var> LTS <Var href={`https://${repository.applications.home}/tree/main/apps/ubuntu`}>container</Var>, deployed in the `default` namespace. Navigate to `Applications` and create an application, then edit the resource manifest as `YAML` and paste the following content:
 
 ```yaml
 apiVersion: argoproj.io/v1alpha1
@@ -116,4 +116,4 @@ $ kubectl exec -itn default ubuntu-6589cf5fb4-p9z2b -- bash
 root@ubuntu-6589cf5fb4-p9z2b:/#
 ```
 
-The end-user will have `root` access to a minimal Ubuntu <Var code>{os.version}</Var> LTS container, connected to the Kubernetes cluster network. Common tools may require manual installation via `apt-get`.
+The end-user will have `root` access to a minimal Ubuntu <Var code>{meta.os.version}</Var> LTS container, connected to the Kubernetes cluster network. Common tools may require manual installation via `apt-get`.

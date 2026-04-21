@@ -1,18 +1,24 @@
 /**
  * @fileoverview R2 metadata API endpoint.
  *
- * Returns pre-built metadata manifest for R2-backed content entries.
- * Without parameters, returns all entries from the manifest.
- * With a `key` parameter, returns metadata for a single entry.
+ * Returns pre-built metadata manifest for an R2-backed collection.
+ * Without parameters, returns the reflections manifest (backward
+ * compatible default). With a `collection` parameter, selects the
+ * requested collection's manifest. With a `key` parameter, returns
+ * metadata for a single entry regardless of collection.
  *
  * @example
  * GET /metadata
+ * GET /metadata?collection=blog
  * GET /metadata?key=src/content/claude/reflections/2025/12/14/first-light.mdx
  */
 
 import { cloudflare } from '@axivo/website/global'
 
-const metadataKey = cloudflare.bucket.metadata.reflections
+const metadataKeys = {
+  blog: cloudflare.bucket.metadata.blog,
+  reflections: cloudflare.bucket.metadata.reflections
+}
 
 /**
  * Decodes metadata fields that were encoded during upload.
@@ -44,6 +50,11 @@ function decodeMetadata(metadata) {
 export async function GET(request) {
   const { searchParams } = new URL(request.url)
   const key = searchParams.get('key')
+  const collection = searchParams.get('collection') || 'reflections'
+  const metadataKey = metadataKeys[collection]
+  if (!metadataKey) {
+    return Response.json({ error: `Unknown collection: ${collection}` }, { status: 400 })
+  }
   try {
     const { getCloudflareContext } = await import('@opennextjs/cloudflare')
     const { env } = await getCloudflareContext({ async: true })

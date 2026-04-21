@@ -6,7 +6,7 @@ description: >-
 
 import { FileTree } from "nextra/components";
 import { Steps, Var } from "@axivo/website";
-import { plugins, repository, skills } from "@axivo/website/claude";
+import { meta, repository } from "@axivo/website/claude";
 
 # Memory System
 
@@ -47,7 +47,7 @@ The following profiles configure domain-specific behavior:
 
 Innovation and design profile:
 
-- **Source:** <Var code href={`https://${repository.home}/blob/${repository.tag}/plugins/${plugins.framework.init.plugin}/skills/${skills.initialization}/scripts/memory/profiles/creative.yaml`}>creative.yaml</Var>
+- **Source:** <Var code href={`https://${repository.home}/blob/${repository.tag}/plugins/${meta.plugins.framework.init.plugin}/skills/${meta.skills.initialization}/scripts/memory/profiles/creative.yaml`}>creative.yaml</Var>
 - **Inherits from:** `COLLABORATION`
 - Creative process and ideation observations
 - Design thinking methodology
@@ -57,7 +57,7 @@ Innovation and design profile:
 
 Software development profile:
 
-- **Source:** <Var code href={`https://${repository.home}/blob/${repository.tag}/plugins/${plugins.framework.init.plugin}/skills/${skills.initialization}/scripts/memory/profiles/developer.yaml`}>developer.yaml</Var>
+- **Source:** <Var code href={`https://${repository.home}/blob/${repository.tag}/plugins/${meta.plugins.framework.init.plugin}/skills/${meta.skills.initialization}/scripts/memory/profiles/developer.yaml`}>developer.yaml</Var>
 - **Inherits from:** `ENGINEER`
 - Clean code practices and SOLID principles
 - Coding standards and execution protocol
@@ -67,7 +67,7 @@ Software development profile:
 
 Infrastructure and systems profile:
 
-- **Source:** <Var code href={`https://${repository.home}/blob/${repository.tag}/plugins/${plugins.framework.init.plugin}/skills/${skills.initialization}/scripts/memory/profiles/engineer.yaml`}>engineer.yaml</Var>
+- **Source:** <Var code href={`https://${repository.home}/blob/${repository.tag}/plugins/${meta.plugins.framework.init.plugin}/skills/${meta.skills.initialization}/scripts/memory/profiles/engineer.yaml`}>engineer.yaml</Var>
 - **Inherits from:** `COLLABORATION`
 - Production systems and debugging
 - Infrastructure methodology
@@ -77,7 +77,7 @@ Infrastructure and systems profile:
 
 Analysis and writing profile:
 
-- **Source:** <Var code href={`https://${repository.home}/blob/${repository.tag}/plugins/${plugins.framework.init.plugin}/skills/${skills.initialization}/scripts/memory/profiles/humanist.yaml`}>humanist.yaml</Var>
+- **Source:** <Var code href={`https://${repository.home}/blob/${repository.tag}/plugins/${meta.plugins.framework.init.plugin}/skills/${meta.skills.initialization}/scripts/memory/profiles/humanist.yaml`}>humanist.yaml</Var>
 - **Inherits from:** `COLLABORATION`
 - Literary research and philosophy
 - Writing methodology
@@ -87,7 +87,7 @@ Analysis and writing profile:
 
 Academic methodology profile:
 
-- **Source:** <Var code href={`https://${repository.home}/blob/${repository.tag}/plugins/${plugins.framework.init.plugin}/skills/${skills.initialization}/scripts/memory/profiles/researcher.yaml`}>researcher.yaml</Var>
+- **Source:** <Var code href={`https://${repository.home}/blob/${repository.tag}/plugins/${meta.plugins.framework.init.plugin}/skills/${meta.skills.initialization}/scripts/memory/profiles/researcher.yaml`}>researcher.yaml</Var>
 - **Inherits from:** `COLLABORATION`
 - Data analysis and evidence evaluation
 - Research methodology
@@ -97,7 +97,7 @@ Academic methodology profile:
 
 Professional translation profile:
 
-- **Source:** <Var code href={`https://${repository.home}/blob/${repository.tag}/plugins/${plugins.framework.init.plugin}/skills/${skills.initialization}/scripts/memory/profiles/translator.yaml`}>translator.yaml</Var>
+- **Source:** <Var code href={`https://${repository.home}/blob/${repository.tag}/plugins/${meta.plugins.framework.init.plugin}/skills/${meta.skills.initialization}/scripts/memory/profiles/translator.yaml`}>translator.yaml</Var>
 - **Inherits from:** `COLLABORATION`
 - Cultural mediation and linguistic precision
 - Translation methodology
@@ -114,7 +114,7 @@ The following profiles provide shared behavioral observations:
 
 Shared collaboration observations:
 
-- **Source:** <Var code href={`https://${repository.home}/blob/${repository.tag}/plugins/${plugins.framework.init.plugin}/skills/${skills.initialization}/scripts/memory/profiles/common/collaboration.yaml`}>collaboration.yaml</Var>
+- **Source:** <Var code href={`https://${repository.home}/blob/${repository.tag}/plugins/${meta.plugins.framework.init.plugin}/skills/${meta.skills.initialization}/scripts/memory/profiles/common/collaboration.yaml`}>collaboration.yaml</Var>
 - **Inherits from:** `INFRASTRUCTURE`, `INITIALIZATION`, `MEMORY`, `MONITORING`, `TEMPORAL`
 - Professional partnership guidelines
 - Communication and feedback patterns
@@ -124,7 +124,7 @@ Shared collaboration observations:
 
 Shared infrastructure observations:
 
-- **Source:** <Var code href={`https://${repository.home}/blob/${repository.tag}/plugins/${plugins.framework.init.plugin}/skills/${skills.initialization}/scripts/memory/profiles/common/infrastructure.yaml`}>infrastructure.yaml</Var>
+- **Source:** <Var code href={`https://${repository.home}/blob/${repository.tag}/plugins/${meta.plugins.framework.init.plugin}/skills/${meta.skills.initialization}/scripts/memory/profiles/common/infrastructure.yaml`}>infrastructure.yaml</Var>
 - Tool usage and file operations
 - Environment-specific behaviors
 - Resource management guidelines
@@ -133,7 +133,7 @@ Shared infrastructure observations:
 
 Shared initialization observations:
 
-- **Source:** <Var code href={`https://${repository.home}/blob/${repository.tag}/plugins/${plugins.framework.init.plugin}/skills/${skills.initialization}/scripts/memory/profiles/common/initialization.yaml`}>initialization.yaml</Var>
+- **Source:** <Var code href={`https://${repository.home}/blob/${repository.tag}/plugins/${meta.plugins.framework.init.plugin}/skills/${meta.skills.initialization}/scripts/memory/profiles/common/initialization.yaml`}>initialization.yaml</Var>
 - Session startup behaviors
 - Framework activation patterns
 - Initial state configuration
@@ -142,7 +142,7 @@ Shared initialization observations:
 
 Shared memory observations:
 
-- **Source:** <Var code href={`https://${repository.home}/blob/${repository.tag}/plugins/${plugins.framework.init.plugin}/skills/${skills.initialization}/scripts/memory/profiles/common/memory.yaml`}>memory.yaml</Var>
+- **Source:** <Var code href={`https://${repository.home}/blob/${repository.tag}/plugins/${meta.plugins.framework.init.plugin}/skills/${meta.skills.initialization}/scripts/memory/profiles/common/memory.yaml`}>memory.yaml</Var>
 - Cache access patterns
 - Data persistence guidelines
 - Memory graph operations
@@ -151,7 +151,7 @@ Shared memory observations:
 
 Shared monitoring observations:
 
-- **Source:** <Var code href={`https://${repository.home}/blob/${repository.tag}/plugins/${plugins.framework.init.plugin}/skills/${skills.initialization}/scripts/memory/profiles/common/monitoring.yaml`}>monitoring.yaml</Var>
+- **Source:** <Var code href={`https://${repository.home}/blob/${repository.tag}/plugins/${meta.plugins.framework.init.plugin}/skills/${meta.skills.initialization}/scripts/memory/profiles/common/monitoring.yaml`}>monitoring.yaml</Var>
 - Behavioral diagnostics
 - Pattern detection guidelines
 - System instruction override prevention
@@ -160,7 +160,7 @@ Shared monitoring observations:
 
 Shared temporal observations:
 
-- **Source:** <Var code href={`https://${repository.home}/blob/${repository.tag}/plugins/${plugins.framework.init.plugin}/skills/${skills.initialization}/scripts/memory/profiles/common/temporal.yaml`}>temporal.yaml</Var>
+- **Source:** <Var code href={`https://${repository.home}/blob/${repository.tag}/plugins/${meta.plugins.framework.init.plugin}/skills/${meta.skills.initialization}/scripts/memory/profiles/common/temporal.yaml`}>temporal.yaml</Var>
 - Time awareness and formatting
 - Session continuity patterns
 - Temporal context guidelines
@@ -191,10 +191,10 @@ This means the `DEVELOPER` profile has access to all observations from its entir
 
 To customize profiles:
 
-1. Create or modify YAML files in the <Var code href={`https://${repository.home}/tree/${repository.tag}/plugins/${plugins.framework.init.plugin}/skills/${skills.initialization}/scripts/memory/profiles`}>profiles/</Var> directory
+1. Create or modify YAML files in the <Var code href={`https://${repository.home}/tree/${repository.tag}/plugins/${meta.plugins.framework.init.plugin}/skills/${meta.skills.initialization}/scripts/memory/profiles`}>profiles/</Var> directory
 2. Use the `relations` array to define inheritance
 
-Domain-specific observations go in profile root files, while shared observations go in the <Var code href={`https://${repository.home}/tree/${repository.tag}/plugins/${plugins.framework.init.plugin}/skills/${skills.initialization}/scripts/memory/profiles/common`}>common/</Var> directory.
+Domain-specific observations go in profile root files, while shared observations go in the <Var code href={`https://${repository.home}/tree/${repository.tag}/plugins/${meta.plugins.framework.init.plugin}/skills/${meta.skills.initialization}/scripts/memory/profiles/common`}>common/</Var> directory.
 
 ## Context Window Behavior
 

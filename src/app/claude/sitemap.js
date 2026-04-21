@@ -6,8 +6,8 @@
  */
 
 export const dynamic = 'force-static'
+import { meta } from '@axivo/website/claude'
 import { domain } from '@axivo/website/global'
-import { source } from '@axivo/website/claude'
 import { getPageMap } from 'nextra/page-map'
 
 /**
@@ -40,7 +40,7 @@ function extractRoutes(pageMapItems) {
  */
 async function sitemap() {
   try {
-    const pageMap = await getPageMap(`/${source.path}`)
+    const pageMap = await getPageMap(`/${meta.source.path}`)
     const routes = extractRoutes(pageMap)
     return routes
       .map((route) => ({
@@ -49,7 +49,7 @@ async function sitemap() {
       }))
       .sort((a, b) => a.url.localeCompare(b.url))
   } catch (error) {
-    console.error(`Sitemap error for /${source.path}:`, error)
+    console.error(`Sitemap error for /${meta.source.path}:`, error)
     return []
   }
 }

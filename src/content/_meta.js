@@ -7,5 +7,9 @@ export default {
   index: {
     display: 'hidden',
     type: 'page'
+  },
+  blog: {
+    title: 'Blog',
+    type: 'page'
   }
 }

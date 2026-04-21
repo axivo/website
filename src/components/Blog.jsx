@@ -6,7 +6,7 @@
  * Tags wrapper, and helpers for the blog landing and tag pages.
  */
 
-import { source } from '@axivo/website/blog'
+import { meta } from '@axivo/website/blog'
 import { domain } from '@axivo/website/global'
 import {
   getPostPageMap,
@@ -19,16 +19,16 @@ import {
 } from './Post'
 
 const collection = {
-  contentPrefix: `src/content/${source.path}/`,
+  contentPrefix: `src/content/${meta.source.path}/`,
   describeIndex: phrase =>
     `Posts by Floren Munteanu about AXIVO projects during ${phrase}.`,
   latestTocSectionId: 'latest-posts',
-  metadataEndpoint: `${domain.protocol}://${domain.name}/metadata?collection=${source.path}`,
-  routePath: `/${source.path}`,
-  sectionId: source.path,
+  metadataEndpoint: `${domain.protocol}://${domain.name}/metadata?collection=${meta.source.path}`,
+  routePath: `/${meta.source.path}`,
+  sectionId: meta.source.path,
   sectionPath: '',
-  sectionTitle: source.title,
-  tagsSectionTitle: source.title,
+  sectionTitle: meta.source.title,
+  tagsSectionTitle: meta.source.title,
   templates: ['post']
 }
 
