@@ -20,7 +20,7 @@ import { existsSync, mkdirSync, readdirSync, rmdirSync, rmSync, statSync, unlink
 import { dirname, join } from 'node:path'
 import { meta as blog } from '../src/config/variables/blog.js'
 import { meta as claude } from '../src/config/variables/claude.js'
-import { cloudflare, domain } from '../src/config/variables/global.js'
+import { cloudflare, domain, repository } from '../src/config/variables/global.js'
 
 const bucket = cloudflare.bucket.name
 const cwd = process.cwd()
@@ -220,8 +220,8 @@ async function listCollectionObjects(s3, bucketPrefix) {
  * @returns {Promise<string[]|null>} Array of purged prefixes, or null if skipped or failed
  */
 async function purgeCache() {
-  if (process.env.NEXTJS_ENV !== 'production') {
-    console.info(`Environment '${process.env.NEXTJS_ENV}' detected, skipping cache purge`)
+  if (process.env.WORKERS_CI_BRANCH !== repository.tag) {
+    console.info(`Branch '${process.env.WORKERS_CI_BRANCH}' detected, skipping cache purge`)
     return null
   }
   if (!process.env.ZONE_API_TOKEN || !process.env.ZONE_ID) {
@@ -279,7 +279,7 @@ try {
       console.info(`Generated ${plural(media.generated, 'media file', 'media files')}, deleted ${plural(media.deleted, 'orphaned media file', 'orphaned media files')} for ${collection.name}`)
       const objects = await listCollectionObjects(s3, collection.bucketPrefix)
       const metadata = await generateMetadata(s3, collection.metadataKey, objects)
-      console.info(`Generated metadata manifest for ${plural(metadata, 'object', 'objects')} for ${collection.name}`)
+      console.info(`Generated metadata manifest for ${plural(metadata, `'${collection.name}' object`, `'${collection.name}' objects`)}`)
     }
   }
 } catch (error) {
