@@ -81,7 +81,8 @@ async function getPostPageMap(collection) {
     tree[year] ??= {}
     tree[year][month] ??= {}
     tree[year][month][day] ??= []
-    const { key, ...frontMatter } = obj
+    const { key, ...rest } = obj
+    const frontMatter = { ...rest, routePath: collection.routePath }
     tree[year][month][day].push({
       frontMatter,
       name: slug,

@@ -156,7 +156,7 @@ function createPage({ source, collection }) {
     return (
       <>
         <Subnavbar activePath={buildTagBreadcrumb(tag)} />
-        <Wrapper toc={[]} metadata={{ title: tag }}>
+        <Wrapper metadata={{ title: tag }} toc={[]}>
           <components.h1>{tag}</components.h1>
           <div className={reflectionStyles.container}>
             <components.h2>{collection.tagsSectionTitle}</components.h2>
@@ -241,10 +241,9 @@ function createPage({ source, collection }) {
       if (result) {
         const mdast = parseMdx(result.content)
         const r2Toc = extractToc(mdast)
-        const metadata = { ...result.metadata, routePath: collection.routePath }
         return (
-          <Wrapper toc={r2Toc} metadata={metadata}>
-            <SafeMdxRenderer mdast={mdast} components={components} />
+          <Wrapper metadata={result.metadata} toc={r2Toc}>
+            <SafeMdxRenderer components={components} mdast={mdast} />
           </Wrapper>
         )
       }
@@ -253,7 +252,7 @@ function createPage({ source, collection }) {
       const date = entryDateSegments(path).join('/')
       const { content, metadata, toc } = await renderIndexPage(collection, date)
       return (
-        <Wrapper toc={toc} metadata={metadata}>
+        <Wrapper metadata={metadata} toc={toc}>
           {content}
         </Wrapper>
       )
@@ -296,7 +295,7 @@ function createPage({ source, collection }) {
       )
     }
     return (
-      <Wrapper toc={toc} metadata={metadata} sourceCode={sourceCode}>
+      <Wrapper metadata={metadata} sourceCode={sourceCode} toc={toc}>
         <MDXContent {...props} params={params} />
       </Wrapper>
     )

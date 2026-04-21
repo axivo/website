@@ -138,6 +138,10 @@ async function listCollectionObjects(s3, bucketPrefix) {
  * @returns {Promise<string[]|null>} Array of purged prefixes, or null if skipped or failed
  */
 async function purgeCache() {
+  if (!process.env.WORKERS_CI_BRANCH) {
+    console.info('Development environment detected, skipping cache purge')
+    return null
+  }
   if (process.env.WORKERS_CI_BRANCH !== repository.tag) {
     console.info(`Branch '${process.env.WORKERS_CI_BRANCH}' detected, skipping cache purge`)
     return null
