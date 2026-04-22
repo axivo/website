@@ -17,9 +17,8 @@
 
 import { useMDXComponents as getMDXComponents } from '@axivo/website'
 import { PostCard } from './PostCard'
-import { ReflectionPage as PostPage } from './ReflectionPage'
+import { PostPage } from './PostPage'
 import { TagGrid } from './Tag'
-import styles from './Reflection.module.css'
 
 const months = [
   'January', 'February', 'March', 'April', 'May', 'June',
@@ -186,7 +185,7 @@ async function Posts({ collection, children, date, entries: entriesProp, limit, 
   }
   if (limit) {
     return (
-      <div className={styles.container} style={style}>
+      <div style={style}>
         {children}
         {entries.slice(0, parseInt(limit, 10)).map(entry => (
           <PostCard collection={collection} key={entry.route} post={entry} />
@@ -199,9 +198,9 @@ async function Posts({ collection, children, date, entries: entriesProp, limit, 
     <PostCard collection={collection} key={entry.route} post={entry} />
   ))
   return (
-    <div className={styles.container} style={style}>
+    <div style={style}>
       {children}
-      <PostPage pageSize={postsPageSize} totalPages={totalPages}>
+      <PostPage pageSize={postsPageSize} sectionId={collection.sectionId} totalPages={totalPages}>
         {cards}
       </PostPage>
     </div>

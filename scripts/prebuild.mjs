@@ -208,7 +208,7 @@ try {
 try {
   const purged = await purgeCache()
   if (purged?.length) {
-    console.info(`Purged cache for ${plural(purged.length, 'prefix', 'prefixes')}`)
+    console.info(`Cache purged for ${plural(purged.length, 'prefix', 'prefixes')}`)
   }
 } catch (error) {
   console.error('Failed to purge cache:', error.message)

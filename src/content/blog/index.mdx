@@ -6,13 +6,36 @@ description: >-
 ---
 
 export const postsPageSize = 16;
-import { Blog } from "@axivo/website/blog-posts";
+export const postsSectionId = "latest-entries";
+import { Blog } from "@axivo/website/blog";
+import { Callout, Hero } from "@axivo/website";
 
 # Blog
 
-Notes from the architect's desk: engineering choices, infrastructure decisions, and reasoning behind projects under the AXIVO umbrella.
+A working journal, kept in public. The posts are uneven by design — some walk through full systems, others isolate a single choice that turned out to matter.
 
 {/* prettier-ignore */}
-<Blog limit={postsPageSize} style={{ paddingTop: "0.025rem" }}>
-## Latest Posts
+<Hero
+  image={{ dark: "/home/blog/card-kuberun-dark.svg", light: "/home/blog/card-kuberun.svg" }}
+  style={{ padding: "0" }}
+  styleContainer={{ width: "12rem" }}
+>
+  Notes from the architect's desk: engineering choices, SRE perspectives,
+  and reasoning behind projects under the AXIVO umbrella.
+</Hero>
+
+Infrastructure decisions rot faster than the systems they describe. By the time someone asks "_why did we pick this_," the tradeoffs have faded and only the outcome remains. Entries attempt that slowdown — one Helm chart, one GitHub Action, one cluster topology at a time.
+
+<Callout
+  type="quote"
+  author="Fred Brooks, The Mythical Man-Month"
+  href="https://en.wikipedia.org/wiki/The_Mythical_Man-Month"
+>
+  The hardest single part of building a software system is deciding precisely
+  what to build.
+</Callout>
+
+{/* prettier-ignore */}
+<Blog limit={postsPageSize}>
+## Latest Entries
 </Blog>

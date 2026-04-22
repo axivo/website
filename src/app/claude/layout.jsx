@@ -7,8 +7,7 @@
  */
 
 import { footer, Search, Subnavbar } from '@axivo/website'
-import { meta, repository } from '@axivo/website/claude'
-import { getReflectionPageMap } from '@axivo/website/reflections'
+import { getReflectionPageMap, meta, repository } from '@axivo/website/claude'
 import { getPageMap, normalizePageMap } from 'nextra/page-map'
 import { Layout, Navbar } from 'nextra-theme-docs'
 
