@@ -11,8 +11,8 @@
  * - sectionId: slug used for heading anchors (e.g. 'reflections')
  * - sectionTitle: human title for the section (e.g. 'Reflections')
  * - templates: array of R2 `template` metadata values to match
- * - metadataEndpoint: URL to the collection's metadata manifest
- * - describeIndex: function(phrase) returning SEO description for index pages
+ * - metadataKey: R2 object key for the collection's manifest
+ * - describe: function(phrase) returning SEO description for index pages
  */
 
 import { useMDXComponents as getMDXComponents } from '@axivo/website'
@@ -27,14 +27,19 @@ const months = [
 const postsPageSize = 20
 
 /**
- * Fetches metadata objects from the collection's metadata endpoint.
+ * Reads a collection's metadata manifest directly from R2 via the
+ * CONTENT_BUCKET binding. Avoids the HTTP self-fetch that would route
+ * the request back through the Worker for no benefit.
  *
- * @param {string} endpoint - Metadata endpoint URL
+ * @param {object} collection - Collection descriptor with metadataKey
  * @returns {Promise<object[]>} Array of R2 metadata objects
  */
-async function fetchMetadata(endpoint) {
-  const response = await fetch(endpoint)
-  const { objects } = await response.json()
+async function fetchMetadata(collection) {
+  const { getCloudflareContext } = await import('@opennextjs/cloudflare')
+  const { env } = await getCloudflareContext({ async: true })
+  const object = await env.CONTENT_BUCKET.get(collection.metadataKey)
+  if (!object) return []
+  const { objects } = await object.json()
   return objects
 }
 
@@ -67,7 +72,7 @@ function filterByDate(entries, date) {
  * @returns {Promise<object[]>} Array of year folder items (pre-normalization)
  */
 async function getPostPageMap(collection) {
-  const objects = await fetchMetadata(collection.metadataEndpoint)
+  const objects = await fetchMetadata(collection)
   const entries = objects.filter(obj => obj.template === collection.template)
   const tree = {}
   for (const obj of entries) {
@@ -147,7 +152,7 @@ async function getPostPageMap(collection) {
  * @returns {Promise<object[]>} Sorted array of entries
  */
 async function getPosts(collection) {
-  const objects = await fetchMetadata(collection.metadataEndpoint)
+  const objects = await fetchMetadata(collection)
   return objects
     .filter(obj => obj.template === collection.template)
     .map(obj => toEntry(obj, collection.contentPrefix))
@@ -237,7 +242,7 @@ async function renderIndexPage(collection, date) {
   }
   const metadata = {
     asIndexPage: true,
-    description: collection.describeIndex(phrase),
+    description: collection.describe(phrase),
     title: seoTitle || title
   }
   const components = getMDXComponents()
