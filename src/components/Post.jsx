@@ -93,7 +93,9 @@ async function getPostPageMap(collection) {
     })
   }
   const result = []
-  for (const year of Object.keys(tree).sort()) {
+  const years = Object.keys(tree).sort()
+  const latestYear = years[years.length - 1]
+  for (const year of years) {
     const yearRoute = `${collection.routePath}/${year}`
     const monthFolders = []
     for (const month of Object.keys(tree[year]).sort()) {
@@ -134,7 +136,7 @@ async function getPostPageMap(collection) {
       route: yearRoute,
       children: [
         {
-          frontMatter: { asIndexPage: true, theme: { collapsed: false }, title: year },
+          frontMatter: { asIndexPage: true, theme: { collapsed: year !== latestYear }, title: year },
           name: 'index',
           route: yearRoute
         },
