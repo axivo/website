@@ -93,7 +93,7 @@ async function getPostPageMap(collection) {
     })
   }
   const result = []
-  for (const year of Object.keys(tree).sort()) {
+  for (const year of Object.keys(tree).sort().reverse()) {
     const yearRoute = `${collection.routePath}/${year}`
     const monthFolders = []
     for (const month of Object.keys(tree[year]).sort()) {
