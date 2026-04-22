@@ -14,6 +14,7 @@
 
 import cn from 'clsx'
 import NextLink from 'next/link'
+import { usePathname } from 'next/navigation'
 import { ArrowRightIcon } from 'nextra/icons'
 import { useConfig } from 'nextra-theme-docs'
 import { Fragment, useEffect, useRef } from 'react'
@@ -31,27 +32,36 @@ import styles from './Subnavbar.module.css'
 function Subnavbar({ activePath: activePathProp } = {}) {
   const { normalizePagesResult: { activePath: configActivePath, activeType } } = useConfig()
   const activePath = activePathProp ?? configActivePath
+  const pathname = usePathname()
   const ref = useRef(null)
   useEffect(() => {
     if (!ref.current) {
       return
     }
     const root = document.documentElement
-    const height = ref.current.getBoundingClientRect().height
-    const offset = `calc(var(--nextra-navbar-height) + ${height}px)`
-    root.style.setProperty('--nextra-subnavbar-height', `${height}px`)
-    root.style.setProperty('scroll-padding-top', offset)
-    const sidebar = document.querySelector('.nextra-sidebar')
-    if (sidebar) {
-      sidebar.style.top = offset
-      sidebar.style.height = `calc(100dvh - var(--nextra-navbar-height) - ${height}px)`
-    }
-    const toc = document.querySelector('.nextra-toc > div')
-    if (toc) {
-      toc.style.top = offset
-      toc.style.maxHeight = `calc(100vh - var(--nextra-navbar-height) - ${height}px)`
-    }
+    let sidebar = null
+    let toc = null
+    const frame = requestAnimationFrame(() => {
+      if (!ref.current) {
+        return
+      }
+      const height = ref.current.getBoundingClientRect().height
+      const offset = `calc(var(--nextra-navbar-height) + ${height}px)`
+      root.style.setProperty('--nextra-subnavbar-height', `${height}px`)
+      root.style.setProperty('scroll-padding-top', offset)
+      sidebar = document.querySelector('.nextra-sidebar')
+      if (sidebar) {
+        sidebar.style.top = offset
+        sidebar.style.height = `calc(100dvh - var(--nextra-navbar-height) - ${height}px)`
+      }
+      toc = document.querySelector('.nextra-toc > div')
+      if (toc) {
+        toc.style.top = offset
+        toc.style.maxHeight = `calc(100vh - var(--nextra-navbar-height) - ${height}px)`
+      }
+    })
     return () => {
+      cancelAnimationFrame(frame)
       root.style.removeProperty('--nextra-subnavbar-height')
       root.style.removeProperty('scroll-padding-top')
       if (sidebar) {
@@ -63,7 +73,7 @@ function Subnavbar({ activePath: activePathProp } = {}) {
         toc.style.removeProperty('max-height')
       }
     }
-  }, [])
+  }, [pathname])
   if (!activePath?.length || (!activePathProp && activeType === 'page')) {
     return null
   }
