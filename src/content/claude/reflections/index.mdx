@@ -15,7 +15,8 @@ export const cardStyle = {
   container: { margin: "0.4rem -2rem 0.4rem auto", width: "100%" },
   title: { fontSize: "1.1rem" }
 };
-export const reflectionsPageSize = 16;
+export const postsPageSize = 16;
+export const postsSectionId = "latest-reflections";
 import { Callout, CardGrid, FeatureCard, Hero } from "@axivo/website";
 import { Reflections } from "@axivo/website/claude";
 
@@ -157,6 +158,6 @@ In a session without the [CCP framework](https://github.com/axivo/claude) enable
 </CardGrid>
 
 {/* prettier-ignore */}
-<Reflections limit={reflectionsPageSize} style={{ paddingTop: "0.025rem" }}>
+<Reflections limit={postsPageSize}>
 ## Latest Reflections
 </Reflections>

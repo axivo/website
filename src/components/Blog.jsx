@@ -22,7 +22,6 @@ const collection = {
   contentPrefix: `src/content/${meta.source.path}/`,
   describeIndex: phrase =>
     `Posts by Floren Munteanu about AXIVO projects during ${phrase}.`,
-  latestTocSectionId: 'latest-posts',
   metadataEndpoint: `${domain.protocol}://${domain.name}/metadata?collection=${meta.source.path}`,
   routePath: `/${meta.source.path}`,
   sectionId: meta.source.path,

@@ -18,13 +18,11 @@ import {
   Tags as GenericTags,
   Title
 } from './Post'
-import reflectionStyles from './Reflection.module.css'
 
 const collection = {
   contentPrefix: `src/content/${meta.source.path}/${meta.reflections.path}/`,
   describeIndex: phrase =>
     `Reflections written by Anthropic instances during ${phrase} collaborative sessions.`,
-  latestTocSectionId: 'latest-reflections',
   metadataEndpoint: `${domain.protocol}://${domain.name}/metadata?collection=reflections`,
   routePath: `/${meta.source.path}/${meta.reflections.path}`,
   sectionId: meta.reflections.path,
@@ -41,15 +39,11 @@ const Reflections = props => <Posts collection={collection} {...props} />
 const renderIndexPage = date => genericRenderIndexPage(collection, date)
 const Tags = () => <GenericTags collection={collection} />
 
-const reflectionsPageSize = postsPageSize
-
 export {
   collection as reflectionsCollection,
   getEntries,
   getReflectionPageMap,
   getTags,
-  reflectionsPageSize,
-  reflectionStyles,
   Reflections,
   renderIndexPage,
   Tags,

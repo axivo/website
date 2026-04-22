@@ -282,14 +282,16 @@ function createPage({ source, collection }) {
     const atCollectionRoot = hasSection
       ? path.length === 1 && path[0] === sectionPath
       : path.length === 0
-    if (atCollectionRoot && collection.latestTocSectionId) {
+    const postsSectionId = pageModule.postsSectionId
+    if (atCollectionRoot && postsSectionId) {
       const entries = await getPosts(collection)
-      const latestToc = entries.slice(0, pageModule.reflectionsPageSize || postsPageSize).map(entry => ({
+      const limit = pageModule.postsPageSize || postsPageSize
+      const latestToc = entries.slice(0, limit).map(entry => ({
         depth: 3,
         id: entry.route.split('/').pop(),
         value: entry.frontMatter.title
       }))
-      updateToc(collection.latestTocSectionId, latestToc)
+      updateToc(postsSectionId, latestToc)
     }
     if (metadata.template === 'splash') {
       return (
