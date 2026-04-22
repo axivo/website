@@ -10,6 +10,7 @@ import { meta as globalMeta } from '@axivo/website/global'
 export const meta = {
   ...globalMeta,
   source: {
+    describe: phrase => `Posts about engineering decisions and SRE perspectives during ${phrase} collaborative work.`,
     path: 'blog',
     title: 'Blog'
   }
