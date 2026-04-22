@@ -15,6 +15,7 @@ import {
   Posts,
   postsPageSize,
   renderIndexPage as genericRenderIndexPage,
+  sortYears,
   Tags as GenericTags,
   Title
 } from './Post'
@@ -46,6 +47,7 @@ export {
   getTags,
   Reflections,
   renderIndexPage,
+  sortYears,
   Tags,
   Title
 }

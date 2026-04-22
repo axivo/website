@@ -7,7 +7,7 @@
  */
 
 import { footer, Search, Subnavbar } from '@axivo/website'
-import { getReflectionPageMap, meta, repository } from '@axivo/website/claude'
+import { getReflectionPageMap, meta, repository, sortYears } from '@axivo/website/claude'
 import { getPageMap, normalizePageMap } from 'nextra/page-map'
 import { Layout, Navbar } from 'nextra-theme-docs'
 
@@ -54,7 +54,7 @@ async function PageLayout({ children }) {
       ...yearChildren
     ]
     const index = pageMap.indexOf(reflectionsFolder)
-    pageMap[index] = normalizePageMap(reflectionsFolder)
+    pageMap[index] = sortYears(normalizePageMap(reflectionsFolder))
   }
   return (
     <Layout

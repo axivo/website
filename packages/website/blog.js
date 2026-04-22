@@ -3,4 +3,4 @@
  */
 
 export { meta, repository } from '../../src/config/variables/blog.js'
-export { Blog, blogCollection, getBlogPageMap, getEntries, getTags, renderIndexPage, Tags, Title } from '../../src/components/Blog'
+export { Blog, blogCollection, getBlogPageMap, getEntries, getTags, renderIndexPage, sortYears, Tags, Title } from '../../src/components/Blog'
