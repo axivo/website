@@ -210,10 +210,8 @@ function createPage({ source, collection }) {
     const sectionParams = params
       .filter(p => p.mdxPath?.[0] === source.path)
       .map(p => ({ mdxPath: p.mdxPath.slice(1) }))
-    const { getCloudflareContext } = await import('@opennextjs/cloudflare')
-    const { env } = await getCloudflareContext({ async: true })
-    const manifest = await env.CONTENT_BUCKET.get(collection.metadataKey)
-    const { objects } = manifest ? await manifest.json() : { objects: [] }
+    const response = await fetch(collection.metadataEndpoint)
+    const { objects } = await response.json()
     const indexDirs = new Set()
     const collectionParams = objects
       .filter(obj => obj.template === collection.template)

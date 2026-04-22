@@ -7,7 +7,7 @@
  */
 
 import { meta } from '@axivo/website/blog'
-import { cloudflare } from '@axivo/website/global'
+import { cloudflare, domain } from '@axivo/website/global'
 import {
   getPostPageMap,
   getPosts,
@@ -21,6 +21,7 @@ import {
 const collection = {
   contentPrefix: `src/content/${meta.source.path}/`,
   describe: meta.source.describe,
+  metadataEndpoint: `${domain.protocol}://${domain.name}/metadata?collection=${meta.source.path}`,
   metadataKey: cloudflare.bucket.metadata.blog,
   routePath: `/${meta.source.path}`,
   sectionId: meta.source.path,
