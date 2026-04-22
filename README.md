@@ -11,7 +11,7 @@ For local development and testing, use the following commands:
 npm install
 
 # Preview on Cloudflare Workers runtime
-npm run preview 2>&1 | tee "./logs/preview-$(date +%Y-%m-%d_%H-%M-%S).log"
+FORCE_COLOR=1 npm run preview 2>&1 | tee "./logs/preview-$(date +%Y-%m-%d_%H-%M-%S).log"
 ```
 
 ## Dependency Management
