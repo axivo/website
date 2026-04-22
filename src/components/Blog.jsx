@@ -14,6 +14,7 @@ import {
   getTags as genericGetTags,
   Posts,
   renderIndexPage as genericRenderIndexPage,
+  sortYears,
   Tags as GenericTags,
   Title
 } from './Post'
@@ -45,6 +46,7 @@ export {
   getEntries,
   getTags,
   renderIndexPage,
+  sortYears,
   Tags,
   Title
 }

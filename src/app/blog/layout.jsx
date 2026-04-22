@@ -6,7 +6,7 @@
  */
 
 import { footer, Search, Subnavbar } from '@axivo/website'
-import { getBlogPageMap, meta, repository } from '@axivo/website/blog'
+import { getBlogPageMap, meta, repository, sortYears } from '@axivo/website/blog'
 import { getPageMap, normalizePageMap } from 'nextra/page-map'
 import { Layout, Navbar } from 'nextra-theme-docs'
 
@@ -52,9 +52,7 @@ async function PageLayout({ children }) {
     item.type === 'menu'
   )
   const blogIndex = pageMap.indexOf(blogFolder)
-  if (blogIndex >= 0) {
-    pageMap[blogIndex] = normalizePageMap(blogFolder)
-  }
+  pageMap[blogIndex] = sortYears(normalizePageMap(blogFolder))
   return (
     <Layout
       copyPageButton={false}

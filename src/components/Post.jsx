@@ -93,7 +93,9 @@ async function getPostPageMap(collection) {
     })
   }
   const result = []
-  for (const year of Object.keys(tree).sort()) {
+  const years = Object.keys(tree).sort()
+  const latestYear = years[years.length - 1]
+  for (const year of years) {
     const yearRoute = `${collection.routePath}/${year}`
     const monthFolders = []
     for (const month of Object.keys(tree[year]).sort()) {
@@ -134,7 +136,7 @@ async function getPostPageMap(collection) {
       route: yearRoute,
       children: [
         {
-          frontMatter: { asIndexPage: true, theme: { collapsed: false }, title: year },
+          frontMatter: { asIndexPage: true, theme: { collapsed: year !== latestYear }, title: year },
           name: 'index',
           route: yearRoute
         },
@@ -320,6 +322,23 @@ function toEntry(obj, contentPrefix) {
   return { frontMatter, route }
 }
 
+/**
+ * Reorders year folders inside a normalized page map folder so the latest
+ * year appears first. Works around Nextra's alphabetical sort of numeric
+ * folder names, which would otherwise list older years first.
+ *
+ * @param {object} folder - Normalized folder returned by normalizePageMap
+ * @returns {object} Same folder with year children reordered
+ */
+function sortYears(folder) {
+  const yearPattern = /^\d{4}$/
+  const years = folder.children.filter(child => yearPattern.test(child.name))
+  const others = folder.children.filter(child => !yearPattern.test(child.name))
+  years.sort((a, b) => b.name.localeCompare(a.name))
+  folder.children = [...others, ...years]
+  return folder
+}
+
 export {
   filterByDate,
   getPostPageMap,
@@ -328,6 +347,7 @@ export {
   Posts,
   postsPageSize,
   renderIndexPage,
+  sortYears,
   Tags,
   Title
 }
