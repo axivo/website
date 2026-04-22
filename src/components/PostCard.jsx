@@ -37,7 +37,7 @@ function PostCard({ collection, post, readMore = 'Read more' }) {
         </Link>
       </components.h3>
       {date && <Meta author={author} date={date} routePath={collection.routePath} source={source} template={template} />}
-      {tags?.length > 0 && (
+      {tags?.length && (
         <div className={styles.tags}>
           {[...tags].sort().map(tag => (
             <Link key={tag} href={`${collection.routePath}/tags/${tag}`} className={styles.tag}>
