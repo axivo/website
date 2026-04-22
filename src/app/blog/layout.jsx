@@ -46,7 +46,11 @@ async function PageLayout({ children }) {
       ...yearChildren
     ]
   }
-  const pageMap = rootPageMap.filter(item => !('name' in item) || item.name === meta.source.path)
+  const pageMap = rootPageMap.filter(item =>
+    !('name' in item) ||
+    item.name === meta.source.path ||
+    item.type === 'menu'
+  )
   const blogIndex = pageMap.indexOf(blogFolder)
   if (blogIndex >= 0) {
     pageMap[blogIndex] = normalizePageMap(blogFolder)
