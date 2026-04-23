@@ -1,19 +1,22 @@
 @reference "tailwindcss";
 
 .ordered {
-  @apply list-decimal ms-8;
+  @apply ms-9 list-decimal;
 }
 
 .unordered {
-  @apply list-disc ms-8;
+  @apply ms-8 list-disc;
 }
 
 .ordered:not(:first-child),
 .unordered:not(:first-child) {
-  @apply mt-[1.25em];
+  @apply mt-[1em];
 }
 
-:is(ol, ul) .ordered,
+:is(ol, ul) .ordered {
+  @apply ms-5;
+}
+
 :is(ol, ul) .unordered {
-  @apply my-[.75em];
+  @apply ms-4;
 }

@@ -11,7 +11,7 @@
 'use client'
 
 import cn from 'clsx'
-import { Meta } from './Meta'
+import { Meta } from '../Meta'
 import styles from './PageTitle.module.css'
 
 /**

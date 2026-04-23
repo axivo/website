@@ -9,7 +9,7 @@
 import { useMDXComponents as getMDXComponents } from '@axivo/website'
 import GithubSlugger from 'github-slugger'
 import Link from 'next/link'
-import { Image } from './Image'
+import { Image } from './mdx/Image'
 import styles from './FeatureCard.module.css'
 
 /**

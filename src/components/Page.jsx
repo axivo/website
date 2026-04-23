@@ -19,11 +19,13 @@
 import { PostCard, Subnavbar, useMDXComponents as getMDXComponents } from '@axivo/website'
 import GithubSlugger from 'github-slugger'
 import { generateStaticParamsFor, importPage } from 'nextra/pages'
+import { remarkMermaid } from '@theguild/remark-mermaid'
 import remarkMdx from 'remark-mdx'
 import remarkParse from 'remark-parse'
 import { SafeMdxRenderer } from 'safe-mdx'
 import { unified } from 'unified'
-import { filterByDate, getPosts, getTags, Posts, postsPageSize, renderIndexPage } from './Post'
+import { renderNode } from './mdx/renderNode'
+import { filterByDate, getPosts, Posts, postsPageSize, renderIndexPage } from './Post'
 
 const components = getMDXComponents()
 const nextraStaticParams = generateStaticParamsFor('mdxPath')
@@ -92,7 +94,8 @@ async function fetchR2Object(key) {
  * @returns {object} MDAST root node
  */
 function parseMdx(mdx) {
-  return unified().use(remarkParse).use(remarkMdx).parse(mdx)
+  const processor = unified().use(remarkParse).use(remarkMdx).use(remarkMermaid)
+  return processor.runSync(processor.parse(mdx))
 }
 
 /**
@@ -210,30 +213,23 @@ function createPage({ source, collection }) {
     const sectionParams = params
       .filter(p => p.mdxPath?.[0] === source.path)
       .map(p => ({ mdxPath: p.mdxPath.slice(1) }))
+      .filter(p => p.mdxPath[p.mdxPath.length - 1] !== 'tags')
     const response = await fetch(collection.metadataEndpoint)
     const { objects } = await response.json()
     const indexDirs = new Set()
-    const collectionParams = objects
-      .filter(obj => obj.template === collection.template)
-      .map(obj => {
-        const segments = obj.key
-          .replace(collection.contentPrefix, '')
-          .replace('.mdx', '')
-          .split('/')
-        const [year, month, day] = segments
-        indexDirs.add(`${year}`)
-        indexDirs.add(`${year}/${month}`)
-        indexDirs.add(`${year}/${month}/${day}`)
-        return { mdxPath: hasSection ? [sectionPath, ...segments] : segments }
-      })
+    for (const obj of objects.filter(obj => obj.template === collection.template)) {
+      const [year, month, day] = obj.key
+        .replace(collection.contentPrefix, '')
+        .replace('.mdx', '')
+        .split('/')
+      indexDirs.add(`${year}`)
+      indexDirs.add(`${year}/${month}`)
+      indexDirs.add(`${year}/${month}/${day}`)
+    }
     const indexParams = [...indexDirs].map(dir => ({
       mdxPath: hasSection ? [sectionPath, ...dir.split('/')] : dir.split('/')
     }))
-    const allTags = await getTags(collection)
-    const tagParams = [...new Set(allTags)].map(tag => ({
-      mdxPath: hasSection ? [sectionPath, 'tags', tag] : ['tags', tag]
-    }))
-    return [...sectionParams, ...collectionParams, ...indexParams, ...tagParams]
+    return [...sectionParams, ...indexParams]
   }
 
   async function Page(props) {
@@ -247,7 +243,7 @@ function createPage({ source, collection }) {
         const r2Toc = extractToc(mdast)
         return (
           <Wrapper metadata={result.metadata} toc={r2Toc}>
-            <SafeMdxRenderer components={components} mdast={mdast} />
+            <SafeMdxRenderer components={components} mdast={mdast} renderNode={renderNode} />
           </Wrapper>
         )
       }

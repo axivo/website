@@ -11,10 +11,10 @@ import { join } from 'node:path'
 import * as websiteComponents from '@axivo/website'
 import { useMDXComponents as getDocsMDXComponents } from 'nextra-theme-docs'
 import { withGitHubAlert } from 'nextra/components'
-import { Callout } from './src/components/Callout'
-import { Ordered, Unordered } from './src/components/List'
-import { PageTitle } from './src/components/PageTitle'
-import { SourceCodeSetter } from './src/components/SourceCode'
+import { Callout } from './src/components/mdx/Callout'
+import { Ordered, Unordered } from './src/components/mdx/List'
+import { PageTitle } from './src/components/mdx/PageTitle'
+import { SourceCodeSetter } from './src/components/mdx/SourceCode'
 
 const docsComponents = getDocsMDXComponents()
 const NextraWrapper = docsComponents.wrapper
