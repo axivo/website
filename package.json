@@ -5,6 +5,7 @@
   "private": true,
   "scripts": {
     "build": "next build",
+    "deploy": "node --no-warnings scripts/deploy.mjs",
     "dev": "next dev",
     "prebuild": "node --no-warnings --env-file=.env.production scripts/prebuild.mjs",
     "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview"

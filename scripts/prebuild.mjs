@@ -1,26 +1,26 @@
 /**
  * @fileoverview Prebuild script for Cloudflare Workers deployment.
  *
- * Performs four operations:
+ * Performs three operations:
  * 1. Unshallows the git repository to access full commit history
  * 2. Generates a timestamp map from git history for accurate
  *    "Last updated" dates, bypassing @napi-rs/simple-git which
  *    returns incorrect dates on unshallowed repositories
  * 3. Generates metadata manifests for all R2-backed collections
- * 4. Purges Cloudflare edge cache for configured route prefixes
+ *
+ * Cache purge and Worker warming run post-deploy in scripts/postbuild.mjs.
  *
  * Usage: node scripts/prebuild.mjs
  */
 
 import { HeadObjectCommand, ListObjectsV2Command, PutObjectCommand, S3Client } from '@aws-sdk/client-s3'
-import Cloudflare from 'cloudflare'
 import { config } from 'dotenv'
 import { execSync } from 'node:child_process'
 import { mkdirSync, rmSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { meta as blog } from '../src/config/variables/blog.js'
 import { meta as claude } from '../src/config/variables/claude.js'
-import { cloudflare, domain, repository } from '../src/config/variables/global.js'
+import { cloudflare } from '../src/config/variables/global.js'
 
 const bucket = cloudflare.bucket.name
 const cwd = process.cwd()
@@ -132,40 +132,6 @@ async function listCollectionObjects(s3, bucketPrefix) {
   return objects
 }
 
-/**
- * Purges Cloudflare edge cache for configured route prefixes.
- *
- * @returns {Promise<string[]|null>} Array of purged prefixes, or null if skipped or failed
- */
-async function purgeCache() {
-  if (!process.env.WORKERS_CI_BRANCH) {
-    console.info('Development environment detected, skipping cache purge')
-    return null
-  }
-  if (process.env.WORKERS_CI_BRANCH !== repository.tag) {
-    console.info(`Branch '${process.env.WORKERS_CI_BRANCH}' detected, skipping cache purge`)
-    return null
-  }
-  if (!process.env.ZONE_API_TOKEN || !process.env.ZONE_ID) {
-    console.info('Cloudflare credentials not found, skipping cache purge')
-    return null
-  }
-  if (!domain.name) {
-    console.info('Domain not configured, skipping cache purge')
-    return null
-  }
-  if (!cloudflare.cache.prefixes.length) {
-    return []
-  }
-  const prefixes = cloudflare.cache.prefixes.map(prefix => `${domain.name}${prefix}`)
-  const client = new Cloudflare({ apiToken: process.env.ZONE_API_TOKEN })
-  await client.cache.purge({
-    zone_id: process.env.ZONE_ID,
-    prefixes
-  })
-  return prefixes
-}
-
 try {
   execSync('git fetch --unshallow', { cwd, stdio: 'pipe' })
 } catch {
@@ -204,12 +170,4 @@ try {
   }
 } catch (error) {
   console.error('Failed R2 operations:', error.message)
-}
-try {
-  const purged = await purgeCache()
-  if (purged?.length) {
-    console.info(`Cache purged for ${plural(purged.length, 'prefix', 'prefixes')}`)
-  }
-} catch (error) {
-  console.error('Failed to purge cache:', error.message)
 }
