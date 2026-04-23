@@ -47,7 +47,7 @@ const iconLibraries = {
 }
 const menuFile = join(generatedDir, 'menu.js')
 const outputDir = join(cwd, '.next')
-const outputFile = join(outputDir, 'timestamps.json')
+const timestampsFile = join(generatedDir, 'timestamps.json')
 const pluralRules = new Intl.PluralRules('en-US')
 const plural = (count, singular, pluralForm) => `${count} ${pluralRules.select(count) === 'one' ? singular : pluralForm}`
 
@@ -212,11 +212,12 @@ try {
 } catch {
   console.info('Repository already unshallowed or fully cloned')
 }
+mkdirSync(generatedDir, { recursive: true })
 mkdirSync(outputDir, { recursive: true })
 rmSync(fetchCacheDir, { force: true, recursive: true })
 try {
   const timestamps = getTimestamps()
-  writeFileSync(outputFile, JSON.stringify(timestamps))
+  writeFileSync(timestampsFile, JSON.stringify(timestamps))
   console.info(`Generated timestamps for ${Object.keys(timestamps).length} files`)
 } catch (error) {
   console.error('Failed to generate timestamps:', error.message)

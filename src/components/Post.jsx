@@ -50,6 +50,7 @@ async function fetchMetadata(collection) {
     const { objects } = await object.json()
     return objects
   })()
+  promise.catch(() => metadataCache.delete(collection.metadataKey))
   metadataCache.set(collection.metadataKey, promise)
   return promise
 }
