@@ -38,3 +38,4 @@ node_modules/
 .dev.vars
 .wrangler/
 src/generated/menu.js
+src/generated/timestamps.json

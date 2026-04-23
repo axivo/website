@@ -6,11 +6,10 @@
  * and h1 headings use the PageTitle component with copy-page support.
  */
 
-import { readFileSync } from 'node:fs'
-import { join } from 'node:path'
 import * as websiteComponents from '@axivo/website'
 import { useMDXComponents as getDocsMDXComponents } from 'nextra-theme-docs'
 import { withGitHubAlert } from 'nextra/components'
+import timestamps from './src/generated/timestamps.json' with { type: 'json' }
 import { Callout } from './src/components/mdx/Callout'
 import { Ordered, Unordered } from './src/components/mdx/List'
 import { PageTitle } from './src/components/mdx/PageTitle'
@@ -18,16 +17,6 @@ import { SourceCodeSetter } from './src/components/mdx/SourceCode'
 
 const docsComponents = getDocsMDXComponents()
 const NextraWrapper = docsComponents.wrapper
-
-let timestamps = {}
-try {
-  timestamps = JSON.parse(readFileSync(join(process.cwd(), '.next/timestamps.json'), 'utf8'))
-  const pluralRules = new Intl.PluralRules('en-US')
-  const plural = (count, singular, pluralForm) => `${count} ${pluralRules.select(count) === 'one' ? singular : pluralForm}`
-  console.info(`Loaded timestamps for ${plural(Object.keys(timestamps).length, 'file', 'files')}`)
-} catch {
-  console.info('Waiting for timestamps generation ...')
-}
 
 /**
  * Returns merged MDX components with custom overrides.
