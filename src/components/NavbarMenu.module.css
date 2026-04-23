@@ -40,11 +40,11 @@
 }
 
 .menuItemDescription {
-  @apply text-xs text-gray-500 dark:text-gray-400;
+  @apply text-xs text-gray-500 dark:text-gray-400 whitespace-nowrap overflow-hidden text-ellipsis;
 }
 
 .menuItemText {
-  @apply flex flex-col;
+  @apply flex flex-col min-w-0;
 }
 
 .menuItemTitle {
