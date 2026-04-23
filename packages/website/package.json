@@ -24,6 +24,9 @@
       "types": "./k3s-cluster.d.ts",
       "import": "./k3s-cluster.js"
     },
+    "./menu": {
+      "import": "./menu.js"
+    },
     "./page": {
       "import": "./page.js"
     }
