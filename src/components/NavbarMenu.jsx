@@ -13,14 +13,10 @@ import cn from 'clsx'
 import NextLink from 'next/link'
 import { ArrowRightIcon, LinkArrowIcon } from 'nextra/icons'
 import { useEffect, useRef, useState } from 'react'
-import * as FiIcons from 'react-icons/fi'
-import * as GoIcons from 'react-icons/go'
 import * as SiIcons from 'react-icons/si'
 import styles from './NavbarMenu.module.css'
 
 const libraries = {
-  fi: FiIcons,
-  go: GoIcons,
   si: SiIcons
 }
 
