@@ -93,33 +93,18 @@ async function purgeCache() {
 }
 
 /**
- * Warms a single URL by issuing a GET request. Returns timing and
- * cache status information for logging.
+ * Warms a single URL by issuing a GET request. Throws on network
+ * failure; returns status and timing on success.
  *
  * @param {string} path - Path to warm, relative to base URL
- * @returns {Promise<{path: string, status: number, duration: number, opennextCache?: string, error?: string}>}
+ * @returns {Promise<{path: string, status: number, duration: number}>}
  */
 async function warm(path) {
-  const url = `${baseUrl}${path}`
   const start = Date.now()
-  try {
-    const response = await fetch(url, { method: 'GET' })
-    const duration = Date.now() - start
-    await response.text()
-    return {
-      path,
-      status: response.status,
-      duration,
-      opennextCache: response.headers.get('x-opennext-cache') || 'unknown'
-    }
-  } catch (error) {
-    return {
-      path,
-      status: 0,
-      duration: Date.now() - start,
-      error: error.message
-    }
-  }
+  const response = await fetch(`${baseUrl}${path}`, { method: 'GET' })
+  const duration = Date.now() - start
+  await response.text()
+  return { path, status: response.status, duration }
 }
 
 execSync('npx wrangler deploy', { stdio: 'inherit' })
@@ -139,14 +124,21 @@ try {
 }
 if (cachePaths.length) {
   console.info(`Warming ${plural(cachePaths.length, 'path', 'paths')} on ${baseUrl}`)
-  const results = await Promise.all(cachePaths.map(warm))
-  for (const result of results) {
-    if (result.error) {
-      console.warn(`  ${result.path} — FAILED in ${result.duration}ms (${result.error})`)
+  const settled = await Promise.allSettled(cachePaths.map(warm))
+  let succeeded = 0
+  for (const [index, outcome] of settled.entries()) {
+    const path = cachePaths[index]
+    if (outcome.status === 'fulfilled') {
+      const { status, duration } = outcome.value
+      if (status >= 200 && status < 400) {
+        succeeded += 1
+        console.info(`Warmed '${path}' path in ${duration}ms`)
+      } else {
+        console.warn(`Failed to warm '${path}' path with status ${status}`)
+      }
     } else {
-      console.info(`  ${result.path} — ${result.status} in ${result.duration}ms (opennext: ${result.opennextCache})`)
+      console.warn(`Failed to warm '${path}' path: ${outcome.reason.message}`)
     }
   }
-  const succeeded = results.filter(r => r.status >= 200 && r.status < 400).length
   console.info(`Warmed ${succeeded} of ${plural(cachePaths.length, 'path', 'paths')}`)
 }
