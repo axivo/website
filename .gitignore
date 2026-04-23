@@ -37,3 +37,4 @@ node_modules/
 # Wrangler
 .dev.vars
 .wrangler/
+src/generated/menu.js
