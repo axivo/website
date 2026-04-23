@@ -26,21 +26,32 @@ const months = [
 ]
 const postsPageSize = 20
 
+const metadataCache = new Map()
+
 /**
  * Reads a collection's metadata manifest directly from R2 via the
  * CONTENT_BUCKET binding. Avoids the HTTP self-fetch that would route
- * the request back through the Worker for no benefit.
+ * the request back through the Worker for no benefit. Memoizes the
+ * in-flight promise by metadataKey so concurrent callers share one
+ * R2 fetch for the lifetime of the process — safe because the manifest
+ * is immutable within a deploy.
  *
  * @param {object} collection - Collection descriptor with metadataKey
  * @returns {Promise<object[]>} Array of R2 metadata objects
  */
 async function fetchMetadata(collection) {
-  const { getCloudflareContext } = await import('@opennextjs/cloudflare')
-  const { env } = await getCloudflareContext({ async: true })
-  const object = await env.CONTENT_BUCKET.get(collection.metadataKey)
-  if (!object) return []
-  const { objects } = await object.json()
-  return objects
+  const cached = metadataCache.get(collection.metadataKey)
+  if (cached) return cached
+  const promise = (async () => {
+    const { getCloudflareContext } = await import('@opennextjs/cloudflare')
+    const { env } = await getCloudflareContext({ async: true })
+    const object = await env.CONTENT_BUCKET.get(collection.metadataKey)
+    if (!object) return []
+    const { objects } = await object.json()
+    return objects
+  })()
+  metadataCache.set(collection.metadataKey, promise)
+  return promise
 }
 
 /**

@@ -13,6 +13,7 @@ import remarkParse from 'remark-parse'
 import { SafeMdxRenderer } from 'safe-mdx'
 import { unified } from 'unified'
 import { Meta } from './Meta'
+import { renderNode } from './mdx/renderNode'
 import styles from './PostCard.module.css'
 
 /**
@@ -48,7 +49,7 @@ function PostCard({ collection, post, readMore = 'Read more' }) {
       )}
       {description && (
         <div className={styles.description}>
-          <SafeMdxRenderer components={components} mdast={unified().use(remarkParse).use(remarkMdx).parse(description)} />
+          <SafeMdxRenderer components={components} mdast={unified().use(remarkParse).use(remarkMdx).parse(description)} renderNode={renderNode} />
         </div>
       )}
       {readMore && (
