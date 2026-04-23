@@ -87,7 +87,7 @@ function Callout({ type = 'default', author, href, children }) {
  */
 function stripLabel(children) {
   const items = Children.toArray(children)
-  if (items.length > 0 && isValidElement(items[0]) && items[0].type === 'b') {
+  if (items.length && isValidElement(items[0]) && items[0].type === 'b') {
     return items.slice(1)
   }
   return children
