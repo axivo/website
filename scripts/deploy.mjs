@@ -2,11 +2,13 @@
  * @fileoverview Deploy script for Cloudflare Workers deployment.
  *
  * Entry point for the Cloudflare build pipeline's deploy step.
- * Performs three operations in order:
+ * Performs four operations in order:
  * 1. Deploys the Worker via wrangler.
  * 2. Purges Cloudflare edge cache for configured route prefixes so
  *    stale entries from the previous deploy are removed.
- * 3. Warms the Worker's caches.default by issuing parallel GET requests
+ * 3. Purges the R2 bucket cache prefix so orphaned incremental cache
+ *    entries from previous build IDs do not accumulate.
+ * 4. Warms the Worker's caches.default by issuing parallel GET requests
  *    to hot URLs, populating the nearest edge. Smart Tiered Cache
  *    propagates the warm state to other edges on first miss.
  *
@@ -17,6 +19,7 @@
  */
 
 import { execSync } from 'node:child_process'
+import { DeleteObjectsCommand, ListObjectsV2Command, S3Client } from '@aws-sdk/client-s3'
 import Cloudflare from 'cloudflare'
 import { cloudflare, domain, repository } from '../src/config/variables/global.js'
 
@@ -93,6 +96,48 @@ async function purgeCache() {
 }
 
 /**
+ * Deletes every object under the cache prefix in the content bucket so
+ * orphaned entries from previous build IDs do not accumulate. Each
+ * deploy writes fresh entries under the new build ID prefix, making
+ * the old ones unreachable.
+ *
+ * @returns {Promise<number|null>} Number of deleted objects, or null if skipped or failed
+ */
+async function purgeBucketCache() {
+  if (!process.env.R2_ENDPOINT) {
+    console.info('R2 credentials not found, skipping bucket cache purge')
+    return null
+  }
+  const s3 = new S3Client({
+    region: 'auto',
+    endpoint: process.env.R2_ENDPOINT,
+    credentials: {
+      accessKeyId: process.env.R2_ACCESS_KEY_ID,
+      secretAccessKey: process.env.R2_SECRET_ACCESS_KEY
+    }
+  })
+  let deleted = 0
+  let continuationToken
+  do {
+    const list = await s3.send(new ListObjectsV2Command({
+      Bucket: cloudflare.bucket.name,
+      ContinuationToken: continuationToken,
+      Prefix: cloudflare.bucket.cache.prefix
+    }))
+    const objects = (list.Contents || []).map(obj => ({ Key: obj.Key }))
+    if (objects.length) {
+      await s3.send(new DeleteObjectsCommand({
+        Bucket: cloudflare.bucket.name,
+        Delete: { Objects: objects }
+      }))
+      deleted += objects.length
+    }
+    continuationToken = list.IsTruncated ? list.NextContinuationToken : undefined
+  } while (continuationToken)
+  return deleted
+}
+
+/**
  * Warms a single URL by issuing a GET request. Throws on network
  * failure; returns status and timing on success.
  *
@@ -115,6 +160,14 @@ try {
   }
 } catch (error) {
   console.warn(`Failed to purge cache: ${error.message}`)
+}
+try {
+  const deleted = await purgeBucketCache()
+  if (deleted !== null) {
+    console.info(`Bucket cache purged for ${plural(deleted, 'object', 'objects')}`)
+  }
+} catch (error) {
+  console.warn(`Failed to purge bucket cache: ${error.message}`)
 }
 let cachePaths = []
 try {
