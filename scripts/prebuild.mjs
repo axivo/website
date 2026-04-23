@@ -24,16 +24,6 @@ import { meta as blog } from '@axivo/website/blog'
 import { meta as claude } from '@axivo/website/claude'
 
 const bucket = cloudflare.bucket.name
-const cwd = process.cwd()
-const contentDir = join(cwd, 'src/content')
-const fetchCacheDir = join(cwd, '.next', 'cache', 'fetch-cache')
-const generatedDir = join(cwd, 'src/generated')
-const menuFile = join(generatedDir, 'menu.js')
-const outputDir = join(cwd, '.next')
-const outputFile = join(outputDir, 'timestamps.json')
-const pluralRules = new Intl.PluralRules('en-US')
-const plural = (count, singular, pluralForm) => `${count} ${pluralRules.select(count) === 'one' ? singular : pluralForm}`
-
 const collections = [
   {
     bucketPrefix: `src/content/${claude.source.path}/${claude.reflections.path}/`,
@@ -46,6 +36,15 @@ const collections = [
     name: blog.source.path
   }
 ]
+const cwd = process.cwd()
+const contentDir = join(cwd, 'src/content')
+const fetchCacheDir = join(cwd, '.next', 'cache', 'fetch-cache')
+const generatedDir = join(cwd, 'src/generated')
+const menuFile = join(generatedDir, 'menu.js')
+const outputDir = join(cwd, '.next')
+const outputFile = join(outputDir, 'timestamps.json')
+const pluralRules = new Intl.PluralRules('en-US')
+const plural = (count, singular, pluralForm) => `${count} ${pluralRules.select(count) === 'one' ? singular : pluralForm}`
 
 /**
  * Discovers _menu.js files under src/content/ and generates a registry
