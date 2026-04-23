@@ -195,5 +195,5 @@ if (cachePaths.length) {
       console.warn(`Failed to warm '${path}' path: ${outcome.reason.message}`)
     }
   }
-  console.info(`Warmed ${succeeded} of ${plural(cachePaths.length, 'path', 'paths')}`)
+  console.info(`Warmed ${succeeded} of ${plural(cachePaths.length, 'website path', 'website paths')}`)
 }
