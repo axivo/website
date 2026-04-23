@@ -123,7 +123,7 @@ try {
   console.warn(`Failed to fetch sitemap: ${error.message}`)
 }
 if (cachePaths.length) {
-  console.info(`Warming ${plural(cachePaths.length, 'path', 'paths')} on ${baseUrl}`)
+  console.info(`Warming ${plural(cachePaths.length, 'website path', 'website paths')} ...`)
   const settled = await Promise.allSettled(cachePaths.map(warm))
   let succeeded = 0
   for (const [index, outcome] of settled.entries()) {
