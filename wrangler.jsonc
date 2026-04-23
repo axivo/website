@@ -28,6 +28,14 @@
       "binding": "CONTENT_BUCKET",
       "bucket_name": "axivo-website",
       "remote": true
+    },
+    {
+      "binding": "NEXT_INC_CACHE_R2_BUCKET",
+      "bucket_name": "axivo-website",
+      "remote": true
     }
-  ]
+  ],
+  "vars": {
+    "NEXT_INC_CACHE_R2_PREFIX": "cache"
+  }
 }

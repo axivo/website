@@ -22,6 +22,9 @@ export const analytics = {
 
 export const cloudflare = {
   bucket: {
+    cache: {
+      prefix: 'cache/'
+    },
     metadata: {
       blog: 'metadata/blog.json',
       reflections: 'metadata/reflections.json'
