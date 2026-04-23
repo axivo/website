@@ -6,12 +6,13 @@
  * Uses force-static to support Next.js static export.
  */
 
-export const dynamic = 'force-static'
 import { meta as blog } from '@axivo/website/blog'
 import { meta as claude } from '@axivo/website/claude'
 import { domain } from '@axivo/website/global'
 import { meta as cluster } from '@axivo/website/k3s-cluster'
 import { getPageMap } from 'nextra/page-map'
+
+export const dynamic = 'force-static'
 
 /**
  * Recursively extracts route paths from Nextra page map items.

@@ -10,8 +10,9 @@
  * entries without needing an explicit purge.
  */
 
-export { BucketCachePurge, DOQueueHandler, DOShardedTagCache } from '../.open-next/worker.js'
 import worker from '../.open-next/worker.js'
+
+export { BucketCachePurge, DOQueueHandler, DOShardedTagCache } from '../.open-next/worker.js'
 
 let buildId
 
