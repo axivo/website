@@ -3,11 +3,13 @@
  *
  * Entry point for the Cloudflare build pipeline's deploy step.
  * Performs four operations in order:
- * 1. Deploys the Worker via wrangler.
- * 2. Purges Cloudflare edge cache for configured route prefixes so
+ * 1. Purges the R2 bucket cache prefix so orphaned incremental cache
+ *    entries from previous build IDs are cleared before the new
+ *    deploy populates fresh entries.
+ * 2. Deploys the Worker via wrangler. OpenNext's deploy step populates
+ *    the R2 incremental cache with the new build's prerendered pages.
+ * 3. Purges Cloudflare edge cache for configured route prefixes so
  *    stale entries from the previous deploy are removed.
- * 3. Purges the R2 bucket cache prefix so orphaned incremental cache
- *    entries from previous build IDs do not accumulate.
  * 4. Warms the Worker's caches.default by issuing parallel GET requests
  *    to hot URLs, populating the nearest edge. Smart Tiered Cache
  *    propagates the warm state to other edges on first miss.
@@ -152,6 +154,14 @@ async function warm(path) {
   return { path, status: response.status, duration }
 }
 
+try {
+  const deleted = await purgeBucketCache()
+  if (deleted !== null) {
+    console.info(`Bucket cache purged for ${plural(deleted, 'object', 'objects')}`)
+  }
+} catch (error) {
+  console.warn(`Failed to purge bucket cache: ${error.message}`)
+}
 execSync('npx wrangler deploy', { stdio: 'inherit' })
 try {
   const purged = await purgeCache()
@@ -160,14 +170,6 @@ try {
   }
 } catch (error) {
   console.warn(`Failed to purge cache: ${error.message}`)
-}
-try {
-  const deleted = await purgeBucketCache()
-  if (deleted !== null) {
-    console.info(`Bucket cache purged for ${plural(deleted, 'object', 'objects')}`)
-  }
-} catch (error) {
-  console.warn(`Failed to purge bucket cache: ${error.message}`)
 }
 let cachePaths = []
 try {
