@@ -15,7 +15,7 @@
 
 import { dirname, join } from 'node:path'
 import { execSync } from 'node:child_process'
-import { mkdirSync, rmSync, writeFileSync } from 'node:fs'
+import { mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
 import { config } from 'dotenv'
 import fg from 'fast-glob'
 import { HeadObjectCommand, ListObjectsV2Command, PutObjectCommand, S3Client } from '@aws-sdk/client-s3'
@@ -40,6 +40,11 @@ const cwd = process.cwd()
 const contentDir = join(cwd, 'src/content')
 const fetchCacheDir = join(cwd, '.next', 'cache', 'fetch-cache')
 const generatedDir = join(cwd, 'src/generated')
+const iconLibraries = {
+  fi: 'react-icons/fi',
+  go: 'react-icons/go',
+  si: 'react-icons/si'
+}
 const menuFile = join(generatedDir, 'menu.js')
 const outputDir = join(cwd, '.next')
 const outputFile = join(outputDir, 'timestamps.json')
@@ -47,31 +52,70 @@ const pluralRules = new Intl.PluralRules('en-US')
 const plural = (count, singular, pluralForm) => `${count} ${pluralRules.select(count) === 'one' ? singular : pluralForm}`
 
 /**
- * Discovers _menu.js files under src/content/ and generates a registry
- * module at src/generated/menu.js. Each discovered file becomes a
- * static import keyed by its directory path ('' for root, 'claude', etc).
- * Missing files produce no import, so deleting a _menu.js cleanly
- * removes it from the registry on the next prebuild run.
+ * Discovers _menu.js files under src/content/ and generates a combined
+ * registry module at src/generated/menu.js. The module exports two maps:
  *
- * @returns {Promise<number>} Number of _menu.js files discovered
+ *   - `menus` — keyed by directory path ('' for root, 'claude', etc)
+ *     pointing at each _menu.js's default export.
+ *   - `icons` — keyed by icon spec (e.g. 'si/SiClaude') pointing at the
+ *     resolved react-icons component. Only icons actually referenced in
+ *     _menu.js files are imported, keeping the bundle minimal.
+ *
+ * Missing files produce no import, so adding or removing a _menu.js (or
+ * an icon inside one) flows through the next prebuild run with no other
+ * code edits.
+ *
+ * @returns {Promise<{iconCount: number, menuCount: number}>}
  */
 async function generateMenu() {
   const matches = await fg('**/_menu.{js,jsx,ts,tsx}', { cwd: contentDir })
   const sorted = matches.sort((a, b) => a.localeCompare(b))
   const entries = sorted.map((match, index) => {
     const key = dirname(match) === '.' ? '' : dirname(match)
-    return { key, identifier: `menu${index}`, path: match }
+    return { identifier: `menu${index}`, key, path: match }
   })
-  const imports = entries
+  const iconSpecs = new Set()
+  for (const { path } of entries) {
+    const body = readFileSync(join(contentDir, path), 'utf8')
+    for (const match of body.matchAll(/icon:\s*['"]([a-z]+\/[A-Z]\w+)['"]/g)) {
+      iconSpecs.add(match[1])
+    }
+  }
+  const iconsByLibrary = {}
+  for (const spec of iconSpecs) {
+    const [library, name] = spec.split('/')
+    if (!iconLibraries[library]) {
+      console.warn(`[generateMenu] unknown icon library prefix '${library}' in spec '${spec}'`)
+      continue
+    }
+    iconsByLibrary[library] ||= []
+    iconsByLibrary[library].push(name)
+  }
+  const menuImports = entries
     .map(({ identifier, path }) => `import ${identifier} from '../content/${path}'`)
     .join('\n')
-  const map = entries
+  const iconImports = Object.entries(iconsByLibrary)
+    .map(([library, names]) => `import { ${names.sort().join(', ')} } from '${iconLibraries[library]}'`)
+    .join('\n')
+  const menuMap = entries
     .map(({ key, identifier }) => `  '${key}': ${identifier}`)
     .join(',\n')
-  const source = `${imports}\n\nexport const menus = {\n${map}\n}\n`
+  const iconMap = [...iconSpecs]
+    .sort()
+    .map(spec => `  '${spec}': ${spec.split('/')[1]}`)
+    .join(',\n')
+  const source = [
+    iconImports,
+    menuImports,
+    '',
+    `export const icons = {\n${iconMap}\n}`,
+    '',
+    `export const menus = {\n${menuMap}\n}`,
+    ''
+  ].join('\n')
   mkdirSync(generatedDir, { recursive: true })
   writeFileSync(menuFile, source)
-  return entries.length
+  return { iconCount: iconSpecs.size, menuCount: entries.length }
 }
 
 /**
@@ -179,8 +223,8 @@ try {
   process.exit(1)
 }
 try {
-  const count = await generateMenu()
-  console.info(`Generated menu registry for ${plural(count, 'menu', 'menus')}`)
+  const { iconCount, menuCount } = await generateMenu()
+  console.info(`Generated menu registry for ${plural(iconCount, 'icon', 'icons')} and ${plural(menuCount, 'menu', 'menus')}`)
 } catch (error) {
   console.error('Failed to generate menu registry:', error.message)
   process.exit(1)

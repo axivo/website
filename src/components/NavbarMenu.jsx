@@ -13,18 +13,13 @@ import cn from 'clsx'
 import NextLink from 'next/link'
 import { ArrowRightIcon, LinkArrowIcon } from 'nextra/icons'
 import { useEffect, useRef, useState } from 'react'
-import * as SiIcons from 'react-icons/si'
+import { icons } from '@axivo/website/menu'
 import styles from './NavbarMenu.module.css'
-
-const libraries = {
-  si: SiIcons
-}
 
 function resolveIcon(spec) {
   if (!spec) return null
   if (typeof spec !== 'string') return spec
-  const [library, name] = spec.split('/')
-  return libraries[library]?.[name] ?? null
+  return icons[spec] ?? null
 }
 
 function NavbarMenu({ title, items }) {

@@ -14,7 +14,7 @@
 
 import { useCopy } from 'nextra/hooks'
 import { useConfig } from 'nextra-theme-docs'
-import { menus } from '../generated/menu'
+import { menus } from '@axivo/website/menu'
 import { NavbarMenu } from './NavbarMenu'
 import { useSourceCode } from './SourceCode'
 
