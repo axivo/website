@@ -13,23 +13,17 @@
  * Usage: node scripts/prebuild.mjs
  */
 
-import { HeadObjectCommand, ListObjectsV2Command, PutObjectCommand, S3Client } from '@aws-sdk/client-s3'
-import { config } from 'dotenv'
+import { dirname, join } from 'node:path'
 import { execSync } from 'node:child_process'
 import { mkdirSync, rmSync, writeFileSync } from 'node:fs'
-import { join } from 'node:path'
+import { config } from 'dotenv'
+import fg from 'fast-glob'
+import { HeadObjectCommand, ListObjectsV2Command, PutObjectCommand, S3Client } from '@aws-sdk/client-s3'
+import { cloudflare } from '../src/config/variables/global.js'
 import { meta as blog } from '../src/config/variables/blog.js'
 import { meta as claude } from '../src/config/variables/claude.js'
-import { cloudflare } from '../src/config/variables/global.js'
 
 const bucket = cloudflare.bucket.name
-const cwd = process.cwd()
-const fetchCacheDir = join(cwd, '.next', 'cache', 'fetch-cache')
-const outputDir = join(cwd, '.next')
-const outputFile = join(outputDir, 'timestamps.json')
-const pluralRules = new Intl.PluralRules('en-US')
-const plural = (count, singular, pluralForm) => `${count} ${pluralRules.select(count) === 'one' ? singular : pluralForm}`
-
 const collections = [
   {
     bucketPrefix: `src/content/${claude.source.path}/${claude.reflections.path}/`,
@@ -42,6 +36,43 @@ const collections = [
     name: blog.source.path
   }
 ]
+const cwd = process.cwd()
+const contentDir = join(cwd, 'src/content')
+const fetchCacheDir = join(cwd, '.next', 'cache', 'fetch-cache')
+const generatedDir = join(cwd, 'src/generated')
+const menuFile = join(generatedDir, 'menu.js')
+const outputDir = join(cwd, '.next')
+const outputFile = join(outputDir, 'timestamps.json')
+const pluralRules = new Intl.PluralRules('en-US')
+const plural = (count, singular, pluralForm) => `${count} ${pluralRules.select(count) === 'one' ? singular : pluralForm}`
+
+/**
+ * Discovers _menu.js files under src/content/ and generates a registry
+ * module at src/generated/menu.js. Each discovered file becomes a
+ * static import keyed by its directory path ('' for root, 'claude', etc).
+ * Missing files produce no import, so deleting a _menu.js cleanly
+ * removes it from the registry on the next prebuild run.
+ *
+ * @returns {Promise<number>} Number of _menu.js files discovered
+ */
+async function generateMenu() {
+  const matches = await fg('**/_menu.{js,jsx,ts,tsx}', { cwd: contentDir })
+  const sorted = matches.sort((a, b) => a.localeCompare(b))
+  const entries = sorted.map((match, index) => {
+    const key = dirname(match) === '.' ? '' : dirname(match)
+    return { key, identifier: `menu${index}`, path: match }
+  })
+  const imports = entries
+    .map(({ identifier, path }) => `import ${identifier} from '../content/${path}'`)
+    .join('\n')
+  const map = entries
+    .map(({ key, identifier }) => `  '${key}': ${identifier}`)
+    .join(',\n')
+  const source = `${imports}\n\nexport const menus = {\n${map}\n}\n`
+  mkdirSync(generatedDir, { recursive: true })
+  writeFileSync(menuFile, source)
+  return entries.length
+}
 
 /**
  * Generates metadata manifest and uploads it to R2.
@@ -145,6 +176,13 @@ try {
   console.info(`Generated timestamps for ${Object.keys(timestamps).length} files`)
 } catch (error) {
   console.error('Failed to generate timestamps:', error.message)
+  process.exit(1)
+}
+try {
+  const count = await generateMenu()
+  console.info(`Generated menu registry for ${plural(count, 'menu', 'menus')}`)
+} catch (error) {
+  console.error('Failed to generate menu registry:', error.message)
   process.exit(1)
 }
 try {

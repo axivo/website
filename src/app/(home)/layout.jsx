@@ -5,10 +5,10 @@
  * AXIVO logo navbar, sidebar from page map, search, and shared footer.
  */
 
-import { footer, Search, Subnavbar } from '@axivo/website'
+import { footer, Navbar, NavbarMenuItems, Search, Subnavbar } from '@axivo/website'
 import { meta, repository } from '@axivo/website/global'
 import { getPageMap } from 'nextra/page-map'
-import { Layout, Navbar } from 'nextra-theme-docs'
+import { Layout } from 'nextra-theme-docs'
 
 /**
  * Home section layout with docs theme, logo navbar, and sidebar.
@@ -27,7 +27,9 @@ async function PageLayout({ children }) {
           </>
         }
         projectLink={`https://${repository.home}`}
-      />
+      >
+        <NavbarMenuItems />
+      </Navbar>
       <Subnavbar />
     </>
   )

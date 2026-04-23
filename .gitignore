@@ -1,6 +1,5 @@
 # Claude
 .claude/
-**/claude/reflections/[0-9][0-9][0-9][0-9]/
 
 # Environment
 .env
@@ -38,3 +37,4 @@ node_modules/
 # Wrangler
 .dev.vars
 .wrangler/
+src/generated/menu.js

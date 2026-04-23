@@ -16,7 +16,7 @@ import cn from 'clsx'
 import NextLink from 'next/link'
 import { ArrowRightIcon } from 'nextra/icons'
 import { Fragment, useEffect, useRef } from 'react'
-import { Explore } from './Explore'
+import { ExploreMenu } from './ExploreMenu'
 import { GoHome } from 'react-icons/go'
 import { useConfig } from 'nextra-theme-docs'
 import { usePathname } from 'next/navigation'
@@ -117,7 +117,7 @@ function Subnavbar({ activePath: activePathProp } = {}) {
             )
           })}
         </div>
-        <Explore />
+        <ExploreMenu />
       </div>
     </div>
   )
