@@ -13,7 +13,7 @@ import cn from 'clsx'
 import { Anchor } from 'nextra/components'
 import { useFSRoute } from 'nextra/hooks'
 import { useConfig } from 'nextra-theme-docs'
-import { menus } from '../generated/menus'
+import { menus } from '../generated/menu'
 import { NavbarMenu } from './NavbarMenu'
 
 const linkClass = cn(

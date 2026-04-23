@@ -16,9 +16,9 @@
  * Usage: node scripts/deploy.mjs
  */
 
-import Cloudflare from 'cloudflare'
-import { cloudflare, domain, repository } from '../src/config/variables/global.js'
 import { execSync } from 'node:child_process'
+import Cloudflare from 'cloudflare'
+import { cloudflare, domain, repository } from '@axivo/website/global'
 
 const baseUrl = `${domain.protocol}://${domain.name}`
 const pluralRules = new Intl.PluralRules('en-US')

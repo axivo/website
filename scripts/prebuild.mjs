@@ -13,22 +13,22 @@
  * Usage: node scripts/prebuild.mjs
  */
 
-import { HeadObjectCommand, ListObjectsV2Command, PutObjectCommand, S3Client } from '@aws-sdk/client-s3'
-import { config } from 'dotenv'
-import fg from 'fast-glob'
+import { dirname, join } from 'node:path'
 import { execSync } from 'node:child_process'
 import { mkdirSync, rmSync, writeFileSync } from 'node:fs'
-import { dirname, join } from 'node:path'
-import { meta as blog } from '../src/config/variables/blog.js'
-import { meta as claude } from '../src/config/variables/claude.js'
-import { cloudflare } from '../src/config/variables/global.js'
+import { config } from 'dotenv'
+import fg from 'fast-glob'
+import { HeadObjectCommand, ListObjectsV2Command, PutObjectCommand, S3Client } from '@aws-sdk/client-s3'
+import { cloudflare } from '@axivo/website/global'
+import { meta as blog } from '@axivo/website/blog'
+import { meta as claude } from '@axivo/website/claude'
 
 const bucket = cloudflare.bucket.name
 const cwd = process.cwd()
 const contentDir = join(cwd, 'src/content')
 const fetchCacheDir = join(cwd, '.next', 'cache', 'fetch-cache')
 const generatedDir = join(cwd, 'src/generated')
-const menusFile = join(generatedDir, 'menus.js')
+const menuFile = join(generatedDir, 'menu.js')
 const outputDir = join(cwd, '.next')
 const outputFile = join(outputDir, 'timestamps.json')
 const pluralRules = new Intl.PluralRules('en-US')
@@ -49,14 +49,14 @@ const collections = [
 
 /**
  * Discovers _menu.js files under src/content/ and generates a registry
- * module at src/generated/menus.js. Each discovered file becomes a
+ * module at src/generated/menu.js. Each discovered file becomes a
  * static import keyed by its directory path ('' for root, 'claude', etc).
  * Missing files produce no import, so deleting a _menu.js cleanly
  * removes it from the registry on the next prebuild run.
  *
  * @returns {Promise<number>} Number of _menu.js files discovered
  */
-async function generateMenus() {
+async function generateMenu() {
   const matches = await fg('**/_menu.{js,jsx,ts,tsx}', { cwd: contentDir })
   const sorted = matches.sort((a, b) => a.localeCompare(b))
   const entries = sorted.map((match, index) => {
@@ -71,7 +71,7 @@ async function generateMenus() {
     .join(',\n')
   const source = `${imports}\n\nexport const menus = {\n${map}\n}\n`
   mkdirSync(generatedDir, { recursive: true })
-  writeFileSync(menusFile, source)
+  writeFileSync(menuFile, source)
   return entries.length
 }
 
@@ -180,7 +180,7 @@ try {
   process.exit(1)
 }
 try {
-  const count = await generateMenus()
+  const count = await generateMenu()
   console.info(`Generated menu registry for ${plural(count, 'menu', 'menus')}`)
 } catch (error) {
   console.error('Failed to generate menu registry:', error.message)
