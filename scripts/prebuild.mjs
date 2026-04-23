@@ -19,9 +19,9 @@ import { mkdirSync, rmSync, writeFileSync } from 'node:fs'
 import { config } from 'dotenv'
 import fg from 'fast-glob'
 import { HeadObjectCommand, ListObjectsV2Command, PutObjectCommand, S3Client } from '@aws-sdk/client-s3'
-import { cloudflare } from '@axivo/website/global'
-import { meta as blog } from '@axivo/website/blog'
-import { meta as claude } from '@axivo/website/claude'
+import { cloudflare } from '../src/config/variables/global.js'
+import { meta as blog } from '../src/config/variables/blog.js'
+import { meta as claude } from '../src/config/variables/claude.js'
 
 const bucket = cloudflare.bucket.name
 const collections = [
