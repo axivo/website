@@ -3,11 +3,11 @@
  *
  * Entry point for the Cloudflare build pipeline's deploy step.
  * Performs four operations in order:
- * 1. Purges the R2 bucket cache prefix so orphaned incremental cache
- *    entries from previous build IDs are cleared before the new
- *    deploy populates fresh entries.
+ * 1. Purges the KV incremental cache namespace so orphaned entries
+ *    from previous build IDs are cleared before the new deploy
+ *    populates fresh entries.
  * 2. Deploys the Worker via wrangler. OpenNext's deploy step populates
- *    the R2 incremental cache with the new build's prerendered pages.
+ *    the KV incremental cache with the new build's prerendered pages.
  * 3. Purges Cloudflare edge cache for configured route prefixes so
  *    stale entries from the previous deploy are removed.
  * 4. Warms the Worker's caches.default by issuing parallel GET requests
@@ -21,7 +21,6 @@
  */
 
 import { execSync } from 'node:child_process'
-import { DeleteObjectsCommand, ListObjectsV2Command, S3Client } from '@aws-sdk/client-s3'
 import Cloudflare from 'cloudflare'
 import { cloudflare, domain, repository } from '../src/config/variables/global.js'
 
@@ -141,48 +140,6 @@ async function purgeKvCache() {
     }
     cursor = list.result_info?.cursor
   } while (cursor)
-  return deleted
-}
-
-/**
- * Deletes every object under the cache prefix in the content bucket so
- * orphaned entries from previous build IDs do not accumulate. Each
- * deploy writes fresh entries under the new build ID prefix, making
- * the old ones unreachable.
- *
- * @returns {Promise<number|null>} Number of deleted objects, or null if skipped or failed
- */
-async function purgeBucketCache() {
-  if (!process.env.R2_ENDPOINT) {
-    console.info('R2 credentials not found, skipping bucket cache purge')
-    return null
-  }
-  const s3 = new S3Client({
-    region: 'auto',
-    endpoint: process.env.R2_ENDPOINT,
-    credentials: {
-      accessKeyId: process.env.R2_ACCESS_KEY_ID,
-      secretAccessKey: process.env.R2_SECRET_ACCESS_KEY
-    }
-  })
-  let deleted = 0
-  let continuationToken
-  do {
-    const list = await s3.send(new ListObjectsV2Command({
-      Bucket: cloudflare.bucket.name,
-      ContinuationToken: continuationToken,
-      Prefix: cloudflare.bucket.cache.prefix
-    }))
-    const objects = (list.Contents || []).map(obj => ({ Key: obj.Key }))
-    if (objects.length) {
-      await s3.send(new DeleteObjectsCommand({
-        Bucket: cloudflare.bucket.name,
-        Delete: { Objects: objects }
-      }))
-      deleted += objects.length
-    }
-    continuationToken = list.IsTruncated ? list.NextContinuationToken : undefined
-  } while (continuationToken)
   return deleted
 }
 

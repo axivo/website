@@ -29,11 +29,6 @@
       "binding": "CONTENT_BUCKET",
       "bucket_name": "axivo-website",
       "remote": true
-    },
-    {
-      "binding": "NEXT_INC_CACHE_R2_BUCKET",
-      "bucket_name": "axivo-website",
-      "remote": true
     }
   ],
   "services": [
@@ -41,8 +36,5 @@
       "binding": "WORKER_SELF_REFERENCE",
       "service": "website"
     }
-  ],
-  "vars": {
-    "NEXT_INC_CACHE_R2_PREFIX": "cache"
-  }
+  ]
 }
