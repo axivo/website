@@ -21,10 +21,6 @@
 import { createElement } from 'react'
 import { Callout } from './Callout'
 
-const ALERT_TYPES = new Set(['caution', 'important', 'note', 'tip', 'warning'])
-
-const ALERT_MARKER = /^\s*\[!(?<name>[A-Z]+)\]\s*$/
-
 /**
  * Detects a GitHub alert marker in a blockquote and renders a Callout.
  * Returns undefined when the blockquote is a plain quote so safe-mdx
@@ -43,12 +39,12 @@ function renderAlert(node, transform) {
   if (firstText?.type !== 'text' || typeof firstText.value !== 'string') {
     return undefined
   }
-  const match = firstText.value.match(ALERT_MARKER)
+  const match = firstText.value.match(/^\s*\[!(?<name>[A-Z]+)\]\s*$/)
   if (!match) {
     return undefined
   }
   const name = match.groups.name.toLowerCase()
-  if (!ALERT_TYPES.has(name)) {
+  if (!['caution', 'important', 'note', 'tip', 'warning'].includes(name)) {
     return undefined
   }
   const capitalizedName = name[0].toUpperCase() + name.slice(1)
