@@ -6,9 +6,9 @@
  * and h1 headings use the PageTitle component with copy-page support.
  */
 
-import * as websiteComponents from '@axivo/website'
 import { useMDXComponents as getDocsMDXComponents } from 'nextra-theme-docs'
 import { withGitHubAlert } from 'nextra/components'
+import * as websiteComponents from '@axivo/website'
 import timestamps from './src/generated/timestamps.json' with { type: 'json' }
 import { Callout } from './src/components/mdx/Callout'
 import { Ordered, Unordered } from './src/components/mdx/List'

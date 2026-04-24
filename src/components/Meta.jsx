@@ -8,8 +8,8 @@
 
 'use client'
 
-import { meta } from '@axivo/website/global'
 import { useConfig } from 'nextra-theme-docs'
+import { meta } from '@axivo/website/global'
 import styles from './Meta.module.css'
 
 /**

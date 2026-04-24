@@ -3,11 +3,14 @@
  *
  * Entry point for the Cloudflare build pipeline's deploy step.
  * Performs four operations in order:
- * 1. Purges the KV incremental cache namespace so orphaned entries
- *    from previous build IDs are cleared before the new deploy
- *    populates fresh entries.
- * 2. Deploys the Worker via wrangler. OpenNext's deploy step populates
- *    the KV incremental cache with the new build's prerendered pages.
+ * 1. Calls the currently-deployed Worker's internal purge endpoint to
+ *    delete orphaned KV incremental cache entries from the previous
+ *    build. The Worker uses its own binding to the KV namespace, so
+ *    no API token is needed in the deploy environment — only the
+ *    shared KV_PURGE_SECRET.
+ * 2. Deploys the new Worker via wrangler. OpenNext's deploy step
+ *    populates the KV incremental cache with the new build's
+ *    prerendered pages.
  * 3. Purges Cloudflare edge cache for configured route prefixes so
  *    stale entries from the previous deploy are removed.
  * 4. Warms the Worker's caches.default by issuing parallel GET requests
@@ -97,49 +100,26 @@ async function purgeCache() {
 }
 
 /**
- * Deletes every key in the KV incremental cache namespace so orphaned
- * entries from previous build IDs do not accumulate. Each deploy writes
- * fresh entries under the new build ID, making the old ones unreachable.
- * Uses Cloudflare's REST API because wrangler KV commands require an
- * interactive shell and the SDK abstracts paging cleanly.
+ * Calls the currently-deployed Worker's internal purge endpoint to
+ * delete every key in the KV incremental cache namespace. The Worker
+ * uses its own binding to perform the deletion, so no API token is
+ * needed here — only the shared KV_PURGE_SECRET both sides agree on.
  *
  * @returns {Promise<number|null>} Number of deleted keys, or null if skipped or failed
  */
 async function purgeKvCache() {
-  if (!process.env.ZONE_API_TOKEN || !process.env.CLOUDFLARE_ACCOUNT_ID) {
-    console.info('Cloudflare credentials not found, skipping KV cache purge')
+  if (!process.env.KV_PURGE_SECRET) {
+    console.info('KV purge secret not found, skipping KV cache purge')
     return null
   }
-  const account = process.env.CLOUDFLARE_ACCOUNT_ID
-  const namespace = cloudflare.kv.namespace.id
-  const base = `https://api.cloudflare.com/client/v4/accounts/${account}/storage/kv/namespaces/${namespace}`
-  const headers = { authorization: `Bearer ${process.env.ZONE_API_TOKEN}`, 'content-type': 'application/json' }
-  let deleted = 0
-  let cursor
-  do {
-    const url = new URL(`${base}/keys`)
-    url.searchParams.set('limit', '1000')
-    if (cursor) url.searchParams.set('cursor', cursor)
-    const listResponse = await fetch(url, { headers })
-    const list = await listResponse.json()
-    if (!list.success) {
-      throw new Error(`KV list failed: ${JSON.stringify(list.errors)}`)
-    }
-    const keys = list.result.map(k => k.name)
-    if (keys.length) {
-      const deleteResponse = await fetch(`${base}/bulk/delete`, {
-        method: 'POST',
-        headers,
-        body: JSON.stringify(keys)
-      })
-      const result = await deleteResponse.json()
-      if (!result.success) {
-        throw new Error(`KV bulk delete failed: ${JSON.stringify(result.errors)}`)
-      }
-      deleted += keys.length
-    }
-    cursor = list.result_info?.cursor
-  } while (cursor)
+  const response = await fetch(`${baseUrl}/__internal/purge-kv-cache`, {
+    method: 'POST',
+    headers: { authorization: `Bearer ${process.env.KV_PURGE_SECRET}` }
+  })
+  if (!response.ok) {
+    throw new Error(`KV purge returned ${response.status} ${response.statusText}`)
+  }
+  const { deleted } = await response.json()
   return deleted
 }
 

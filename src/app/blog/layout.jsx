@@ -5,10 +5,10 @@
  * navbar, sidebar from page map, Algolia search, and shared footer.
  */
 
-import { footer, Navbar, NavbarMenuItems, Search, Subnavbar } from '@axivo/website'
-import { getBlogPageMap, meta, repository, sortYears } from '@axivo/website/blog'
 import { getPageMap, normalizePageMap } from 'nextra/page-map'
 import { Layout } from 'nextra-theme-docs'
+import { footer, Navbar, NavbarMenuItems, Search, Subnavbar } from '@axivo/website'
+import { getBlogPageMap, meta, repository, sortYears } from '@axivo/website/blog'
 
 const metadata = {
   title: {

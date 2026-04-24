@@ -16,16 +16,16 @@
  *   - tagsSectionTitle: heading shown above post cards on tag pages
  */
 
-import { PostCard, Subnavbar, useMDXComponents as getMDXComponents } from '@axivo/website'
 import GithubSlugger from 'github-slugger'
-import { generateStaticParamsFor, importPage } from 'nextra/pages'
 import { remarkMermaid } from '@theguild/remark-mermaid'
 import remarkMdx from 'remark-mdx'
 import remarkParse from 'remark-parse'
 import { SafeMdxRenderer } from 'safe-mdx'
 import { unified } from 'unified'
-import { renderNode } from './mdx/renderNode'
+import { generateStaticParamsFor, importPage } from 'nextra/pages'
+import { PostCard, Subnavbar, useMDXComponents as getMDXComponents } from '@axivo/website'
 import { filterByDate, getPosts, Posts, postsPageSize, renderIndexPage } from './Post'
+import { renderNode } from './mdx/renderNode'
 
 const components = getMDXComponents()
 const nextraStaticParams = generateStaticParamsFor('mdxPath')

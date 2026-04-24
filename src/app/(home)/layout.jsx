@@ -5,10 +5,10 @@
  * AXIVO logo navbar, sidebar from page map, search, and shared footer.
  */
 
-import { footer, Navbar, NavbarMenuItems, Search, Subnavbar } from '@axivo/website'
-import { meta, repository } from '@axivo/website/global'
 import { getPageMap } from 'nextra/page-map'
 import { Layout } from 'nextra-theme-docs'
+import { footer, Navbar, NavbarMenuItems, Search, Subnavbar } from '@axivo/website'
+import { meta, repository } from '@axivo/website/global'
 
 /**
  * Home section layout with docs theme, logo navbar, and sidebar.

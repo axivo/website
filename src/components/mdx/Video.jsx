@@ -12,9 +12,6 @@ import { useEffect, useRef } from 'react'
 import 'plyr/dist/plyr.css'
 import styles from './Video.module.css'
 
-/**
- * Plyr controls configuration matching minimalist layout.
- */
 const plyrControls = [
   'play-large',
   'play',

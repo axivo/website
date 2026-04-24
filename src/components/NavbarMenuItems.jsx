@@ -11,8 +11,8 @@
 
 import cn from 'clsx'
 import { Anchor } from 'nextra/components'
-import { useFSRoute } from 'nextra/hooks'
 import { useConfig } from 'nextra-theme-docs'
+import { useFSRoute } from 'nextra/hooks'
 import { menus } from '@axivo/website/menu'
 import { NavbarMenu } from './NavbarMenu'
 

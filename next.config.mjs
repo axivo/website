@@ -5,17 +5,18 @@
  * and unoptimized images for static deployment.
  */
 
+import { initOpenNextCloudflareForDev } from '@opennextjs/cloudflare'
 import nextra from 'nextra'
+
+initOpenNextCloudflareForDev()
 
 const withNextra = nextra({
   contentDirBasePath: '/',
   defaultShowCopyCode: true,
   search: false
 })
-
 const nextConfig = withNextra({
   reactStrictMode: true
 })
 
-export { nextConfig as default }
-import('@opennextjs/cloudflare').then(m => m.initOpenNextCloudflareForDev());
+export default nextConfig

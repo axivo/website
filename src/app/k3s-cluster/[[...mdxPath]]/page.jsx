@@ -6,9 +6,9 @@
  * docs wrapper with table of contents and sidebar.
  */
 
-import { useMDXComponents as getMDXComponents } from '@axivo/website'
-import { meta } from '@axivo/website/k3s-cluster'
 import { generateStaticParamsFor, importPage } from 'nextra/pages'
+import { meta } from '@axivo/website/k3s-cluster'
+import { useMDXComponents as getMDXComponents } from '@axivo/website'
 import '../../(home)/page.css'
 
 const components = getMDXComponents()

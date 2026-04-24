@@ -7,8 +7,8 @@
  * pages, and tag pages via the collection descriptor.
  */
 
-import { meta, reflectionsCollection } from '@axivo/website/claude'
 import { createPage } from '@axivo/website/page'
+import { meta, reflectionsCollection } from '@axivo/website/claude'
 import '../../(home)/page.css'
 
 const { generateMetadata, generateStaticParams, Page } = createPage({

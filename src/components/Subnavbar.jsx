@@ -14,12 +14,12 @@
 
 import cn from 'clsx'
 import NextLink from 'next/link'
-import { ArrowRightIcon } from 'nextra/icons'
 import { Fragment, useEffect, useRef } from 'react'
-import { ExploreMenu } from './ExploreMenu'
 import { GoHome } from 'react-icons/go'
+import { ArrowRightIcon } from 'nextra/icons'
 import { useConfig } from 'nextra-theme-docs'
 import { usePathname } from 'next/navigation'
+import { ExploreMenu } from './ExploreMenu'
 import styles from './Subnavbar.module.css'
 
 /**

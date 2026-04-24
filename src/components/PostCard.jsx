@@ -6,12 +6,12 @@
  * (year, month, day) and the reflections landing page.
  */
 
-import { useMDXComponents as getMDXComponents } from '@axivo/website'
 import Link from 'next/link'
 import remarkMdx from 'remark-mdx'
 import remarkParse from 'remark-parse'
 import { SafeMdxRenderer } from 'safe-mdx'
 import { unified } from 'unified'
+import { useMDXComponents as getMDXComponents } from '@axivo/website'
 import { Meta } from './Meta'
 import { renderNode } from './mdx/renderNode'
 import styles from './PostCard.module.css'

@@ -6,10 +6,10 @@
  * Algolia search, and shared footer.
  */
 
-import { footer, Navbar, NavbarMenuItems, Search, Subnavbar } from '@axivo/website'
-import { getReflectionPageMap, meta, repository, sortYears } from '@axivo/website/claude'
 import { getPageMap, normalizePageMap } from 'nextra/page-map'
 import { Layout } from 'nextra-theme-docs'
+import { footer, Navbar, NavbarMenuItems, Search, Subnavbar } from '@axivo/website'
+import { getReflectionPageMap, meta, repository, sortYears } from '@axivo/website/claude'
 
 const metadata = {
   title: {

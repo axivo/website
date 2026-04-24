@@ -20,13 +20,12 @@ import { PostCard } from './PostCard'
 import { PostPage } from './PostPage'
 import { TagGrid } from './Tag'
 
+const metadataCache = new Map()
 const months = [
   'January', 'February', 'March', 'April', 'May', 'June',
   'July', 'August', 'September', 'October', 'November', 'December'
 ]
 const postsPageSize = 20
-
-const metadataCache = new Map()
 
 /**
  * Reads a collection's metadata manifest directly from R2 via the

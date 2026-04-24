@@ -31,7 +31,6 @@ const collection = {
   tagsSectionTitle: meta.source.title,
   template: 'blog'
 }
-
 const Blog = props => <Posts collection={collection} {...props} />
 const getBlogPageMap = () => getPostPageMap(collection)
 const getEntries = () => getPosts(collection)
