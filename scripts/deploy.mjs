@@ -127,8 +127,8 @@ async function purgeKvCache() {
     }
     const keys = list.result.map(k => k.name)
     if (keys.length) {
-      const deleteResponse = await fetch(`${base}/bulk`, {
-        method: 'DELETE',
+      const deleteResponse = await fetch(`${base}/bulk/delete`, {
+        method: 'POST',
         headers,
         body: JSON.stringify(keys)
       })
