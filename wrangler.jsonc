@@ -2,7 +2,7 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "main": "scripts/worker.js",
   "name": "website",
-  "compatibility_date": "2026-04-03",
+  "compatibility_date": "2026-04-24",
   "compatibility_flags": [
     "global_fetch_strictly_public",
     "nodejs_compat"
@@ -14,10 +14,11 @@
   "images": {
     "binding": "IMAGES"
   },
-  "services": [
+  "kv_namespaces": [
     {
-      "binding": "WORKER_SELF_REFERENCE",
-      "service": "website"
+      "binding": "NEXT_INC_CACHE_KV",
+      "id": "48b9b8b3167243678d0b47d68f4cc4f9",
+      "remote": true
     }
   ],
   "observability": {
@@ -28,14 +29,12 @@
       "binding": "CONTENT_BUCKET",
       "bucket_name": "axivo-website",
       "remote": true
-    },
-    {
-      "binding": "NEXT_INC_CACHE_R2_BUCKET",
-      "bucket_name": "axivo-website",
-      "remote": true
     }
   ],
-  "vars": {
-    "NEXT_INC_CACHE_R2_PREFIX": "cache"
-  }
+  "services": [
+    {
+      "binding": "WORKER_SELF_REFERENCE",
+      "service": "website"
+    }
+  ]
 }

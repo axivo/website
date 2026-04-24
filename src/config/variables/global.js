@@ -22,9 +22,6 @@ export const analytics = {
 
 export const cloudflare = {
   bucket: {
-    cache: {
-      prefix: 'cache/'
-    },
     metadata: {
       blog: 'metadata/blog.json',
       reflections: 'metadata/reflections.json'
@@ -36,6 +33,11 @@ export const cloudflare = {
     prefixes: [
       '/'
     ]
+  },
+  kv: {
+    namespace: {
+      id: '48b9b8b3167243678d0b47d68f4cc4f9'
+    }
   }
 }
 

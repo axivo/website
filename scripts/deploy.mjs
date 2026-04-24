@@ -3,11 +3,11 @@
  *
  * Entry point for the Cloudflare build pipeline's deploy step.
  * Performs four operations in order:
- * 1. Purges the R2 bucket cache prefix so orphaned incremental cache
- *    entries from previous build IDs are cleared before the new
- *    deploy populates fresh entries.
+ * 1. Purges the KV incremental cache namespace so orphaned entries
+ *    from previous build IDs are cleared before the new deploy
+ *    populates fresh entries.
  * 2. Deploys the Worker via wrangler. OpenNext's deploy step populates
- *    the R2 incremental cache with the new build's prerendered pages.
+ *    the KV incremental cache with the new build's prerendered pages.
  * 3. Purges Cloudflare edge cache for configured route prefixes so
  *    stale entries from the previous deploy are removed.
  * 4. Warms the Worker's caches.default by issuing parallel GET requests
@@ -21,7 +21,6 @@
  */
 
 import { execSync } from 'node:child_process'
-import { DeleteObjectsCommand, ListObjectsV2Command, S3Client } from '@aws-sdk/client-s3'
 import Cloudflare from 'cloudflare'
 import { cloudflare, domain, repository } from '../src/config/variables/global.js'
 
@@ -98,44 +97,49 @@ async function purgeCache() {
 }
 
 /**
- * Deletes every object under the cache prefix in the content bucket so
- * orphaned entries from previous build IDs do not accumulate. Each
- * deploy writes fresh entries under the new build ID prefix, making
- * the old ones unreachable.
+ * Deletes every key in the KV incremental cache namespace so orphaned
+ * entries from previous build IDs do not accumulate. Each deploy writes
+ * fresh entries under the new build ID, making the old ones unreachable.
+ * Uses Cloudflare's REST API because wrangler KV commands require an
+ * interactive shell and the SDK abstracts paging cleanly.
  *
- * @returns {Promise<number|null>} Number of deleted objects, or null if skipped or failed
+ * @returns {Promise<number|null>} Number of deleted keys, or null if skipped or failed
  */
-async function purgeBucketCache() {
-  if (!process.env.R2_ENDPOINT) {
-    console.info('R2 credentials not found, skipping bucket cache purge')
+async function purgeKvCache() {
+  if (!process.env.ZONE_API_TOKEN || !process.env.CLOUDFLARE_ACCOUNT_ID) {
+    console.info('Cloudflare credentials not found, skipping KV cache purge')
     return null
   }
-  const s3 = new S3Client({
-    region: 'auto',
-    endpoint: process.env.R2_ENDPOINT,
-    credentials: {
-      accessKeyId: process.env.R2_ACCESS_KEY_ID,
-      secretAccessKey: process.env.R2_SECRET_ACCESS_KEY
-    }
-  })
+  const account = process.env.CLOUDFLARE_ACCOUNT_ID
+  const namespace = cloudflare.kv.namespace.id
+  const base = `https://api.cloudflare.com/client/v4/accounts/${account}/storage/kv/namespaces/${namespace}`
+  const headers = { authorization: `Bearer ${process.env.ZONE_API_TOKEN}`, 'content-type': 'application/json' }
   let deleted = 0
-  let continuationToken
+  let cursor
   do {
-    const list = await s3.send(new ListObjectsV2Command({
-      Bucket: cloudflare.bucket.name,
-      ContinuationToken: continuationToken,
-      Prefix: cloudflare.bucket.cache.prefix
-    }))
-    const objects = (list.Contents || []).map(obj => ({ Key: obj.Key }))
-    if (objects.length) {
-      await s3.send(new DeleteObjectsCommand({
-        Bucket: cloudflare.bucket.name,
-        Delete: { Objects: objects }
-      }))
-      deleted += objects.length
+    const url = new URL(`${base}/keys`)
+    url.searchParams.set('limit', '1000')
+    if (cursor) url.searchParams.set('cursor', cursor)
+    const listResponse = await fetch(url, { headers })
+    const list = await listResponse.json()
+    if (!list.success) {
+      throw new Error(`KV list failed: ${JSON.stringify(list.errors)}`)
     }
-    continuationToken = list.IsTruncated ? list.NextContinuationToken : undefined
-  } while (continuationToken)
+    const keys = list.result.map(k => k.name)
+    if (keys.length) {
+      const deleteResponse = await fetch(`${base}/bulk`, {
+        method: 'DELETE',
+        headers,
+        body: JSON.stringify(keys)
+      })
+      const result = await deleteResponse.json()
+      if (!result.success) {
+        throw new Error(`KV bulk delete failed: ${JSON.stringify(result.errors)}`)
+      }
+      deleted += keys.length
+    }
+    cursor = list.result_info?.cursor
+  } while (cursor)
   return deleted
 }
 
@@ -155,12 +159,12 @@ async function warm(path) {
 }
 
 try {
-  const deleted = await purgeBucketCache()
+  const deleted = await purgeKvCache()
   if (deleted !== null) {
-    console.info(`Bucket cache purged for ${plural(deleted, 'object', 'objects')}`)
+    console.info(`KV cache purged for ${plural(deleted, 'key', 'keys')}`)
   }
 } catch (error) {
-  console.warn(`Failed to purge bucket cache: ${error.message}`)
+  console.warn(`Failed to purge KV cache: ${error.message}`)
 }
 execSync('npx wrangler deploy', { stdio: 'inherit' })
 try {
