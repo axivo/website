@@ -5,8 +5,9 @@
  * Uses force-static to support Next.js static export.
  */
 
-export const dynamic = 'force-static'
 import { crawlers, domain } from '@axivo/website/global'
+
+export const dynamic = 'force-static'
 
 /**
  * Generates robots.txt configuration.

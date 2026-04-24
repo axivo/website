@@ -5,10 +5,11 @@
  * a sitemap with URL and change frequency per route.
  */
 
-export const dynamic = 'force-static'
-import { meta } from '@axivo/website/claude'
-import { domain } from '@axivo/website/global'
 import { getPageMap } from 'nextra/page-map'
+import { domain } from '@axivo/website/global'
+import { meta } from '@axivo/website/claude'
+
+export const dynamic = 'force-static'
 
 /**
  * Recursively extracts route paths from Nextra page map items.

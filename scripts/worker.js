@@ -8,10 +8,17 @@
  * the cache to avoid serving HTML payloads to RSC clients. Cache keys
  * include the deploy BUILD_ID so each deploy naturally invalidates stale
  * entries without needing an explicit purge.
+ *
+ * Exposes an internal `/__internal/purge-kv-cache` route guarded by the
+ * KV_PURGE_SECRET shared secret. When called with the correct bearer
+ * token, the Worker uses its NEXT_INC_CACHE_KV binding to list and
+ * delete every key in the OpenNext incremental cache namespace. This
+ * avoids needing an API token in the deploy environment.
  */
 
-export { BucketCachePurge, DOQueueHandler, DOShardedTagCache } from '../.open-next/worker.js'
 import worker from '../.open-next/worker.js'
+
+export { BucketCachePurge, DOQueueHandler, DOShardedTagCache } from '../.open-next/worker.js'
 
 let buildId
 
@@ -52,6 +59,33 @@ function keyFor(request, id) {
 }
 
 /**
+ * Lists and deletes every key in the OpenNext incremental cache KV
+ * namespace via the Worker's own binding. Paginates through list results
+ * and fires concurrent deletes per page. Authenticated by a shared
+ * secret passed in the Authorization header.
+ *
+ * @param {Request} request - Incoming request
+ * @param {object} env - Worker bindings including NEXT_INC_CACHE_KV and KV_PURGE_SECRET
+ * @returns {Promise<Response>} JSON response with the number of deleted keys, or 403 on auth failure
+ */
+async function purgeKvCache(request, env) {
+  const expected = env.KV_PURGE_SECRET
+  const provided = request.headers.get('authorization')
+  if (!expected || provided !== `Bearer ${expected}`) {
+    return new Response('forbidden', { status: 403 })
+  }
+  let cursor
+  let deleted = 0
+  do {
+    const list = await env.NEXT_INC_CACHE_KV.list({ cursor })
+    await Promise.all(list.keys.map(k => env.NEXT_INC_CACHE_KV.delete(k.name)))
+    deleted += list.keys.length
+    cursor = list.list_complete ? undefined : list.cursor
+  } while (cursor)
+  return Response.json({ deleted })
+}
+
+/**
  * Worker fetch handler. Serves cached GET responses from caches.default
  * when available, otherwise delegates to the OpenNext handler and caches the
  * result if the origin response is marked cacheable. Non-GET requests
@@ -64,6 +98,10 @@ function keyFor(request, id) {
  */
 export default {
   async fetch(request, env, ctx) {
+    const url = new URL(request.url)
+    if (url.pathname === '/__internal/purge-kv-cache' && request.method === 'POST') {
+      return purgeKvCache(request, env)
+    }
     if (request.method !== 'GET') {
       return worker.fetch(request, env, ctx)
     }

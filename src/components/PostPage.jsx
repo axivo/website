@@ -43,12 +43,10 @@ function PostPage({ children, pageSize, sectionId, totalPages }) {
     if (!tocList || !sectionItem) {
       return
     }
-    // Remove existing h3 entries
     const existingH3s = tocList.querySelectorAll('li > a.x\\:ms-3')
     for (const el of existingH3s) {
       el.closest('li')?.remove()
     }
-    // Build new TOC entries from visible cards
     const container = containerRef.current
     if (!container) {
       return
@@ -72,7 +70,6 @@ function PostPage({ children, pageSize, sectionId, totalPages }) {
       tocLinks.set(id, a)
     }
     tocLinksRef.current = tocLinks
-    // Set up IntersectionObserver for scroll-spy highlighting
     if (observerRef.current) {
       observerRef.current.disconnect()
     }

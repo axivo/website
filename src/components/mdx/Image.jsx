@@ -6,8 +6,8 @@
  * in a styled card with optional caption content via children.
  */
 
-import { cloudflare } from '@axivo/website/global'
 import Link from 'next/link'
+import { cloudflare } from '@axivo/website/global'
 import styles from './Image.module.css'
 
 const cdnPattern = /^\/(?:claude\/reflections|blog)\/\d{4}\/\d{2}\//
