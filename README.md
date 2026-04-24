@@ -64,6 +64,7 @@ At runtime, the page component reads the stub frontmatter and fetches the full M
 Create a `.dev.vars` file in the project root for local builds:
 
 ```shell
+KV_PURGE_SECRET=<your-kv-purge-secret>
 R2_ACCESS_KEY_ID=<your-access-key-id>
 R2_SECRET_ACCESS_KEY=<your-secret-access-key>
 R2_ENDPOINT=<your-r2-endpoint>
