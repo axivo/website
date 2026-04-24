@@ -6,9 +6,9 @@
   "scripts": {
     "build": "next build",
     "deploy": "node --env-file=.env.production --no-warnings scripts/deploy.mjs",
-    "dev": "next dev",
+    "dev": "NODE_OPTIONS='--no-webstorage' next dev",
     "prebuild": "node --env-file=.env.production --no-warnings scripts/prebuild.mjs",
-    "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview"
+    "preview": "NODE_OPTIONS='--no-webstorage' opennextjs-cloudflare build && opennextjs-cloudflare preview"
   },
   "dependencies": {
     "@axivo/website": "file:./packages/website",
