@@ -141,7 +141,7 @@ async function warm(path) {
 try {
   const deleted = await purgeKvCache()
   if (deleted !== null) {
-    console.info(`Remote KV cache purged for ${plural(deleted, 'key', 'keys')}`)
+    console.info(`Remote KV cache purged for ${plural(deleted, 'asset', 'assets')}`)
   }
 } catch (error) {
   console.warn(`Failed to purge remote KV cache: ${error.message}`)
