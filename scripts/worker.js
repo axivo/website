@@ -124,9 +124,12 @@ export default {
       response.ok &&
       !/no-store|no-cache|private/i.test(cacheControl) &&
       !response.headers.has('set-cookie')
-    if (cacheable) {
-      await cache.put(cacheKey, response.clone())
+    if (!cacheable) {
+      return response
     }
-    return response
+    const normalized = new Response(response.body, response)
+    normalized.headers.set('vary', 'Accept-Encoding')
+    await cache.put(cacheKey, normalized.clone())
+    return normalized
   }
 }
