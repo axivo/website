@@ -141,19 +141,19 @@ async function warm(path) {
 try {
   const deleted = await purgeKvCache()
   if (deleted !== null) {
-    console.info(`KV cache purged for ${plural(deleted, 'key', 'keys')}`)
+    console.info(`Remote KV cache purged for ${plural(deleted, 'key', 'keys')}`)
   }
 } catch (error) {
-  console.warn(`Failed to purge KV cache: ${error.message}`)
+  console.warn(`Failed to purge remote KV cache: ${error.message}`)
 }
 execSync('npx wrangler deploy', { stdio: 'inherit' })
 try {
   const purged = await purgeCache()
   if (purged?.length) {
-    console.info(`Cache purged for ${plural(purged.length, 'prefix', 'prefixes')}`)
+    console.info(`Cloudflare cache purged for ${plural(purged.length, 'prefix', 'prefixes')}`)
   }
 } catch (error) {
-  console.warn(`Failed to purge cache: ${error.message}`)
+  console.warn(`Failed to purge Cloudflare cache: ${error.message}`)
 }
 let cachePaths = []
 try {
