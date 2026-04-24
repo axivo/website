@@ -9,6 +9,21 @@
  * include the deploy BUILD_ID so each deploy naturally invalidates stale
  * entries without needing an explicit purge.
  *
+ * HEAD requests are internally rewritten to GET for cache lookup and
+ * origin fetch, with the body stripped on return. OpenNext's generated
+ * handler mishandles HEAD on cold-cache state (first hit after a purge,
+ * cold PoPs), returning 503. Rewriting to GET lets HEAD populate the
+ * Worker's own `caches.default` on cold miss and avoids the broken path.
+ *
+ * Responses with status codes in the `statusTtl` map have their
+ * cache-control rewritten before being written to the edge and returned
+ * upstream. OpenNext's incremental cache replays 404s with the same
+ * `s-maxage=31536000` it applies to prerendered 2xx pages, which would
+ * pin stale 404s at the edge for a year. The rewrite sets status-appropriate
+ * TTLs (60s for 404/410, 24h for 301/308, no-store for 302/307 and 5xx)
+ * and acts as a safety floor against origin cache-control misconfiguration
+ * on 5xx responses.
+ *
  * Exposes an internal `/__internal/purge-kv-cache` route guarded by the
  * KV_PURGE_SECRET shared secret. When called with the correct bearer
  * token, the Worker uses its NEXT_INC_CACHE_KV binding to list and
@@ -21,6 +36,18 @@ import worker from '../.open-next/worker.js'
 export { BucketCachePurge, DOQueueHandler, DOShardedTagCache } from '../.open-next/worker.js'
 
 let buildId
+const statusTtl = {
+  301: 86400,
+  302: 0,
+  307: 0,
+  308: 86400,
+  404: 60,
+  410: 60,
+  500: 0,
+  502: 0,
+  503: 0,
+  504: 0
+}
 
 /**
  * Fetches the deploy BUILD_ID from the static assets binding once per isolate.
@@ -86,10 +113,57 @@ async function purgeKvCache(request, env) {
 }
 
 /**
+ * Sets the TTL on responses whose status appears in `statusTtl` by
+ * rewriting the cache-control header. OpenNext's incremental cache
+ * replays prerendered 404s with the same `s-maxage=31536000` it applies
+ * to 2xx pages; without this rewrite, stale 404s and transient 5xx
+ * failures would pin at the edge for a year. For positive-TTL entries
+ * (3xx/4xx) the origin may opt out via `no-store|no-cache|private`, but
+ * 5xx (ttl === 0) always rewrites as a safety floor that origin
+ * cache-control cannot override.
+ *
+ * @param {Response} response - Origin response
+ * @returns {Response} Response with rewritten cache-control when applicable
+ */
+function setTtl(response) {
+  const ttl = statusTtl[response.status]
+  if (ttl === undefined) {
+    return response
+  }
+  const cacheControl = response.headers.get('cache-control') || ''
+  if (ttl > 0 && /no-store|no-cache|private/i.test(cacheControl)) {
+    return response
+  }
+  const normalized = new Response(response.body, response)
+  normalized.headers.set(
+    'cache-control',
+    ttl === 0 ? 'no-store' : `public, s-maxage=${ttl}, stale-while-revalidate=${ttl * 5}`
+  )
+  return normalized
+}
+
+/**
+ * Strips the response body for HEAD requests while preserving status
+ * and headers. HEAD is rewritten to GET upstream for cache and origin
+ * lookup; the body is dropped here before returning to the client.
+ *
+ * @param {Response} response - Full GET response
+ * @param {boolean} isHead - Whether the original request was HEAD
+ * @returns {Response} Body-less response for HEAD, original otherwise
+ */
+function stripBody(response, isHead) {
+  if (!isHead) {
+    return response
+  }
+  return new Response(null, { status: response.status, headers: response.headers })
+}
+
+/**
  * Worker fetch handler. Serves cached GET responses from caches.default
- * when available, otherwise delegates to the OpenNext handler and caches the
- * result if the origin response is marked cacheable. Non-GET requests
- * bypass the cache to match Cache API semantics (only GET is cacheable).
+ * when available, otherwise delegates to the OpenNext handler and caches
+ * the result if the origin response is marked cacheable. HEAD requests
+ * are rewritten to GET for cache lookup and origin fetch, with the body
+ * stripped on return. Non-GET, non-HEAD methods bypass the cache.
  *
  * @param {Request} request - Incoming request
  * @param {object} env - Worker bindings
@@ -102,34 +176,39 @@ export default {
     if (url.pathname === '/__internal/purge-kv-cache' && request.method === 'POST') {
       return purgeKvCache(request, env)
     }
-    if (request.method !== 'GET') {
+    const isHead = request.method === 'HEAD'
+    if (request.method !== 'GET' && !isHead) {
       return worker.fetch(request, env, ctx)
     }
     if (request.headers.has('rsc') || request.headers.has('next-router-prefetch')) {
       return worker.fetch(request, env, ctx)
     }
+    const lookupRequest = isHead
+      ? new Request(request.url, { method: 'GET', headers: request.headers })
+      : request
     const id = await getBuildId(request, env)
     const cache = caches.default
-    const cacheKey = id ? keyFor(request, id) : request
+    const cacheKey = id ? keyFor(lookupRequest, id) : lookupRequest
     const cached = await cache.match(cacheKey)
     if (cached) {
-      return cached
+      return stripBody(cached, isHead)
     }
-    const response = await worker.fetch(request, env, ctx)
+    const originResponse = await worker.fetch(lookupRequest, env, ctx)
+    const response = setTtl(originResponse)
     const cacheControl = response.headers.get('cache-control') || ''
     const maxAgeMatch = cacheControl.match(/(?:^|,\s*)(?:s-maxage|max-age)\s*=\s*(\d+)/i)
     const maxAge = maxAgeMatch ? parseInt(maxAgeMatch[1], 10) : 0
     const cacheable =
       maxAge > 0 &&
-      response.ok &&
+      (response.ok || response.status in statusTtl) &&
       !/no-store|no-cache|private/i.test(cacheControl) &&
       !response.headers.has('set-cookie')
     if (!cacheable) {
-      return response
+      return stripBody(response, isHead)
     }
     const normalized = new Response(response.body, response)
     normalized.headers.set('vary', 'Accept-Encoding')
     await cache.put(cacheKey, normalized.clone())
-    return normalized
+    return stripBody(normalized, isHead)
   }
 }
