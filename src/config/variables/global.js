@@ -36,6 +36,11 @@ export const cloudflare = {
     prefixes: [
       '/'
     ]
+  },
+  kv: {
+    namespace: {
+      id: '48b9b8b3167243678d0b47d68f4cc4f9'
+    }
   }
 }
 
