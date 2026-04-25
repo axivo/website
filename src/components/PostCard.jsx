@@ -13,7 +13,7 @@ import { SafeMdxRenderer } from 'safe-mdx'
 import { unified } from 'unified'
 import { useMDXComponents as getMDXComponents } from '@axivo/website'
 import { Meta } from './Meta'
-import { renderNode } from './mdx/renderNode'
+import { dispatch } from './mdx/renderers/node'
 import styles from './PostCard.module.css'
 
 /**
@@ -49,7 +49,7 @@ function PostCard({ collection, post, readMore = 'Read more' }) {
       )}
       {description && (
         <div className={styles.description}>
-          <SafeMdxRenderer components={components} mdast={unified().use(remarkParse).use(remarkMdx).parse(description)} renderNode={renderNode} />
+          <SafeMdxRenderer components={components} mdast={unified().use(remarkParse).use(remarkMdx).parse(description)} renderNode={dispatch} />
         </div>
       )}
       {readMore && (

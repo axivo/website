@@ -32,6 +32,62 @@ const pluralRules = new Intl.PluralRules('en-US')
 const plural = (count, singular, pluralForm) => `${count} ${pluralRules.select(count) === 'one' ? singular : pluralForm}`
 
 /**
+ * Runs the deploy pipeline in four phases: KV cache purge through the
+ * currently-deployed Worker, wrangler deploy, edge cache purge, and
+ * post-deploy warming of the hot path list. Cache purge and warming
+ * failures are logged but do not stop the pipeline; a failed wrangler
+ * deploy exits non-zero and fails the build.
+ *
+ * @returns {Promise<void>}
+ */
+async function deploy() {
+  try {
+    const deleted = await purgeKvCache()
+    if (deleted !== null) {
+      console.info(`Remote KV cache purged for ${plural(deleted, 'asset', 'assets')}`)
+    }
+  } catch (error) {
+    console.warn(`Failed to purge remote KV cache: ${error.message}`)
+  }
+  execSync('npx wrangler deploy', { stdio: 'inherit' })
+  try {
+    const purged = await purgeCache()
+    if (purged?.length) {
+      console.info(`Cloudflare cache purged for ${plural(purged.length, 'prefix', 'prefixes')}`)
+    }
+  } catch (error) {
+    console.warn(`Failed to purge Cloudflare cache: ${error.message}`)
+  }
+  let cachePaths = []
+  try {
+    cachePaths = await getCachePaths()
+  } catch (error) {
+    console.warn(`Failed to fetch sitemap: ${error.message}`)
+  }
+  if (!cachePaths.length) {
+    return
+  }
+  console.info(`Warming ${plural(cachePaths.length, 'website path', 'website paths')} ...`)
+  const settled = await Promise.allSettled(cachePaths.map(warm))
+  let succeeded = 0
+  for (const [index, outcome] of settled.entries()) {
+    const path = cachePaths[index]
+    if (outcome.status === 'fulfilled') {
+      const { status, duration } = outcome.value
+      if (status >= 200 && status < 400) {
+        succeeded += 1
+        console.info(`Warmed '${path}' path in ${duration}ms`)
+      } else {
+        console.warn(`Failed to warm '${path}' path with status ${status}`)
+      }
+    } else {
+      console.warn(`Failed to warm '${path}' path: ${outcome.reason.message}`)
+    }
+  }
+  console.info(`Warmed ${succeeded} of ${plural(cachePaths.length, 'website path', 'website paths')}`)
+}
+
+/**
  * Fetches the site's sitemap and extracts URL paths up to two segments
  * deep. Uses the deployed sitemap as the authoritative source of
  * warmable pages so the hot path list stays in sync with the actual
@@ -138,46 +194,4 @@ async function warm(path) {
   return { path, status: response.status, duration }
 }
 
-try {
-  const deleted = await purgeKvCache()
-  if (deleted !== null) {
-    console.info(`Remote KV cache purged for ${plural(deleted, 'asset', 'assets')}`)
-  }
-} catch (error) {
-  console.warn(`Failed to purge remote KV cache: ${error.message}`)
-}
-execSync('npx wrangler deploy', { stdio: 'inherit' })
-try {
-  const purged = await purgeCache()
-  if (purged?.length) {
-    console.info(`Cloudflare cache purged for ${plural(purged.length, 'prefix', 'prefixes')}`)
-  }
-} catch (error) {
-  console.warn(`Failed to purge Cloudflare cache: ${error.message}`)
-}
-let cachePaths = []
-try {
-  cachePaths = await getCachePaths()
-} catch (error) {
-  console.warn(`Failed to fetch sitemap: ${error.message}`)
-}
-if (cachePaths.length) {
-  console.info(`Warming ${plural(cachePaths.length, 'website path', 'website paths')} ...`)
-  const settled = await Promise.allSettled(cachePaths.map(warm))
-  let succeeded = 0
-  for (const [index, outcome] of settled.entries()) {
-    const path = cachePaths[index]
-    if (outcome.status === 'fulfilled') {
-      const { status, duration } = outcome.value
-      if (status >= 200 && status < 400) {
-        succeeded += 1
-        console.info(`Warmed '${path}' path in ${duration}ms`)
-      } else {
-        console.warn(`Failed to warm '${path}' path with status ${status}`)
-      }
-    } else {
-      console.warn(`Failed to warm '${path}' path: ${outcome.reason.message}`)
-    }
-  }
-  console.info(`Warmed ${succeeded} of ${plural(cachePaths.length, 'website path', 'website paths')}`)
-}
+await deploy()

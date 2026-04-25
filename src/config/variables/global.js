@@ -22,12 +22,18 @@ export const analytics = {
 
 export const cloudflare = {
   bucket: {
+    cdn: {
+      prefixes: [
+        'blog',
+        'claude/reflections'
+      ],
+      url: 'https://cdn.axivo.com/public'
+    },
     metadata: {
       blog: 'metadata/blog.json',
       reflections: 'metadata/reflections.json'
     },
-    name: 'axivo-website',
-    url: 'https://cdn.axivo.com/public'
+    name: 'axivo-website'
   },
   cache: {
     prefixes: [
