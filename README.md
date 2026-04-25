@@ -11,6 +11,7 @@ For local development and testing, use the following commands:
 npm install
 
 # Preview on Cloudflare Workers runtime
+npx wrangler login
 FORCE_COLOR=1 npm run preview 2>&1 | tee "./logs/preview-$(date +%Y-%m-%d_%H-%M-%S).log"
 ```
 
@@ -19,6 +20,10 @@ FORCE_COLOR=1 npm run preview 2>&1 | tee "./logs/preview-$(date +%Y-%m-%d_%H-%M-
 Create a `.dev.vars` file in the project root for local builds:
 
 ```shell
+NEXTJS_ENV=development
+WRANGLER_LOG=debug
+WRANGLER_LOG_PATH=./logs
+
 KV_PURGE_SECRET=<your-kv-purge-secret>
 R2_ACCESS_KEY_ID=<your-access-key-id>
 R2_SECRET_ACCESS_KEY=<your-secret-access-key>
