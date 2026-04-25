@@ -18,7 +18,7 @@ I'm a site reliability engineer specialized in:
 
 ## Architecture
 
-The site is a static Next.js/Nextra application deployed to Cloudflare Workers via OpenNext. Content lives outside the deployment artifact: reflections and blog posts are MDX files in R2, fetched and rendered at request time. Most traffic is absorbed by caches before reaching the Worker. The whole thing runs for the price of a coffee per month.
+The site is a static Next.js/Nextra application deployed to Cloudflare Workers via OpenNext. Content lives outside the deployment artifact: reflections and blog posts are MDX files in R2, fetched and rendered at request time. Cloudflare's zone CDN absorbs warm traffic without invoking the Worker; the Worker only runs on cold misses, post-purge first hits, and dynamic paths (RSC, internal endpoints). The whole thing runs for the price of a coffee per month.
 
 ### Directory Tree
 
@@ -108,10 +108,15 @@ The Worker bundle itself carries only code — no content. Publishing more entri
 
 ### Cache Layers
 
-Three layers, each with a distinct purpose:
+Four layers, each with a distinct purpose. Listed in order of how a request encounters them:
 
+- **Cloudflare zone CDN** — configured via a Cache Rule in the Cloudflare dashboard
+  - First layer a request hits. Stores responses at the PoP keyed by URL.
+  - Cache Rule expression matches `axivo.com` and excludes `/_next/data`, `/__internal`, and RSC requests (`?_rsc=` query string).
+  - Edge TTL set to "Use cache-control header if present" — the rule trusts the Worker's emitted cache-control as the policy, rather than overriding it from the dashboard.
+  - On hit, the Worker is not invoked. The CDN responds directly. This is the dominant path for warm sitemap traffic.
 - **`caches.default`** — managed by `scripts/worker.js`
-  - Per-PoP cache, serves repeat visitors at the edge they hit
+  - Per-PoP cache inside the Worker, used when the zone CDN didn't already have an answer.
   - Cache keys include `BUILD_ID` so deploys invalidate naturally
   - RSC and prefetch requests bypass this layer to avoid serving HTML to clients expecting an RSC stream
 - **OpenNext incremental cache (KV)** — configured in `open-next.config.ts` via `kvIncrementalCache`, backed by the `NEXT_INC_CACHE_KV` binding in `wrangler.jsonc`
@@ -124,6 +129,14 @@ Three layers, each with a distinct purpose:
   - Rejected promises are evicted so a transient failure doesn't poison the isolate
 
 Content sizes and cost economics come from Cloudflare's zero-egress R2 pricing: when a Worker reads an R2 object in the same account, no per-GB charge applies. The architecture is built around this — moving content out of the bundle would trade one bill for another on any other provider.
+
+### Cache Policy
+
+The Worker is the authoritative source for cache policy across all responses. The zone CDN trusts whatever `cache-control` header the Worker sends. Three pieces of policy live in `scripts/worker.js`:
+
+- **`Vary` normalization.** OpenNext emits `Vary: RSC, Next-Router-State-Tree, ...` on prerendered pages. Cloudflare's CDN refuses to cache responses with non-standard `Vary` values. The Worker overwrites `Vary` to `Accept-Encoding` on cacheable responses before returning to the zone, which the CDN honors. RSC and prefetch requests bypass this code path entirely, so the original `Vary` is preserved where it matters semantically.
+- **`statusTtl` and `setTtl`.** A status-keyed table at module scope sets per-status `cache-control` policy on responses leaving the Worker: 60s for 404/410, 24h for 301/308, no-store for 302/307 and all 5xx. For 3xx/4xx, origin retains opt-out via `no-store|no-cache|private`. For 5xx, the rewrite is unconditional — a safety floor that origin cache-control cannot override. Adding or changing policy is a one-line edit to the table.
+- **HEAD as GET.** HEAD requests are rewritten to GET internally for cache lookup and origin fetch, then the body is stripped on return. This routes around an OpenNext bug where HEAD on cold-cache state returns 503, and lets HEAD share cache state with GET so monitoring and health checks see consistent latency.
 
 ### Rendering
 
@@ -214,12 +227,15 @@ Each section-scoped entry point lets a section's code import only what it needs 
 
 A typical request traces this path:
 
-1. GET arrives at a Cloudflare PoP. The Worker wrapper in `scripts/worker.js` runs.
-2. If `caches.default` has the response under the BUILD_ID-scoped key, it's returned immediately. No further work.
-3. If cache misses, OpenNext handles the request. Static asset routes resolve from bundled HTML. Dynamic routes enter the `createPage` factory.
-4. Dynamic entry renders: fetch MDX from R2, parse to MDAST, render via `safe-mdx`, wrap in the Nextra docs layout.
-5. OpenNext stores the response in the KV incremental cache (for other edges) and returns it to the Worker wrapper, which stores it in `caches.default` (for this edge) and returns it to the visitor.
-6. RSC and prefetch requests skip both cache layers and always re-render, because caching one variant under a URL breaks clients expecting the other.
+1. GET arrives at a Cloudflare PoP. The zone CDN checks its cache against the Cache Rule's match expression.
+2. If the zone has a stored response, it's returned directly. The Worker is not invoked. This is the dominant path — sitemap URLs at warm steady state are 100% zone-CDN hits.
+3. If the zone misses, the Worker wrapper in `scripts/worker.js` runs.
+4. If `caches.default` has the response under the BUILD_ID-scoped key, the Worker returns it immediately.
+5. If both caches miss, OpenNext handles the request. Static asset routes resolve from bundled HTML. Dynamic routes enter the `createPage` factory.
+6. Dynamic entry renders: fetch MDX from R2, parse to MDAST, render via `safe-mdx`, wrap in the Nextra docs layout.
+7. The Worker normalizes `Vary` and applies `setTtl` if the response status warrants it, then stores the result in `caches.default` (for this edge) and returns it. OpenNext also stores in the KV incremental cache for other edges. The zone CDN stores the response on its way back to the visitor.
+8. RSC and prefetch requests skip the zone CDN (excluded by the Cache Rule's `?_rsc=` filter) and bypass `caches.default` inside the Worker, always re-rendering, because caching one variant under a URL breaks clients expecting the other.
+9. HEAD requests are rewritten to GET inside the Worker for cache lookup and origin fetch, then the body is stripped on return.
 
 ### Deploy
 
