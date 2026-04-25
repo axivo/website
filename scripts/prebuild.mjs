@@ -52,6 +52,66 @@ const pluralRules = new Intl.PluralRules('en-US')
 const plural = (count, singular, pluralForm) => `${count} ${pluralRules.select(count) === 'one' ? singular : pluralForm}`
 
 /**
+ * Runs the prebuild pipeline in three phases: timestamps from git history,
+ * menu and icon registry from `_menu.js` files under `src/content/`, and
+ * metadata manifests for R2-backed collections. Each phase logs its
+ * progress and exits the process on a failure that should stop the
+ * build. R2 operations are skipped when credentials are not present so
+ * local builds without R2 access still complete.
+ *
+ * @returns {Promise<void>}
+ */
+async function build() {
+  try {
+    execSync('git fetch --unshallow', { cwd, stdio: 'pipe' })
+  } catch {
+    console.info('Repository already unshallowed or fully cloned')
+  }
+  mkdirSync(generatedDir, { recursive: true })
+  mkdirSync(outputDir, { recursive: true })
+  rmSync(fetchCacheDir, { force: true, recursive: true })
+  try {
+    const timestamps = getTimestamps()
+    writeFileSync(timestampsFile, JSON.stringify(timestamps))
+    console.info(`Generated timestamps for ${Object.keys(timestamps).length} files`)
+  } catch (error) {
+    console.error('Failed to generate timestamps:', error.message)
+    process.exit(1)
+  }
+  try {
+    const { iconCount, menuCount } = await generateMenu()
+    console.info(`Generated menu registry for ${plural(iconCount, 'icon', 'icons')} and ${plural(menuCount, 'menu', 'menus')}`)
+  } catch (error) {
+    console.error('Failed to generate menu registry:', error.message)
+    process.exit(1)
+  }
+  try {
+    if (!process.env.R2_ENDPOINT) {
+      config({ path: join(cwd, '.dev.vars') })
+    }
+    if (!process.env.R2_ENDPOINT) {
+      console.info('R2 credentials not found, skipping R2 operations')
+      return
+    }
+    const s3 = new S3Client({
+      region: 'auto',
+      endpoint: process.env.R2_ENDPOINT,
+      credentials: {
+        accessKeyId: process.env.R2_ACCESS_KEY_ID,
+        secretAccessKey: process.env.R2_SECRET_ACCESS_KEY
+      }
+    })
+    for (const collection of collections) {
+      const objects = await listCollectionObjects(s3, collection.bucketPrefix)
+      const metadata = await generateMetadata(s3, collection.metadataKey, objects)
+      console.info(`Generated metadata manifest for ${plural(metadata, `'${collection.name}' object`, `'${collection.name}' objects`)}`)
+    }
+  } catch (error) {
+    console.error('Failed R2 operations:', error.message)
+  }
+}
+
+/**
  * Discovers _menu.js files under src/content/ and generates a combined
  * registry module at src/generated/menu.js. The module exports two maps:
  *
@@ -207,50 +267,4 @@ async function listCollectionObjects(s3, bucketPrefix) {
   return objects
 }
 
-try {
-  execSync('git fetch --unshallow', { cwd, stdio: 'pipe' })
-} catch {
-  console.info('Repository already unshallowed or fully cloned')
-}
-mkdirSync(generatedDir, { recursive: true })
-mkdirSync(outputDir, { recursive: true })
-rmSync(fetchCacheDir, { force: true, recursive: true })
-try {
-  const timestamps = getTimestamps()
-  writeFileSync(timestampsFile, JSON.stringify(timestamps))
-  console.info(`Generated timestamps for ${Object.keys(timestamps).length} files`)
-} catch (error) {
-  console.error('Failed to generate timestamps:', error.message)
-  process.exit(1)
-}
-try {
-  const { iconCount, menuCount } = await generateMenu()
-  console.info(`Generated menu registry for ${plural(iconCount, 'icon', 'icons')} and ${plural(menuCount, 'menu', 'menus')}`)
-} catch (error) {
-  console.error('Failed to generate menu registry:', error.message)
-  process.exit(1)
-}
-try {
-  if (!process.env.R2_ENDPOINT) {
-    config({ path: join(cwd, '.dev.vars') })
-  }
-  if (!process.env.R2_ENDPOINT) {
-    console.info('R2 credentials not found, skipping R2 operations')
-  } else {
-    const s3 = new S3Client({
-      region: 'auto',
-      endpoint: process.env.R2_ENDPOINT,
-      credentials: {
-        accessKeyId: process.env.R2_ACCESS_KEY_ID,
-        secretAccessKey: process.env.R2_SECRET_ACCESS_KEY
-      }
-    })
-    for (const collection of collections) {
-      const objects = await listCollectionObjects(s3, collection.bucketPrefix)
-      const metadata = await generateMetadata(s3, collection.metadataKey, objects)
-      console.info(`Generated metadata manifest for ${plural(metadata, `'${collection.name}' object`, `'${collection.name}' objects`)}`)
-    }
-  }
-} catch (error) {
-  console.error('Failed R2 operations:', error.message)
-}
+await build()
