@@ -38,19 +38,6 @@ export const cloudflare = {
   cache: {
     prefixes: [
       '/'
-    ],
-    warmupPaths: [
-      '/apple-icon.png',
-      '/apple-touch-icon-precomposed.png',
-      '/apple-touch-icon.png',
-      '/claude/sitemap.xml',
-      '/favicon.ico',
-      '/icon.svg',
-      '/icon1.png',
-      '/icon2.png',
-      '/manifest.webmanifest',
-      '/robots.txt',
-      '/sitemap.xml'
     ]
   },
   kv: {
@@ -78,28 +65,6 @@ export const domain = {
 export const meta = {
   brand: {
     name: 'AXIVO'
-  },
-  features: {
-    syntax: [
-      'banner',
-      'bleed',
-      'button',
-      'callout',
-      'cards',
-      'code',
-      'collapse',
-      'featurecard',
-      'filetree',
-      'footnotes',
-      'hero',
-      'image',
-      'mermaid',
-      'steps',
-      'table',
-      'tabs',
-      'var',
-      'video'
-    ]
   },
   profile: {
     architect: {
