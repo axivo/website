@@ -27,6 +27,7 @@ import { unified } from 'unified'
 import { PostCard, Subnavbar, useMDXComponents as getMDXComponents } from '@axivo/website'
 import { remarkMarkAndUnravel } from '@axivo/website/remark'
 import { createDispatch } from './mdx/renderers/node'
+import { createEntrySchema, JsonLd } from './JsonLd'
 import { extractFootnotes } from './mdx/footnotes'
 import { filterByDate, getMetadata, getPosts, Posts, postsPageSize, renderIndexPage } from './Post'
 
@@ -281,10 +282,14 @@ async function renderEntryPage(path, collection) {
     blocks: record?.features?.syntax?.blocks,
     inline: record?.features?.syntax?.inline
   })
+  const entryPath = entryDateSegments(path, collection)
   return (
-    <Wrapper metadata={result.metadata} toc={r2Toc}>
-      <SafeMdxRenderer components={components} mdast={mdast} renderNode={dispatch} />
-    </Wrapper>
+    <>
+      <JsonLd data={createEntrySchema({ collection, metadata: result.metadata, path: entryPath })} />
+      <Wrapper metadata={result.metadata} toc={r2Toc}>
+        <SafeMdxRenderer components={components} mdast={mdast} renderNode={dispatch} />
+      </Wrapper>
+    </>
   )
 }
 
