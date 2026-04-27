@@ -135,11 +135,10 @@ The site is a static Next.js/Nextra application deployed to Cloudflare Workers v
 
 Four scripts in `scripts/`, each running at a different lifecycle stage:
 
-- `deploy.js` — deploy-time, runs after `next build`. Orchestrates the four-step deploy:
+- `deploy.js` — deploy-time, runs after `next build`. Orchestrates the three-step deploy:
   - KV cache purge through the currently-deployed Worker's internal endpoint
   - `wrangler deploy` to ship the new Worker
   - Edge cache purge for configured route prefixes
-  - Warming the hot path list from the deployed sitemap
 - `prebuild.js` — build-time, runs before `next build`. Generates the artifacts the build depends on:
   - Menu and icon registry at `src/generated/menu.js`
   - Timestamps map at `src/generated/timestamps.json` from git history
@@ -314,12 +313,11 @@ Secrets required in `.dev.vars` for the HTTPS path:
 
 ### Deploy
 
-The `npm run deploy` command runs `scripts/deploy.js`, which performs four steps in order:
+The `npm run deploy` command runs `scripts/deploy.js`, which performs three steps in order:
 
 1. **KV purge.** Calls the currently-deployed Worker's internal `/__internal/purge-kv-cache` endpoint with a shared secret (`KV_PURGE_SECRET`). The Worker uses its own KV binding to delete every key from the previous build. No Cloudflare API token needed.
 2. **Wrangler deploy.** Ships the new Worker. OpenNext's deploy step populates the KV namespace with the new build's prerendered pages.
 3. **Edge cache purge.** Clears Cloudflare's CDN cache for configured prefixes via the Cloudflare Cache API.
-4. **Warming.** Fetches `/sitemap.xml`, filters to URLs at path depth ≤ 2 (section roots and listings), issues parallel GETs. The Worker renders them, stores in `caches.default`, and Smart Tiered Cache propagates warm state to other PoPs. Individual entries cache on first-visitor demand.
 
 Secrets required in the deploy environment:
 

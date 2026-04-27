@@ -2,7 +2,7 @@
  * @fileoverview Deploy script for Cloudflare Workers deployment.
  *
  * Entry point for the Cloudflare build pipeline's deploy step.
- * Performs four operations in order:
+ * Performs three operations in order:
  * 1. Calls the currently-deployed Worker's internal purge endpoint to
  *    delete orphaned KV incremental cache entries from the previous
  *    build. The Worker uses its own binding to the KV namespace, so
@@ -13,12 +13,9 @@
  *    prerendered pages.
  * 3. Purges Cloudflare edge cache for configured route prefixes so
  *    stale entries from the previous deploy are removed.
- * 4. Warms the Worker's caches.default by issuing parallel GET requests
- *    to hot URLs, populating the nearest edge. Smart Tiered Cache
- *    propagates the warm state to other edges on first miss.
  *
- * Cache purge and warming failures log a warning but do not fail the
- * pipeline. A failed wrangler deploy exits non-zero and fails the build.
+ * Cache purge failures log a warning but do not fail the pipeline.
+ * A failed wrangler deploy exits non-zero and fails the build.
  *
  * Usage: node scripts/deploy.js
  */
@@ -32,11 +29,10 @@ const pluralRules = new Intl.PluralRules('en-US')
 const plural = (count, singular, pluralForm) => `${count} ${pluralRules.select(count) === 'one' ? singular : pluralForm}`
 
 /**
- * Runs the deploy pipeline in four phases: KV cache purge through the
- * currently-deployed Worker, wrangler deploy, edge cache purge, and
- * post-deploy warming of the hot path list. Cache purge and warming
- * failures are logged but do not stop the pipeline; a failed wrangler
- * deploy exits non-zero and fails the build.
+ * Runs the deploy pipeline in three phases: KV cache purge through the
+ * currently-deployed Worker, wrangler deploy, and edge cache purge.
+ * Cache purge failures are logged but do not stop the pipeline; a
+ * failed wrangler deploy exits non-zero and fails the build.
  *
  * @returns {Promise<void>}
  */
@@ -58,56 +54,6 @@ async function deploy() {
   } catch (error) {
     console.warn(`Failed to purge Cloudflare cache: ${error.message}`)
   }
-  let cachePaths = []
-  try {
-    cachePaths = await getCachePaths()
-  } catch (error) {
-    console.warn(`Failed to fetch sitemap: ${error.message}`)
-  }
-  if (!cachePaths.length) {
-    return
-  }
-  console.info(`Warming ${plural(cachePaths.length, 'website path', 'website paths')} ...`)
-  const settled = await Promise.allSettled(cachePaths.map(warm))
-  let succeeded = 0
-  for (const [index, outcome] of settled.entries()) {
-    const path = cachePaths[index]
-    if (outcome.status === 'fulfilled') {
-      const { status, duration } = outcome.value
-      if (status >= 200 && status < 400) {
-        succeeded += 1
-        console.info(`Warmed '${path}' path in ${duration}ms`)
-      } else {
-        console.warn(`Failed to warm '${path}' path with status ${status}`)
-      }
-    } else {
-      console.warn(`Failed to warm '${path}' path: ${outcome.reason.message}`)
-    }
-  }
-  console.info(`Warmed ${succeeded} of ${plural(cachePaths.length, 'website path', 'website paths')}`)
-}
-
-/**
- * Fetches the site's sitemap and extracts URL paths up to two segments
- * deep. Uses the deployed sitemap as the authoritative source of
- * warmable pages so the hot path list stays in sync with the actual
- * site structure. Deeper content pages cache on first-visitor demand.
- * Adds essential root-level files that never change but are frequently
- * requested by crawlers and browsers.
- *
- * @returns {Promise<string[]>} Array of URL paths relative to base URL
- */
-async function getCachePaths() {
-  const response = await fetch(`${baseUrl}/sitemap.xml`)
-  if (!response.ok) {
-    throw new Error(`Sitemap fetch returned ${response.status}`)
-  }
-  const xml = await response.text()
-  const urls = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m => m[1])
-  const sitemapPaths = urls
-    .map(url => url.replace(baseUrl, '') || '/')
-    .filter(path => path === '/' || path.split('/').filter(Boolean).length <= 2)
-  return [...sitemapPaths, ...cloudflare.cache.warmupPaths]
 }
 
 /**
@@ -169,21 +115,6 @@ async function purgeKvCache() {
   }
   const { deleted } = await response.json()
   return deleted
-}
-
-/**
- * Warms a single URL by issuing a GET request. Throws on network
- * failure; returns status and timing on success.
- *
- * @param {string} path - Path to warm, relative to base URL
- * @returns {Promise<{path: string, status: number, duration: number}>}
- */
-async function warm(path) {
-  const start = Date.now()
-  const response = await fetch(`${baseUrl}${path}`, { method: 'GET' })
-  const duration = Date.now() - start
-  await response.text()
-  return { path, status: response.status, duration }
 }
 
 await deploy()
