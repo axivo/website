@@ -9,6 +9,7 @@ import { getPageMap } from 'nextra/page-map'
 import { Layout } from 'nextra-theme-docs'
 import { footer, Navbar, NavbarMenuItems, Search, Subnavbar } from '@axivo/website'
 import { meta, repository } from '@axivo/website/global'
+import { createSiteSchema, JsonLd } from '../../components/JsonLd'
 
 /**
  * Home section layout with docs theme, logo navbar, and sidebar.
@@ -35,19 +36,22 @@ async function PageLayout({ children }) {
   )
   const pageMap = await getPageMap()
   return (
-    <Layout
-      copyPageButton={false}
-      docsRepositoryBase={`https://${repository.home}/blob/${repository.tag}/docs/content`}
-      editLink={null}
-      feedback={{ link: `https://${repository.home}/discussions` }}
-      footer={footer}
-      navbar={navbar}
-      pageMap={pageMap}
-      search={<Search />}
-      sidebar={{ defaultMenuCollapseLevel: 1 }}
-    >
-      {children}
-    </Layout>
+    <>
+      <JsonLd data={createSiteSchema()} />
+      <Layout
+        copyPageButton={false}
+        docsRepositoryBase={`https://${repository.home}/blob/${repository.tag}/docs/content`}
+        editLink={null}
+        feedback={{ link: `https://${repository.home}/discussions` }}
+        footer={footer}
+        navbar={navbar}
+        pageMap={pageMap}
+        search={<Search />}
+        sidebar={{ defaultMenuCollapseLevel: 1 }}
+      >
+        {children}
+      </Layout>
+    </>
   )
 }
 

@@ -1,11 +1,13 @@
 /**
- * @fileoverview JSON-LD structured data for entry pages.
+ * @fileoverview JSON-LD structured data for the website.
  *
- * Emits Schema.org `BlogPosting` (blog) or `Article` (reflection)
- * markup for each entry so Google can produce rich results. Field
- * selection follows Google's documented recommendations for Article
- * structured data: author, datePublished, headline, image.
+ * Emits Schema.org markup so Google and AI systems can understand
+ * site and content entities:
  *
+ * - `WebSite` + `Person` on the home layout (site identity)
+ * - `BlogPosting` (blog) or `Article` (reflection) on each entry
+ *
+ * Field selection follows Google's documented recommendations.
  * Author profiles come from `meta.profile.architect` (blog) and
  * `meta.profile.instance` (reflection); the schema image is the OG
  * file convention served at `/opengraph-image.png`.
@@ -60,6 +62,35 @@ function createPersonSchema(profile) {
 }
 
 /**
+ * Builds the Schema.org WebSite + Organization graph for the home
+ * layout. Combines site identity with the brand entity via an
+ * `@graph` payload so search engines and AI systems link the site
+ * to its owning organization.
+ *
+ * @returns {object} Schema.org graph with WebSite and Organization entities
+ */
+function createSiteSchema() {
+  const baseUrl = `${domain.protocol}://${domain.name}`
+  const organization = {
+    '@type': 'Organization',
+    name: meta.brand.name,
+    url: baseUrl
+  }
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'WebSite',
+        author: organization,
+        name: meta.brand.name,
+        url: baseUrl
+      },
+      organization
+    ]
+  }
+}
+
+/**
  * Renders a JSON-LD structured data script tag. Replaces `<` with its
  * unicode escape `<` to prevent XSS injection through metadata
  * fields that may contain HTML-like characters.
@@ -77,4 +108,4 @@ function JsonLd({ data }) {
   )
 }
 
-export { createEntrySchema, JsonLd }
+export { createEntrySchema, createSiteSchema, JsonLd }
