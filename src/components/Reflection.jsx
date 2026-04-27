@@ -22,7 +22,7 @@ import {
 
 const collection = {
   contentPrefix: `src/content/${meta.source.path}/${meta.reflections.path}/`,
-  describe: meta.reflections.describe,
+  description: meta.reflections.description,
   metadataEndpoint: `${domain.protocol}://${domain.name}/metadata?collection=reflections`,
   metadataKey: cloudflare.bucket.metadata.reflections,
   routePath: `/${meta.source.path}/${meta.reflections.path}`,

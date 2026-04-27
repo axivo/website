@@ -16,11 +16,11 @@ export const algolia = {
   maxResultsPerGroup: 50
 }
 
-export const analytics = {
-  id: 'G-8N53WYKXE6'
-}
-
 export const cloudflare = {
+  analytics: {
+    enabled: true,
+    token: '45bf7ada7d7f4a59abf6afaf6c87205c'
+  },
   bucket: {
     cdn: {
       prefixes: [
@@ -40,11 +40,6 @@ export const cloudflare = {
       '/'
     ]
   },
-  kv: {
-    namespace: {
-      id: '48b9b8b3167243678d0b47d68f4cc4f9'
-    }
-  },
   zone: {
     acme: {
       environment: 'production'
@@ -60,6 +55,13 @@ export const crawlers = [
 export const domain = {
   name: process.env.NEXT_PUBLIC_DOMAIN,
   protocol: process.env.NEXT_PUBLIC_PROTOCOL
+}
+
+export const google = {
+  analytics: {
+    enabled: false,
+    id: 'G-8N53WYKXE6'
+  }
 }
 
 export const meta = {

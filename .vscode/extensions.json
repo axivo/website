@@ -1,7 +1,6 @@
 {
   "recommendations": [
     "esbenp.prettier-vscode",
-    "github.vscode-github-actions",
-    "golang.go"
+    "github.vscode-github-actions"
   ]
 }

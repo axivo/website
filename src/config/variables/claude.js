@@ -38,7 +38,7 @@ export const meta = {
     }
   },
   reflections: {
-    describe: phrase => `Reflections written by Anthropic instances during ${phrase} collaborative sessions.`,
+    description: phrase => `Reflections written by Anthropic instances during ${phrase} collaborative sessions.`,
     path: 'reflections',
     title: 'Reflections'
   },
