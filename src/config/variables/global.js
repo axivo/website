@@ -22,22 +22,47 @@ export const analytics = {
 
 export const cloudflare = {
   bucket: {
+    cdn: {
+      prefixes: [
+        'blog',
+        'claude/reflections'
+      ],
+      url: 'https://cdn.axivo.com/public'
+    },
     metadata: {
       blog: 'metadata/blog.json',
       reflections: 'metadata/reflections.json'
     },
-    name: 'axivo-website',
-    url: 'https://cdn.axivo.com/public'
+    name: 'axivo-website'
   },
   cache: {
     prefixes: [
       '/'
+    ],
+    warmupPaths: [
+      '/apple-icon.png',
+      '/apple-touch-icon-precomposed.png',
+      '/apple-touch-icon.png',
+      '/claude/sitemap.xml',
+      '/favicon.ico',
+      '/icon.svg',
+      '/icon1.png',
+      '/icon2.png',
+      '/manifest.webmanifest',
+      '/robots.txt',
+      '/sitemap.xml'
     ]
   },
   kv: {
     namespace: {
       id: '48b9b8b3167243678d0b47d68f4cc4f9'
     }
+  },
+  zone: {
+    acme: {
+      environment: 'production'
+    },
+    subdomain: 'preview'
   }
 }
 
@@ -53,6 +78,28 @@ export const domain = {
 export const meta = {
   brand: {
     name: 'AXIVO'
+  },
+  features: {
+    syntax: [
+      'banner',
+      'bleed',
+      'button',
+      'callout',
+      'cards',
+      'code',
+      'collapse',
+      'featurecard',
+      'filetree',
+      'footnotes',
+      'hero',
+      'image',
+      'mermaid',
+      'steps',
+      'table',
+      'tabs',
+      'var',
+      'video'
+    ]
   },
   profile: {
     architect: {

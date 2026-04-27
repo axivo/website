@@ -23,6 +23,7 @@ Icon
 out/
 
 # Node.js
+certs/
 node_modules/
 
 # Temporary files

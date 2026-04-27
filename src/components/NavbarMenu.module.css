@@ -14,9 +14,8 @@
 }
 
 .menu {
-  @apply absolute right-0 rounded-md py-1 text-sm shadow-lg z-30;
+  @apply absolute right-0 min-w-64 rounded-md py-1 text-sm shadow-lg z-30;
   top: calc(100% + 0.25rem);
-  min-width: 16rem;
 }
 
 :global(.dark) .menu {
@@ -40,7 +39,20 @@
 }
 
 .menuItemDescription {
-  @apply text-xs text-gray-500 dark:text-gray-400 whitespace-nowrap overflow-hidden text-ellipsis;
+  @apply text-xs whitespace-nowrap overflow-hidden text-ellipsis;
+  color: var(--x-color-gray-600);
+}
+
+.menuItem:hover .menuItemDescription {
+  color: var(--x-color-primary-800);
+}
+
+:global(.dark) .menuItemDescription {
+  color: var(--x-color-gray-400);
+}
+
+:global(.dark) .menuItem:hover .menuItemDescription {
+  color: var(--x-color-primary-500);
 }
 
 .menuItemText {

@@ -29,6 +29,14 @@
     },
     "./page": {
       "import": "./page.js"
+    },
+    "./remark": {
+      "types": "./remark.d.ts",
+      "import": "./remark.js"
+    },
+    "./theme": {
+      "types": "./theme.d.ts",
+      "import": "./theme.js"
     }
   }
 }

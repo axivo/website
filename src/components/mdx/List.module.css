@@ -10,7 +10,7 @@
 
 .ordered:not(:first-child),
 .unordered:not(:first-child) {
-  @apply mt-[1em];
+  @apply my-[0.5em];
 }
 
 :is(ol, ul) .ordered {

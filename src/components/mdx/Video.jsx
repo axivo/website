@@ -10,6 +10,7 @@
 
 import { useEffect, useRef } from 'react'
 import 'plyr/dist/plyr.css'
+import { setSource } from './utils'
 import styles from './Video.module.css'
 
 const plyrControls = [
@@ -71,6 +72,7 @@ function Video({
       }
     }
   }, [])
+  const resolvedSrc = setSource(src)
   if (type === 'audio') {
     return (
       <div className={styles.container}>
@@ -83,7 +85,7 @@ function Video({
           muted={muted}
           preload={preload}
         >
-          <source src={src} />
+          <source src={resolvedSrc} />
         </audio>
       </div>
     )
@@ -107,7 +109,7 @@ function Video({
         playsInline={playsInline}
         preload={preload}
       >
-        <source src={src} type="video/mp4" />
+        <source src={resolvedSrc} type="video/mp4" />
       </video>
     </div>
   )

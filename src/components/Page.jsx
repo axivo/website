@@ -16,20 +16,60 @@
  *   - tagsSectionTitle: heading shown above post cards on tag pages
  */
 
+import { generateStaticParamsFor, importPage } from 'nextra/pages'
 import GithubSlugger from 'github-slugger'
+import remarkGfm from 'remark-gfm'
 import { remarkMermaid } from '@theguild/remark-mermaid'
 import remarkMdx from 'remark-mdx'
 import remarkParse from 'remark-parse'
 import { SafeMdxRenderer } from 'safe-mdx'
 import { unified } from 'unified'
-import { generateStaticParamsFor, importPage } from 'nextra/pages'
 import { PostCard, Subnavbar, useMDXComponents as getMDXComponents } from '@axivo/website'
-import { filterByDate, getPosts, Posts, postsPageSize, renderIndexPage } from './Post'
-import { renderNode } from './mdx/renderNode'
+import { remarkMarkAndUnravel } from '@axivo/website/remark'
+import { createDispatch } from './mdx/renderers/node'
+import { extractFootnotes } from './mdx/footnotes'
+import { filterByDate, getMetadata, getPosts, Posts, postsPageSize, renderIndexPage } from './Post'
 
 const components = getMDXComponents()
 const nextraStaticParams = generateStaticParamsFor('mdxPath')
 const Wrapper = components.wrapper
+
+/**
+ * Builds the breadcrumb trail for a tag page under a source/collection.
+ *
+ * @param {object} source - Content source descriptor
+ * @param {object} collection - Collection descriptor
+ * @param {string} tag - Tag slug
+ * @returns {object[]} Breadcrumb trail entries
+ */
+function buildTagBreadcrumb(source, collection, tag) {
+  const hasSection = collection.sectionPath.length > 0
+  const root = {
+    name: hasSection ? collection.sectionPath : source.path,
+    route: hasSection ? collection.routePath : `/${source.path}`,
+    title: hasSection ? collection.sectionTitle : source.title,
+    frontMatter: {}
+  }
+  const tagsRoute = hasSection ? `${collection.routePath}/tags` : `/${source.path}/tags`
+  const tagRoute = hasSection ? `${collection.routePath}/tags/${tag}` : `/${source.path}/tags/${tag}`
+  return [
+    root,
+    { name: 'tags', route: tagsRoute, title: 'Tags', frontMatter: {} },
+    { name: tag, route: tagRoute, title: tag, frontMatter: {} }
+  ]
+}
+
+/**
+ * Returns the date segments of a route path under a collection. Strips
+ * the section prefix when the collection has one.
+ *
+ * @param {string[]} path - Route path segments
+ * @param {object} collection - Collection descriptor
+ * @returns {string[]} Date-segment slice of the path
+ */
+function entryDateSegments(path, collection) {
+  return collection.sectionPath.length > 0 ? path.slice(1) : path
+}
 
 /**
  * Extracts table of contents from an MDAST tree. Builds Nextra-compatible
@@ -88,14 +128,164 @@ async function fetchR2Object(key) {
 }
 
 /**
+ * Tests whether a route path resolves to an individual entry under a
+ * collection (year/month/day/slug shape).
+ *
+ * @param {string[]} path - Route path segments
+ * @param {object} collection - Collection descriptor
+ * @returns {boolean}
+ */
+function isEntry(path, collection) {
+  if (collection.sectionPath.length > 0) {
+    return path[0] === collection.sectionPath && path.length === 5 && /^\d{4}$/.test(path[1])
+  }
+  return path.length === 4 && /^\d{4}$/.test(path[0])
+}
+
+/**
+ * Tests whether a route path resolves to a date-based index page (year,
+ * year/month, or year/month/day) under a collection.
+ *
+ * @param {string[]} path - Route path segments
+ * @param {object} collection - Collection descriptor
+ * @returns {boolean}
+ */
+function isIndex(path, collection) {
+  if (collection.sectionPath.length > 0) {
+    return path[0] === collection.sectionPath && path.length >= 2 && path.length <= 4 && /^\d{4}$/.test(path[1])
+  }
+  return path.length >= 1 && path.length <= 3 && /^\d{4}$/.test(path[0])
+}
+
+/**
+ * Tests whether a route path resolves to a tag page under a collection.
+ *
+ * @param {string[]} path - Route path segments
+ * @param {object} collection - Collection descriptor
+ * @returns {boolean}
+ */
+function isTagPage(path, collection) {
+  if (collection.sectionPath.length > 0) {
+    return path[0] === collection.sectionPath && path[1] === 'tags' && path[2]
+  }
+  return path[0] === 'tags' && path[1]
+}
+
+/**
  * Parses MDX content into an AST for safe rendering.
  *
  * @param {string} mdx - Raw MDX content
  * @returns {object} MDAST root node
  */
 function parseMdx(mdx) {
-  const processor = unified().use(remarkParse).use(remarkMdx).use(remarkMermaid)
+  const processor = unified()
+    .use(remarkParse)
+    .use(remarkMdx)
+    .use(remarkMarkAndUnravel)
+    .use(remarkGfm)
+    .use(remarkMermaid)
   return processor.runSync(processor.parse(mdx))
+}
+
+/**
+ * Renders the React tree for a Nextra-bundled MDX page under a source.
+ * Handles the splash template, the collection-root posts injection into
+ * the TOC, and the default wrapped layout.
+ *
+ * @param {object} props - Next.js page props
+ * @param {string[]} path - Route path segments
+ * @param {object} source - Content source descriptor
+ * @param {object} collection - Collection descriptor
+ * @returns {Promise<import('react').ReactNode>}
+ */
+async function renderBundledPage(props, path, source, collection) {
+  const params = await props.params
+  const pageModule = await importPage([source.path, ...path])
+  const {
+    default: MDXContent,
+    toc: originalToc,
+    metadata,
+    sourceCode
+  } = pageModule
+  const toc = [...originalToc]
+  const hasSection = collection.sectionPath.length > 0
+  const atCollectionRoot = hasSection
+    ? path.length === 1 && path[0] === collection.sectionPath
+    : path.length === 0
+  const postsSectionId = pageModule.postsSectionId
+  if (atCollectionRoot && postsSectionId) {
+    const entries = await getPosts(collection)
+    const limit = pageModule.postsPageSize || postsPageSize
+    const latestToc = entries.slice(0, limit).map(entry => ({
+      depth: 3,
+      id: entry.route.split('/').pop(),
+      value: entry.frontMatter.title
+    }))
+    const insertIndex = toc.findIndex(item => item.id === postsSectionId)
+    if (insertIndex !== -1) {
+      toc.splice(insertIndex + 1, 0, ...latestToc)
+    }
+  }
+  if (metadata.template === 'splash') {
+    return (
+      <div className="splash content-container">
+        <MDXContent {...props} params={params} />
+      </div>
+    )
+  }
+  return (
+    <Wrapper metadata={metadata} sourceCode={sourceCode} toc={toc}>
+      <MDXContent {...props} params={params} />
+    </Wrapper>
+  )
+}
+
+/**
+ * Renders the React tree for a date-based index page (year, year/month,
+ * or year/month/day) under a collection.
+ *
+ * @param {string[]} path - Route path segments
+ * @param {object} collection - Collection descriptor
+ * @returns {Promise<import('react').ReactNode>}
+ */
+async function renderDateIndexPage(path, collection) {
+  const date = entryDateSegments(path, collection).join('/')
+  const { content, metadata, toc } = await renderIndexPage(collection, date)
+  return (
+    <Wrapper metadata={metadata} toc={toc}>
+      {content}
+    </Wrapper>
+  )
+}
+
+/**
+ * Renders the React tree for an entry page (individual reflection or blog
+ * post). Returns null when the entry isn't found in R2.
+ *
+ * @param {string[]} path - Route path segments
+ * @param {object} collection - Collection descriptor
+ * @returns {Promise<import('react').ReactNode|null>}
+ */
+async function renderEntryPage(path, collection) {
+  const key = `${collection.contentPrefix}${entryDateSegments(path, collection).join('/')}.mdx`
+  const result = await fetchR2Object(key)
+  if (!result) {
+    return null
+  }
+  const mdast = parseMdx(result.content)
+  extractFootnotes(mdast)
+  const r2Toc = extractToc(mdast)
+  const objects = await getMetadata(collection)
+  const record = objects.find(obj => obj.key === key)
+  const dispatch = createDispatch({
+    blocks: record?.features?.syntax?.blocks,
+    inline: record?.features?.syntax?.inline
+  })
+  return (
+    <Wrapper metadata={result.metadata} toc={r2Toc}>
+      <SafeMdxRenderer components={components} mdast={mdast} renderNode={dispatch} />
+    </Wrapper>
+  )
 }
 
 /**
@@ -107,203 +297,152 @@ function parseMdx(mdx) {
  * @param {object} config.collection - Collection descriptor with sectionPath
  * @returns {{ generateMetadata: Function, generateStaticParams: Function, Page: Function }}
  */
-function createPage({ source, collection }) {
-  const sectionPath = collection.sectionPath
-  const hasSection = sectionPath.length > 0
-
-  const isEntry = path => {
-    if (hasSection) {
-      return path[0] === sectionPath && path.length === 5 && /^\d{4}$/.test(path[1])
-    }
-    return path.length === 4 && /^\d{4}$/.test(path[0])
+function renderPage({ source, collection }) {
+  return {
+    generateMetadata: props => resolveMetadata(props, source, collection),
+    generateStaticParams: () => resolveStaticParams(source, collection),
+    Page: props => resolvePage(props, source, collection)
   }
-
-  const isIndex = path => {
-    if (hasSection) {
-      return path[0] === sectionPath && path.length >= 2 && path.length <= 4 && /^\d{4}$/.test(path[1])
-    }
-    return path.length >= 1 && path.length <= 3 && /^\d{4}$/.test(path[0])
-  }
-
-  const isTagPage = path => {
-    if (hasSection) {
-      return path[0] === sectionPath && path[1] === 'tags' && path[2]
-    }
-    return path[0] === 'tags' && path[1]
-  }
-
-  const entryDateSegments = path => (hasSection ? path.slice(1) : path)
-
-  const buildTagBreadcrumb = tag => {
-    const root = {
-      name: hasSection ? sectionPath : source.path,
-      route: hasSection ? collection.routePath : `/${source.path}`,
-      title: hasSection ? collection.sectionTitle : source.title,
-      frontMatter: {}
-    }
-    const tagsRoute = hasSection ? `${collection.routePath}/tags` : `/${source.path}/tags`
-    const tagRoute = hasSection ? `${collection.routePath}/tags/${tag}` : `/${source.path}/tags/${tag}`
-    return [
-      root,
-      { name: 'tags', route: tagsRoute, title: 'Tags', frontMatter: {} },
-      { name: tag, route: tagRoute, title: tag, frontMatter: {} }
-    ]
-  }
-
-  async function renderTagPage(tag) {
-    const entries = await getPosts(collection)
-    const filtered = entries.filter(entry =>
-      entry.frontMatter.tags?.includes(tag)
-    )
-    const toc = [
-      { depth: 2, id: collection.sectionId, value: collection.sectionTitle },
-      ...filtered.slice(0, postsPageSize).map(entry => ({
-        depth: 3,
-        id: entry.route.split('/').pop(),
-        value: entry.frontMatter.title
-      }))
-    ]
-    return (
-      <>
-        <Subnavbar activePath={buildTagBreadcrumb(tag)} />
-        <Wrapper metadata={{ title: tag }} toc={toc}>
-          <components.h1>{tag}</components.h1>
-          <Posts collection={collection} entries={filtered}>
-            <components.h2 id={collection.sectionId}>{collection.tagsSectionTitle}</components.h2>
-          </Posts>
-        </Wrapper>
-      </>
-    )
-  }
-
-  async function generateMetadata(props) {
-    const params = await props.params
-    const path = params.mdxPath || []
-    if (isEntry(path)) {
-      const key = `${collection.contentPrefix}${entryDateSegments(path).join('/')}.mdx`
-      const result = await fetchR2Object(key)
-      if (result) {
-        return {
-          description: result.metadata.description,
-          title: result.metadata.title
-        }
-      }
-    }
-    if (isIndex(path)) {
-      const date = entryDateSegments(path).join('/')
-      const { metadata } = await renderIndexPage(collection, date)
-      return metadata
-    }
-    if (isTagPage(path)) {
-      return { title: decodeURIComponent(hasSection ? path[2] : path[1]) }
-    }
-    const { metadata } = await importPage([source.path, ...path])
-    const result = { ...metadata }
-    if (result.seoTitle) {
-      result.title = result.seoTitle
-    }
-    if (!result.description) {
-      result.description = `${result.title} — ${source.title}`
-    }
-    return result
-  }
-
-  async function generateStaticParams() {
-    const params = await nextraStaticParams()
-    const sectionParams = params
-      .filter(p => p.mdxPath?.[0] === source.path)
-      .map(p => ({ mdxPath: p.mdxPath.slice(1) }))
-      .filter(p => p.mdxPath[p.mdxPath.length - 1] !== 'tags')
-    const response = await fetch(collection.metadataEndpoint)
-    const { objects } = await response.json()
-    const indexDirs = new Set()
-    for (const obj of objects.filter(obj => obj.template === collection.template)) {
-      const [year, month, day] = obj.key
-        .replace(collection.contentPrefix, '')
-        .replace('.mdx', '')
-        .split('/')
-      indexDirs.add(`${year}`)
-      indexDirs.add(`${year}/${month}`)
-      indexDirs.add(`${year}/${month}/${day}`)
-    }
-    const indexParams = [...indexDirs].map(dir => ({
-      mdxPath: hasSection ? [sectionPath, ...dir.split('/')] : dir.split('/')
-    }))
-    return [...sectionParams, ...indexParams]
-  }
-
-  async function Page(props) {
-    const params = await props.params
-    const path = params.mdxPath || []
-    if (isEntry(path)) {
-      const key = `${collection.contentPrefix}${entryDateSegments(path).join('/')}.mdx`
-      const result = await fetchR2Object(key)
-      if (result) {
-        const mdast = parseMdx(result.content)
-        const r2Toc = extractToc(mdast)
-        return (
-          <Wrapper metadata={result.metadata} toc={r2Toc}>
-            <SafeMdxRenderer components={components} mdast={mdast} renderNode={renderNode} />
-          </Wrapper>
-        )
-      }
-    }
-    if (isIndex(path)) {
-      const date = entryDateSegments(path).join('/')
-      const { content, metadata, toc } = await renderIndexPage(collection, date)
-      return (
-        <Wrapper metadata={metadata} toc={toc}>
-          {content}
-        </Wrapper>
-      )
-    }
-    if (isTagPage(path)) {
-      const tag = decodeURIComponent(hasSection ? path[2] : path[1])
-      return renderTagPage(tag)
-    }
-    const pageModule = await importPage([source.path, ...path])
-    const {
-      default: MDXContent,
-      toc: originalToc,
-      metadata,
-      sourceCode
-    } = pageModule
-    const toc = [...originalToc]
-    const updateToc = (sectionId, items) => {
-      const index = toc.findIndex(item => item.id === sectionId)
-      if (index !== -1) {
-        toc.splice(index + 1, 0, ...items)
-      }
-    }
-    const atCollectionRoot = hasSection
-      ? path.length === 1 && path[0] === sectionPath
-      : path.length === 0
-    const postsSectionId = pageModule.postsSectionId
-    if (atCollectionRoot && postsSectionId) {
-      const entries = await getPosts(collection)
-      const limit = pageModule.postsPageSize || postsPageSize
-      const latestToc = entries.slice(0, limit).map(entry => ({
-        depth: 3,
-        id: entry.route.split('/').pop(),
-        value: entry.frontMatter.title
-      }))
-      updateToc(postsSectionId, latestToc)
-    }
-    if (metadata.template === 'splash') {
-      return (
-        <div className="splash content-container">
-          <MDXContent {...props} params={params} />
-        </div>
-      )
-    }
-    return (
-      <Wrapper metadata={metadata} sourceCode={sourceCode} toc={toc}>
-        <MDXContent {...props} params={params} />
-      </Wrapper>
-    )
-  }
-
-  return { generateMetadata, generateStaticParams, Page }
 }
 
-export { createPage }
+/**
+ * Renders the React tree for a tag page under a collection.
+ *
+ * @param {string} tag - Tag slug
+ * @param {object} source - Content source descriptor
+ * @param {object} collection - Collection descriptor
+ * @returns {Promise<import('react').ReactNode>}
+ */
+async function renderTagPage(tag, source, collection) {
+  const entries = await getPosts(collection)
+  const filtered = entries.filter(entry =>
+    entry.frontMatter.tags?.includes(tag)
+  )
+  const toc = [
+    { depth: 2, id: collection.sectionId, value: collection.sectionTitle },
+    ...filtered.slice(0, postsPageSize).map(entry => ({
+      depth: 3,
+      id: entry.route.split('/').pop(),
+      value: entry.frontMatter.title
+    }))
+  ]
+  return (
+    <>
+      <Subnavbar activePath={buildTagBreadcrumb(source, collection, tag)} />
+      <Wrapper metadata={{ title: tag }} toc={toc}>
+        <components.h1>{tag}</components.h1>
+        <Posts collection={collection} entries={filtered}>
+          <components.h2 id={collection.sectionId}>{collection.tagsSectionTitle}</components.h2>
+        </Posts>
+      </Wrapper>
+    </>
+  )
+}
+
+/**
+ * Resolves the page metadata for a request route under a source/collection.
+ * Routes through the entry, index, tag, and bundled-page branches in turn.
+ *
+ * @param {object} props - Next.js page props
+ * @param {object} source - Content source descriptor
+ * @param {object} collection - Collection descriptor
+ * @returns {Promise<object>}
+ */
+async function resolveMetadata(props, source, collection) {
+  const params = await props.params
+  const path = params.mdxPath || []
+  if (isEntry(path, collection)) {
+    const key = `${collection.contentPrefix}${entryDateSegments(path, collection).join('/')}.mdx`
+    const result = await fetchR2Object(key)
+    if (result) {
+      return {
+        description: result.metadata.description,
+        title: result.metadata.title
+      }
+    }
+  }
+  if (isIndex(path, collection)) {
+    const date = entryDateSegments(path, collection).join('/')
+    const { metadata } = await renderIndexPage(collection, date)
+    return metadata
+  }
+  if (isTagPage(path, collection)) {
+    const hasSection = collection.sectionPath.length > 0
+    return { title: decodeURIComponent(hasSection ? path[2] : path[1]) }
+  }
+  const { metadata } = await importPage([source.path, ...path])
+  const result = { ...metadata }
+  if (result.seoTitle) {
+    result.title = result.seoTitle
+  }
+  if (!result.description) {
+    result.description = `${result.title} — ${source.title}`
+  }
+  return result
+}
+
+/**
+ * Resolves the rendered page tree for a request route under a
+ * source/collection. Routes through the entry, index, tag, and bundled
+ * page branches in turn.
+ *
+ * @param {object} props - Next.js page props
+ * @param {object} source - Content source descriptor
+ * @param {object} collection - Collection descriptor
+ * @returns {Promise<import('react').ReactNode>}
+ */
+async function resolvePage(props, source, collection) {
+  const params = await props.params
+  const path = params.mdxPath || []
+  if (isEntry(path, collection)) {
+    const tree = await renderEntryPage(path, collection)
+    if (tree) {
+      return tree
+    }
+  }
+  if (isIndex(path, collection)) {
+    return renderDateIndexPage(path, collection)
+  }
+  if (isTagPage(path, collection)) {
+    const hasSection = collection.sectionPath.length > 0
+    const tag = decodeURIComponent(hasSection ? path[2] : path[1])
+    return renderTagPage(tag, source, collection)
+  }
+  return renderBundledPage(props, path, source, collection)
+}
+
+/**
+ * Resolves the static params (prerender targets) for a source/collection.
+ * Combines Nextra's discovered MDX paths under the source with the
+ * R2-derived date index paths.
+ *
+ * @param {object} source - Content source descriptor
+ * @param {object} collection - Collection descriptor
+ * @returns {Promise<object[]>}
+ */
+async function resolveStaticParams(source, collection) {
+  const params = await nextraStaticParams()
+  const sectionParams = params
+    .filter(p => p.mdxPath?.[0] === source.path)
+    .map(p => ({ mdxPath: p.mdxPath.slice(1) }))
+    .filter(p => p.mdxPath[p.mdxPath.length - 1] !== 'tags')
+  const response = await fetch(collection.metadataEndpoint)
+  const { objects } = await response.json()
+  const indexDirs = new Set()
+  for (const obj of objects.filter(obj => obj.template === collection.template)) {
+    const [year, month, day] = obj.key
+      .replace(collection.contentPrefix, '')
+      .replace('.mdx', '')
+      .split('/')
+    indexDirs.add(`${year}`)
+    indexDirs.add(`${year}/${month}`)
+    indexDirs.add(`${year}/${month}/${day}`)
+  }
+  const hasSection = collection.sectionPath.length > 0
+  const indexParams = [...indexDirs].map(dir => ({
+    mdxPath: hasSection ? [collection.sectionPath, ...dir.split('/')] : dir.split('/')
+  }))
+  return [...sectionParams, ...indexParams]
+}
+
+export { renderPage }

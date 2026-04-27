@@ -33,8 +33,6 @@
 
 import worker from '../.open-next/worker.js'
 
-export { BucketCachePurge, DOQueueHandler, DOShardedTagCache } from '../.open-next/worker.js'
-
 let buildId
 const statusTtl = {
   301: 86400,
@@ -47,6 +45,59 @@ const statusTtl = {
   502: 0,
   503: 0,
   504: 0
+}
+
+/**
+ * Worker fetch handler. Serves cached GET responses from caches.default
+ * when available, otherwise delegates to the OpenNext handler and caches
+ * the result if the origin response is marked cacheable. HEAD requests
+ * are rewritten to GET for cache lookup and origin fetch, with the body
+ * stripped on return. Non-GET, non-HEAD methods bypass the cache.
+ *
+ * @param {Request} request - Incoming request
+ * @param {object} env - Worker bindings
+ * @param {ExecutionContext} ctx - Execution context passed through to OpenNext
+ * @returns {Promise<Response>} Response from cache or OpenNext handler
+ */
+async function fetch(request, env, ctx) {
+  const url = new URL(request.url)
+  if (url.pathname === '/__internal/purge-kv-cache' && request.method === 'POST') {
+    return purgeKvCache(request, env)
+  }
+  const isHead = request.method === 'HEAD'
+  if (request.method !== 'GET' && !isHead) {
+    return worker.fetch(request, env, ctx)
+  }
+  if (request.headers.has('rsc') || request.headers.has('next-router-prefetch')) {
+    return worker.fetch(request, env, ctx)
+  }
+  const lookupRequest = isHead
+    ? new Request(request.url, { method: 'GET', headers: request.headers })
+    : request
+  const id = await getBuildId(request, env)
+  const cache = caches.default
+  const cacheKey = id ? keyFor(lookupRequest, id) : lookupRequest
+  const cached = await cache.match(cacheKey)
+  if (cached) {
+    return stripBody(cached, isHead)
+  }
+  const originResponse = await worker.fetch(lookupRequest, env, ctx)
+  const response = setTtl(originResponse)
+  const cacheControl = response.headers.get('cache-control') || ''
+  const maxAgeMatch = cacheControl.match(/(?:^|,\s*)(?:s-maxage|max-age)\s*=\s*(\d+)/i)
+  const maxAge = maxAgeMatch ? parseInt(maxAgeMatch[1], 10) : 0
+  const cacheable =
+    maxAge > 0 &&
+    (response.ok || response.status in statusTtl) &&
+    !/no-store|no-cache|private/i.test(cacheControl) &&
+    !response.headers.has('set-cookie')
+  if (!cacheable) {
+    return stripBody(response, isHead)
+  }
+  const normalized = new Response(response.body, response)
+  normalized.headers.set('vary', 'Accept-Encoding')
+  await cache.put(cacheKey, normalized.clone())
+  return stripBody(normalized, isHead)
 }
 
 /**
@@ -158,57 +209,5 @@ function stripBody(response, isHead) {
   return new Response(null, { status: response.status, headers: response.headers })
 }
 
-/**
- * Worker fetch handler. Serves cached GET responses from caches.default
- * when available, otherwise delegates to the OpenNext handler and caches
- * the result if the origin response is marked cacheable. HEAD requests
- * are rewritten to GET for cache lookup and origin fetch, with the body
- * stripped on return. Non-GET, non-HEAD methods bypass the cache.
- *
- * @param {Request} request - Incoming request
- * @param {object} env - Worker bindings
- * @param {ExecutionContext} ctx - Execution context passed through to OpenNext
- * @returns {Promise<Response>} Response from cache or OpenNext handler
- */
-export default {
-  async fetch(request, env, ctx) {
-    const url = new URL(request.url)
-    if (url.pathname === '/__internal/purge-kv-cache' && request.method === 'POST') {
-      return purgeKvCache(request, env)
-    }
-    const isHead = request.method === 'HEAD'
-    if (request.method !== 'GET' && !isHead) {
-      return worker.fetch(request, env, ctx)
-    }
-    if (request.headers.has('rsc') || request.headers.has('next-router-prefetch')) {
-      return worker.fetch(request, env, ctx)
-    }
-    const lookupRequest = isHead
-      ? new Request(request.url, { method: 'GET', headers: request.headers })
-      : request
-    const id = await getBuildId(request, env)
-    const cache = caches.default
-    const cacheKey = id ? keyFor(lookupRequest, id) : lookupRequest
-    const cached = await cache.match(cacheKey)
-    if (cached) {
-      return stripBody(cached, isHead)
-    }
-    const originResponse = await worker.fetch(lookupRequest, env, ctx)
-    const response = setTtl(originResponse)
-    const cacheControl = response.headers.get('cache-control') || ''
-    const maxAgeMatch = cacheControl.match(/(?:^|,\s*)(?:s-maxage|max-age)\s*=\s*(\d+)/i)
-    const maxAge = maxAgeMatch ? parseInt(maxAgeMatch[1], 10) : 0
-    const cacheable =
-      maxAge > 0 &&
-      (response.ok || response.status in statusTtl) &&
-      !/no-store|no-cache|private/i.test(cacheControl) &&
-      !response.headers.has('set-cookie')
-    if (!cacheable) {
-      return stripBody(response, isHead)
-    }
-    const normalized = new Response(response.body, response)
-    normalized.headers.set('vary', 'Accept-Encoding')
-    await cache.put(cacheKey, normalized.clone())
-    return stripBody(normalized, isHead)
-  }
-}
+export { BucketCachePurge, DOQueueHandler, DOShardedTagCache } from '../.open-next/worker.js'
+export default { fetch }

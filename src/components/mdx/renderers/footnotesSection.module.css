@@ -1,0 +1,17 @@
+@reference "tailwindcss";
+
+:global(.footnotes) {
+  @apply mt-12 pt-6 border-t border-gray-200 dark:border-gray-800 text-sm;
+}
+
+:global(.footnotes) ol {
+  @apply ms-8 list-decimal;
+}
+
+:global(.footnotes) :global(.sr-only) {
+  @apply sr-only;
+}
+
+:global(.data-footnote-backref) {
+  @apply ms-1 no-underline;
+}

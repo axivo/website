@@ -1,5 +1,5 @@
 /**
- * @fileoverview Subpath export for claude subsection variables and reflection components.
+ * @fileoverview Subpath export for the claude subsection variables and reflection components.
  */
 
 export { meta, repository } from '../../src/config/variables/claude.js'

@@ -3,12 +3,13 @@
   "version": "1.0.0",
   "description": "Content and static-site generator",
   "private": true,
+  "type": "module",
   "scripts": {
     "build": "next build",
-    "deploy": "node --env-file=.env.production --no-warnings scripts/deploy.mjs",
+    "deploy": "node --env-file=.env.production --no-warnings scripts/deploy.js",
     "dev": "NODE_OPTIONS='--no-webstorage' next dev",
-    "prebuild": "node --env-file=.env.production --no-warnings scripts/prebuild.mjs",
-    "preview": "NODE_OPTIONS='--no-webstorage' opennextjs-cloudflare build && opennextjs-cloudflare preview"
+    "prebuild": "node --env-file=.env.production --no-warnings scripts/prebuild.js",
+    "preview": "node --env-file=.env.production --no-warnings scripts/preview.js"
   },
   "dependencies": {
     "@axivo/website": "file:./packages/website",
@@ -31,11 +32,18 @@
   "devDependencies": {
     "@aws-sdk/client-s3": "^3.1037.0",
     "@tailwindcss/postcss": "^4.2.0",
+    "acme-client": "^5.4.0",
     "cloudflare": "^5.2.0",
     "dotenv": "^17.4.0",
     "fast-glob": "^3.3.0",
+    "hast-util-to-html": "^9.0.0",
     "prettier-plugin-tailwindcss": "^0.7.0",
+    "rehype-pretty-code": "^0.14.0",
+    "remark-gfm": "^4.0.0",
+    "remark-rehype": "^11.1.0",
+    "shiki": "^3.0.0",
     "tailwindcss": "^4.2.0",
+    "unist-util-visit": "^5.0.0",
     "wrangler": "^4.85.0"
   }
 }

@@ -1,0 +1,13 @@
+@reference "tailwindcss";
+
+.item {
+  @apply my-[0.5em];
+}
+
+:global(.task-list-item) {
+  @apply list-none;
+}
+
+:global(.task-list-item) input[type="checkbox"] {
+  @apply -ms-8 me-1;
+}

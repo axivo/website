@@ -7,10 +7,8 @@
  */
 
 import Link from 'next/link'
-import { cloudflare } from '@axivo/website/global'
+import { setSource } from './utils'
 import styles from './Image.module.css'
-
-const cdnPattern = /^\/(?:claude\/reflections|blog)\/\d{4}\/\d{2}\//
 
 /**
  * Theme-aware image with optional card layout.
@@ -50,15 +48,12 @@ function Image({ alt, children, href, src, style, styleImage, template }) {
  */
 function renderImage(src, alt, imageStyle) {
   if (typeof src === 'string') {
-    const resolved = cdnPattern.test(src) ? `${cloudflare.bucket.url}${src}` : src
-    return <img alt={alt} className={styles.image} src={resolved} style={imageStyle} />
+    return <img alt={alt} className={styles.image} src={setSource(src)} style={imageStyle} />
   }
-  const dark = cdnPattern.test(src.dark) ? `${cloudflare.bucket.url}${src.dark}` : src.dark
-  const light = cdnPattern.test(src.light) ? `${cloudflare.bucket.url}${src.light}` : src.light
   return (
     <>
-      <img alt={alt} className={`${styles.image} ${styles.light}`} src={light} style={imageStyle} />
-      <img alt={alt} className={`${styles.image} ${styles.dark}`} src={dark} style={imageStyle} />
+      <img alt={alt} className={`${styles.image} ${styles.light}`} src={setSource(src.light)} style={imageStyle} />
+      <img alt={alt} className={`${styles.image} ${styles.dark}`} src={setSource(src.dark)} style={imageStyle} />
     </>
   )
 }

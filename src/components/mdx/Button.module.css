@@ -1,0 +1,13 @@
+@reference "tailwindcss";
+
+.button {
+  @apply inline-block;
+}
+
+.button:not(:first-child) {
+  @apply mt-[1.25em];
+}
+
+p .button {
+  @apply mt-0;
+}

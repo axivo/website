@@ -8,10 +8,10 @@
  */
 
 import { blogCollection, meta } from '@axivo/website/blog'
-import { createPage } from '@axivo/website/page'
+import { renderPage } from '@axivo/website/page'
 import '../../(home)/page.css'
 
-const { generateMetadata, generateStaticParams, Page } = createPage({
+const { generateMetadata, generateStaticParams, Page } = renderPage({
   collection: blogCollection,
   source: meta.source
 })
