@@ -76,6 +76,7 @@ export const meta = {
     },
     instance: {
       avatar: 'https://github.com/claude.png',
+      homepage: 'https://www.anthropic.com/claude',
       name: 'Claude'
     }
   }
