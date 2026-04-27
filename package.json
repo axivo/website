@@ -37,7 +37,7 @@
     "dotenv": "^17.4.0",
     "fast-glob": "^3.3.0",
     "hast-util-to-html": "^9.0.0",
-    "prettier-plugin-tailwindcss": "^0.7.0",
+    "prettier-plugin-tailwindcss": "^0.8.0",
     "rehype-pretty-code": "^0.14.0",
     "remark-gfm": "^4.0.0",
     "remark-rehype": "^11.1.0",
