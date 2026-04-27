@@ -21,7 +21,7 @@ import {
 
 const collection = {
   contentPrefix: `src/content/${meta.source.path}/`,
-  describe: meta.source.describe,
+  description: meta.source.description,
   metadataEndpoint: `${domain.protocol}://${domain.name}/metadata?collection=${meta.source.path}`,
   metadataKey: cloudflare.bucket.metadata.blog,
   routePath: `/${meta.source.path}`,

@@ -4,10 +4,10 @@
 
 export {
   algolia,
-  analytics,
   cloudflare,
   crawlers,
   domain,
+  google,
   meta,
   repository
 } from '../../src/config/variables/global.js'

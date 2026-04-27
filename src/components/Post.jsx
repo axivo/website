@@ -12,7 +12,7 @@
  * - sectionTitle: human title for the section (e.g. 'Reflections')
  * - templates: array of R2 `template` metadata values to match
  * - metadataKey: R2 object key for the collection's manifest
- * - describe: function(phrase) returning SEO description for index pages
+ * - description: function(phrase) returning SEO description for index pages
  */
 
 import { useMDXComponents as getMDXComponents } from '@axivo/website'
@@ -255,7 +255,7 @@ async function renderIndexPage(collection, date) {
   }
   const metadata = {
     asIndexPage: true,
-    description: collection.describe(phrase),
+    description: collection.description(phrase),
     title: seoTitle || title
   }
   const components = getMDXComponents()

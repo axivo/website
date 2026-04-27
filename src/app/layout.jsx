@@ -7,7 +7,8 @@
 
 import { Head } from 'nextra/components'
 import { GoogleAnalytics } from '@next/third-parties/google'
-import { analytics, domain } from '@axivo/website/global'
+import Script from 'next/script'
+import { cloudflare, domain, google } from '@axivo/website/global'
 import '../styles/globals.css'
 
 export const metadata = {
@@ -43,7 +44,15 @@ function RootLayout({ children }) {
   return (
     <html lang="en" dir="ltr" suppressHydrationWarning>
       <Head />
-      <GoogleAnalytics gaId={analytics.id} />
+      {cloudflare.analytics.enabled && (
+        <Script
+          defer
+          src="https://static.cloudflareinsights.com/beacon.min.js"
+          data-cf-beacon={`{"token": "${cloudflare.analytics.token}"}`}
+          strategy="afterInteractive"
+        />
+      )}
+      {google.analytics.enabled && <GoogleAnalytics gaId={google.analytics.id} />}
       <body>
         {children}
       </body>
