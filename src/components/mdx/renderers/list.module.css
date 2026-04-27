@@ -9,7 +9,7 @@ ul:global(.contains-task-list) {
 }
 
 :global(.contains-task-list):not(:first-child) {
-  @apply mt-[0.5em];
+  @apply my-[0.5em];
 }
 
 :is(ol, ul) ol:global(.contains-task-list) {

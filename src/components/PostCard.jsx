@@ -13,7 +13,7 @@ import { SafeMdxRenderer } from 'safe-mdx'
 import { unified } from 'unified'
 import { useMDXComponents as getMDXComponents } from '@axivo/website'
 import { Meta } from './Meta'
-import { dispatch } from './mdx/renderers/node'
+import { createDispatch } from './mdx/renderers/node'
 import styles from './PostCard.module.css'
 
 /**
@@ -29,6 +29,7 @@ import styles from './PostCard.module.css'
 function PostCard({ collection, post, readMore = 'Read more' }) {
   const { author, date, description, source, tags, template, title } = post.frontMatter
   const components = getMDXComponents()
+  const dispatch = createDispatch()
   const id = post.route.split('/').pop()
   return (
     <div className={styles.card}>

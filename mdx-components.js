@@ -6,10 +6,20 @@
  * and h1 headings use the PageTitle component with copy-page support.
  */
 
+import {
+  Banner,
+  Bleed,
+  Cards,
+  Collapse,
+  FileTree,
+  Tabs,
+  withGitHubAlert
+} from 'nextra/components'
+import { Mermaid } from '@theguild/remark-mermaid/mermaid'
 import { useMDXComponents as getDocsMDXComponents } from 'nextra-theme-docs'
-import { withGitHubAlert } from 'nextra/components'
 import * as websiteComponents from '@axivo/website'
 import timestamps from './src/generated/timestamps.json' with { type: 'json' }
+import { Button } from './src/components/mdx/Button'
 import { Callout } from './src/components/mdx/Callout'
 import { Ordered, Unordered } from './src/components/mdx/List'
 import { PageTitle } from './src/components/mdx/PageTitle'
@@ -28,6 +38,14 @@ function useMDXComponents(components) {
   return {
     ...docsComponents,
     ...websiteComponents,
+    Banner,
+    Bleed,
+    Button,
+    Cards,
+    Collapse,
+    FileTree,
+    Mermaid,
+    Tabs,
     blockquote: withGitHubAlert(
       (props) => <Callout {...props} />,
       docsComponents.blockquote

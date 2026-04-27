@@ -20,7 +20,7 @@
  * Cache purge and warming failures log a warning but do not fail the
  * pipeline. A failed wrangler deploy exits non-zero and fails the build.
  *
- * Usage: node scripts/deploy.mjs
+ * Usage: node scripts/deploy.js
  */
 
 import { execSync } from 'node:child_process'
@@ -107,15 +107,7 @@ async function getCachePaths() {
   const sitemapPaths = urls
     .map(url => url.replace(baseUrl, '') || '/')
     .filter(path => path === '/' || path.split('/').filter(Boolean).length <= 2)
-  return [
-    ...sitemapPaths,
-    '/apple-icon.png',
-    '/claude/sitemap.xml',
-    '/favicon.ico',
-    '/icon.svg',
-    '/robots.txt',
-    '/sitemap.xml'
-  ]
+  return [...sitemapPaths, ...cloudflare.cache.warmupPaths]
 }
 
 /**
@@ -135,7 +127,7 @@ async function purgeCache() {
     console.info(`Branch '${process.env.WORKERS_CI_BRANCH}' detected, skipping cache purge`)
     return null
   }
-  if (!process.env.ZONE_API_TOKEN || !process.env.ZONE_ID) {
+  if (!process.env.ZONE_CACHE_TOKEN || !process.env.ZONE_ID) {
     console.info('Cloudflare credentials not found, skipping cache purge')
     return null
   }
@@ -147,7 +139,7 @@ async function purgeCache() {
     return []
   }
   const prefixes = cloudflare.cache.prefixes.map(prefix => `${domain.name}${prefix}`)
-  const client = new Cloudflare({ apiToken: process.env.ZONE_API_TOKEN })
+  const client = new Cloudflare({ apiToken: process.env.ZONE_CACHE_TOKEN })
   await client.cache.purge({
     zone_id: process.env.ZONE_ID,
     prefixes

@@ -1,5 +1,5 @@
 /**
- * @fileoverview Subpath export for website variables.
+ * @fileoverview Subpath export for the website variables.
  */
 
 export {

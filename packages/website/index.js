@@ -6,6 +6,7 @@
  */
 
 export { Breadcrumb } from '../../node_modules/nextra-theme-docs/dist/components/breadcrumb.js'
+export { Button } from '../../src/components/mdx/Button'
 export { footer } from '../../src/config/site'
 export { Callout } from '../../src/components/mdx/Callout'
 export { CardGrid, FeatureCard } from '../../src/components/FeatureCard'

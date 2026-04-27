@@ -16,6 +16,7 @@
  *   - tagsSectionTitle: heading shown above post cards on tag pages
  */
 
+import { generateStaticParamsFor, importPage } from 'nextra/pages'
 import GithubSlugger from 'github-slugger'
 import remarkGfm from 'remark-gfm'
 import { remarkMermaid } from '@theguild/remark-mermaid'
@@ -23,11 +24,11 @@ import remarkMdx from 'remark-mdx'
 import remarkParse from 'remark-parse'
 import { SafeMdxRenderer } from 'safe-mdx'
 import { unified } from 'unified'
-import { generateStaticParamsFor, importPage } from 'nextra/pages'
 import { PostCard, Subnavbar, useMDXComponents as getMDXComponents } from '@axivo/website'
-import { filterByDate, getPosts, Posts, postsPageSize, renderIndexPage } from './Post'
+import { remarkMarkAndUnravel } from '@axivo/website/remark'
+import { createDispatch } from './mdx/renderers/node'
 import { extractFootnotes } from './mdx/footnotes'
-import { dispatch } from './mdx/renderers/node'
+import { filterByDate, getMetadata, getPosts, Posts, postsPageSize, renderIndexPage } from './Post'
 
 const components = getMDXComponents()
 const nextraStaticParams = generateStaticParamsFor('mdxPath')
@@ -177,7 +178,12 @@ function isTagPage(path, collection) {
  * @returns {object} MDAST root node
  */
 function parseMdx(mdx) {
-  const processor = unified().use(remarkParse).use(remarkMdx).use(remarkGfm).use(remarkMermaid)
+  const processor = unified()
+    .use(remarkParse)
+    .use(remarkMdx)
+    .use(remarkMarkAndUnravel)
+    .use(remarkGfm)
+    .use(remarkMermaid)
   return processor.runSync(processor.parse(mdx))
 }
 
@@ -269,6 +275,12 @@ async function renderEntryPage(path, collection) {
   const mdast = parseMdx(result.content)
   extractFootnotes(mdast)
   const r2Toc = extractToc(mdast)
+  const objects = await getMetadata(collection)
+  const record = objects.find(obj => obj.key === key)
+  const dispatch = createDispatch({
+    blocks: record?.features?.syntax?.blocks,
+    inline: record?.features?.syntax?.inline
+  })
   return (
     <Wrapper metadata={result.metadata} toc={r2Toc}>
       <SafeMdxRenderer components={components} mdast={mdast} renderNode={dispatch} />

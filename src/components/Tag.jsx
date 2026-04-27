@@ -12,9 +12,9 @@ import styles from './Tag.module.css'
  *
  * @param {object} props
  * @param {Array<[string, number]>} props.tags - Sorted array of [tag, count] pairs
- * @param {string} [props.basePath='/claude/reflections/tags'] - Base URL for tag links
+ * @param {string} props.basePath - Base URL for tag links
  */
-function TagGrid({ tags, basePath = '/claude/reflections/tags' }) {
+function TagGrid({ tags, basePath }) {
   return (
     <div className={styles.grid}>
       {tags.map(([tag, count]) => (

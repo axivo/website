@@ -28,33 +28,6 @@ const months = [
 const postsPageSize = 20
 
 /**
- * Reads a collection's metadata manifest directly from R2 via the
- * CONTENT_BUCKET binding. Avoids the HTTP self-fetch that would route
- * the request back through the Worker for no benefit. Memoizes the
- * in-flight promise by metadataKey so concurrent callers share one
- * R2 fetch for the lifetime of the process — safe because the manifest
- * is immutable within a deploy.
- *
- * @param {object} collection - Collection descriptor with metadataKey
- * @returns {Promise<object[]>} Array of R2 metadata objects
- */
-async function fetchMetadata(collection) {
-  const cached = metadataCache.get(collection.metadataKey)
-  if (cached) return cached
-  const promise = (async () => {
-    const { getCloudflareContext } = await import('@opennextjs/cloudflare')
-    const { env } = await getCloudflareContext({ async: true })
-    const object = await env.CONTENT_BUCKET.get(collection.metadataKey)
-    if (!object) return []
-    const { objects } = await object.json()
-    return objects
-  })()
-  promise.catch(() => metadataCache.delete(collection.metadataKey))
-  metadataCache.set(collection.metadataKey, promise)
-  return promise
-}
-
-/**
  * Filters entries by date prefix.
  *
  * @param {object[]} entries - Entries to filter
@@ -76,6 +49,33 @@ function filterByDate(entries, date) {
 }
 
 /**
+ * Reads a collection's metadata manifest directly from R2 via the
+ * CONTENT_BUCKET binding. Avoids the HTTP self-fetch that would route
+ * the request back through the Worker for no benefit. Memoizes the
+ * in-flight promise by metadataKey so concurrent callers share one
+ * R2 fetch for the lifetime of the process — safe because the manifest
+ * is immutable within a deploy.
+ *
+ * @param {object} collection - Collection descriptor with metadataKey
+ * @returns {Promise<object[]>} Array of R2 metadata objects
+ */
+async function getMetadata(collection) {
+  const cached = metadataCache.get(collection.metadataKey)
+  if (cached) return cached
+  const promise = (async () => {
+    const { getCloudflareContext } = await import('@opennextjs/cloudflare')
+    const { env } = await getCloudflareContext({ async: true })
+    const object = await env.CONTENT_BUCKET.get(collection.metadataKey)
+    if (!object) return []
+    const { objects } = await object.json()
+    return objects
+  })()
+  promise.catch(() => metadataCache.delete(collection.metadataKey))
+  metadataCache.set(collection.metadataKey, promise)
+  return promise
+}
+
+/**
  * Builds pre-normalization page map children for a collection's entries.
  * Returns year folder children matching nextra's internal page map format.
  *
@@ -83,7 +83,7 @@ function filterByDate(entries, date) {
  * @returns {Promise<object[]>} Array of year folder items (pre-normalization)
  */
 async function getPostPageMap(collection) {
-  const objects = await fetchMetadata(collection)
+  const objects = await getMetadata(collection)
   const entries = objects.filter(obj => obj.template === collection.template)
   const tree = {}
   for (const obj of entries) {
@@ -165,7 +165,7 @@ async function getPostPageMap(collection) {
  * @returns {Promise<object[]>} Sorted array of entries
  */
 async function getPosts(collection) {
-  const objects = await fetchMetadata(collection)
+  const objects = await getMetadata(collection)
   return objects
     .filter(obj => obj.template === collection.template)
     .map(obj => toEntry(obj, collection.contentPrefix))
@@ -297,7 +297,7 @@ async function Tags({ collection }) {
     tagCounts[tag] += 1
   }
   const sorted = Object.entries(tagCounts).sort((a, b) => a[0].localeCompare(b[0]))
-  return <TagGrid tags={sorted} />
+  return <TagGrid tags={sorted} basePath={`${collection.routePath}/tags`} />
 }
 
 /**
@@ -352,6 +352,7 @@ function sortYears(folder) {
 
 export {
   filterByDate,
+  getMetadata,
   getPostPageMap,
   getPosts,
   getTags,
