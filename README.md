@@ -12,7 +12,7 @@ npm install
 
 # Preview on Cloudflare Workers runtime
 npx wrangler login
-FORCE_COLOR=1 npm run preview 2>&1 | tee "./logs/preview-$(date +%Y-%m-%d_%H-%M-%S).log"
+npm run preview
 ```
 
 ### Credentials
@@ -28,7 +28,8 @@ KV_PURGE_SECRET=<your-kv-purge-secret>
 R2_ACCESS_KEY_ID=<your-access-key-id>
 R2_SECRET_ACCESS_KEY=<your-secret-access-key>
 R2_ENDPOINT=<your-r2-endpoint>
-ZONE_API_TOKEN=<your-zone-api-token>
+ZONE_CACHE_TOKEN=<your-zone-cache-token>
+ZONE_DNS_TOKEN=<your-zone-dns-token>
 ZONE_ID=<your-zone-id>
 ```
 
