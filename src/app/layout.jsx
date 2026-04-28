@@ -8,6 +8,7 @@
 import { Head } from 'nextra/components'
 import { GoogleAnalytics } from '@next/third-parties/google'
 import Script from 'next/script'
+import { ViewTransition } from 'react'
 import { cloudflare, domain, google } from '@axivo/website/global'
 import '../styles/globals.css'
 
@@ -54,7 +55,9 @@ function RootLayout({ children }) {
       )}
       {google.analytics.enabled && <GoogleAnalytics gaId={google.analytics.id} />}
       <body>
-        {children}
+        <ViewTransition>
+          {children}
+        </ViewTransition>
       </body>
     </html>
   )
