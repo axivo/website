@@ -23,12 +23,14 @@ import {
 const collection = {
   contentPrefix: `src/content/${meta.source.path}/${meta.reflections.path}/`,
   description: meta.reflections.description,
+  icon: meta.reflections.icon,
   metadataEndpoint: `${domain.protocol}://${domain.name}/metadata?collection=reflections`,
   metadataKey: cloudflare.bucket.metadata.reflections,
+  relatedTitle: meta.reflections.related.title,
   routePath: `/${meta.source.path}/${meta.reflections.path}`,
   sectionId: meta.reflections.path,
   sectionPath: meta.reflections.path,
-  sectionTitle: meta.reflections.title,
+  sectionTitle: meta.reflections.entries.title ?? meta.reflections.title,
   tagsSectionTitle: meta.reflections.title,
   template: 'reflection'
 }

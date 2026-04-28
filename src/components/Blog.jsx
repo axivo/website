@@ -22,12 +22,14 @@ import {
 const collection = {
   contentPrefix: `src/content/${meta.source.path}/`,
   description: meta.source.description,
+  icon: meta.source.icon,
   metadataEndpoint: `${domain.protocol}://${domain.name}/metadata?collection=${meta.source.path}`,
   metadataKey: cloudflare.bucket.metadata.blog,
+  relatedTitle: meta.source.related.title,
   routePath: `/${meta.source.path}`,
   sectionId: meta.source.path,
   sectionPath: '',
-  sectionTitle: meta.source.title,
+  sectionTitle: meta.source.entries.title ?? meta.source.title,
   tagsSectionTitle: meta.source.title,
   template: 'blog'
 }

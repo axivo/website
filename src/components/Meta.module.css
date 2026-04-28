@@ -9,7 +9,7 @@
 }
 
 .container {
-  @apply mt-1 flex flex-wrap items-center gap-y-2 text-sm text-gray-600;
+  @apply flex flex-wrap gap-y-2 items-center mt-1 text-gray-600 text-sm;
 }
 
 :global(.dark) .container {

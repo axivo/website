@@ -9,12 +9,11 @@
 }
 
 nav a:has(img) {
-  transition: transform 0.18s cubic-bezier(0.23, 1, 0.32, 1);
+  @apply [transition:transform_0.18s_cubic-bezier(0.23,_1,_0.32,_1)];
 }
 
 nav a:has(img):hover {
-  @apply opacity-100;
-  transform: translateY(-0.1rem);
+  @apply -translate-y-[0.1rem] opacity-100;
 }
 
 .subtitle {

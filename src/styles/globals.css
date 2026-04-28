@@ -7,3 +7,37 @@
 :root:root {
   --nextra-content-width: 80rem;
 }
+
+/* View Transitions */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 250ms;
+  animation-timing-function: ease-out;
+}
+
+::view-transition-new(root) {
+  animation-name: fade-in;
+}
+
+::view-transition-old(root) {
+  animation-name: fade-out;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 0s;
+  }
+}

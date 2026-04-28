@@ -16,6 +16,9 @@ const withNextra = nextra({
   search: false
 })
 const nextConfig = withNextra({
+  experimental: {
+    viewTransition: true
+  },
   reactStrictMode: true,
   redirects: async () => [
     { source: '/apple-touch-icon-precomposed.png', destination: '/apple-icon.png', permanent: true },

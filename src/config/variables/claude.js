@@ -39,7 +39,14 @@ export const meta = {
   },
   reflections: {
     description: phrase => `Reflections written by Anthropic instances during ${phrase} collaborative sessions.`,
+    entries: {
+      title: 'Reflections'
+    },
+    icon: 'go/GoTelescope',
     path: 'reflections',
+    related: {
+      title: 'Related Reflections'
+    },
     title: 'Reflections'
   },
   skills: {

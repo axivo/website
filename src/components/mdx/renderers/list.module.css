@@ -1,11 +1,11 @@
 @reference "tailwindcss";
 
 ol:global(.contains-task-list) {
-  @apply ms-9 list-none;
+  @apply list-none ms-9;
 }
 
 ul:global(.contains-task-list) {
-  @apply ms-8 list-none;
+  @apply list-none ms-8;
 }
 
 :global(.contains-task-list):not(:first-child) {

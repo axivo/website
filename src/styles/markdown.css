@@ -2,8 +2,14 @@
 
 /* Blockquote */
 blockquote {
-  @apply my-4 px-4 text-sm leading-5 font-normal not-italic;
-  border-left: 4px solid rgb(0, 128, 128);
+  @apply border-l-4
+    border-l-[var(--x-color-slate-700)]
+    font-normal
+    leading-5
+    my-4
+    not-italic
+    px-4
+    text-sm;
 }
 
 blockquote p {
@@ -11,24 +17,36 @@ blockquote p {
 }
 
 .dark blockquote {
-  border-left-color: rgb(94, 194, 194);
+  @apply border-l-[var(--x-color-slate-200)];
 }
 
 /* Button */
 a.button {
-  @apply inline-block rounded-full px-4 py-1.5 text-sm text-white no-underline transition-all duration-300 ease-in-out select-none;
-  background: linear-gradient(to bottom, #238aff, #4150f5);
-  box-shadow: 0 1px 2px #00295738;
-  text-shadow: 0 1px 1px #00387838;
+  @apply bg-gradient-to-b
+    duration-300
+    ease-in-out
+    from-[var(--x-color-blue-600)]
+    inline-block
+    no-underline
+    px-4
+    py-1.5
+    rounded-full
+    select-none
+    shadow-[0_1px_2px_color-mix(in_oklab,_var(--x-color-blue-900)_22%,_transparent)]
+    text-sm
+    text-white
+    to-[var(--x-color-blue-700)]
+    transition-all
+    [text-shadow:0_1px_1px_color-mix(in_oklab,_var(--x-color-blue-900)_22%,_transparent)];
 }
 
 a.button span {
-  @apply inline-block transition-all duration-300 ease-in-out;
+  @apply duration-300 ease-in-out inline-block transition-all;
 }
 
 a.button:hover {
-  @apply brightness-[1.05];
-  box-shadow: 0 4px 20px -8px #0078ffab;
+  @apply brightness-[1.05]
+    shadow-[0_4px_20px_-8px_color-mix(in_oklab,_var(--x-color-blue-600)_67%,_transparent)];
 }
 
 a.button:hover span {
@@ -44,24 +62,27 @@ a.button:active {
 }
 
 a.button:focus-visible {
-  @apply outline-offset-2;
-  outline: 2px solid
-    hsl(var(--nextra-primary-hue) var(--nextra-primary-saturation) 77%);
+  @apply outline-2
+    outline-offset-2
+    outline-[hsl(var(--nextra-primary-hue)_var(--nextra-primary-saturation)_77%)];
 }
 
 .dark a.button {
-  background: linear-gradient(to bottom, #d0dfff, #b2c7ff);
-  color: #000;
-  text-shadow: none;
+  @apply from-[var(--x-color-blue-100)] text-black [text-shadow:none] to-[var(--x-color-blue-100)];
 }
 
 .dark a.button:hover {
-  box-shadow: 0 4px 20px -8px rgb(178 199 255 / 50%);
+  @apply shadow-[0_4px_20px_-8px_color-mix(in_oklab,_var(--x-color-blue-100)_50%,_transparent)];
 }
 
 /* Code */
 code.nextra-code {
   @apply text-xs;
+}
+
+/* Nextra TOC: Hide icons in heading text */
+.nextra-mask a svg {
+  @apply hidden;
 }
 
 /* Table */

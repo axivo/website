@@ -1,19 +1,28 @@
 @reference "tailwindcss";
 
 .subnavbar {
-  @apply sticky z-20 w-full backdrop-blur-md border-b;
-  top: var(--nextra-navbar-height);
+  @apply backdrop-blur-md
+    border-b
+    sticky
+    top-[var(--nextra-navbar-height)]
+    w-full
+    z-20;
 }
 
 .container {
-  @apply mx-auto flex items-center justify-between gap-4 py-1.5;
-  max-width: var(--nextra-content-width);
-  padding-left: max(env(safe-area-inset-left), 1.5rem);
-  padding-right: max(env(safe-area-inset-right), 1.5rem);
+  @apply flex
+    gap-4
+    items-center
+    justify-between
+    max-w-[var(--nextra-content-width)]
+    mx-auto
+    pl-[max(env(safe-area-inset-left),_1.5rem)]
+    pr-[max(env(safe-area-inset-right),_1.5rem)]
+    py-1.5;
 }
 
 .breadcrumb {
-  @apply flex items-center gap-1 overflow-hidden text-sm;
+  @apply flex gap-1 items-center overflow-hidden text-sm;
 }
 
 .icon {
@@ -21,11 +30,11 @@
 }
 
 .separator {
-  @apply shrink-0 rtl:rotate-180;
+  @apply rtl:rotate-180 shrink-0;
 }
 
 .item {
-  @apply whitespace-nowrap transition-colors;
+  @apply transition-colors whitespace-nowrap;
 }
 
 .itemActive {

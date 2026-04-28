@@ -153,6 +153,20 @@ async function generateMenu() {
       iconSpecs.add(match[1])
     }
   }
+  const mdxMatches = await fg('**/*.mdx', { cwd: contentDir })
+  for (const path of mdxMatches) {
+    const body = readFileSync(join(contentDir, path), 'utf8')
+    for (const match of body.matchAll(/<Icon\b[^>]*\bname=["']([a-z]+\/[A-Z]\w+)["']/g)) {
+      iconSpecs.add(match[1])
+    }
+  }
+  const jsxMatches = await fg('**/*.{js,jsx}', { cwd: join(cwd, 'src') })
+  for (const path of jsxMatches) {
+    const body = readFileSync(join(cwd, 'src', path), 'utf8')
+    for (const match of body.matchAll(/<Icon\b[^>]*\bname=["']([a-z]+\/[A-Z]\w+)["']/g)) {
+      iconSpecs.add(match[1])
+    }
+  }
   const iconsByLibrary = {}
   for (const spec of iconSpecs) {
     const [library, name] = spec.split('/')

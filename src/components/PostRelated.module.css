@@ -1,0 +1,31 @@
+@reference "tailwindcss";
+
+.related {
+  @apply border-gray-200 border-t mt-12 pt-8;
+}
+
+:global(.dark) .related {
+  @apply border-neutral-800;
+}
+
+.related h2 {
+  @apply border-none flex items-center mt-2 pb-0;
+}
+
+.related h3 {
+  @apply text-lg;
+}
+
+.related h3 + div {
+  @apply leading-5 max-h-20 overflow-hidden relative text-xs;
+}
+
+.related h3 + div::after {
+  @apply absolute bottom-0 h-20 left-0 right-0;
+  background: linear-gradient(to bottom, transparent, var(--x-color-white));
+  content: '';
+}
+
+:global(.dark) .related h3 + div::after {
+  background: linear-gradient(to bottom, transparent, var(--x-color-neutral-800));
+}
