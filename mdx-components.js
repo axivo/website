@@ -21,6 +21,7 @@ import * as websiteComponents from '@axivo/website'
 import timestamps from './src/generated/timestamps.json' with { type: 'json' }
 import { Button } from './src/components/mdx/Button'
 import { Callout } from './src/components/mdx/Callout'
+import { Icon } from './src/components/mdx/Icon'
 import { Ordered, Unordered } from './src/components/mdx/List'
 import { PageTitle } from './src/components/mdx/PageTitle'
 import { SourceCodeSetter } from './src/components/mdx/SourceCode'
@@ -44,6 +45,7 @@ function useMDXComponents(components) {
     Cards,
     Collapse,
     FileTree,
+    Icon,
     Mermaid,
     Tabs,
     blockquote: withGitHubAlert(

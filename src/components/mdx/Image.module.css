@@ -1,43 +1,49 @@
 @reference "tailwindcss";
 
 .caption {
-  @apply px-4 py-3 text-sm opacity-80;
+  @apply opacity-80 px-4 py-3 text-sm;
 }
 
 .caption p {
-  @apply m-1 leading-5;
+  @apply leading-5 m-1;
 }
 
 .card {
-  @apply mt-5 mb-7 block w-fit overflow-hidden rounded-2xl no-underline;
-  background-color: white;
+  @apply bg-white
+    block
+    mb-7
+    mt-5
+    no-underline
+    overflow-hidden
+    rounded-2xl
+    w-fit;
   box-shadow:
-    0 8px 16px rgb(0 0 0 / 8%),
-    0 1px 2px rgb(0 0 0 / 4%),
-    0 0 0 1px rgb(0 0 0 / 3%);
+    0 8px 16px color-mix(in oklab, var(--x-color-black) 8%, transparent),
+    0 1px 2px color-mix(in oklab, var(--x-color-black) 4%, transparent),
+    0 0 0 1px color-mix(in oklab, var(--x-color-black) 3%, transparent);
   transition: box-shadow 0.3s ease;
 }
 
 :global(.dark) .card {
-  background-color: #202020;
+  @apply bg-neutral-800;
   box-shadow:
-    0 8px 16px rgb(255 255 255 / 8%),
-    0 1px 2px rgb(255 255 255 / 4%),
-    0 0 0 1px rgb(255 255 255 / 3%);
+    0 8px 16px color-mix(in oklab, var(--x-color-white) 8%, transparent),
+    0 1px 2px color-mix(in oklab, var(--x-color-white) 4%, transparent),
+    0 0 0 1px color-mix(in oklab, var(--x-color-white) 3%, transparent);
 }
 
 .card:hover {
   box-shadow:
-    0 12px 24px rgb(0 0 0 / 12%),
-    0 2px 4px rgb(0 0 0 / 6%),
-    0 0 0 1px rgb(0 0 0 / 5%);
+    0 12px 24px color-mix(in oklab, var(--x-color-black) 12%, transparent),
+    0 2px 4px color-mix(in oklab, var(--x-color-black) 6%, transparent),
+    0 0 0 1px color-mix(in oklab, var(--x-color-black) 5%, transparent);
 }
 
 :global(.dark) .card:hover {
   box-shadow:
-    0 12px 24px rgb(255 255 255 / 12%),
-    0 2px 4px rgb(255 255 255 / 6%),
-    0 0 0 1px rgb(255 255 255 / 5%);
+    0 12px 24px color-mix(in oklab, var(--x-color-white) 12%, transparent),
+    0 2px 4px color-mix(in oklab, var(--x-color-white) 6%, transparent),
+    0 0 0 1px color-mix(in oklab, var(--x-color-white) 5%, transparent);
 }
 
 .dark {

@@ -15,11 +15,11 @@
 import cn from 'clsx'
 import NextLink from 'next/link'
 import { Fragment, useEffect, useRef } from 'react'
-import { GoHome } from 'react-icons/go'
 import { ArrowRightIcon } from 'nextra/icons'
 import { useConfig } from 'nextra-theme-docs'
 import { usePathname } from 'next/navigation'
 import { ExploreMenu } from './ExploreMenu'
+import { Icon } from './mdx/Icon'
 import styles from './Subnavbar.module.css'
 
 /**
@@ -81,7 +81,7 @@ function Subnavbar({ activePath: activePathProp } = {}) {
     <div ref={ref} className={cn('nextra-border nextra-subnavbar x:bg-nextra-bg/70', styles.subnavbar)}>
       <div className={styles.container}>
         <div className={cn(styles.breadcrumb, 'x:text-gray-600 x:dark:text-gray-400 x:contrast-more:text-gray-700 x:contrast-more:dark:text-gray-100')}>
-          <GoHome size={18} className={styles.icon} />
+          <Icon name="go/GoHome" size={18} className={styles.icon} />
           {activePath.map((item, index, arr) => {
             const nextItem = arr[index + 1]
             const href = nextItem

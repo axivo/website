@@ -1,12 +1,11 @@
 @reference "tailwindcss";
 
 .arrow {
-  @apply transition-transform duration-200;
-  transform: rotate(90deg);
+  @apply duration-200 rotate-90 transition-transform;
 }
 
 .arrowOpen {
-  transform: rotate(-90deg);
+  @apply -rotate-90;
 }
 
 .container {
@@ -14,45 +13,58 @@
 }
 
 .menu {
-  @apply absolute right-0 min-w-64 rounded-md py-1 text-sm shadow-lg z-30;
-  top: calc(100% + 0.25rem);
+  @apply absolute
+    min-w-64
+    py-1
+    right-0
+    rounded-md
+    shadow-lg
+    text-sm
+    top-[calc(100%+0.25rem)]
+    z-30;
 }
 
 :global(.dark) .menu {
-  box-shadow:
-    0 10px 15px -3px rgba(255, 255, 255, 0.08),
-    0 4px 6px -4px rgba(255, 255, 255, 0.06);
+  @apply shadow-[0_10px_15px_-3px_color-mix(in_oklab,_var(--x-color-white)_8%,_transparent),_0_4px_6px_-4px_color-mix(in_oklab,_var(--x-color-white)_6%,_transparent)];
 }
 
 .menuItem {
-  @apply flex gap-3 items-center w-full px-3 py-1.5 cursor-pointer text-left;
+  @apply cursor-pointer
+    flex
+    gap-3
+    items-center
+    px-3
+    py-1.5
+    text-left
+    w-full;
 }
 
 .menuItem:hover {
-  background-color: var(--x-color-primary-100);
-  color: var(--x-color-primary-800);
+  @apply bg-[var(--x-color-primary-100)] text-[var(--x-color-primary-800)];
 }
 
 :global(.dark) .menuItem:hover {
-  background-color: color-mix(in srgb, var(--x-color-primary-500) 10%, transparent);
-  color: var(--x-color-primary-500);
+  @apply bg-[color-mix(in_oklab,_var(--x-color-primary-500)_10%,_transparent)] text-[var(--x-color-primary-500)];
 }
 
 .menuItemDescription {
-  @apply text-xs whitespace-nowrap overflow-hidden text-ellipsis;
-  color: var(--x-color-gray-600);
+  @apply overflow-hidden
+    text-[var(--x-color-gray-600)]
+    text-ellipsis
+    text-xs
+    whitespace-nowrap;
 }
 
 .menuItem:hover .menuItemDescription {
-  color: var(--x-color-primary-800);
+  @apply text-[var(--x-color-primary-800)];
 }
 
 :global(.dark) .menuItemDescription {
-  color: var(--x-color-gray-400);
+  @apply text-[var(--x-color-gray-400)];
 }
 
 :global(.dark) .menuItem:hover .menuItemDescription {
-  color: var(--x-color-primary-500);
+  @apply text-[var(--x-color-primary-500)];
 }
 
 .menuItemText {
@@ -60,9 +72,14 @@
 }
 
 .menuItemTitle {
-  @apply font-medium flex gap-1;
+  @apply flex font-medium gap-1;
 }
 
 .trigger {
-  @apply flex gap-1.5 items-center whitespace-nowrap text-sm cursor-pointer;
+  @apply cursor-pointer
+    flex
+    gap-1.5
+    items-center
+    text-sm
+    whitespace-nowrap;
 }

@@ -9,43 +9,46 @@
 }
 
 .tag {
-  @apply rounded-full px-3 py-1 text-xs text-gray-600 no-underline transition-colors;
-  background: rgba(0, 0, 0, 0.05);
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  @apply bg-[color-mix(in_oklab,_var(--x-color-black)_5%,_transparent)]
+    border
+    border-[color-mix(in_oklab,_var(--x-color-black)_10%,_transparent)]
+    no-underline
+    px-3
+    py-1
+    rounded-full
+    text-gray-600
+    text-xs
+    transition-colors;
 }
 
 .tag:hover {
-  background: rgba(0, 0, 0, 0.1);
-  border-color: rgba(0, 0, 0, 0.2);
+  @apply bg-[color-mix(in_oklab,_var(--x-color-black)_10%,_transparent)] border-[color-mix(in_oklab,_var(--x-color-black)_20%,_transparent)];
 }
 
 :global(.dark) .tag {
-  @apply text-gray-400;
-  background: rgba(249, 250, 251, 0.1);
-  border-color: rgba(249, 250, 251, 0.15);
+  @apply bg-[color-mix(in_oklab,_var(--x-color-gray-50)_10%,_transparent)] border-[color-mix(in_oklab,_var(--x-color-gray-50)_15%,_transparent)] text-gray-400;
 }
 
 :global(.dark) .tag:hover {
-  background: rgba(249, 250, 251, 0.15);
-  border-color: rgba(249, 250, 251, 0.25);
+  @apply bg-[color-mix(in_oklab,_var(--x-color-gray-50)_15%,_transparent)] border-[color-mix(in_oklab,_var(--x-color-gray-50)_25%,_transparent)];
 }
 
 .tags {
-  @apply mt-2 flex flex-wrap gap-1.5;
+  @apply flex flex-wrap gap-1.5 mt-2;
 }
 
 .title {
-  @apply mb-1 mt-0 text-2xl font-semibold;
+  @apply font-semibold mb-1 mt-0 text-2xl;
 }
 
 .titleLink {
-  @apply no-underline transition-all duration-300;
+  @apply duration-300 no-underline transition-all;
 }
 
 .titleLink:hover {
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  @apply [text-shadow:0_2px_4px_color-mix(in_oklab,_var(--x-color-black)_20%,_transparent)];
 }
 
 :global(.dark) .titleLink:hover {
-  text-shadow: 0 2px 4px rgba(255, 255, 255, 0.4);
+  @apply [text-shadow:0_2px_4px_color-mix(in_oklab,_var(--x-color-white)_40%,_transparent)];
 }

@@ -4,8 +4,8 @@ description: >-
   Engineering decisions, infrastructure choices, and reasoning behind projects under the AXIVO umbrella.
 ---
 
-export const postsPageSize = 16;
-export const postsSectionId = "latest-entries";
+export const postsPageSize = 16
+export const postsSectionId = 'latest-entries'
 
 # Blog
 
@@ -13,9 +13,9 @@ A working journal, kept in public. The posts are uneven by design — some walk 
 
 {/* prettier-ignore */}
 <Hero
-  image={{ dark: "/home/blog/card-kuberun-dark.svg", light: "/home/blog/card-kuberun.svg" }}
-  style={{ padding: "0" }}
-  styleContainer={{ width: "12rem" }}
+  image={{ dark: '/home/blog/card-kuberun-dark.svg', light: '/home/blog/card-kuberun.svg' }}
+  style={{ padding: '0' }}
+  styleContainer={{ width: '12rem' }}
 >
   Notes from the architect's desk: engineering choices, SRE perspectives,
   and reasoning behind projects under the AXIVO umbrella.
@@ -34,5 +34,5 @@ Infrastructure decisions rot faster than the systems they describe. By the time 
 
 {/* prettier-ignore */}
 <Blog limit={postsPageSize}>
-## Latest Entries
+## <Icon name="go/GoTelescope" size={36} style={{ paddingBottom: '0.25rem' }} /> Latest Entries
 </Blog>

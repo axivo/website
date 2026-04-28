@@ -16,6 +16,7 @@
  */
 
 import { useMDXComponents as getMDXComponents } from '@axivo/website'
+import { Icon } from './mdx/Icon'
 import { PostCard } from './PostCard'
 import { PostPage } from './PostPage'
 import { TagGrid } from './Tag'
@@ -173,6 +174,37 @@ async function getPosts(collection) {
 }
 
 /**
+ * Returns entries most related to the current entry by shared-tag count.
+ * Excludes the current entry, filters out entries with no overlap,
+ * sorts by overlap (descending) then date (descending), and takes the
+ * top `count`. Returns an empty array when the current entry has no
+ * tags or no other entries share any.
+ *
+ * @param {object} currentEntry - The entry being viewed
+ * @param {object[]} entries - All entries in the collection
+ * @param {number} [count=2] - Maximum related entries to return
+ * @returns {object[]} Top related entries
+ */
+function getRelated(currentEntry, entries, count = 2) {
+  const currentTags = currentEntry.frontMatter.tags || []
+  if (!currentTags.length) {
+    return []
+  }
+  const currentTagSet = new Set(currentTags)
+  return entries
+    .filter(entry => entry.route !== currentEntry.route)
+    .map(entry => {
+      const tags = entry.frontMatter.tags || []
+      const overlap = tags.filter(tag => currentTagSet.has(tag)).length
+      return { entry, overlap }
+    })
+    .filter(({ overlap }) => overlap > 0)
+    .sort((a, b) => b.overlap - a.overlap || b.entry.frontMatter.date.localeCompare(a.entry.frontMatter.date))
+    .slice(0, count)
+    .map(({ entry }) => entry)
+}
+
+/**
  * Fetches all unique tags across a collection's entries.
  *
  * @param {object} collection - Collection descriptor
@@ -275,7 +307,7 @@ async function renderIndexPage(collection, date) {
     <>
       <components.h1><Title date={date} /></components.h1>
       <Posts collection={collection} date={date}>
-        <components.h2 id={collection.sectionId}>{collection.sectionTitle}</components.h2>
+        <components.h2 id={collection.sectionId}><Icon name={collection.icon} size={36} style={{ paddingBottom: '0.25rem' }} />&nbsp;{collection.sectionTitle}</components.h2>
       </Posts>
     </>
   )
@@ -355,6 +387,7 @@ export {
   getMetadata,
   getPostPageMap,
   getPosts,
+  getRelated,
   getTags,
   Posts,
   postsPageSize,

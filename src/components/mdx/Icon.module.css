@@ -1,0 +1,5 @@
+@reference "tailwindcss";
+
+.icon {
+  @apply inline-block;
+}

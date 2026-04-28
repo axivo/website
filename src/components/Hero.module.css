@@ -1,36 +1,49 @@
 @reference "tailwindcss";
 
 a.cta {
-  @apply mt-[1.25em] inline-block rounded-full px-6 py-3 text-white no-underline transition-all duration-300 ease-in-out select-none;
-  background: linear-gradient(to bottom, #238aff, #4150f5);
-  box-shadow: 0 1px 2px #00295738;
-  text-shadow: 0 1px 1px #00387838;
+  @apply bg-gradient-to-b
+    duration-300
+    ease-in-out
+    from-[var(--x-color-blue-600)]
+    inline-block
+    mt-[1.25em]
+    no-underline
+    px-6
+    py-3
+    rounded-full
+    select-none
+    shadow-[0_1px_2px_color-mix(in_oklab,_var(--x-color-blue-900)_22%,_transparent)]
+    text-white
+    to-[var(--x-color-blue-700)]
+    transition-all
+    [text-shadow:0_1px_1px_color-mix(in_oklab,_var(--x-color-blue-900)_22%,_transparent)];
 }
 
 a.ctaLink {
-  @apply mt-[1.25em] ml-4 md:ml-8;
+  @apply md:ml-8 ml-4 mt-[1.25em];
 }
 
 :global(.dark) a.cta {
-  background: linear-gradient(to bottom, #d0dfff, #b2c7ff);
-  box-shadow: 0 1px 2px rgb(178 199 255 / 20%);
-  color: #000;
-  text-shadow: none;
-  -webkit-tap-highlight-color: transparent;
-  -webkit-user-drag: none;
+  @apply [-webkit-tap-highlight-color:transparent]
+    [-webkit-user-drag:none]
+    from-[var(--x-color-blue-100)]
+    shadow-[0_1px_2px_color-mix(in_oklab,_var(--x-color-blue-100)_20%,_transparent)]
+    text-black
+    [text-shadow:none]
+    to-[var(--x-color-blue-100)];
 }
 
 a.cta span {
-  @apply inline-block transition-all duration-300 ease-in-out;
+  @apply duration-300 ease-in-out inline-block transition-all;
 }
 
 a.cta:hover {
-  @apply brightness-[1.05];
-  box-shadow: 0 5px 30px -10px #0078ffab;
+  @apply brightness-[1.05]
+    shadow-[0_5px_30px_-10px_color-mix(in_oklab,_var(--x-color-blue-600)_67%,_transparent)];
 }
 
 :global(.dark) a.cta:hover {
-  box-shadow: 0 5px 30px -10px rgb(178 199 255 / 50%);
+  @apply shadow-[0_5px_30px_-10px_color-mix(in_oklab,_var(--x-color-blue-100)_50%,_transparent)];
 }
 
 a.cta:hover span {
@@ -38,12 +51,12 @@ a.cta:hover span {
 }
 
 a.cta:active {
-  @apply brightness-[0.95];
-  box-shadow: 0 1px 3px #00295738;
+  @apply brightness-[0.95]
+    shadow-[0_1px_3px_color-mix(in_oklab,_var(--x-color-blue-900)_22%,_transparent)];
 }
 
 :global(.dark) a.cta:active {
-  box-shadow: 0 1px 3px rgb(178 199 255 / 20%);
+  @apply shadow-[0_1px_3px_color-mix(in_oklab,_var(--x-color-blue-100)_20%,_transparent)];
 }
 
 a.cta:active span {
@@ -51,9 +64,9 @@ a.cta:active span {
 }
 
 a.cta:focus-visible {
-  @apply outline-offset-2;
-  outline: 2px solid
-    hsl(var(--nextra-primary-hue) var(--nextra-primary-saturation) 77%);
+  @apply outline-2
+    outline-offset-2
+    outline-[hsl(var(--nextra-primary-hue)_var(--nextra-primary-saturation)_77%)];
 }
 
 a.cta:focus-visible span {
@@ -61,14 +74,14 @@ a.cta:focus-visible span {
 }
 
 .container {
-  @apply mx-auto;
-  max-width: var(--nextra-content-width);
-  padding-left: max(env(safe-area-inset-left), 2rem);
-  padding-right: max(env(safe-area-inset-right), 2rem);
+  @apply mx-auto
+    max-w-[var(--nextra-content-width)]
+    pl-[max(env(safe-area-inset-left),_2rem)]
+    pr-[max(env(safe-area-inset-right),_2rem)];
 }
 
 .content {
-  @apply flex max-w-[70rem] items-center gap-8;
+  @apply flex gap-8 items-center max-w-[70rem];
 }
 
 .hero {
@@ -76,14 +89,16 @@ a.cta:focus-visible span {
 }
 
 .image {
-  @apply shrink-0;
-  width: clamp(12rem, 30vw, 24rem);
+  @apply shrink-0 w-[clamp(12rem,_30vw,_24rem)];
 }
 
 .tagline {
-  @apply flex flex-wrap items-center leading-normal;
-  font-feature-settings: initial;
-  font-size: clamp(1.2rem, 3vw, 1.4rem);
+  @apply flex
+    flex-wrap
+    [font-feature-settings:initial]
+    items-center
+    leading-normal
+    text-[clamp(1.2rem,_3vw,_1.4rem)];
 }
 
 .tagline p {
@@ -99,23 +114,26 @@ a.cta:focus-visible span {
 }
 
 .title {
-  @apply inline-flex leading-tight font-bold tracking-[-2px];
-  background-clip: text;
-  background-image: linear-gradient(146deg, #000, #757a7d);
-  font-feature-settings: initial;
-  font-size: clamp(2.5rem, 8vw, 4rem);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  @apply bg-clip-text
+    bg-[linear-gradient(146deg,_var(--x-color-black),_#757a7d)]
+    [-webkit-background-clip:text]
+    [-webkit-text-fill-color:transparent]
+    [font-feature-settings:initial]
+    font-bold
+    inline-flex
+    leading-tight
+    text-[clamp(2.5rem,_8vw,_4rem)]
+    tracking-[-2px];
 }
 
 :global(.dark) .title {
-  background-image: linear-gradient(146deg, #fff, #757a7d);
+  @apply bg-[linear-gradient(146deg,_var(--x-color-white),_#757a7d)];
 }
 
 @media screen and (max-width: 768px) {
   .container {
-    padding-left: max(env(safe-area-inset-left), 1rem);
-    padding-right: max(env(safe-area-inset-right), 1rem);
+    @apply pl-[max(env(safe-area-inset-left),_1rem)]
+      pr-[max(env(safe-area-inset-right),_1rem)];
   }
 
   .content {

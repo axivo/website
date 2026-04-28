@@ -1,11 +1,16 @@
 @reference "tailwindcss";
 
 :global(.footnotes) {
-  @apply mt-12 pt-6 border-t border-gray-200 dark:border-gray-800 text-sm;
+  @apply border-gray-200
+    border-t
+    dark:border-gray-800
+    mt-12
+    pt-6
+    text-sm;
 }
 
 :global(.footnotes) ol {
-  @apply ms-8 list-decimal;
+  @apply list-decimal ms-8;
 }
 
 :global(.footnotes) :global(.sr-only) {

@@ -1,13 +1,23 @@
 @reference "tailwindcss";
 
 .button {
-  @apply relative w-full rounded-lg px-3 py-2 text-base leading-tight md:w-45 md:text-sm;
-  @apply flex cursor-pointer items-center;
-  background: rgba(0, 0, 0, 0.05);
+  @apply bg-[color-mix(in_oklab,_var(--x-color-black)_5%,_transparent)]
+    cursor-pointer
+    flex
+    items-center
+    leading-tight
+    md:text-sm
+    md:w-45
+    px-3
+    py-2
+    relative
+    rounded-lg
+    text-base
+    w-full;
 }
 
 :global(.dark) .button {
-  background: rgba(249, 250, 251, 0.1);
+  @apply bg-[color-mix(in_oklab,_var(--x-color-gray-50)_10%,_transparent)];
 }
 
 .button:hover {
@@ -15,7 +25,7 @@
 }
 
 .placeholder {
-  @apply text-base font-normal text-gray-600 md:text-sm;
+  @apply font-normal md:text-sm text-base text-gray-600;
 }
 
 :global(.dark) .placeholder {
@@ -23,33 +33,47 @@
 }
 
 .shortcut {
-  @apply pointer-events-none absolute end-3 select-none;
-  @apply h-5 rounded px-1.5 font-mono text-[10px] font-medium;
-  @apply text-gray-600;
-  @apply border border-gray-200;
-  @apply flex items-center max-sm:hidden;
-  background: #fff;
+  @apply absolute
+    bg-white
+    border
+    border-gray-200
+    end-3
+    flex
+    font-medium
+    font-mono
+    h-5
+    items-center
+    max-sm:hidden
+    pointer-events-none
+    px-1.5
+    rounded
+    select-none
+    text-[10px]
+    text-gray-600;
 }
 
 :global(.dark) .shortcut {
-  @apply text-gray-400;
-  @apply border-neutral-800;
-  background: rgb(var(--nextra-bg));
+  @apply bg-[rgb(var(--nextra-bg))] border-neutral-800 text-gray-400;
 }
 
 :global(:root) {
-  --docsearch-container-background: rgba(0, 0, 0, 0.25);
-  --docsearch-footer-background: rgb(var(--nextra-bg));
-  --docsearch-hit-background: rgb(var(--nextra-bg));
-  --docsearch-modal-background: rgb(var(--nextra-bg));
+  --docsearch-container-background: color-mix(in oklab, var(--x-color-black) 25%, transparent);
+  --docsearch-footer-background: var(--x-color-white);
+  --docsearch-hit-background: var(--x-color-white);
+  --docsearch-modal-background: var(--x-color-white);
   --docsearch-modal-width: 600px;
-  --docsearch-searchbox-background: rgb(var(--nextra-bg));
-  --docsearch-searchbox-focus-background: rgb(var(--nextra-bg));
+  --docsearch-searchbox-background: var(--x-color-white);
+  --docsearch-searchbox-focus-background: var(--x-color-white);
   --docsearch-text-color: rgb(var(--nextra-fg));
 }
 
 :global(.dark) {
-  --docsearch-container-background: rgba(0, 0, 0, 0.5);
+  --docsearch-container-background: color-mix(in oklab, var(--x-color-black) 50%, transparent);
+  --docsearch-footer-background: var(--x-color-neutral-800);
+  --docsearch-hit-background: var(--x-color-neutral-800);
+  --docsearch-modal-background: var(--x-color-neutral-800);
+  --docsearch-searchbox-background: var(--x-color-neutral-800);
+  --docsearch-searchbox-focus-background: var(--x-color-neutral-800);
 }
 
 :global(.DocSearch-Container) {
@@ -62,17 +86,15 @@
   border: 1px solid rgb(var(--nextra-bg));
 }
 
-:global(.dark .DocSearch-Modal) {
-  box-shadow:
-    0 16px 48px 0 color-mix(in srgb, currentColor 10%, transparent),
-    0 4px 12px 0 color-mix(in srgb, currentColor 5%, transparent);
+:global(.DocSearch-Modal) {
+  box-shadow: none;
 }
 
 :global(.dark .DocSearch-Modal .DocSearch-Footer) {
-  border-top-color: color-mix(in srgb, currentColor 20%, transparent);
+  border-top-color: color-mix(in oklab, currentColor 20%, transparent);
 }
 
 :global(.dark .DocSearch-Commands-Key) {
-  background: rgba(255, 255, 255, 0.1);
+  background: color-mix(in oklab, var(--x-color-white) 10%, transparent);
   border-color: rgb(var(--nextra-bg));
 }

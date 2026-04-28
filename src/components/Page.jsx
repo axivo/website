@@ -29,7 +29,8 @@ import { remarkMarkAndUnravel } from '@axivo/website/remark'
 import { createDispatch } from './mdx/renderers/node'
 import { createEntrySchema, JsonLd } from './JsonLd'
 import { extractFootnotes } from './mdx/footnotes'
-import { filterByDate, getMetadata, getPosts, Posts, postsPageSize, renderIndexPage } from './Post'
+import { filterByDate, getMetadata, getPosts, getRelated, Posts, postsPageSize, renderIndexPage } from './Post'
+import { PostRelated } from './PostRelated'
 
 const components = getMDXComponents()
 const nextraStaticParams = generateStaticParamsFor('mdxPath')
@@ -283,11 +284,15 @@ async function renderEntryPage(path, collection) {
     inline: record?.features?.syntax?.inline
   })
   const entryPath = entryDateSegments(path, collection)
+  const entries = await getPosts(collection)
+  const currentEntry = entries.find(entry => entry.route === `${collection.routePath}/${entryPath.join('/')}`)
+  const related = currentEntry ? getRelated(currentEntry, entries) : []
   return (
     <>
       <JsonLd data={createEntrySchema({ collection, metadata: result.metadata, path: entryPath })} />
       <Wrapper metadata={result.metadata} toc={r2Toc}>
         <SafeMdxRenderer components={components} mdast={mdast} renderNode={dispatch} />
+        <PostRelated entries={related} title={collection.relatedTitle} />
       </Wrapper>
     </>
   )

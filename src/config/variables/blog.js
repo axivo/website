@@ -11,7 +11,14 @@ export const meta = {
   ...globalMeta,
   source: {
     description: phrase => `Posts about engineering decisions and SRE perspectives during ${phrase} collaborative work.`,
+    entries: {
+      title: 'Blog Entries'
+    },
+    icon: 'go/GoTelescope',
     path: 'blog',
+    related: {
+      title: 'Related Posts'
+    },
     title: 'Blog'
   }
 }
