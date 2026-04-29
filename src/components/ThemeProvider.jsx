@@ -33,7 +33,18 @@ function setTheme() {
     } else {
       root.style.colorScheme = 'light'
     }
-  } catch (e) {}
+  } catch (e) { }
+}
+
+/**
+ * Thin pass-through around next-themes' ThemeProvider.
+ *
+ * @param {object} props - Provider props forwarded to next-themes
+ * @param {import('react').ReactNode} props.children - Page content
+ * @returns {import('react').ReactElement} Themed children
+ */
+function ThemeProvider({ children, ...props }) {
+  return <NextThemesProvider {...props}>{children}</NextThemesProvider>
 }
 
 /**
@@ -50,17 +61,6 @@ function setTheme() {
  */
 function ThemeScript() {
   return <script dangerouslySetInnerHTML={{ __html: `(${setTheme})()` }} />
-}
-
-/**
- * Thin pass-through around next-themes' ThemeProvider.
- *
- * @param {object} props - Provider props forwarded to next-themes
- * @param {import('react').ReactNode} props.children - Page content
- * @returns {import('react').ReactElement} Themed children
- */
-function ThemeProvider({ children, ...props }) {
-  return <NextThemesProvider {...props}>{children}</NextThemesProvider>
 }
 
 export { ThemeProvider, ThemeScript }
