@@ -8,9 +8,9 @@
 import { Head } from 'nextra/components'
 import { GoogleAnalytics } from '@next/third-parties/google'
 import Script from 'next/script'
-import { ThemeProvider } from 'next-themes'
 import { ViewTransition } from 'react'
 import { cloudflare, domain, google } from '@axivo/website/global'
+import { ThemeProvider, ThemeScript } from '@axivo/website'
 import '../styles/globals.css'
 
 export const metadata = {
@@ -45,7 +45,9 @@ export const metadata = {
 function RootLayout({ children }) {
   return (
     <html lang="en" dir="ltr" suppressHydrationWarning>
-      <Head />
+      <Head>
+        <ThemeScript />
+      </Head>
       {cloudflare.analytics.enabled && (
         <Script
           defer
