@@ -1,45 +1,23 @@
 @reference "tailwindcss";
 
 a.cta {
-  @apply bg-gradient-to-b
-    duration-300
-    ease-in-out
-    from-[var(--x-color-blue-600)]
-    inline-block
-    mt-[1.25em]
-    no-underline
-    px-6
-    py-3
-    rounded-full
-    select-none
-    shadow-[0_1px_2px_color-mix(in_oklab,_var(--x-color-blue-900)_22%,_transparent)]
-    text-white
-    to-[var(--x-color-blue-700)]
-    transition-all
-    [text-shadow:0_1px_1px_color-mix(in_oklab,_var(--x-color-blue-900)_22%,_transparent)];
+  @apply mt-[1.25em] inline-block rounded-full bg-gradient-to-b from-[var(--x-color-blue-600)] to-[var(--x-color-blue-700)] px-6 py-3 text-white no-underline shadow-[0_1px_2px_color-mix(in_oklab,_var(--x-color-blue-900)_22%,_transparent)] transition-all duration-300 ease-in-out select-none [text-shadow:0_1px_1px_color-mix(in_oklab,_var(--x-color-blue-900)_22%,_transparent)];
 }
 
 a.ctaLink {
-  @apply md:ml-8 ml-4 mt-[1.25em];
+  @apply mt-[1.25em] ml-4 md:ml-8;
 }
 
 :global(.dark) a.cta {
-  @apply [-webkit-tap-highlight-color:transparent]
-    [-webkit-user-drag:none]
-    from-[var(--x-color-blue-100)]
-    shadow-[0_1px_2px_color-mix(in_oklab,_var(--x-color-blue-100)_20%,_transparent)]
-    text-black
-    [text-shadow:none]
-    to-[var(--x-color-blue-100)];
+  @apply from-[var(--x-color-blue-100)] to-[var(--x-color-blue-100)] text-black shadow-[0_1px_2px_color-mix(in_oklab,_var(--x-color-blue-100)_20%,_transparent)] [-webkit-tap-highlight-color:transparent] [-webkit-user-drag:none] [text-shadow:none];
 }
 
 a.cta span {
-  @apply duration-300 ease-in-out inline-block transition-all;
+  @apply inline-block transition-all duration-300 ease-in-out;
 }
 
 a.cta:hover {
-  @apply brightness-[1.05]
-    shadow-[0_5px_30px_-10px_color-mix(in_oklab,_var(--x-color-blue-600)_67%,_transparent)];
+  @apply shadow-[0_5px_30px_-10px_color-mix(in_oklab,_var(--x-color-blue-600)_67%,_transparent)] brightness-[1.05];
 }
 
 :global(.dark) a.cta:hover {
@@ -51,8 +29,7 @@ a.cta:hover span {
 }
 
 a.cta:active {
-  @apply brightness-[0.95]
-    shadow-[0_1px_3px_color-mix(in_oklab,_var(--x-color-blue-900)_22%,_transparent)];
+  @apply shadow-[0_1px_3px_color-mix(in_oklab,_var(--x-color-blue-900)_22%,_transparent)] brightness-[0.95];
 }
 
 :global(.dark) a.cta:active {
@@ -64,9 +41,7 @@ a.cta:active span {
 }
 
 a.cta:focus-visible {
-  @apply outline-2
-    outline-offset-2
-    outline-[hsl(var(--nextra-primary-hue)_var(--nextra-primary-saturation)_77%)];
+  @apply outline-2 outline-offset-2 outline-[hsl(var(--nextra-primary-hue)_var(--nextra-primary-saturation)_77%)];
 }
 
 a.cta:focus-visible span {
@@ -74,14 +49,11 @@ a.cta:focus-visible span {
 }
 
 .container {
-  @apply mx-auto
-    max-w-[var(--nextra-content-width)]
-    pl-[max(env(safe-area-inset-left),_2rem)]
-    pr-[max(env(safe-area-inset-right),_2rem)];
+  @apply mx-auto max-w-[var(--nextra-content-width)] pr-[max(env(safe-area-inset-right),_2rem)] pl-[max(env(safe-area-inset-left),_2rem)];
 }
 
 .content {
-  @apply flex gap-8 items-center max-w-[70rem];
+  @apply flex max-w-[70rem] items-center gap-8;
 }
 
 .hero {
@@ -89,16 +61,11 @@ a.cta:focus-visible span {
 }
 
 .image {
-  @apply shrink-0 w-[clamp(12rem,_30vw,_24rem)];
+  @apply w-[clamp(12rem,_30vw,_24rem)] shrink-0;
 }
 
 .tagline {
-  @apply flex
-    flex-wrap
-    [font-feature-settings:initial]
-    items-center
-    leading-normal
-    text-[clamp(1.2rem,_3vw,_1.4rem)];
+  @apply flex flex-wrap items-center [font-feature-settings:initial] text-[clamp(1.2rem,_3vw,_1.4rem)] leading-normal;
 }
 
 .tagline p {
@@ -114,16 +81,7 @@ a.cta:focus-visible span {
 }
 
 .title {
-  @apply bg-clip-text
-    bg-[linear-gradient(146deg,_var(--x-color-black),_#757a7d)]
-    [-webkit-background-clip:text]
-    [-webkit-text-fill-color:transparent]
-    [font-feature-settings:initial]
-    font-bold
-    inline-flex
-    leading-tight
-    text-[clamp(2.5rem,_8vw,_4rem)]
-    tracking-[-2px];
+  @apply inline-flex bg-[linear-gradient(146deg,_var(--x-color-black),_#757a7d)] bg-clip-text [font-feature-settings:initial] text-[clamp(2.5rem,_8vw,_4rem)] leading-tight font-bold tracking-[-2px] [-webkit-background-clip:text] [-webkit-text-fill-color:transparent];
 }
 
 :global(.dark) .title {
@@ -132,8 +90,7 @@ a.cta:focus-visible span {
 
 @media screen and (max-width: 768px) {
   .container {
-    @apply pl-[max(env(safe-area-inset-left),_1rem)]
-      pr-[max(env(safe-area-inset-right),_1rem)];
+    @apply pr-[max(env(safe-area-inset-right),_1rem)] pl-[max(env(safe-area-inset-left),_1rem)];
   }
 
   .content {

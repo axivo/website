@@ -1,11 +1,11 @@
 @reference "tailwindcss";
 
 .ordered {
-  @apply list-decimal ms-9;
+  @apply ms-9 list-decimal;
 }
 
 .unordered {
-  @apply list-disc ms-8;
+  @apply ms-8 list-disc;
 }
 
 .ordered:not(:first-child),

@@ -26,9 +26,9 @@ While still implemented, the `admin` credentials are disabled by default and `us
 argocd_resources:
   server:
     users:
-      - name: "{{ argocd_map.credentials.server.user.name }}"
-        password: "{{ argocd_map.credentials.server.user.password }}"
-        permissions: "apiKey, login"
+      - name: '{{ argocd_map.credentials.server.user.name }}'
+        password: '{{ argocd_map.credentials.server.user.password }}'
+        permissions: 'apiKey, login'
         role: admin
         enabled: true
 ```

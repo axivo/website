@@ -16,6 +16,7 @@ Effective profile creation requires understanding behavioral programming systems
 
 Profiles implement a **dual-layer cognitive architecture** that combines active behavioral guidance with background cognitive safeguards, while inheriting from [common](/claude/wiki/components/memory/#common-profiles) foundations to avoid duplication and ensure consistent integration:
 
+{/* prettier-ignore */}
 ```yaml
 PROFILE_NAME:
   description: "Brief profile description"
@@ -34,6 +35,7 @@ Common inheritance patterns:
 
 The `{profile_name}_context.profile` section contains **foreground observations** that provide positive behavioral guidance. Example for `DEVELOPER` profile:
 
+{/* prettier-ignore */}
 ```yaml
 developer_context:
   profile:
@@ -53,6 +55,7 @@ These observations:
 
 The `{profile_name}_methodology.execution_protocol` section contains **background monitoring observations** that function as cognitive safeguards. Example for `DEVELOPER` profile:
 
+{/* prettier-ignore */}
 ```yaml
 developer_methodology:
   execution_protocol:
@@ -207,6 +210,7 @@ Step-by-step example demonstrating the creation of a `DATA_SCIENTIST` profile wi
 
 Create `data-scientist.yaml` file in <Var href={`https://${repository.home}/tree/${repository.tag}/plugins/${meta.plugins.framework.init.plugin}/skills/${meta.skills.initialization}/scripts/memory/profiles`}>profiles</Var> directory:
 
+{/* prettier-ignore */}
 ```yaml
 DATA_SCIENTIST:
   description: "Data science and analytics collaboration profile — rigorous, evidence-based, and interpretive"

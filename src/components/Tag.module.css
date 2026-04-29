@@ -1,7 +1,7 @@
 @reference "tailwindcss";
 
 .count {
-  @apply text-gray-600 text-xs;
+  @apply text-xs text-gray-600;
 }
 
 :global(.dark) .count {
@@ -9,36 +9,23 @@
 }
 
 .grid {
-  @apply gap-x-2 gap-y-4 grid grid-cols-3 mt-4;
+  @apply mt-4 grid grid-cols-3 gap-x-2 gap-y-4;
 }
 
 .tag {
-  @apply bg-[color-mix(in_oklab,_var(--x-color-black)_5%,_transparent)]
-    border
-    border-[color-mix(in_oklab,_var(--x-color-black)_10%,_transparent)]
-    gap-2
-    inline-flex
-    items-center
-    justify-self-start
-    no-underline
-    px-3
-    py-1
-    rounded-full
-    text-gray-600
-    text-sm
-    transition-colors;
+  @apply inline-flex items-center gap-2 justify-self-start rounded-full border border-[color-mix(in_oklab,_var(--x-color-black)_10%,_transparent)] bg-[color-mix(in_oklab,_var(--x-color-black)_5%,_transparent)] px-3 py-1 text-sm text-gray-600 no-underline transition-colors;
 }
 
 .tag:hover {
-  @apply bg-[color-mix(in_oklab,_var(--x-color-black)_10%,_transparent)] border-[color-mix(in_oklab,_var(--x-color-black)_20%,_transparent)];
+  @apply border-[color-mix(in_oklab,_var(--x-color-black)_20%,_transparent)] bg-[color-mix(in_oklab,_var(--x-color-black)_10%,_transparent)];
 }
 
 :global(.dark) .tag {
-  @apply bg-[color-mix(in_oklab,_var(--x-color-gray-50)_10%,_transparent)] border-[color-mix(in_oklab,_var(--x-color-gray-50)_15%,_transparent)] text-gray-400;
+  @apply border-[color-mix(in_oklab,_var(--x-color-gray-50)_15%,_transparent)] bg-[color-mix(in_oklab,_var(--x-color-gray-50)_10%,_transparent)] text-gray-400;
 }
 
 :global(.dark) .tag:hover {
-  @apply bg-[color-mix(in_oklab,_var(--x-color-gray-50)_15%,_transparent)] border-[color-mix(in_oklab,_var(--x-color-gray-50)_25%,_transparent)];
+  @apply border-[color-mix(in_oklab,_var(--x-color-gray-50)_25%,_transparent)] bg-[color-mix(in_oklab,_var(--x-color-gray-50)_15%,_transparent)];
 }
 
 @media screen and (max-width: 768px) {

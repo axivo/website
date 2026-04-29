@@ -15,12 +15,7 @@ import { useConfig } from 'nextra-theme-docs'
 import { useFSRoute } from 'nextra/hooks'
 import { menus } from '@axivo/website/menu'
 import { NavbarMenu } from './NavbarMenu'
-
-const linkClass = cn(
-  'x:text-sm x:contrast-more:text-gray-700 x:contrast-more:dark:text-gray-100 x:whitespace-nowrap',
-  'x:text-gray-600 x:hover:text-black x:dark:text-gray-400 x:dark:hover:text-gray-200',
-  'x:ring-inset x:transition-colors'
-)
+import styles from './NavbarMenuItems.module.css'
 
 function isMenu(page) {
   return page.type === 'menu'
@@ -66,10 +61,7 @@ function NavbarMenuItems({ site = '' }) {
       <Anchor
         href={href}
         key={page.name}
-        className={cn(
-          linkClass,
-          'x:aria-[current]:font-medium x:aria-[current]:subpixel-antialiased x:aria-[current]:text-current'
-        )}
+        className={cn(styles.link, styles.linkActive)}
         aria-current={isCurrentPage}
       >
         {page.title}

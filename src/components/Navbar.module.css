@@ -1,0 +1,49 @@
+@reference "tailwindcss";
+
+.header {
+  @apply sticky top-0 z-30 w-full bg-transparent print:hidden max-md:[.nextra-banner:not([class$=hidden])~&]:top-(--nextra-banner-height);
+}
+
+.blur {
+  @apply absolute -z-1 size-full border-b bg-[rgb(var(--nextra-bg)/0.7)] backdrop-blur-md;
+}
+
+.nav {
+  @apply mx-auto flex h-(--nextra-navbar-height) max-w-(--nextra-content-width) items-center justify-end gap-4 pr-[max(env(safe-area-inset-right),1.5rem)] pl-[max(env(safe-area-inset-left),1.5rem)];
+}
+
+.logo {
+  @apply flex items-center;
+}
+
+.logoMargin {
+  @apply me-auto;
+}
+
+.logoMarginMobile {
+  @apply max-md:me-auto;
+}
+
+.logoLink {
+  @apply transition-opacity hover:opacity-75;
+}
+
+.items {
+  @apply flex gap-4 py-1.5 max-md:hidden;
+}
+
+.itemsAlignLeft {
+  @apply me-auto;
+}
+
+.search {
+  @apply max-md:hidden;
+}
+
+.hamburger {
+  @apply md:hidden;
+}
+
+.hamburgerActive {
+  @apply bg-gray-400/20;
+}

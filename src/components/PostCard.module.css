@@ -9,40 +9,31 @@
 }
 
 .tag {
-  @apply bg-[color-mix(in_oklab,_var(--x-color-black)_5%,_transparent)]
-    border
-    border-[color-mix(in_oklab,_var(--x-color-black)_10%,_transparent)]
-    no-underline
-    px-3
-    py-1
-    rounded-full
-    text-gray-600
-    text-xs
-    transition-colors;
+  @apply rounded-full border border-[color-mix(in_oklab,_var(--x-color-black)_10%,_transparent)] bg-[color-mix(in_oklab,_var(--x-color-black)_5%,_transparent)] px-3 py-1 text-xs text-gray-600 no-underline transition-colors;
 }
 
 .tag:hover {
-  @apply bg-[color-mix(in_oklab,_var(--x-color-black)_10%,_transparent)] border-[color-mix(in_oklab,_var(--x-color-black)_20%,_transparent)];
+  @apply border-[color-mix(in_oklab,_var(--x-color-black)_20%,_transparent)] bg-[color-mix(in_oklab,_var(--x-color-black)_10%,_transparent)];
 }
 
 :global(.dark) .tag {
-  @apply bg-[color-mix(in_oklab,_var(--x-color-gray-50)_10%,_transparent)] border-[color-mix(in_oklab,_var(--x-color-gray-50)_15%,_transparent)] text-gray-400;
+  @apply border-[color-mix(in_oklab,_var(--x-color-gray-50)_15%,_transparent)] bg-[color-mix(in_oklab,_var(--x-color-gray-50)_10%,_transparent)] text-gray-400;
 }
 
 :global(.dark) .tag:hover {
-  @apply bg-[color-mix(in_oklab,_var(--x-color-gray-50)_15%,_transparent)] border-[color-mix(in_oklab,_var(--x-color-gray-50)_25%,_transparent)];
+  @apply border-[color-mix(in_oklab,_var(--x-color-gray-50)_25%,_transparent)] bg-[color-mix(in_oklab,_var(--x-color-gray-50)_15%,_transparent)];
 }
 
 .tags {
-  @apply flex flex-wrap gap-1.5 mt-2;
+  @apply mt-2 flex flex-wrap gap-1.5;
 }
 
 .title {
-  @apply font-semibold mb-1 mt-0 text-2xl;
+  @apply mt-0 mb-1 text-2xl font-semibold;
 }
 
 .titleLink {
-  @apply duration-300 no-underline transition-all;
+  @apply no-underline transition-all duration-300;
 }
 
 .titleLink:hover {

@@ -1,7 +1,7 @@
 @reference "tailwindcss";
 
 .arrow {
-  @apply duration-200 rotate-90 transition-transform;
+  @apply rotate-90 transition-transform duration-200;
 }
 
 .arrowOpen {
@@ -13,15 +13,7 @@
 }
 
 .menu {
-  @apply absolute
-    min-w-64
-    py-1
-    right-0
-    rounded-md
-    shadow-lg
-    text-sm
-    top-[calc(100%+0.25rem)]
-    z-30;
+  @apply absolute top-[calc(100%+0.25rem)] right-0 z-30 min-w-64 rounded-md py-1 text-sm shadow-lg;
 }
 
 :global(.dark) .menu {
@@ -29,14 +21,7 @@
 }
 
 .menuItem {
-  @apply cursor-pointer
-    flex
-    gap-3
-    items-center
-    px-3
-    py-1.5
-    text-left
-    w-full;
+  @apply flex w-full cursor-pointer items-center gap-3 px-3 py-1.5 text-left;
 }
 
 .menuItem:hover {
@@ -48,11 +33,7 @@
 }
 
 .menuItemDescription {
-  @apply overflow-hidden
-    text-[var(--x-color-gray-600)]
-    text-ellipsis
-    text-xs
-    whitespace-nowrap;
+  @apply overflow-hidden text-xs text-ellipsis whitespace-nowrap text-[var(--x-color-gray-600)];
 }
 
 .menuItem:hover .menuItemDescription {
@@ -68,18 +49,13 @@
 }
 
 .menuItemText {
-  @apply flex flex-col min-w-0;
+  @apply flex min-w-0 flex-col;
 }
 
 .menuItemTitle {
-  @apply flex font-medium gap-1;
+  @apply flex gap-1 font-medium;
 }
 
 .trigger {
-  @apply cursor-pointer
-    flex
-    gap-1.5
-    items-center
-    text-sm
-    whitespace-nowrap;
+  @apply flex cursor-pointer items-center gap-1.5 text-sm whitespace-nowrap;
 }

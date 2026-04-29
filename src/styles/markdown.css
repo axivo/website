@@ -1,15 +1,19 @@
+/**
+ * @fileoverview Markdown content stylesheet.
+ *
+ * Overrides Nextra's default rendering for blockquotes, inline code,
+ * tables, and the `<a class="button">` element used in `Read more →`
+ * links. Hides H2 icons from the TOC sidebar.
+ */
+
 @reference "tailwindcss";
 
-/* Blockquote */
+/**
+ * Overrides Nextra's default blockquote rendering with a slate-700 left
+ * border and dropped italics to match the quote-callout aesthetic.
+ */
 blockquote {
-  @apply border-l-4
-    border-l-[var(--x-color-slate-700)]
-    font-normal
-    leading-5
-    my-4
-    not-italic
-    px-4
-    text-sm;
+  @apply my-4 border-l-4 border-l-[var(--x-color-slate-700)] px-4 text-sm leading-5 font-normal not-italic;
 }
 
 blockquote p {
@@ -20,33 +24,20 @@ blockquote p {
   @apply border-l-[var(--x-color-slate-200)];
 }
 
-/* Button */
+/**
+ * Styles `<a class="button">` elements with a blue gradient and slide-on-hover
+ * for inner `<span>` arrows used in `Read more →` links.
+ */
 a.button {
-  @apply bg-gradient-to-b
-    duration-300
-    ease-in-out
-    from-[var(--x-color-blue-600)]
-    inline-block
-    no-underline
-    px-4
-    py-1.5
-    rounded-full
-    select-none
-    shadow-[0_1px_2px_color-mix(in_oklab,_var(--x-color-blue-900)_22%,_transparent)]
-    text-sm
-    text-white
-    to-[var(--x-color-blue-700)]
-    transition-all
-    [text-shadow:0_1px_1px_color-mix(in_oklab,_var(--x-color-blue-900)_22%,_transparent)];
+  @apply inline-block rounded-full bg-gradient-to-b from-[var(--x-color-blue-600)] to-[var(--x-color-blue-700)] px-4 py-1.5 text-sm text-white no-underline shadow-[0_1px_2px_color-mix(in_oklab,_var(--x-color-blue-900)_22%,_transparent)] transition-all duration-300 ease-in-out select-none [text-shadow:0_1px_1px_color-mix(in_oklab,_var(--x-color-blue-900)_22%,_transparent)];
 }
 
 a.button span {
-  @apply duration-300 ease-in-out inline-block transition-all;
+  @apply inline-block transition-all duration-300 ease-in-out;
 }
 
 a.button:hover {
-  @apply brightness-[1.05]
-    shadow-[0_4px_20px_-8px_color-mix(in_oklab,_var(--x-color-blue-600)_67%,_transparent)];
+  @apply shadow-[0_4px_20px_-8px_color-mix(in_oklab,_var(--x-color-blue-600)_67%,_transparent)] brightness-[1.05];
 }
 
 a.button:hover span {
@@ -62,30 +53,36 @@ a.button:active {
 }
 
 a.button:focus-visible {
-  @apply outline-2
-    outline-offset-2
-    outline-[hsl(var(--nextra-primary-hue)_var(--nextra-primary-saturation)_77%)];
+  @apply outline-2 outline-offset-2 outline-[hsl(var(--nextra-primary-hue)_var(--nextra-primary-saturation)_77%)];
 }
 
 .dark a.button {
-  @apply from-[var(--x-color-blue-100)] text-black [text-shadow:none] to-[var(--x-color-blue-100)];
+  @apply from-[var(--x-color-blue-100)] to-[var(--x-color-blue-100)] text-black [text-shadow:none];
 }
 
 .dark a.button:hover {
   @apply shadow-[0_4px_20px_-8px_color-mix(in_oklab,_var(--x-color-blue-100)_50%,_transparent)];
 }
 
-/* Code */
+/**
+ * Sizes inline code one step smaller so it integrates visually with body prose.
+ */
 code.nextra-code {
   @apply text-xs;
 }
 
-/* Nextra TOC: Hide icons in heading text */
+/**
+ * Hides H2 icons from Nextra's TOC sidebar. Section headings embed `<Icon>`
+ * SVGs that the TOC would otherwise mirror next to each link.
+ */
 .nextra-mask a svg {
   @apply hidden;
 }
 
-/* Table */
+/**
+ * Overrides Nextra's table rendering with thin row underlines and no zebra
+ * striping for a cleaner editorial look.
+ */
 table {
   @apply text-sm;
 }

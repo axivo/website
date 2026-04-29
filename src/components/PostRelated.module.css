@@ -1,7 +1,7 @@
 @reference "tailwindcss";
 
 .related {
-  @apply border-gray-200 border-t mt-12 pt-8;
+  @apply mt-12 border-t border-gray-200 pt-8;
 }
 
 :global(.dark) .related {
@@ -9,7 +9,7 @@
 }
 
 .related h2 {
-  @apply border-none flex items-center mt-2 pb-0;
+  @apply mt-2 flex items-center border-none pb-0;
 }
 
 .related h3 {
@@ -17,15 +17,19 @@
 }
 
 .related h3 + div {
-  @apply leading-5 max-h-20 overflow-hidden relative text-xs;
+  @apply relative max-h-20 overflow-hidden text-xs leading-5;
 }
 
 .related h3 + div::after {
-  @apply absolute bottom-0 h-20 left-0 right-0;
+  @apply absolute right-0 bottom-0 left-0 h-20;
   background: linear-gradient(to bottom, transparent, var(--x-color-white));
-  content: '';
+  content: "";
 }
 
 :global(.dark) .related h3 + div::after {
-  background: linear-gradient(to bottom, transparent, var(--x-color-neutral-800));
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    var(--x-color-neutral-800)
+  );
 }

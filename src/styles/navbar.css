@@ -1,3 +1,11 @@
+/**
+ * @fileoverview Navbar stylesheet.
+ *
+ * Swaps light and dark logo variants based on the active theme, applies
+ * a subtle hover-lift transition to logo links, and positions the
+ * subtitle ("claude") next to the AXIVO mark.
+ */
+
 @reference "tailwindcss";
 
 .dark .title-dark {

@@ -1,7 +1,7 @@
 @reference "tailwindcss";
 
 .attribution {
-  @apply mt-2 text-[var(--callout-color)] text-sm;
+  @apply mt-2 text-sm text-[var(--callout-color)];
 }
 
 .body p {
@@ -9,12 +9,7 @@
 }
 
 .callout {
-  @apply border-l-4
-    border-l-[var(--callout-color)]
-    leading-5
-    my-4
-    px-4
-    text-sm;
+  @apply my-4 border-l-4 border-l-[var(--callout-color)] px-4 text-sm leading-5;
 }
 
 .caution {
@@ -58,7 +53,7 @@
 }
 
 .title {
-  @apply flex font-bold items-center mb-2 text-[var(--callout-color)] text-base;
+  @apply mb-2 flex items-center text-base font-bold text-[var(--callout-color)];
 }
 
 .title svg {
