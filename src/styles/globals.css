@@ -8,7 +8,7 @@
  */
 
 @import "tailwindcss";
-@import "nextra-theme-docs/style.css" layer(base);
+@import "nextra-theme-docs/style.css";
 @import "./markdown.css";
 @import "./navbar.css";
 
