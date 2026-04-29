@@ -13,6 +13,7 @@ import NextLink from 'next/link'
 import { Anchor, Button } from 'nextra/components'
 import { GitHubIcon, MenuIcon } from 'nextra/icons'
 import { setMenu, useMenu, useThemeConfig } from 'nextra-theme-docs'
+import { meta } from '@axivo/website/global'
 import styles from './Navbar.module.css'
 
 function ClientNavbar({ children, className, items }) {
@@ -40,7 +41,7 @@ function ClientNavbar({ children, className, items }) {
   )
 }
 
-const defaultProjectIcon = <GitHubIcon height="24" aria-label="Project repository" />
+const defaultProjectIcon = <GitHubIcon height="24" aria-label={`${meta.brand.name} Repository`} />
 
 function Navbar({
   align = 'right',
@@ -61,9 +62,9 @@ function Navbar({
       <nav className={cn(styles.nav, className)}>
         {logoLink ? (
           <NextLink
+            aria-label={`${meta.brand.name} Home Page`}
+            className={cn('nextra-focus', logoClass)}
             href={typeof logoLink === 'string' ? logoLink : '/'}
-            className={cn('nextra-focus', logoClass, styles.logoLink)}
-            aria-label="Home page"
           >
             {logo}
           </NextLink>

@@ -24,10 +24,6 @@
   @apply max-md:me-auto;
 }
 
-.logoLink {
-  @apply transition-opacity hover:opacity-75;
-}
-
 .items {
   @apply flex gap-4 py-1.5 max-md:hidden;
 }

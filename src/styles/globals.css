@@ -7,8 +7,8 @@
  * to every page navigation.
  */
 
-@import "nextra-theme-docs/style.css";
 @import "tailwindcss";
+@import "nextra-theme-docs/style.css" layer(base);
 @import "./markdown.css";
 @import "./navbar.css";
 
