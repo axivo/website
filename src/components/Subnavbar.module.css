@@ -1,5 +1,27 @@
 @reference "tailwindcss";
 
+/**
+ * Static initial value for the subnavbar height, available at CSS parse
+ * time so the browser's native fragment-scroll on cold load uses the
+ * correct offset. The runtime `useEffect` in Subnavbar.jsx refines it
+ * once mounted.
+ *
+ * Sum of 33px, derived from:
+ *   - `var(--spacing) * 3` - `py-1.5` padding-block (top + bottom): 12px
+ *   - `18px` - home icon size from Subnavbar.jsx `size={18}`
+ *   - `2px` - `text-sm` line-height overhang above the 18px icon
+ *   - `1px` - `border-b` bottom border
+ */
+:global(:root) {
+  --nextra-subnavbar-height: calc((var(--spacing) * 3) + 18px + 2px + 1px);
+}
+
+:global(html) {
+  scroll-padding-top: calc(
+    var(--nextra-navbar-height) + var(--nextra-subnavbar-height)
+  );
+}
+
 .subnavbar {
   @apply sticky top-[var(--nextra-navbar-height)] z-20 w-full border-b backdrop-blur-md;
 }
