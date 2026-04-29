@@ -10,6 +10,7 @@ import { GoogleAnalytics } from '@next/third-parties/google'
 import Script from 'next/script'
 import { ViewTransition } from 'react'
 import { cloudflare, domain, google } from '@axivo/website/global'
+import { ThemeProvider, ThemeScript } from '@axivo/website'
 import '../styles/globals.css'
 
 export const metadata = {
@@ -44,7 +45,9 @@ export const metadata = {
 function RootLayout({ children }) {
   return (
     <html lang="en" dir="ltr" suppressHydrationWarning>
-      <Head />
+      <Head>
+        <ThemeScript />
+      </Head>
       {cloudflare.analytics.enabled && (
         <Script
           defer
@@ -55,9 +58,16 @@ function RootLayout({ children }) {
       )}
       {google.analytics.enabled && <GoogleAnalytics gaId={google.analytics.id} />}
       <body>
-        <ViewTransition>
-          {children}
-        </ViewTransition>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          disableTransitionOnChange
+          storageKey="theme"
+        >
+          <ViewTransition>
+            {children}
+          </ViewTransition>
+        </ThemeProvider>
       </body>
     </html>
   )

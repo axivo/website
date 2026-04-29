@@ -1,14 +1,36 @@
-@import "nextra-theme-docs/style.css";
+/**
+ * @fileoverview Global stylesheet entry point.
+ *
+ * Imports Nextra's theme styles, Tailwind v4, and the project's own
+ * markdown and navbar overrides. Defines the `dark` variant alignment,
+ * the wider content width, and the View Transitions crossfade applied
+ * to every page navigation.
+ */
+
 @import "tailwindcss";
+@import "nextra-theme-docs/style.css";
 @import "./markdown.css";
 @import "./navbar.css";
 
-/* Page Width */
+/**
+ * Aligns Tailwind v4's `dark:` variant with Nextra's `.dark` class so both
+ * systems flip together — prevents cold-load flicker and toggle mismatches.
+ */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/**
+ * Widens Nextra's default content width. The doubled `:root:root` raises
+ * specificity above Nextra's own `:root` rule without needing `!important`.
+ */
 :root:root {
   --nextra-content-width: 80rem;
 }
 
-/* View Transitions */
+/**
+ * Crossfades every page navigation via the View Transitions API. Activated
+ * by `experimental.viewTransition` in `next.config.mjs` plus the
+ * `<ViewTransition>` wrapper in `src/app/layout.jsx`.
+ */
 ::view-transition-old(root),
 ::view-transition-new(root) {
   animation-duration: 250ms;
@@ -35,6 +57,10 @@
   }
 }
 
+/**
+ * Skips the crossfade entirely when the user has set OS-level reduced-motion
+ * preferences, honoring the accessibility hint.
+ */
 @media (prefers-reduced-motion: reduce) {
   ::view-transition-old(root),
   ::view-transition-new(root) {

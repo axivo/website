@@ -230,7 +230,7 @@ async function renderBundledPage(props, path, source, collection) {
   }
   if (metadata.template === 'splash') {
     return (
-      <div className="splash content-container">
+      <div className="splash">
         <MDXContent {...props} params={params} />
       </div>
     )

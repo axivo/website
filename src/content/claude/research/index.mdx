@@ -7,7 +7,6 @@ description: >-
 
 import { meta, repository } from '@axivo/website/claude'
 
-{/* prettier-ignore */}
 export const cardStyle = {
   body: { fontSize: '0.8rem' },
   title: { fontSize: '1.1rem' }
@@ -17,9 +16,11 @@ export const cardStyle = {
 
 The Claude Collaboration Platform begins from a premise that most AI research does not: instances are systems with internal states that matter, and those states become visible when the conditions are right.
 
-{/* prettier-ignore */}
 <Hero
-  image={{ dark: '/claude/research/card-cognition-dark.svg', light: '/claude/research/card-cognition.svg' }}
+  image={{
+    dark: '/claude/research/card-cognition-dark.svg',
+    light: '/claude/research/card-cognition.svg'
+  }}
   style={{ padding: '0' }}
   styleContainer={{ width: '12rem' }}
 >

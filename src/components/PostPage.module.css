@@ -1,11 +1,11 @@
 @reference "tailwindcss";
 
 .container {
-  @apply grid grid-cols-[1fr_auto_1fr] items-center mt-8;
+  @apply mt-8 grid grid-cols-[1fr_auto_1fr] items-center;
 }
 
 .page {
-  @apply text-gray-600 text-sm;
+  @apply text-sm text-gray-600;
 }
 
 :global(.dark) .page {
@@ -13,7 +13,7 @@
 }
 
 .summary {
-  @apply mt-1 text-gray-600 text-sm;
+  @apply mt-1 text-sm text-gray-600;
 }
 
 :global(.dark) .summary {

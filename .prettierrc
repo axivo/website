@@ -1,5 +1,16 @@
 {
+  "overrides": [
+    {
+      "files": "*.css",
+      "options": {
+        "singleQuote": false
+      }
+    }
+  ],
   "plugins": [
     "prettier-plugin-tailwindcss"
-  ]
+  ],
+  "semi": false,
+  "singleQuote": true,
+  "trailingComma": "none"
 }

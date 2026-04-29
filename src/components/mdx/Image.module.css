@@ -1,22 +1,15 @@
 @reference "tailwindcss";
 
 .caption {
-  @apply opacity-80 px-4 py-3 text-sm;
+  @apply px-4 py-3 text-sm opacity-80;
 }
 
 .caption p {
-  @apply leading-5 m-1;
+  @apply m-1 leading-5;
 }
 
 .card {
-  @apply bg-white
-    block
-    mb-7
-    mt-5
-    no-underline
-    overflow-hidden
-    rounded-2xl
-    w-fit;
+  @apply mt-5 mb-7 block w-fit overflow-hidden rounded-2xl bg-white no-underline;
   box-shadow:
     0 8px 16px color-mix(in oklab, var(--x-color-black) 8%, transparent),
     0 1px 2px color-mix(in oklab, var(--x-color-black) 4%, transparent),

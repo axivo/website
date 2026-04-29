@@ -13,23 +13,25 @@ import NextLink from 'next/link'
 import { Anchor, Button } from 'nextra/components'
 import { GitHubIcon, MenuIcon } from 'nextra/icons'
 import { setMenu, useMenu, useThemeConfig } from 'nextra-theme-docs'
+import { meta } from '@axivo/website/global'
+import styles from './Navbar.module.css'
 
 function ClientNavbar({ children, className, items }) {
   const themeConfig = useThemeConfig()
   const menu = useMenu()
   return (
     <>
-      <div className={cn('x:flex x:gap-4 x:py-1.5 x:max-md:hidden', className)}>
+      <div className={cn(styles.items, className)}>
         {items}
       </div>
       {themeConfig.search && (
-        <div className="x:max-md:hidden">{themeConfig.search}</div>
+        <div className={styles.search}>{themeConfig.search}</div>
       )}
       {children}
       <Button
         aria-label="Menu"
         className={({ active }) =>
-          cn('nextra-hamburger x:md:hidden', active && 'x:bg-gray-400/20')
+          cn('nextra-hamburger', styles.hamburger, active && styles.hamburgerActive)
         }
         onClick={() => setMenu(prev => !prev)}
       >
@@ -39,7 +41,7 @@ function ClientNavbar({ children, className, items }) {
   )
 }
 
-const defaultProjectIcon = <GitHubIcon height="24" aria-label="Project repository" />
+const defaultProjectIcon = <GitHubIcon height="24" aria-label={`${meta.brand.name} Repository`} />
 
 function Navbar({
   align = 'right',
@@ -51,40 +53,18 @@ function Navbar({
   projectLink
 }) {
   const logoClass = cn(
-    'x:flex x:items-center',
-    align === 'left' ? 'x:max-md:me-auto' : 'x:me-auto'
+    styles.logo,
+    align === 'left' ? styles.logoMarginMobile : styles.logoMargin
   )
   return (
-    <header
-      className={cn(
-        'nextra-navbar x:sticky x:top-0 x:z-30 x:w-full x:bg-transparent x:print:hidden',
-        'x:max-md:[.nextra-banner:not([class$=hidden])~&]:top-(--nextra-banner-height)'
-      )}
-    >
-      <div
-        className={cn(
-          'nextra-navbar-blur',
-          'x:absolute x:-z-1 x:size-full',
-          'nextra-border x:border-b',
-          'x:backdrop-blur-md x:bg-nextra-bg/70'
-        )}
-      />
-      <nav
-        style={{ height: 'var(--nextra-navbar-height)' }}
-        className={cn(
-          'x:mx-auto x:flex x:max-w-(--nextra-content-width) x:items-center x:gap-4 x:pl-[max(env(safe-area-inset-left),1.5rem)] x:pr-[max(env(safe-area-inset-right),1.5rem)]',
-          'x:justify-end',
-          className
-        )}
-      >
+    <header className={cn('nextra-navbar', styles.header)}>
+      <div className={cn('nextra-navbar-blur', 'nextra-border', styles.blur)} />
+      <nav className={cn(styles.nav, className)}>
         {logoLink ? (
           <NextLink
+            aria-label={`${meta.brand.name} Home Page`}
+            className={cn('nextra-focus', logoClass)}
             href={typeof logoLink === 'string' ? logoLink : '/'}
-            className={cn(
-              logoClass,
-              'x:transition-opacity x:focus-visible:nextra-focus x:hover:opacity-75'
-            )}
-            aria-label="Home page"
           >
             {logo}
           </NextLink>
@@ -92,7 +72,7 @@ function Navbar({
           <div className={logoClass}>{logo}</div>
         )}
         <ClientNavbar
-          className={align === 'left' ? 'x:me-auto' : ''}
+          className={align === 'left' ? styles.itemsAlignLeft : ''}
           items={children}
         >
           {projectLink && <Anchor href={projectLink}>{projectIcon}</Anchor>}

@@ -1,19 +1,7 @@
 @reference "tailwindcss";
 
 .button {
-  @apply bg-[color-mix(in_oklab,_var(--x-color-black)_5%,_transparent)]
-    cursor-pointer
-    flex
-    items-center
-    leading-tight
-    md:text-sm
-    md:w-45
-    px-3
-    py-2
-    relative
-    rounded-lg
-    text-base
-    w-full;
+  @apply relative flex w-full cursor-pointer items-center rounded-lg bg-[color-mix(in_oklab,_var(--x-color-black)_5%,_transparent)] px-3 py-2 text-base leading-tight md:w-45 md:text-sm;
 }
 
 :global(.dark) .button {
@@ -25,7 +13,7 @@
 }
 
 .placeholder {
-  @apply font-normal md:text-sm text-base text-gray-600;
+  @apply text-base font-normal text-gray-600 md:text-sm;
 }
 
 :global(.dark) .placeholder {
@@ -33,31 +21,19 @@
 }
 
 .shortcut {
-  @apply absolute
-    bg-white
-    border
-    border-gray-200
-    end-3
-    flex
-    font-medium
-    font-mono
-    h-5
-    items-center
-    max-sm:hidden
-    pointer-events-none
-    px-1.5
-    rounded
-    select-none
-    text-[10px]
-    text-gray-600;
+  @apply pointer-events-none absolute end-3 flex h-5 items-center rounded border border-gray-200 bg-white px-1.5 font-mono text-[10px] font-medium text-gray-600 select-none max-sm:hidden;
 }
 
 :global(.dark) .shortcut {
-  @apply bg-[rgb(var(--nextra-bg))] border-neutral-800 text-gray-400;
+  @apply border-neutral-800 bg-[rgb(var(--nextra-bg))] text-gray-400;
 }
 
 :global(:root) {
-  --docsearch-container-background: color-mix(in oklab, var(--x-color-black) 25%, transparent);
+  --docsearch-container-background: color-mix(
+    in oklab,
+    var(--x-color-black) 25%,
+    transparent
+  );
   --docsearch-footer-background: var(--x-color-white);
   --docsearch-hit-background: var(--x-color-white);
   --docsearch-modal-background: var(--x-color-white);
@@ -68,7 +44,11 @@
 }
 
 :global(.dark) {
-  --docsearch-container-background: color-mix(in oklab, var(--x-color-black) 50%, transparent);
+  --docsearch-container-background: color-mix(
+    in oklab,
+    var(--x-color-black) 50%,
+    transparent
+  );
   --docsearch-footer-background: var(--x-color-neutral-800);
   --docsearch-hit-background: var(--x-color-neutral-800);
   --docsearch-modal-background: var(--x-color-neutral-800);

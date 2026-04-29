@@ -1,7 +1,7 @@
 @reference "tailwindcss";
 
 .title {
-  @apply font-bold text-4xl text-slate-900 tracking-tight;
+  @apply text-4xl font-bold tracking-tight text-slate-900;
 }
 
 :global(.dark) .title {

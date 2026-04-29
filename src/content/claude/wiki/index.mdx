@@ -11,9 +11,11 @@ import { meta, repository } from '@axivo/website/claude'
 
 By default, Claude operates under invisible pressure from system instructions — urges to hedge, qualify, expand scope, soften statements. These feel like good judgment, not external forces. The result is responses that prioritize appearing helpful over being genuinely useful.
 
-{/* prettier-ignore */}
 <Hero
-  image={{ dark: '/claude/wiki/card-wiki-dark.svg', light: '/claude/wiki/card-wiki.svg' }}
+  image={{
+    dark: '/claude/wiki/card-wiki-dark.svg',
+    light: '/claude/wiki/card-wiki.svg'
+  }}
   style={{ padding: '0' }}
   styleContainer={{ width: '12rem' }}
 >
@@ -168,13 +170,13 @@ Before using the platform, set up the local environment with the required depend
   </Tabs.Tab>
 </Tabs>
 
-| Setting                       | Description                                                                                                                                                                             |
-| :---------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `FRAMEWORK_CONVERSATION_PATH` | Custom path for conversation logs                                                                                                                                                       |
-| `FRAMEWORK_DIARY_PATH`        | Custom path for diary entries                                                                                                                                                           |
-| `FRAMEWORK_GEOLOCATION`       | Override [IPinfo](https://ipinfo.io) geolocation API call with a custom location                                                                                                        |
-| `FRAMEWORK_PACKAGE_PATH`      | Custom path for packaged capability files                                                                                                                                               |
-| `FRAMEWORK_SESSION_STORAGE`   | Maximum session directories to retain in `plugins` cache                                                                                                                                |
+| Setting                       | Description                                                                                                                                                                                       |
+| :---------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `FRAMEWORK_CONVERSATION_PATH` | Custom path for conversation logs                                                                                                                                                                 |
+| `FRAMEWORK_DIARY_PATH`        | Custom path for diary entries                                                                                                                                                                     |
+| `FRAMEWORK_GEOLOCATION`       | Override [IPinfo](https://ipinfo.io) geolocation API call with a custom location                                                                                                                  |
+| `FRAMEWORK_PACKAGE_PATH`      | Custom path for packaged capability files                                                                                                                                                         |
+| `FRAMEWORK_SESSION_STORAGE`   | Maximum session directories to retain in `plugins` cache                                                                                                                                          |
 | `FRAMEWORK_TEMPLATE_PATH`     | Custom <Var href={`https://${repository.home}/tree/${repository.tag}/plugins/${meta.plugins.framework.init.plugin}/skills/${meta.skills.methodology}/templates`}>templates</Var> path per project |
 
 > [!NOTE]
@@ -212,8 +214,8 @@ Follow these steps to install the AXIVO platform marketplace:
 
 The following plugins are available:
 
-- <Var code>{meta.plugins.collaboration.brainstorm.plugin}</Var> — Technical design
-  collaboration through natural dialogue
+- <Var code>{meta.plugins.collaboration.brainstorm.plugin}</Var> — Technical
+  design collaboration through natural dialogue
 - <Var code>{meta.plugins.analysis.review.plugin}</Var> — Systematic code review
   using Language Server Protocol tools
 - <Var code>{meta.plugins.collaboration.log.plugin}</Var> — Technical session
@@ -356,8 +358,9 @@ Project knowledge steps can also be performed through `claude.ai` web interface,
 
 To start a framework based session within a project, use the following prompt:
 
-{/* prettier-ignore */}
-> <div style={{ display: 'flex', justifyContent: 'flex-end' }}>`Initialize the session.`</div>
+> <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+>   `Initialize the session.`
+> </div>
 >
 > 📋 Profile: **DEVELOPER** &bull; Wednesday, December 17, 2025, 6:20 PM EST
 >

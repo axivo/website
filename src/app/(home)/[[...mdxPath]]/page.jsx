@@ -56,7 +56,7 @@ async function Page(props) {
   } = await importPage(params.mdxPath)
   if (metadata.template === 'splash') {
     return (
-      <div className="splash content-container">
+      <div className="splash">
         <MDXContent {...props} params={params} />
       </div>
     )

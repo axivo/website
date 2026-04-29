@@ -4,20 +4,13 @@
   @apply border-gray-300;
 }
 
-:global(.nextra-steps) :is(h2, h3:not([style^='visibility:']), h4, h5, h6) {
+:global(.nextra-steps) :is(h2, h3:not([style^="visibility:"]), h4, h5, h6) {
   @apply relative;
 }
 
-:global(.nextra-steps) :is(h2, h3:not([style^='visibility:']), h4, h5, h6)::before {
-  @apply -translate-y-1/2
-    [box-shadow:inset_0_0_0_1px_var(--x-color-gray-300)]
-    flex
-    items-center
-    justify-center
-    leading-none
-    size-[34px]
-    [text-indent:0]
-    top-1/2;
+:global(.nextra-steps)
+  :is(h2, h3:not([style^="visibility:"]), h4, h5, h6)::before {
+  @apply top-1/2 flex size-[34px] -translate-y-1/2 items-center justify-center [text-indent:0] leading-none [box-shadow:inset_0_0_0_1px_var(--x-color-gray-300)];
 }
 
 :global(.nextra-steps) h4 {
@@ -36,23 +29,19 @@
   @apply border-neutral-700;
 }
 
-:global(.dark) :global(.nextra-steps) :is(h2, h3:not([style^='visibility:']), h4, h5, h6)::before {
+:global(.dark)
+  :global(.nextra-steps)
+  :is(h2, h3:not([style^="visibility:"]), h4, h5, h6)::before {
   @apply [box-shadow:inset_0_0_0_1px_var(--x-color-neutral-700)];
 }
 
-.bullet:is(.bullet) :is(h2, h3:not([style^='visibility:']), h4, h5, h6)::before {
-  @apply [border-color:rgb(var(--nextra-bg))]
-    [content:"⏺"]
-    flex
-    items-center
-    justify-center
-    leading-none
-    size-[34px]
-    text-neutral-800
-    [text-indent:0]
-    text-xl;
+.bullet:is(.bullet)
+  :is(h2, h3:not([style^="visibility:"]), h4, h5, h6)::before {
+  @apply flex size-[34px] items-center justify-center [border-color:rgb(var(--nextra-bg))] [text-indent:0] text-xl leading-none text-neutral-800 [content:"⏺"];
 }
 
-:global(.dark) .bullet:is(.bullet) :is(h2, h3:not([style^='visibility:']), h4, h5, h6)::before {
+:global(.dark)
+  .bullet:is(.bullet)
+  :is(h2, h3:not([style^="visibility:"]), h4, h5, h6)::before {
   @apply text-neutral-300;
 }
