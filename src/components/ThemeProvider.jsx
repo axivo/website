@@ -20,7 +20,7 @@ import { ThemeProvider as NextThemesProvider } from 'next-themes'
  * Serialized via `.toString()` and rendered inside `<script>` so the
  * source stays readable while shipping as a compact IIFE.
  */
-function applyTheme() {
+function setTheme() {
   try {
     const stored = localStorage.getItem('theme') || 'system'
     const isDark =
@@ -49,7 +49,7 @@ function applyTheme() {
  * @returns {import('react').ReactElement} Inline script element
  */
 function ThemeScript() {
-  return <script dangerouslySetInnerHTML={{ __html: `(${applyTheme})()` }} />
+  return <script dangerouslySetInnerHTML={{ __html: `(${setTheme})()` }} />
 }
 
 /**
