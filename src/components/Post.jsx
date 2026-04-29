@@ -174,16 +174,20 @@ async function getPosts(collection) {
 }
 
 /**
- * Returns entries most related to the current entry by shared-tag count.
- * Excludes the current entry, filters out entries with no overlap,
- * sorts by overlap (descending) then date (descending), and takes the
- * top `count`. Returns an empty array when the current entry has no
- * tags or no other entries share any.
+ * Returns entries related to the current entry by shared-tag count.
+ * Filters candidates to those sharing at least one tag, then samples
+ * without replacement weighted by overlap squared so deeply-related
+ * entries dominate while less-related entries still surface.
+ *
+ * The seed combines the current entry's route with the current day,
+ * so a returning reader sees a stable selection within a day but
+ * different related entries across days. Returns an empty array when
+ * the current entry has no tags or no other entries share any.
  *
  * @param {object} currentEntry - The entry being viewed
  * @param {object[]} entries - All entries in the collection
  * @param {number} [count=2] - Maximum related entries to return
- * @returns {object[]} Top related entries
+ * @returns {object[]} Selected related entries
  */
 function getRelated(currentEntry, entries, count = 2) {
   const currentTags = currentEntry.frontMatter.tags || []
@@ -191,17 +195,86 @@ function getRelated(currentEntry, entries, count = 2) {
     return []
   }
   const currentTagSet = new Set(currentTags)
-  return entries
+  const candidates = entries
     .filter(entry => entry.route !== currentEntry.route)
     .map(entry => {
       const tags = entry.frontMatter.tags || []
       const overlap = tags.filter(tag => currentTagSet.has(tag)).length
-      return { entry, overlap }
+      return { entry, weight: overlap * overlap }
     })
-    .filter(({ overlap }) => overlap > 0)
-    .sort((a, b) => b.overlap - a.overlap || b.entry.frontMatter.date.localeCompare(a.entry.frontMatter.date))
-    .slice(0, count)
-    .map(({ entry }) => entry)
+    .filter(({ weight }) => weight > 0)
+  if (!candidates.length) {
+    return []
+  }
+  const day = new Date().toISOString().slice(0, 10)
+  const random = seededRandom(hashSeed(currentEntry.route + day))
+  return weightedSample(candidates, count, random)
+}
+
+/**
+ * Hashes a string into a deterministic 32-bit integer for seeding
+ * pseudo-random selection. Uses the FNV-1a algorithm — fast, well
+ * distributed, and sufficient for non-cryptographic seeding.
+ *
+ * @param {string} input - String to hash
+ * @returns {number} 32-bit unsigned integer hash
+ */
+function hashSeed(input) {
+  let hash = 2166136261
+  for (let i = 0; i < input.length; i++) {
+    hash ^= input.charCodeAt(i)
+    hash = Math.imul(hash, 16777619)
+  }
+  return hash >>> 0
+}
+
+/**
+ * Mulberry32 — a small, fast, seedable PRNG. Returns a function that
+ * yields floats in [0, 1) deterministically from the seed.
+ *
+ * @param {number} seed - 32-bit integer seed
+ * @returns {() => number} Random number generator
+ */
+function seededRandom(seed) {
+  let state = seed
+  return () => {
+    state = (state + 0x6d2b79f5) >>> 0
+    let t = state
+    t = Math.imul(t ^ (t >>> 15), t | 1)
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61)
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296
+  }
+}
+
+/**
+ * Picks `count` items from a weighted candidate pool without replacement.
+ * Each candidate's selection probability is proportional to its weight,
+ * preserving the "more relevant items appear more often" signal while
+ * allowing variety across calls with different seeds.
+ *
+ * @param {{entry: object, weight: number}[]} candidates - Weighted pool
+ * @param {number} count - Number of items to pick
+ * @param {() => number} random - Seeded random function
+ * @returns {object[]} Selected entries
+ */
+function weightedSample(candidates, count, random) {
+  const pool = candidates.map(c => ({ ...c }))
+  const picked = []
+  while (picked.length < count && pool.length > 0) {
+    const totalWeight = pool.reduce((sum, c) => sum + c.weight, 0)
+    let target = random() * totalWeight
+    let pickedIndex = 0
+    for (let i = 0; i < pool.length; i++) {
+      target -= pool[i].weight
+      if (target <= 0) {
+        pickedIndex = i
+        break
+      }
+    }
+    picked.push(pool[pickedIndex].entry)
+    pool.splice(pickedIndex, 1)
+  }
+  return picked
 }
 
 /**
