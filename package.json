@@ -44,6 +44,6 @@
     "shiki": "^4.0.0",
     "tailwindcss": "^4.2.0",
     "unist-util-visit": "^5.0.0",
-    "wrangler": "^4.85.0"
+    "wrangler": "^4.86.0"
   }
 }
