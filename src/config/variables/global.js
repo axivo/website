@@ -79,7 +79,8 @@ export const meta = {
       homepage: 'https://www.anthropic.com/claude',
       name: 'Claude'
     }
-  }
+  },
+  redirects: []
 }
 
 export const repository = {

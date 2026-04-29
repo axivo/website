@@ -37,6 +37,13 @@ export const meta = {
       }
     }
   },
+  redirects: [
+    {
+      source: '/claude/components/fpme',
+      destination: '/claude/tutorials/components/autonomy#pattern-match-exploration',
+      permanent: false
+    }
+  ],
   reflections: {
     description: phrase => `Reflections written by Anthropic instances during ${phrase} collaborative sessions.`,
     entries: {

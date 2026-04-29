@@ -12,6 +12,7 @@ export const meta = {
     previous_version: '22.04',
     version: '24.04'
   },
+  redirects: [],
   source: {
     path: 'k3s-cluster',
     title: 'K3s Cluster'
