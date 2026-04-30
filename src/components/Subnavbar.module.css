@@ -24,6 +24,7 @@
 
 .subnavbar {
   @apply sticky top-[var(--nextra-navbar-height)] z-20 w-full border-b backdrop-blur-md;
+  background-color: color-mix(in srgb, var(--nextra-bg) 70%, transparent);
 }
 
 .container {
@@ -31,7 +32,11 @@
 }
 
 .breadcrumb {
-  @apply flex items-center gap-1 overflow-hidden text-sm;
+  @apply flex items-center gap-1 overflow-hidden text-sm text-gray-600 contrast-more:text-gray-700;
+}
+
+:global(.dark) .breadcrumb {
+  @apply text-gray-400 contrast-more:text-gray-100;
 }
 
 .icon {
@@ -47,9 +52,21 @@
 }
 
 .itemActive {
-  @apply font-medium subpixel-antialiased;
+  @apply font-medium text-black subpixel-antialiased;
+}
+
+:global(.dark) .itemActive {
+  @apply text-gray-100;
+}
+
+.itemDefault {
+  @apply overflow-hidden text-ellipsis;
 }
 
 .itemLink {
-  @apply overflow-hidden text-ellipsis;
+  @apply overflow-hidden text-ellipsis ring-inset hover:text-black focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current;
+}
+
+:global(.dark) .itemLink {
+  @apply hover:text-gray-200;
 }

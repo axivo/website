@@ -1,7 +1,7 @@
 @reference "tailwindcss";
 
 :global(.nextra-steps) {
-  @apply border-gray-300;
+  @apply ms-4 mb-12 border-s border-gray-200 ps-6;
 }
 
 :global(.nextra-steps) :is(h2, h3:not([style^="visibility:"]), h4, h5, h6) {
@@ -10,7 +10,7 @@
 
 :global(.nextra-steps)
   :is(h2, h3:not([style^="visibility:"]), h4, h5, h6)::before {
-  @apply top-1/2 flex size-[34px] -translate-y-1/2 items-center justify-center [text-indent:0] leading-none [box-shadow:inset_0_0_0_1px_var(--x-color-gray-300)];
+  @apply top-1/2 flex size-[34px] -translate-y-1/2 items-center justify-center leading-none [box-shadow:inset_0_0_0_1px_var(--x-color-gray-300)];
 }
 
 :global(.nextra-steps) h4 {
@@ -26,7 +26,7 @@
 }
 
 :global(.dark) :global(.nextra-steps) {
-  @apply border-neutral-700;
+  @apply border-neutral-800;
 }
 
 :global(.dark)
@@ -37,7 +37,7 @@
 
 .bullet:is(.bullet)
   :is(h2, h3:not([style^="visibility:"]), h4, h5, h6)::before {
-  @apply flex size-[34px] items-center justify-center [border-color:rgb(var(--nextra-bg))] [text-indent:0] text-xl leading-none text-neutral-800 [content:"⏺"];
+  @apply flex size-[34px] items-center justify-center [border-color:rgb(var(--nextra-bg))] text-xl leading-none text-neutral-800 [content:"⏺"];
 }
 
 :global(.dark)

@@ -1,7 +1,11 @@
 @reference "tailwindcss";
 
 :global(.footnotes) {
-  @apply mt-12 border-t border-gray-200 pt-6 text-sm dark:border-gray-800;
+  @apply mt-12 border-t border-gray-200 pt-6 text-sm;
+}
+
+:global(.dark) :global(.footnotes) {
+  @apply border-gray-800;
 }
 
 :global(.footnotes) ol {

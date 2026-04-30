@@ -28,7 +28,7 @@ import { PostCard, Subnavbar, useMDXComponents as getMDXComponents } from '@axiv
 import { remarkMarkAndUnravel } from '@axivo/website/remark'
 import { createDispatch } from './mdx/renderers/node'
 import { createEntrySchema, JsonLd } from './JsonLd'
-import { extractFootnotes } from './mdx/footnotes'
+import { extractFootnotes } from './mdx/renderers/footnotes'
 import { filterByDate, getMetadata, getPosts, getRelated, Posts, postsPageSize, renderIndexPage } from './Post'
 import { PostRelated } from './PostRelated'
 

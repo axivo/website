@@ -124,7 +124,6 @@ The site is a static Next.js/Nextra application deployed to Cloudflare Workers v
     │       ├── Button.module.css
     │       ├── Callout.jsx                GitHub-alert callouts plus a quote variant with attribution
     │       ├── Callout.module.css
-    │       ├── footnotes.js               MDAST preprocessor that numbers footnote refs and appends the section
     │       ├── Icon.jsx                   Resolves an icon spec against the prebuild-generated react-icons registry
     │       ├── Icon.module.css
     │       ├── Image.jsx                  Theme-aware image with optional card template and caption
@@ -137,6 +136,7 @@ The site is a static Next.js/Nextra application deployed to Cloudflare Workers v
     │       │   ├── alert.js               Routes GFM alert blockquotes to Callout, mirroring withGitHubAlert
     │       │   ├── code.js                Injects precomputed shiki HTML for fenced blocks via cursor
     │       │   ├── footnoteReference.js   Renders footnote refs as numbered superscript links
+    │       │   ├── footnotes.js           MDAST preprocessor that numbers footnote refs and appends the section
     │       │   ├── footnotesSection.js    Renders the synthetic footnotes section appended by the preprocessor
     │       │   ├── footnotesSection.module.css
     │       │   ├── image.js               Routes markdown images through the CDN-aware Image component
@@ -294,9 +294,8 @@ Components live in two directories with distinct roles. The directory tree above
 `src/components/mdx/` — components authored from inside MDX, plus the dynamic-path renderers:
 
 - The top-level `.jsx` files (Button, Callout, Icon, Image, List, PageTitle, SourceCode, Steps, Var, Video) are MDX-authored components shared between bundled and dynamic paths via the components map. They're the override layer over Nextra's primitives.
-- `footnotes.js` is a one-shot MDAST preprocessor that runs before safe-mdx visits the tree, numbering footnote refs and appending the synthetic Footnotes section.
 - `utils.js` holds the shared CDN path resolver used by Image and Video.
-- `renderers/` is the dynamic-path dispatch registry — each file handles one MDAST node type that needs custom rendering on the safe-mdx path. `node.js` builds the per-render dispatcher via `createDispatch`. See the Rendering section above for the architecture.
+- `renderers/` is the dynamic-path dispatch registry — each file handles one MDAST node type that needs custom rendering on the safe-mdx path. `node.js` builds the per-render dispatcher via `createDispatch`. `footnotes.js` is a co-located MDAST preprocessor that runs before safe-mdx visits the tree, numbering footnote refs and appending the synthetic Footnotes section consumed by `footnotesSection.js`. See the Rendering section above for the architecture.
 
 The `mdx-components.js` file at the repo root is Next.js's canonical MDX entry point and the **convergence point for both render paths** — both consult the same map, so overriding once applies everywhere. It merges three sources plus our overrides:
 
@@ -395,3 +394,17 @@ Runtime secrets (not in `wrangler.jsonc`, set via `wrangler secret put`):
 - No hardcoded section names — use `source` from section variables
 - No hardcoded domain or protocol — use `domain` from `@axivo/website/global`
 - CSS Modules with `@reference "tailwindcss"` for Tailwind v4
+
+### CSS Conventions
+
+- **Utility-first for color and styling.** Use Tailwind utilities inside `@apply` for any color in Tailwind's default palette (`text-black`, `bg-white`, `text-gray-600`, `bg-neutral-800`, `bg-blue-600`). They compile to `var(--x-color-*)` underneath and read cleanly.
+- **Nextra-supplied colors require arbitrary value syntax.** Nextra defines its colors (`--x-color-primary-50` through `--x-color-primary-800`, `--x-color-nextra-bg`, etc.) as CSS variables in its compiled stylesheet, registered for the `x:`-prefixed utility namespace only. Without the `x:` prefix, Tailwind in this project doesn't recognize them — `bg-primary-100` and `bg-nextra-bg` are **not** valid utility classes. Use the arbitrary value form (`bg-[var(--x-color-primary-100)]`, `bg-[var(--x-color-nextra-bg)]`) instead.
+- **Raw `var(--x-color-*)` only when a utility cannot express it.** Allowed contexts:
+  - `color-mix(in oklab, var(--x-color-*) N%, transparent)` for opacity blending in `box-shadow`, backgrounds, borders.
+  - `linear-gradient()` / `radial-gradient()` color stops.
+  - `rgb(var(--nextra-bg))` / `rgb(var(--nextra-fg))` — Nextra exposes raw triplets, no utility wraps them.
+  - Assignments to third-party CSS variables (`--docsearch-*`, `--plyr-*`, `--callout-color`).
+  - Properties without a Tailwind utility (e.g., arbitrary `[box-shadow:inset_...]` color stops).
+- **Dark mode via sibling rule, never `@apply dark:...`.** Tailwind v4 + CSS Modules silently drops `dark:` inside `@apply`. Use a sibling `:global(.dark) .className { @apply ... }` rule instead.
+- **One vocabulary per declaration block.** Don't mix `text-black` and `color: var(--x-color-black)` in the same rule. If `color-mix()` forces a raw var on one property, keep utilities for everything else they can express.
+- **`x:`-prefixed inline classes are reserved for runtime DOM injection into Nextra's tree.** The only sanctioned use is `PostPage.jsx`, where the scroll-spy `useEffect` injects `<li>` items into Nextra's TOC and must visually match the surrounding entries Nextra renders with `x:`-prefixed classes. Do not use `x:` classes for static styling — those belong in CSS modules.

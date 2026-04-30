@@ -58,7 +58,7 @@ function NavbarMenu({ title, items }) {
         </div>
       </>
     )
-    const className = cn(styles.menuItem, 'x:transition-colors x:text-gray-800 x:dark:text-gray-100')
+    const className = styles.menuItem
     if (item.href) {
       return (
         <NextLink
@@ -89,7 +89,7 @@ function NavbarMenu({ title, items }) {
   return (
     <div className={styles.container} ref={containerRef}>
       <button
-        className={cn(styles.trigger, 'x:text-gray-600 x:dark:text-gray-400 x:hover:text-black x:dark:hover:text-gray-200 x:transition-colors')}
+        className={styles.trigger}
         onClick={() => setOpen(prev => !prev)}
         type="button"
       >
@@ -97,7 +97,7 @@ function NavbarMenu({ title, items }) {
         <ArrowRightIcon width="12" className={cn(styles.arrow, open && styles.arrowOpen)} />
       </button>
       {open && (
-        <div className={cn(styles.menu, 'x:border x:border-black/5 x:dark:border-white/20 x:bg-nextra-bg')}>
+        <div className={styles.menu}>
           {items.map(renderItem)}
         </div>
       )}
