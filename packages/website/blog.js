@@ -2,7 +2,7 @@
  * @fileoverview Subpath export for the blog section variables and components.
  */
 
-export { meta, repository } from '../../src/config/variables/blog.js'
+export { meta, repository } from '../../src/config/blog.js'
 export {
   Blog,
   blogCollection,

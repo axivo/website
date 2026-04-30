@@ -17,8 +17,12 @@ import { icons } from '@axivo/website/menu'
 import styles from './NavbarMenu.module.css'
 
 function resolveIcon(spec) {
-  if (!spec) return null
-  if (typeof spec !== 'string') return spec
+  if (!spec) {
+    return null
+  }
+  if (typeof spec !== 'string') {
+    return spec
+  }
   return icons[spec] ?? null
 }
 
@@ -26,7 +30,9 @@ function NavbarMenu({ title, items }) {
   const [open, setOpen] = useState(false)
   const containerRef = useRef(null)
   useEffect(() => {
-    if (!open) return
+    if (!open) {
+      return
+    }
     function handleClickOutside(event) {
       if (containerRef.current && !containerRef.current.contains(event.target)) {
         setOpen(false)

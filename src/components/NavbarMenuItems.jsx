@@ -26,7 +26,9 @@ function NavbarMenuItems({ site = '' }) {
   const items = useConfig().normalizePagesResult.topLevelNavbarItems
   const pathname = useFSRoute()
   return items.map((page, index, arr) => {
-    if ('display' in page && page.display === 'hidden') return null
+    if ('display' in page && page.display === 'hidden') {
+      return null
+    }
     if (isMenu(page)) {
       const enrichment = menu[page.name]
       if (enrichment) {

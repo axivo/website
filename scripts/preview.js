@@ -22,6 +22,7 @@ import acme from 'acme-client'
 import Cloudflare from 'cloudflare'
 import { config } from 'dotenv'
 import { cloudflare, domain } from '@axivo/website/global'
+import { copyAssets } from '@axivo/website/assets'
 
 const certDir = './certs'
 const renewalThresholdMs = 30 * 24 * 60 * 60 * 1000
@@ -175,10 +176,14 @@ function getCertificateMs(certPath) {
 function getLanAddress() {
   const interfaces = networkInterfaces()
   const preferred = interfaces.en0?.find(entry => entry.family === 'IPv4' && !entry.internal)
-  if (preferred) return preferred.address
+  if (preferred) {
+    return preferred.address
+  }
   for (const entries of Object.values(interfaces)) {
     const entry = entries?.find(item => item.family === 'IPv4' && !item.internal)
-    if (entry) return entry.address
+    if (entry) {
+      return entry.address
+    }
   }
   throw new Error('No IPv4 address found')
 }
@@ -239,6 +244,7 @@ async function preview() {
     logStream.end()
     process.exit(buildStatus)
   }
+  copyAssets()
   const previewStatus = await startProcess('opennextjs-cloudflare', previewArgs, logStream)
   logStream.end()
   process.exit(previewStatus)

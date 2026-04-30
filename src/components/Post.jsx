@@ -62,12 +62,16 @@ function filterByDate(entries, date) {
  */
 async function getMetadata(collection) {
   const cached = metadataCache.get(collection.metadataKey)
-  if (cached) return cached
+  if (cached) {
+    return cached
+  }
   const promise = (async () => {
     const { getCloudflareContext } = await import('@opennextjs/cloudflare')
     const { env } = await getCloudflareContext({ async: true })
     const object = await env.CONTENT_BUCKET.get(collection.metadataKey)
-    if (!object) return []
+    if (!object) {
+      return []
+    }
     const { objects } = await object.json()
     return objects
   })()

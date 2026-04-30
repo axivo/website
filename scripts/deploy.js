@@ -22,7 +22,8 @@
 
 import { execSync } from 'node:child_process'
 import Cloudflare from 'cloudflare'
-import { cloudflare, domain, repository } from '../src/config/variables/global.js'
+import { cloudflare, domain, repository } from '@axivo/website/global'
+import { copyAssets } from '@axivo/website/assets'
 
 const baseUrl = `${domain.protocol}://${domain.name}`
 const pluralRules = new Intl.PluralRules('en-US')
@@ -45,6 +46,8 @@ async function deploy() {
   } catch (error) {
     console.warn(`Failed to purge remote KV cache: ${error.message}`)
   }
+  const copied = copyAssets()
+  console.info(`Copied ${plural(copied, 'asset', 'assets')} to '.open-next/assets'`)
   execSync('npx wrangler deploy', { stdio: 'inherit' })
   try {
     const purged = await purgeCache()

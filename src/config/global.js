@@ -65,6 +65,21 @@ export const google = {
 }
 
 export const meta = {
+  assets: {
+    images: [
+      '/apple-icon.png',
+      '/icon.svg',
+      '/icon1.png',
+      '/icon2.png',
+      '/opengraph-image.png'
+    ],
+    pages: [
+      '/claude/sitemap.xml',
+      '/manifest.webmanifest',
+      '/robots.txt',
+      '/sitemap.xml'
+    ]
+  },
   brand: {
     name: 'AXIVO'
   },
@@ -80,7 +95,19 @@ export const meta = {
       name: 'Claude'
     }
   },
-  redirects: []
+  redirects: [],
+  ttl: {
+    301: 86400,
+    302: 0,
+    307: 0,
+    308: 86400,
+    404: 60,
+    410: 60,
+    500: 0,
+    502: 0,
+    503: 0,
+    504: 0
+  }
 }
 
 export const repository = {
