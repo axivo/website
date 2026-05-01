@@ -71,6 +71,12 @@ async function fetch(request, env, ctx) {
     return stripBody(cached, isHead)
   }
   const originResponse = await worker.fetch(lookupRequest, env, ctx)
+  if (originResponse.status === 404 && url.pathname !== '/') {
+    const parent = await getParentPath(url, env, ctx)
+    if (parent) {
+      return setTtl(Response.redirect(new URL(parent, url).toString(), 308))
+    }
+  }
   const response = setTtl(originResponse)
   const cacheControl = response.headers.get('cache-control') || ''
   const maxAgeMatch = cacheControl.match(/(?:^|,\s*)(?:s-maxage|max-age)\s*=\s*(\d+)/i)
@@ -108,6 +114,32 @@ async function getBuildId(request, env) {
     }
   }
   return buildId
+}
+
+/**
+ * Walks up the URL path one segment at a time and returns the first
+ * parent path that resolves to a 200 response. Used to redirect 404s on
+ * category-without-index URLs to the closest existing parent page,
+ * preserving link equity and giving users a sensible landing point
+ * instead of a dead end. Returns null when no valid parent exists.
+ *
+ * @param {URL} url - Original requested URL
+ * @param {object} env - Worker bindings
+ * @param {ExecutionContext} ctx - Execution context
+ * @returns {Promise<string|null>} Valid parent pathname, or null when none found
+ */
+async function getParentPath(url, env, ctx) {
+  const segments = url.pathname.split('/').filter(Boolean)
+  while (segments.length > 0) {
+    segments.pop()
+    const parent = segments.length ? `/${segments.join('/')}` : '/'
+    const probe = new Request(new URL(parent, url), { method: 'GET' })
+    const response = await worker.fetch(probe, env, ctx)
+    if (response.ok) {
+      return parent
+    }
+  }
+  return null
 }
 
 /**
