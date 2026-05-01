@@ -25,6 +25,19 @@
       "matchUpdateTypes": [
         "patch"
       ]
+    },
+    {
+      "enabled": true,
+      "matchManagers": [
+        "npm"
+      ],
+      "matchPackageNames": [
+        "nextra",
+        "nextra-theme-docs"
+      ],
+      "matchUpdateTypes": [
+        "patch"
+      ]
     }
   ],
   "prConcurrentLimit": 0,
