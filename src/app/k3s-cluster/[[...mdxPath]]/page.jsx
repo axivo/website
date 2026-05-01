@@ -23,9 +23,8 @@ const Wrapper = components.wrapper
 async function generateMetadata(props) {
   const params = await props.params
   const path = params.mdxPath || []
-  const canonical = `/${meta.source.path}${path.length ? '/' + path.join('/') : ''}`
   const { metadata } = await importPage([meta.source.path, ...path])
-  const result = { ...metadata, alternates: { canonical } }
+  const result = { ...metadata }
   if (result.seoTitle) {
     result.title = result.seoTitle
   }

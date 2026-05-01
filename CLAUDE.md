@@ -61,28 +61,24 @@ The site is a static Next.js/Nextra application deployed to Cloudflare Workers v
     │   ├── icon1.png                      192x192 PWA icon referenced by manifest
     │   ├── icon2.png                      512x512 PWA icon referenced by manifest
     │   ├── manifest.js                    Web app manifest route handler (PWA metadata)
-    │   ├── not-found.jsx                  Site-wide 404 page (re-exports NotFound)
+    │   ├── not-found.jsx                  Site-wide 404 page (re-exports NotFound, rarely reached due to Worker parent-walk redirect)
     │   ├── opengraph-image.png            Static metadata file used as default OG image
     │   ├── robots.js                      Robots.txt route handler with crawler rules and sitemap URL
     │   ├── sitemap.js                     Root sitemap.xml route handler covering every section
     │   ├── (home)/                        Route group for the home section
     │   │   ├── layout.jsx                 Home section docs Layout with navbar/sidebar/footer
-    │   │   ├── not-found.jsx              Section-scoped 404
     │   │   ├── page.css                   Section-scoped CSS imported by route handlers
     │   │   ├── [[...mdxPath]]/page.jsx    Catch-all dynamic page handler for bundled MDX
     │   │   └── metadata/route.js          R2 metadata API endpoint (single object or full collection manifest)
     │   ├── blog/                          Blog section
     │   │   ├── layout.jsx                 Blog section docs Layout
-    │   │   ├── not-found.jsx              Section-scoped 404
     │   │   └── [[...mdxPath]]/page.jsx    Delegates to renderPage factory bound to blog collection
     │   ├── claude/                        Claude section
     │   │   ├── layout.jsx                 Claude section docs Layout (dual logo navbar)
-    │   │   ├── not-found.jsx              Section-scoped 404
     │   │   ├── sitemap.js                 Claude-scoped sitemap.xml route handler
     │   │   └── [[...mdxPath]]/page.jsx    Delegates to renderPage factory bound to reflections collection
     │   └── k3s-cluster/                   K3s Cluster section
     │       ├── layout.jsx                 K3s section docs Layout (dual logo navbar)
-    │       ├── not-found.jsx              Section-scoped 404
     │       └── [[...mdxPath]]/page.jsx    Catch-all dynamic page handler for bundled MDX
     ├── components/                        Structural and navigational React components
     │   ├── Blog.jsx                       Binds the Post.jsx helpers to the blog collection descriptor
@@ -253,11 +249,12 @@ Content sizes and cost economics come from Cloudflare's zero-egress R2 pricing: 
 
 ### Cache Policy
 
-The Worker is the authoritative source for cache policy across all responses. The zone CDN trusts whatever `cache-control` header the Worker sends. Three pieces of policy live in `scripts/worker.js`:
+The Worker is the authoritative source for cache policy across all responses. The zone CDN trusts whatever `cache-control` header the Worker sends. Four pieces of policy live in `scripts/worker.js`:
 
 - **`Vary` normalization.** OpenNext emits `Vary: RSC, Next-Router-State-Tree, ...` on prerendered pages. Cloudflare's CDN refuses to cache responses with non-standard `Vary` values. The Worker overwrites `Vary` to `Accept-Encoding` on cacheable responses before returning to the zone, which the CDN honors. RSC and prefetch requests bypass this code path entirely, so the original `Vary` is preserved where it matters semantically.
 - **`meta.ttl` and `setTtl`.** A status-keyed table in `src/config/global.js` sets per-status `cache-control` policy on responses leaving the Worker: 60s for 404/410, 24h for 301/308, no-store for 302/307 and all 5xx. For 3xx/4xx, origin retains opt-out via `no-store|no-cache|private`. For 5xx, the rewrite is unconditional — a safety floor that origin cache-control cannot override. Adding or changing policy is a one-line edit to the `meta.ttl` map.
 - **HEAD as GET.** HEAD requests are rewritten to GET internally for cache lookup and origin fetch, then the body is stripped on return. This routes around an OpenNext bug where HEAD on cold-cache state returns 503, and lets HEAD share cache state with GET so monitoring and health checks see consistent latency.
+- **Parent-walk redirect on 404.** When OpenNext returns a 404, the Worker walks up the URL path one segment at a time and probes each ancestor. The first ancestor that returns 200 becomes the destination of an HTTP 308 permanent redirect. Old URLs from prior site versions, deleted pages, and category-without-index paths all degrade gracefully to the closest existing parent instead of dead-ending. The redirect is edge-cacheable (24h via `meta.ttl[308]`), so subsequent hits to the same broken URL serve from cache without invoking the Worker. Falls through to a real 404 only when the walk reaches `/` and even root returns 404 — essentially never.
 
 ### Rendering
 

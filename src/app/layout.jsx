@@ -9,24 +9,28 @@ import { Head } from 'nextra/components'
 import { GoogleAnalytics } from '@next/third-parties/google'
 import Script from 'next/script'
 import { ViewTransition } from 'react'
-import { cloudflare, domain, google } from '@axivo/website/global'
+import { cloudflare, domain, google, meta } from '@axivo/website/global'
 import { ThemeProvider, ThemeScript } from '@axivo/website'
 import '../styles/globals.css'
 
 export const metadata = {
   metadataBase: new URL(`${domain.protocol}://${domain.name}`),
   title: {
-    template: '%s - AXIVO'
+    template: `%s - ${meta.brand.name}`
   },
   description: 'Imagine. Create.',
-  applicationName: 'AXIVO',
+  applicationName: meta.brand.name,
   generator: 'Next.js',
   openGraph: {
-    siteName: 'AXIVO',
+    siteName: meta.brand.name,
+    url: './',
     type: 'website'
   },
   appleWebApp: {
-    title: 'AXIVO'
+    title: meta.brand.name
+  },
+  alternates: {
+    canonical: './'
   },
   icons: {
     apple: [
