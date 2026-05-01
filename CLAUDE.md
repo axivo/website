@@ -405,3 +405,15 @@ Runtime secrets (not in `wrangler.jsonc`, set via `wrangler secret put`):
 - **Dark mode via sibling rule, never `@apply dark:...`.** Tailwind v4 + CSS Modules silently drops `dark:` inside `@apply`. Use a sibling `:global(.dark) .className { @apply ... }` rule instead.
 - **One vocabulary per declaration block.** Don't mix `text-black` and `color: var(--x-color-black)` in the same rule. If `color-mix()` forces a raw var on one property, keep utilities for everything else they can express.
 - **`x:`-prefixed inline classes are reserved for runtime DOM injection into Nextra's tree.** The only sanctioned use is `PostPage.jsx`, where the scroll-spy `useEffect` injects `<li>` items into Nextra's TOC and must visually match the surrounding entries Nextra renders with `x:`-prefixed classes. Do not use `x:` classes for static styling — those belong in CSS modules.
+
+## Issues
+
+Active workarounds that compensate for upstream bugs. Each entry documents the symptom, the workaround, and the condition that lets the workaround be removed.
+
+### `zod` pinned to `4.3.6` via `overrides`
+
+**Symptom.** Building with `zod@4.4.x` fails because `nextra-theme-docs@4.6.1` declares `children` as a required field on `LayoutPropsSchema`, but Next.js strips `children` from the props before passing them to the schema's parser. Zod 4.4 introduced stricter validation that rejects this absence; Zod 4.3 was lenient about it.
+
+**Workaround.** `package.json` pins `zod` to `4.3.6` via the `overrides` block. This forces every transitive dependency that reaches for `zod` to use the older permissive version, even when their own ranges allow `4.4.x`.
+
+**Removal condition.** Remove the override when upgrading to `nextra-theme-docs@4.6.2` or later, *if* that release fixes the schema declaration (mark `children` optional or fall back to a non-throwing parse). Renovate is configured to surface nextra patch updates via PR (`.github/renovate.json5`), so the `4.6.2` bump will arrive automatically. When the PR lands, test the build with the override removed before merging.

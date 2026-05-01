@@ -26,7 +26,7 @@
     "react-icons": "^5.6.0",
     "remark-mdx": "^3.1.0",
     "remark-parse": "^11.0.0",
-    "safe-mdx": "^1.7.0",
+    "safe-mdx": "^1.8.0",
     "unified": "^11.0.0"
   },
   "devDependencies": {

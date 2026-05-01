@@ -70,11 +70,11 @@ async function fetch(request, env, ctx) {
   if (cached) {
     return stripBody(cached, isHead)
   }
-  const originResponse = await worker.fetch(lookupRequest, env, ctx)
+  let originResponse = await worker.fetch(lookupRequest, env, ctx)
   if (originResponse.status === 404 && url.pathname !== '/') {
     const parent = await getParentPath(url, env, ctx)
     if (parent) {
-      return setTtl(Response.redirect(new URL(parent, url).toString(), 308))
+      originResponse = Response.redirect(new URL(parent, url).toString(), 308)
     }
   }
   const response = setTtl(originResponse)
