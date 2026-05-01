@@ -7,7 +7,7 @@
 
 import { getPageMap } from 'nextra/page-map'
 import { Layout } from 'nextra-theme-docs'
-import { footer, Navbar, NavbarMenuItems, Search, Subnavbar } from '@axivo/website'
+import { Footer, Navbar, NavbarMenuItems, Search, Subnavbar } from '@axivo/website'
 import { meta, repository } from '@axivo/website/global'
 import { createSiteSchema, JsonLd } from '../../components/JsonLd'
 
@@ -43,7 +43,7 @@ async function PageLayout({ children }) {
         docsRepositoryBase={`https://${repository.home}/blob/${repository.tag}/docs/content`}
         editLink={null}
         feedback={{ link: `https://${repository.home}/discussions` }}
-        footer={footer}
+        footer={<Footer />}
         navbar={navbar}
         pageMap={pageMap}
         search={<Search />}

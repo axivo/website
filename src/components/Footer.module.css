@@ -1,0 +1,9 @@
+@reference "tailwindcss";
+
+.copyright {
+  @apply text-sm font-bold;
+}
+
+.disclaimer {
+  @apply text-xs mt-1;
+}

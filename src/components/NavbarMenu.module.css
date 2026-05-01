@@ -13,15 +13,19 @@
 }
 
 .menu {
-  @apply absolute top-[calc(100%+0.25rem)] right-0 z-30 min-w-64 rounded-md py-1 text-sm shadow-lg;
+  @apply absolute top-[calc(100%+0.25rem)] right-0 z-30 min-w-64 rounded-md border border-black/5 bg-[var(--x-color-nextra-bg)] py-1 text-sm shadow-lg;
 }
 
 :global(.dark) .menu {
-  @apply shadow-[0_10px_15px_-3px_color-mix(in_oklab,_var(--x-color-white)_8%,_transparent),_0_4px_6px_-4px_color-mix(in_oklab,_var(--x-color-white)_6%,_transparent)];
+  @apply border-white/20 shadow-[0_10px_15px_-3px_color-mix(in_oklab,_var(--x-color-white)_8%,_transparent),_0_4px_6px_-4px_color-mix(in_oklab,_var(--x-color-white)_6%,_transparent)];
 }
 
 .menuItem {
-  @apply flex w-full cursor-pointer items-center gap-3 px-3 py-1.5 text-left;
+  @apply flex w-full cursor-pointer items-center gap-3 px-3 py-1.5 text-left text-gray-800 transition-colors;
+}
+
+:global(.dark) .menuItem {
+  @apply text-gray-100;
 }
 
 .menuItem:hover {
@@ -33,7 +37,7 @@
 }
 
 .menuItemDescription {
-  @apply overflow-hidden text-xs text-ellipsis whitespace-nowrap text-[var(--x-color-gray-600)];
+  @apply overflow-hidden text-xs text-ellipsis whitespace-nowrap text-gray-600;
 }
 
 .menuItem:hover .menuItemDescription {
@@ -41,7 +45,7 @@
 }
 
 :global(.dark) .menuItemDescription {
-  @apply text-[var(--x-color-gray-400)];
+  @apply text-gray-400;
 }
 
 :global(.dark) .menuItem:hover .menuItemDescription {
@@ -57,5 +61,9 @@
 }
 
 .trigger {
-  @apply flex cursor-pointer items-center gap-1.5 text-sm whitespace-nowrap;
+  @apply flex cursor-pointer items-center gap-1.5 text-sm whitespace-nowrap text-gray-600 transition-colors hover:text-black;
+}
+
+:global(.dark) .trigger {
+  @apply text-gray-400 hover:text-gray-200;
 }

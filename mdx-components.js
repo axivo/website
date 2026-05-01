@@ -18,7 +18,6 @@ import {
 import { Mermaid } from '@theguild/remark-mermaid/mermaid'
 import { useMDXComponents as getDocsMDXComponents } from 'nextra-theme-docs'
 import * as websiteComponents from '@axivo/website'
-import timestamps from './src/generated/timestamps.json' with { type: 'json' }
 import { Button } from './src/components/mdx/Button'
 import { Callout } from './src/components/mdx/Callout'
 import { Icon } from './src/components/mdx/Icon'
@@ -57,8 +56,8 @@ function useMDXComponents(components) {
     ul: Unordered,
     wrapper: ({ sourceCode, metadata, ...props }) => {
       const updatedMetadata = { ...metadata }
-      if (metadata?.filePath && timestamps[metadata.filePath]) {
-        updatedMetadata.timestamp = timestamps[metadata.filePath]
+      if (metadata?.filePath && websiteComponents.timestamps[metadata.filePath]) {
+        updatedMetadata.timestamp = websiteComponents.timestamps[metadata.filePath]
       }
       return (
         <>

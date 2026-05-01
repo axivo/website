@@ -22,7 +22,9 @@ function ExploreMenu() {
   const { normalizePagesResult: { activeThemeContext } } = useConfig()
   const { copy } = useCopy()
   const sourceCode = useSourceCode()
-  if (activeThemeContext.copyPage === false) return null
+  if (activeThemeContext.copyPage === false) {
+    return null
+  }
   const actions = {
     copyPage: {
       handler: () => sourceCode && copy(sourceCode),

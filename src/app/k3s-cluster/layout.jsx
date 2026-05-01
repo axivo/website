@@ -8,8 +8,8 @@
 
 import { getPageMap } from 'nextra/page-map'
 import { Layout } from 'nextra-theme-docs'
-import { footer, Navbar, NavbarMenuItems, Search, Subnavbar } from '@axivo/website'
-import { meta, repository } from '@axivo/website/k3s-cluster'
+import { Footer, Navbar, NavbarMenuItems, Search, Subnavbar } from '@axivo/website'
+import { meta, repository } from '@axivo/website/cluster'
 
 const metadata = {
   title: {
@@ -54,7 +54,7 @@ async function PageLayout({ children }) {
       docsRepositoryBase={`https://${repository.home}/blob/main/content`}
       editLink={null}
       feedback={{ link: `https://${repository.home}/discussions` }}
-      footer={footer}
+      footer={<Footer />}
       navbar={navbar}
       pageMap={pageMap}
       search={<Search section={meta.source.path} />}

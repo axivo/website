@@ -57,7 +57,9 @@ function Search({ section } = {}) {
     setIsOpen(false)
   }, [])
   useEffect(() => {
-    if (!isOpen) return
+    if (!isOpen) {
+      return
+    }
     const timer = setTimeout(() => {
       removeTracking('.DocSearch-Logo a')
     }, 0)

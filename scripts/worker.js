@@ -15,7 +15,7 @@
  * cold PoPs), returning 503. Rewriting to GET lets HEAD populate the
  * Worker's own `caches.default` on cold miss and avoids the broken path.
  *
- * Responses with status codes in the `statusTtl` map have their
+ * Responses with status codes in `meta.ttl` have their
  * cache-control rewritten before being written to the edge and returned
  * upstream. OpenNext's incremental cache replays 404s with the same
  * `s-maxage=31536000` it applies to prerendered 2xx pages, which would
@@ -32,20 +32,9 @@
  */
 
 import worker from '../.open-next/worker.js'
+import { meta } from '@axivo/website/global'
 
 let buildId
-const statusTtl = {
-  301: 86400,
-  302: 0,
-  307: 0,
-  308: 86400,
-  404: 60,
-  410: 60,
-  500: 0,
-  502: 0,
-  503: 0,
-  504: 0
-}
 
 /**
  * Worker fetch handler. Serves cached GET responses from caches.default
@@ -88,7 +77,7 @@ async function fetch(request, env, ctx) {
   const maxAge = maxAgeMatch ? parseInt(maxAgeMatch[1], 10) : 0
   const cacheable =
     maxAge > 0 &&
-    (response.ok || response.status in statusTtl) &&
+    (response.ok || response.status in meta.ttl) &&
     !/no-store|no-cache|private/i.test(cacheControl) &&
     !response.headers.has('set-cookie')
   if (!cacheable) {
@@ -164,7 +153,7 @@ async function purgeKvCache(request, env) {
 }
 
 /**
- * Sets the TTL on responses whose status appears in `statusTtl` by
+ * Sets the TTL on responses whose status appears in `meta.ttl` by
  * rewriting the cache-control header. OpenNext's incremental cache
  * replays prerendered 404s with the same `s-maxage=31536000` it applies
  * to 2xx pages; without this rewrite, stale 404s and transient 5xx
@@ -177,7 +166,7 @@ async function purgeKvCache(request, env) {
  * @returns {Response} Response with rewritten cache-control when applicable
  */
 function setTtl(response) {
-  const ttl = statusTtl[response.status]
+  const ttl = meta.ttl[response.status]
   if (ttl === undefined) {
     return response
   }
@@ -188,7 +177,7 @@ function setTtl(response) {
   const normalized = new Response(response.body, response)
   normalized.headers.set(
     'cache-control',
-    ttl === 0 ? 'no-store' : `public, s-maxage=${ttl}, stale-while-revalidate=${ttl * 5}`
+    ttl === 0 ? 'no-store' : `public, s-maxage=${ttl}`
   )
   return normalized
 }

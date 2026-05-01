@@ -9,6 +9,10 @@
       "types": "./index.d.ts",
       "import": "./index.js"
     },
+    "./assets": {
+      "types": "./assets.d.ts",
+      "import": "./assets.js"
+    },
     "./blog": {
       "types": "./blog.d.ts",
       "import": "./blog.js"
@@ -17,23 +21,29 @@
       "types": "./claude.d.ts",
       "import": "./claude.js"
     },
+    "./cluster": {
+      "types": "./cluster.d.ts",
+      "import": "./cluster.js"
+    },
     "./global": {
       "types": "./global.d.ts",
       "import": "./global.js"
     },
-    "./k3s-cluster": {
-      "types": "./k3s-cluster.d.ts",
-      "import": "./k3s-cluster.js"
-    },
     "./menu": {
+      "types": "./menu.d.ts",
       "import": "./menu.js"
     },
     "./page": {
+      "types": "./page.d.ts",
       "import": "./page.js"
     },
     "./remark": {
       "types": "./remark.d.ts",
       "import": "./remark.js"
+    },
+    "./sitemap": {
+      "types": "./sitemap.d.ts",
+      "import": "./sitemap.js"
     },
     "./theme": {
       "types": "./theme.d.ts",

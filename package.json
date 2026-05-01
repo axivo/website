@@ -26,14 +26,14 @@
     "react-icons": "^5.6.0",
     "remark-mdx": "^3.1.0",
     "remark-parse": "^11.0.0",
-    "safe-mdx": "^1.6.0",
+    "safe-mdx": "^1.7.0",
     "unified": "^11.0.0"
   },
   "devDependencies": {
-    "@aws-sdk/client-s3": "^3.1038.0",
+    "@aws-sdk/client-s3": "^3.1040.0",
     "@tailwindcss/postcss": "^4.2.0",
     "acme-client": "^5.4.0",
-    "cloudflare": "^5.2.0",
+    "cloudflare": "^6.0.0",
     "dotenv": "^17.4.0",
     "fast-glob": "^3.3.0",
     "hast-util-to-html": "^9.0.0",
@@ -44,6 +44,9 @@
     "shiki": "^4.0.0",
     "tailwindcss": "^4.2.0",
     "unist-util-visit": "^5.0.0",
-    "wrangler": "^4.86.0"
+    "wrangler": "^4.87.0"
+  },
+  "overrides": {
+    "zod": "4.3.6"
   }
 }

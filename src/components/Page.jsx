@@ -28,7 +28,7 @@ import { PostCard, Subnavbar, useMDXComponents as getMDXComponents } from '@axiv
 import { remarkMarkAndUnravel } from '@axivo/website/remark'
 import { createDispatch } from './mdx/renderers/node'
 import { createEntrySchema, JsonLd } from './JsonLd'
-import { extractFootnotes } from './mdx/footnotes'
+import { extractFootnotes } from './mdx/renderers/footnotes'
 import { filterByDate, getMetadata, getPosts, getRelated, Posts, postsPageSize, renderIndexPage } from './Post'
 import { PostRelated } from './PostRelated'
 
@@ -361,11 +361,14 @@ async function renderTagPage(tag, source, collection) {
 async function resolveMetadata(props, source, collection) {
   const params = await props.params
   const path = params.mdxPath || []
+  const canonical = `/${source.path}${path.length ? '/' + path.join('/') : ''}`
+  const alternates = { canonical }
   if (isEntry(path, collection)) {
     const key = `${collection.contentPrefix}${entryDateSegments(path, collection).join('/')}.mdx`
     const result = await fetchR2Object(key)
     if (result) {
       return {
+        alternates,
         description: result.metadata.description,
         title: result.metadata.title
       }
@@ -374,14 +377,17 @@ async function resolveMetadata(props, source, collection) {
   if (isIndex(path, collection)) {
     const date = entryDateSegments(path, collection).join('/')
     const { metadata } = await renderIndexPage(collection, date)
-    return metadata
+    return { ...metadata, alternates }
   }
   if (isTagPage(path, collection)) {
     const hasSection = collection.sectionPath.length > 0
-    return { title: decodeURIComponent(hasSection ? path[2] : path[1]) }
+    return {
+      alternates,
+      title: decodeURIComponent(hasSection ? path[2] : path[1])
+    }
   }
   const { metadata } = await importPage([source.path, ...path])
-  const result = { ...metadata }
+  const result = { ...metadata, alternates }
   if (result.seoTitle) {
     result.title = result.seoTitle
   }

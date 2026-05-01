@@ -78,9 +78,9 @@ function Subnavbar({ activePath: activePathProp } = {}) {
     return null
   }
   return (
-    <div ref={ref} className={cn('nextra-border nextra-subnavbar x:bg-nextra-bg/70', styles.subnavbar)}>
+    <div ref={ref} className={cn('nextra-border nextra-subnavbar', styles.subnavbar)}>
       <div className={styles.container}>
-        <div className={cn(styles.breadcrumb, 'x:text-gray-600 x:dark:text-gray-400 x:contrast-more:text-gray-700 x:contrast-more:dark:text-gray-100')}>
+        <div className={styles.breadcrumb}>
           <Icon name="go/GoHome" size={18} className={styles.icon} />
           {activePath.map((item, index, arr) => {
             const nextItem = arr[index + 1]
@@ -103,12 +103,8 @@ function Subnavbar({ activePath: activePathProp } = {}) {
                 <ComponentToUse
                   className={cn(
                     styles.item,
-                    nextItem
-                      ? cn(styles.itemLink, href && 'x:hover:text-black x:dark:hover:text-gray-200')
-                      : cn(styles.itemActive, 'x:text-black x:dark:text-gray-100'),
-                    href && 'x:focus-visible:nextra-focus x:ring-inset'
+                    href ? styles.itemLink : nextItem ? styles.itemDefault : styles.itemActive
                   )}
-                  title={typeof item.title === 'string' ? item.title : undefined}
                   {...(href && { href, prefetch: false })}
                 >
                   {item.title}

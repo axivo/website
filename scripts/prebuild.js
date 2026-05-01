@@ -28,10 +28,11 @@ import remarkRehype from 'remark-rehype'
 import { SKIP, visit } from 'unist-util-visit'
 import { toHtml } from 'hast-util-to-html'
 import { unified } from 'unified'
+import { cloudflare } from '@axivo/website/global'
 import { remarkMarkAndUnravel } from '@axivo/website/remark'
-import { cloudflare } from '../src/config/variables/global.js'
-import { meta as blog } from '../src/config/variables/blog.js'
-import { meta as claude } from '../src/config/variables/claude.js'
+import { formatTimestamp } from '@axivo/website/sitemap'
+import { meta as blog } from '../src/config/blog.js'
+import { meta as claude } from '../src/config/claude.js'
 
 const bucket = cloudflare.bucket.name
 const codeBlockFilenameRe = /filename="([^"]+)"/
@@ -234,7 +235,7 @@ async function generateMetadata(s3, metadataKey, objects) {
  */
 function getTimestamps() {
   const result = execSync(
-    'git log --format="COMMIT:%at" --name-only --diff-filter=ACMR HEAD',
+    'git log --diff-filter="ACMR" --format="COMMIT:%at" --name-only --no-show-signature',
     { cwd, encoding: 'utf8' }
   )
   const timestamps = {}
@@ -337,7 +338,7 @@ async function listCollectionObjects(s3, bucketPrefix) {
         Bucket: bucket,
         Key: obj.Key
       }))
-      const object = { key: obj.Key, ...head.Metadata }
+      const object = { key: obj.Key, lastModified: formatTimestamp(obj.LastModified), ...head.Metadata }
       if (object.description) {
         object.description = decodeURIComponent(object.description)
       }
