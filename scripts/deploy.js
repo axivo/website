@@ -47,7 +47,7 @@ async function deploy() {
     console.warn(`Failed to purge remote KV cache: ${error.message}`)
   }
   const copied = copyAssets()
-  console.info(`Copied ${plural(copied, 'asset', 'assets')} to '.open-next/assets'`)
+  console.info(`Copied ${plural(copied, 'static asset', 'static assets')} to '/.open-next/assets' directory`)
   execSync('npx wrangler deploy', { stdio: 'inherit' })
   try {
     const purged = await purgeCache()
