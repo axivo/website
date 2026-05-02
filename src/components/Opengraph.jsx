@@ -45,7 +45,7 @@ function Opengraph({ baseUrl, description, title }) {
       <div
         style={{
           color: '#000',
-          fontSize: 48,
+          fontSize: 64,
           fontWeight: 700,
           letterSpacing: '-2px',
           lineHeight: 1.1
@@ -56,8 +56,8 @@ function Opengraph({ baseUrl, description, title }) {
       <div
         style={{
           display: 'flex',
-          height: 199,
-          marginTop: 24,
+          height: 224,
+          marginTop: 12,
           overflow: 'hidden',
           position: 'relative'
         }}
@@ -68,7 +68,7 @@ function Opengraph({ baseUrl, description, title }) {
             columnGap: '0.28em',
             display: 'flex',
             flexWrap: 'wrap',
-            fontSize: 26,
+            fontSize: 32,
             fontWeight: 400,
             lineHeight: 1.4
           }}
@@ -79,7 +79,7 @@ function Opengraph({ baseUrl, description, title }) {
           style={{
             background: 'linear-gradient(to bottom, rgba(255,255,255,0), #fff)',
             bottom: 0,
-            height: 199,
+            height: 224,
             left: 0,
             position: 'absolute',
             right: 0
