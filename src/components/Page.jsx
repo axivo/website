@@ -37,6 +37,25 @@ const nextraStaticParams = generateStaticParamsFor('mdxPath')
 const Wrapper = components.wrapper
 
 /**
+ * Builds the dynamic Open Graph image URL for a page metadata object.
+ * Encodes the title and description as query parameters so the /og
+ * route can render the social card without re-fetching content.
+ *
+ * @param {object} metadata - Page metadata with title and description
+ * @returns {string} Relative URL pointing at the /og route
+ */
+function buildOgImageUrl(metadata) {
+  const params = new URLSearchParams()
+  if (metadata.title) {
+    params.set('title', metadata.title)
+  }
+  if (metadata.description) {
+    params.set('description', metadata.description)
+  }
+  return `/og?${params.toString()}`
+}
+
+/**
  * Builds the breadcrumb trail for a tag page under a source/collection.
  *
  * @param {object} source - Content source descriptor
@@ -369,46 +388,6 @@ async function renderTagPage(tag, source, collection) {
 }
 
 /**
- * Strips markdown delimiters (`` ` ``, `**`, `_`) from a description
- * while preserving the inner text. Used when emitting plain-text meta
- * tags (`description`, `og:description`, `twitter:description`) so
- * social platforms that don't render markdown show clean prose. The
- * OG image URL still receives the original markdown-flavored text so
- * Satori can parse it into styled spans.
- *
- * @param {string} text - Description with possible markdown delimiters
- * @returns {string} Description with delimiters removed
- */
-function stripMarkdown(text) {
-  if (!text) {
-    return text
-  }
-  return text
-    .replace(/`([^`]+)`/g, '$1')
-    .replace(/\*\*([^*]+)\*\*/g, '$1')
-    .replace(/_([^_]+)_/g, '$1')
-}
-
-/**
- * Builds the dynamic Open Graph image URL for a page metadata object.
- * Encodes the title and description as query parameters so the /og
- * route can render the social card without re-fetching content.
- *
- * @param {object} metadata - Page metadata with title and description
- * @returns {string} Relative URL pointing at the /og route
- */
-function buildOgImageUrl(metadata) {
-  const params = new URLSearchParams()
-  if (metadata.title) {
-    params.set('title', metadata.title)
-  }
-  if (metadata.description) {
-    params.set('description', metadata.description)
-  }
-  return `/og?${params.toString()}`
-}
-
-/**
  * Resolves the page metadata for a request route under a source/collection.
  * Routes through the entry, index, tag, and bundled-page branches in turn.
  * Each branch attaches a dynamic Open Graph image URL referencing the
@@ -503,13 +482,13 @@ async function resolveStaticParams(source, collection, sections) {
   const params = await nextraStaticParams()
   const sectionParams = source.path
     ? params
-        .filter(p => p.mdxPath?.[0] === source.path)
-        .map(p => ({ mdxPath: p.mdxPath.slice(1) }))
-        .filter(p => p.mdxPath[p.mdxPath.length - 1] !== 'tags')
+      .filter(p => p.mdxPath?.[0] === source.path)
+      .map(p => ({ mdxPath: p.mdxPath.slice(1) }))
+      .filter(p => p.mdxPath[p.mdxPath.length - 1] !== 'tags')
     : [
-        { mdxPath: [] },
-        ...params.filter(p => !sections?.includes(p.mdxPath?.[0]))
-      ]
+      { mdxPath: [] },
+      ...params.filter(p => !sections?.includes(p.mdxPath?.[0]))
+    ]
   if (!collection) {
     return sectionParams
   }
@@ -530,6 +509,27 @@ async function resolveStaticParams(source, collection, sections) {
     mdxPath: hasSection ? [collection.sectionPath, ...dir.split('/')] : dir.split('/')
   }))
   return [...sectionParams, ...indexParams]
+}
+
+/**
+ * Strips markdown delimiters (`` ` ``, `**`, `_`) from a description
+ * while preserving the inner text. Used when emitting plain-text meta
+ * tags (`description`, `og:description`, `twitter:description`) so
+ * social platforms that don't render markdown show clean prose. The
+ * OG image URL still receives the original markdown-flavored text so
+ * Satori can parse it into styled spans.
+ *
+ * @param {string} text - Description with possible markdown delimiters
+ * @returns {string} Description with delimiters removed
+ */
+function stripMarkdown(text) {
+  if (!text) {
+    return text
+  }
+  return text
+    .replace(/`([^`]+)`/g, '$1')
+    .replace(/\*\*([^*]+)\*\*/g, '$1')
+    .replace(/_([^_]+)_/g, '$1')
 }
 
 export { renderPage }
