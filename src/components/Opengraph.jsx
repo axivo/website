@@ -57,7 +57,7 @@ function Opengraph({ baseUrl, description, title }) {
         style={{
           display: 'flex',
           height: 224,
-          marginTop: 24,
+          marginTop: 12,
           overflow: 'hidden',
           position: 'relative'
         }}
