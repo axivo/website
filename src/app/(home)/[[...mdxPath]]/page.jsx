@@ -1,71 +1,24 @@
 /**
  * @fileoverview Dynamic page handler for the home section.
  *
- * Serves all Nextra content pages through the catch-all route.
- * Splash pages render full-width, all others use the standard
- * docs wrapper with table of contents and sidebar.
+ * Delegates to the shared page factory bound to the home source. The
+ * home section ships only bundled MDX (no R2-backed collection) and
+ * claims the root path plus any top-level pages whose first segment
+ * does not match a known section directory. The list of section paths
+ * is sourced from the section configs so adding a new section never
+ * requires updating this handler.
  */
 
-import { generateStaticParamsFor, importPage } from 'nextra/pages'
-import { useMDXComponents as getMDXComponents } from '@axivo/website'
+import { meta as blog } from '@axivo/website/blog'
+import { meta as claude } from '@axivo/website/claude'
+import { meta as cluster } from '@axivo/website/cluster'
+import { meta } from '@axivo/website/global'
+import { renderPage } from '@axivo/website/page'
 import '../page.css'
 
-const components = getMDXComponents()
-const Wrapper = components.wrapper
-
-/**
- * Generates page metadata from Nextra's importPage.
- *
- * @param {object} props - Next.js page props
- * @returns {Promise<object>} Page metadata with title
- */
-async function generateMetadata(props) {
-  const params = await props.params
-  const { metadata } = await importPage(params.mdxPath)
-  if (metadata.seoTitle) {
-    return { ...metadata, title: metadata.seoTitle }
-  }
-  return metadata
-}
-
-/**
- * Generates static params for all Nextra content pages.
- *
- * @returns {Promise<object[]>} Array of path params for static generation
- */
-async function generateStaticParams() {
-  const params = await generateStaticParamsFor('mdxPath')()
-  return [{ mdxPath: [] }, ...params]
-}
-
-/**
- * Main page component for the home section catch-all route.
- * Routes splash pages to full-width layout, all others to the
- * standard Nextra docs wrapper.
- *
- * @param {object} props - Next.js page props
- * @returns {Promise<import('react').ReactElement>} Rendered page
- */
-async function Page(props) {
-  const params = await props.params
-  const {
-    default: MDXContent,
-    toc,
-    metadata,
-    sourceCode
-  } = await importPage(params.mdxPath)
-  if (metadata.template === 'splash') {
-    return (
-      <div className="splash">
-        <MDXContent {...props} params={params} />
-      </div>
-    )
-  }
-  return (
-    <Wrapper toc={toc} metadata={metadata} sourceCode={sourceCode}>
-      <MDXContent {...props} params={params} />
-    </Wrapper>
-  )
-}
+const { generateMetadata, generateStaticParams, Page } = renderPage({
+  sections: [blog.source.path, claude.source.path, cluster.source.path],
+  source: { path: '', title: meta.brand.name }
+})
 
 export { generateMetadata, generateStaticParams, Page as default }
