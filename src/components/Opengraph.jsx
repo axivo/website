@@ -56,7 +56,7 @@ function Opengraph({ baseUrl, description, title }) {
       <div
         style={{
           display: 'flex',
-          height: 224,
+          height: 180,
           marginTop: 12,
           overflow: 'hidden',
           position: 'relative'
@@ -79,7 +79,7 @@ function Opengraph({ baseUrl, description, title }) {
           style={{
             background: 'linear-gradient(to bottom, rgba(255,255,255,0), #fff)',
             bottom: 0,
-            height: 224,
+            height: 180,
             left: 0,
             position: 'absolute',
             right: 0
