@@ -7,6 +7,7 @@
 
 import { initOpenNextCloudflareForDev } from '@opennextjs/cloudflare'
 import nextra from 'nextra'
+import { darkTheme, lightTheme } from './src/components/mdx/renderers/theme.js'
 import { meta as claude } from './src/config/claude.js'
 import { meta as cluster } from './src/config/cluster.js'
 import { meta as website } from './src/config/global.js'
@@ -16,6 +17,11 @@ initOpenNextCloudflareForDev()
 const withNextra = nextra({
   contentDirBasePath: '/',
   defaultShowCopyCode: true,
+  mdxOptions: {
+    rehypePrettyCodeOptions: {
+      theme: { dark: darkTheme, light: lightTheme }
+    }
+  },
   search: false
 })
 const nextConfig = withNextra({
@@ -26,9 +32,7 @@ const nextConfig = withNextra({
   redirects: async () => [
     ...claude.redirects,
     ...cluster.redirects,
-    ...website.redirects,
-    { source: '/apple-touch-icon-precomposed.png', destination: '/apple-icon.png', permanent: true },
-    { source: '/apple-touch-icon.png', destination: '/apple-icon.png', permanent: true }
+    ...website.redirects
   ]
 })
 

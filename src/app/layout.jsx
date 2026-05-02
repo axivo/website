@@ -9,11 +9,12 @@ import { Head } from 'nextra/components'
 import { GoogleAnalytics } from '@next/third-parties/google'
 import Script from 'next/script'
 import { ViewTransition } from 'react'
+import { inter, jetbrainsMono } from '@axivo/website/fonts'
 import { cloudflare, domain, google, meta } from '@axivo/website/global'
 import { ThemeProvider, ThemeScript } from '@axivo/website'
 import '../styles/globals.css'
 
-export const metadata = {
+const metadata = {
   metadataBase: new URL(`${domain.protocol}://${domain.name}`),
   title: {
     template: `%s - ${meta.brand.name}`
@@ -21,22 +22,22 @@ export const metadata = {
   description: 'Imagine. Create.',
   applicationName: meta.brand.name,
   generator: 'Next.js',
-  openGraph: {
-    siteName: meta.brand.name,
-    url: './',
-    type: 'website'
+  alternates: {
+    canonical: './'
   },
   appleWebApp: {
     title: meta.brand.name
-  },
-  alternates: {
-    canonical: './'
   },
   icons: {
     apple: [
       { url: '/apple-icon.png', rel: 'apple-touch-icon' },
       { url: '/apple-icon.png', rel: 'apple-touch-icon-precomposed' }
     ]
+  },
+  openGraph: {
+    siteName: meta.brand.name,
+    url: './',
+    type: 'website'
   }
 }
 
@@ -48,7 +49,7 @@ export const metadata = {
  */
 function RootLayout({ children }) {
   return (
-    <html lang="en" dir="ltr" suppressHydrationWarning>
+    <html lang="en" dir="ltr" className={[inter, jetbrainsMono].map(font => font.variable).join(' ')} suppressHydrationWarning>
       <Head>
         <ThemeScript />
       </Head>
@@ -77,4 +78,4 @@ function RootLayout({ children }) {
   )
 }
 
-export { RootLayout as default }
+export { metadata, RootLayout as default }

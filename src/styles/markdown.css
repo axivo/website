@@ -72,6 +72,14 @@ code.nextra-code {
 }
 
 /**
+ * Overrides Nextra's `decoration-from-font` link underline thickness, which
+ * renders heavy with Inter's metrics.
+ */
+main a {
+  text-decoration-thickness: auto;
+}
+
+/**
  * Hides H2 icons from Nextra's TOC sidebar. Section headings embed `<Icon>`
  * SVGs that the TOC would otherwise mirror next to each link.
  */
