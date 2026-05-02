@@ -20,6 +20,9 @@ description: >-
     }
     ```
   </div>
+  <div className="hero-prose">
+    Welcome to our public web space. Our goal is to create projects delivering beautiful engineering experiences.
+  </div>
   <style>{`
     .hero-code code {
       font-size: 1.5rem;
@@ -34,6 +37,17 @@ description: >-
     }
     .hero-code pre > div {
       display: none;
+    }
+    .hero-prose {
+      display: none;
+    }
+    @media (max-width: 768px) {
+      .hero-code {
+        display: none;
+      }
+      .hero-prose {
+        display: block;
+      }
     }
   `}</style>
 </Hero>
