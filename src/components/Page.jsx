@@ -37,6 +37,25 @@ const nextraStaticParams = generateStaticParamsFor('mdxPath')
 const Wrapper = components.wrapper
 
 /**
+ * Builds the dynamic Open Graph image URL for a page metadata object.
+ * Encodes the title and description as query parameters so the /og
+ * route can render the social card without re-fetching content.
+ *
+ * @param {object} metadata - Page metadata with title and description
+ * @returns {string} Relative URL pointing at the /og route
+ */
+function buildOgImageUrl(metadata) {
+  const params = new URLSearchParams()
+  if (metadata.title) {
+    params.set('title', metadata.title)
+  }
+  if (metadata.description) {
+    params.set('description', metadata.description)
+  }
+  return `/og?${params.toString()}`
+}
+
+/**
  * Builds the breadcrumb trail for a tag page under a source/collection.
  *
  * @param {object} source - Content source descriptor
@@ -138,6 +157,9 @@ async function fetchR2Object(key) {
  * @returns {boolean}
  */
 function isEntry(path, collection) {
+  if (!collection) {
+    return false
+  }
   if (collection.sectionPath.length > 0) {
     return path[0] === collection.sectionPath && path.length === 5 && /^\d{4}$/.test(path[1])
   }
@@ -153,6 +175,9 @@ function isEntry(path, collection) {
  * @returns {boolean}
  */
 function isIndex(path, collection) {
+  if (!collection) {
+    return false
+  }
   if (collection.sectionPath.length > 0) {
     return path[0] === collection.sectionPath && path.length >= 2 && path.length <= 4 && /^\d{4}$/.test(path[1])
   }
@@ -167,6 +192,9 @@ function isIndex(path, collection) {
  * @returns {boolean}
  */
 function isTagPage(path, collection) {
+  if (!collection) {
+    return false
+  }
   if (collection.sectionPath.length > 0) {
     return path[0] === collection.sectionPath && path[1] === 'tags' && path[2]
   }
@@ -202,7 +230,8 @@ function parseMdx(mdx) {
  */
 async function renderBundledPage(props, path, source, collection) {
   const params = await props.params
-  const pageModule = await importPage([source.path, ...path])
+  const importPath = source.path ? [source.path, ...path] : path
+  const pageModule = await importPage(importPath)
   const {
     default: MDXContent,
     toc: originalToc,
@@ -210,22 +239,24 @@ async function renderBundledPage(props, path, source, collection) {
     sourceCode
   } = pageModule
   const toc = [...originalToc]
-  const hasSection = collection.sectionPath.length > 0
-  const atCollectionRoot = hasSection
-    ? path.length === 1 && path[0] === collection.sectionPath
-    : path.length === 0
-  const postsSectionId = pageModule.postsSectionId
-  if (atCollectionRoot && postsSectionId) {
-    const entries = await getPosts(collection)
-    const limit = pageModule.postsPageSize || postsPageSize
-    const latestToc = entries.slice(0, limit).map(entry => ({
-      depth: 3,
-      id: entry.route.split('/').pop(),
-      value: entry.frontMatter.title
-    }))
-    const insertIndex = toc.findIndex(item => item.id === postsSectionId)
-    if (insertIndex !== -1) {
-      toc.splice(insertIndex + 1, 0, ...latestToc)
+  if (collection) {
+    const hasSection = collection.sectionPath.length > 0
+    const atCollectionRoot = hasSection
+      ? path.length === 1 && path[0] === collection.sectionPath
+      : path.length === 0
+    const postsSectionId = pageModule.postsSectionId
+    if (atCollectionRoot && postsSectionId) {
+      const entries = await getPosts(collection)
+      const limit = pageModule.postsPageSize || postsPageSize
+      const latestToc = entries.slice(0, limit).map(entry => ({
+        depth: 3,
+        id: entry.route.split('/').pop(),
+        value: entry.frontMatter.title
+      }))
+      const insertIndex = toc.findIndex(item => item.id === postsSectionId)
+      if (insertIndex !== -1) {
+        toc.splice(insertIndex + 1, 0, ...latestToc)
+      }
     }
   }
   if (metadata.template === 'splash') {
@@ -300,17 +331,24 @@ async function renderEntryPage(path, collection) {
 
 /**
  * Creates Next.js page handlers (generateMetadata, generateStaticParams,
- * Page) for a content source with an R2-backed post collection.
+ * Page) for a content source. The collection descriptor is optional —
+ * sections that ship only bundled MDX (no R2-backed post collection)
+ * pass `{ source }` and the entry, index, and tag-page branches are
+ * skipped. The source descriptor's `path` may also be empty for the
+ * root home, in which case bundled imports are not prefixed and the
+ * factory honors the optional `sections` array to exclude paths that
+ * other route handlers claim (e.g. `/blog/*`, `/claude/*`).
  *
  * @param {object} config
  * @param {object} config.source - Content source descriptor with path and title
- * @param {object} config.collection - Collection descriptor with sectionPath
+ * @param {object} [config.collection] - Optional collection descriptor with sectionPath
+ * @param {string[]} [config.sections] - Optional list of section paths the home should not claim
  * @returns {{ generateMetadata: Function, generateStaticParams: Function, Page: Function }}
  */
-function renderPage({ source, collection }) {
+function renderPage({ source, collection, sections }) {
   return {
     generateMetadata: props => resolveMetadata(props, source, collection),
-    generateStaticParams: () => resolveStaticParams(source, collection),
+    generateStaticParams: () => resolveStaticParams(source, collection, sections),
     Page: props => resolvePage(props, source, collection)
   }
 }
@@ -350,25 +388,6 @@ async function renderTagPage(tag, source, collection) {
 }
 
 /**
- * Builds the dynamic Open Graph image URL for a page metadata object.
- * Encodes the title and description as query parameters so the /og
- * route can render the social card without re-fetching content.
- *
- * @param {object} metadata - Page metadata with title and description
- * @returns {string} Relative URL pointing at the /og route
- */
-function buildOgImageUrl(metadata) {
-  const params = new URLSearchParams()
-  if (metadata.title) {
-    params.set('title', metadata.title)
-  }
-  if (metadata.description) {
-    params.set('description', metadata.description)
-  }
-  return `/og?${params.toString()}`
-}
-
-/**
  * Resolves the page metadata for a request route under a source/collection.
  * Routes through the entry, index, tag, and bundled-page branches in turn.
  * Each branch attaches a dynamic Open Graph image URL referencing the
@@ -390,13 +409,15 @@ async function resolveMetadata(props, source, collection) {
         description: result.metadata.description,
         title: result.metadata.title
       }
-      return { ...metadata, openGraph: { images: [buildOgImageUrl(metadata)] } }
+      const image = buildOgImageUrl(metadata)
+      return { ...metadata, description: stripMarkdown(metadata.description), openGraph: { images: [image] } }
     }
   }
   if (isIndex(path, collection)) {
     const date = entryDateSegments(path, collection).join('/')
     const { metadata } = await renderIndexPage(collection, date)
-    return { ...metadata, openGraph: { images: [buildOgImageUrl(metadata)] } }
+    const image = buildOgImageUrl(metadata)
+    return { ...metadata, description: stripMarkdown(metadata.description), openGraph: { images: [image] } }
   }
   if (isTagPage(path, collection)) {
     const hasSection = collection.sectionPath.length > 0
@@ -405,7 +426,8 @@ async function resolveMetadata(props, source, collection) {
     }
     return { ...metadata, openGraph: { images: [buildOgImageUrl(metadata)] } }
   }
-  const { metadata } = await importPage([source.path, ...path])
+  const importPath = source.path ? [source.path, ...path] : path
+  const { metadata } = await importPage(importPath)
   const result = { ...metadata }
   if (result.seoTitle) {
     result.title = result.seoTitle
@@ -413,7 +435,8 @@ async function resolveMetadata(props, source, collection) {
   if (!result.description) {
     result.description = `${result.title} — ${source.title}`
   }
-  return { ...result, openGraph: { images: [buildOgImageUrl(result)] } }
+  const image = buildOgImageUrl(result)
+  return { ...result, description: stripMarkdown(result.description), openGraph: { images: [image] } }
 }
 
 /**
@@ -455,12 +478,20 @@ async function resolvePage(props, source, collection) {
  * @param {object} collection - Collection descriptor
  * @returns {Promise<object[]>}
  */
-async function resolveStaticParams(source, collection) {
+async function resolveStaticParams(source, collection, sections) {
   const params = await nextraStaticParams()
-  const sectionParams = params
-    .filter(p => p.mdxPath?.[0] === source.path)
-    .map(p => ({ mdxPath: p.mdxPath.slice(1) }))
-    .filter(p => p.mdxPath[p.mdxPath.length - 1] !== 'tags')
+  const sectionParams = source.path
+    ? params
+      .filter(p => p.mdxPath?.[0] === source.path)
+      .map(p => ({ mdxPath: p.mdxPath.slice(1) }))
+      .filter(p => p.mdxPath[p.mdxPath.length - 1] !== 'tags')
+    : [
+      { mdxPath: [] },
+      ...params.filter(p => !sections?.includes(p.mdxPath?.[0]))
+    ]
+  if (!collection) {
+    return sectionParams
+  }
   const response = await fetch(collection.metadataEndpoint)
   const { objects } = await response.json()
   const indexDirs = new Set()
@@ -478,6 +509,27 @@ async function resolveStaticParams(source, collection) {
     mdxPath: hasSection ? [collection.sectionPath, ...dir.split('/')] : dir.split('/')
   }))
   return [...sectionParams, ...indexParams]
+}
+
+/**
+ * Strips markdown delimiters (`` ` ``, `**`, `_`) from a description
+ * while preserving the inner text. Used when emitting plain-text meta
+ * tags (`description`, `og:description`, `twitter:description`) so
+ * social platforms that don't render markdown show clean prose. The
+ * OG image URL still receives the original markdown-flavored text so
+ * Satori can parse it into styled spans.
+ *
+ * @param {string} text - Description with possible markdown delimiters
+ * @returns {string} Description with delimiters removed
+ */
+function stripMarkdown(text) {
+  if (!text) {
+    return text
+  }
+  return text
+    .replace(/`([^`]+)`/g, '$1')
+    .replace(/\*\*([^*]+)\*\*/g, '$1')
+    .replace(/_([^_]+)_/g, '$1')
 }
 
 export { renderPage }
