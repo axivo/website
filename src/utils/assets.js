@@ -31,21 +31,16 @@ import { meta } from '@axivo/website/global'
  */
 function copyAssets() {
   let copied = 0
-  for (const file of meta.assets.images) {
-    const source = join('src/app', file)
-    if (existsSync(source) && lstatSync(source).isFile()) {
-      copyFileSync(source, join('.open-next/assets', file))
-      copied += 1
-    }
-  }
-  for (const file of meta.assets.pages) {
-    const source = join('.next/server/app', `${file}.body`)
+  const copy = (source, file) => {
     if (existsSync(source) && lstatSync(source).isFile()) {
       const destination = join('.open-next/assets', file)
       mkdirSync(dirname(destination), { recursive: true })
       copyFileSync(source, destination)
       copied += 1
     }
+  }
+  for (const asset of meta.assets) {
+    copy(asset.source, asset.destination)
   }
   return copied
 }

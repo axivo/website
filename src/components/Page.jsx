@@ -350,8 +350,29 @@ async function renderTagPage(tag, source, collection) {
 }
 
 /**
+ * Builds the dynamic Open Graph image URL for a page metadata object.
+ * Encodes the title and description as query parameters so the /og
+ * route can render the social card without re-fetching content.
+ *
+ * @param {object} metadata - Page metadata with title and description
+ * @returns {string} Relative URL pointing at the /og route
+ */
+function buildOgImageUrl(metadata) {
+  const params = new URLSearchParams()
+  if (metadata.title) {
+    params.set('title', metadata.title)
+  }
+  if (metadata.description) {
+    params.set('description', metadata.description)
+  }
+  return `/og?${params.toString()}`
+}
+
+/**
  * Resolves the page metadata for a request route under a source/collection.
  * Routes through the entry, index, tag, and bundled-page branches in turn.
+ * Each branch attaches a dynamic Open Graph image URL referencing the
+ * page's title and description.
  *
  * @param {object} props - Next.js page props
  * @param {object} source - Content source descriptor
@@ -365,22 +386,24 @@ async function resolveMetadata(props, source, collection) {
     const key = `${collection.contentPrefix}${entryDateSegments(path, collection).join('/')}.mdx`
     const result = await fetchR2Object(key)
     if (result) {
-      return {
+      const metadata = {
         description: result.metadata.description,
         title: result.metadata.title
       }
+      return { ...metadata, openGraph: { images: [buildOgImageUrl(metadata)] } }
     }
   }
   if (isIndex(path, collection)) {
     const date = entryDateSegments(path, collection).join('/')
     const { metadata } = await renderIndexPage(collection, date)
-    return metadata
+    return { ...metadata, openGraph: { images: [buildOgImageUrl(metadata)] } }
   }
   if (isTagPage(path, collection)) {
     const hasSection = collection.sectionPath.length > 0
-    return {
+    const metadata = {
       title: decodeURIComponent(hasSection ? path[2] : path[1])
     }
+    return { ...metadata, openGraph: { images: [buildOgImageUrl(metadata)] } }
   }
   const { metadata } = await importPage([source.path, ...path])
   const result = { ...metadata }
@@ -390,7 +413,7 @@ async function resolveMetadata(props, source, collection) {
   if (!result.description) {
     result.description = `${result.title} — ${source.title}`
   }
-  return result
+  return { ...result, openGraph: { images: [buildOgImageUrl(result)] } }
 }
 
 /**

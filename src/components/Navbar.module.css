@@ -5,7 +5,8 @@
 }
 
 .blur {
-  @apply absolute -z-1 size-full border-b bg-[rgb(var(--nextra-bg)/0.7)] backdrop-blur-md;
+  @apply absolute -z-1 size-full border-b backdrop-blur-md;
+  background-color: color-mix(in oklab, var(--x-color-nextra-bg) 70%, transparent);
 }
 
 .nav {

@@ -2,15 +2,40 @@
 template: splash
 title: Imagine. Create.
 description: >-
-  AXIVO creates open-source projects empowering engineers to deliver beautiful software experiences.
+  Welcome to our `public` web space. Our goal is to **create** projects delivering _beautiful_ engineering experiences.
 ---
 
 <Hero
   title="Imagine. Create."
   image={{ dark: '/home/hero-dark.svg', light: '/home/hero.svg' }}
 >
-  Welcome to our public web space. Our goal is to create projects empowering
-  engineers to deliver beautiful experiences to the open-source community.
+  <div className="hero-code">
+    ```js
+    function AXIVO() {
+      return [
+        'Welcome to our public web space.',
+        'Our goal is to create projects delivering',
+        'beautiful engineering experiences.'
+      ].join(' ')
+    }
+    ```
+  </div>
+  <style>{`
+    .hero-code code {
+      font-size: 1.5rem;
+      letter-spacing: -2px;
+      line-height: 1.5;
+    }
+    .hero-code pre {
+      background: transparent;
+      border: none;
+      box-shadow: none;
+      padding: 0;
+    }
+    .hero-code pre > div {
+      display: none;
+    }
+  `}</style>
 </Hero>
 
 ## <Icon name="go/GoTelescope" size={48} style={{ paddingBottom: '0.25rem' }} /> Latest Projects

@@ -24,7 +24,7 @@
 
 .subnavbar {
   @apply sticky top-[var(--nextra-navbar-height)] z-20 w-full border-b backdrop-blur-md;
-  background-color: color-mix(in srgb, var(--nextra-bg) 70%, transparent);
+  background-color: color-mix(in oklab, var(--x-color-nextra-bg) 70%, transparent);
 }
 
 .container {

@@ -65,21 +65,21 @@ export const google = {
 }
 
 export const meta = {
-  assets: {
-    images: [
-      '/apple-icon.png',
-      '/icon.svg',
-      '/icon1.png',
-      '/icon2.png',
-      '/opengraph-image.png'
-    ],
-    pages: [
-      '/claude/sitemap.xml',
-      '/manifest.webmanifest',
-      '/robots.txt',
-      '/sitemap.xml'
-    ]
-  },
+  assets: [
+    { destination: '/claude/sitemap.xml', source: '.next/server/app/claude/sitemap.xml.body' },
+    { destination: '/fonts/Inter-Bold.ttf', source: 'packages/website/fonts/Inter-Bold.ttf' },
+    { destination: '/fonts/Inter-Italic.ttf', source: 'packages/website/fonts/Inter-Italic.ttf' },
+    { destination: '/fonts/Inter-Regular.ttf', source: 'packages/website/fonts/Inter-Regular.ttf' },
+    { destination: '/fonts/JetBrainsMono-Regular.ttf', source: 'packages/website/fonts/JetBrainsMono-Regular.ttf' },
+    { destination: '/apple-icon.png', source: 'src/app/apple-icon.png' },
+    { destination: '/icon.svg', source: 'src/app/icon.svg' },
+    { destination: '/icon1.png', source: 'src/app/icon1.png' },
+    { destination: '/icon2.png', source: 'src/app/icon2.png' },
+    { destination: '/manifest.webmanifest', source: '.next/server/app/manifest.webmanifest.body' },
+    { destination: '/opengraph-image.png', source: 'src/app/opengraph-image.png' },
+    { destination: '/robots.txt', source: '.next/server/app/robots.txt.body' },
+    { destination: '/sitemap.xml', source: '.next/server/app/sitemap.xml.body' }
+  ],
   brand: {
     name: 'AXIVO'
   },
@@ -95,7 +95,22 @@ export const meta = {
       name: 'Claude'
     }
   },
-  redirects: [],
+  redirects: [
+    { source: '/apple-touch-icon-precomposed.png', destination: '/apple-icon.png', permanent: true },
+    { source: '/apple-touch-icon.png', destination: '/apple-icon.png', permanent: true }
+  ],
+  theme: {
+    overrides: {
+      'github-dark': {
+        // Sets var(--x-color-slate-200) color for string tokens
+        'string,punctuation.definition.string,string punctuation.section.embedded source': '#e2e8f0'
+      },
+      'github-light': {
+        // Sets var(--x-color-slate-700) color for string tokens
+        'string,punctuation.definition.string,string punctuation.section.embedded source': '#314158'
+      }
+    }
+  },
   ttl: {
     301: 86400,
     302: 0,

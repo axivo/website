@@ -31,6 +31,7 @@ import { unified } from 'unified'
 import { cloudflare } from '@axivo/website/global'
 import { remarkMarkAndUnravel } from '@axivo/website/remark'
 import { formatTimestamp } from '@axivo/website/sitemap'
+import { darkTheme, lightTheme } from '../src/components/mdx/renderers/theme.js'
 import { meta as blog } from '../src/config/blog.js'
 import { meta as claude } from '../src/config/claude.js'
 
@@ -474,7 +475,7 @@ async function setFeatures(s3, objects) {
         }
         delete node.properties['data-line']
       },
-      theme: { dark: 'github-dark', light: 'github-light' },
+      theme: { dark: darkTheme, light: lightTheme },
       defaultLang: { block: 'plaintext' },
       filterMetaString: meta => meta.replace(codeBlockFilenameRe, ''),
       getHighlighter(opts) {

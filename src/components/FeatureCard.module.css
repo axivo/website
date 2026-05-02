@@ -74,6 +74,10 @@
   font-size: clamp(1.4rem, 4vw, 1.8rem);
 }
 
+.title :global(.subheading-anchor) {
+  display: none;
+}
+
 @media screen and (max-width: 768px) {
   .cardHero {
     @apply flex-col;

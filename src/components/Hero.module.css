@@ -49,7 +49,7 @@ a.cta:focus-visible span {
 }
 
 .container {
-  @apply mx-auto max-w-[var(--nextra-content-width)] pr-[max(env(safe-area-inset-right),_2rem)] pl-[max(env(safe-area-inset-left),_2rem)];
+  @apply mx-auto max-w-[var(--nextra-content-width)] pr-[max(env(safe-area-inset-right),_0.625rem)] pl-[max(env(safe-area-inset-left),_0.625rem)];
 }
 
 .content {
@@ -89,6 +89,14 @@ a.cta:focus-visible span {
 }
 
 @media screen and (max-width: 768px) {
+  a.cta {
+    @apply px-4 py-2 text-lg;
+  }
+
+  a.ctaLink {
+    @apply text-lg;
+  }
+
   .container {
     @apply pr-[max(env(safe-area-inset-right),_1rem)] pl-[max(env(safe-area-inset-left),_1rem)];
   }
@@ -101,7 +109,15 @@ a.cta:focus-visible span {
     @apply py-4;
   }
 
+  .tagline {
+    @apply justify-center text-lg;
+  }
+
   .text {
     @apply mt-0;
+  }
+
+  .title {
+    @apply text-5xl;
   }
 }
