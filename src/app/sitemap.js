@@ -13,7 +13,7 @@
  */
 
 import { getPageMap } from 'nextra/page-map'
-import { buildEntryTimestamps, extractRoutes, resolveBundledTimestamp } from '@axivo/website/sitemap'
+import { buildEntryTimestamps, extractPages, resolveBundledTimestamp } from '@axivo/website/sitemap'
 import { domain } from '@axivo/website/global'
 import { getEntries as getBlogEntries, meta as blog } from '@axivo/website/blog'
 import { getEntries as getReflectionEntries, meta as claude } from '@axivo/website/claude'
@@ -34,7 +34,7 @@ async function sitemap() {
       sections.map(async (section) => {
         try {
           const pageMap = await getPageMap(section)
-          return extractRoutes(pageMap)
+          return extractPages(pageMap).map(page => page.route)
         } catch (error) {
           console.error(`Sitemap error for ${section}:`, error)
           return []

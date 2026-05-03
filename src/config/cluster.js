@@ -4,10 +4,10 @@
  * Defines section metadata, Ubuntu OS versions, and repository URLs.
  */
 
-import { meta as globalMeta } from '@axivo/website/global'
+import { meta as website } from '@axivo/website/global'
 
 export const meta = {
-  ...globalMeta,
+  ...website,
   os: {
     previous_version: '22.04',
     version: '24.04'

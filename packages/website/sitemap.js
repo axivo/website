@@ -4,7 +4,7 @@
 
 export {
   buildEntryTimestamps,
-  extractRoutes,
+  extractPages,
   formatTimestamp,
   resolveBundledTimestamp
 } from '../../src/utils/sitemap.js'

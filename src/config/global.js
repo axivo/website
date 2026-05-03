@@ -75,6 +75,7 @@ export const meta = {
     { destination: '/icon.svg', source: 'src/app/icon.svg' },
     { destination: '/icon1.png', source: 'src/app/icon1.png' },
     { destination: '/icon2.png', source: 'src/app/icon2.png' },
+    { destination: '/llms.txt', source: '.next/server/app/llms.txt.body' },
     { destination: '/manifest.webmanifest', source: '.next/server/app/manifest.webmanifest.body' },
     { destination: '/opengraph-image.png', source: 'src/app/opengraph-image.png' },
     { destination: '/robots.txt', source: '.next/server/app/robots.txt.body' },

@@ -9,6 +9,7 @@
 *.log
 *.txt
 logs/
+!**/llms.txt/
 
 # MacOS
 **/.DS_Store

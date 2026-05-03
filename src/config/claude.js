@@ -5,10 +5,10 @@
  * repository URLs, and skill mappings.
  */
 
-import { meta as globalMeta } from '@axivo/website/global'
+import { meta as website } from '@axivo/website/global'
 
 export const meta = {
-  ...globalMeta,
+  ...website,
   plugins: {
     analysis: {
       review: {

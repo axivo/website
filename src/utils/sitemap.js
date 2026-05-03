@@ -52,30 +52,58 @@ function buildEntryTimestamps(entries) {
 }
 
 /**
- * Recursively extracts route paths from Nextra page map items. Skips
- * `data` nodes (frontmatter holders) and folders without an `index`
- * child (which are not addressable as URLs).
+ * Recursively extracts addressable pages from Nextra page map items.
+ * Skips folders without an `index` child (which are not addressable
+ * as URLs). Title resolution mirrors Nextra's own `titlize` precedence:
+ * the parent folder's `_meta.js` data title takes priority, then the
+ * page's frontmatter `sidebarTitle`, then frontmatter `title`, with
+ * the structural `name` as the final fallback. Each emitted page
+ * carries the route, the resolved title, the frontmatter description
+ * when present, and a `hidden` flag set when the parent folder's
+ * `_meta.js` marks the page as `display: 'hidden'`. Consumers that
+ * only need routes call `.map(p => p.route)`; consumers that need
+ * authored prose read description directly; consumers building
+ * navigation-style listings filter out hidden pages.
  *
  * @param {object[]} pageMapItems - Nextra page map tree
- * @returns {string[]} Flat array of route paths
+ * @param {object} [meta] - Parsed `_meta.js` data from the parent folder, keyed by item name
+ * @returns {Array<{ description: string|undefined, hidden: boolean, route: string, title: string }>}
  */
-function extractRoutes(pageMapItems) {
-  const routes = []
+function extractPages(pageMapItems, meta = {}) {
+  const dataNode = pageMapItems.find(item => 'data' in item)
+  const folderMeta = dataNode ? dataNode.data : meta
+  const pages = []
   for (const item of pageMapItems) {
     if ('data' in item) {
       continue
     }
+    const itemMeta = folderMeta[item.name]
+    const hidden = itemMeta?.display === 'hidden'
     if ('route' in item && !('children' in item)) {
-      routes.push(item.route)
+      const frontMatter = item.frontMatter || {}
+      pages.push({
+        description: frontMatter.description,
+        hidden,
+        route: item.route,
+        title: itemMeta?.title || frontMatter.sidebarTitle || frontMatter.title || item.name
+      })
+      continue
     }
     if ('children' in item) {
-      if (item.children.some((child) => child.name === 'index')) {
-        routes.push(item.route)
+      const indexChild = item.children.find(child => child.name === 'index')
+      if (indexChild) {
+        const frontMatter = indexChild.frontMatter || {}
+        pages.push({
+          description: frontMatter.description,
+          hidden,
+          route: item.route,
+          title: itemMeta?.title || frontMatter.sidebarTitle || frontMatter.title || item.name
+        })
       }
-      routes.push(...extractRoutes(item.children))
+      pages.push(...extractPages(item.children.filter(child => child.name !== 'index')))
     }
   }
-  return routes
+  return pages
 }
 
 /**
@@ -100,4 +128,4 @@ function resolveBundledTimestamp(route, timestamps) {
   return null
 }
 
-export { buildEntryTimestamps, extractRoutes, formatTimestamp, resolveBundledTimestamp }
+export { buildEntryTimestamps, extractPages, formatTimestamp, resolveBundledTimestamp }

@@ -5,10 +5,10 @@
  * authored by Floren Munteanu, AXIVO's architect.
  */
 
-import { meta as globalMeta } from '@axivo/website/global'
+import { meta as website } from '@axivo/website/global'
 
 export const meta = {
-  ...globalMeta,
+  ...website,
   source: {
     description: phrase => `Posts about engineering decisions and SRE perspectives during ${phrase} collaborative work.`,
     entries: {
