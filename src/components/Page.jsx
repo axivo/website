@@ -532,4 +532,4 @@ function stripMarkdown(text) {
     .replace(/_([^_]+)_/g, '$1')
 }
 
-export { renderPage }
+export { renderPage, stripMarkdown }

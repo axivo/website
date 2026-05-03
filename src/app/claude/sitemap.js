@@ -14,7 +14,7 @@ import { getEntries as getReflectionEntries, meta } from '@axivo/website/claude'
 import { domain } from '@axivo/website/global'
 import {
   buildEntryTimestamps,
-  extractRoutes,
+  extractPages,
   resolveBundledTimestamp
 } from '@axivo/website/sitemap'
 
@@ -28,7 +28,7 @@ export const dynamic = 'force-static'
 async function sitemap() {
   const [pageMapRoutes, reflectionEntries] = await Promise.all([
     getPageMap(`/${meta.source.path}`)
-      .then(extractRoutes)
+      .then(pageMap => extractPages(pageMap).map(page => page.route))
       .catch((error) => {
         console.error(`Sitemap error for /${meta.source.path}:`, error)
         return []
