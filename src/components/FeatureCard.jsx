@@ -7,8 +7,7 @@
  */
 
 import GithubSlugger from 'github-slugger'
-import { Link, useMDXComponents as getMDXComponents } from '@axivo/website'
-import { Image } from './mdx/Image'
+import { Image, Link, useMDXComponents as getMDXComponents } from '@axivo/website'
 import styles from './FeatureCard.module.css'
 
 /**

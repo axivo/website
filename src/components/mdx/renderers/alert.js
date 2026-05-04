@@ -15,7 +15,7 @@
  */
 
 import { createElement } from 'react'
-import { Callout } from '../Callout'
+import { Callout } from '@axivo/website'
 
 /**
  * Renders an MDAST blockquote as a Callout when its first text node

@@ -12,9 +12,8 @@
 import cn from 'clsx'
 import { useFSRoute } from 'nextra/hooks'
 import { useConfig } from 'nextra-theme-docs'
-import { Anchor } from '@axivo/website'
+import { Anchor, NavbarMenu } from '@axivo/website'
 import { menus } from '@axivo/website/menu'
-import { NavbarMenu } from './NavbarMenu'
 import styles from './NavbarMenuItems.module.css'
 
 function isMenu(page) {
