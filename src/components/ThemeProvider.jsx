@@ -57,10 +57,23 @@ function ThemeProvider({ children, ...props }) {
  * here only to control placement, since next-themes renders its script
  * inside `<body>`, after the browser has already begun painting.
  *
+ * Defines `__name` as a no-op passthrough before invoking `setTheme`.
+ * esbuild's name-preservation transform (used by Next.js for stack traces)
+ * annotates functions with `__name(fn, "fn")` calls; when next-themes
+ * serializes its ThemeScript via `Function.prototype.toString()`, those calls
+ * land in the inline payload but the helper itself doesn't — producing a
+ * `ReferenceError` on every page load and cascading into a React hydration
+ * error. Defining `__name` first makes the serialized calls inert. Remove
+ * once next-themes ships a fix that strips the annotations before injection.
+ *
  * @returns {import('react').ReactElement} Inline script element
  */
 function ThemeScript() {
-  return <script dangerouslySetInnerHTML={{ __html: `(${setTheme})()` }} />
+  const html = [
+    `globalThis.__name || (globalThis.__name = f => f);`,
+    `(${setTheme})();`
+  ].join('\n')
+  return <script dangerouslySetInnerHTML={{ __html: html }} />
 }
 
 export { ThemeProvider, ThemeScript }

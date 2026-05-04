@@ -6,6 +6,7 @@
  * and h1 headings use the PageTitle component with copy-page support.
  */
 
+import { Mermaid } from '@theguild/remark-mermaid/mermaid'
 import {
   Banner,
   Bleed,
@@ -15,7 +16,6 @@ import {
   Tabs,
   withGitHubAlert
 } from 'nextra/components'
-import { Mermaid } from '@theguild/remark-mermaid/mermaid'
 import { useMDXComponents as getDocsMDXComponents } from 'nextra-theme-docs'
 import * as websiteComponents from '@axivo/website'
 import { Button } from './src/components/mdx/Button'
