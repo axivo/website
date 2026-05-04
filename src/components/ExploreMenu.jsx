@@ -14,8 +14,8 @@
 
 import { useCopy } from 'nextra/hooks'
 import { useConfig } from 'nextra-theme-docs'
+import { NavbarMenu } from '@axivo/website'
 import { menus } from '@axivo/website/menu'
-import { NavbarMenu } from './NavbarMenu'
 import { useSourceCode } from './mdx/SourceCode'
 
 function ExploreMenu() {

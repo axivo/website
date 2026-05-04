@@ -10,9 +10,9 @@
 'use client'
 
 import cn from 'clsx'
-import NextLink from 'next/link'
 import { ArrowRightIcon, LinkArrowIcon } from 'nextra/icons'
 import { useEffect, useRef, useState } from 'react'
+import { Link as NextLink } from '@axivo/website'
 import { icons } from '@axivo/website/menu'
 import styles from './NavbarMenu.module.css'
 

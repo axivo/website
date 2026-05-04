@@ -5,12 +5,11 @@
  * for all pages across every section.
  */
 
-import { Head } from 'nextra/components'
 import { GoogleAnalytics } from '@next/third-parties/google'
-import Script from 'next/script'
+import { Head } from 'nextra/components'
 import { ViewTransition } from 'react'
+import { domain, google, meta } from '@axivo/website/global'
 import { inter, jetbrainsMono } from '@axivo/website/fonts'
-import { cloudflare, domain, google, meta } from '@axivo/website/global'
 import { ThemeProvider, ThemeScript } from '@axivo/website'
 import '../styles/globals.css'
 
@@ -53,14 +52,6 @@ function RootLayout({ children }) {
       <Head>
         <ThemeScript />
       </Head>
-      {cloudflare.analytics.enabled && (
-        <Script
-          defer
-          src="https://static.cloudflareinsights.com/beacon.min.js"
-          data-cf-beacon={`{"token": "${cloudflare.analytics.token}"}`}
-          strategy="afterInteractive"
-        />
-      )}
       {google.analytics.enabled && <GoogleAnalytics gaId={google.analytics.id} />}
       <body>
         <ThemeProvider

@@ -13,12 +13,11 @@
 'use client'
 
 import cn from 'clsx'
-import NextLink from 'next/link'
-import { Fragment, useEffect, useRef } from 'react'
+import { usePathname } from 'next/navigation'
 import { ArrowRightIcon } from 'nextra/icons'
 import { useConfig } from 'nextra-theme-docs'
-import { usePathname } from 'next/navigation'
-import { ExploreMenu } from './ExploreMenu'
+import { Fragment, useEffect, useRef } from 'react'
+import { ExploreMenu, Link as NextLink } from '@axivo/website'
 import { Icon } from './mdx/Icon'
 import styles from './Subnavbar.module.css'
 

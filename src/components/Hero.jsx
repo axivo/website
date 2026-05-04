@@ -8,7 +8,7 @@
  * Children can include any content: text, links, buttons.
  */
 
-import { Image } from './mdx/Image'
+import { Image } from '@axivo/website'
 import styles from './Hero.module.css'
 
 /**

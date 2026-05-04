@@ -15,9 +15,8 @@
  * - description: function(phrase) returning SEO description for index pages
  */
 
-import { useMDXComponents as getMDXComponents } from '@axivo/website'
+import { PostCard, useMDXComponents as getMDXComponents } from '@axivo/website'
 import { Icon } from './mdx/Icon'
-import { PostCard } from './PostCard'
 import { PostPage } from './PostPage'
 import { TagGrid } from './Tag'
 

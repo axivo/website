@@ -17,10 +17,6 @@ export const algolia = {
 }
 
 export const cloudflare = {
-  analytics: {
-    enabled: true,
-    token: '45bf7ada7d7f4a59abf6afaf6c87205c'
-  },
   bucket: {
     cdn: {
       prefixes: [

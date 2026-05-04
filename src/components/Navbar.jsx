@@ -9,10 +9,10 @@
 'use client'
 
 import cn from 'clsx'
-import NextLink from 'next/link'
-import { Anchor, Button } from 'nextra/components'
+import { Button } from 'nextra/components'
 import { GitHubIcon, MenuIcon } from 'nextra/icons'
 import { setMenu, useMenu, useThemeConfig } from 'nextra-theme-docs'
+import { Anchor, Link as NextLink } from '@axivo/website'
 import { meta } from '@axivo/website/global'
 import styles from './Navbar.module.css'
 

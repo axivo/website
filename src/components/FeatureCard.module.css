@@ -10,7 +10,7 @@
 
 .card,
 .cardHero {
-  @apply flex overflow-hidden rounded-2xl bg-white px-7 py-6 text-black no-underline;
+  @apply relative flex overflow-hidden rounded-2xl bg-white px-7 py-6 text-black no-underline;
   box-shadow:
     0 8px 16px color-mix(in oklab, var(--x-color-black) 8%, transparent),
     0 1px 2px color-mix(in oklab, var(--x-color-black) 4%, transparent),
@@ -24,6 +24,10 @@
 
 .cardHero {
   @apply flex-row items-center gap-8;
+}
+
+.cardLink {
+  @apply absolute inset-0;
 }
 
 :global(.dark) .card,
