@@ -12,7 +12,7 @@ import cn from 'clsx'
 import { Button } from 'nextra/components'
 import { GitHubIcon, MenuIcon } from 'nextra/icons'
 import { setMenu, useMenu, useThemeConfig } from 'nextra-theme-docs'
-import { Link as NextLink } from '@axivo/website'
+import { Anchor as NextLink } from '@axivo/website'
 import { meta } from '@axivo/website/global'
 import styles from './Navbar.module.css'
 

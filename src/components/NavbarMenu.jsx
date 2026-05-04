@@ -12,7 +12,7 @@
 import cn from 'clsx'
 import { ArrowRightIcon, LinkArrowIcon } from 'nextra/icons'
 import { useEffect, useRef, useState } from 'react'
-import { Link as NextLink } from '@axivo/website'
+import { Anchor as NextLink } from '@axivo/website'
 import { icons } from '@axivo/website/menu'
 import styles from './NavbarMenu.module.css'
 

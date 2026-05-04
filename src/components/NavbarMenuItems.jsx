@@ -12,7 +12,7 @@
 import cn from 'clsx'
 import { useFSRoute } from 'nextra/hooks'
 import { useConfig } from 'nextra-theme-docs'
-import { Link, NavbarMenu } from '@axivo/website'
+import { Anchor, NavbarMenu } from '@axivo/website'
 import { menus } from '@axivo/website/menu'
 import styles from './NavbarMenuItems.module.css'
 
@@ -59,14 +59,14 @@ function NavbarMenuItems({ site = '' }) {
         arr.every(item => !('href' in item) || item.href !== pathname)) ||
       undefined
     return (
-      <Link
+      <Anchor
         href={href}
         key={page.name}
         className={cn(styles.link, styles.linkActive)}
         aria-current={isCurrentPage}
       >
         {page.title}
-      </Link>
+      </Anchor>
     )
   })
 }

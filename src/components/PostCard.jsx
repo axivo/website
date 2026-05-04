@@ -10,7 +10,7 @@ import remarkMdx from 'remark-mdx'
 import remarkParse from 'remark-parse'
 import { SafeMdxRenderer } from 'safe-mdx'
 import { unified } from 'unified'
-import { Link, Meta, useMDXComponents as getMDXComponents } from '@axivo/website'
+import { Anchor, Link, Meta, useMDXComponents as getMDXComponents } from '@axivo/website'
 import { createDispatch } from './mdx/renderers/node'
 import styles from './PostCard.module.css'
 
@@ -32,9 +32,9 @@ function PostCard({ collection, post, readMore = 'Read more' }) {
   return (
     <div className={styles.card}>
       <components.h3 className={styles.title} id={id}>
-        <Link href={post.route} className={styles.titleLink}>
+        <Anchor href={post.route} className={styles.titleLink}>
           {title}
-        </Link>
+        </Anchor>
       </components.h3>
       {date && <Meta author={author} date={date} routePath={collection.routePath} source={source} template={template} />}
       {tags?.length && (
