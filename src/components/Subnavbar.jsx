@@ -17,7 +17,7 @@ import { usePathname } from 'next/navigation'
 import { ArrowRightIcon } from 'nextra/icons'
 import { useConfig } from 'nextra-theme-docs'
 import { Fragment, useEffect, useRef } from 'react'
-import { ExploreMenu, Link as NextLink } from '@axivo/website'
+import { Anchor as NextLink, ExploreMenu } from '@axivo/website'
 import { Icon } from './mdx/Icon'
 import styles from './Subnavbar.module.css'
 
