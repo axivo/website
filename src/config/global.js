@@ -94,7 +94,9 @@ export const meta = {
   },
   redirects: [
     { source: '/apple-touch-icon-precomposed.png', destination: '/apple-icon.png', permanent: true },
-    { source: '/apple-touch-icon.png', destination: '/apple-icon.png', permanent: true }
+    { source: '/apple-touch-icon.png', destination: '/apple-icon.png', permanent: true },
+    { source: '/:section/tutorials/handbook/:rest*', destination: '/:section/tutorials/:rest*', permanent: true },
+    { source: '/:section/wiki/guide/:rest*', destination: '/:section/wiki/:rest*', permanent: true }
   ],
   theme: {
     overrides: {

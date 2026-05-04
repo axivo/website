@@ -5,7 +5,6 @@
  * used across all website sections.
  */
 
-export { Anchor, Link } from '../../src/components/Link'
 export { Blog } from '../../src/components/Blog'
 export { Breadcrumb } from '../../node_modules/nextra-theme-docs/dist/components/breadcrumb.js'
 export { Button } from '../../src/components/mdx/Button'
@@ -15,6 +14,7 @@ export { ExploreMenu } from '../../src/components/ExploreMenu'
 export { Footer } from '../../src/components/Footer'
 export { Hero, HeroStyles } from '../../src/components/Hero'
 export { Image } from '../../src/components/mdx/Image'
+export { Link } from '../../src/components/Link'
 export { Meta } from '../../src/components/Meta'
 export { Navbar } from '../../src/components/Navbar'
 export { NavbarMenu } from '../../src/components/NavbarMenu'
