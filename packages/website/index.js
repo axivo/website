@@ -27,7 +27,7 @@ export { Search } from '../../src/components/Search'
 export { Steps } from '../../src/components/mdx/Steps'
 export { Subnavbar } from '../../src/components/Subnavbar'
 export { ThemeProvider, ThemeScript } from '../../src/components/ThemeProvider'
-export { default as timestamps } from '../../src/generated/timestamps.json' with { type: 'json' }
+export { default as timestamps } from '../../src/build/timestamps.json' with { type: 'json' }
 export { useMDXComponents } from '../../mdx-components'
 export { Var } from '../../src/components/mdx/Var'
 export { Video } from '../../src/components/mdx/Video'

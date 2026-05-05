@@ -39,5 +39,4 @@ node_modules/
 # Wrangler
 .dev.vars
 .wrangler/
-src/generated/menu.js
-src/generated/timestamps.json
+src/build/
