@@ -80,6 +80,9 @@ The site is a static Next.js/Nextra application deployed to Cloudflare Workers v
     │   └── k3s-cluster/                   K3s Cluster section
     │       ├── layout.jsx                 K3s section docs Layout (dual logo navbar)
     │       └── [[...mdxPath]]/page.jsx    Catch-all dynamic page handler for bundled MDX
+    ├── build/                             Prebuild outputs imported as source (gitignored)
+    │   ├── menu.js                        Menu and icon registry from prebuild
+    │   └── timestamps.json                Last-modified timestamps from git history
     ├── components/                        Structural and navigational React components
     │   ├── Blog.jsx                       Binds the Post.jsx helpers to the blog collection descriptor
     │   ├── ExploreMenu.jsx                Subnavbar action dropdown wiring _menu actions to Nextra hooks
@@ -156,9 +159,6 @@ The site is a static Next.js/Nextra application deployed to Cloudflare Workers v
     │   ├── cluster.js                     K3s Cluster meta (source, OS versions)
     │   └── global.js                      Site meta (algolia, cloudflare, crawlers, domain, ttl, assets list)
     ├── content/                           MDX content organized by section with Nextra page maps
-    ├── generated/                         Build-time generated files (gitignored)
-    │   ├── menu.js                        Menu and icon registry from prebuild
-    │   └── timestamps.json                Last-modified timestamps from git history
     ├── styles/                            Global Tailwind styles
     │   ├── globals.css                    Tailwind v4 entry, dark variant, custom variants
     │   ├── markdown.css                   Markdown-specific overrides for Nextra defaults
@@ -178,8 +178,8 @@ Four scripts in `scripts/`, each running at a different lifecycle stage:
   - `wrangler deploy` to ship the new Worker
   - Edge cache purge for configured route prefixes
 - `prebuild.js` — build-time, runs before `next build`. Generates the artifacts the build depends on:
-  - Menu and icon registry at `src/generated/menu.js`
-  - Timestamps map at `src/generated/timestamps.json` from git history
+  - Menu and icon registry at `src/build/menu.js`
+  - Timestamps map at `src/build/timestamps.json` from git history
   - Metadata manifests uploaded to R2 for each collection
 - `preview.js` — local dev, runs via `npm run preview`. Produces a LAN-accessible HTTPS preview server:
   - Issues a Let's Encrypt certificate via ACME DNS-01, using the Cloudflare API to manage the challenge TXT record

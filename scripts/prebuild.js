@@ -52,15 +52,15 @@ const collections = [
 const cwd = process.cwd()
 const contentDir = join(cwd, 'src/content')
 const fetchCacheDir = join(cwd, '.next', 'cache', 'fetch-cache')
-const generatedDir = join(cwd, 'src/generated')
+const buildDir = join(cwd, 'src/build')
 const iconLibraries = {
   fi: 'react-icons/fi',
   go: 'react-icons/go',
   si: 'react-icons/si'
 }
-const menuFile = join(generatedDir, 'menu.js')
+const menuFile = join(buildDir, 'menu.js')
 const outputDir = join(cwd, '.next')
-const timestampsFile = join(generatedDir, 'timestamps.json')
+const timestampsFile = join(buildDir, 'timestamps.json')
 const pluralRules = new Intl.PluralRules('en-US')
 const plural = (count, singular, pluralForm) => `${count} ${pluralRules.select(count) === 'one' ? singular : pluralForm}`
 
@@ -80,7 +80,7 @@ async function build() {
   } catch {
     console.info('Repository already unshallowed or fully cloned')
   }
-  mkdirSync(generatedDir, { recursive: true })
+  mkdirSync(buildDir, { recursive: true })
   mkdirSync(outputDir, { recursive: true })
   rmSync(fetchCacheDir, { force: true, recursive: true })
   try {
@@ -127,7 +127,7 @@ async function build() {
 
 /**
  * Discovers _menu.js files under src/content/ and generates a combined
- * registry module at src/generated/menu.js. The module exports two maps:
+ * registry module at src/build/menu.js. The module exports two maps:
  *
  *   - `menus` — keyed by directory path ('' for root, 'claude', etc)
  *     pointing at each _menu.js's default export.
@@ -201,7 +201,7 @@ async function generateMenu() {
     `export const menus = {\n${menuMap}\n}`,
     ''
   ].join('\n')
-  mkdirSync(generatedDir, { recursive: true })
+  mkdirSync(buildDir, { recursive: true })
   writeFileSync(menuFile, source)
   return { iconCount: iconSpecs.size, menuCount: entries.length }
 }
