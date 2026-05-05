@@ -93,10 +93,10 @@ export const meta = {
     }
   },
   redirects: [
-    { source: '/apple-touch-icon-precomposed.png', destination: '/apple-icon.png', permanent: true },
-    { source: '/apple-touch-icon.png', destination: '/apple-icon.png', permanent: true },
     { source: '/:section/tutorials/handbook/:rest*', destination: '/:section/tutorials/:rest*', permanent: true },
-    { source: '/:section/wiki/guide/:rest*', destination: '/:section/wiki/:rest*', permanent: true }
+    { source: '/:section/wiki/guide/:rest*', destination: '/:section/wiki/:rest*', permanent: true },
+    { source: '/apple-touch-icon-precomposed.png', destination: '/apple-icon.png', permanent: true },
+    { source: '/apple-touch-icon.png', destination: '/apple-icon.png', permanent: true }
   ],
   theme: {
     overrides: {
@@ -113,14 +113,14 @@ export const meta = {
   ttl: {
     301: 86400,
     302: 0,
-    307: 0,
+    307: 86400,
     308: 86400,
     404: 60,
     410: 60,
-    500: 0,
-    502: 0,
-    503: 0,
-    504: 0
+    500: 15,
+    502: 30,
+    503: 30,
+    504: 15
   }
 }
 
