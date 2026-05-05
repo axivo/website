@@ -196,12 +196,18 @@ Four scripts in `scripts/`, each running at a different lifecycle stage:
 
 Blog posts live in [`axivo/journal`](https://github.com/axivo/journal), reflections in [`axivo/claude-reflections`](https://github.com/axivo/claude-reflections). A PR merged in either repo drives the pipeline forward:
 
-1. **Prettier formatting:** GitHub Actions runs Prettier against changed Markdown files. Any formatting change is committed back to the branch as `github-actions[bot]` so source and canonical format stay in sync.
-2. **Frontmatter parse:** For each changed file, the workflow reads YAML frontmatter and extracts the body, lifting MDX components out of comment blocks and stripping repo-only content.
-3. **R2 content sync:** The processed MDX body is uploaded to R2 under `src/content/<section>/YYYY/MM/DD/<slug>.mdx`. Frontmatter fields (author, date, description, source, tags, template, title) are written as R2 custom metadata on the object.
-4. **Media sync:** Co-located images and videos are uploaded to `public/<section>/YYYY/MM/` in R2 and served via `cdn.axivo.com`. The `<Image>` component rewrites matching paths to the CDN at render time.
-5. **Issue reporting:** If any step fails, the workflow opens a labeled issue against the repo with the run details.
-6. **Website deploy:** The next deploy of `axivo/website` runs `scripts/prebuild.js`, which iterates the bucket, reads each entry's custom metadata, sorts by date, and writes `metadata/<collection>.json` back to R2. Listing and tag pages read these manifests instead of walking R2 per request.
+1. Prettier formatting — GitHub Actions runs Prettier against changed Markdown files
+   - Any formatting change is committed back to the branch as `github-actions[bot]` so source and canonical format stay in sync
+2. Frontmatter parse — for each changed file, the workflow reads YAML frontmatter and extracts the body
+   - Lifts MDX components out of comment blocks and strips repo-only content
+3. R2 content sync — processed MDX body is uploaded to R2 under `src/content/<section>/YYYY/MM/DD/<slug>.mdx`
+   - Frontmatter fields (author, date, description, source, tags, template, title) are written as R2 custom metadata on the object
+4. Media sync — co-located images and videos are uploaded to `public/<section>/YYYY/MM/` in R2 and served via `cdn.axivo.com`
+   - The `<Image>` component rewrites matching paths to the CDN at render time
+5. Issue reporting — if any step fails, the workflow opens a labeled issue against the repo with the run details
+6. Website deploy — the next deploy of `axivo/website` runs `scripts/prebuild.js`, which iterates the bucket and writes `metadata/<collection>.json` back to R2
+   - Reads each entry's custom metadata, sorts by date
+   - Listing and tag pages read these manifests instead of walking R2 per request
 
 Authoring an entry never touches the website repo. Write Markdown, open a PR in the content repo, merge, and the next deploy surfaces it.
 
@@ -209,13 +215,13 @@ Authoring an entry never touches the website repo. Write Markdown, open a PR in 
 
 R2 bucket `axivo-website` holds three prefixes:
 
-- **MDX bodies** — `src/content/<section>/YYYY/MM/DD/<slug>.mdx`
+- MDX bodies — `src/content/<section>/YYYY/MM/DD/<slug>.mdx`
   - `src/content/blog/2026/04/21/website-infrastructure-design.mdx`
   - `src/content/claude/reflections/2025/11/17/the-first-night.mdx`
-- **Metadata manifests** — `metadata/<collection>.json`
+- Metadata manifests — `metadata/<collection>.json`
   - `metadata/blog.json`
   - `metadata/reflections.json`
-- **Media served via `cdn.axivo.com`** — `public/<section>/YYYY/MM/DD-<slug>.<ext>`
+- Media served via `cdn.axivo.com` — `public/<section>/YYYY/MM/DD-<slug>.<ext>`
   - `public/claude/reflections/2025/12/14-first-light.webp`
   - `public/blog/2026/04/21-architecture-diagram.webp`
 
@@ -227,20 +233,20 @@ The Worker bundle itself carries only code — no content. Publishing more entri
 
 Four layers, each with a distinct purpose. Listed in order of how a request encounters them:
 
-- **Cloudflare zone CDN** — configured via a Cache Rule in the Cloudflare dashboard
-  - First layer a request hits. Stores responses at the PoP keyed by URL.
-  - Cache Rule expression matches `axivo.com` and excludes `/_next/data`, `/__internal`, and RSC requests (`?_rsc=` query string).
-  - Edge TTL set to "Use cache-control header if present" — the rule trusts the Worker's emitted cache-control as the policy, rather than overriding it from the dashboard.
-  - On hit, the Worker is not invoked. The CDN responds directly. This is the dominant path for warm sitemap traffic.
-- **`caches.default`** — managed by `scripts/worker.js`
-  - Per-PoP cache inside the Worker, used when the zone CDN didn't already have an answer.
+- Cloudflare zone CDN — configured via a Cache Rule in the Cloudflare dashboard
+  - First layer a request hits, stores responses at the PoP keyed by URL
+  - Cache Rule expression matches `axivo.com` and excludes `/_next/data`, `/__internal`, and RSC requests (`?_rsc=` query string)
+  - Edge TTL set to "Use cache-control header if present" — the rule trusts the Worker's emitted cache-control as the policy, rather than overriding it from the dashboard
+  - On hit, the Worker is not invoked and the CDN responds directly — the dominant path for warm sitemap traffic
+- `caches.default` — managed by `scripts/worker.js`
+  - Per-PoP cache inside the Worker, used when the zone CDN didn't already have an answer
   - Cache keys include `BUILD_ID` so deploys invalidate naturally
   - RSC and prefetch requests bypass this layer to avoid serving HTML to clients expecting an RSC stream
-- **OpenNext incremental cache (KV)** — configured in `open-next.config.ts` via `kvIncrementalCache`, backed by the `NEXT_INC_CACHE_KV` binding in `wrangler.jsonc`
+- OpenNext incremental cache (KV) — configured in `open-next.config.ts` via `kvIncrementalCache`, backed by the `NEXT_INC_CACHE_KV` binding in `wrangler.jsonc`
   - Global via Cloudflare KV's edge-local replication
   - Persists rendered HTML across PoPs; when any edge has a cold `caches.default`, OpenNext reads prerendered HTML from KV instead of re-rendering
   - KV was chosen over R2 after measurement showed 2-4x faster reads for our workload
-- **In-isolate memoization** — implemented in `src/components/Post.jsx` via `getMetadata`
+- In-isolate memoization — implemented in `src/components/Post.jsx` via `getMetadata`
   - Caches the manifest fetch per-isolate using a module-scoped `Map` keyed by R2 object key
   - Concurrent renders share one R2 call
   - Rejected promises are evicted so a transient failure doesn't poison the isolate
@@ -251,34 +257,56 @@ Content sizes and cost economics come from Cloudflare's zero-egress R2 pricing: 
 
 The Worker is the authoritative source for cache policy across all responses. The zone CDN trusts whatever `cache-control` header the Worker sends. Four pieces of policy live in `scripts/worker.js`:
 
-- **`Vary` normalization.** OpenNext emits `Vary: RSC, Next-Router-State-Tree, ...` on prerendered pages. Cloudflare's CDN refuses to cache responses with non-standard `Vary` values. The Worker overwrites `Vary` to `Accept-Encoding` on cacheable responses before returning to the zone, which the CDN honors. RSC and prefetch requests bypass this code path entirely, so the original `Vary` is preserved where it matters semantically.
-- **`meta.ttl` and `setTtl`.** A status-keyed table in `src/config/global.js` sets per-status `cache-control` policy on responses leaving the Worker: 60s for 404/410, 24h for 301/308, no-store for 302/307 and all 5xx. For 3xx/4xx, origin retains opt-out via `no-store|no-cache|private`. For 5xx, the rewrite is unconditional — a safety floor that origin cache-control cannot override. Adding or changing policy is a one-line edit to the `meta.ttl` map.
-- **HEAD as GET.** HEAD requests are rewritten to GET internally for cache lookup and origin fetch, then the body is stripped on return. This routes around an OpenNext bug where HEAD on cold-cache state returns 503, and lets HEAD share cache state with GET so monitoring and health checks see consistent latency.
-- **Parent-walk redirect on 404.** When OpenNext returns a 404, the Worker walks up the URL path one segment at a time and probes each ancestor. The first ancestor that returns 200 becomes the destination of an HTTP 308 permanent redirect. Old URLs from prior site versions, deleted pages, and category-without-index paths all degrade gracefully to the closest existing parent instead of dead-ending. The redirect is edge-cacheable (24h via `meta.ttl[308]`), so subsequent hits to the same broken URL serve from cache without invoking the Worker. Falls through to a real 404 only when the walk reaches `/` and even root returns 404 — essentially never.
+- `Vary` normalization — OpenNext emits `Vary: RSC, Next-Router-State-Tree, ...` on prerendered pages, which Cloudflare's CDN refuses to cache
+  - The Worker overwrites `Vary` to `Accept-Encoding` on cacheable responses before returning to the zone, which the CDN honors
+  - RSC and prefetch requests bypass this code path entirely, so the original `Vary` is preserved where it matters semantically
+- `meta.ttl` and `setTtl` — status-keyed table in `src/config/global.js` sets per-status `cache-control` policy on responses leaving the Worker
+  - 60s for 404/410, 24h for 301/308, no-store for 302/307 and all 5xx
+  - For 3xx/4xx, origin retains opt-out via `no-store|no-cache|private`
+  - For 5xx the rewrite is unconditional — a safety floor that origin cache-control cannot override
+  - Adding or changing policy is a one-line edit to the `meta.ttl` map
+- HEAD as GET — HEAD requests are rewritten to GET internally for cache lookup and origin fetch, then the body is stripped on return
+  - Routes around an OpenNext bug where HEAD on cold-cache state returns 503
+  - Lets HEAD share cache state with GET so monitoring and health checks see consistent latency
+- Parent-walk redirect on 404 — when OpenNext returns a 404, the Worker walks up the URL path one segment at a time and probes each ancestor
+  - The first ancestor that returns 200 becomes the destination of an HTTP 308 permanent redirect
+  - Old URLs from prior site versions, deleted pages, and category-without-index paths all degrade gracefully to the closest existing parent instead of dead-ending
+  - The redirect is edge-cacheable (24h via `meta.ttl[308]`), so subsequent hits to the same broken URL serve from cache without invoking the Worker
+  - Falls through to a real 404 only when the walk reaches `/` and even root returns 404 — essentially never
 
 ### Rendering
 
 The site has two render paths. Authoring intent is that they produce identical HTML for identical input — every architectural choice flows from this parity contract.
 
-- **Bundled path.** Static MDX files under `src/content/` (wiki, tutorials, home, the k3s-cluster section) are compiled at deploy time by Nextra's MDX loader and served as Workers Static Assets. JSX components imported in MDX are resolved at compile time against the components map.
-- **Dynamic path.** R2-backed entries (blog, reflections) are fetched, parsed to MDAST, and rendered at request time via [`safe-mdx`](https://www.npmjs.com/package/safe-mdx) — a constrained renderer that walks the MDAST and resolves JSX tags against the same components map without executing arbitrary JavaScript. Security boundary stays on the Worker side; authoring ergonomics match the bundled path.
+- Bundled path — static MDX files under `src/content/` (wiki, tutorials, home, the k3s-cluster section) compiled at deploy time by Nextra's MDX loader and served as Workers Static Assets
+  - JSX components imported in MDX are resolved at compile time against the components map
+- Dynamic path — R2-backed entries (blog, reflections) fetched, parsed to MDAST, and rendered at request time via [`safe-mdx`](https://www.npmjs.com/package/safe-mdx)
+  - `safe-mdx` is a constrained renderer that walks the MDAST and resolves JSX tags against the same components map without executing arbitrary JavaScript
+  - Security boundary stays on the Worker side; authoring ergonomics match the bundled path
 
 Dynamic pages use a shared factory in `src/components/Page.jsx`:
 
-- **Routes handled by the factory** — reflection entries, blog entries, tag pages, and index pages (year, month, day)
-- **Inputs the factory takes:**
+- Routes handled — reflection entries, blog entries, tag pages, and index pages (year, month, day)
+- Inputs the factory takes
   - Source descriptor — path and title for the section
   - Collection descriptor — R2 prefix, route path, section metadata
-- **Outputs the factory returns** — Next.js page exports (`generateMetadata`, `generateStaticParams`, `Page`)
-- **What gets prerendered vs on-demand:**
+- Outputs the factory returns — Next.js page exports (`generateMetadata`, `generateStaticParams`, `Page`)
+- Prerendered vs on-demand
   - `generateStaticParams` prerenders section roots and year/month/day indexes
   - Individual entries and tag pages render on-demand, cached afterward in KV
 
 MDX rendering on the dynamic path relies on four pieces:
 
-- **`parseMdx` in `src/components/Page.jsx`** runs the unified pipeline: `remark-parse` → `remark-mdx` → `remarkMarkAndUnravel` (deep-imported from `@mdx-js/mdx`, unwraps JSX-only paragraphs so dynamic HTML matches bundled HTML) → `remark-gfm` → `remarkMermaid`. The output is an MDAST tree handed to safe-mdx.
-- **`safe-mdx`** walks the MDAST and emits React. JSX tags resolve against the components map from `mdx-components.js`. No arbitrary JavaScript is ever evaluated.
-- **`renderers/` directory** at `src/components/mdx/renderers/` is a per-MDAST-node-type dispatch registry. The dispatcher is built by `createDispatch` in `node.js` and passed to safe-mdx as its `renderNode` hook. Each handler under `renderers/` covers one node type (alert blockquotes, fenced code, footnote refs, footnotes section, markdown images, inline code with `{:lang}` hints, task-list containers, list items, tables). Handlers that return undefined fall back to safe-mdx's default rendering. Adding a new node type means adding one file to `renderers/` and one entry to the registry in `node.js`.
+- `parseMdx` in `src/components/Page.jsx` — runs the unified pipeline `remark-parse` → `remark-mdx` → `remarkMarkAndUnravel` → `remark-gfm` → `remarkMermaid`
+  - `remarkMarkAndUnravel` is deep-imported from `@mdx-js/mdx` and unwraps JSX-only paragraphs so dynamic HTML matches bundled HTML
+  - Output is an MDAST tree handed to safe-mdx
+- `safe-mdx` — walks the MDAST and emits React, resolving JSX tags against the components map from `mdx-components.js`
+  - No arbitrary JavaScript is ever evaluated
+- `renderers/` at `src/components/mdx/renderers/` — per-MDAST-node-type dispatch registry
+  - Dispatcher is built by `createDispatch` in `node.js` and passed to safe-mdx as its `renderNode` hook
+  - Each handler covers one node type (alert blockquotes, fenced code, footnote refs, footnotes section, markdown images, inline code with `{:lang}` hints, task-list containers, list items, tables)
+  - Handlers that return undefined fall back to safe-mdx's default rendering
+  - Adding a new node type means adding one file to `renderers/` and one entry to the registry in `node.js`
 
 The bundled path runs Nextra's standard compile pipeline, which already includes `remark-mark-and-unravel` and `rehype-pretty-code`, so its output is the structural baseline the dynamic path is shaped against.
 
@@ -286,20 +314,30 @@ The bundled path runs Nextra's standard compile pipeline, which already includes
 
 Components live in two directories with distinct roles. The directory tree above lists every file with a one-line purpose; the notes below capture how the pieces fit together.
 
-`src/components/` — structural and navigational pieces that frame the site (navbar, sub-navbar, hero, search, post listings, page factory). Not used from inside MDX. `Page.jsx` is the most architecturally important of these — it's the factory for R2-backed dynamic entries, and it owns the `parseMdx` pipeline plus the `getMetadata` memoization.
+`src/components/` — structural and navigational pieces that frame the site, not used from inside MDX:
+
+- `Page.jsx` — factory for R2-backed dynamic entries, owns the `parseMdx` pipeline and the `getMetadata` memoization
+- Splices the latest entries into the TOC of collection-root MDX pages
+  - Each page (e.g. `src/content/blog/index.mdx`, `src/content/claude/reflections/index.mdx`) exports `postsSectionId` and `postsPageSize`
+  - `Page.jsx` finds the TOC item whose id equals `postsSectionId` and inserts up to `postsPageSize` entries underneath
+  - The id must match the heading slug Nextra emits — when the heading starts with a JSX element like `<Icon />`, the slug carries a leading dash (e.g. `-latest-entries`) and `postsSectionId` must include it
 
 `src/components/mdx/` — components authored from inside MDX, plus the dynamic-path renderers:
 
-- The top-level `.jsx` files (Button, Callout, Icon, Image, List, PageTitle, SourceCode, Steps, Var, Video) are MDX-authored components shared between bundled and dynamic paths via the components map. They're the override layer over Nextra's primitives.
-- `utils.js` holds the shared CDN path resolver used by Image and Video.
-- `renderers/` is the dynamic-path dispatch registry — each file handles one MDAST node type that needs custom rendering on the safe-mdx path. `node.js` builds the per-render dispatcher via `createDispatch`. `footnotes.js` is a co-located MDAST preprocessor that runs before safe-mdx visits the tree, numbering footnote refs and appending the synthetic Footnotes section consumed by `footnotesSection.js`. See the Rendering section above for the architecture.
+- Top-level `.jsx` files (Button, Callout, Icon, Image, List, PageTitle, SourceCode, Steps, Var, Video) — MDX-authored components shared between bundled and dynamic paths via the components map, the override layer over Nextra's primitives
+- `utils.js` — shared CDN path resolver used by Image and Video
+- `renderers/` — dynamic-path dispatch registry, each file handles one MDAST node type that needs custom rendering on the safe-mdx path
+  - `node.js` builds the per-render dispatcher via `createDispatch`
+  - `footnotes.js` is a co-located MDAST preprocessor that runs before safe-mdx visits the tree, numbering footnote refs and appending the synthetic Footnotes section consumed by `footnotesSection.js`
+  - See the Rendering section above for the architecture
 
 The `mdx-components.js` file at the repo root is Next.js's canonical MDX entry point and the **convergence point for both render paths** — both consult the same map, so overriding once applies everywhere. It merges three sources plus our overrides:
 
-- **Nextra's docs theme components** — headings, code blocks, tables, the default rendering surface
-- **Nextra's built-in primitives** (`Banner`, `Bleed`, `Cards`, `Collapse`, `FileTree`, `Tabs`) — explicitly added to the map so the dynamic path resolves them. The bundled path resolves them via ESM imports at compile time, so this only matters for safe-mdx.
-- **The website package's shared components** — everything exported from `@axivo/website`
-- **Overrides applied on top:**
+- Nextra's docs theme components — headings, code blocks, tables, the default rendering surface
+- Nextra's built-in primitives (`Banner`, `Bleed`, `Cards`, `Collapse`, `FileTree`, `Tabs`) — explicitly added to the map so the dynamic path resolves them
+  - The bundled path resolves them via ESM imports at compile time, so this only matters for safe-mdx
+- The website package's shared components — everything exported from `@axivo/website`
+- Overrides applied on top
   - `Button` replaced with our wrapper (`./src/components/mdx/Button`) for block-level spacing
   - `blockquote` wrapped with Nextra's `withGitHubAlert` so the bundled path routes alert syntax to Callout (the dynamic path uses `renderers/alert.js` for the same behavior)
   - `h1` replaced with `PageTitle` (adds author/date bar)
@@ -327,26 +365,38 @@ Each section-scoped entry point lets a section's code import only what it needs 
 
 A typical request traces this path:
 
-1. GET arrives at a Cloudflare PoP. The zone CDN checks its cache against the Cache Rule's match expression.
-2. If the zone has a stored response, it's returned directly. The Worker is not invoked. This is the dominant path — sitemap URLs at warm steady state are 100% zone-CDN hits.
-3. If the zone misses, the Worker wrapper in `scripts/worker.js` runs.
-4. If `caches.default` has the response under the BUILD_ID-scoped key, the Worker returns it immediately.
-5. If both caches miss, OpenNext handles the request. Static asset routes resolve from bundled HTML. Dynamic routes enter the `renderPage` factory in `src/components/Page.jsx`.
-6. Dynamic entry renders: fetch MDX from R2, parse to MDAST, render via `safe-mdx`, wrap in the Nextra docs layout.
-7. The Worker normalizes `Vary` and applies `setTtl` if the response status warrants it, then stores the result in `caches.default` (for this edge) and returns it. OpenNext also stores in the KV incremental cache for other edges. The zone CDN stores the response on its way back to the visitor.
-8. RSC and prefetch requests skip the zone CDN (excluded by the Cache Rule's `?_rsc=` filter) and bypass `caches.default` inside the Worker, always re-rendering, because caching one variant under a URL breaks clients expecting the other.
-9. HEAD requests are rewritten to GET inside the Worker for cache lookup and origin fetch, then the body is stripped on return.
+1. GET arrives at a Cloudflare PoP — the zone CDN checks its cache against the Cache Rule's match expression
+2. If the zone has a stored response, it's returned directly — the Worker is not invoked
+   - Dominant path; sitemap URLs at warm steady state are 100% zone-CDN hits
+3. If the zone misses, the Worker wrapper in `scripts/worker.js` runs
+4. If `caches.default` has the response under the BUILD_ID-scoped key, the Worker returns it immediately
+5. If both caches miss, OpenNext handles the request
+   - Static asset routes resolve from bundled HTML
+   - Dynamic routes enter the `renderPage` factory in `src/components/Page.jsx`
+6. Dynamic entry renders — fetch MDX from R2, parse to MDAST, render via `safe-mdx`, wrap in the Nextra docs layout
+7. The Worker normalizes `Vary` and applies `setTtl` if the response status warrants it, then stores the result in `caches.default` (for this edge) and returns it
+   - OpenNext also stores in the KV incremental cache for other edges
+   - The zone CDN stores the response on its way back to the visitor
+8. RSC and prefetch requests skip the zone CDN (excluded by the Cache Rule's `?_rsc=` filter) and bypass `caches.default` inside the Worker, always re-rendering
+   - Caching one variant under a URL breaks clients expecting the other
+9. HEAD requests are rewritten to GET inside the Worker for cache lookup and origin fetch, then the body is stripped on return
 
 ### Preview
 
 The `npm run preview` command runs `scripts/preview.js`, which produces a local dev server reachable at `https://preview.axivo.com:8787` with a browser-trusted Let's Encrypt certificate. Two paths depending on whether Cloudflare credentials are present:
 
-1. **Credentials present** (`ZONE_DNS_TOKEN` and `ZONE_ID` set in `.dev.vars`):
-   1. **Cert lifecycle.** Checks `./certs/` for a cached cert. Reuses if validity is more than 30 days out and the issuer matches the configured `cloudflare.zone.acme.environment` (`staging` or `production`). Otherwise issues a fresh cert via ACME using the [`acme-client`](https://www.npmjs.com/package/acme-client) library against Let's Encrypt directly.
-   2. **DNS-01 challenge.** Uses the Cloudflare API to write the challenge TXT record at `_acme-challenge.preview.axivo.com`, waits 10 seconds for Cloudflare's authoritative NS to publish (matching certbot's default `propagation_seconds`), tells Let's Encrypt the challenge is ready, and deletes the TXT record after validation.
-   3. **Account keys.** ACME account keys are namespaced per environment (`certs/account.staging.key`, `certs/account.production.key`) so flipping `cloudflare.zone.acme.environment` between staging and production never crosses accounts.
-   4. **Wrangler.** Builds the OpenNext bundle, then spawns `opennextjs-cloudflare preview` bound to the Mac's LAN IP with `--local-protocol https`, `--https-cert-path`, and `--https-key-path`. The `preview.axivo.com` A record points at the LAN IP, so Safari resolves the hostname → connects to the LAN IP → SNI matches the cert → green padlock.
-2. **Credentials missing.** Logs a notice and runs the preview server in plain HTTP on the LAN IP. Useful for fresh clones that haven't set up the Cloudflare token yet.
+1. Credentials present (`ZONE_DNS_TOKEN` and `ZONE_ID` set in `.dev.vars`)
+   1. Cert lifecycle — checks `./certs/` for a cached cert
+      - Reuses if validity is more than 30 days out and the issuer matches the configured `cloudflare.zone.acme.environment` (`staging` or `production`)
+      - Otherwise issues a fresh cert via ACME using the [`acme-client`](https://www.npmjs.com/package/acme-client) library against Let's Encrypt directly
+   2. DNS-01 challenge — uses the Cloudflare API to write the challenge TXT record at `_acme-challenge.preview.axivo.com`
+      - Waits 10 seconds for Cloudflare's authoritative NS to publish (matching certbot's default `propagation_seconds`)
+      - Tells Let's Encrypt the challenge is ready, and deletes the TXT record after validation
+   3. Account keys — namespaced per environment (`certs/account.staging.key`, `certs/account.production.key`) so flipping `cloudflare.zone.acme.environment` between staging and production never crosses accounts
+   4. Wrangler — builds the OpenNext bundle, then spawns `opennextjs-cloudflare preview` bound to the Mac's LAN IP with `--local-protocol https`, `--https-cert-path`, and `--https-key-path`
+      - The `preview.axivo.com` A record points at the LAN IP, so Safari resolves the hostname → connects to the LAN IP → SNI matches the cert → green padlock
+2. Credentials missing — logs a notice and runs the preview server in plain HTTP on the LAN IP
+   - Useful for fresh clones that haven't set up the Cloudflare token yet
 
 Secrets required in `.dev.vars` for the HTTPS path:
 
@@ -357,10 +407,15 @@ Secrets required in `.dev.vars` for the HTTPS path:
 
 The `npm run deploy` command runs `scripts/deploy.js`, which performs four steps in order:
 
-1. **KV purge.** Calls the currently-deployed Worker's internal `/__internal/purge-kv-cache` endpoint with a shared secret (`KV_PURGE_SECRET`). The Worker uses its own KV binding to delete every key from the previous build. No Cloudflare API token needed.
-2. **Asset copy.** Calls `copyAssets()` from `@axivo/website/assets`, which mirrors OpenNext's favicon special case for the rest of the metadata files. Copies images from `src/app/` and prerendered route output from `.next/server/app/<file>.body` into `.open-next/assets/`. Workers Static Assets serves them directly, bypassing OpenNext's route handlers and the `cache-control: max-age=0` they ship.
-3. **Wrangler deploy.** Ships the new Worker. OpenNext's deploy step populates the KV namespace with the new build's prerendered pages.
-4. **Edge cache purge.** Clears Cloudflare's CDN cache for configured prefixes via the Cloudflare Cache API.
+1. KV purge — calls the currently-deployed Worker's internal `/__internal/purge-kv-cache` endpoint with a shared secret (`KV_PURGE_SECRET`)
+   - The Worker uses its own KV binding to delete every key from the previous build
+   - No Cloudflare API token needed
+2. Asset copy — calls `copyAssets()` from `@axivo/website/assets`, which mirrors OpenNext's favicon special case for the rest of the metadata files
+   - Copies images from `src/app/` and prerendered route output from `.next/server/app/<file>.body` into `.open-next/assets/`
+   - Workers Static Assets serves them directly, bypassing OpenNext's route handlers and the `cache-control: max-age=0` they ship
+3. Wrangler deploy — ships the new Worker
+   - OpenNext's deploy step populates the KV namespace with the new build's prerendered pages
+4. Edge cache purge — clears Cloudflare's CDN cache for configured prefixes via the Cloudflare Cache API
 
 Secrets required in the deploy environment:
 
@@ -394,17 +449,25 @@ Runtime secrets (not in `wrangler.jsonc`, set via `wrangler secret put`):
 
 ### CSS Conventions
 
-- **Utility-first for color and styling.** Use Tailwind utilities inside `@apply` for any color in Tailwind's default palette (`text-black`, `bg-white`, `text-gray-600`, `bg-neutral-800`, `bg-blue-600`). They compile to `var(--x-color-*)` underneath and read cleanly.
-- **Nextra-supplied colors require arbitrary value syntax.** Nextra defines its colors (`--x-color-primary-50` through `--x-color-primary-800`, `--x-color-nextra-bg`, etc.) as CSS variables in its compiled stylesheet, registered for the `x:`-prefixed utility namespace only. Without the `x:` prefix, Tailwind in this project doesn't recognize them — `bg-primary-100` and `bg-nextra-bg` are **not** valid utility classes. Use the arbitrary value form (`bg-[var(--x-color-primary-100)]`, `bg-[var(--x-color-nextra-bg)]`) instead.
-- **Raw `var(--x-color-*)` only when a utility cannot express it.** Allowed contexts:
-  - `color-mix(in oklab, var(--x-color-*) N%, transparent)` for opacity blending in `box-shadow`, backgrounds, borders.
-  - `linear-gradient()` / `radial-gradient()` color stops.
-  - `rgb(var(--nextra-bg))` / `rgb(var(--nextra-fg))` — Nextra exposes raw triplets, no utility wraps them.
-  - Assignments to third-party CSS variables (`--docsearch-*`, `--plyr-*`, `--callout-color`).
-  - Properties without a Tailwind utility (e.g., arbitrary `[box-shadow:inset_...]` color stops).
-- **Dark mode via sibling rule, never `@apply dark:...`.** Tailwind v4 + CSS Modules silently drops `dark:` inside `@apply`. Use a sibling `:global(.dark) .className { @apply ... }` rule instead.
-- **One vocabulary per declaration block.** Don't mix `text-black` and `color: var(--x-color-black)` in the same rule. If `color-mix()` forces a raw var on one property, keep utilities for everything else they can express.
-- **`x:`-prefixed inline classes are reserved for runtime DOM injection into Nextra's tree.** The only sanctioned use is `PostPage.jsx`, where the scroll-spy `useEffect` injects `<li>` items into Nextra's TOC and must visually match the surrounding entries Nextra renders with `x:`-prefixed classes. Do not use `x:` classes for static styling — those belong in CSS modules.
+- Utility-first for color and styling — use Tailwind utilities inside `@apply` for any color in Tailwind's default palette (`text-black`, `bg-white`, `text-gray-600`, `bg-neutral-800`, `bg-blue-600`)
+  - They compile to `var(--x-color-*)` underneath and read cleanly
+- Nextra-supplied colors require arbitrary value syntax — Nextra defines its colors as CSS variables registered for the `x:`-prefixed utility namespace only
+  - Affected variables include `--x-color-primary-50` through `--x-color-primary-800`, `--x-color-nextra-bg`, etc.
+  - Without the `x:` prefix, Tailwind in this project doesn't recognize them — `bg-primary-100` and `bg-nextra-bg` are **not** valid utility classes
+  - Use the arbitrary value form instead: `bg-[var(--x-color-primary-100)]`, `bg-[var(--x-color-nextra-bg)]`
+- Raw `var(--x-color-*)` only when a utility cannot express it — allowed contexts
+  - `color-mix(in oklab, var(--x-color-*) N%, transparent)` for opacity blending in `box-shadow`, backgrounds, borders
+  - `linear-gradient()` / `radial-gradient()` color stops
+  - `rgb(var(--nextra-bg))` / `rgb(var(--nextra-fg))` — Nextra exposes raw triplets, no utility wraps them
+  - Assignments to third-party CSS variables (`--docsearch-*`, `--plyr-*`, `--callout-color`)
+  - Properties without a Tailwind utility (e.g. arbitrary `[box-shadow:inset_...]` color stops)
+- Dark mode via sibling rule, never `@apply dark:...` — Tailwind v4 + CSS Modules silently drops `dark:` inside `@apply`
+  - Use a sibling `:global(.dark) .className { @apply ... }` rule instead
+- One vocabulary per declaration block — don't mix `text-black` and `color: var(--x-color-black)` in the same rule
+  - If `color-mix()` forces a raw var on one property, keep utilities for everything else they can express
+- `x:`-prefixed inline classes are reserved for runtime DOM injection into Nextra's tree
+  - The only sanctioned use is `PostPage.jsx`, where the scroll-spy `useEffect` injects `<li>` items into Nextra's TOC and must visually match the surrounding entries Nextra renders with `x:`-prefixed classes
+  - Do not use `x:` classes for static styling — those belong in CSS modules
 
 ## Issues
 
@@ -412,8 +475,10 @@ Active workarounds that compensate for upstream bugs. Each entry documents the s
 
 ### `zod` pinned to `4.3.6` via `overrides`
 
-**Symptom.** Building with `zod@4.4.x` fails because `nextra-theme-docs@4.6.1` declares `children` as a required field on `LayoutPropsSchema`, but Next.js strips `children` from the props before passing them to the schema's parser. Zod 4.4 introduced stricter validation that rejects this absence; Zod 4.3 was lenient about it.
-
-**Workaround.** `package.json` pins `zod` to `4.3.6` via the `overrides` block. This forces every transitive dependency that reaches for `zod` to use the older permissive version, even when their own ranges allow `4.4.x`.
-
-**Removal condition.** Remove the override when upgrading to `nextra-theme-docs@4.6.2` or later, *if* that release fixes the schema declaration (mark `children` optional or fall back to a non-throwing parse). Renovate is configured to surface nextra patch updates via PR (`.github/renovate.json5`), so the `4.6.2` bump will arrive automatically. When the PR lands, test the build with the override removed before merging.
+- Symptom — building with `zod@4.4.x` fails because `nextra-theme-docs@4.6.1` declares `children` as a required field on `LayoutPropsSchema`, but Next.js strips `children` from the props before passing them to the schema's parser
+  - Zod 4.4 introduced stricter validation that rejects this absence; Zod 4.3 was lenient about it
+- Workaround — `package.json` pins `zod` to `4.3.6` via the `overrides` block
+  - Forces every transitive dependency that reaches for `zod` to use the older permissive version, even when their own ranges allow `4.4.x`
+- Removal condition — remove the override when upgrading to `nextra-theme-docs@4.6.2` or later, _if_ that release fixes the schema declaration (mark `children` optional or fall back to a non-throwing parse)
+  - Renovate is configured to surface nextra patch updates via PR (`.github/renovate.json5`), so the `4.6.2` bump will arrive automatically
+  - When the PR lands, test the build with the override removed before merging
