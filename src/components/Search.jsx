@@ -88,6 +88,7 @@ function Search({ section } = {}) {
           {...config}
           initialScrollY={window.scrollY}
           onClose={onClose}
+          placeholder="Search..."
         />,
         document.body
       )}

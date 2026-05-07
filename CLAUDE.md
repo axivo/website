@@ -469,6 +469,29 @@ Runtime secrets (not in `wrangler.jsonc`, set via `wrangler secret put`):
   - The only sanctioned use is `PostPage.jsx`, where the scroll-spy `useEffect` injects `<li>` items into Nextra's TOC and must visually match the surrounding entries Nextra renders with `x:`-prefixed classes
   - Do not use `x:` classes for static styling — those belong in CSS modules
 
+## Style
+
+References for third-party component styling. CSS files stay clean — no inline comment blocks, no provenance notes. Look here instead.
+
+### Algolia DocSearch
+
+The search modal is themed by overriding DocSearch's CSS custom properties in `src/components/Search.module.css`. All variables and class names referenced there are documented at:
+
+- **Styling overview:** https://docsearch.algolia.com/docs/styling/
+- **API reference (props, `translations`, `placeholder`):** https://docsearch.algolia.com/docs/v3/api/
+- **Canonical CSS variables file:** https://cdn.jsdelivr.net/npm/@docsearch/css@4/dist/_variables.css
+- **Full stylesheet (for class names not exposed as variables):** https://cdn.jsdelivr.net/npm/@docsearch/css@4/dist/style.css
+
+The `_variables.css` file is the source of truth for every `--docsearch-*` property. Read it before adding new overrides — many properties have non-obvious names (`--docsearch-soft-primary-color`, `--docsearch-hit-highlight-color`) that are easy to miss otherwise.
+
+Properties not exposed as variables (input font-size, hit-source font-size, modal box-shadow, etc.) are styled via direct class overrides on `:global(.DocSearch-*)` selectors, with class names taken from `style.css`. The Algolia logo SVG hardcodes its own fill colors via inline `<style>` — override `.DocSearch-Logo svg .cls-1, .cls-2 { fill: currentColor }` and set `.DocSearch-Logo a { color: ... }` to theme it.
+
+Theme switching follows the rest of the site: declare full palette in `:root`, override the deltas in `:global(.dark)`. Never rely on DocSearch's built-in `[data-theme="dark"]` palette — our site uses the `.dark` class convention, not `data-theme`.
+
+Color pairs follow Nextra convention. The standard pairs are `gray-200 / neutral-800` for borders (matches Nextra's `nextra-border` utility) and `gray-100 / neutral-900` for raised gray panels (matches Nextra's footer). Stick to these pairs unless there's a specific reason to deviate — they keep theme-component additions visually coherent with the rest of the site.
+
+Verify variable wiring before relying on it. Some DocSearch elements consume *different* variables than their names suggest. The kbd-keys at `.DocSearch-Commands-Key` use `--docsearch-background-color`, not `--docsearch-key-background` (which exists in some legacy docs but is not consumed by the v4 stylesheet). Always grep the published `style.css` for the property name to confirm it reaches the element you think.
+
 ## Issues
 
 Active workarounds that compensate for upstream bugs. Each entry documents the symptom, the workaround, and the condition that lets the workaround be removed.
