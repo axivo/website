@@ -40,7 +40,11 @@ async function sitemap() {
   const allRoutes = [...new Set([...pageMapRoutes, ...entryRoutes])]
   return allRoutes
     .map((route) => {
-      const lastModified = entryTimestamps[route] ?? resolveBundledTimestamp(route, timestamps)
+      const entryTime = entryTimestamps[route]
+      const bundledTime = resolveBundledTimestamp(route, timestamps)
+      const lastModified = (entryTime && bundledTime)
+        ? (entryTime > bundledTime ? entryTime : bundledTime)
+        : (entryTime ?? bundledTime)
       const entry = {
         url: `${domain.protocol}://${domain.name}${route}`,
         changeFrequency: 'weekly'
