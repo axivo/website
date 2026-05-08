@@ -10,7 +10,7 @@
 
 :global(.nextra-steps)
   :is(h2, h3:not([style^="visibility:"]), h4, h5, h6)::before {
-  @apply top-1/2 flex size-[34px] -translate-y-1/2 items-center justify-center leading-none [box-shadow:inset_0_0_0_1px_var(--x-color-gray-300)];
+  @apply flex items-center justify-center leading-none [box-shadow:inset_0_0_0_1px_var(--x-color-gray-300)];
 }
 
 :global(.nextra-steps) h4 {
@@ -37,7 +37,7 @@
 
 .bullet:is(.bullet)
   :is(h2, h3:not([style^="visibility:"]), h4, h5, h6)::before {
-  @apply flex size-[34px] items-center justify-center [border-color:rgb(var(--nextra-bg))] text-base leading-none text-neutral-800 [content:"●"];
+  @apply flex items-center justify-center [border-color:rgb(var(--nextra-bg))] text-[15px] leading-none text-neutral-800 [content:"●"];
 }
 
 :global(.dark)
