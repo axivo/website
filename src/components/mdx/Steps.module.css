@@ -37,11 +37,11 @@
 
 .bullet:is(.bullet)
   :is(h2, h3:not([style^="visibility:"]), h4, h5, h6)::before {
-  @apply flex size-[34px] items-center justify-center [border-color:rgb(var(--nextra-bg))] text-xl leading-none text-neutral-800 [content:"⏺"];
+  @apply flex size-[34px] items-center justify-center [border-color:rgb(var(--nextra-bg))] text-base leading-none text-neutral-800 [content:"●"];
 }
 
 :global(.dark)
   .bullet:is(.bullet)
   :is(h2, h3:not([style^="visibility:"]), h4, h5, h6)::before {
-  @apply text-neutral-300;
+  @apply text-neutral-200;
 }
