@@ -21,6 +21,7 @@ import { renderFootnoteReference } from './footnoteReference'
 import { renderFootnotesSection } from './footnotesSection'
 import { renderImage } from './image'
 import { renderInlineCode } from './inlineCode'
+import { renderLink } from './link'
 import { renderList } from './list'
 import { renderListItem } from './listItem'
 import { renderTable } from './table'
@@ -45,6 +46,7 @@ function createDispatch({ blocks = [], inline = [] } = {}) {
     footnotesSection: renderFootnotesSection,
     image: renderImage,
     inlineCode: (node, transform) => renderInlineCode(node, transform, inline, cursor),
+    link: renderLink,
     list: renderList,
     listItem: renderListItem,
     table: renderTable

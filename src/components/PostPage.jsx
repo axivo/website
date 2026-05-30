@@ -101,7 +101,7 @@ function PostPage({ children, pageSize, sectionId, totalPages }) {
     <div ref={containerRef}>
       {totalPages > 1 && (
         <p className={styles.summary}>
-          ○ Showing {start + 1}–{end} of {total} entries
+          ○ Showing {start + 1}-{end} of {total} entries
         </p>
       )}
       {pageCards}
