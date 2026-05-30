@@ -3,3 +3,7 @@
 .icon {
   @apply inline-block;
 }
+
+:global(.nextra-toc) a .icon {
+  @apply hidden;
+}

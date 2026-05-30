@@ -3,7 +3,7 @@
  *
  * Overrides Nextra's default rendering for blockquotes, inline code,
  * tables, and the `<a class="button">` element used in `Read more →`
- * links. Hides H2 icons from the TOC sidebar.
+ * links.
  */
 
 @reference "tailwindcss";
@@ -77,14 +77,6 @@ code.nextra-code {
  */
 main a {
   text-decoration-thickness: auto;
-}
-
-/**
- * Hides H2 icons from Nextra's TOC sidebar. Section headings embed `<Icon>`
- * SVGs that the TOC would otherwise mirror next to each link.
- */
-.nextra-mask a svg {
-  @apply hidden;
 }
 
 /**
