@@ -9,14 +9,17 @@
 import { cloudflare } from '@axivo/website/global'
 
 const cdnPattern = new RegExp(
-  `^/(?:${cloudflare.bucket.cdn.prefixes.join('|')})/\\d{4}/\\d{2}/`
+  `^/(?:${cloudflare.bucket.cdn.prefixes.join('|')})/\\d{4}/\\d{2}/[^/]+\\.[a-z0-9]+$`,
+  'i'
 )
 
 /**
  * Resolves a media source path through the CDN when it matches one of
  * the configured content prefixes (`cloudflare.bucket.cdn.prefixes`)
- * followed by the YYYY/MM/ media convention. Pass-through for paths
- * that don't match (absolute URLs, external sources, non-media paths).
+ * followed by the YYYY/MM/ media convention and a trailing file
+ * extension. Internal page links under the same prefixes (e.g.,
+ * `/claude/reflections/2025/12/13`) lack an extension and pass through
+ * unchanged so they resolve on the site origin.
  *
  * @param {string} src - Source path or URL
  * @returns {string} Resolved URL

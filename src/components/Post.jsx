@@ -18,6 +18,7 @@
 import { PostCard, useMDXComponents as getMDXComponents } from '@axivo/website'
 import { Icon } from './mdx/Icon'
 import { PostPage } from './PostPage'
+import postPageStyles from './PostPage.module.css'
 import { TagGrid } from './Tag'
 
 const metadataCache = new Map()
@@ -310,10 +311,16 @@ async function Posts({ collection, children, date, entries: entriesProp, limit, 
     entries = filterByDate(entries, date)
   }
   if (limit) {
+    const shown = entries.slice(0, parseInt(limit, 10))
     return (
       <div style={style}>
         {children}
-        {entries.slice(0, parseInt(limit, 10)).map(entry => (
+        {entries.length > shown.length && (
+          <p className={postPageStyles.summary}>
+            ○ Showing 1-{shown.length} of {entries.length} entries
+          </p>
+        )}
+        {shown.map(entry => (
           <PostCard collection={collection} key={entry.route} post={entry} />
         ))}
       </div>

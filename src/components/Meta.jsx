@@ -69,7 +69,7 @@ function Meta({ author, date, routePath, source, template } = {}) {
       <a href={dayPath} className={styles.date}>
         {month} {day}, {year}
       </a>
-      <span className={styles.separator}>&middot;</span>
+      <span className={styles.separator}>&bull;</span>
       <span>{formatTime(parseInt(hours, 10), minutes)}</span>
       {author && (
         <>
