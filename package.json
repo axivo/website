@@ -31,7 +31,7 @@
   },
   "devDependencies": {
     "@aws-sdk/client-s3": "^3.1044.0",
-    "@tailwindcss/postcss": "^4.2.0",
+    "@tailwindcss/postcss": "^4.3.1",
     "acme-client": "^5.4.0",
     "cloudflare": "^6.1.0",
     "dotenv": "^17.4.0",
@@ -42,7 +42,7 @@
     "remark-gfm": "^4.0.0",
     "remark-rehype": "^11.1.0",
     "shiki": "^4.0.0",
-    "tailwindcss": "^4.2.0",
+    "tailwindcss": "^4.3.1",
     "unist-util-visit": "^5.0.0",
     "wrangler": "^4.88.0"
   },
