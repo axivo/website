@@ -11,6 +11,13 @@
     "prebuild": "node --env-file=.env.production --no-warnings scripts/prebuild.js",
     "preview": "node --env-file=.env.production --no-warnings scripts/preview.js"
   },
+  "allowScripts": {
+    "core-js": true,
+    "esbuild": true,
+    "fsevents": true,
+    "sharp": true,
+    "workerd": true
+  },
   "dependencies": {
     "@axivo/website": "file:./packages/website",
     "@docsearch/react": "^4.6.0",
@@ -30,10 +37,10 @@
     "unified": "^11.0.0"
   },
   "devDependencies": {
-    "@aws-sdk/client-s3": "^3.1044.0",
+    "@aws-sdk/client-s3": "^3.1074.0",
     "@tailwindcss/postcss": "^4.2.0",
     "acme-client": "^5.4.0",
-    "cloudflare": "^6.1.0",
+    "cloudflare": "^6.4.0",
     "dotenv": "^17.4.0",
     "fast-glob": "^3.3.0",
     "hast-util-to-html": "^9.0.0",
@@ -41,10 +48,10 @@
     "rehype-pretty-code": "^0.14.0",
     "remark-gfm": "^4.0.0",
     "remark-rehype": "^11.1.0",
-    "shiki": "^4.0.0",
-    "tailwindcss": "^4.2.0",
+    "shiki": "^4.2.0",
+    "tailwindcss": "^4.3.0",
     "unist-util-visit": "^5.0.0",
-    "wrangler": "^4.88.0"
+    "wrangler": "^4.103.0"
   },
   "overrides": {
     "zod": "4.3.6"
