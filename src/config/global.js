@@ -31,11 +31,6 @@ export const cloudflare = {
     },
     name: 'axivo-website'
   },
-  cache: {
-    prefixes: [
-      '/'
-    ]
-  },
   zone: {
     acme: {
       environment: 'production'

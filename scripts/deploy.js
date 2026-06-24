@@ -11,8 +11,8 @@
  * 2. Deploys the new Worker via wrangler. OpenNext's deploy step
  *    populates the KV incremental cache with the new build's
  *    prerendered pages.
- * 3. Purges Cloudflare edge cache for configured route prefixes so
- *    stale entries from the previous deploy are removed.
+ * 3. Purges the entire Cloudflare zone cache so stale entries from the
+ *    previous deploy are removed across the website and CDN media hosts.
  *
  * Cache purge failures log a warning but do not fail the pipeline.
  * A failed wrangler deploy exits non-zero and fails the build.
@@ -22,7 +22,7 @@
 
 import { execSync } from 'node:child_process'
 import Cloudflare from 'cloudflare'
-import { cloudflare, domain, repository } from '@axivo/website/global'
+import { domain, repository } from '@axivo/website/global'
 import { copyAssets } from '@axivo/website/assets'
 
 const baseUrl = `${domain.protocol}://${domain.name}`
@@ -51,8 +51,8 @@ async function deploy() {
   execSync('npx wrangler deploy', { stdio: 'inherit' })
   try {
     const purged = await purgeCache()
-    if (purged?.length) {
-      console.info(`Cloudflare cache purged for ${plural(purged.length, 'prefix', 'prefixes')}`)
+    if (purged) {
+      console.info('Cloudflare cache purged for entire zone')
     }
   } catch (error) {
     console.warn(`Failed to purge Cloudflare cache: ${error.message}`)
@@ -60,12 +60,13 @@ async function deploy() {
 }
 
 /**
- * Purges Cloudflare edge cache for configured route prefixes. Skips
- * when not running in the production branch of the Workers CI build
- * environment, when Cloudflare credentials are not available, or when
- * the domain is not configured.
+ * Purges the entire Cloudflare zone cache, covering both the website
+ * host and the CDN media host. Purge-by-prefix requires an Enterprise
+ * plan, so the whole zone is purged instead. Skips when not running in
+ * the production branch of the Workers CI build environment or when
+ * Cloudflare credentials are not available.
  *
- * @returns {Promise<string[]|null>} Array of purged prefixes, or null if skipped or failed
+ * @returns {Promise<boolean|null>} True if purged, or null if skipped
  */
 async function purgeCache() {
   if (!process.env.WORKERS_CI_BRANCH) {
@@ -80,20 +81,12 @@ async function purgeCache() {
     console.info('Cloudflare credentials not found, skipping cache purge')
     return null
   }
-  if (!domain.name) {
-    console.info('Domain not configured, skipping cache purge')
-    return null
-  }
-  if (!cloudflare.cache.prefixes.length) {
-    return []
-  }
-  const prefixes = cloudflare.cache.prefixes.map(prefix => `${domain.name}${prefix}`)
   const client = new Cloudflare({ apiToken: process.env.ZONE_CACHE_TOKEN })
   await client.cache.purge({
     zone_id: process.env.ZONE_ID,
-    prefixes
+    purge_everything: true
   })
-  return prefixes
+  return true
 }
 
 /**
