@@ -48,7 +48,7 @@
     "rehype-pretty-code": "^0.14.0",
     "remark-gfm": "^4.0.0",
     "remark-rehype": "^11.1.0",
-    "shiki": "^4.2.0",
+    "shiki": "^4.3.0",
     "tailwindcss": "^4.3.0",
     "unist-util-visit": "^5.0.0",
     "wrangler": "^4.104.0"
