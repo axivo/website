@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "@axivo/website": "file:./packages/website",
-    "@docsearch/react": "^4.6.0",
+    "@docsearch/react": "^5.0.5",
     "@next/third-parties": "^16.2.0",
     "@opennextjs/cloudflare": "^1.19.0",
     "github-slugger": "^2.0.0",
